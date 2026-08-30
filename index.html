@@ -1,1 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ENGL C1000 Resources</title>
+  <meta name="description" content="Interactive resources for ENGL C1000 students.">
+  <style>
+    * { box-sizing: border-box; }
 
+    :root {
+      --bg: #f5f7f8;
+      --surface: #ffffff;
+      --ink: #243447;
+      --muted: #5e6b78;
+      --blue: #045aa1;
+      --blue-dark: #034477;
+      --blue-light: #eef6fc;
+      --border: #d8e1e8;
+      --focus: #111827;
+      --radius: 16px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 8px;
+      z-index: 100;
+      padding: 12px 16px;
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+    }
+
+    .skip-link:focus { left: 8px; }
+
+    a:focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .page {
+      width: min(100% - 28px, 900px);
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    .hero {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: clamp(24px, 5vw, 42px);
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 20px rgba(36, 52, 71, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-size: .88rem;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      line-height: 1.15;
+      font-size: clamp(2rem, 7vw, 3rem);
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-size: clamp(1.45rem, 4vw, 1.8rem);
+    }
+
+    .resource-card {
+      display: block;
+      background: var(--surface);
+      color: var(--ink);
+      text-decoration: none;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(22px, 4vw, 30px);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .resource-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 7px 22px rgba(36, 52, 71, 0.10);
+      transform: translateY(-2px);
+    }
+
+    .resource-tag {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border-radius: 999px;
+      padding: 5px 10px;
+      margin-bottom: 12px;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .resource-card h3 {
+      margin: 0 0 8px;
+      color: var(--blue-dark);
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+
+    .resource-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .launch {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 28px 8px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 17px; }
+
+      .page {
+        width: min(100% - 16px, 900px);
+        padding-top: 16px;
+      }
+
+      .hero {
+        padding: 24px 18px;
+      }
+
+      .resource-card {
+        padding: 22px 18px;
+      }
+
+      .launch {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#resources">Skip to resources</a>
+
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">Student Learning Tools</p>
+      <h1>ENGL C1000 Resources</h1>
+      <p class="intro">
+        Practice key skills for ENGL C1000 with interactive review activities.
+        These resources are designed for low-stakes practice and can be used as often as you need.
+      </p>
+    </header>
+
+    <section id="resources" aria-labelledby="resources-heading">
+      <h2 id="resources-heading">Interactive Resources</h2>
+
+      <a class="resource-card" href="mla-review/">
+        <span class="resource-tag">MLA 9</span>
+        <h3>MLA 9 Review Lab</h3>
+        <p>
+          Practice in-text citations, titles and containers, Works Cited entries,
+          MLA paper setup, and checking AI-generated citations for accuracy.
+        </p>
+        <span class="launch">Start the MLA Review Lab →</span>
+      </a>
+    </section>
+
+    <footer>
+      ENGL C1000 Resources
+    </footer>
+  </main>
+</body>
+</html>
