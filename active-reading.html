@@ -1,1 +1,237 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Active Reading Lab: Talk to the Text</title>
+<meta name="description" content="An accessible ENGL C1000 active reading practice lab.">
+<style>
+:root{
+  --bg:#f5f7fa;--surface:#ffffff;--ink:#243447;--muted:#5b6674;--line:#d7dee8;
+  --brand:#315a7d;--brand-dark:#203e59;--soft:#eef4f8;--warm:#fff7df;--warm-line:#d9a92f;
+  --good:#2f7a4b;--good-bg:#eef8f1;--info:#2d648f;--info-bg:#eef6fb;--focus:#111827;
+  --max:860px;--radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.6;font-size:18px}
+button,input,textarea{font:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;border:2px solid #000;padding:10px 14px;z-index:10}
+.skip:focus{left:8px}
+.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 22px rgba(30,49,66,.07)}
+.eyebrow{margin:0 0 6px;text-transform:uppercase;letter-spacing:.07em;font-size:.86rem;font-weight:800;color:var(--brand)}
+h1,h2,h3{line-height:1.2;color:var(--brand-dark)}
+h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}
+h2{font-size:clamp(1.4rem,4.5vw,2rem);margin:.25em 0 .55em}
+.lead{font-size:1.08rem}
+.callout{background:var(--warm);border-left:5px solid var(--warm-line);padding:15px 17px;border-radius:10px;margin:16px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.pill,.round{display:inline-flex;align-items:center;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}
+.pill{border:1px solid var(--line);background:#fafbfd;color:var(--muted)}
+.round{background:var(--soft);color:var(--brand);margin-bottom:10px}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}
+.primary{background:var(--brand);color:#fff}.primary:hover{background:var(--brand-dark)}
+.secondary{background:#fff;color:var(--brand-dark);border:2px solid var(--brand)}
+.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{display:flex;justify-content:space-between;gap:12px;font-size:.93rem;color:var(--muted);font-weight:700;margin-bottom:7px}
+.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin-bottom:20px}
+.bar{height:100%;background:var(--brand);width:0;transition:width .2s ease}
+.scenario{background:#fafcfe;border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0 18px}
+.question{font-size:1.2rem;font-weight:800;margin:12px 0}
+.answers{display:grid;gap:10px;margin:16px 0}
+.answer{width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #b9c5d1;padding:14px 16px}
+.answer:hover{border-color:var(--brand);background:#f8fbfd}
+.answer[disabled]{cursor:default;opacity:1}
+.answer.correct{border-color:var(--good);background:var(--good-bg)}
+.feedback{display:none;margin-top:16px;padding:16px;border-radius:12px;border:2px solid var(--info);background:var(--info-bg)}
+.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--good-bg)}
+.feedback strong{display:block;margin-bottom:4px}
+.hidden{display:none!important}
+.article{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;margin:14px 0}
+.article h3{margin-top:0}
+.article p{margin:.8em 0}
+.sentence-list{display:grid;gap:9px;margin:14px 0}
+.sentence-btn{width:100%;text-align:left;background:#fff;border:2px solid #b9c5d1;color:var(--ink)}
+.sentence-btn.selected{background:#fff5b8;border-color:#b88900}
+.annotation-types{display:flex;flex-wrap:wrap;gap:8px}
+.annotation-types button{background:#eef3f7;color:var(--ink);border:1px solid var(--line)}
+.annotation-types button.selected{background:#dcecf6;border:2px solid var(--brand)}
+textarea{width:100%;min-height:110px;border:2px solid #aebbc8;border-radius:10px;padding:12px;background:#fff;color:var(--ink);resize:vertical}
+.note{font-size:.92rem;color:var(--muted)}
+.trail{display:grid;gap:10px;margin:14px 0}
+.trail-item{border-left:4px solid var(--brand);background:#f8fafc;padding:12px 14px;border-radius:8px}
+.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,32px);background:#fff}
+.complete{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr auto;gap:9px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}
+.status{font-weight:700}
+.shot{background:var(--warm);border:2px solid var(--warm-line);border-radius:12px;padding:14px 16px;font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
+body.shotmode{background:#fff}
+body.shotmode .hide-shot{display:none!important}
+body.shotmode .shell{width:min(100% - 16px,760px);padding:8px 0}
+body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
+@media(max-width:560px){
+ body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.status{margin-bottom:8px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card" aria-labelledby="title">
+<p class="eyebrow">ENGL C1000 · Reading with purpose and confidence</p>
+<h1 id="title">Active Reading Lab: Talk to the Text</h1>
+<p class="lead">Active reading is not about reading faster or understanding everything the first time. It is about noticing what your brain is doing while you read—and using strategies that help you understand.</p>
+<div class="callout"><strong>Think of active reading as a toolbox.</strong> Previewing, asking questions, making connections, annotating, rereading, summarizing, using audio or text-to-speech, and taking breaks are all tools. You do not have to use every tool every time.</div>
+<div class="meta" aria-label="Activity details"><span class="pill">20 interactions</span><span class="pill">About 12–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
+<p>You will practice on one short original article. Some activities have a best answer; others ask you to make your own reading visible. Your personal notes are saved only in this browser.</p>
+<div class="row"><button id="start" class="primary" type="button">Start the Lab</button><button id="resume" class="secondary hidden" type="button">Resume Where I Left Off</button></div>
+</section>
+
+<section id="quiz" class="card hidden" aria-labelledby="qhead">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
+<div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
+<span id="round" class="round"></span>
+<h2 id="qhead">Active Reading Practice</h2>
+<div id="host"></div>
+<div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button id="retry" class="secondary hidden" type="button">Try Again</button><button id="next" class="primary hidden" type="button">Next</button></div>
+</section>
+
+<section id="done" class="card hidden" aria-labelledby="donehead">
+<div class="completion">
+<div class="complete">✓ Lab complete</div>
+<h2 id="donehead">Active Reading Lab — Complete</h2>
+<p>You practiced active reading before, during, and after reading.</p>
+<div class="grid">
+<div>Purpose &amp; Previewing</div><div class="status">✓ Complete</div>
+<div>Questions &amp; Predictions</div><div class="status">✓ Complete</div>
+<div>Annotation &amp; T4</div><div class="status">✓ Complete</div>
+<div>Monitoring Confusion</div><div class="status">✓ Complete</div>
+<div>Main Ideas &amp; Evidence</div><div class="status">✓ Complete</div>
+<div>Summarizing &amp; Reflection</div><div class="status">✓ Complete</div>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span><br><strong>Practice completed:</strong> 20 of 20 interactions</p>
+<div class="shot">📸 Screenshot this completion card for Canvas.</div>
+</div>
+<div class="row hide-shot"><button id="shot" class="primary" type="button">Prepare Screenshot View</button><button id="exit" class="secondary hidden" type="button">Exit Screenshot View</button><button id="restart" class="quiet" type="button">Practice Again</button></div>
+</section>
+<footer class="hide-shot">Progress and optional notes stay in this browser. This activity does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+const article={
+title:"Why Small Breaks Can Help You Learn",
+subtitle:"A short reading about attention, memory, and study habits",
+paras:[
+"College students often imagine productive studying as a long, uninterrupted stretch of concentration. In practice, attention rises and falls. When readers notice that they are rereading the same sentence without understanding it, continuing to push forward may create the appearance of studying without much learning.",
+"A brief, intentional break can interrupt that cycle. Standing up, getting water, stretching, or looking away from a screen for a few minutes can give a reader a chance to return with renewed attention. The important word is intentional: a short break is different from accidentally disappearing into social media for forty minutes.",
+"Breaks are not the only strategy. Readers can also change how they interact with a difficult text. They might pause after a section and summarize it, turn a heading into a question, listen to an audio version while following the text, look up an unfamiliar term, or mark a confusing passage to revisit. Different readers and different texts may call for different approaches.",
+"The goal is not to create one perfect study routine. It is to notice when comprehension is slipping and make a deliberate adjustment. Active readers monitor their own understanding. Instead of treating confusion as proof that they are bad readers, they use it as information about what to do next."
+]};
+
+const items=[
+{type:"mc",round:"Before You Read · Know Your Purpose",scenario:"Your instructor says: “Read this article so you can discuss whether its advice would help college students.”",q:"What should guide your attention while you read?",answers:["The article's main ideas and questions you could bring to discussion","Every single word equally","Only the longest sentences","Whether you can finish as fast as possible"],c:0,yes:"Your purpose changes what you pay attention to. For discussion, main ideas, questions, and points you might respond to are especially useful.",no:"Start with the reason you were assigned the reading. Preparing for discussion means noticing main ideas and questions you may want to talk about."},
+{type:"preview",round:"Before You Read · Preview",q:"Without reading the full article yet, what can you reasonably predict from the title and subtitle?",answers:["The reading will probably discuss how breaks relate to learning, attention, or study habits","The article will definitely prove that every student needs the exact same study schedule","The article is mainly a history of colleges","There is no useful information in a title or subtitle"],c:0},
+{type:"write",round:"Before You Read · Ask a Question",prompt:"Write one question you have before reading. It can be simple or complex.",placeholder:"Example: Why would taking a break help someone remember more?",key:"preQuestion",tip:"There is no single correct question. The goal is to give your attention something to look for."},
+{type:"mc",round:"Before You Read · Connect",scenario:"You remember a time when you kept rereading a page because you were tired.",q:"How could that experience help you as a reader?",answers:["It gives you a connection you can compare with what the author says","It proves the author must agree with you","It means you already know everything in the article","Personal experience should never be part of reading"],c:0,yes:"Prior experience can give you a starting point for understanding. Active reading also means staying open to information that complicates what you already think.",no:"A personal connection is useful as a starting point, not as final proof. You can compare your experience with the author's ideas."},
+{type:"mc",round:"Before You Read · Make a Plan",scenario:"You have a 25-page chapter, limited time tonight, and you know the material is dense.",q:"Which plan is most likely to make the task manageable?",answers:["Break it into sections, pause to summarize, and continue in focused chunks","Tell yourself to read all 25 pages without stopping no matter what","Skip every difficult section","Wait until you have a perfect three-hour block"],c:0,yes:"Breaking a long task into smaller chunks can make it easier to start and gives you built-in moments to check understanding.",no:"Active reading does not require one long uninterrupted session. Smaller sections with pauses can make a difficult reading more manageable."},
+
+{type:"sentence",round:"During Reading · Find the Main Idea",para:0,q:"Which sentence most clearly states the main point of this paragraph?",sentences:[
+"College students often imagine productive studying as a long, uninterrupted stretch of concentration.",
+"In practice, attention rises and falls.",
+"When readers notice that they are rereading the same sentence without understanding it, continuing to push forward may create the appearance of studying without much learning."
+],c:2,yes:"This sentence explains the paragraph's central idea: continuing to read without comprehension can look productive without producing much learning."},
+{type:"mc",round:"During Reading · Notice Confusion",scenario:"You reach a paragraph and realize you do not understand what it means.",q:"What has happened?",answers:["You noticed a comprehension problem, which gives you useful information","You failed at reading","You should pretend you understood and keep moving","You must start the whole article over"],c:0,yes:"Noticing confusion is part of active reading. Once you notice it, you can decide what strategy to try next.",no:"Confusion is not automatically failure. Recognizing it is the moment when an active reader can choose a strategy."},
+{type:"multi-good",round:"During Reading · Choose a Tool",scenario:"You do not understand a difficult term in the article.",q:"Which of these could be reasonable next steps? Choose one.",answers:["Look up the term","Read the surrounding sentences for context","Mark it with a question and keep going for now","Any of these could be reasonable"],c:3,yes:"Exactly. Active readers have options. The best strategy can depend on the text, your purpose, and how important the term seems."},
+{type:"mc",round:"During Reading · Highlight With Purpose",scenario:"A student highlights almost every sentence on a page.",q:"What is the main problem?",answers:["The highlighting no longer helps important ideas stand out","Using a highlighter is always a bad strategy","The student should only highlight vocabulary words","Highlights are useful only in printed books"],c:0,yes:"Highlighting can be useful, but if nearly everything is marked, the marks stop helping you see what matters most.",no:"The issue is not highlighting itself. The problem is that marking everything makes it harder to distinguish key ideas from supporting details."},
+{type:"mc",round:"During Reading · Leave a Message for Future You",scenario:"Next to a highlighted sentence, a student writes only: “IMPORTANT!!!”",q:"What would make the annotation more useful later?",answers:["Add why the idea matters or what it connects to","Add more exclamation points","Highlight the whole paragraph too","Rewrite the sentence word for word"],c:0,yes:"A useful annotation captures your thinking. Future You benefits from knowing why you marked something, not just that you marked it.",no:"Try to make the thinking visible. A note explaining why the idea matters is more useful than a label like “important.”"},
+
+{type:"annotate",round:"During Reading · Talk to the Text",para:1,q:"Choose a sentence to annotate, then choose what kind of thinking you would record.",key:"annotation1"},
+{type:"mc",round:"During Reading · Questions Can Change",scenario:"Before reading, you asked, “Do breaks actually help?” After paragraph 2, the article says short, intentional breaks can help readers return with renewed attention.",q:"What could an active reader do now?",answers:["Update the question: “What makes a break intentional rather than distracting?”","Keep the original question forever even though the text addressed it","Stop asking questions once one is answered","Assume the rest of the article will contain nothing new"],c:0,yes:"Questions can evolve as your understanding changes. Active readers answer old questions and generate new ones.",no:"Reading can change the questions you have. Once one question is partly answered, a stronger reader may ask a more specific follow-up."},
+{type:"sentence",round:"During Reading · Evidence & Support",para:2,q:"Which sentence gives examples that support the paragraph's claim that readers can change how they interact with a difficult text?",sentences:[
+"Breaks are not the only strategy.",
+"Readers can also change how they interact with a difficult text.",
+"They might pause after a section and summarize it, turn a heading into a question, listen to an audio version while following the text, look up an unfamiliar term, or mark a confusing passage to revisit.",
+"Different readers and different texts may call for different approaches."
+],c:2,yes:"This sentence supplies concrete examples. Active readers distinguish the main idea from the evidence or examples that develop it."},
+{type:"mc",round:"During Reading · Different Readers, Different Tools",scenario:"One student concentrates better by listening to an audio version while following the text. Another prefers silent reading with handwritten notes.",q:"What is the strongest active-reading principle here?",answers:["Different readers can use different strategies to reach the same goal of understanding","One of the students must be reading incorrectly","Audio does not count as reading support","Everyone should use the same method"],c:0,yes:"Active reading is about purposeful engagement and comprehension, not enforcing one identical method for every reader.",no:"The point is not to find one universal method. Readers can choose tools that support their attention and comprehension."},
+{type:"annotate",round:"During Reading · Make Your Thinking Visible",para:3,q:"Annotate one sentence from the final paragraph. A question, reaction, connection, summary, confusion note, or plan to reread can all be legitimate.",key:"annotation2"},
+
+{type:"mc",round:"After You Read · Main Idea",q:"Which statement best summarizes the article's overall message?",answers:["Active readers notice when comprehension slips and deliberately choose strategies that help them reengage","The only useful study strategy is taking frequent breaks","Students should never use social media","Everyone should study in exactly the same way"],c:0,yes:"That captures the article's main idea without turning one example—taking breaks—into the entire argument.",no:"The article uses breaks as one example, but its larger point is about monitoring comprehension and choosing useful strategies."},
+{type:"mc",round:"After You Read · Summary vs. Detail",q:"Which detail is probably too specific to include in a very short 2–3 sentence summary?",answers:["The article says a reader might get water during a brief break","Readers can use different strategies when comprehension slips","Active reading involves monitoring understanding","There is no single perfect study routine"],c:0,yes:"A short summary usually prioritizes the central ideas over small examples such as getting water.",no:"For a 2–3 sentence summary, keep the central ideas. A tiny example like getting water is usually expendable."},
+{type:"write",round:"After You Read · Return to Your Question",prompt:"Look back at the question you wrote before reading. Write a brief answer, revision, or follow-up question.",placeholder:"What did the reading answer? What are you still wondering?",key:"afterQuestion",tip:"This is a comprehension check, not a graded response."},
+{type:"mc",round:"After You Read · Reread Strategically",scenario:"You can summarize most of the article, but paragraph 3 is still fuzzy.",q:"What is the most efficient next move?",answers:["Reread paragraph 3 and review the annotations or questions you made there","Start the whole article from the first word automatically","Ignore the problem because you finished the page","Memorize the paragraph without understanding it"],c:0,yes:"Active rereading is targeted. If you know where understanding broke down, you can return to that specific section.",no:"You do not always need to restart the entire reading. Target the section where comprehension slipped."},
+{type:"trail",round:"Final Reflection · Your Reading Trail",q:"What does your work in this lab show about active reading?"}
+];
+
+const $=id=>document.getElementById(id),intro=$("intro"),quiz=$("quiz"),done=$("done"),host=$("host"),feedback=$("feedback"),ftitle=$("ftitle"),ftext=$("ftext"),retry=$("retry"),next=$("next"),resume=$("resume");
+const key="activeReadingLabV1"; let i=0,locked=false; let notes={};
+
+function state(){try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}}
+function save(completed=false){localStorage.setItem(key,JSON.stringify({i,notes,completed,date:completed?new Date().toISOString():null}))}
+function articleBlock(pIndex){
+ const wrap=document.createElement("div");wrap.className="article";
+ const h=document.createElement("h3");h.textContent=article.title;wrap.appendChild(h);
+ if(pIndex===0){const sub=document.createElement("p");sub.className="note";sub.textContent=article.subtitle;wrap.appendChild(sub)}
+ const p=document.createElement("p");p.textContent=article.paras[pIndex];wrap.appendChild(p);return wrap;
+}
+function showQuiz(){intro.classList.add("hidden");done.classList.add("hidden");quiz.classList.remove("hidden");render();quiz.scrollIntoView({block:"start"})}
+function prep(){
+ locked=false;feedback.className="feedback";retry.classList.add("hidden");next.classList.add("hidden");host.innerHTML="";
+ const pc=Math.round(((i+1)/items.length)*100);$("ptext").textContent=`Interaction ${i+1} of ${items.length}`;$("pct").textContent=`${pc}%`;$("bar").style.width=`${pc}%`;$("round").textContent=items[i].round;
+}
+function addScenario(t){if(!t)return;const s=document.createElement("div");s.className="scenario";s.textContent=t;host.appendChild(s)}
+function addQ(t){const p=document.createElement("p");p.className="question";p.id="currentq";p.textContent=t;host.appendChild(p)}
+function addAnswers(arr,cb){const aw=document.createElement("div");aw.className="answers";aw.setAttribute("role","group");aw.setAttribute("aria-labelledby","currentq");arr.forEach((v,n)=>{const b=document.createElement("button");b.type="button";b.className="answer";b.textContent=v;b.addEventListener("click",()=>cb(n,b,aw));aw.appendChild(b)});host.appendChild(aw)}
+function good(msg){feedback.className="feedback show good";ftitle.textContent="Good active-reading move";ftext.textContent=msg;next.classList.remove("hidden");next.focus()}
+function wrong(msg,aw){[...aw.querySelectorAll("button")].forEach(b=>b.disabled=true);feedback.className="feedback show";ftitle.textContent="Try another reading move";ftext.textContent=msg;retry.classList.remove("hidden");retry.onclick=()=>{[...aw.querySelectorAll("button")].forEach(b=>b.disabled=false);feedback.className="feedback";retry.classList.add("hidden");aw.querySelector("button").focus()};retry.focus()}
+function render(){
+ prep();const x=items[i];save(false);
+ if(x.type==="mc"||x.type==="multi-good"||x.type==="preview"){
+   if(x.type==="preview"){const a=document.createElement("div");a.className="article";a.innerHTML=`<h3>${article.title}</h3><p class="note">${article.subtitle}</p><p><strong>Preview only:</strong> Imagine you can see the title, subtitle, and headings, but you have not read the full article yet.</p>`;host.appendChild(a)}
+   addScenario(x.scenario);addQ(x.q);addAnswers(x.answers,(n,b,aw)=>{if(locked)return;if(n===x.c){locked=true;[...aw.querySelectorAll("button")].forEach(z=>z.disabled=true);b.classList.add("correct");good(x.yes||"Previewing lets you form a reasonable first impression without pretending you already know what the whole text says.")}else wrong(x.no||"Use the clues you actually have. A preview supports a prediction, not certainty.",aw)})
+ } else if(x.type==="sentence"){
+   host.appendChild(articleBlock(x.para));addQ(x.q);addAnswers(x.sentences,(n,b,aw)=>{if(n===x.c){locked=true;[...aw.querySelectorAll("button")].forEach(z=>z.disabled=true);b.classList.add("correct");good(x.yes)}else wrong("Look for the sentence that does the most work in expressing or supporting the paragraph's central idea.",aw)})
+ } else if(x.type==="write"){
+   addQ(x.prompt);const ta=document.createElement("textarea");ta.placeholder=x.placeholder;ta.value=notes[x.key]||"";ta.setAttribute("aria-label",x.prompt);host.appendChild(ta);const p=document.createElement("p");p.className="note";p.textContent=x.tip;host.appendChild(p);
+   const b=document.createElement("button");b.type="button";b.className="primary";b.textContent="Save My Note";b.addEventListener("click",()=>{notes[x.key]=ta.value.trim();save(false);good(notes[x.key]?"Your thinking is now part of your reading trail.":"Even noticing that you do not have a question yet can be useful. You can add one later as the reading gives you more to think about.")});host.appendChild(b);ta.focus()
+ } else if(x.type==="annotate"){
+   host.appendChild(articleBlock(x.para));addQ(x.q);
+   const sent=article.paras[x.para].match(/[^.!?]+[.!?]+/g)||[article.paras[x.para]];let chosenSentence="",chosenType="";
+   const sl=document.createElement("div");sl.className="sentence-list";sent.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="sentence-btn";b.textContent=t.trim();b.addEventListener("click",()=>{[...sl.children].forEach(z=>z.classList.remove("selected"));b.classList.add("selected");chosenSentence=b.textContent})});host.appendChild(sl);
+   const lab=document.createElement("p");lab.innerHTML="<strong>What kind of thinking are you recording?</strong>";host.appendChild(lab);
+   const types=["❓ Question","🔗 Connection","💬 Reaction","💡 Main idea","🤔 Confusion","🔁 Reread / Look up"];const tw=document.createElement("div");tw.className="annotation-types";types.forEach(t=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.addEventListener("click",()=>{[...tw.children].forEach(z=>z.classList.remove("selected"));b.classList.add("selected");chosenType=t})});host.appendChild(tw);
+   const ta=document.createElement("textarea");ta.placeholder="Optional: leave a short message for Future You.";ta.style.marginTop="14px";host.appendChild(ta);
+   const saveb=document.createElement("button");saveb.type="button";saveb.className="primary";saveb.textContent="Save Annotation";saveb.style.marginTop="10px";saveb.addEventListener("click",()=>{if(!chosenSentence||!chosenType){feedback.className="feedback show";ftitle.textContent="Choose two things first";ftext.textContent="Select a sentence and an annotation type. Your written note is optional.";return}notes[x.key]={sentence:chosenSentence,type:chosenType,text:ta.value.trim()};save(false);good("That counts as active reading because you made your thinking visible. Questions, reactions, connections, confusion, summaries, and rereading plans can all be useful annotations.")});host.appendChild(saveb)
+ } else if(x.type==="trail"){
+   addQ(x.q);const tr=document.createElement("div");tr.className="trail";
+   const pre=notes.preQuestion||"You practiced forming a question before reading.";
+   const a1=notes.annotation1?`${notes.annotation1.type}: ${notes.annotation1.text||notes.annotation1.sentence}`:"You practiced annotating while reading.";
+   const a2=notes.annotation2?`${notes.annotation2.type}: ${notes.annotation2.text||notes.annotation2.sentence}`:"You practiced making your thinking visible.";
+   const after=notes.afterQuestion||"You practiced returning to an earlier question after reading.";
+   [ ["Before reading",pre],["During reading",a1],["During reading",a2],["After reading",after] ].forEach(([h,t])=>{const d=document.createElement("div");d.className="trail-item";d.innerHTML=`<strong>${h}</strong><br>${escapeHtml(t)}`;tr.appendChild(d)});host.appendChild(tr);
+   const c=document.createElement("div");c.className="callout";c.innerHTML="<strong>Active reading does not mean understanding everything the first time.</strong> It means noticing what your brain is doing while you read—and doing something useful with that information.";host.appendChild(c);
+   next.textContent="Finish Lab";next.classList.remove("hidden");next.focus()
+ }
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+next.addEventListener("click",()=>{if(i<items.length-1){i++;render();window.scrollTo({top:quiz.offsetTop-8,behavior:"smooth"})}else finish()});
+function finish(){save(true);quiz.classList.add("hidden");done.classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());done.scrollIntoView({block:"start"})}
+$("start").addEventListener("click",()=>{i=0;notes={};showQuiz()});
+resume.addEventListener("click",()=>{const s=state();if(s){notes=s.notes||{};i=Number.isInteger(s.i)?Math.min(s.i,items.length-1):0;if(s.completed){intro.classList.add("hidden");done.classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(s.date?new Date(s.date):new Date());return}}showQuiz()});
+$("shot").addEventListener("click",()=>{document.body.classList.add("shotmode");$("shot").classList.add("hidden");$("exit").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})});
+$("exit").addEventListener("click",()=>{document.body.classList.remove("shotmode");$("exit").classList.add("hidden");$("shot").classList.remove("hidden");done.scrollIntoView({block:"start"})});
+$("restart").addEventListener("click",()=>{if(!confirm("Restart the Active Reading Lab from the beginning?"))return;localStorage.removeItem(key);i=0;notes={};document.body.classList.remove("shotmode");done.classList.add("hidden");intro.classList.remove("hidden");resume.classList.add("hidden");$("start").focus();window.scrollTo({top:0,behavior:"smooth"})});
+const s=state();if(s){resume.classList.remove("hidden");resume.textContent=s.completed?"View Completion Card":"Resume Where I Left Off"}
+})();
+</script>
+</body>
+</html>
