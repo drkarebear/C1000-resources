@@ -1,1 +1,177 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rhetorical Choices Lab</title>
+<meta name="description" content="An accessible, mobile-friendly ENGL C1000 activity about rhetorical situation, voice, and linguistic flexibility.">
+<style>
+:root{
+  --bg:#f5f7fa;--surface:#fff;--ink:#1f2937;--muted:#596574;--line:#d6dee8;
+  --brand:#244a73;--brand-dark:#17314d;--soft:#eef4fa;--gold:#f0b429;
+  --good:#2f7d4a;--goodbg:#eef8f1;--infobg:#eef5fb;--focus:#111827;
+  --radius:16px;--max:820px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.58;font-size:18px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;padding:12px 16px;border:2px solid #000;z-index:100}
+.skip:focus{left:8px}
+button:focus-visible,a:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+.shell{width:min(100% - 24px,var(--max));margin:auto;padding:22px 0 48px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(31,41,55,.08)}
+.eyebrow{margin:0 0 7px;color:var(--brand);font-weight:800;text-transform:uppercase;letter-spacing:.07em;font-size:.88rem}
+h1,h2,h3{line-height:1.2;color:var(--brand-dark)}
+h1{font-size:clamp(2rem,7vw,3.15rem);margin:.1em 0 .25em}
+h2{font-size:clamp(1.45rem,5vw,2rem);margin:.2em 0 .5em}
+.lead{font-size:1.08rem;max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 12px;margin:18px 0}
+.pill,.round{display:inline-flex;align-items:center;min-height:38px;padding:6px 11px;border-radius:999px;font-size:.92rem;font-weight:700}
+.pill{border:1px solid var(--line);color:var(--muted);background:#fafbfd}
+.round{background:var(--soft);color:var(--brand);margin-bottom:10px}
+.callout{border-left:5px solid var(--gold);background:#fff9e8;padding:14px 16px;border-radius:10px;margin:16px 0}
+.myth{border:2px solid var(--line);border-radius:14px;padding:18px;margin:18px 0;background:#fbfcfd}
+.myth strong{display:block;color:var(--brand-dark);margin-bottom:4px}
+.progress-text{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-weight:700;font-size:.94rem;margin-bottom:7px}
+.track{height:12px;background:#e7ebf0;border-radius:999px;overflow:hidden;margin-bottom:20px}
+.bar{height:100%;background:var(--brand);width:0;transition:width .2s ease}
+.question{font-size:clamp(1.13rem,3.5vw,1.34rem);font-weight:800;margin:.45em 0 1em}
+.answers{display:grid;gap:10px;margin:18px 0}
+button{appearance:none;border:0;border-radius:12px;min-height:48px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer}
+.answer{width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #b9c4d2;padding:15px 16px;min-height:54px}
+.answer:hover{border-color:var(--brand);background:#f7fbff}
+.answer[disabled]{cursor:default;opacity:1}
+.answer.correct{border-color:var(--good);background:var(--goodbg)}
+.primary{background:var(--brand);color:#fff}.primary:hover{background:var(--brand-dark)}
+.secondary{background:#fff;color:var(--brand-dark);border:2px solid var(--brand)}
+.quiet{background:#eef1f5;color:#25364a}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.feedback{display:none;margin-top:18px;padding:16px;border-radius:12px;border:2px solid #356b9b;background:var(--infobg)}
+.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--goodbg)}
+.feedback-title{font-weight:800;margin-bottom:4px}
+.hidden{display:none!important}
+.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,34px);background:#fff}
+.complete-mark{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr auto;gap:10px 18px;margin:20px 0;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.status{font-weight:700}
+.shot{background:#fff9e8;border:2px solid #d6a018;border-radius:12px;padding:14px 16px;font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:8px}
+body.shotmode{background:#fff}
+body.shotmode .hide-shot{display:none!important}
+body.shotmode .shell{width:min(100% - 16px,760px);padding:8px 0}
+body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
+body.shotmode .completion{min-height:90vh;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:560px){
+ body{font-size:17px}.shell{width:min(100% - 16px,var(--max));padding-top:12px}.card{padding:20px 16px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.status{margin-bottom:8px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+@media print{.hide-shot{display:none!important}body{background:#fff}.shell{width:100%;padding:0}.card{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card" aria-labelledby="title">
+<p class="eyebrow">ENGL C1000 · Writing choices in context</p>
+<h1 id="title">Rhetorical Choices Lab</h1>
+<p class="lead"><strong>What works here—and why?</strong> In this activity, you’ll explore how writers make choices based on audience, purpose, genre, context, and voice.</p>
+<div class="callout"><strong>One idea to carry with you:</strong> There is not one “right” way to sound. Academic writing is not a new identity you have to put on. It is another set of strategies you can add to your rhetorical toolbox.</div>
+<div class="meta" aria-label="Activity details"><span class="pill">20 questions</span><span class="pill">About 10–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
+<p>You’ll sometimes choose the option that fits a particular situation best. That does <strong>not</strong> mean the other voices are bad or wrong. The question is what each choice helps a writer do.</p>
+<div class="row"><button id="start" class="primary" type="button">Start the Lab</button><button id="resume" class="secondary hidden" type="button">Resume Where I Left Off</button></div>
+</section>
+
+<section id="quiz" class="card hidden" aria-labelledby="quizhead">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
+<span id="round" class="round"></span>
+<h2 id="quizhead">What works here—and why?</h2>
+<div id="host"></div>
+<div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"><div id="ftitle" class="feedback-title"></div><div id="ftext"></div></div>
+<div class="row"><button id="retry" class="secondary hidden" type="button">Try Again</button><button id="next" class="primary hidden" type="button">Next Question</button></div>
+</section>
+
+<section id="done" class="card hidden" aria-labelledby="donehead">
+<div class="completion">
+<div class="complete-mark">✓ Lab complete</div>
+<h2 id="donehead">Rhetorical Choices Lab — Complete</h2>
+<p>You completed all 20 questions about rhetorical situation, voice, and linguistic flexibility.</p>
+<div class="grid">
+<div>Audience, Purpose &amp; Context</div><div class="status">✓ Complete</div>
+<div>Genre &amp; Rhetorical Choices</div><div class="status">✓ Complete</div>
+<div>Voice &amp; Linguistic Flexibility</div><div class="status">✓ Complete</div>
+<div>Academic Conventions</div><div class="status">✓ Complete</div>
+<div>Feedback &amp; Writer Agency</div><div class="status">✓ Complete</div>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span><br><strong>Practice completed:</strong> 20 of 20 questions</p>
+<div class="shot">📸 Screenshot this completion card for Canvas.</div>
+</div>
+<div class="row hide-shot"><button id="shot" class="primary" type="button">Prepare Screenshot View</button><button id="exit" class="secondary hidden" type="button">Exit Screenshot View</button><button id="restart" class="quiet" type="button">Practice Again</button></div>
+</section>
+<footer class="hide-shot">Progress is stored only in this browser. This activity does not ask for your name, email address, or login.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+const qs=[
+{r:"Round 1 · Same Writer, Different Situation",s:"You need to tell a close friend that the college should offer more evening classes because your work schedule makes daytime classes difficult.",q:"Which message best fits this audience and purpose?",a:["They seriously need more night classes. How am I supposed to work all day and still get the classes I need?","The institution should consider expanding evening course offerings to increase accessibility for working students.","This correspondence requests formal consideration of additional evening sections.","Evening course availability constitutes a significant institutional concern."],c:0,yes:"This version is direct, personal, and conversational because the friend already knows the writer and the situation. That makes it a strong rhetorical fit.",no:"The strongest fit is the direct, conversational version. A more formal version could work elsewhere, but a close friend does not need the distance or institutional language those versions create."},
+{r:"Round 1 · Same Writer, Different Situation",s:"Same writer. Same concern. Now the writer is emailing a college administrator to request more evening sections.",q:"Which version best supports that purpose?",a:["Night classes. We need them. Seriously.","I hope the college will consider adding more evening sections. Students who work during the day may have limited options for completing required courses.","You already know what the problem is with the schedule.","Why are there never enough classes at night??"],c:1,yes:"This version clearly states the request and gives the decision-maker useful context. The writer has adapted the message without needing to become a different person.",no:"For this audience, the clearest choice states the request and explains why it matters. That is adaptation to a rhetorical situation—not proof that conversational language is inferior."},
+{r:"Round 1 · Same Writer, Different Situation",s:"A student wants to raise awareness among other students about limited evening classes.",q:"Which genre is most likely to help the writer reach that audience quickly and invite discussion?",a:["A social media post","A private journal entry","A Works Cited page","A note kept only on the writer's phone"],c:0,yes:"A social media post can reach other students and invite public discussion. Genre is part of rhetorical situation because different genres make different kinds of communication possible.",no:"A social media post is the best fit for reaching other students and encouraging discussion. The other genres do not serve that audience and purpose as directly."},
+{r:"Round 2 · Meet the Rhetorical Situation",s:"A student emails a professor: “I missed class because my childcare fell through. Could we talk about what I should review before next class?”",q:"Who is the primary audience?",a:["The professor","The student's friends","Everyone at the college","Future employers"],c:0,yes:"The professor is the person the student is directly addressing. Audience is one part of the rhetorical situation.",no:"The email is directed to the professor, so the professor is the primary audience."},
+{r:"Round 2 · Meet the Rhetorical Situation",s:"A student posts a short video explaining where classmates can find free tutoring on campus.",q:"What is the student's most likely purpose?",a:["Help classmates find a resource","Prove that formal language is always best","Write a private reflection","Demonstrate MLA citation format"],c:0,yes:"The writer wants classmates to know about and find a useful resource. Purpose asks what the writer hopes the communication will accomplish.",no:"The scenario is about helping classmates locate tutoring. That intended outcome is the writer's purpose."},
+{r:"Round 2 · Meet the Rhetorical Situation",s:"A student writes differently in a group chat after class than in a research essay submitted to an instructor.",q:"What best explains the difference?",a:["The student has two different levels of intelligence","Different rhetorical situations can call for different choices","Only the research essay contains real language","Group chats do not have audiences"],c:1,yes:"Exactly. Audience, purpose, genre, and context have changed. Adjusting language across situations can demonstrate rhetorical flexibility.",no:"The difference does not show a change in intelligence or the value of the student's language. The rhetorical situation has changed, so different choices may work."},
+{r:"Round 3 · Voice Is a Choice, Too",s:"A personal essay begins: “My grandmother never measured anything. She cooked by memory, smell, and a hand that somehow knew exactly when enough was enough.”",q:"A reviewer suggests replacing this with a detached sentence about family cooking traditions. What should the writer consider first?",a:["Whether the change helps the essay's purpose while preserving what the writer wants the passage to do","Whether detached language is always more academic","Whether personal voice is forbidden in college","Whether every sentence should sound the same"],c:0,yes:"Yes. Revision should begin with purpose and effect. A writer can consider academic expectations without automatically removing personality, experience, or voice.",no:"The key question is what the passage needs to accomplish. College writing does not automatically require a writer to erase personal voice."},
+{r:"Round 3 · Voice Is a Choice, Too",s:"A student writes, “That policy sounds simple on paper, but living with it is another story.”",q:"Which description is most useful?",a:["The sentence uses a direct, conversational voice that may create emphasis and connection","The sentence is automatically wrong because it sounds conversational","The sentence proves the writer cannot write academically","The sentence must be replaced with longer words"],c:0,yes:"This describes what the language is doing without ranking the writer's voice. Conversational directness can be an intentional rhetorical choice.",no:"A useful rhetorical analysis describes the effect of the choice. Conversational language is not automatically incorrect or evidence of weak writing."},
+{r:"Round 3 · Voice Is a Choice, Too",s:"A multilingual writer includes a familiar phrase from another language and then gives readers enough context to understand its meaning.",q:"What is the most rhetorically useful question to ask?",a:["What does this choice contribute to the writer's meaning, voice, and relationship with the audience?","How quickly can the phrase be removed?","Why doesn't the writer use only one variety of English?","How can every sentence be made to sound identical?"],c:0,yes:"Exactly. The useful question examines what the choice does. Linguistic difference can carry meaning, identity, history, connection, or emphasis.",no:"Rather than assuming linguistic difference is a problem, rhetorical analysis asks what the choice contributes and how readers are likely to experience it."},
+{r:"Round 4 · What Does This Choice Do?",s:"Version 1: “I think the campus needs more shaded outdoor spaces.” Version 2: “The campus needs more shaded outdoor spaces.”",q:"What changes most clearly when “I think” is removed?",a:["The claim becomes more direct and the writer becomes less visible in the sentence","The sentence becomes objectively true","The writer's identity disappears from the entire essay","The sentence changes into a different genre"],c:0,yes:"Removing “I think” makes the claim more direct and reduces the writer's visible presence in that sentence. Whether that helps depends on the larger rhetorical situation.",no:"The clearest change is rhetorical: the claim becomes more direct and the writer is less visible in the sentence. It does not automatically become more true or better."},
+{r:"Round 4 · What Does This Choice Do?",s:"Version 1: “A lot of students can't take a 10 a.m. class because they're at work.” Version 2: “Many students cannot take a 10 a.m. class because they are at work.”",q:"What is the most accurate comparison?",a:["The versions differ in formality, but both communicate the basic idea clearly","Only Version 2 has meaning","Version 1 is not English","Contractions always make a claim less credible"],c:0,yes:"Right. Choices such as “a lot of,” “can't,” and “they're” affect register and tone. They do not make the first sentence meaningless or inherently inferior.",no:"Both sentences communicate the idea. Their level of formality differs, which may matter differently in different rhetorical situations."},
+{r:"Round 4 · What Does This Choice Do?",s:"A writer changes “utilize” to “use” in an essay because both words express the intended meaning.",q:"What does this example show?",a:["More complex vocabulary is not automatically more effective","Short words are always better","Academic writing should never use specialized vocabulary","Vocabulary has no rhetorical effect"],c:0,yes:"Exactly. Precision and fit matter more than making language sound complicated. Specialized language can be useful when the situation actually calls for it.",no:"The point is not that simple words always win. It is that complexity by itself does not make writing stronger; the choice should serve meaning and situation."},
+{r:"Round 4 · What Does This Choice Do?",s:"A writer begins a public comment: “We keep hearing that students need to persist. But persistence gets harder when the classes we need aren't offered after work.”",q:"What might the short sentence beginning with “But” accomplish?",a:["Create emphasis and sharpen the contrast between expectation and reality","Automatically make the writing ungrammatical","Remove the writer's point of view","Turn the public comment into a research report"],c:0,yes:"The short turn can create emphasis and make the contrast feel immediate. Sentence structure and rhythm are rhetorical resources, too.",no:"Here the sentence structure helps emphasize a contrast. An effective analysis asks what the choice does rather than rejecting it simply because of where “But” appears."},
+{r:"Round 5 · Gain, Loss & Academic Conventions",s:"Original: “A lot of us aren't choosing between work and school. We have to do both.” Revision: “Many college students simultaneously manage educational and employment responsibilities.”",q:"What is a fair comparison of the revision?",a:["It gains conventional formality but loses some of the original urgency and voice","It is better in every possible situation","It has no relationship to the original idea","It proves the original writer lacked vocabulary"],c:0,yes:"Exactly. Revision can involve tradeoffs. The more formal version may fit some contexts, while the original carries urgency and a strong sense of speaker.",no:"The useful comparison recognizes a tradeoff: the revision gains conventional formality while reducing some of the original urgency and voice."},
+{r:"Round 5 · Gain, Loss & Academic Conventions",s:"A student wants to use a vivid personal example in an evidence-based ENGL C1000 argument.",q:"Which approach best reflects rhetorical flexibility?",a:["Keep the example if it serves the argument, and connect it clearly to the larger claim and evidence","Delete it because academic writing can never include lived experience","Use only the personal example and ignore the assignment's evidence expectations","Rewrite it until the writer no longer recognizes their own voice"],c:0,yes:"Yes. The writer can retain meaningful voice and experience while also meeting the genre's need for analysis, support, and connection to the larger argument.",no:"Rhetorical flexibility does not require choosing between voice and academic expectations. A writer can keep a useful example and integrate it into a supported argument."},
+{r:"Round 5 · Gain, Loss & Academic Conventions",s:"A professor asks for an evidence-based academic argument. A student has a strong claim but has not yet provided evidence.",q:"What is the most useful revision advice?",a:["Add relevant evidence and explain how it supports the claim","Make every sentence sound more formal","Remove every use of first person","Replace familiar words with longer ones"],c:0,yes:"Exactly. The rhetorical need here is evidence and explanation. Changing the writer's voice would not solve the actual problem.",no:"Because the assignment calls for an evidence-based argument, the missing element is relevant evidence and explanation—not a wholesale change in voice."},
+{r:"Round 6 · Feedback Is Information, Not an Order",s:"An AI tool says: “Remove all uses of ‘I.’ First person is inappropriate in academic writing.”",q:"What is the strongest response from a rhetorically aware writer?",a:["Check the assignment, genre, discipline, audience, and purpose before deciding whether to accept the suggestion","Accept it because AI knows the universal rule","Reject all feedback from AI automatically","Remove the writer's voice from every college assignment"],c:0,yes:"Yes. The writer investigates the rhetorical situation instead of treating a broad rule as universal. Feedback can be evaluated, adapted, or rejected.",no:"There is no universal ban on first person across all academic writing. A rhetorically aware writer checks the expectations and purpose of the particular situation."},
+{r:"Round 6 · Feedback Is Information, Not an Order",s:"A peer says, “This doesn't sound professional enough,” but does not identify a specific problem.",q:"Which follow-up question would be most useful?",a:["What specific language choice concerns you, and how do you think it affects this audience or purpose?","Which words can I replace so I sound like you?","Can you rewrite my voice for me?","Should I make every sentence longer?"],c:0,yes:"That question turns a vague judgment into usable rhetorical feedback. It asks the reader to identify a choice and explain its effect.",no:"Useful feedback should move beyond labels such as “professional” and identify the language choice, its effect, and the rhetorical reason for changing it."},
+{r:"Round 7 · More Than One Choice Can Work",s:"An essay about translating for family begins with: “When I was ten, I already knew which words on an insurance form could cause trouble.” Another possible opening is: “Children who translate for family members may encounter complex adult institutions at an early age.”",q:"Which statement best compares these openings?",a:["Both can work: the first foregrounds lived experience and voice; the second begins with a broader analytical frame","Only the second can belong in college writing","Only the first has a rhetorical purpose","They are identical in tone and effect"],c:0,yes:"Exactly. Two choices can be effective for different reasons. The writer can decide which opening better supports the essay's purpose—or even use both strategically.",no:"Both openings are potentially effective. They create different relationships with the reader and foreground different kinds of information."},
+{r:"Final Challenge · You Are the Writer",s:"You are writing an ENGL C1000 argument advocating for later evening bus service. Your readers may not know what commuting after night classes is like. You want an evidence-based argument that also communicates why the issue matters to students.",q:"Which plan makes the fullest use of your rhetorical toolbox?",a:["Use a clear claim, relevant evidence, explanation, and—if useful—a specific student experience or vivid example that helps readers understand the stakes","Remove all personality so the paper sounds academic","Use only personal experience because evidence would weaken your voice","Choose the most complicated vocabulary possible"],c:0,yes:"That's rhetorical flexibility. Academic conventions, evidence, analysis, lived experience, clarity, and voice are resources a writer can use intentionally rather than mutually exclusive identities.",no:"The strongest plan combines the resources the situation calls for. Academic writing can include evidence and analysis without requiring the writer to erase voice or lived experience."}
+];
+
+const $=id=>document.getElementById(id), intro=$("intro"),quiz=$("quiz"),done=$("done"),host=$("host"),feedback=$("feedback"),ftitle=$("ftitle"),ftext=$("ftext"),retry=$("retry"),next=$("next"),resume=$("resume");
+let i=0,locked=false; const key="rhetoricalChoicesLabV1";
+
+function save(completed=false){localStorage.setItem(key,JSON.stringify({i,completed,date:completed?new Date().toISOString():null}))}
+function load(){try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}}
+function showQuiz(){intro.classList.add("hidden");done.classList.add("hidden");quiz.classList.remove("hidden");render();quiz.scrollIntoView({block:"start"})}
+function render(){
+ locked=false; const x=qs[i], pc=Math.round(((i+1)/qs.length)*100);
+ $("ptext").textContent=`Question ${i+1} of ${qs.length}`;$("pct").textContent=`${pc}%`;$("bar").style.width=`${pc}%`;$("round").textContent=x.r;
+ feedback.className="feedback";retry.classList.add("hidden");next.classList.add("hidden");host.innerHTML="";
+ const s=document.createElement("div");s.className="callout";s.textContent=x.s;host.appendChild(s);
+ const p=document.createElement("p");p.className="question";p.id="currentq";p.textContent=x.q;host.appendChild(p);
+ const aw=document.createElement("div");aw.className="answers";aw.setAttribute("role","group");aw.setAttribute("aria-labelledby","currentq");
+ x.a.forEach((v,n)=>{const b=document.createElement("button");b.type="button";b.className="answer";b.textContent=v;b.addEventListener("click",()=>check(n,b));aw.appendChild(b)});
+ host.appendChild(aw);save(false);const first=aw.querySelector("button");if(first)first.focus();
+}
+function check(n,b){
+ if(locked)return;const x=qs[i],bs=[...host.querySelectorAll(".answer")];
+ if(n===x.c){locked=true;bs.forEach(z=>z.disabled=true);b.classList.add("correct");feedback.className="feedback show good";ftitle.textContent="Good rhetorical reasoning";ftext.textContent=x.yes;next.textContent=i===qs.length-1?"Finish Lab":"Next Question";next.classList.remove("hidden");next.focus()}
+ else{bs.forEach(z=>z.disabled=true);feedback.className="feedback show";ftitle.textContent="Look at the situation again";ftext.textContent=x.no;retry.classList.remove("hidden");retry.focus()}
+}
+retry.addEventListener("click",()=>{const bs=[...host.querySelectorAll(".answer")];bs.forEach(z=>z.disabled=false);feedback.className="feedback";retry.classList.add("hidden");if(bs[0])bs[0].focus()});
+next.addEventListener("click",()=>{if(i<qs.length-1){i++;render();window.scrollTo({top:quiz.offsetTop-8,behavior:"smooth"})}else finish()});
+function finish(){save(true);quiz.classList.add("hidden");done.classList.remove("hidden");const d=new Date();$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(d);done.scrollIntoView({block:"start"})}
+$("start").addEventListener("click",()=>{i=0;showQuiz()});
+resume.addEventListener("click",()=>{const s=load();i=s&&Number.isInteger(s.i)?Math.min(s.i,qs.length-1):0;showQuiz()});
+$("shot").addEventListener("click",()=>{document.body.classList.add("shotmode");$("shot").classList.add("hidden");$("exit").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})});
+$("exit").addEventListener("click",()=>{document.body.classList.remove("shotmode");$("exit").classList.add("hidden");$("shot").classList.remove("hidden");done.scrollIntoView({block:"start"})});
+$("restart").addEventListener("click",()=>{if(!confirm("Restart the Rhetorical Choices Lab from the beginning?"))return;localStorage.removeItem(key);i=0;document.body.classList.remove("shotmode");done.classList.add("hidden");intro.classList.remove("hidden");resume.classList.add("hidden");$("start").focus();window.scrollTo({top:0,behavior:"smooth"})});
+const saved=load();
+if(saved){
+ if(saved.completed){resume.textContent="View Completion Card";resume.classList.remove("hidden");resume.addEventListener("click",function view(){intro.classList.add("hidden");quiz.classList.add("hidden");done.classList.remove("hidden");const d=saved.date?new Date(saved.date):new Date();$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(d)},{once:true})}
+ else if(Number.isInteger(saved.i)&&saved.i>0)resume.classList.remove("hidden");
+}
+})();
+</script>
+</body>
+</html>
