@@ -1,0 +1,1038 @@
+2bVersion2OnlinePreziSlideDeck.pdf
+PDF
+2cVersion3GoogleSlidesDeck.pdf
+PDF
+2dVersion4PDFSlideDeck.pdf
+PDF
+3GuidedNotesWithKey.pdf
+PDF
+4CitationMakerSheets.pdf
+PDF
+5SampleFirstPage.pdf
+PDF
+6SampleWorksCitedPage.pdf
+PDF
+1ReadThisFirst.pdf
+PDF
+
+Perfect. These are enough to get us started. One important constraint: the materials explicitly say they are copyrighted and may be posted only in a password-protected space for your direct students, not on an open-access website.
+
+So I wouldn't copy their slides, examples, wording, or handouts into the public GitHub app. But we can use them to understand the skills you want taught, then create our own original questions, examples, explanations, and design.
+
+And there is a really strong activity structure hiding in these materials. They emphasize two big systems—in-text citations and the Works Cited page—and then break Works Cited entries into MLA's nine core elements.
+
+I'd probably organize our interactive review into five short levels:
+
+Level 1 — Cite It or Not?
+Students decide whether information needs citation: quotation, paraphrase, common knowledge, another scholar's idea, their own analysis, statistics, etc.
+
+Level 2 — In-Text Citation Rescue
+Students fix things like (Garcia, p. 14), (Garcia 14)., repeated author names after signal phrases, misplaced periods, and citations for sources without page numbers. The provided materials specifically emphasize author/page citations and omitting the author's name from the parenthetical citation when it already appears in a signal phrase.
+
+Level 3 — Italics or Quotation Marks?
+This could be especially useful because students struggle with it constantly: book vs. chapter, website vs. webpage, journal vs. article, album vs. song, film, poem, short story, YouTube video, etc. The materials use the song/album distinction explicitly.
+
+Level 4 — Build the Citation
+This is where GitHub gets much more interesting than a normal quiz. Give students source information and have them assemble the appropriate available elements—author, title of source, container, contributor, version, number, publisher, publication date, and location.
+
+Importantly, we don't teach them that every citation needs all nine. The guided notes explicitly address that distinction.
+
+Level 5 — MLA Detective 🔎
+Give students an entire mini Works Cited page containing maybe five planted problems. Students click/select what needs fixing. We could include alphabetization, hanging indents, title formatting, et al., capitalization, punctuation, URLs, etc. Your supplied model specifically calls attention to alphabetizing entries, double spacing, URLs, and using et al. for three or more authors.
+
+Then I'd add a sixth, very contemporary challenge:
+
+Final Boss — The AI Citation 🤖
+
+An AI tool generated this citation.
+Don't trust it yet. Verify it.
+
+Students could identify a formatting error and something the AI invented—wrong author, nonexistent volume number, fake page range, etc. That teaches the much more important lesson that looking like MLA isn't the same thing as being a legitimate citation.
+
+I also think we should include paper formatting, but probably as a short visual challenge rather than another entire level. Your materials cover one-inch margins, double spacing, heading, title treatment, and the last-name/page-number header.
+
+So yes: we have plenty here. And I actually like the GitHub idea even more after seeing the materials. We can make an original, accessible MLA 9 practice experience rather than digitizing a worksheet.
+
+Before coding, though, I would do one additional thing: verify our rules against the current official MLA Style Center. These materials are MLA 9, but a few recommendations can be contextual or evolve even within an edition. That would let us distinguish “MLA requires this” from “this teaching resource recommends this.”
+
+Great. Then we’re ready for Build V1.
+
+I’d make the first version as one self-contained index.html with the CSS and JavaScript inside it. That makes it very easy for you to test locally, upload to GitHub Pages, and embed in Canvas later. We can always split it into separate files once the activity is stable.
+
+For V1, I’d include the opening screen, the five review sections, the AI Citation Detective, immediate explanatory feedback, retry buttons, keyboard-accessible controls, local progress saving, and the screenshot-ready completion card. I’d also keep all examples original so we respect the copyright restrictions in the uploaded materials while preserving the instructional structure they emphasize.
+
+The first coding pass should probably use about 20 questions, exactly like the blueprint we just approved. Once we test the flow and accessibility, we can expand the behind-the-scenes bank to 40–50 questions and randomize which ones students see.
+
+I’m ready to build that first HTML version next.
+
+ok let's go and remember to make it accessible and monnile friendly
+
+Done — I built the first working version as a single self-contained HTML file, so it should be easy to test first and then upload to GitHub Pages.
+
+Download the MLA 9 Review Lab V1
+
+I built this pass specifically around the two things you emphasized: accessibility and mobile use. It has keyboard-accessible answer buttons, visible focus, screen-reader feedback via aria-live, large touch targets, strong contrast, reduced-motion support, responsive layouts, no required dragging, no timer, and no color-only feedback. It also saves progress locally in the student's browser without collecting a name, email, or login.
+
+The end screen includes the screenshot-ready completion card we planned, plus a Prepare Screenshot View button that strips away the extra interface so students can capture a clean completion screen for Canvas.
+
+I also made one deliberate MLA update from the older instructional materials: the font question teaches that MLA calls for a readable typeface in a standard size, rather than saying Times New Roman 12 is the only acceptable choice.
+
+I would test this version ourselves before putting it on GitHub. In particular, I want us to look at it on a computer and phone and decide whether the visual personality feels right before I expand the bank from these 20 questions to the larger randomized version. 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLA 9 Review Lab</title>
+  <meta name="description" content="An accessible, mobile-friendly MLA 9 practice activity with immediate feedback and a screenshot-ready completion card.">
+  <style>
+    :root{
+      --bg:#f5f7fa;
+      --surface:#ffffff;
+      --ink:#1f2937;
+      --muted:#5b6472;
+      --line:#d8dee8;
+      --brand:#244a73;
+      --brand-dark:#17314d;
+      --accent:#f0b429;
+      --good-bg:#eef8f1;
+      --good-border:#2f7d4a;
+      --info-bg:#eef5fb;
+      --info-border:#356b9b;
+      --focus:#111827;
+      --radius:16px;
+      --shadow:0 8px 24px rgba(31,41,55,.08);
+      --max:820px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Arial, Helvetica, sans-serif;
+      line-height:1.55;
+      font-size:18px;
+    }
+
+    a{color:#164e8b}
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible{
+      outline:4px solid var(--focus);
+      outline-offset:3px;
+    }
+
+    .skip-link{
+      position:absolute;
+      left:-9999px;
+      top:8px;
+      background:#fff;
+      color:#000;
+      padding:12px 16px;
+      border:2px solid #000;
+      z-index:1000;
+    }
+
+    .skip-link:focus{left:8px}
+
+    .app-shell{
+      width:min(100% - 24px, var(--max));
+      margin:0 auto;
+      padding:22px 0 48px;
+    }
+
+    .card{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(20px, 4vw, 34px);
+      margin-bottom:18px;
+    }
+
+    h1,h2,h3{
+      line-height:1.2;
+      color:var(--brand-dark);
+    }
+
+    h1{
+      font-size:clamp(2rem, 7vw, 3.25rem);
+      margin:.1em 0 .25em;
+    }
+
+    h2{
+      font-size:clamp(1.5rem, 5vw, 2rem);
+      margin:.2em 0 .5em;
+    }
+
+    h3{
+      font-size:1.2rem;
+      margin:1.2em 0 .4em;
+    }
+
+    p{margin:.55em 0 1em}
+
+    .eyebrow{
+      margin:0;
+      font-size:.9rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--brand);
+    }
+
+    .lead{
+      font-size:1.08rem;
+      max-width:62ch;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 14px;
+      margin:18px 0 6px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      min-height:38px;
+      padding:6px 11px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fafbfd;
+    }
+
+    .button-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      border-radius:12px;
+      min-height:48px;
+      padding:12px 18px;
+      font:inherit;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--brand);
+      color:#fff;
+    }
+
+    .btn-primary:hover{background:var(--brand-dark)}
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--brand-dark);
+      border:2px solid var(--brand);
+    }
+
+    .btn-quiet{
+      background:#eef1f5;
+      color:#25364a;
+    }
+
+    .btn-danger{
+      background:#fff;
+      color:#7a1f1f;
+      border:2px solid #a63a3a;
+    }
+
+    .progress-wrap{
+      margin-bottom:16px;
+    }
+
+    .progress-text{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:.95rem;
+      font-weight:700;
+      color:var(--muted);
+      margin-bottom:7px;
+    }
+
+    .progress-track{
+      width:100%;
+      height:12px;
+      background:#e7ebf0;
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:var(--brand);
+      transition:width .25s ease;
+    }
+
+    .section-label{
+      display:inline-block;
+      margin-bottom:10px;
+      font-size:.9rem;
+      font-weight:700;
+      color:var(--brand);
+      background:#eef4fa;
+      border-radius:999px;
+      padding:5px 10px;
+    }
+
+    .question-text{
+      font-size:clamp(1.15rem, 3.5vw, 1.35rem);
+      font-weight:700;
+      margin:.4em 0 1em;
+    }
+
+    .scenario{
+      border-left:5px solid var(--accent);
+      background:#fff9e8;
+      padding:14px 16px;
+      border-radius:10px;
+      margin:16px 0;
+    }
+
+    .answers{
+      display:grid;
+      gap:10px;
+      margin:18px 0;
+    }
+
+    .answer-btn{
+      width:100%;
+      text-align:left;
+      color:var(--ink);
+      background:#fff;
+      border:2px solid #b9c4d2;
+      padding:15px 16px;
+      min-height:54px;
+    }
+
+    .answer-btn:hover{
+      border-color:var(--brand);
+      background:#f7fbff;
+    }
+
+    .answer-btn[disabled]{
+      cursor:default;
+      opacity:1;
+    }
+
+    .answer-btn.correct{
+      border-color:var(--good-border);
+      background:var(--good-bg);
+    }
+
+    .feedback{
+      display:none;
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      border:2px solid var(--info-border);
+      background:var(--info-bg);
+    }
+
+    .feedback.show{display:block}
+
+    .feedback.correct{
+      border-color:var(--good-border);
+      background:var(--good-bg);
+    }
+
+    .feedback-title{
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .helper{
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .completion-card{
+      border:3px solid var(--brand);
+      border-radius:18px;
+      padding:clamp(20px, 4vw, 34px);
+      background:#fff;
+    }
+
+    .completion-mark{
+      font-size:1rem;
+      font-weight:800;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      color:var(--good-border);
+    }
+
+    .completion-grid{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px 18px;
+      margin:20px 0;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:16px 0;
+    }
+
+    .status{
+      font-weight:700;
+    }
+
+    .screenshot-note{
+      padding:14px 16px;
+      border-radius:12px;
+      background:#fff9e8;
+      border:2px solid #d6a018;
+      font-weight:700;
+    }
+
+    .hidden{display:none !important}
+
+    .screenshot-mode body,
+    body.screenshot-mode{
+      background:#fff;
+    }
+
+    body.screenshot-mode .hide-in-screenshot{
+      display:none !important;
+    }
+
+    body.screenshot-mode .app-shell{
+      width:min(100% - 16px, 760px);
+      padding:8px 0;
+    }
+
+    body.screenshot-mode .card{
+      box-shadow:none;
+      border:0;
+      margin:0;
+      padding:0;
+    }
+
+    body.screenshot-mode .completion-card{
+      min-height:90vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    footer{
+      color:var(--muted);
+      font-size:.9rem;
+      text-align:center;
+      padding:8px 12px 0;
+    }
+
+    @media (max-width:560px){
+      body{font-size:17px}
+
+      .app-shell{
+        width:min(100% - 16px, var(--max));
+        padding-top:12px;
+      }
+
+      .card{
+        padding:20px 16px;
+        border-radius:14px;
+      }
+
+      .button-row{
+        display:grid;
+        grid-template-columns:1fr;
+      }
+
+      .button-row button{width:100%}
+
+      .completion-grid{
+        grid-template-columns:1fr;
+        gap:4px;
+      }
+
+      .status{margin-bottom:8px}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+      }
+    }
+
+    @media print{
+      .hide-in-screenshot{display:none !important}
+      body{background:#fff}
+      .app-shell{width:100%;padding:0}
+      .card{box-shadow:none;border:0}
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to activity</a>
+
+<main id="main" class="app-shell">
+  <section id="intro" class="card" aria-labelledby="intro-title">
+    <p class="eyebrow">Practice, not punishment</p>
+    <h1 id="intro-title">MLA 9 Review Lab</h1>
+    <p class="lead">MLA gets easier when you understand the patterns. Practice the citation and formatting choices you are most likely to use in college writing.</p>
+
+    <div class="meta" aria-label="Activity details">
+      <span class="pill">About 10–15 minutes</span>
+      <span class="pill">No timer</span>
+      <span class="pill">Retry as needed</span>
+      <span class="pill">No score penalty</span>
+    </div>
+
+    <p>You will get immediate feedback after each answer. Completion means you worked through every question—not that you got everything right on the first try.</p>
+
+    <div class="button-row">
+      <button id="startBtn" class="btn-primary" type="button">Start Full Review</button>
+      <button id="resumeBtn" class="btn-secondary hidden" type="button">Resume Where I Left Off</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="card hidden" aria-labelledby="quiz-title">
+    <div class="progress-wrap" aria-label="Activity progress">
+      <div class="progress-text">
+        <span id="progressLabel">Question 1 of 20</span>
+        <span id="percentLabel">5%</span>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <span id="sectionLabel" class="section-label">Round 1 · Cite It or Not?</span>
+    <h2 id="quiz-title">Choose the best answer</h2>
+    <div id="questionHost"></div>
+
+    <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">
+      <div id="feedbackTitle" class="feedback-title"></div>
+      <div id="feedbackText"></div>
+    </div>
+
+    <div class="button-row">
+      <button id="retryBtn" class="btn-secondary hidden" type="button">Try Again</button>
+      <button id="nextBtn" class="btn-primary hidden" type="button">Next Question</button>
+    </div>
+  </section>
+
+  <section id="completion" class="card hidden" aria-labelledby="completion-title">
+    <div class="completion-card">
+      <div class="completion-mark">✓ Review complete</div>
+      <h2 id="completion-title">MLA 9 Review Lab — Complete</h2>
+      <p>You finished all 20 practice questions.</p>
+
+      <div class="completion-grid" aria-label="Completed review sections">
+        <div>Cite It or Not?</div><div class="status">✓ Complete</div>
+        <div>In-Text Citations</div><div class="status">✓ Complete</div>
+        <div>Titles &amp; Containers</div><div class="status">✓ Complete</div>
+        <div>Works Cited</div><div class="status">✓ Complete</div>
+        <div>MLA Paper Setup</div><div class="status">✓ Complete</div>
+        <div>AI Citation Detective</div><div class="status">✓ Complete</div>
+      </div>
+
+      <p><strong>Completed:</strong> <span id="completionDate"></span><br>
+      <strong>Practice completed:</strong> 20 of 20 questions</p>
+
+      <div class="screenshot-note">📸 Screenshot this completion card for Canvas.</div>
+    </div>
+
+    <div class="button-row hide-in-screenshot">
+      <button id="screenshotBtn" class="btn-primary" type="button">Prepare Screenshot View</button>
+      <button id="exitScreenshotBtn" class="btn-secondary hidden" type="button">Exit Screenshot View</button>
+      <button id="restartBtn" class="btn-quiet" type="button">Practice Again</button>
+    </div>
+  </section>
+
+  <footer class="hide-in-screenshot">
+    This activity stores progress only in this browser. It does not ask for a name, email address, or login.
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  const questions = [
+    {
+      section:"Round 1 · Cite It or Not?",
+      prompt:"You write: “In my experience, turning off notifications makes it easier for me to concentrate while reading.” Does this need a citation?",
+      answers:["Yes","No"],
+      correct:1,
+      right:"You got it. This is your own experience, so you do not need to cite an outside source.",
+      wrong:"This statement describes the writer’s own experience. A citation is not needed unless the writer brings in information or ideas from another source."
+    },
+    {
+      section:"Round 1 · Cite It or Not?",
+      prompt:"You write: “A 2025 study found that college students checked their phones an average of 42 times during a typical school day.” Does this need a citation?",
+      answers:["Yes","No"],
+      correct:0,
+      right:"Yes. The statistic came from someone else’s research, so readers need a way to trace it back to the source.",
+      wrong:"A statistic from a study is source-based information. Even when you put it in your own words, it still needs citation."
+    },
+    {
+      section:"Round 1 · Cite It or Not?",
+      prompt:"You write: “Garcia argues that students do not necessarily read less online; instead, they read differently.” Does this need a citation?",
+      answers:["Yes","No"],
+      correct:0,
+      right:"Exactly. You are using Garcia’s idea. Paraphrasing changes the wording, not who deserves credit.",
+      wrong:"This sentence presents Garcia’s argument. Because the idea comes from another person, it still needs citation."
+    },
+    {
+      section:"Round 2 · In-Text Citations",
+      prompt:"You quote page 37 of a book by Maya Chen. Which parenthetical citation is formatted correctly?",
+      answers:["(Chen, p. 37)","(Chen 37)","(Maya Chen 37)","(Chen, 37)"],
+      correct:1,
+      right:"Correct. A standard MLA parenthetical citation uses the author’s last name and page number without a comma: (Chen 37).",
+      wrong:"MLA normally uses the author’s last name and page number without a comma or “p.” in this kind of parenthetical citation."
+    },
+    {
+      section:"Round 2 · In-Text Citations",
+      scenario:"Chen argues that online communities can create meaningful forms of belonging.",
+      prompt:"The idea appears on page 82. Which citation should follow the sentence?",
+      answers:["(Chen 82)","(Chen, p. 82)","(82)","No citation"],
+      correct:2,
+      right:"Right. Chen is already named in the sentence, so the parenthetical citation only needs the page number: (82).",
+      wrong:"Because Chen’s name already appears in the sentence, you do not need to repeat it in the parentheses. The page number is enough."
+    },
+    {
+      section:"Round 2 · In-Text Citations",
+      prompt:"Which version places the final period correctly?",
+      answers:[
+        "“Writing changes when audiences change.” (Patel 16)",
+        "“Writing changes when audiences change” (Patel 16)."
+      ],
+      correct:1,
+      right:"Citation rescued. For a standard quotation like this, the parenthetical citation comes before the sentence’s final period.",
+      wrong:"For this kind of quotation, the sentence-ending period comes after the parenthetical citation."
+    },
+    {
+      section:"Round 2 · In-Text Citations",
+      prompt:"You paraphrase an online article by Jordan Lee. The webpage has no page numbers. Which is best?",
+      answers:["(Lee 1)","(Lee n.p.)","(Lee)","(Lee, online)"],
+      correct:2,
+      right:"Exactly. Do not invent a page number. If the source has no useful numbered location, cite the author without making one up.",
+      wrong:"Do not invent a page or location marker. When there is no useful numbered location, the author name can stand alone."
+    },
+    {
+      section:"Round 2 · In-Text Citations",
+      scenario:"According to Rivera, first-generation students often rely on informal networks to learn campus systems.",
+      prompt:"The source has no page numbers. What additional parenthetical citation is needed at the end of this sentence?",
+      answers:["(Rivera)","(Rivera 1)","None","(n.p.)"],
+      correct:2,
+      right:"Correct. Rivera is already named in the signal phrase, and there is no page number to add.",
+      wrong:"Because Rivera is already named in the sentence and there is no page number, no parenthetical citation is needed here."
+    },
+    {
+      section:"Round 3 · Titles & Containers",
+      prompt:"You are citing the novel Frankenstein. How should the title normally appear in MLA prose and citations?",
+      answers:["In quotation marks","In italics","In bold","Underlined"],
+      correct:1,
+      right:"Yes. A book is a self-contained work, so its title is normally italicized.",
+      wrong:"A book is a self-contained work. MLA normally italicizes titles of larger, self-contained works."
+    },
+    {
+      section:"Round 3 · Titles & Containers",
+      prompt:"You are citing a short story that appears inside an anthology. How should the short story title normally appear?",
+      answers:["In italics","In quotation marks","In bold","In all caps"],
+      correct:1,
+      right:"Right. A short story is a smaller work that appears inside a larger container, so its title goes in quotation marks.",
+      wrong:"A short story is a smaller work within a larger work. MLA normally places its title in quotation marks."
+    },
+    {
+      section:"Round 3 · Titles & Containers",
+      scenario:"Article title: “Why We Can’t Stop Scrolling”  •  Website: The Atlantic",
+      prompt:"What is the container?",
+      answers:["The article title","The Atlantic","The author’s name","The URL"],
+      correct:1,
+      right:"Exactly. The article is the source you used; The Atlantic is the larger work that contains it.",
+      wrong:"The container is the larger work holding the source. Here, the article is contained by The Atlantic."
+    },
+    {
+      section:"Round 3 · Titles & Containers",
+      prompt:"A source does not have information for one of MLA’s nine core elements. What should you do?",
+      answers:["Write “N/A”","Invent a reasonable answer","Leave out the element that does not apply","Keep searching until every element is filled"],
+      correct:2,
+      right:"That is the MLA mindset. Not every source has all nine core elements. Use the elements that actually apply.",
+      wrong:"MLA’s core elements are flexible. You should not invent missing information or force every source to use all nine."
+    },
+    {
+      section:"Round 4 · Works Cited",
+      prompt:"Which correctly begins a Works Cited entry for an author named Elena Rodriguez?",
+      answers:["Elena Rodriguez.","Rodriguez, Elena.","Rodriguez Elena.","Rodriguez, E."],
+      correct:1,
+      right:"Correct. A Works Cited entry normally inverts the first author’s name: Last Name, First Name.",
+      wrong:"In a Works Cited entry, the first author’s name is normally inverted: Last Name, First Name."
+    },
+    {
+      section:"Round 4 · Works Cited",
+      prompt:"A book has three authors: Nia Johnson, Marco Ruiz, and Hannah Kim. Which beginning follows MLA’s usual Works Cited practice?",
+      answers:["Johnson, Nia, Marco Ruiz, and Hannah Kim.","Johnson, Nia, et al.","Johnson et. al.","Johnson, Nia, etc."],
+      correct:1,
+      right:"Correct. For a work with three or more authors, MLA normally lists the first author and then uses et al.",
+      wrong:"For three or more authors, MLA normally lists the first author followed by “et al.” Notice that “et” does not take a period."
+    },
+    {
+      section:"Round 4 · Works Cited",
+      prompt:"Which sequence begins the MLA core-element order correctly?",
+      answers:[
+        "Title of Source → Author → Publisher",
+        "Author → Title of Source → Title of Container",
+        "Publisher → Author → Date",
+        "Location → Title of Source → Author"
+      ],
+      correct:1,
+      right:"Exactly. The core-element sequence begins with Author, Title of Source, and Title of Container.",
+      wrong:"MLA’s core-element sequence begins: Author, Title of Source, Title of Container."
+    },
+    {
+      section:"Round 4 · Works Cited",
+      prompt:"Which author should appear first when these Works Cited entries are alphabetized?",
+      answers:["Brooks, Talia.","Chen, Maya.","Alvarez, Sofia.","Williams, Devin."],
+      correct:2,
+      right:"Correct. Works Cited entries are alphabetized, so Alvarez comes first.",
+      wrong:"Alphabetize by the element that begins the entry. Among these author names, Alvarez comes first."
+    },
+    {
+      section:"Round 4 · Works Cited",
+      prompt:"What is a hanging indent?",
+      answers:[
+        "The first line is indented and later lines are flush left",
+        "Every line is indented the same amount",
+        "The first line is flush left and later lines are indented",
+        "Only the title is indented"
+      ],
+      correct:2,
+      right:"Yes. A hanging indent keeps the first line flush left and indents any additional lines of the same Works Cited entry.",
+      wrong:"A hanging indent does the opposite of a paragraph indent: the first line stays flush left, and later lines move inward."
+    },
+    {
+      section:"Round 5 · MLA Paper Setup",
+      prompt:"Which statement best describes standard MLA paper formatting?",
+      answers:[
+        "Use one-inch margins and double-space the paper",
+        "Use two-inch margins and single-space quotations",
+        "Center-align the body paragraphs",
+        "Use a separate title page for every MLA paper"
+      ],
+      correct:0,
+      right:"Correct. Standard MLA formatting uses one-inch margins and double spacing throughout the paper.",
+      wrong:"A standard MLA paper uses one-inch margins and double spacing. A separate title page is not automatically required."
+    },
+    {
+      section:"Round 5 · MLA Paper Setup",
+      prompt:"Which statement about fonts is safest under current MLA guidance?",
+      answers:[
+        "Times New Roman 12 point is the only acceptable font",
+        "Any decorative font is acceptable",
+        "Use a readable typeface in a standard size, with regular and italic styles clearly distinct",
+        "Font choice never matters"
+      ],
+      correct:2,
+      right:"Correct. MLA does not require Times New Roman specifically. The key is a readable typeface in a standard size with clear regular and italic forms.",
+      wrong:"MLA does not require one specific font. A readable typeface in a standard size is the better rule."
+    },
+    {
+      section:"Final Boss · AI Citation Detective",
+      scenario:"An AI tool produces a polished citation for an article. You open the real article and discover that the AI gave the wrong volume number and page range.",
+      prompt:"What is the most important problem?",
+      answers:[
+        "The citation is too long",
+        "The citation contains inaccurate source information",
+        "The punctuation looks too formal",
+        "AI citations do not need to be checked"
+      ],
+      correct:1,
+      right:"Exactly. A citation can look perfectly formatted and still be false. Verify bibliographic information against the actual source.",
+      wrong:"The central problem is accuracy. A polished citation is not trustworthy if the bibliographic details do not match the real source."
+    }
+  ];
+
+  const intro = document.getElementById("intro");
+  const quiz = document.getElementById("quiz");
+  const completion = document.getElementById("completion");
+  const startBtn = document.getElementById("startBtn");
+  const resumeBtn = document.getElementById("resumeBtn");
+  const questionHost = document.getElementById("questionHost");
+  const sectionLabel = document.getElementById("sectionLabel");
+  const progressLabel = document.getElementById("progressLabel");
+  const percentLabel = document.getElementById("percentLabel");
+  const progressBar = document.getElementById("progressBar");
+  const feedback = document.getElementById("feedback");
+  const feedbackTitle = document.getElementById("feedbackTitle");
+  const feedbackText = document.getElementById("feedbackText");
+  const retryBtn = document.getElementById("retryBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const completionDate = document.getElementById("completionDate");
+  const screenshotBtn = document.getElementById("screenshotBtn");
+  const exitScreenshotBtn = document.getElementById("exitScreenshotBtn");
+  const restartBtn = document.getElementById("restartBtn");
+
+  let index = 0;
+  let locked = false;
+
+  const storageKey = "mla9ReviewLabProgressV1";
+
+  function saveProgress(){
+    localStorage.setItem(storageKey, JSON.stringify({ index, completed:false }));
+  }
+
+  function loadProgress(){
+    try{
+      return JSON.parse(localStorage.getItem(storageKey) || "null");
+    }catch(e){
+      return null;
+    }
+  }
+
+  function showQuiz(){
+    intro.classList.add("hidden");
+    completion.classList.add("hidden");
+    quiz.classList.remove("hidden");
+    renderQuestion();
+    quiz.scrollIntoView({block:"start"});
+  }
+
+  function renderQuestion(){
+    locked = false;
+    const q = questions[index];
+    const pct = Math.round(((index + 1) / questions.length) * 100);
+
+    sectionLabel.textContent = q.section;
+    progressLabel.textContent = `Question ${index + 1} of ${questions.length}`;
+    percentLabel.textContent = `${pct}%`;
+    progressBar.style.width = `${pct}%`;
+
+    feedback.className = "feedback";
+    feedbackTitle.textContent = "";
+    feedbackText.textContent = "";
+    retryBtn.classList.add("hidden");
+    nextBtn.classList.add("hidden");
+
+    questionHost.innerHTML = "";
+
+    if(q.scenario){
+      const scenario = document.createElement("div");
+      scenario.className = "scenario";
+      scenario.textContent = q.scenario;
+      questionHost.appendChild(scenario);
+    }
+
+    const prompt = document.createElement("p");
+    prompt.className = "question-text";
+    prompt.id = "currentQuestion";
+    prompt.textContent = q.prompt;
+    questionHost.appendChild(prompt);
+
+    const answerWrap = document.createElement("div");
+    answerWrap.className = "answers";
+    answerWrap.setAttribute("role","group");
+    answerWrap.setAttribute("aria-labelledby","currentQuestion");
+
+    q.answers.forEach((answer, i)=>{
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "answer-btn";
+      btn.textContent = answer;
+      btn.dataset.index = i;
+      btn.addEventListener("click", ()=>checkAnswer(i, btn));
+      answerWrap.appendChild(btn);
+    });
+
+    questionHost.appendChild(answerWrap);
+    saveProgress();
+
+    const firstAnswer = answerWrap.querySelector("button");
+    if(firstAnswer) firstAnswer.focus();
+  }
+
+  function checkAnswer(choice, button){
+    if(locked) return;
+    const q = questions[index];
+    const allButtons = [...questionHost.querySelectorAll(".answer-btn")];
+
+    if(choice === q.correct){
+      locked = true;
+      allButtons.forEach(b=>b.disabled=true);
+      button.classList.add("correct");
+      feedback.className = "feedback show correct";
+      feedbackTitle.textContent = "Correct";
+      feedbackText.textContent = q.right;
+      nextBtn.textContent = index === questions.length - 1 ? "Finish Review" : "Next Question";
+      nextBtn.classList.remove("hidden");
+      nextBtn.focus();
+    }else{
+      allButtons.forEach(b=>b.disabled=true);
+      feedback.className = "feedback show";
+      feedbackTitle.textContent = "Not quite";
+      feedbackText.textContent = q.wrong;
+      retryBtn.classList.remove("hidden");
+      retryBtn.focus();
+    }
+  }
+
+  retryBtn.addEventListener("click", ()=>{
+    const buttons = [...questionHost.querySelectorAll(".answer-btn")];
+    buttons.forEach(b=>{
+      b.disabled=false;
+      b.classList.remove("correct");
+    });
+    feedback.className = "feedback";
+    retryBtn.classList.add("hidden");
+    if(buttons[0]) buttons[0].focus();
+  });
+
+  nextBtn.addEventListener("click", ()=>{
+    if(index < questions.length - 1){
+      index += 1;
+      renderQuestion();
+      window.scrollTo({top:quiz.offsetTop - 8, behavior:"smooth"});
+    }else{
+      finishReview();
+    }
+  });
+
+  function finishReview(){
+    localStorage.setItem(storageKey, JSON.stringify({ index:questions.length, completed:true }));
+    quiz.classList.add("hidden");
+    completion.classList.remove("hidden");
+    const now = new Date();
+    completionDate.textContent = new Intl.DateTimeFormat(undefined,{
+      year:"numeric", month:"long", day:"numeric"
+    }).format(now);
+    completion.scrollIntoView({block:"start"});
+    document.getElementById("completion-title").focus?.();
+  }
+
+  startBtn.addEventListener("click", ()=>{
+    index = 0;
+    showQuiz();
+  });
+
+  resumeBtn.addEventListener("click", ()=>{
+    const saved = loadProgress();
+    index = saved && Number.isInteger(saved.index) ? Math.min(saved.index, questions.length - 1) : 0;
+    showQuiz();
+  });
+
+  screenshotBtn.addEventListener("click", ()=>{
+    document.body.classList.add("screenshot-mode");
+    screenshotBtn.classList.add("hidden");
+    exitScreenshotBtn.classList.remove("hidden");
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  exitScreenshotBtn.addEventListener("click", ()=>{
+    document.body.classList.remove("screenshot-mode");
+    exitScreenshotBtn.classList.add("hidden");
+    screenshotBtn.classList.remove("hidden");
+    completion.scrollIntoView({block:"start"});
+  });
+
+  restartBtn.addEventListener("click", ()=>{
+    const ok = confirm("Restart the MLA review from the beginning?");
+    if(!ok) return;
+    localStorage.removeItem(storageKey);
+    index = 0;
+    document.body.classList.remove("screenshot-mode");
+    completion.classList.add("hidden");
+    intro.classList.remove("hidden");
+    resumeBtn.classList.add("hidden");
+    startBtn.focus();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  const saved = loadProgress();
+  if(saved){
+    if(saved.completed){
+      resumeBtn.textContent = "View Completion Card";
+      resumeBtn.classList.remove("hidden");
+      resumeBtn.onclick = function(){
+        intro.classList.add("hidden");
+        quiz.classList.add("hidden");
+        completion.classList.remove("hidden");
+        const now = new Date();
+        completionDate.textContent = new Intl.DateTimeFormat(undefined,{
+          year:"numeric", month:"long", day:"numeric"
+        }).format(now);
+      };
+    }else if(Number.isInteger(saved.index) && saved.index > 0){
+      resumeBtn.classList.remove("hidden");
+    }
+  }
+})();
+</script>
+</body>
+</html>
+mla9-review-lab-v1.html
+HTML
+should it put it straight in index?
+
+Yes — if this GitHub repository is just for the MLA Review Lab, I would put it straight into index.html.
+
+That gives you the cleanest setup:
+
+your-repository/
+└── index.html
+
+GitHub Pages will automatically load index.html as the homepage, so students get the activity immediately rather than having to click through another page.
+
+What to do
+In your GitHub repository, choose Add file → Create new file.
+Name it exactly index.html.
+Open the HTML file I made and copy everything into that GitHub file.
+Commit the change.
+Turn on GitHub Pages if it isn't already enabled.
+Then we'll test the live URL before embedding it in Canvas.
+
+If you already have an index.html in that repository, don't overwrite it yet—show me what the repo looks like and I'll tell you the best place for the activity.
+
+is it in an iframe?
+
+No — the index.html I made is the activity itself, not an iframe.
+
+The setup would be:
+
+GitHub
+
+index.html  ← the entire MLA Review Lab lives here
+
+Then Canvas embeds that GitHub page with an iframe:
+
+<iframe
+  src="YOUR-GITHUB-PAGES-URL"
+  title="MLA 9 Review Lab interactive practice activity"
+  style="width:100%; height:850px; border:0;"
+  loading="lazy">
+</iframe>
+
+<p>
+  <a href="YOUR-GITHUB-PAGES-URL" target="_blank" rel="noopener">
+    Open the MLA 9 Review Lab in a new window
+  </a>
+</p>
+
+So it's essentially:
+
+Canvas page → iframe → GitHub index.html → MLA activity
+
+That's the arrangement I'd recommend. The activity remains fully functional on GitHub by itself, while Canvas simply displays it inside your course.
+
+And I definitely want the “Open in a new window” link underneath. That's useful for accessibility and also gives students an escape hatch if Canvas's iframe is cramped on a particular phone or browser.
