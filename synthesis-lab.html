@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synthesis Lab: Get the Sources Talking</title>
+<meta name="description" content="An accessible ENGL C1000 synthesis lab that helps students organize multiple sources around their own ideas.">
+<style>
+:root{
+  --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#66727d;--line:#d7e0e8;
+  --blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;
+  --gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button{font:inherit;font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:4px solid #111;outline-offset:3px}
+.shell{max-width:1060px;margin:auto;padding:20px 12px 52px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
+h1,h2,h3{color:var(--dark);line-height:1.18}
+h1{font-size:clamp(2.1rem,7vw,3.5rem);margin:.1em 0 .25em}
+h2{font-size:clamp(1.4rem,4vw,2rem)}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.84rem;color:var(--blue)}
+.lead{font-size:1.16rem}
+.primary{background:var(--blue);color:#fff}
+.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}
+.quiet{background:#edf1f5;color:var(--ink)}
+.row,.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.call,.secret,.good,.warn,.note{padding:16px;border-radius:14px;margin:14px 0}
+.call{background:var(--goldbg);border-left:5px solid var(--gold)}
+.secret{background:var(--lav);border:2px dashed var(--purple)}
+.good{background:var(--greenbg);border:2px solid var(--green)}
+.warn{background:var(--rosebg);border:2px solid var(--rose)}
+.note{background:var(--soft);border:2px solid var(--blue)}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:900}
+.track{height:12px;background:#e5ebf0;border-radius:99px;overflow:hidden;margin:7px 0 18px}
+.bar{height:100%;background:var(--blue);width:0}
+.stage{display:inline-block;background:var(--soft);color:var(--blue);font-weight:900;border-radius:99px;padding:5px 10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:18px;align-items:start}
+.side{position:sticky;top:10px;border:1px solid var(--line);background:#fbfcfd;border-radius:14px;padding:15px}
+.case,.source,.idea,.block,.matrix{border:2px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;background:#fff}
+.source strong,.idea strong,.block strong{color:var(--blue)}
+.parade{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:18px;background:#fafbfd;border:2px dashed var(--line);border-radius:14px}
+.parade .source{margin:0;min-width:150px;text-align:center}
+.arrow{font-size:1.6rem;font-weight:900;color:var(--muted)}
+.tablewrap{position:relative;min-height:420px;border:3px solid var(--blue);border-radius:20px;background:linear-gradient(#f9fcfd,#eef5f8);padding:20px;margin:16px 0}
+.centeridea{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:220px;background:#fff;border:4px solid var(--blue);border-radius:50%;padding:26px 18px;text-align:center;font-weight:900;z-index:3}
+.node{position:absolute;width:180px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;z-index:2}
+.n1{left:5%;top:8%}.n2{right:5%;top:10%}.n3{left:8%;bottom:8%}.n4{right:8%;bottom:8%}
+.relationship{display:block;margin-top:8px;font-size:.88rem;font-weight:900;color:var(--purple)}
+.relbuttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.relbuttons button{min-height:40px;padding:8px 10px;font-size:.88rem;background:#fff;border:2px solid var(--line)}
+.relbuttons button.selected{background:var(--greenbg);border-color:var(--green)}
+.chem{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;text-align:center;margin:18px 0}
+.beaker{border:3px solid var(--blue);border-radius:14px;padding:18px;background:#f7fbfd}
+.plus{font-size:2rem;font-weight:900}
+.reaction{border:3px dashed var(--purple);border-radius:14px;padding:18px;background:var(--lav);margin-top:16px}
+.dj{border:4px solid var(--dark);border-radius:18px;padding:18px;background:#f6f8fa}
+.djgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.trackcard{border:2px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.fader{height:8px;border-radius:99px;background:#dce3e9;margin:10px 0;position:relative}
+.fader:after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:var(--blue);top:-5px;left:55%}
+.voicebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.voicebar div{border-radius:10px;padding:12px;text-align:center;font-weight:900}
+.you{background:var(--greenbg);border:2px solid var(--green)}.sourceside{background:var(--goldbg);border:2px solid var(--gold)}
+.choices{display:grid;gap:10px}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink)}
+.choice.ok{background:var(--greenbg);border-color:var(--green)}
+.feedback{display:none;background:var(--soft);border:2px solid var(--blue);border-radius:12px;padding:14px;margin-top:14px}
+.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}
+.matrix table{width:100%;border-collapse:collapse}.matrix th,.matrix td{border:1px solid var(--line);padding:10px;text-align:left}.matrix th{background:var(--soft)}
+.badge{display:inline-block;padding:5px 9px;border-radius:99px;background:#fff;border:1px solid var(--line);font-size:.86rem;font-weight:800}
+.lightning{display:grid;gap:10px}.lightning .case{margin:0}
+.completion{border:4px solid var(--blue);border-radius:18px;padding:24px}
+.done{color:var(--green);font-weight:900}
+.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}
+.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:800px){
+  .layout{grid-template-columns:1fr}.side{position:static;order:-1}.tablewrap{min-height:720px}
+  .centeridea{top:50%;width:200px}.n1{left:5%;top:5%}.n2{right:5%;top:22%}.n3{left:5%;bottom:22%}.n4{right:5%;bottom:5%}
+}
+@media(max-width:620px){
+  body{font-size:17px}.row{display:grid}.row button{width:100%}.chem{grid-template-columns:1fr}.plus{transform:rotate(90deg)}
+  .djgrid{grid-template-columns:1fr}.voicebar{grid-template-columns:1fr}.tablewrap{min-height:850px}
+  .node{position:static;width:auto;margin:10px 0}.centeridea{position:static;transform:none;width:auto;border-radius:16px;margin:12px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section id="intro" class="card">
+<p class="eyebrow">ENGL C1000 · Source Synthesis</p>
+<h1>🧩 Synthesis Lab: Get the Sources Talking</h1>
+<p class="lead"><strong>Three sources in one paragraph do not automatically equal synthesis.</strong></p>
+<div class="parade">
+  <div class="source"><strong>Smith says...</strong></div><span class="arrow">→</span>
+  <div class="source"><strong>Jones says...</strong></div><span class="arrow">→</span>
+  <div class="source"><strong>Garcia says...</strong></div>
+</div>
+<div class="warn"><strong>🚨 SOURCE PARADE DETECTED.</strong><br>The sources are standing next to each other. The writer has not yet shown us what relationship matters.</div>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> Synthesis means organizing sources around an idea, question, relationship, or claim that <em>you</em> control.</div>
+<div class="row"><button id="start" class="primary">🧠 Put the Writer Back in Charge</button><button id="resume" class="secondary hidden">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div>
+<div class="track"><div id="bar" class="bar"></div></div>
+<span id="stage" class="stage"></span>
+<div class="layout">
+  <div>
+    <div id="host"></div>
+    <div id="fb" class="feedback" role="status" aria-live="polite"></div>
+    <div class="row"><button id="next" class="primary hidden">Continue</button></div>
+  </div>
+  <aside class="side">
+    <h3>🧩 Synthesis Check</h3>
+    <p><strong>1.</strong> What idea is this paragraph developing?</p>
+    <p><strong>2.</strong> Which sources actually belong in this conversation?</p>
+    <p><strong>3.</strong> How do they relate?</p>
+    <p><strong>4.</strong> What do I notice because I put them together?</p>
+    <p><strong>5.</strong> Why does that matter to my claim?</p>
+  </aside>
+</div>
+</section>
+
+<section id="finish" class="card hidden">
+<div class="good"><h2>🧩 Conversation Built</h2><p><strong>Synthesis is not squeezing more sources into a paragraph. It is showing the reader what you notice when ideas are placed in conversation.</strong></p></div>
+
+<h2>🧩 I Have Multiple Sources. Now What?</h2>
+<div class="case">
+<p><strong>1. What idea is this paragraph trying to develop?</strong></p>
+<p><strong>2. Which sources actually help with that idea?</strong></p>
+<p><strong>3. How do those sources relate?</strong></p>
+<div class="chips"><span class="badge">🤝 Agree</span><span class="badge">➕ Add</span><span class="badge">↔ Contrast</span><span class="badge">🧩 Complicate</span><span class="badge">⚖ Qualify</span><span class="badge">🔍 Example</span></div>
+<p><strong>4. What do I notice because I put them together?</strong></p>
+<p><strong>5. Why does that relationship matter to my claim?</strong></p>
+</div>
+
+<div class="note"><h3>🧠 A synthesis sentence starter can help—but it is scaffolding, not a law.</h3>
+<p>“Taken together, these sources suggest...”<br>
+“While both sources identify..., they differ in...”<br>
+“Source B complicates Source A by...”<br>
+“Viewed together, these findings raise a question about...”</p></div>
+
+<div class="row"><button id="copy" class="secondary">📋 Copy My Synthesis Check</button></div>
+
+<div id="completion" class="completion">
+<p class="done">✓ LAB COMPLETE</p>
+<h2>Synthesis Lab: Get the Sources Talking — Complete</h2>
+<p>✓ Distinguish source-by-source summary from synthesis<br>
+✓ Identify relationships among sources<br>
+✓ Organize evidence around a writer-controlled idea<br>
+✓ Explain what becomes visible when sources are placed together<br>
+✓ Use agreement, contrast, complication, qualification, and examples purposefully<br>
+✓ Recognize when a source does not belong in a particular paragraph<br>
+✓ Use disagreement as material for analysis<br>
+✓ Connect synthesis back to the writer's claim</p>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+</section>
+<footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
+</main>
+
+<script>
+(()=>{const $=x=>document.getElementById(x),KEY="synthesisGetSourcesTalkingV1";let i=0;
+const M=[
+["1 · Source Parade","parade"],
+["2 · Where Did the Writer Go?","ghost"],
+["3 · Relationship Detector","choice",
+`<div class="source"><strong>Source A:</strong> Evening students report difficulty accessing tutoring after 6 p.m.</div><div class="source"><strong>Source B:</strong> Students who use tutoring regularly are more likely to complete gateway courses.</div>`,
+"What relationship could a writer reasonably notice?",
+[["Together, they suggest that limited evening access may matter academically, not just logistically.",1,"Yes. The writer creates a new connection between access and academic support."],["Source B proves Source A is correct.",0,"The sources address different pieces of the issue; one does not simply prove the other."],["They both mention students, so they agree.",0,"Shared vocabulary is not yet a meaningful synthesis relationship."],["They should be summarized in separate paragraphs automatically.",0,"That would hide the potentially useful relationship between them."]]],
+["4 · Source Chemistry Lab","chem"],
+["5 · Same Sources, Different Conversation","same"],
+["6 · Conversation Table","table"],
+["7 · Choose a Relationship","tablepick"],
+["8 · Build Around an Idea","build"],
+["9 · Who Is Talking?","voice"],
+["10 · Synthesis DJ Board","dj"],
+["11 · Do These Sources Belong Together?","choice",
+`<div class="source">A: evening students report limited tutoring access</div><div class="source">B: tutoring participation is associated with course completion</div><div class="source">C: evening students often work daytime hours</div><div class="source">D: campus parking structures use reinforced concrete</div>`,
+"Which source probably does not belong in this particular synthesis about evening academic support?",
+[["Source D",1,"Right. A source can be useful somewhere else and still not belong in this conversation."],["Source A",0,"This directly addresses access."],["Source B",0,"This helps establish why access may matter academically."],["Source C",0,"This may help explain why evening schedules shape availability."]]],
+["12 · Agreement Is Not Enough","agree"],
+["13 · Disagreement Is Interesting","disagree"],
+["14 · Synthesis Matrix","matrix"],
+["15 · Source Clique","clique"],
+["16 · Bigger Words ≠ More Synthesis","sentence"],
+["17 · Complication Unlocked","complicate"],
+["18 · Parade or Synthesis?","lightning"],
+["19 · Final Conversation Board","finalboard"],
+["20 · Writer Back in Charge","end"]
+];
+
+function feedback(text,good=true){
+  $("fb").textContent=text;$("fb").className="feedback show"+(good?" good":"");$("next").classList.remove("hidden")
+}
+function choices(opts){
+  let d=document.createElement("div");d.className="choices";
+  opts.forEach(([label,good,msg])=>{
+    let b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;
+    b.onclick=()=>{if(good){[...d.children].forEach(x=>x.disabled=true);b.classList.add("ok");feedback("🧩 "+msg)}
+    else{b.disabled=true;feedback(msg+" Try another relationship.",false);$("next").classList.add("hidden")}};
+    d.appendChild(b)
+  });return d
+}
+function relButtons(target){
+  const rels=["🤝 Agrees","➕ Adds","🧩 Complicates","⚖ Qualifies","↔ Contrasts","🔍 Example"];
+  let d=document.createElement("div");d.className="relbuttons";
+  rels.forEach(r=>{let b=document.createElement("button");b.type="button";b.textContent=r;b.onclick=()=>{[...d.children].forEach(x=>x.classList.remove("selected"));b.classList.add("selected");target.textContent=r+" — relationship chosen";feedback("Nice. Now the important question is: what does that relationship help the writer notice?")};d.appendChild(b)});
+  return d
+}
+function render(){
+  let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";
+  $("stage").textContent=m[0];$("pt").textContent=`Synthesis move ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";
+
+  if(m[1]==="choice"){
+    $("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;
+    $("host").appendChild(choices(m[4]))
+  }
+  if(m[1]==="parade"){
+    $("host").innerHTML=`<h2>🎺 Source Parade</h2><div class="parade"><div class="source"><strong>Smith says...</strong><p>Belonging supports persistence.</p></div><span class="arrow">→</span><div class="source"><strong>Jones says...</strong><p>Online communities may provide connection.</p></div><span class="arrow">→</span><div class="source"><strong>Garcia says...</strong><p>Passive social media use may increase isolation.</p></div></div><div class="warn"><strong>Three sources. Three summaries. No visible relationship yet.</strong></div>`;
+    feedback("The problem is not that the sources are bad. The writer has not yet shown what matters about putting them together.")
+  }
+  if(m[1]==="ghost"){
+    $("host").innerHTML=`<h2>👻 Where Did the Writer Go?</h2><div class="case"><p>Smith argues that belonging improves student persistence. Jones discusses online communities among college students. Garcia examines social media and isolation.</p></div><div class="warn"><strong>WRITER NOT DETECTED.</strong></div><div class="good"><strong>Put the writer back in charge:</strong><p>What relationship do <em>you</em> notice among these sources? What should your reader understand because you put them together?</p></div>`;
+    feedback("Synthesis requires the writer to interpret relationships, not only report source content.")
+  }
+  if(m[1]==="chem"){
+    $("host").innerHTML=`<h2>⚗️ Source Chemistry Lab</h2><div class="chem"><div class="beaker"><strong>🧪 Source A</strong><p>Belonging is associated with persistence.</p></div><div class="plus">+</div><div class="beaker"><strong>🧪 Source B</strong><p>Evening students have fewer chances to use campus support services.</p></div></div><div class="reaction"><strong>⚗️ SYNTHESIS REACTION:</strong><p>Together, these findings raise the possibility that access to community-building and support services may affect more than convenience; it may also shape persistence.</p></div><div class="secret">🔓 The new sentence does not merely repeat A and B. It shows what becomes visible when they are placed together.</div>`;
+    feedback("✨ Synthesis can create a new insight that neither source states exactly on its own.")
+  }
+  if(m[1]==="same"){
+    $("host").innerHTML=`<h2>🔄 Same Sources, Different Conversation</h2><div class="case"><strong>Question 1:</strong> How can colleges improve students' sense of belonging?<p>Jones may become central because online communities offer one possible way to build connection.</p></div><div class="case"><strong>Question 2:</strong> Should colleges rely heavily on social media to build community?<p>Garcia may become more important because the evidence complicates the idea that more online interaction is always better.</p></div><div class="secret">🔓 Sources do not arrive pre-synthesized. Your question helps determine which relationships matter.</div>`;
+    feedback("The same evidence can enter different conversations depending on the writer's purpose.")
+  }
+  if(m[1]==="table"){
+    $("host").innerHTML=`<h2>🧠 The Conversation Table</h2><div class="tablewrap"><div class="centeridea">YOUR IDEA<br><small>Access is not only whether a service exists; it is whether students can realistically use it.</small></div><div class="node n1"><strong>Smith</strong><p>Support use is associated with persistence.</p><span class="relationship">🤝 supports</span></div><div class="node n2"><strong>Jones</strong><p>Evening students report limited service access.</p><span class="relationship">➕ adds context</span></div><div class="node n3"><strong>Garcia</strong><p>Online options can extend access for some students.</p><span class="relationship">🔍 example/solution</span></div><div class="node n4"><strong>Lee</strong><p>Online support does not work equally well for all students.</p><span class="relationship">🧩 complicates</span></div></div>`;
+    feedback("The writer's idea is in the center. Sources enter because of the jobs they do in that conversation.")
+  }
+  if(m[1]==="tablepick"){
+    let rel=document.createElement("div"); rel.className="note"; rel.textContent="Choose a possible relationship.";
+    $("host").innerHTML=`<h2>🔗 Choose the Relationship</h2><div class="source"><strong>Source A:</strong> Students value flexible online tutoring.</div><div class="source"><strong>Source B:</strong> Some students report difficulty forming relationships with online tutors.</div><p><strong>How might Source B relate to Source A?</strong></p>`;
+    $("host").appendChild(relButtons(rel));$("host").appendChild(rel)
+  }
+  if(m[1]==="build"){
+    $("host").innerHTML=`<h2>🧱 Build Around an Idea</h2><div class="block"><strong>YOUR CLAIM</strong><p>Evening students may face access barriers even when services technically exist.</p></div><div class="block"><strong>SOURCE A EVIDENCE</strong><p>Evening students report lower access to tutoring hours.</p></div><div class="block"><strong>YOUR EXPLANATION</strong><p>This suggests that availability on paper does not guarantee practical access.</p></div><div class="block"><strong>SOURCE B EVIDENCE</strong><p>Students who use tutoring regularly show stronger completion outcomes.</p></div><div class="block"><strong>RELATIONSHIP</strong><p>Placed together, the studies suggest that scheduling can become an academic-support issue.</p></div><div class="block"><strong>YOUR SIGNIFICANCE</strong><p>Colleges may need to evaluate access by when and how students can use services, not only whether the services exist.</p></div><div class="secret">🔓 This is one possible structure, not a required paragraph formula.</div>`;
+    feedback("Notice the rhythm: writer → source → writer → source → writer.")
+  }
+  if(m[1]==="voice"){
+    $("host").innerHTML=`<h2>🎙️ Who Is Talking?</h2><div class="voicebar"><div class="you">🧠 YOU<br>Claim · interpretation · relationship · significance</div><div class="sourceside">📚 SOURCES<br>Evidence · examples · findings · perspectives</div></div><div class="warn"><strong>Quote → Quote → Quote</strong><br><br>🚨 THE GUESTS HAVE TAKEN OVER THE PARTY.</div><div class="good">The goal is not a magic percentage. The question is whether the reader can still follow <strong>your reasoning</strong>.</div>`;
+    feedback("Sources support the conversation; they do not replace the writer's thinking.")
+  }
+  if(m[1]==="dj"){
+    $("host").innerHTML=`<h2>🎛️ Synthesis DJ Board</h2><div class="dj"><div class="djgrid"><div class="trackcard"><strong>Source A</strong><div class="fader"></div><p>Bring in for evidence.</p></div><div class="trackcard"><strong>Source B</strong><div class="fader"></div><p>Use to complicate A.</p></div><div class="trackcard"><strong>Source C</strong><div class="fader"></div><p>Fade in for an example.</p></div></div><div class="good"><strong>🎛️ YOU ARE MIXING THE CONVERSATION.</strong><br>Not every source needs equal airtime. Not every source belongs in every paragraph.</div></div>`;
+    feedback("Synthesis is partly about deciding when a source enters and what relationship the reader should hear.")
+  }
+  if(m[1]==="agree"){
+    $("host").innerHTML=`<h2>🤝 “They Agree.” Now What?</h2><div class="case"><p>Smith and Jones both identify barriers to student access.</p></div><div class="warn"><strong>AGREEMENT DETECTED. ANALYSIS STILL NEEDED.</strong></div><div class="good"><strong>Ask:</strong> What do we learn because they agree?<p>If studies using different student populations identify similar access barriers, the problem may extend beyond one campus or program.</p></div>`;
+    feedback("Naming a relationship is a start. Synthesis also explains why that relationship matters.")
+  }
+  if(m[1]==="disagree"){
+    $("host").innerHTML=`<h2>⚡ Sources Disagree</h2><div class="good"><strong>Excellent.</strong></div><p>Instead of deciding one source must be wrong, investigate:</p><div class="chips"><span class="badge">Different populations?</span><span class="badge">Different time periods?</span><span class="badge">Different definitions?</span><span class="badge">Different methods?</span><span class="badge">Different contexts?</span><span class="badge">Different conditions?</span></div><div class="secret">🔓 Disagreement is not a research failure. It can become the most interesting part of the analysis.</div>`;
+    feedback("Conflict among sources gives the writer something to explain.")
+  }
+  if(m[1]==="matrix"){
+    $("host").innerHTML=`<h2>📊 The Synthesis Matrix</h2><div class="matrix"><table><thead><tr><th>Idea / Question</th><th>Smith</th><th>Jones</th><th>Garcia</th></tr></thead><tbody><tr><td>Belonging matters</td><td>✓</td><td>✓</td><td></td></tr><tr><td>Online spaces may help</td><td></td><td>✓</td><td>✓</td></tr><tr><td>Effects vary by use</td><td></td><td></td><td>✓</td></tr></tbody></table></div><div class="secret">🔓 A synthesis matrix is basically a conversation map. It helps you organize by <strong>ideas</strong> rather than by source.</div>`;
+    feedback("This is especially useful when you have several sources and begin seeing repeated themes.")
+  }
+  if(m[1]==="clique"){
+    $("host").innerHTML=`<h2>😬 Source Clique Detected</h2><div class="parade"><div class="source">Source 1<br>same basic point</div><div class="source">Source 2<br>same basic point</div><div class="source">Source 3<br>same basic point</div><div class="source">Source 4<br>same basic point</div></div><div class="note"><strong>Possible moves:</strong><p>Use the strongest one or two. Group similar findings briefly. Save some sources for another purpose. Look for a source that adds complexity.</p></div>`;
+    feedback("More citations do not automatically create more synthesis.")
+  }
+  if(m[1]==="sentence"){
+    $("host").innerHTML=`<h2>🗣️ Bigger Words ≠ More Synthesis</h2><div class="warn"><strong>Source report:</strong><p>Smith says tutoring helps. Jones says evening students cannot always access it.</p></div><div class="good"><strong>Synthesis:</strong><p>Taken together, Smith's findings about tutoring and Jones's evidence about limited evening access suggest that scheduling may function as an academic-support issue rather than merely a convenience issue.</p></div><div class="secret">What changed? <strong>Relationship + inference + significance.</strong> Not fancy vocabulary.</div>`;
+    feedback("Synthesis is reasoning, not an academic-sounding costume.")
+  }
+  if(m[1]==="complicate"){
+    $("host").innerHTML=`<h2>🧩 Complication Unlocked</h2><div class="case"><p>Your first two sources suggest online tutoring improves access. A third source finds that some students experience online tutoring as less relational and less useful.</p></div><div class="warn">Option 1: Delete it because it messes up the paragraph. 😬</div><div class="good">Option 2: Use it to qualify the claim: online options may expand access, but effectiveness can depend on how the support is designed and experienced.</div><div class="secret">🔓 Good synthesis does not force every source to agree.</div>`;
+    feedback("A complication can make the writer's claim more precise.")
+  }
+  if(m[1]==="lightning"){
+    $("host").innerHTML=`<h2>⚡ Parade or Synthesis?</h2><div class="lightning"><div class="case"><strong>🎺 PARADE</strong><p>Patel studied commuting students. Rivera studied tutoring.</p></div><div class="case"><strong>🧩 SYNTHESIS</strong><p>While Patel shows that commuting students spend less time on campus, Rivera finds that students benefit from repeated tutoring contact; together, these findings suggest that support models requiring extra campus time may unintentionally disadvantage commuters.</p></div></div><div class="secret">Look for the move that tells the reader <strong>what becomes visible when the sources are placed together.</strong></div>`;
+    feedback("You are learning to recognize the writer's thinking in the paragraph.")
+  }
+  if(m[1]==="finalboard"){
+    $("host").innerHTML=`<h2>👑 Final Conversation Board</h2><div class="tablewrap"><div class="centeridea">🧠 YOUR IDEA<br><small>Access depends on whether students can realistically use a service.</small></div><div class="node n1"><strong>A</strong><p>Evening tutoring closes early.</p><span class="relationship">➕ evidence</span></div><div class="node n2"><strong>B</strong><p>Tutoring use supports course completion.</p><span class="relationship">🤝 supports significance</span></div><div class="node n3"><strong>C</strong><p>Online tutoring expands access for some students.</p><span class="relationship">🔍 example/solution</span></div><div class="node n4"><strong>D</strong><p>Online tutoring is not equally effective for everyone.</p><span class="relationship">🧩 complicates</span></div></div><div class="good"><strong>CONVERSATION BUILT:</strong><p>What I want my reader to understand: expanding availability matters, but effective access depends on both scheduling and the quality of the support students can actually use.</p></div>`;
+    feedback("The sources are now doing different jobs around a writer-controlled idea.")
+  }
+  if(m[1]==="end"){
+    $("host").innerHTML=`<h2>🎉 Writer Back in Charge</h2><div class="parade"><div class="source"><strong>BEFORE</strong><p>Smith → Jones → Garcia</p><small>“Here are three things I read.”</small></div><span class="arrow">→</span><div class="source"><strong>AFTER</strong><p>Sources ↔ 🧠 YOUR IDEA ↔ Sources</p><small>“Here is what I notice when these ideas are in conversation.”</small></div></div><div class="good"><strong>SOURCES TALKING.</strong><p>Synthesis is not about squeezing more sources into a paragraph. It is about showing the reader what you notice when ideas are placed in conversation.</p></div>`;
+    $("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")
+  }
+  localStorage.setItem(KEY,JSON.stringify({i}))
+}
+
+$("next").onclick=()=>{
+  if(i<M.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}
+  else{
+    $("lab").classList.add("hidden");$("finish").classList.remove("hidden");
+    $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());
+    localStorage.setItem(KEY,JSON.stringify({done:true}));
+    setTimeout(()=>$("completion").scrollIntoView({behavior:"smooth",block:"center"}),200)
+  }
+};
+
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()};
+
+const toolkit=`SYNTHESIS CHECK
+
+1. What idea is this paragraph trying to develop?
+2. Which sources actually help with that idea?
+3. How do those sources relate?
+   - Agree
+   - Add
+   - Contrast
+   - Complicate
+   - Qualify
+   - Give an example
+4. What do I notice because I put them together?
+5. Why does that relationship matter to my claim?
+
+Useful starters:
+“Taken together, these sources suggest...”
+“While both sources identify..., they differ in...”
+“Source B complicates Source A by...”
+“Viewed together, these findings raise a question about...”
+
+Remember: the sentence starter is scaffolding. The relationship is the synthesis.`;
+
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(toolkit);$("copy").textContent="✓ Synthesis Check Copied"}catch(e){alert(toolkit)}};
+
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){
+  $("resume").classList.remove("hidden");
+  $("resume").textContent=s.done?"View Canvas Completion":"Resume";
+  $("resume").onclick=()=>{
+    $("intro").classList.add("hidden");
+    if(s.done){
+      $("finish").classList.remove("hidden");
+      $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())
+    }else{
+      i=s.i||0;$("lab").classList.remove("hidden");render()
+    }
+  }
+}
+})();
+</script>
+</body>
+</html>
