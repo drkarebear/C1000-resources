@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Do I Ask? The College Writing Help Desk</title>
+<meta name="description" content="An accessible first-gen friendly college writing help-routing lab for ENGL C1000.">
+<style>
+:root{--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button,select,input,textarea{font:inherit}button{font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid #111;outline-offset:3px}
+.shell{max-width:1080px;margin:auto;padding:20px 12px 52px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
+h1,h2,h3{color:var(--dark);line-height:1.18}h1{font-size:clamp(2rem,7vw,3.45rem);margin:.1em 0 .25em}.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.84rem;color:var(--blue)}
+.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}
+.row,.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.call,.secret,.good,.warn,.note{padding:16px;border-radius:14px;margin:14px 0}
+.call{background:var(--goldbg);border-left:5px solid var(--gold)}.secret{background:var(--lav);border:2px dashed var(--purple)}.good{background:var(--greenbg);border:2px solid var(--green)}.warn{background:var(--rosebg);border:2px solid var(--rose)}.note{background:var(--soft);border:2px solid var(--blue)}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:900}.track{height:12px;background:#e5ebf0;border-radius:99px;overflow:hidden;margin:7px 0 18px}.bar{height:100%;background:var(--blue)}
+.stage{display:inline-block;background:var(--soft);color:var(--blue);font-weight:900;border-radius:99px;padding:5px 10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.side{position:sticky;top:10px;border:1px solid var(--line);background:#fbfcfd;border-radius:14px;padding:15px}
+.ticket,.person,.case,.upgrade,.route{border:2px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;background:#fff}.ticket{border-left:7px solid var(--gold)}
+.people,.choices,.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.person{text-align:center}.person .icon{font-size:2rem}.person strong{display:block;color:var(--blue)}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink)}.choice.ok{background:var(--greenbg);border-color:var(--green)}
+.feedback{display:none;background:var(--soft);border:2px solid var(--blue);border-radius:12px;padding:14px;margin-top:14px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}
+.desk{border:4px solid var(--dark);border-radius:18px;padding:18px;background:#f9fbfc}.incoming{font-weight:900;color:var(--rose);letter-spacing:.04em}
+.myth{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}.imagined,.actual{border-radius:14px;padding:16px}.imagined{background:var(--rosebg);border:2px solid var(--rose)}.actual{background:var(--greenbg);border:2px solid var(--green)}.arrow{font-size:2rem;font-weight:900}
+.upgrade label,.tool label{display:block;font-weight:900;margin-top:10px}.upgrade input,.tool select,.tool textarea{width:100%;border:2px solid var(--line);border-radius:10px;padding:10px;background:#fff}.upgradeout{background:var(--greenbg);border:2px solid var(--green);border-radius:12px;padding:14px;margin-top:14px}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.85rem;font-weight:900;background:#fff}
+.tool{border:4px solid var(--blue);border-radius:18px;padding:20px;background:#f9fcfd}.result{margin-top:16px}
+.completion{border:4px solid var(--blue);border-radius:18px;padding:24px}.done{color:var(--green);font-weight:900}.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}
+@media(max-width:620px){body{font-size:17px}.people,.choices,.grid2,.myth{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.row{display:grid}.row button{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section id="intro" class="card">
+<p class="eyebrow">College Writing · Unwritten Rules</p>
+<h1>🆘 Who Do I Ask?</h1>
+<h2>The College Writing Help Desk</h2>
+<p><strong>College gives you a lot of people who can help. It does not always explain who does what—or when you're “allowed” to ask.</strong></p>
+<div class="desk"><p class="incoming">🚨 HELP REQUEST INCOMING</p><p>“I know I need help with this paper. I just don't know who to ask.”</p></div>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> Knowing <em>where</em> to get help and <em>what to ask</em> is a college skill. You do not have to wait until you have a finished draft—or until things are going badly.</div>
+<div class="row"><button id="start" class="primary">🎧 Open the Help Desk</button><button id="resume" class="secondary hidden">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+<span id="stage" class="stage"></span>
+<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Continue</button></div></div>
+<aside class="side"><h3>☎️ Help Desk Directory</h3>
+<p><strong>👩‍🏫 Professor</strong><br>Assignment expectations, course-specific questions, feedback, grades.</p>
+<p><strong>✍️ Tutor</strong><br>Ideas, drafts, organization, revision, reading as a reader.</p>
+<p><strong>📚 Librarian</strong><br>Search terms, databases, source types, research strategies.</p>
+<p><strong>👥 Classmate</strong><br>Reader reaction, brainstorming, shared course context.</p>
+<p><strong>💻 Tech Help</strong><br>Access, logins, platforms, technical problems.</p>
+<p><small>More than one route can be useful.</small></p>
+</aside></div>
+</section>
+
+<section id="finish" class="card hidden">
+<div class="good"><h2>🎉 Help Desk Navigator Unlocked</h2><p><strong>Asking for help is not one skill. Matching the problem to a useful person—and giving them enough information to help—is the skill.</strong></p></div>
+
+<h2>🆘 I Need Help. Where Do I Go?</h2>
+<div class="tool">
+<label for="problem">What's happening right now?</label>
+<select id="problem">
+<option value="assignment">I don't understand the assignment</option>
+<option value="ideas">I don't know what to write</option>
+<option value="draft">My draft needs work</option>
+<option value="research">I'm stuck on research</option>
+<option value="feedback">I don't understand feedback</option>
+<option value="citation">I'm unsure about citations</option>
+<option value="tech">Something technical isn't working</option>
+<option value="behind">I'm behind</option>
+<option value="unknown">I don't even know what I need</option>
+</select>
+<div class="row"><button id="route" class="primary">☎️ Route My Question</button></div>
+<div id="result" class="result" aria-live="polite"></div>
+</div>
+
+<div class="note"><h3>🎯 A Better Help Request</h3><p><strong>What I'm working on:</strong> ______<br><strong>Where I am:</strong> ______<br><strong>What I'm unsure about:</strong> ______<br><strong>What I'd like help seeing/doing:</strong> ______</p></div>
+<div class="row"><button id="copy" class="secondary">📋 Copy My Help Request Builder</button></div>
+
+<div class="completion">
+<p class="done">✓ LAB COMPLETE</p>
+<h2>Who Do I Ask? The College Writing Help Desk — Complete</h2>
+<p>✓ Match writing problems with useful sources of help<br>
+✓ Recognize that several routes may be appropriate<br>
+✓ Use professors, tutors, librarians, classmates, and technical support strategically<br>
+✓ Ask for help before a draft is complete<br>
+✓ Turn a vague request into a more useful question<br>
+✓ Know that office hours can be used for confusion, ideas, drafts, and feedback<br>
+✓ Communicate when a writing or submission problem needs attention</p>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+</section>
+<footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
+</main>
+<script>
+(()=>{const $=x=>document.getElementById(x),KEY="collegeWritingHelpDeskV1";let i=0;
+const scenarios=[
+["1 · Meet the Help Desk","directory"],
+["2 · Research Emergency","choice",`<div class="ticket"><strong>🎫 Ticket #101</strong><p>“I have to use three credible sources, but everything I find seems random. I don't know what search terms to use.”</p></div>`,"Where is a strong place to start?",[
+["📚 Librarian",1,"Great route. Librarians can help develop search terms, locate databases, distinguish source types, and find research efficiently."],
+["💻 Tech Help",0,"Tech support is useful when the system itself is not working, but this is a research-strategy problem."],
+["👥 Classmate only",0,"A classmate may have ideas, but a librarian has specialized research expertise."],
+["Wait until the paper is almost due",0,"You can get research help before the problem becomes urgent."]]],
+["3 · Assignment Decoder","choice",`<div class="ticket"><strong>🎫 Ticket #102</strong><p>“The prompt says ‘critically analyze.’ I don't understand what my professor means by that in this assignment.”</p></div>`,"Which route is especially useful?",[
+["👩‍🏫 Professor",1,"Yes. The professor can clarify what the assignment expects in this course. A tutor can also help you work through the prompt."],
+["📚 Librarian only",0,"A librarian can help with research, but the professor is the strongest source for course-specific assignment expectations."],
+["Guess what it means",0,"Clarifying an assignment is a legitimate academic move."],
+["Wait for the grade to find out",0,"You can ask before submitting."]]],
+["4 · Tutoring Myth","tutor"],
+["5 · Office Hours: What Students Imagine","office"],
+["6 · Can I Ask This?","ask"],
+["7 · Draft Without a Draft","choice",`<div class="ticket"><strong>🎫 Ticket #103</strong><p>“I have a topic and some notes, but no draft. Is it too early to go to tutoring?”</p></div>`,"What would you tell the student?",[
+["No. Bring the assignment, notes, questions, or even a blank page.",1,"Exactly. Tutoring can support planning and getting started, not only finished drafts."],
+["Yes. Tutors only proofread completed essays.",0,"Tutoring can happen at many stages of the writing process."],
+["Write the whole essay first.",0,"A student can get useful support before a full draft exists."],
+["Only ask a friend.",0,"Friends can help, but they are not the only option."]]],
+["8 · Feedback Mystery","choice",`<div class="ticket"><strong>🎫 Ticket #104</strong><p>“My professor wrote ‘develop this’ three times. I don't know what that means.”</p></div>`,"What are useful routes?",[
+["👩‍🏫 Professor or ✍️ tutor",1,"Yes. The professor can explain the course-specific feedback; a tutor can help you inspect places where a reader needs more explanation, evidence, or reasoning."],
+["💻 Tech Help",0,"This is a writing/feedback question, not a technical problem."],
+["Ignore every comment you don't understand",0,"Unclear feedback can become a question."],
+["Add three random quotations",0,"‘Develop’ does not automatically mean ‘add more quotes.’"]]],
+["9 · Librarian Superpower","librarian"],
+["10 · Tech Trouble","choice",`<div class="ticket"><strong>🎫 Ticket #105</strong><p>“I uploaded my essay, but Canvas says the file cannot be opened.”</p></div>`,"What is a smart next move?",[
+["Verify the file, contact appropriate tech support, and communicate with the professor if submission is affected.",1,"Yes. Solve the technical problem and communicate rather than silently hoping it fixes itself."],
+["Do nothing because clicking Submit was enough.",0,"It is worth checking that the submitted artifact actually works."],
+["Start rewriting the essay.",0,"The writing may be fine; the immediate problem is technical/submission-related."],
+["Ask a librarian to repair Canvas.",0,"A librarian may help with many things, but platform troubleshooting belongs elsewhere."]]],
+["11 · Classmates Are Readers","classmate"],
+["12 · More Than One Good Door","doors"],
+["13 · Better Question Machine","upgrade"],
+["14 · Upgrade a Vague Question","upgrade2"],
+["15 · I'm Behind","behind"],
+["16 · I Disagree With Feedback","disagree"],
+["17 · I Don't Know What I Need","unknown"],
+["18 · Help Routing Challenge","choice",`<div class="ticket"><strong>🎫 Ticket #106</strong><p>“My draft has five pages and sources, but I can't tell whether Paragraph 3 supports my thesis.”</p></div>`,"Which request is likely to produce the most useful help?",[
+["“Could you read my thesis and Paragraph 3 and tell me where you see the connection—and where you lose it?”",1,"Excellent. It identifies the material and the reader question."],
+["“Is my essay good?”",0,"That is understandable, but it is so broad that the helper has to guess what kind of feedback you need."],
+["“Fix Paragraph 3.”",0,"Useful writing support helps you understand and make choices rather than simply taking over the writing."],
+["“What grade is this?”",0,"A tutor or classmate may not be able to predict the instructor's grade; a more specific reader question is more useful."]]],
+["19 · Help Is Part of the Process","process"],
+["20 · Your Help Desk Pass","end"]
+];
+
+function fb(t,g=true){$("fb").textContent=t;$("fb").className="feedback show"+(g?" good":"");$("next").classList.remove("hidden")}
+function choices(opts){let d=document.createElement("div");d.className="choices";opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("☎️ "+m)}else{b.disabled=true;fb(m+" Try another route.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){let m=scenarios[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Help ticket ${i+1} of ${scenarios.length}`;$("pc").textContent=Math.round((i+1)/scenarios.length*100)+"%";$("bar").style.width=Math.round((i+1)/scenarios.length*100)+"%";
+if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4]))}
+if(m[1]==="directory"){$("host").innerHTML=`<h2>🎧 Welcome to the Help Desk</h2><div class="people"><div class="person"><span class="icon">👩‍🏫</span><strong>Professor</strong>Course-specific expectations, feedback, grades</div><div class="person"><span class="icon">✍️</span><strong>Tutor</strong>Ideas, drafts, organization, revision</div><div class="person"><span class="icon">📚</span><strong>Librarian</strong>Research, databases, search strategies</div><div class="person"><span class="icon">👥</span><strong>Classmate</strong>Reader response, brainstorming, course context</div><div class="person"><span class="icon">💻</span><strong>Tech Help</strong>Platforms, access, technical problems</div><div class="person"><span class="icon">🧠</span><strong>You</strong>Decide what kind of help would move you forward</div></div><div class="secret">🔓 You are not expected to solve every writing problem alone.</div>`;fb("Different people have different kinds of expertise. The skill is routing the question.")}
+if(m[1]==="tutor"){$("host").innerHTML=`<h2>✍️ Tutoring Myth Destroyer</h2><div class="warn"><strong>MYTH:</strong> “I should only go to tutoring when I have a complete draft that needs fixing.”</div><div class="good"><strong>REALITY:</strong> Depending on your college's services, tutoring may help with understanding an assignment, brainstorming, planning, drafting, organization, revision, or getting reader feedback.</div><div class="call"><strong>NO DRAFT?</strong> Bring the assignment.<br><strong>HALF A DRAFT?</strong> Bring that.<br><strong>ONE CONFUSING PARAGRAPH?</strong> Bring that.<br><strong>JUST A QUESTION?</strong> Bring that.</div>`;fb("🚨 MYTH DESTROYED: help can happen before a paper is finished.")}
+if(m[1]==="office"){$("host").innerHTML=`<h2>🧙 Office Hours</h2><div class="myth"><div class="imagined"><strong>WHAT STUDENTS SOMETIMES IMAGINE</strong><p>Arrive with a completed draft and an impressive scholarly question.</p></div><div class="arrow">→</div><div class="actual"><strong>WHAT YOU CAN ACTUALLY SAY</strong><p>“I'm having trouble figuring out how to start.”</p><p>“I don't understand this part of the assignment.”</p><p>“Could I show you the direction I'm thinking?”</p><p>“I don't understand this comment.”</p></div></div>`;fb("Office hours are a place for course questions—not an exam you have to prepare to attend.")}
+if(m[1]==="ask"){$("host").innerHTML=`<h2>❓ Can I Ask This?</h2><div class="case">“Can I ask what the prompt means?” <span class="badge">YES</span></div><div class="case">“Can I go to tutoring without a complete draft?” <span class="badge">YES</span></div><div class="case">“Can I ask a librarian when I don't know what search terms to use?” <span class="badge">YES</span></div><div class="case">“Can I use office hours even if I'm doing okay?” <span class="badge">YES</span></div><div class="case">“Can I ask about feedback I don't understand?” <span class="badge">YES</span></div>`;fb("A useful question does not have to begin after you already know what to do.")}
+if(m[1]==="librarian"){$("host").innerHTML=`<h2>📚 Librarian Enters the Chat</h2><div class="desk"><p class="incoming">SEARCH TABS OPEN: 17</p><p>Student: “Maybe tab 18 will finally explain this.”</p></div><div class="good"><strong>LIBRARIAN SUPERPOWERS:</strong><p>Turn a topic into search terms · identify useful databases · locate source types · adjust a search that is too broad/narrow · help you investigate where information lives.</p></div><div class="secret">🔓 You do not need to arrive knowing exactly what to search for. Figuring out the search can be part of the librarian's help.</div>`;fb("Sometimes the fastest way through research is another human who knows the information landscape.")}
+if(m[1]==="classmate"){$("host").innerHTML=`<h2>👥 A Classmate Is Not a Mini-Professor</h2><div class="note"><strong>Useful classmate questions:</strong><p>“What do you think my main point is?”<br>“Where did you get confused?”<br>“Which example felt most convincing?”<br>“What question did you still have?”</p></div><div class="secret">🔓 A classmate does not need to know how to “fix” your paper to give useful reader information.</div>`;fb("Peer readers can tell you what happened while they were reading.")}
+if(m[1]==="doors"){$("host").innerHTML=`<h2>🚪 More Than One Good Door</h2><div class="ticket"><p>“My introduction feels unfocused.”</p></div><div class="grid2"><div class="person"><span class="icon">👩‍🏫</span><strong>Professor</strong>Can clarify assignment expectations and course priorities.</div><div class="person"><span class="icon">✍️</span><strong>Tutor</strong>Can read the introduction with you and help you identify what the reader needs.</div><div class="person"><span class="icon">👥</span><strong>Classmate</strong>Can tell you what they think the main point is.</div><div class="person"><span class="icon">🧠</span><strong>You</strong>Can use that information to decide what to revise.</div></div><div class="secret">🔓 College help is often a network, not a single correct door.</div>`;fb("The best route depends on the kind of information you need.")}
+if(m[1]==="upgrade"){$("host").innerHTML=`<h2>🎯 Better Question Machine</h2><div class="warn"><strong>START:</strong> “Can you help me with my essay?”</div><div class="upgrade"><strong>ADD FOUR PIECES:</strong><p>1. What I'm working on<br>2. Where I am in the process<br>3. What I'm unsure about<br>4. What I'd like help seeing or doing</p></div><div class="good"><strong>UPGRADED:</strong><p>“I'm working on my argument essay and I have a draft. I'm unsure whether Paragraph 3 supports my thesis. Could you read those together and tell me where you see the connection?”</p></div>`;fb("The first question was allowed. The upgraded question simply makes it easier for someone to give targeted help.")}
+if(m[1]==="upgrade2"){$("host").innerHTML=`<h2>⚙️ Help Request Upgrader</h2><div class="grid2"><div class="warn"><strong>VAGUE</strong><p>“I don't get research.”</p></div><div class="good"><strong>MORE USEFUL</strong><p>“I'm researching food insecurity among college students. I found general websites, but I need credible sources with data. Could you help me improve my search terms or choose a database?”</p></div></div><div class="secret">🔓 Specific questions are learnable. Students who sound “good at asking for help” often know how to name where they are stuck.</div>`;fb("You can build a specific question even when you do not know the answer.")}
+if(m[1]==="behind"){$("host").innerHTML=`<h2>⏰ “I'm Behind.”</h2><div class="ticket"><p>“The paper is due soon. I've avoided Canvas because I'm embarrassed, and now I don't know what to do.”</p></div><div class="route"><strong>RE-ENTRY ROUTE</strong><p>1. Open the assignment and confirm what is actually due.<br>2. Look at what you already have—even notes count.<br>3. Identify the smallest useful next move.<br>4. Communicate with your professor when the situation requires it.<br>5. Use tutoring/research help if it can move the work forward.</p></div><div class="secret">🔓 Avoiding the course does not create more information. Re-entry starts by finding out what is true right now.</div>`;fb("The goal is not to solve the entire paper in one move. It is to re-enter the process.")}
+if(m[1]==="disagree"){$("host").innerHTML=`<h2>💬 “I Disagree With This Feedback.”</h2><div class="warn"><strong>Less useful opening:</strong> “Why did you take points off?”</div><div class="good"><strong>More useful opening:</strong> “I was trying to show ___ in this paragraph. Your comment says the connection is unclear. Could you show me where you stopped seeing that connection?”</div><div class="secret">🔓 Asking about feedback does not require agreeing with every suggested change. First understand the reader's concern; then decide how to respond.</div>`;fb("Questions can turn feedback into information you can use.")}
+if(m[1]==="unknown"){$("host").innerHTML=`<h2>🫠 “I Don't Even Know What I Need.”</h2><div class="good"><strong>That can still become a help request.</strong><p>“I'm stuck on this assignment, and I'm having trouble identifying exactly where I'm stuck. Could we look at the prompt and what I have so far and figure out my next step?”</p></div><div class="secret">🔓 You do not need to diagnose the whole problem before asking someone to help you diagnose it.</div>`;fb("“I don't know what I need” is information. Start there.")}
+if(m[1]==="process"){$("host").innerHTML=`<h2>🔄 Help Is Part of the Writing Process</h2><div class="people"><div class="person"><span class="icon">📝</span><strong>Before drafting</strong>Clarify · brainstorm · research</div><div class="person"><span class="icon">🧱</span><strong>During drafting</strong>Talk through ideas · get reader response</div><div class="person"><span class="icon">🩻</span><strong>During revision</strong>Organization · development · feedback</div><div class="person"><span class="icon">📤</span><strong>Before submission</strong>Questions · technical checks · documentation</div></div><div class="secret">🔓 Help is not a last-resort stage after writing fails. It can be used throughout the process.</div>`;fb("The timing of help can change what kind of help is useful.")}
+if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>🎟️ Your Help Desk Pass</h2><p><strong>Problem → useful person → specific question → next move.</strong></p></div><div class="call">You do not need a perfect question.<br>You do not need a finished draft.<br>You do not need to know exactly what is wrong.<br><strong>You need enough information to open a useful conversation.</strong></div>`;$("next").textContent="Finish & Open Help Navigator";$("next").classList.remove("hidden")}
+localStorage.setItem(KEY,JSON.stringify({i}))}
+
+$("next").onclick=()=>{if(i<scenarios.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
+
+const routes={
+assignment:["👩‍🏫 Professor + ✍️ Tutor","Professor: course-specific expectations. Tutor: help unpack the prompt and plan a response.","“I'm reading the assignment as asking me to ___. Am I understanding that correctly?”"],
+ideas:["✍️ Tutor + 👩‍🏫 Professor or 👥 classmate","Talk through the prompt, questions, examples, and possible directions.","“I understand the assignment, but I have several possible directions and can't tell which is workable. Could I talk them through?”"],
+draft:["✍️ Tutor + 👥 reader; 👩‍🏫 professor for course-specific questions","Bring the part you have. You can ask about focus, organization, reader experience, or revision.","“Could you read my thesis and this paragraph and tell me what connection you see?”"],
+research:["📚 Librarian; 👩‍🏫 professor for assignment-specific source requirements","A librarian can help with search strategy and finding material; the professor can clarify what counts for the assignment.","“I need sources about ___. My current searches are giving me ___. Could you help me adjust my search?”"],
+feedback:["👩‍🏫 Professor + ✍️ Tutor","Ask the professor what a course-specific comment means; use tutoring to work through revision possibilities.","“I was trying to do ___. When you wrote ‘develop,’ what did you need more of as a reader?”"],
+citation:["✍️ Tutor / writing center + 📚 librarian + course resources","The best office varies by campus. Bring the actual source and the citation question.","“I'm using this source in this way. Could you help me figure out what information I need for the citation?”"],
+tech:["💻 Tech Help + communicate with 👩‍🏫 professor if coursework/submission is affected","Troubleshoot the platform/file and document or communicate about a submission problem when needed.","“My file is ___. When I submit it, __ happens. I already tried ___. What should I check next?”"],
+behind:["👩‍🏫 Professor + the support that matches the work you still need","First find out what is due and what options actually exist; then route the writing/research problem.","“I'm behind on ___. I currently have ___. I want to re-enter the work. What should I prioritize or know about the assignment at this point?”"],
+unknown:["✍️ Tutor or 👩‍🏫 professor","You can ask someone to help identify the problem.","“I'm stuck, but I'm having trouble identifying exactly where. Could we look at the assignment and what I have so far and figure out my next move?”"]
+};
+$("route").onclick=()=>{let r=routes[$("problem").value];$("result").innerHTML=`<div class="good"><h3>☎️ Try: ${r[0]}</h3><p>${r[1]}</p><p><strong>A question you could ask:</strong><br>${r[2]}</p></div><p><small>Campus services and responsibilities vary. Use your course and college information to confirm local details.</small></p>`};
+
+const builder=`BETTER HELP REQUEST BUILDER
+
+What I'm working on:
+________________________
+
+Where I am in the process:
+________________________
+
+What I'm unsure about:
+________________________
+
+What I'd like help seeing or doing:
+________________________
+
+Possible structure:
+“I'm working on ___. I currently have/am at ___. I'm unsure about ___. Could you help me ___?”
+
+Remember: You do not need a perfect question or a finished draft to start a useful conversation.`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(builder);$("copy").textContent="✓ Help Request Builder Copied"}catch(e){alert(builder)}}
+
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Help Navigator":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
