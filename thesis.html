@@ -3,280 +3,146 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paragraph Lab: Build the Argument</title>
-<meta name="description" content="A mobile-friendly interactive body paragraph lab for ENGL C1000.">
+<title>Thesis Lab: Find the Focus</title>
 <style>
-:root{
-  --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#5f6b78;--line:#d8e0e8;
-  --brand:#315a7d;--brand-dark:#203e59;--soft:#eef4f8;--warm:#fff6dc;
-  --warm-line:#d6a52b;--good:#2f7a4b;--good-bg:#eef8f1;--rose:#f8eef2;
-  --rose-line:#a85d79;--focus:#111827;--max:940px;--radius:16px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
-button{font:inherit}
-button:focus-visible,a:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
-.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#000;border:2px solid #000;padding:10px 14px}
-.skip:focus{left:8px}
-.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,62,89,.07)}
-.eyebrow{margin:0 0 6px;color:var(--brand);text-transform:uppercase;letter-spacing:.07em;font-size:.86rem;font-weight:800}
-h1,h2,h3{line-height:1.2;color:var(--brand-dark)}
-h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}
-h2{font-size:clamp(1.4rem,4.5vw,2rem);margin:.25em 0 .55em}
-h3{font-size:1.14rem;margin:.15em 0 .55em}
-.lead{font-size:1.08rem}
-.callout{background:var(--warm);border-left:5px solid var(--warm-line);padding:15px 17px;border-radius:10px;margin:16px 0}
-.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-.pill,.stage{display:inline-flex;align-items:center;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}
-.pill{border:1px solid var(--line);background:#fafbfd;color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:10px}
-.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}
-.primary{background:var(--brand);color:#fff}.secondary{background:#fff;color:var(--brand-dark);border:2px solid var(--brand)}.quiet{background:#edf1f5;color:var(--ink)}
-.progress-text{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.93rem;font-weight:700;margin-bottom:7px}
-.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s ease}
-.workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.mainpane{min-width:0}
-.sidebar{border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px;position:sticky;top:10px}
-.blueprint{display:grid;gap:8px}
-.bp{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;font-size:.92rem}
-.bp.on{border-color:var(--good);background:var(--good-bg)}
-.scenario{background:#fafcfe;border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0 18px}
-.question{font-size:1.2rem;font-weight:800;margin:12px 0}.choices{display:grid;gap:10px;margin:16px 0}
-.choice{width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #b9c5d1;padding:14px 16px}
-.choice.selected{border-color:var(--good);background:var(--good-bg)}
-.feedback{display:none;margin-top:16px;padding:16px;border-radius:12px;border:2px solid var(--brand);background:var(--soft)}
-.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--good-bg)}.feedback strong{display:block;margin-bottom:4px}
-.secret,.decoder{border:2px solid var(--warm-line);background:var(--warm);border-radius:14px;padding:18px;margin:14px 0}
-.decoder{border-style:dashed;border-color:var(--brand);background:#f8fbfd}.myth{border:2px solid var(--rose-line);background:var(--rose);border-radius:14px;padding:18px;margin:14px 0}
-.paragraph{border:2px solid var(--line);border-radius:14px;padding:18px;background:#fff;margin:15px 0}
-.sentence{padding:10px 12px;border-left:4px solid transparent;border-radius:8px;margin:6px 0}
-.sentence.claim{background:#eef4f8;border-left-color:#315a7d}.sentence.evidence{background:#f4f5f7;border-left-color:#747f8b}.sentence.analysis{background:#eef8f1;border-left-color:#2f7a4b}.sentence.connection{background:#fff6dc;border-left-color:#d6a52b}
-.reader{background:#f8fbfd;border:2px dashed var(--brand);border-radius:12px;padding:14px;margin:14px 0}
-.er{border:3px solid #a85d79;background:#fff8fb;border-radius:16px;padding:18px;margin:15px 0}.er .siren{font-weight:900;color:#7f3452;text-transform:uppercase;letter-spacing:.05em}
-.xray-label{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
-.hidden{display:none!important}.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,32px);background:#fff}
-.complete{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
-.grid{display:grid;grid-template-columns:1fr auto;gap:9px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}
-.toolrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.tool{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-.final-banner{border:3px solid var(--good);background:var(--good-bg);border-radius:18px;padding:22px;text-align:center;margin-bottom:18px}
-.final-banner .big{font-size:clamp(1.7rem,6vw,2.7rem);font-weight:900;color:var(--good)}
-.shot{background:var(--warm);border:2px solid var(--warm-line);border-radius:12px;padding:14px 16px;font-weight:700}
-footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
-@media(max-width:760px){.workspace{grid-template-columns:1fr}.sidebar{position:static;order:-1}.toolrow{grid-template-columns:1fr}}
-@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+:root{--bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#5f6b78;--line:#d8e0e8;--brand:#315a7d;--brand-dark:#203e59;--soft:#eef4f8;--warm:#fff6dc;--warm-line:#d6a52b;--good:#2f7a4b;--good-bg:#eef8f1;--rose:#f8eef2;--rose-line:#a85d79;--focus:#111827;--max:920px;--radius:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
+button,textarea{font:inherit}button:focus-visible,textarea:focus-visible,a:focus-visible{outline:4px solid var(--focus);outline-offset:3px}.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#000;border:2px solid #000;padding:10px 14px}.skip:focus{left:8px}
+.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,62,89,.07)}
+.eyebrow{margin:0 0 6px;color:var(--brand);text-transform:uppercase;letter-spacing:.07em;font-size:.86rem;font-weight:800}h1,h2,h3{line-height:1.2;color:var(--brand-dark)}h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}h2{font-size:clamp(1.4rem,4.5vw,2rem);margin:.25em 0 .55em}h3{font-size:1.14rem;margin:.15em 0 .55em}
+.lead{font-size:1.08rem}.callout{background:var(--warm);border-left:5px solid var(--warm-line);padding:15px 17px;border-radius:10px;margin:16px 0}.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill,.stage{display:inline-flex;align-items:center;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}.pill{border:1px solid var(--line);background:#fafbfd;color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:10px}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:var(--brand);color:#fff}.secondary{background:#fff;color:var(--brand-dark);border:2px solid var(--brand)}.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.93rem;font-weight:700;margin-bottom:7px}.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s ease}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;align-items:start}.mainpane{min-width:0}.sidebar{border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px;position:sticky;top:10px}.history{display:grid;gap:9px;margin-top:10px}.history-item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 11px;font-size:.9rem}.history-item strong{display:block;color:var(--brand-dark);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+.question{font-size:1.2rem;font-weight:800;margin:12px 0}.scenario{background:#fafcfe;border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0 18px}.choices{display:grid;gap:10px;margin:16px 0}.choice{width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #b9c5d1;padding:14px 16px}.choice.selected{border-color:var(--good);background:var(--good-bg)}.feedback{display:none;margin-top:16px;padding:16px;border-radius:12px;border:2px solid var(--brand);background:var(--soft)}.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--good-bg)}.feedback strong{display:block;margin-bottom:4px}
+.secret,.decoder{border:2px solid var(--warm-line);background:var(--warm);border-radius:14px;padding:18px;margin:14px 0}.decoder{border-style:dashed;border-color:var(--brand);background:#f8fbfd}.myth{border:2px solid var(--rose-line);background:var(--rose);border-radius:14px;padding:18px;margin:14px 0}.reader-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.reader-box{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.reader-box.on{border-color:var(--good);background:var(--good-bg)}
+textarea{width:100%;min-height:110px;border:2px solid #aebbc8;border-radius:10px;padding:12px;resize:vertical}.note{font-size:.92rem;color:var(--muted)}.hidden{display:none!important}.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,32px);background:#fff}.complete{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}.grid{display:grid;grid-template-columns:1fr auto;gap:9px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}.shot{background:var(--warm);border:2px solid var(--warm-line);border-radius:12px;padding:14px 16px;font-weight:700}footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
+@media(max-width:760px){.workspace{grid-template-columns:1fr}.sidebar{position:static;order:-1}.reader-grid{grid-template-columns:1fr}}@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to activity</a>
 <main id="main" class="shell">
 <section id="intro" class="card">
-  <p class="eyebrow">ENGL C1000 · Make the paragraph's job visible</p>
-  <h1>Paragraph Lab: Build the Argument</h1>
-  <p class="lead"><strong>A body paragraph is not a box you fill with five sentences. It is a unit of thought doing a job in your argument.</strong></p>
-  <div class="callout">In this lab, you will build a paragraph, see its hidden architecture, diagnose paragraphs that are not working, and learn what comments like <em>develop this</em>, <em>analyze</em>, and <em>how does this connect?</em> may actually be asking you to do.</div>
-  <div class="meta"><span class="pill">20 paragraph moments</span><span class="pill">Mobile friendly</span><span class="pill">No timer</span><span class="pill">No rigid paragraph formula</span></div>
-  <div class="row"><button id="start" class="primary" type="button">Enter the Paragraph Workshop</button><button id="resume" class="secondary hidden" type="button">Resume My Paragraph</button></div>
+<p class="eyebrow">ENGL C1000 · Make the hidden thinking visible</p>
+<h1>Thesis Lab: Find the Focus</h1>
+<p class="lead"><strong>You do not have to magically “find” a perfect thesis. You can develop one.</strong></p>
+<div class="callout">A thesis is a rhetorical tool: it helps a writer focus an argument and helps a reader understand where that argument is going. In this lab, ideas become questions, questions become claims, and claims change as the thinking develops.</div>
+<p>College writing often uses phrases like <em>too broad</em>, <em>arguable</em>, and <em>so what?</em> without fully explaining what they mean. This lab will decode some of that language along the way.</p>
+<div class="meta"><span class="pill">20 thesis moments</span><span class="pill">No timer</span><span class="pill">No one thesis formula</span></div>
+<div class="row"><button id="start" class="primary" type="button">Enter the Thesis Workshop</button><button id="resume" class="secondary hidden" type="button">Resume My Thesis</button></div>
 </section>
 
 <section id="lab" class="card hidden">
-  <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div class="track"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage"></span>
-  <h2>The Paragraph Workshop</h2>
-  <div class="workspace">
-    <div class="mainpane">
-      <div id="host"></div>
-      <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-      <div class="row"><button id="next" class="primary hidden" type="button">Next Paragraph Moment</button></div>
-    </div>
-    <aside class="sidebar">
-      <h3>Paragraph Blueprint</h3>
-      <div id="blueprint" class="blueprint"></div>
-    </aside>
-  </div>
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+<span id="stage" class="stage"></span><h2>The Thesis Workshop</h2>
+<div class="workspace"><div class="mainpane"><div id="host"></div><div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div><div class="row"><button id="next" class="primary hidden" type="button">Next Thesis Moment</button></div></div>
+<aside class="sidebar"><h3>Your Thesis History</h3><div id="history" class="history"></div></aside></div>
 </section>
 
 <section id="done" class="card hidden">
-  <div class="final-banner">
-    <div>🏗️</div>
-    <div class="big">ARGUMENT BUILT ✓</div>
-    <p>You figured out what the reader needed and built the paragraph to provide it.</p>
-  </div>
-
-  <div id="finalParagraph" class="paragraph"></div>
-
-  <div class="row">
-    <button id="xray" class="primary" type="button">🩻 X-Ray My Paragraph</button>
-    <button id="prompt" class="secondary" type="button">🎲 Give Me a Starting Question</button>
-    <button id="copy" class="secondary" type="button">📋 Copy My Paragraph Blueprint</button>
-  </div>
-
-  <div id="promptBox" class="decoder hidden" role="status" aria-live="polite"></div>
-
-  <div class="er">
-    <div class="siren">🚑 Final Patient Status</div>
-    <h3>Paragraph 4: Discharged ✓</h3>
-    <p><strong>Treatment:</strong> Clarified the paragraph-level claim, added analysis, and connected the evidence to the larger argument.</p>
-    <p><strong>Prognosis:</strong> Reader can follow the argument.</p>
-    <p class="note">You are now cleared to treat paragraphs without randomly adding “Furthermore.”</p>
-  </div>
-
-  <div class="completion">
-    <div class="complete">✓ Lab complete</div>
-    <h2>Paragraph Lab — Complete</h2>
-    <div class="grid">
-      <div>Give the paragraph a job</div><div>✓ Complete</div>
-      <div>Write a paragraph-level claim</div><div>✓ Complete</div>
-      <div>Support the claim</div><div>✓ Complete</div>
-      <div>Analyze the evidence</div><div>✓ Complete</div>
-      <div>Connect ideas</div><div>✓ Complete</div>
-      <div>Diagnose and revise</div><div>✓ Complete</div>
-    </div>
-    <p><strong>Completed:</strong> <span id="date"></span></p>
-    <div class="shot">📸 Screenshot this completion card for Canvas.</div>
-  </div>
-
-  <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<div class="completion"><div class="complete">✓ Lab complete</div><h2>Thesis Lab — Complete</h2><p>You practiced developing a thesis through questions, focus, reader needs, evidence, and revision.</p>
+<div class="grid"><div>Topic vs. Thesis</div><div>✓ Complete</div><div>Narrowing &amp; Focus</div><div>✓ Complete</div><div>Arguable Claims</div><div>✓ Complete</div><div>Reader Direction</div><div>✓ Complete</div><div>Revision &amp; Qualification</div><div>✓ Complete</div><div>College Writing Decoder</div><div>✓ Complete</div></div>
+<p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 Screenshot this completion card for Canvas.</div></div>
+<div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
 </section>
 <footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
 </main>
 
 <script>
 (()=>{
-const $=id=>document.getElementById(id), key="paragraphBuildArgumentV1";
-let i=0, unlocked={job:false,claim:false,evidence:false,analysis:false,connection:false,revision:false};
-const paragraph={
- claim:"High textbook prices can become an academic access problem when students delay purchasing required materials.",
- evidence:"When students postpone buying or accessing a required text, they may begin a course without the same materials their classmates are using.",
- analysis:"That delay matters because course readings often provide the concepts, examples, and context students need to participate fully in early assignments and discussions.",
- connection:"Reducing avoidable course-material costs can therefore improve access not only to textbooks, but also to the learning opportunities those materials support."
-};
+const $=id=>document.getElementById(id), key="thesisFindFocusDraftV1";
+let i=0, history=[["Topic","College affordability"]], notes={};
+
 const moments=[
-["1 · Give the Paragraph a Job","choice","Thesis: Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers to required course content.","Before writing a topic sentence, what should you decide?",[
-["What job this paragraph needs to do for the larger argument.",1,"A paragraph is easier to build when you know what it needs to contribute."],
-["How many sentences it must contain.",0,"Sentence count does not tell you what intellectual work the paragraph needs to do."],
-["Which transition word to start with.",0,"Transitions come after you understand the relationship between ideas."],
-["How academic the first sentence sounds.",0,"The job of the paragraph matters more than sounding impressive."]
-],"job"],
-["1 · Give the Paragraph a Job","decoder","College Writing Decoder: “Write a body paragraph.”","A useful first question is not “How many sentences?” but “What does this paragraph need to contribute to my argument?”"],
-["2 · Make the Point Visible","choice","Paragraph job: Show how textbook cost can become an academic access problem.","Which sentence makes that paragraph-level claim visible?",[
-[paragraph.claim,1,"This tells the reader what the paragraph will show and connects directly to the larger argument."],
-["Textbooks are used in many college classes.",0,"This names the topic but does not yet make the paragraph's point."],
-["There are many things to say about textbooks.",0,"The reader still cannot see the paragraph's job."],
-["Furthermore, textbooks can be expensive.",0,"A transition word cannot replace a clear paragraph-level claim."]
-],"claim"],
-["2 · Make the Point Visible","decoder","College Writing Decoder: “You need a stronger topic sentence.”","Your instructor may mean: I can see what this paragraph is about, but I cannot yet see what you are saying about it or how it advances the argument."],
-["3 · Support the Claim","choice",paragraph.claim,"Your reader is thinking: “Okay. What makes you say that?” What does the paragraph need next?",[
-["Relevant evidence or an example.",1,"A claim needs something that helps the reader see why it is reasonable."],
-["A second topic sentence.",0,"The paragraph already has a claim. Now the reader needs support."],
-["A concluding sentence immediately.",0,"The paragraph has not yet developed the idea."],
-["A fancier word for textbook.",0,"Vocabulary is not a substitute for support."]
-],"evidence"],
-["3 · Support the Claim","build","evidence"],
-["4 · Do the Thinking","choice","Your paragraph now has a claim and evidence.","What does the reader still need after the evidence?",[
-["Your explanation of what the evidence shows and why it matters.",1,"Evidence does not explain itself. Analysis is where the writer helps the reader understand its significance."],
-["Another quotation automatically.",0,"More evidence is not always the cure for missing analysis."],
-["A longer transition.",0,"The issue is not transition length. The reader needs the writer's thinking."],
-["Nothing. Evidence should speak for itself.",0,"Readers often need the writer to explain how evidence supports the claim."]
-],"analysis"],
-["4 · Do the Thinking","decoder","College Writing Decoder: “Analyze this.”","Do not just give me more evidence. Help me understand what you think the evidence shows and why it matters to this paragraph and argument."],
-["4 · Do the Thinking","build","analysis"],
-["5 · Connect It","choice","The paragraph now contains a claim, evidence, and analysis.","What can help the reader see how this paragraph advances the larger argument?",[
-["A connection that shows why this idea matters to the thesis or what the reader should understand next.",1,"Connection keeps the paragraph from feeling like an isolated mini-essay."],
-["The word “Furthermore” no matter what comes next.",0,"Transition words only help when they accurately express the relationship between ideas."],
-["Repeating the thesis word for word.",0,"Connection should develop the argument, not merely repeat it."],
-["Adding a random fact.",0,"New information should serve the paragraph's job."]
-],"connection"],
-["5 · Connect It","build","connection"],
-["6 · See the Hidden Architecture","xray"],
-["7 · Break the Formula","myth","Every body paragraph must have exactly the same number and order of parts.","A paragraph formula can be a useful starting scaffold. But paragraphs can begin with an example, complication, question, or context when the rhetorical situation calls for it."],
-["8 · Paragraph Emergency Room","er","Patient 1","The paragraph has a topic sentence and a quotation, but the quotation is followed by another quotation. The instructor wrote: “Needs analysis.”","What is the likely problem?",[
-["The writer has support but has not yet explained what the evidence shows.",1,"Diagnosis confirmed. The treatment is explanation and reasoning, not automatically more evidence."],
-["The paragraph needs a third quotation.",0,"More quotation does not treat missing analysis."],
-["The topic sentence must be longer.",0,"The problem is not topic-sentence length."],
-["The paragraph needs “Moreover.”",0,"A transition word will not create analysis."]
-]],
-["8 · Paragraph Emergency Room","er","Patient 2","The paragraph discusses textbook costs, parking, cafeteria hours, and social media. Each idea is interesting, but they compete for attention.","What is the likely problem?",[
-["The paragraph has lost focus and may be trying to do several jobs at once.",1,"Diagnosis confirmed. Revision may mean cutting, moving, or separating ideas."],
-["The paragraph is too short.",0,"Length is not the main problem."],
-["It needs more commas.",0,"Sentence-level editing will not solve a focus problem."],
-["It needs a quotation after every sentence.",0,"More evidence will not create unity."]
-]],
-["8 · Paragraph Emergency Room","er","Patient 3","The paragraph contains a strong source, but the instructor writes: “How does this connect?”","What is the instructor probably asking for?",[
-["Help the reader see the relationship between this evidence, the paragraph's claim, and the larger argument.",1,"Exactly. The reader can see the information but has lost the argumentative connection."],
-["Use the phrase “This connects because...” whether or not it actually does.",0,"A phrase cannot manufacture a relationship that has not been explained."],
-["Add another source.",0,"The paragraph may already have enough evidence."],
-["Make the quotation longer.",0,"The issue is connection, not quotation length."]
-]],
-["9 · Transition Puzzle","choice","Paragraph A explains that students may delay accessing course materials because of cost. Paragraph B explains how delayed access can affect participation in early coursework.","What is the relationship between these ideas?",[
-["Cause → consequence.",1,"Yes. Once you know the relationship, you can choose language that helps the reader see it."],
-["Unrelated ideas.",0,"The second idea develops a consequence of the first."],
-["Pure contrast.",0,"The second paragraph is not mainly opposing the first."],
-["A list with no relationship.",0,"There is a clear conceptual connection."]
-],"revision"],
-["9 · Transition Puzzle","decoder","College Writing Decoder: “Add a transition.”","Do not begin with a transition word. Begin by asking: What is the relationship between these ideas? Addition? Contrast? Cause and effect? Complication? Example? Problem to solution? Then choose language that makes that relationship visible."],
-["10 · Final Repair","repair"],
-["10 · Final Repair","finish"]
+["Start With What You Have","choice","You want to write about college affordability, but you do not have a thesis yet.","What do you actually have right now?",[
+["A topic — and that is enough to start exploring.",1,"A topic is raw material. You do not need a finished thesis before you begin thinking."],
+["A bad thesis.",0,"Not everything needs to be judged as a thesis. Right now, you simply have a topic."],
+["A failed essay.",0,"You are at an early stage of the process, not at the end."],
+["Nothing useful.",0,"A topic gives you somewhere to begin asking questions."]
+],["Topic","College affordability"]],
+["Decode the Prompt","decoder","College Writing Decoder: “You need a thesis.”","This usually means the reader needs a clearer sense of the claim your paper will develop. You can get there through questions, drafting, reading, research, and revision."],
+["Turn Topics Into Questions","choice","Your topic is “college affordability.”","Which question is most likely to help you find a focused direction?",[
+["What specific college cost creates a problem I want to understand better?",1,"Focused questions move you toward something a paper can actually investigate."],
+["Is college good or bad?",0,"That question is probably too broad for one focused paper."],
+["How can I mention every possible college expense?",0,"A focused argument does not have to cover everything."],
+["What sentence sounds most impressive?",0,"A thesis begins with thinking, not trying to sound impressive."]
+],["Question","What specific college cost creates a problem I want to understand better?"]],
+["Ask Your Own Question","write","What is one question you could ask about college affordability?","For example: How do textbook costs affect students who are already balancing tuition, work, and living expenses?"],
+["Observation or Claim?","choice","You notice that textbooks and course materials can add substantially to the cost of a semester.","Which statement is still mostly an observation rather than a thesis?",[
+["Textbooks and course materials can be expensive.",1,"This tells us something about the topic, but it does not yet give the reader much of an argument to follow."],
+["Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers.",0,"This is already making a claim that needs reasons and evidence."],
+["Although OER adoption takes faculty time, colleges should invest in it when it can reduce recurring student costs.",0,"This is already a qualified claim."],
+["Course-material costs deserve more institutional attention because they can affect access to required texts.",0,"This gives the reader argumentative direction."]
+],["Observation","Textbooks and course materials can be expensive."]],
+["What Does Arguable Mean?","decoder","College Writing Decoder: “Make it arguable.”","Arguable does not have to mean controversial or combative. It means your thesis makes a claim that needs reasoning, evidence, interpretation, or explanation."],
+["Narrow the Focus","choice","You are working with: “College is expensive.”","Which revision gives the paper a more workable focus?",[
+["Textbook and course-material costs can create avoidable financial barriers for community college students.",1,"This narrows the topic and gives the reader a clearer issue to follow."],
+["College is very, very expensive for many reasons.",0,"This adds emphasis but not much focus."],
+["Everything about college costs too much.",0,"This is still extremely broad."],
+["College costs should be discussed.",0,"This announces a topic without a clear claim."]
+],["Focused idea","Textbook and course-material costs can create avoidable financial barriers for community college students."]],
+["What Does Too Broad Mean?","decoder","College Writing Decoder: “Too broad.”","This usually does not mean your topic is bad. It means the paper may be trying to cover more than this assignment can meaningfully explain."],
+["Ask So What?","choice","Working idea: “Textbook and course-material costs can create avoidable financial barriers for community college students.”","What does “So what?” ask the writer to do?",[
+["Explain why the claim matters or what is at stake.",1,"“So what?” is usually a request for significance, not an insult."],
+["Delete the idea because nobody cares.",0,"The phrase can sound harsh, but it usually means: help the reader see the significance."],
+["Add a dramatic adjective.",0,"Significance comes from reasoning, not intensity alone."],
+["Make the sentence longer.",0,"Length does not automatically create stakes."]
+],["Stakes","Course-material costs can affect whether students can access required texts from the beginning of a course."]],
+["Read Like a Reader","reader","College students face many financial challenges.",["Topic"],["Claim","Focus","Stakes","Direction"]],
+["Read Like a Reader","reader","Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers to required course content.",["Topic","Claim","Focus","Stakes","Direction"],[]],
+["Build a Working Thesis","choice","You now know the topic, the problem, and why it matters.","Which version works best as a working thesis for an argument?",[
+["Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers to required course content.",1,"This gives the writer direction and gives the reader a claim that can be developed."],
+["Textbooks.",0,"A topic is not yet a claim."],
+["Textbooks are expensive and college is hard.",0,"These are observations, but the argumentative direction is still unclear."],
+["There are many things to say about OER.",0,"This announces a topic rather than an argument."]
+],["Working thesis","Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers to required course content."]],
+["Formula Myth","myth","A thesis must always contain three reasons because an essay has three body paragraphs.","That formula can be a useful scaffold, but it is not a universal law. Different arguments, genres, disciplines, and assignments may need different thesis shapes."],
+["Placement Myth","myth","A thesis must always be the final sentence of the introduction.","That placement is common and often useful, but rhetorical situations vary. What matters is that readers can identify the argument's direction."],
+["Research Complicates Things","choice","You learn that OER adoption can require faculty time, accessibility work, and institutional support.","What should happen when research complicates the original claim?",[
+["Revise the thesis so it acknowledges the complication while preserving the argument.",1,"Research can sharpen or qualify a claim. That is development, not failure."],
+["Ignore the complication.",0,"Strong arguments often become more credible when they address relevant complexity."],
+["Delete every source that disagrees.",0,"Evidence should inform the claim, not merely confirm it."],
+["Keep the thesis exactly the same.",0,"A working thesis is allowed to work and change."]
+],["Complication","OER can reduce student costs, but implementation also requires faculty time and institutional support."]],
+["Watch the Thesis Evolve","transform"],
+["Qualify the Claim","choice","A writer does not want to imply that OER will solve every affordability problem.","Which move adds useful qualification?",[
+["Use language such as “can,” “may,” or “when” to match the evidence and scope.",1,"Qualification can make a thesis more precise."],
+["Use “always” and “never” to sound confident.",0,"Absolute language can overstate what evidence supports."],
+["Add bigger words.",0,"Precision matters more than sounding complicated."],
+["Remove the claim entirely.",0,"Qualification refines a claim; it does not require abandoning it."]
+],["Qualified claim","When appropriate OER is available, institutional support for adoption can reduce recurring course-material costs while helping faculty manage implementation."]],
+["What Does Specific Mean?","decoder","College Writing Decoder: “Be more specific.”","This usually does not mean “make the sentence longer” or “use bigger words.” It means help the reader understand exactly what you are claiming, about whom or what, and under what conditions."],
+["I Still Don't Have a Thesis","stuck"],
+["Follow the Thinking","finish"]
 ];
 
-function save(done=false){localStorage.setItem(key,JSON.stringify({i,unlocked,done,date:done?new Date().toISOString():null}))}
-function setUnlocked(k){if(k)unlocked[k]=true;renderBlueprint()}
-function renderBlueprint(){
- const labels=[["job","1. Give it a job"],["claim","2. Make the point visible"],["evidence","3. Support it"],["analysis","4. Do the thinking"],["connection","5. Connect it"],["revision","6. Check and revise"]];
- $("blueprint").innerHTML=labels.map(([k,l])=>`<div class="bp ${unlocked[k]?"on":""}">${unlocked[k]?"✓":"○"} ${l}</div>`).join("")
-}
-function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
-function paragraphHTML(xray=false){
- return `<div class="sentence claim">${xray?'<div class="xray-label">Paragraph-level claim / topic sentence</div>':""}${paragraph.claim}</div>
- <div class="sentence evidence">${xray?'<div class="xray-label">Evidence / example</div>':""}${paragraph.evidence}</div>
- <div class="sentence analysis">${xray?'<div class="xray-label">Analysis</div>':""}${paragraph.analysis}</div>
- <div class="sentence connection">${xray?'<div class="xray-label">Connection</div>':""}${paragraph.connection}</div>`
-}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function save(done=false){localStorage.setItem(key,JSON.stringify({i,history,notes,done,date:done?new Date().toISOString():null}))}
+function renderHistory(){const h=$("history");h.innerHTML="";history.slice(-7).forEach(([a,b])=>{const d=document.createElement("div");d.className="history-item";d.innerHTML=`<strong>${esc(a)}</strong>${esc(b)}`;h.appendChild(d)})}
+function addHistory(x){if(x&&!history.some(h=>h[0]===x[0]&&h[1]===x[1]))history.push(x);renderHistory()}
+function fb(title,text,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=title;$("ftext").textContent=text;$("next").classList.remove("hidden")}
 function render(){
- const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
- $("ptext").textContent=`Paragraph moment ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderBlueprint();
+ const m=moments[i]; $("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
+ $("ptext").textContent=`Thesis moment ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderHistory();
  if(m[1]==="choice"){
-  $("host").innerHTML=`<div class="scenario">${m[2]}</div><p class="question">${m[3]}</p><div class="choices" id="choices"></div>`;
-  m[4].forEach(([label,good,msg])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");setUnlocked(m[5]);fb("That helps the reader.",msg)}else{b.disabled=true;fb("Look at what the reader still needs.",msg+" Try another choice.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)})
+  $("host").innerHTML=`<div class="scenario">${esc(m[2])}</div><p class="question">${esc(m[3])}</p><div class="choices" id="choices"></div>`;
+  m[4].forEach(([label,good,msg])=>{let b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");addHistory(m[5]);fb("That moves the thinking forward.",msg)}else{b.disabled=true;fb("Look at what this move would do.",msg+" Try another choice.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)});
  }
- if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 ${m[2]}</h3><p>${m[3]}</p></div>`;fb("Hidden instruction decoded.","College writing often compresses several thinking moves into a short comment.")}
- if(m[1]==="build"){
-  const type=m[2], labels={evidence:"Add Support",analysis:"Add Analysis",connection:"Add Connection"};
-  let partial=type==="evidence"?`<div class="sentence claim">${paragraph.claim}</div>`:type==="analysis"?`<div class="sentence claim">${paragraph.claim}</div><div class="sentence evidence">${paragraph.evidence}</div>`:`<div class="sentence claim">${paragraph.claim}</div><div class="sentence evidence">${paragraph.evidence}</div><div class="sentence analysis">${paragraph.analysis}</div>`;
-  $("host").innerHTML=`<div class="paragraph">${partial}</div><button id="addpiece" class="primary" type="button">${labels[type]}</button>`;
-  $("addpiece").onclick=()=>{setUnlocked(type);$("host").innerHTML=`<div class="paragraph">${type==="evidence"?partial+`<div class="sentence evidence">${paragraph.evidence}</div>`:type==="analysis"?partial+`<div class="sentence analysis">${paragraph.analysis}</div>`:partial+`<div class="sentence connection">${paragraph.connection}</div>`}</div>`;fb("The paragraph grew.","You added a piece because the reader needed it—not because a formula demanded a certain sentence count.")}
- }
- if(m[1]==="xray"){$("host").innerHTML=`<div class="reader">👀 <strong>Reader:</strong> “I can follow the paragraph. What is happening underneath the surface?”</div><div class="paragraph">${paragraphHTML(true)}</div><p class="note"><strong>Real essays do not contain these labels.</strong> X-ray mode is showing you the invisible work each part is doing.</p>`;fb("You can see the architecture now.","The labels are scaffolding. The goal is to understand the work, not to force every paragraph into identical slots.")}
- if(m[1]==="myth"){$("host").innerHTML=`<div class="myth"><p><strong>MYTH:</strong> ${m[2]}</p><p><strong>REALITY:</strong> ${m[3]}</p></div>`;fb("Scaffold, not law.","Keep a paragraph formula if it helps you get started. Add other structures to your toolbox as your writing situations become more complex.")}
- if(m[1]==="er"){
-  $("host").innerHTML=`<div class="er"><div class="siren">🚨 Paragraph Emergency</div><h3>${m[2]}</h3><p>${m[3]}</p></div><p class="question">${m[4]}</p><div class="choices" id="choices"></div>`;
-  m[5].forEach(([label,good,msg])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");setUnlocked("revision");fb("Diagnosis confirmed.",msg)}else{b.disabled=true;fb("That treatment does not match the problem.",msg+" Try another diagnosis.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)})
- }
- if(m[1]==="repair"){$("host").innerHTML=`<div class="er"><div class="siren">🚑 Final Repair</div><p><strong>Original paragraph:</strong> Textbooks are expensive. A source says many students worry about textbook costs. This is important. Furthermore, college is difficult.</p></div><p class="question">Repair plan</p><div class="blueprint"><div class="bp on">✓ Give the paragraph one job: explain how cost can affect academic access.</div><div class="bp on">✓ Replace the vague opening with a paragraph-level claim.</div><div class="bp on">✓ Keep relevant support.</div><div class="bp on">✓ Explain what the support shows.</div><div class="bp on">✓ Connect the point to the larger argument.</div></div><div class="paragraph">${paragraphHTML(false)}</div>`;Object.keys(unlocked).forEach(k=>unlocked[k]=true);renderBlueprint();fb("Patient stabilized.","You did not make the paragraph more academic by adding words. You made its job clearer and gave the reader what they needed.")}
- if(m[1]==="finish"){$("host").innerHTML=`<div class="callout"><strong>When someone says “write a body paragraph,” you do not have to guess.</strong><br>Start with: <em>What job does this paragraph need to do for my argument?</em><br>Then ask: <em>What does my reader need in order to follow me?</em></div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
+ if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 ${esc(m[2])}</h3><p>${esc(m[3])}</p></div>`;fb("Hidden language decoded.","College writing often uses shorthand for a much bigger thinking task.")}
+ if(m[1]==="write"){$("host").innerHTML=`<p class="question">${esc(m[2])}</p><textarea id="qnote" placeholder="${esc(m[3])}">${esc(notes.q||"")}</textarea><p class="note">There is no single correct question. The goal is to turn a large topic into something you can investigate.</p><button id="saveq" class="primary" type="button">Save My Question</button>`;$("saveq").onclick=()=>{notes.q=$("qnote").value.trim();if(notes.q)addHistory(["Your question",notes.q]);fb("You created a possible path.","Questions can help a thesis emerge. You do not need to know the answer before you begin.")}}
+ if(m[1]==="myth"){$("host").innerHTML=`<div class="myth"><p><strong>MYTH:</strong> ${esc(m[2])}</p><p><strong>REALITY:</strong> ${esc(m[3])}</p></div>`;fb("A formula can be a tool, not a law.","Keep strategies that help you, but do not mistake one scaffold for the only legitimate way to write.")}
+ if(m[1]==="reader"){let labels=["Topic","Claim","Focus","Stakes","Direction"];$("host").innerHTML=`<div class="scenario"><strong>Read this as a reader:</strong><br>“${esc(m[2])}”</div><p class="question">What does this sentence give the reader?</p><div class="reader-grid">${labels.map(x=>`<div class="reader-box ${m[3].includes(x)?"on":""}"><strong>${m[3].includes(x)?"✓":"○"} ${x}</strong><div class="note">${m[3].includes(x)?"The reader gets this.":"Not much yet."}</div></div>`).join("")}</div>`;fb(m[3].length===1?"A topic is visible, but the argument is still hidden.":"Notice how much more work this thesis does for the reader.",m[3].length===1?"This is not bad writing. It simply has not developed into a focused claim.":"It works because it gives the reader useful information, not because it sounds more academic.")}
+ if(m[1]==="transform"){$("host").innerHTML=`<div class="secret"><h3>Before research</h3><p>“Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers to required course content.”</p><h3>After research complicates the issue</h3><p>“Although converting courses to OER requires faculty time and institutional support, colleges should invest in zero-cost course materials when strong alternatives are available because recurring textbook costs can create avoidable barriers to course access.”</p><p><strong>The thesis became more nuanced because the writer learned more.</strong></p></div>`;addHistory(["Revised thesis","Although converting courses to OER requires faculty time and institutional support, colleges should invest when strong alternatives are available because recurring textbook costs can create avoidable barriers to course access."]);fb("This is revision.","Changing a working thesis can be evidence that your thinking became stronger.")}
+ if(m[1]==="stuck"){let opts=[["I have a topic.","Turn it into questions."],["I have a question.","Try two or three possible answers."],["I have an opinion but don't know why.","List reasons, examples, experiences, or evidence."],["I have several ideas and can't connect them.","Look for patterns, tensions, causes, contrasts, or a question that links them."],["I have research but don't know what I'm arguing.","Ask what the sources are making you notice."],["My research changed my mind.","Revise the thesis. That is what a working thesis is for."]];$("host").innerHTML=`<div class="decoder"><h3>🧭 I don't have a thesis yet. What DO I have?</h3><p>Choose the situation closest to yours.</p></div><div class="choices" id="stuck"></div>`;opts.forEach(([a,b])=>{let bt=document.createElement("button");bt.className="choice";bt.textContent=a;bt.onclick=()=>{[...$("stuck").children].forEach(x=>x.classList.remove("selected"));bt.classList.add("selected");fb("You have a next move.",b)};$("stuck").appendChild(bt)})}
+ if(m[1]==="finish"){$("host").innerHTML=`<div class="secret"><h3>Follow the Thinking</h3><p><strong>Start:</strong> “Social media affects college students.”</p><p><strong>Notice:</strong> Students sometimes turn to social media for college-process information that already exists on official websites.</p><p><strong>Question:</strong> Why are students relying on social media to understand processes their colleges already explain?</p><p><strong>Working claim:</strong> Colleges should treat student-services communication as a design problem, not just an information problem, because information students cannot easily find or understand may function as if it were unavailable.</p><p><strong>You did not fill in a thesis formula. You followed the thinking until you found something worth claiming.</strong></p></div><div class="callout"><strong>You do not have to find the perfect sentence.</strong> You have to find the focus of what you want to say.</div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
  save(false)
 }
-$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());$("finalParagraph").innerHTML=paragraphHTML(false)}
-$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={job:false,claim:false,evidence:false,analysis:false,connection:false,revision:false};render()}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else{save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;history=[["Topic","College affordability"]];notes={};render()}
 $("restart").onclick=()=>{localStorage.removeItem(key);location.reload()}
-let xray=false;$("xray").onclick=()=>{xray=!xray;$("finalParagraph").innerHTML=paragraphHTML(xray);$("xray").textContent=xray?"👁️ Read Normally":"🩻 X-Ray My Paragraph"}
-const starters=["What does my reader need to understand next?","What part of my thesis does this paragraph need to develop?","What evidence would help my reader believe this?","What do I think this evidence actually shows?","Why does this matter to the argument I'm making?","What might my reader be confused about here?"];
-$("prompt").onclick=()=>{const box=$("promptBox");box.classList.remove("hidden");box.innerHTML=`<h3>Starting Question</h3><p>${starters[Math.floor(Math.random()*starters.length)]}</p>`}
-$("copy").onclick=async()=>{const text=`MY PARAGRAPH BLUEPRINT
-
-1. Give it a job — What does this paragraph need to contribute?
-2. Make the point visible — What should my reader understand?
-3. Support it — What evidence or example helps?
-4. Do the thinking — What does that evidence show?
-5. Connect it — Why does this matter to my larger argument?
-6. Check the reader — What might they still need?`;
- try{await navigator.clipboard.writeText(text);$("copy").textContent="✓ Blueprint Copied"}catch(e){$("promptBox").classList.remove("hidden");$("promptBox").innerHTML=`<h3>My Paragraph Blueprint</h3><p>${text.replace(/\n/g,"<br>")}</p>`}}
 let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume My Paragraph";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion Card":"Resume My Thesis";$("resume").onclick=()=>{i=s.i||0;history=s.history||history;notes=s.notes||{};$("intro").classList.add("hidden");if(s.done){$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date(s.date||Date.now()))}else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
 </body>
