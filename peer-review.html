@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peer Review Lab: Be a Useful Reader</title>
+<meta name="description" content="An accessible first-gen-friendly peer review practice lab for ENGL C1000.">
+<style>
+:root{
+ --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#64717e;--line:#d8e0e8;
+ --brand:#365d79;--dark:#223f55;--soft:#eef4f8;--gold:#fff5d9;--goldline:#b7871d;
+ --good:#2f7649;--goodbg:#eef8f1;--rose:#8f5068;--rosebg:#fbf0f4;--max:980px;--r:16px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button{font:inherit}
+button:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;border:2px solid #000;padding:10px;z-index:99}.skip:focus{left:8px}
+.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(34,63,85,.07)}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:800;font-size:.86rem;color:var(--brand);margin:0 0 6px}
+h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}h2{font-size:clamp(1.4rem,4.5vw,2rem)}h3{font-size:1.12rem}
+.lead{font-size:1.08rem}
+.callout,.decoder,.awkward,.machine{border-radius:13px;padding:17px;margin:15px 0}
+.callout{background:var(--gold);border-left:5px solid var(--goldline)}
+.decoder{background:#f8fbfd;border:2px dashed var(--brand)}
+.awkward{background:var(--rosebg);border:2px solid var(--rose)}
+.machine{background:#fafafa;border:3px dashed #7a828b}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill,.stage{display:inline-flex;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}.pill{border:1px solid var(--line);color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:8px}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:var(--brand);color:#fff}.secondary{background:#fff;border:2px solid var(--brand);color:var(--dark)}.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.93rem;font-weight:700}.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin:7px 0 20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;align-items:start}.side{position:sticky;top:10px;border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px}
+.reader-note{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;margin:8px 0;font-size:.92rem}.reader-note.on{background:var(--goodbg);border-color:var(--good)}
+.passage{background:#fbfcfd;border:1px solid var(--line);border-radius:13px;padding:17px;margin:14px 0}.passage p{margin:.65em 0}
+.question{font-size:1.18rem;font-weight:800;margin:15px 0}.choices{display:grid;gap:10px;margin:15px 0}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink);padding:14px 16px}.choice.selected{border-color:var(--good);background:var(--goodbg)}
+.feedback{display:none;border:2px solid var(--brand);background:var(--soft);border-radius:12px;padding:16px;margin-top:16px}.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--goodbg)}.feedback strong{display:block}
+.mind{border:3px solid #606a74;border-radius:16px;background:#f8fafb;padding:20px;text-align:center;margin:15px 0}.mind .big{font-size:1.35rem;font-weight:900}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bad,.better{border-radius:13px;padding:15px}.bad{background:var(--rosebg);border:2px solid var(--rose)}.better{background:var(--goodbg);border:2px solid var(--good)}
+.comment{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;margin:9px 0}
+.report{border:3px solid var(--brand);border-radius:16px;padding:20px;background:#fff}.report .item{padding:12px 0;border-bottom:1px solid var(--line)}.report .item:last-child{border-bottom:0}
+.final{border:3px solid var(--good);background:var(--goodbg);border-radius:18px;padding:22px;text-align:center}.final .big{font-size:clamp(1.7rem,6vw,2.6rem);font-weight:900;color:var(--good)}
+.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,30px);margin-top:18px}.complete{color:var(--good);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.grid{display:grid;grid-template-columns:1fr auto;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;margin:16px 0}.shot{background:var(--gold);border:2px solid var(--goldline);border-radius:12px;padding:14px;font-weight:700}
+.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:760px){.workspace{grid-template-columns:1fr}.side{position:static;order:-1}.compare{grid-template-columns:1fr}}
+@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card">
+ <p class="eyebrow">ENGL C1000 · Peer review without mind reading</p>
+ <h1>Peer Review Lab: Be a Useful Reader</h1>
+ <p class="lead"><strong>Your job is not to fix someone else's paper. Your job is to give the writer useful information about your experience as a reader.</strong></p>
+ <div class="callout"><strong>College writing has unwritten rules.</strong> Peer review has some too. This lab makes them visible: what to notice, what to say, what you do <em>not</em> need to know, and how to help without taking control of someone else's writing.</div>
+ <div class="meta"><span class="pill">20 reader moments</span><span class="pill">No grammar policing</span><span class="pill">No timer</span><span class="pill">Writer keeps agency</span></div>
+ <div class="row"><button id="start" class="primary" type="button">Enter Reader Mode</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+ <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+ <span id="stage" class="stage"></span><h2>Reader Simulator</h2>
+ <div class="workspace">
+  <div>
+   <div id="host"></div>
+   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+   <div class="row"><button id="next" class="primary hidden" type="button">Next Reader Moment</button></div>
+  </div>
+  <aside class="side"><h3>Your Reader Toolkit</h3><div id="toolkit"></div></aside>
+ </div>
+</section>
+
+<section id="done" class="card hidden">
+ <div class="final"><div>👀</div><div class="big">YOU WERE A READER, NOT AN EDITOR</div><p>You noticed. You described your experience. You asked questions. You identified what worked. You gave the writer information.</p><p><strong>The writer gets to decide what to do with it.</strong></p></div>
+ <div class="report">
+  <h2>Your Reader Report</h2>
+  <div class="item"><strong>KEEP:</strong> Tell the writer where something worked and why.</div>
+  <div class="item"><strong>CONSIDER:</strong> Describe where you needed more as a reader.</div>
+  <div class="item"><strong>QUESTION:</strong> Ask something that may help the writer think about the next revision.</div>
+ </div>
+ <div class="row"><button id="copy" class="primary" type="button">📋 Copy My Peer Review Starter</button></div>
+ <div class="completion">
+  <div class="complete">✓ Lab complete</div><h2>Peer Review Lab — Complete</h2>
+  <div class="grid"><div>Respond as a reader</div><div>✓ Complete</div><div>Give specific positive feedback</div><div>✓ Complete</div><div>Describe confusion without taking over</div><div>✓ Complete</div><div>Decode common instructor language</div><div>✓ Complete</div><div>Prioritize useful feedback</div><div>✓ Complete</div></div>
+  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 Screenshot this completion card for Canvas.</div>
+ </div>
+ <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+</section>
+<footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
+</main>
+<script>
+(()=>{
+const $=id=>document.getElementById(id),key="peerReviewUsefulReaderV1";
+let i=0,skills={notice:false,specific:false,agency:false,questions:false,prioritize:false};
+const passage=`<div class="passage"><p><strong>Student draft:</strong> Evening students can face barriers that daytime students do not always encounter. For example, some campus offices close before evening classes begin. A student who works during the day may therefore have fewer opportunities to ask questions in person. Colleges should think about these schedules when designing student services.</p></div>`;
+const moments=[
+["1 · What Is Peer Review?","choice",passage,"What is the peer reviewer's main job?",[
+["Tell the writer what I experienced as a reader and give useful information for revision.",1,"Yes. You can be a useful reader without being the professor, an editor, or an expert."],
+["Rewrite the paper the way I would write it.",0,"That takes control away from the writer."],
+["Find every grammar mistake.",0,"Peer review can include sentence-level noticing, but that is not its whole purpose."],
+["Decide what grade the paper deserves.",0,"That is not the peer reviewer's job."]
+],"notice"],
+["2 · Mind Reading Unavailable","mind"],
+["3 · Reader Check","choice",passage,"You understand the paragraph's main point, but you want to know whether the problem affects online services too. Which response is most useful?",[
+["I followed your point about office hours. I wondered whether this problem also affects students trying to use services online.",1,"This tells the writer what you understood and gives them a question they can choose to pursue."],
+["You forgot online services.",0,"You do not know whether the writer intended to discuss them, and the command gives less useful reader information."],
+["Fix this paragraph.",0,"The writer does not know what you experienced or what might need attention."],
+["Good.",0,"Positive feedback helps more when it identifies what worked."]
+],"questions"],
+["4 · Comment or Command?","choice","","Which comment gives the writer more agency?",[
+["I wasn't sure how this example connected to your thesis.",1,"This describes a reader experience. The writer can decide how to respond."],
+["Delete this example.",0,"That is a command, and it does not explain the reader's experience."],
+["Never use this kind of example.",0,"This turns one reader reaction into a universal rule."],
+["Rewrite this sentence like this...",0,"Unless specifically requested, rewriting can replace the writer's language rather than support their decision-making."]
+],"agency"],
+["5 · Upgrade the Comment","compare"],
+["6 · Compliment Upgrade Machine","machine"],
+["7 · Useful Positive Feedback","choice",passage,"Which positive comment gives the writer information they can actually use?",[
+["The example about offices closing before evening classes made the scheduling problem concrete for me. I'd keep that.",1,"Specific positive feedback tells the writer what is working and what may be worth preserving."],
+["Good job!",0,"Kind, but the writer cannot tell what worked."],
+["Nice.",0,"The writer needs a little more information."],
+["I like it.",0,"Tell the writer what produced that reaction."]
+],"specific"],
+["8 · Peer Review Awkwardness","awkward","Their paper seems much better than mine.","What can you still offer?",[
+["My genuine reader reactions: where I was convinced, interested, confused, surprised, or wanted more.",1,"You do not need to be a stronger writer to be a useful reader."],
+["Nothing. Only better writers can review papers.",0,"Readers do not need to outrank writers."],
+["Invent problems so I have something to say.",0,"Feedback should be genuine."],
+["Correct their punctuation to prove I helped.",0,"You can contribute much more than proofreading."]
+]],
+["9 · Peer Review Awkwardness","awkward","I don't know how to fix this paragraph.","What can you say?",[
+["I lost the connection here, even if I don't know what revision would solve it.",1,"Exactly. Identifying where the reader lost the thread is useful information."],
+["Nothing until I know the solution.",0,"You are not required to diagnose and repair everything."],
+["Rewrite it myself.",0,"The writer should retain control of the revision."],
+["Guess at a grammar rule.",0,"Uncertain rules are not useful feedback."]
+]],
+["10 · College Writing Decoder","decoder","“This is confusing.”","Upgrade it by locating the reader experience: “I followed the point until the quotation. After it, I wasn't sure what you wanted me to understand from the evidence.”"],
+["11 · College Writing Decoder","decoder","“Your topic sentence is weak.”","Try: “I can tell this paragraph is about textbook costs, but I'm not yet sure what you're arguing about them.”"],
+["12 · College Writing Decoder","decoder","“Needs development.”","As a reader, ask what you needed more of: reasoning, evidence, example, explanation, context, or connection. You do not have to prescribe the exact revision."],
+["13 · Strong Body Paragraph Check","choice",passage,"Which question best helps you review the paragraph as a unit of thought?",[
+["Can I tell what job this paragraph is doing, and do its examples and explanation help me follow that job?",1,"This focuses on what the paragraph is doing rather than forcing it into a sentence-count formula."],
+["Does it have exactly five sentences?",0,"Sentence count does not tell you whether a paragraph develops its idea."],
+["Does every sentence sound formal?",0,"Formality is not the same as clarity, focus, or effectiveness."],
+["Does it begin with 'Furthermore'?",0,"Transitions should express relationships, not satisfy a word requirement."]
+],"notice"],
+["14 · Difference Is Not an Error","choice","","A classmate uses a phrase or language pattern that is different from the way you would say it, but you understand the meaning. What is the best first move?",[
+["Focus on the writing task and reader experience rather than treating difference itself as an error.",1,"Peer review should not turn language difference into automatic deficiency."],
+["Change it so it sounds like me.",0,"Your language is not the universal standard for another writer's voice."],
+["Mark it wrong because it is unfamiliar.",0,"Unfamiliarity and error are not the same thing."],
+["Tell them to sound more academic.",0,"That instruction is too vague to help and can flatten voice."]
+],"agency"],
+["15 · Feedback Priorities","choice","","You only have time for three meaningful comments. What is the strongest strategy?",[
+["Prioritize a strength to preserve, an important place where I needed more, and a question that could help revision.",1,"Peer review does not require commenting on every sentence. Prioritizing can make feedback more usable."],
+["Mark every comma I can find.",0,"That may crowd out more important information about the argument and reader experience."],
+["Write 'good' beside every paragraph.",0,"Encouragement is valuable, but specific feedback is more useful."],
+["Choose three random sentences.",0,"Prioritize comments that could matter to revision."]
+],"prioritize"],
+["16 · Reader Report: KEEP","choice",passage,"Which KEEP comment would you give?",[
+["Keep the example about office hours; it helped me understand how the scheduling issue could affect a working student.",1,"This tells the writer exactly what worked for this reader and why."],
+["Keep everything.",0,"That is too broad to guide revision."],
+["Good paragraph.",0,"Be more specific about what is working."],
+["I wouldn't change it.",0,"The writer still does not know what created your positive response."]
+],"specific"],
+["17 · Reader Report: CONSIDER","choice",passage,"Which CONSIDER comment gives useful reader information?",[
+["I understood the office-hours example, but I wanted a little more explanation of how common or significant this barrier might be.",1,"This identifies where the reader wanted more without dictating a single solution."],
+["Add three sentences.",0,"Sentence count does not identify the reader's actual need."],
+["This needs work.",0,"The writer cannot tell what needs attention."],
+["Make it better.",0,"That does not describe the reading experience."]
+],"notice"],
+["18 · Reader Report: QUESTION","choice",passage,"Which question could open a useful revision possibility?",[
+["How might colleges support evening students when an office cannot stay open later?",1,"This question grows naturally from the paragraph's argument and may help the writer think further."],
+["Why didn't you write this differently?",0,"That is vague and can sound judgmental."],
+["Don't you think this is obvious?",0,"That closes conversation rather than opening revision."],
+["Can you fix it?",0,"A useful peer-review question is more specific."]
+],"questions"],
+["19 · Final Simulated Review","report"],
+["20 · Reader, Not Editor","finish"]
+];
+function save(done=false){localStorage.setItem(key,JSON.stringify({i,skills,done}))}
+function setSkill(k){if(k)skills[k]=true;toolkit()}
+function toolkit(){const a=[["notice","Notice reader experience"],["specific","Be specific"],["agency","Protect writer agency"],["questions","Ask useful questions"],["prioritize","Prioritize feedback"]];$("toolkit").innerHTML=a.map(([k,v])=>`<div class="reader-note ${skills[k]?"on":""}">${skills[k]?"✓":"○"} ${v}</div>`).join("")}
+function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
+function makeChoices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);fb("Useful reader move.",m)}else{b.disabled=true;fb("Try it from the reader's position.",m+" Try another response.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){
+ const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Reader Moment";
+ $("ptext").textContent=`Reader moment ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];toolkit();
+ if(m[1]==="choice"){$("host").innerHTML=(m[2]||"")+`<p class="question">${m[3]}</p>`;$("host").appendChild(makeChoices(m[4],m[5]))}
+ if(m[1]==="mind"){$("host").innerHTML=`<div class="mind"><div class="big">🔮 MIND READING...</div><p>Trying to determine exactly what the writer intended...</p><p><strong>🚫 MIND READING UNAVAILABLE</strong></p></div><div class="decoder"><strong>Try this instead:</strong> Tell the writer what you actually experienced. What did you understand? Where did you lose the thread? What interested you? What did you want to know?</div>`;setSkill("notice");fb("Good news: you don't need psychic powers.","Writer intention and reader experience are different. Peer review can report the second one.")}
+ if(m[1]==="compare"){$("host").innerHTML=`<div class="compare"><div class="bad"><strong>Less useful</strong><p>“This paragraph is confusing.”</p></div><div class="better"><strong>More useful</strong><p>“I followed your point until the quotation. After it, I wasn't sure how the evidence connected to your paragraph's main idea.”</p></div></div>`;setSkill("specific");fb("Locate the reaction.","Specific reader information gives the writer something they can make a decision about.")}
+ if(m[1]==="machine"){$("host").innerHTML=`<div class="machine"><h3>🤖 Compliment Upgrade Machine</h3><p><strong>INPUT:</strong> “Good job!”</p><p>⚙️ locating what worked... identifying reader effect...</p><p><strong>OUTPUT:</strong> “The example about missing the enrollment deadline made the problem concrete for me. That's where I understood why your argument matters.”</p></div>`;setSkill("specific");fb("Positive feedback is revision information too.","When writers know what worked, they know what they may want to preserve.")}
+ if(m[1]==="awkward"){$("host").innerHTML=`<div class="awkward"><h3>😬 Peer Review Awkwardness Simulator</h3><p><strong>${m[2]}</strong></p></div><p class="question">${m[3]}</p>`;$("host").appendChild(makeChoices(m[4],"agency"))}
+ if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 College Writing Decoder</h3><p><strong>${m[2]}</strong></p><p>${m[3]}</p></div>`;fb("Make the hidden request visible.","You can describe what a reader needs without pretending there is only one correct revision.")}
+ if(m[1]==="report"){$("host").innerHTML=`${passage}<div class="report"><h3>👀 Reader Report</h3><div class="item"><strong>KEEP:</strong> The office-hours example made the scheduling barrier concrete for me.</div><div class="item"><strong>CONSIDER:</strong> I wanted a little more explanation of how significant this barrier might be.</div><div class="item"><strong>QUESTION:</strong> How might colleges support evening students when an office cannot stay open later?</div></div>`;Object.keys(skills).forEach(k=>skills[k]=true);toolkit();fb("That's a usable peer review.","It identifies a strength, reports an important reader need, and opens a revision possibility without taking control of the paper.")}
+ if(m[1]==="finish"){$("host").innerHTML=`<div class="callout"><strong>You do not need to be the professor. You do not need to be a better writer. You do not need to know how to fix everything.</strong><br><br>Be an attentive reader. Tell the writer what happened while you were reading. Then let the writer decide what to do with that information.</div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
+ save()
+}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={notice:false,specific:false,agency:false,questions:false,prioritize:false};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
+$("copy").onclick=async()=>{const t=`PEER REVIEW STARTER
+
+KEEP: One thing that worked for me as a reader was ___ because ___.
+
+CONSIDER: I followed your point until ___. Here I needed more ___.
+
+QUESTION: One question I had while reading was ___.
+
+Remember: I can describe my reader experience without deciding the writer's revision for them.`;try{await navigator.clipboard.writeText(t);$("copy").textContent="✓ Peer Review Starter Copied"}catch(e){alert(t)}}
+let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
