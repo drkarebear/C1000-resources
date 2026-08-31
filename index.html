@@ -1,473 +1,820 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ENGL C1000 Resources</title>
-<meta name="description" content="Interactive writing labs and just-in-time help for ENGL C1000 students.">
-<style>
-:root{
-  --bg:#f4f7fa;
-  --paper:#ffffff;
-  --ink:#243447;
-  --muted:#64727f;
-  --line:#d8e1e8;
-  --blue:#315f78;
-  --blue-dark:#203f52;
-  --blue-soft:#edf5f8;
-  --green:#2f7749;
-  --green-soft:#eef8f1;
-  --gold:#946807;
-  --gold-soft:#fff6dc;
-  --rose:#8b4f66;
-  --rose-soft:#fbf0f4;
-  --purple:#72559a;
-  --purple-soft:#f8f3fb;
-  --max:1180px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font:18px/1.6 Arial,Helvetica,sans-serif;
-}
-a{color:inherit}
-a:focus-visible,button:focus-visible{
-  outline:4px solid #111827;
-  outline-offset:3px;
-}
-.skip{
-  position:absolute;
-  left:-9999px;
-  top:8px;
-  z-index:999;
-  background:#fff;
-  color:#000;
-  border:2px solid #000;
-  padding:10px 14px;
-  border-radius:8px;
-}
-.skip:focus{left:8px}
-.wrap{
-  width:min(calc(100% - 24px),var(--max));
-  margin:auto;
-}
-.hero{
-  padding:52px 0 30px;
-}
-.hero-card{
-  background:linear-gradient(145deg,#ffffff 0%,#f2f7fa 100%);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:clamp(26px,5vw,52px);
-  box-shadow:0 14px 34px rgba(32,63,82,.08);
-}
-.eyebrow{
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-weight:900;
-  color:var(--blue);
-  font-size:.85rem;
-  margin:0 0 8px;
-}
-h1,h2,h3{color:var(--blue-dark);line-height:1.15}
-h1{
-  margin:.05em 0 .2em;
-  font-size:clamp(2.4rem,7vw,4.5rem);
-}
-h2{
-  font-size:clamp(1.7rem,4vw,2.5rem);
-  margin:.2em 0;
-}
-h3{
-  margin:.1em 0 .35em;
-  font-size:1.25rem;
-}
-.lead{
-  font-size:clamp(1.08rem,2.2vw,1.3rem);
-  max-width:780px;
-  margin:.6em 0 0;
-}
-.hero-note{
-  margin-top:22px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.pill{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:#fff;
-  border:1px solid var(--line);
-  color:var(--muted);
-  border-radius:999px;
-  padding:7px 11px;
-  font-size:.9rem;
-  font-weight:800;
-}
-.quick-nav{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin:20px 0 4px;
-}
-.quick{
-  text-decoration:none;
-  border:2px solid var(--line);
-  background:#fff;
-  border-radius:16px;
-  padding:16px 18px;
-  font-weight:900;
-}
-.quick small{
-  display:block;
-  margin-top:4px;
-  color:var(--muted);
-  font-weight:700;
-}
-.quick:hover{border-color:var(--blue);transform:translateY(-1px)}
-.section{
-  padding:34px 0 8px;
-}
-.section-head{
-  margin-bottom:16px;
-}
-.section-head p{
-  max-width:800px;
-  margin:.4em 0 0;
-  color:var(--muted);
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:16px;
-}
-.card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  min-height:100%;
-  box-shadow:0 8px 22px rgba(32,63,82,.05);
-}
-.card:hover{
-  border-color:#aebdca;
-  box-shadow:0 10px 26px rgba(32,63,82,.09);
-}
-.icon{
-  font-size:2rem;
-  line-height:1;
-  margin-bottom:10px;
-}
-.kicker{
-  font-size:.78rem;
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  font-weight:900;
-  color:var(--blue);
-  margin-bottom:6px;
-}
-.problem{
-  font-weight:900;
-  color:var(--ink);
-  margin:.25em 0 .5em;
-}
-.desc{
-  color:var(--muted);
-  margin:.2em 0 1em;
-}
-.meta{
-  margin-top:auto;
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  padding-top:6px;
-}
-.tag{
-  font-size:.78rem;
-  font-weight:800;
-  border-radius:999px;
-  padding:5px 9px;
-  background:var(--blue-soft);
-  color:var(--blue);
-}
-.launch{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  min-height:48px;
-  margin-top:15px;
-  text-decoration:none;
-  font-weight:900;
-  border-radius:12px;
-  background:var(--blue);
-  color:#fff;
-  padding:12px 15px;
-}
-.launch:hover{background:var(--blue-dark)}
-.stuck .card:nth-child(3n+1){border-top:5px solid var(--rose)}
-.stuck .card:nth-child(3n+2){border-top:5px solid var(--gold)}
-.stuck .card:nth-child(3n+3){border-top:5px solid var(--purple)}
-.build .card:nth-child(3n+1){border-top:5px solid var(--blue)}
-.build .card:nth-child(3n+2){border-top:5px solid var(--green)}
-.build .card:nth-child(3n+3){border-top:5px solid var(--gold)}
-.bottom{
-  margin:42px 0 50px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:24px;
-  text-align:center;
-}
-.bottom strong{color:var(--blue-dark)}
-footer{
-  color:var(--muted);
-  text-align:center;
-  font-size:.9rem;
-  padding:0 0 36px;
-}
-@media(max-width:920px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:640px){
-  body{font-size:17px}
-  .wrap{width:min(calc(100% - 16px),var(--max))}
-  .hero{padding-top:18px}
-  .hero-card{padding:22px 17px}
-  .quick-nav{grid-template-columns:1fr}
-  .grid{grid-template-columns:1fr}
-  /* On mobile, students who arrive needing immediate help see rescue tools first. */
-  #stuck{order:1}
-  #build{order:2}
-  .main-sections{display:flex;flex-direction:column}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *{transition:none!important}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>College Writer Lab | ENGL C1000 Resources</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #f6f8f8;
+      color: #263943;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid #173e4b;
+      outline-offset: 4px;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: #e8f1f3;
+      border: 1px solid #c5d9de;
+      border-radius: 22px;
+      padding: 42px 36px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #55747e;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      color: #173e4b;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+    }
+
+    .hero-intro {
+      max-width: 850px;
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .hero-note {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #ffffff;
+      border-radius: 10px;
+      font-weight: 700;
+      color: #36545e;
+    }
+
+    /* QUICK NAV */
+
+    .quick-nav {
+      background: #ffffff;
+      border: 1px solid #d8e0e3;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+
+    .quick-nav h2 {
+      margin: 0 0 6px;
+      color: #173e4b;
+      font-size: 1.3rem;
+    }
+
+    .quick-nav p {
+      margin: 0 0 17px;
+      color: #53666e;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      min-height: 52px;
+      padding: 11px 14px;
+      border: 1px solid #cbd7db;
+      border-radius: 10px;
+      background: #f7fafb;
+      color: #284b58;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background: #edf4f5;
+      transform: translateY(-1px);
+    }
+
+    /* SECTIONS */
+
+    .category {
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 26px;
+      border: 1px solid transparent;
+    }
+
+    .category-header {
+      margin-bottom: 22px;
+    }
+
+    .category-number {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      background: rgba(255,255,255,0.72);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .category h2 {
+      margin: 0 0 7px;
+      color: #173e4b;
+      font-size: clamp(1.45rem, 3vw, 1.9rem);
+      line-height: 1.25;
+    }
+
+    .category-description {
+      max-width: 850px;
+      margin: 0;
+      color: #40555e;
+      font-size: 1rem;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 165px;
+      padding: 19px;
+      background: #ffffff;
+      border: 1px solid rgba(80, 100, 108, 0.2);
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(25, 55, 65, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(25, 55, 65, 0.09);
+    }
+
+    .tool-title {
+      margin: 0 0 7px;
+      color: #193f4c;
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .tool-description {
+      margin: 0;
+      color: #53666e;
+      font-size: 0.94rem;
+      flex-grow: 1;
+    }
+
+    .tool-action {
+      margin-top: 14px;
+      color: #245f75;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    /* CATEGORY COLORS */
+
+    .category-1 {
+      background: #edf3f7;
+      border-color: #ccdbe4;
+    }
+
+    .category-2 {
+      background: #edf5ee;
+      border-color: #cedfce;
+    }
+
+    .category-3 {
+      background: #f7f2e8;
+      border-color: #e5d9bd;
+    }
+
+    .category-4 {
+      background: #f3edf6;
+      border-color: #dfd1e5;
+    }
+
+    .category-5 {
+      background: #f8eeee;
+      border-color: #e8d1d1;
+    }
+
+    .category-6 {
+      background: #edf4f4;
+      border-color: #cbdede;
+    }
+
+    /* FOOTER */
+
+    .bottom-message {
+      margin-top: 36px;
+      padding: 28px;
+      background: #173e4b;
+      border-radius: 18px;
+      color: #ffffff;
+    }
+
+    .bottom-message h2 {
+      margin: 0 0 8px;
+      color: #ffffff;
+      font-size: 1.35rem;
+    }
+
+    .bottom-message p {
+      margin: 0;
+      max-width: 850px;
+    }
+
+    footer {
+      padding: 26px 4px 0;
+      text-align: center;
+      color: #60727a;
+      font-size: 0.88rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 950px) {
+      .tool-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .page-shell {
+        padding: 14px 12px 40px;
+      }
+
+      .hero {
+        padding: 28px 22px;
+        border-radius: 16px;
+      }
+
+      .quick-nav {
+        padding: 19px;
+      }
+
+      .nav-grid,
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category {
+        padding: 22px 17px;
+        border-radius: 16px;
+      }
+
+      .tool-card {
+        min-height: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .tool-card,
+      .nav-link {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
+
 <body>
-<a class="skip" href="#main">Skip to resources</a>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="hero-card">
-      <p class="eyebrow">ENGL C1000 Resources</p>
-      <h1>What do you need right now?</h1>
-      <p class="lead">These short, interactive labs are here for two reasons: to help you <strong>build your writing</strong> and to help when you're <strong>stuck and not sure what to do next</strong>.</p>
+  <main class="page-shell">
 
-      <div class="quick-nav" aria-label="Jump to a resource category">
-        <a class="quick" href="#build">✍️ Build My Writing
-          <small>I know what skill I want to practice.</small>
+    <!-- HERO -->
+
+    <header class="hero">
+
+      <p class="eyebrow">
+        ENGL C1000 Writing Support
+      </p>
+
+      <h1>
+        College Writer Lab
+      </h1>
+
+      <p class="hero-intro">
+        Writing gets complicated sometimes. You do not need to work through these tools in order.
+        Start with the problem you are trying to solve <strong>right now</strong>.
+        Each activity is designed to help you make a useful move in your actual reading, writing, research, or revision.
+      </p>
+
+      <p class="hero-note">
+        Choose your starting point ↓
+      </p>
+
+    </header>
+
+
+    <!-- QUICK NAV -->
+
+    <nav class="quick-nav" aria-label="Writing lab categories">
+
+      <h2>
+        What do you need help with today?
+      </h2>
+
+      <p>
+        Jump to the category that sounds closest to what you need.
+      </p>
+
+      <div class="nav-grid">
+
+        <a class="nav-link" href="#figure-it-out">
+          Figure out the assignment
         </a>
-        <a class="quick" href="#stuck">🆘 I'm Stuck
-          <small>Help me figure out my next move.</small>
+
+        <a class="nav-link" href="#reading">
+          Understand the reading
         </a>
+
+        <a class="nav-link" href="#get-going">
+          Get my writing going
+        </a>
+
+        <a class="nav-link" href="#develop">
+          Develop my ideas
+        </a>
+
+        <a class="nav-link" href="#revise">
+          Revise my draft
+        </a>
+
+        <a class="nav-link" href="#submit">
+          Get ready to submit
+        </a>
+
       </div>
 
-      <div class="hero-note">
-        <span class="pill">⏱ Most labs: about 10–15 minutes</span>
-        <span class="pill">↻ Try them as often as you want</span>
-        <span class="pill">✓ Practice, not perfection</span>
+    </nav>
+
+
+    <!-- CATEGORY 1 -->
+
+    <section class="category category-1" id="figure-it-out">
+
+      <div class="category-header">
+
+        <span class="category-number">
+          Starting Point 1
+        </span>
+
+        <h2>
+          I Need to Figure Out What I&rsquo;m Supposed to Do
+        </h2>
+
+        <p class="category-description">
+          Start here when the assignment, expectations, or college process feels unclear.
+        </p>
+
       </div>
-    </div>
-  </div>
-</header>
 
-<main id="main" class="main-sections">
+      <div class="tool-grid">
 
-<section id="build" class="section build">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Path 1</p>
-      <h2>✍️ Build My Writing</h2>
-      <p>Practice the skills you use to read, plan, draft, develop, revise, edit, and document college writing.</p>
-    </div>
+        <a class="tool-card" href="decode-assignment.html">
+          <span class="tool-title">Decode the Assignment</span>
+          <span class="tool-description">
+            Break a complicated assignment into the actual jobs you need to complete.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-    <div class="grid">
-      <article class="card">
-        <div class="icon">📖</div>
-        <div class="kicker">Reading</div>
-        <h3>Active Reading</h3>
-        <p class="problem">I want to understand and use what I read.</p>
-        <p class="desc">Practice noticing, questioning, connecting, and tracking your thinking while you read.</p>
-        <div class="meta"><span class="tag">ACTIVE READING</span><span class="tag">10–15 MIN</span></div>
-        <a class="launch" href="active-reading.html">Talk to the Text →</a>
-      </article>
+        <a class="tool-card" href="what-does-analyze-mean.html">
+          <span class="tool-title">What Does &ldquo;Analyze&rdquo; Mean?</span>
+          <span class="tool-description">
+            Turn one of the most common college directions into concrete thinking moves.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-      <article class="card">
-        <div class="icon">🎯</div>
-        <div class="kicker">Rhetoric</div>
-        <h3>Rhetorical Choices</h3>
-        <p class="problem">How should I write for this audience and situation?</p>
-        <p class="desc">Explore how purpose, audience, context, and voice shape the choices writers make.</p>
-        <div class="meta"><span class="tag">RHETORIC</span><span class="tag">AUDIENCE</span></div>
-        <a class="launch" href="rhetorical-choices.html">Explore the Choices →</a>
-      </article>
+        <a class="tool-card" href="what-does-reflect-mean.html">
+          <span class="tool-title">What Does &ldquo;Reflect&rdquo; Mean?</span>
+          <span class="tool-description">
+            Learn what instructors usually mean when they ask you to reflect rather than simply summarize.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-      <article class="card">
-        <div class="icon">🛠️</div>
-        <div class="kicker">Process</div>
-        <h3>Writing Process</h3>
-        <p class="problem">How do writers actually get from an assignment to a finished draft?</p>
-        <p class="desc">See what writers do when the process gets messy, including drafting, revising, asking questions, and getting help.</p>
-        <div class="meta"><span class="tag">PROCESS</span><span class="tag">DRAFTING</span></div>
-        <a class="launch" href="writing-process.html">Go Behind the Draft →</a>
-      </article>
+        <a class="tool-card" href="who-do-i-ask.html">
+          <span class="tool-title">Who Do I Ask?</span>
+          <span class="tool-description">
+            Figure out where to go when you have a question, problem, or need for support.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-      <article class="card">
-        <div class="icon">🎯</div>
-        <div class="kicker">Focus</div>
-        <h3>Thesis Lab</h3>
-        <p class="problem">I have a topic. Help me turn it into a focused claim.</p>
-        <p class="desc">Watch a thesis develop from a topic into a working claim that can guide an argument.</p>
-        <div class="meta"><span class="tag">THESIS</span><span class="tag">FOCUS</span></div>
-        <a class="launch" href="thesis.html">Find the Focus →</a>
-      </article>
+        <a class="tool-card" href="you-belong-in-the-process.html">
+          <span class="tool-title">You Belong in the Process</span>
+          <span class="tool-description">
+            Practice navigating uncertainty, questions, and help-seeking as part of being a college student.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-      <article class="card">
-        <div class="icon">🧱</div>
-        <div class="kicker">Development</div>
-        <h3>Paragraph Lab</h3>
-        <p class="problem">I want my paragraphs to actually move my argument forward.</p>
-        <p class="desc">Build paragraphs as units of thought using claims, evidence, analysis, and purposeful connections.</p>
-        <div class="meta"><span class="tag">PARAGRAPHS</span><span class="tag">ARGUMENT</span></div>
-        <a class="launch" href="body-paragraphs.html">Build the Argument →</a>
-      </article>
+      </div>
 
-      <article class="card">
-        <div class="icon">💬</div>
-        <div class="kicker">Sources</div>
-        <h3>Source Integration</h3>
-        <p class="problem">How do I use sources without letting them take over my paper?</p>
-        <p class="desc">Decide what job a source should do, bring it into the conversation, and make your own thinking visible.</p>
-        <div class="meta"><span class="tag">SOURCES</span><span class="tag">INTEGRATION</span></div>
-        <a class="launch" href="source-integration.html">Join the Conversation →</a>
-      </article>
+    </section>
 
-      <article class="card">
-        <div class="icon">👥</div>
-        <div class="kicker">Feedback</div>
-        <h3>Peer Review</h3>
-        <p class="problem">What am I actually supposed to do when I review someone else's draft?</p>
-        <p class="desc">Practice being a useful reader without becoming the writer's editor or trying to “fix” the paper.</p>
-        <div class="meta"><span class="tag">PEER REVIEW</span><span class="tag">READER RESPONSE</span></div>
-        <a class="launch" href="peer-review.html">Be a Useful Reader →</a>
-      </article>
 
-      <article class="card">
-        <div class="icon">🔎</div>
-        <div class="kicker">Editing</div>
-        <h3>Editing Lab</h3>
-        <p class="problem">How do I edit without trying to fix everything?</p>
-        <p class="desc">Separate meaning, sentence boundaries, recurring patterns, conventions, and intentional voice.</p>
-        <div class="meta"><span class="tag">EDITING</span><span class="tag">CLARITY</span></div>
-        <a class="launch" href="mechanics.html">See What Needs Attention →</a>
-      </article>
+    <!-- CATEGORY 2 -->
 
-      <article class="card">
-        <div class="icon">📚</div>
-        <div class="kicker">Documentation</div>
-        <h3>MLA 9 Review</h3>
-        <p class="problem">I want help with MLA citations, Works Cited, and paper setup.</p>
-        <p class="desc">Practice the logic behind MLA 9 documentation through short citation and formatting challenges.</p>
-        <div class="meta"><span class="tag">MLA 9</span><span class="tag">CITATION</span></div>
-        <a class="launch" href="mla-review.html">Review MLA →</a>
-      </article>
-    </div>
-  </div>
-</section>
+    <section class="category category-2" id="reading">
 
-<section id="stuck" class="section stuck">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Path 2</p>
-      <h2>🆘 I'm Stuck</h2>
-      <p>Start with the problem that sounds most like yours. These labs make some of the unwritten rules of college writing visible and give you a concrete next move.</p>
-    </div>
+      <div class="category-header">
 
-    <div class="grid">
-      <article class="card">
-        <div class="icon">🔓</div>
-        <div class="kicker">Assignment Help</div>
-        <h3>Decode the Assignment</h3>
-        <p class="problem">I don't understand what this assignment is asking me to do.</p>
-        <p class="desc">Find the job, thinking move, evidence, reader, deliverable, constraints, and questions hiding inside an assignment.</p>
-        <div class="meta"><span class="tag">PROMPTS</span><span class="tag">UNWRITTEN RULES</span></div>
-        <a class="launch" href="decode-assignment.html">Decode My Assignment →</a>
-      </article>
+        <span class="category-number">
+          Starting Point 2
+        </span>
 
-      <article class="card">
-        <div class="icon">🧠</div>
-        <div class="kicker">Academic Language</div>
-        <h3>What Does “Analyze” Mean?</h3>
-        <p class="problem">My professor keeps telling me to analyze. What does that actually mean?</p>
-        <p class="desc">See the thinking moves behind analysis and practice making reasoning visible to a reader.</p>
-        <div class="meta"><span class="tag">ANALYSIS</span><span class="tag">THINKING MOVES</span></div>
-        <a class="launch" href="what-does-analyze-mean.html">Show Me Analysis →</a>
-      </article>
+        <h2>
+          I Need to Understand What I&rsquo;m Reading
+        </h2>
 
-      <article class="card">
-        <div class="icon">💬</div>
-        <div class="kicker">Feedback Help</div>
-        <h3>Professor Comment Decoder</h3>
-        <p class="problem">My paper says “Develop,” “Unclear,” and “So what?” Help.</p>
-        <p class="desc">Translate common instructor shorthand into useful questions, patterns, and possible revision moves.</p>
-        <div class="meta"><span class="tag">FEEDBACK</span><span class="tag">REVISION</span></div>
-        <a class="launch" href="professor-comment-decoder.html">Decode My Feedback →</a>
-      </article>
+        <p class="category-description">
+          Use these when a reading is difficult, long, unfamiliar, or hard to connect to your assignment.
+        </p>
 
-      <article class="card">
-        <div class="icon">💥</div>
-        <div class="kicker">Getting Started</div>
-        <h3>Writer's Block Buster</h3>
-        <p class="problem">I know I need to write. I just can't get moving.</p>
-        <p class="desc">Identify what kind of stuck you're experiencing and get a small, realistic next move.</p>
-        <div class="meta"><span class="tag">WRITER'S BLOCK</span><span class="tag">NEXT MOVE</span></div>
-        <a class="launch" href="writers-block-buster.html">Get Me Unstuck →</a>
-      </article>
+      </div>
 
-      <article class="card">
-        <div class="icon">🩺</div>
-        <div class="kicker">Revision Help</div>
-        <h3>Essay Triage</h3>
-        <p class="problem">There is SO MUCH wrong with this draft. What do I fix first?</p>
-        <p class="desc">Separate big revision moves, reader-care issues, recurring patterns, and final polish so you can prioritize.</p>
-        <div class="meta"><span class="tag">REVISION</span><span class="tag">PRIORITIES</span></div>
-        <a class="launch" href="essay-triage.html">Triage My Draft →</a>
-      </article>
+      <div class="tool-grid">
 
-      <article class="card">
-        <div class="icon">🌊</div>
-        <div class="kicker">Research Help</div>
-        <h3>Research Without Drowning</h3>
-        <p class="problem">I have 37 tabs open and somehow know less than when I started.</p>
-        <p class="desc">Narrow your search, skim strategically, choose useful sources, escape rabbit holes, and know when to start writing.</p>
-        <div class="meta"><span class="tag">RESEARCH</span><span class="tag">SOURCE CHOICE</span></div>
-        <a class="launch" href="research-without-drowning.html">Rescue My Research →</a>
-      </article>
-    </div>
+        <a class="tool-card" href="active-reading.html">
+          <span class="tool-title">Active Reading</span>
+          <span class="tool-description">
+            Practice doing something with a text instead of simply moving your eyes across the page.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-    <div class="bottom">
-      <h2>🧭 Not sure where to start?</h2>
-      <p><strong>Pick the card that sounds most like what is happening right now.</strong> You do not have to complete these labs in order, and you can come back whenever a different problem shows up.</p>
-    </div>
-  </div>
-</section>
+        <a class="tool-card" href="read-like-you-have-a-purpose.html">
+          <span class="tool-title">Read Like You Have a Purpose</span>
+          <span class="tool-description">
+            Decide what you are looking for before you spend time reading everything the same way.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-</main>
+        <a class="tool-card" href="analysis-detective.html">
+          <span class="tool-title">Analysis Detective</span>
+          <span class="tool-description">
+            Look beneath what a text says to examine how details create meaning.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
 
-<footer>
-  <div class="wrap">
-    <p><strong>These activities are for practice, not perfection.</strong> Try a strategy, see what happens, and keep the tools that help you.</p>
-  </div>
-</footer>
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORY 3 -->
+
+    <section class="category category-3" id="get-going">
+
+      <div class="category-header">
+
+        <span class="category-number">
+          Starting Point 3
+        </span>
+
+        <h2>
+          I Need to Get My Writing Going
+        </h2>
+
+        <p class="category-description">
+          Start here when you need momentum, focus, a direction, or a way into the draft.
+        </p>
+
+      </div>
+
+      <div class="tool-grid">
+
+        <a class="tool-card" href="writers-block-buster.html">
+          <span class="tool-title">Writer&rsquo;s Block Buster</span>
+          <span class="tool-description">
+            Try practical ways to get words moving when starting feels unusually difficult.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="focus-rescue.html">
+          <span class="tool-title">Focus Rescue</span>
+          <span class="tool-description">
+            Reset when distraction, overwhelm, or too many competing tasks are getting in the way.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="study-lab.html">
+          <span class="tool-title">Study Lab</span>
+          <span class="tool-description">
+            Make a more workable plan for studying, reading, or completing academic work.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="writing-process.html">
+          <span class="tool-title">Writing Process</span>
+          <span class="tool-description">
+            Figure out where you are in the writing process and choose a useful next move.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="thesis.html">
+          <span class="tool-title">Thesis Lab</span>
+          <span class="tool-description">
+            Develop a working claim that gives your paper direction without locking you into a formula.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="make-your-case.html">
+          <span class="tool-title">Make Your Case</span>
+          <span class="tool-description">
+            Strengthen the reasoning behind a claim and think about what your reader will need.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="rhetorical-choices.html">
+          <span class="tool-title">Rhetorical Choices</span>
+          <span class="tool-description">
+            Make intentional choices based on your purpose, audience, situation, and message.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORY 4 -->
+
+    <section class="category category-4" id="develop">
+
+      <div class="category-header">
+
+        <span class="category-number">
+          Starting Point 4
+        </span>
+
+        <h2>
+          I Need to Develop My Ideas
+        </h2>
+
+        <p class="category-description">
+          Your draft has something to say. These tools can help you deepen the thinking, evidence, and connections.
+        </p>
+
+      </div>
+
+      <div class="tool-grid">
+
+        <a class="tool-card" href="develop-dont-pad.html">
+          <span class="tool-title">Develop, Don&rsquo;t Pad</span>
+          <span class="tool-description">
+            Make writing fuller by adding meaning instead of adding sentences just to make it longer.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="body-paragraphs.html">
+          <span class="tool-title">Body Paragraphs</span>
+          <span class="tool-description">
+            Build paragraphs in which ideas, evidence, and explanation work together.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="source-integration.html">
+          <span class="tool-title">Source Integration</span>
+          <span class="tool-description">
+            Bring source material into your own writing clearly and purposefully.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="synthesis-lab.html">
+          <span class="tool-title">Synthesis Lab</span>
+          <span class="tool-description">
+            Put sources into conversation instead of discussing each source separately.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="research-without-drowning.html">
+          <span class="tool-title">Research Without Drowning</span>
+          <span class="tool-description">
+            Make research more manageable by narrowing what you need and knowing when to stop searching.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORY 5 -->
+
+    <section class="category category-5" id="revise">
+
+      <div class="category-header">
+
+        <span class="category-number">
+          Starting Point 5
+        </span>
+
+        <h2>
+          I Have a Draft. Now What?
+        </h2>
+
+        <p class="category-description">
+          Revision is more than correcting errors. Use these tools to diagnose what your draft needs and make higher-impact changes.
+        </p>
+
+      </div>
+
+      <div class="tool-grid">
+
+        <a class="tool-card" href="essay-triage.html">
+          <span class="tool-title">Essay Triage</span>
+          <span class="tool-description">
+            Decide which problems matter most so you do not try to fix everything at once.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="reverse-outline.html">
+          <span class="tool-title">Reverse Outline</span>
+          <span class="tool-description">
+            Map what your completed draft is actually doing and find places where the structure needs attention.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="professor-comment-decoder.html">
+          <span class="tool-title">Professor Comment Decoder</span>
+          <span class="tool-description">
+            Translate instructor feedback into specific revision moves you can actually make.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="peer-review.html">
+          <span class="tool-title">Peer Review</span>
+          <span class="tool-description">
+            Give and use feedback that helps a writer make decisions rather than simply pointing out mistakes.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="still-a-writer.html">
+          <span class="tool-title">Still a Writer</span>
+          <span class="tool-description">
+            Work through difficult feedback or revision without treating one draft as a judgment of your ability.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORY 6 -->
+
+    <section class="category category-6" id="submit">
+
+      <div class="category-header">
+
+        <span class="category-number">
+          Starting Point 6
+        </span>
+
+        <h2>
+          I&rsquo;m Getting Ready to Submit
+        </h2>
+
+        <p class="category-description">
+          Once the ideas and organization are in place, use these tools for editing, proofreading, mechanics, and MLA.
+        </p>
+
+      </div>
+
+      <div class="tool-grid">
+
+        <a class="tool-card" href="the-editing-room.html">
+          <span class="tool-title">The Editing Room</span>
+          <span class="tool-description">
+            Look closely at sentences and make purposeful editing decisions before you submit.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="proofreading-er.html">
+          <span class="tool-title">Proofreading ER</span>
+          <span class="tool-description">
+            Diagnose proofreading problems and decide which ones need attention first.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="mechanics.html">
+          <span class="tool-title">Mechanics</span>
+          <span class="tool-description">
+            Practice common sentence-level conventions and apply them more deliberately to your writing.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+        <a class="tool-card" href="mla-review.html">
+          <span class="tool-title">MLA Review</span>
+          <span class="tool-description">
+            Check common MLA paper setup, citation, and documentation choices before submitting.
+          </span>
+          <span class="tool-action">Open activity →</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- END MESSAGE -->
+
+    <section class="bottom-message">
+
+      <h2>
+        You do not have to fix everything today.
+      </h2>
+
+      <p>
+        Choose one problem, make one useful move, and then decide what you need next.
+        Writing develops through decisions, practice, feedback, and revision—not by getting everything right on the first try.
+      </p>
+
+    </section>
+
+
+    <footer>
+      College Writer Lab &bull; ENGL C1000 Writing Support
+    </footer>
+
+  </main>
+
 </body>
 </html>
