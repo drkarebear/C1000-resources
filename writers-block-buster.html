@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writer's Block Buster</title>
+<meta name="description" content="An accessible, first-gen-friendly college writing lab for figuring out why you're stuck and choosing a useful next move.">
+<style>
+:root{
+  --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#64717d;--line:#d7e0e8;
+  --blue:#315f78;--blue2:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;
+  --gold:#9a6b08;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;
+  --max:1020px;--radius:17px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button,textarea{font:inherit}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;border:2px solid #000;padding:10px;z-index:99}.skip:focus{left:8px}
+.shell{width:min(calc(100% - 22px),var(--max));margin:auto;padding:20px 0 50px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,63,82,.07)}
+h1,h2,h3{line-height:1.18;color:var(--blue2)}h1{font-size:clamp(2.2rem,7vw,3.5rem);margin:.1em 0 .25em}h2{font-size:clamp(1.45rem,4vw,2rem)}h3{font-size:1.12rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.85rem;color:var(--blue);margin:0}
+.lead{font-size:1.12rem}
+.callout,.secret,.buster,.rescue{padding:17px;border-radius:14px;margin:15px 0}
+.callout{background:var(--goldbg);border-left:5px solid var(--gold)}
+.secret{background:#f7f2fb;border:2px dashed var(--purple)}
+.buster{background:var(--greenbg);border:2px solid var(--green)}
+.rescue{background:var(--soft);border:2px solid var(--blue)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill{border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:.91rem;font-weight:700;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:11px;margin-top:18px}
+button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:800;cursor:pointer}
+.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--blue2)}.quiet{background:#edf1f5;color:var(--ink)}
+.progressline{display:flex;justify-content:space-between;gap:10px;font-size:.92rem;font-weight:800;color:var(--muted)}
+.track{height:12px;background:#e5ebf0;border-radius:999px;overflow:hidden;margin:7px 0 20px}.bar{height:100%;width:0;background:var(--blue);transition:width .2s}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;align-items:start}
+.side{position:sticky;top:10px;background:#fbfcfd;border:1px solid var(--line);border-radius:14px;padding:15px}
+.blockwall{display:grid;grid-template-columns:1fr 1fr;gap:8px}.block{padding:9px;border-radius:8px;border:1px solid #b9c4cd;background:#fff;font-size:.86rem;font-weight:800}.block.cracked{text-decoration:line-through;background:var(--greenbg);border-color:var(--green);color:#345c42}
+.stage{display:inline-flex;background:var(--soft);color:var(--blue);font-size:.9rem;font-weight:800;border-radius:999px;padding:6px 11px}
+.question{font-size:1.17rem;font-weight:900;margin:15px 0}
+.choices{display:grid;gap:10px}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink);padding:14px 16px}.choice.selected{background:var(--greenbg);border-color:var(--green)}
+.feedback{display:none;border:2px solid var(--blue);background:var(--soft);border-radius:12px;padding:15px;margin-top:15px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}.feedback strong{display:block}
+.stuckgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stuck{background:#fff;border:2px solid #b8c4cf;text-align:left}.stuck:hover{border-color:var(--blue)}
+.bigblock{text-align:center;border:4px solid var(--rose);background:var(--rosebg);border-radius:16px;padding:20px;margin:15px 0}.bigblock .icon{font-size:2.5rem}.bigblock strong{display:block;font-size:1.3rem;color:#65384a}
+.loop{border:3px solid var(--rose);background:var(--rosebg);border-radius:16px;padding:18px}.counter{font-size:2rem;font-weight:900;color:var(--rose)}
+.parking{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lot{border:2px dashed var(--blue);background:#f8fbfd;border-radius:13px;padding:14px}.lot h3{margin-top:0}
+.idea{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px;margin:7px 0}
+.shrink{font-size:clamp(1.5rem,5vw,2.4rem);font-weight:900;text-align:center;border:3px solid var(--blue);border-radius:15px;padding:18px;background:#f8fbfd}
+.arrow{text-align:center;font-size:2rem;color:var(--blue)}
+.machine{border:3px solid var(--blue);border-radius:17px;padding:18px;background:#f8fbfd;text-align:center}.machine-output{background:#fff;border:2px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;min-height:90px;display:flex;align-items:center;justify-content:center;font-weight:800}
+textarea{width:100%;min-height:105px;border:2px solid #aebbc7;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}
+.toolkit{display:grid;gap:9px}.toolrow{display:grid;grid-template-columns:180px 1fr;gap:12px;border-bottom:1px solid var(--line);padding:9px 0}.toolrow:last-child{border-bottom:0}.toolrow strong{color:var(--blue)}
+.completion{border:4px solid var(--blue);border-radius:18px;padding:clamp(20px,4vw,30px);background:#fff}.complete{color:var(--green);font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+.completegrid{display:grid;grid-template-columns:1fr auto;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;margin:16px 0}
+.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}
+.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}
+@media(max-width:580px){body{font-size:17px}.shell{width:min(calc(100% - 14px),var(--max));padding-top:9px}.card{padding:19px 15px}.stuckgrid,.parking{grid-template-columns:1fr}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.toolrow,.completegrid{grid-template-columns:1fr;gap:3px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card">
+  <p class="eyebrow">ENGL C1000 · College Writer Toolkit</p>
+  <h1>💥 Writer's Block Buster</h1>
+  <p class="lead"><strong>Stuck? Find your next move.</strong></p>
+  <div class="callout"><strong>“Writer's block” isn't always one problem.</strong> You might be confused, overloaded with ideas, missing information, trying to make the first sentence perfect, or simply unsure what writers do next. Different blocks need different tools.</div>
+  <div class="secret">🔓 <strong>College Writing Secret:</strong> Experienced writers still get stuck. What changes is that they collect strategies for getting moving again.</div>
+  <div class="pills"><span class="pill">20 block-busting missions</span><span class="pill">Stuck Simulator</span><span class="pill">Next-Move Machine</span><span class="pill">No timer</span><span class="pill">Canvas completion card</span></div>
+  <div class="row"><button id="start" class="primary" type="button">Bust the First Block</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+  <div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+  <span id="stage" class="stage"></span>
+  <div class="layout">
+    <div>
+      <div id="host"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+      <div class="row"><button id="next" class="primary hidden" type="button">Next Block</button></div>
+    </div>
+    <aside class="side" aria-label="Block wall">
+      <h3>🧱 Block Wall</h3>
+      <p style="font-size:.9rem">Each strategy gives you another way through.</p>
+      <div id="wall" class="blockwall"></div>
+    </aside>
+  </div>
+</section>
+
+<section id="done" class="card hidden">
+  <div class="buster">
+    <h2>💥 Writers Get Stuck.</h2>
+    <p><strong>The skill is learning how to respond when it happens.</strong></p>
+  </div>
+  <h2>🧰 My “I'm Stuck” Toolkit</h2>
+  <div class="toolkit">
+    <div class="toolrow"><strong>Confused →</strong><span>Decode the assignment or ask a specific question.</span></div>
+    <div class="toolrow"><strong>Blank →</strong><span>Generate questions before trying to generate answers.</span></div>
+    <div class="toolrow"><strong>Too many ideas →</strong><span>Choose what belongs now and park the rest for later.</span></div>
+    <div class="toolrow"><strong>Can't find the words →</strong><span>Say what you mean normally first; shape it for the reader later.</span></div>
+    <div class="toolrow"><strong>Trying for perfect →</strong><span>Write something temporary that gives you material to revise.</span></div>
+    <div class="toolrow"><strong>Stuck at the beginning →</strong><span>Start somewhere else. Essays do not have to be written in order.</span></div>
+    <div class="toolrow"><strong>Need information →</strong><span>Stop drafting and read, search, observe, or ask.</span></div>
+    <div class="toolrow"><strong>Overwhelmed →</strong><span>Shrink the job until the next action is visible.</span></div>
+    <div class="toolrow"><strong>Behind →</strong><span>Re-enter with one useful action; communication may be part of the process.</span></div>
+  </div>
+  <div class="machine" style="margin-top:20px">
+    <h2>🆘 Next-Move Machine</h2>
+    <p>Come back anytime you're stuck. Get one small thing you can do next.</p>
+    <div id="machineOutput" class="machine-output" aria-live="polite">Press the button for a next move.</div>
+    <button id="machineBtn" class="secondary" type="button">💥 Give Me a Next Move</button>
+  </div>
+  <div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Stuck Toolkit</button></div>
+
+  <div id="completionCard" class="completion" style="margin-top:24px">
+    <div class="complete">✓ Lab complete</div>
+    <h2>Writer's Block Buster — Complete</h2>
+    <div class="completegrid">
+      <span>Diagnose different kinds of “stuck”</span><strong>✓ Complete</strong>
+      <span>Generate ideas with questions</span><strong>✓ Complete</strong>
+      <span>Use temporary writing instead of waiting for perfect wording</span><strong>✓ Complete</strong>
+      <span>Start a draft somewhere other than the introduction</span><strong>✓ Complete</strong>
+      <span>Recognize when research—not drafting—is the next move</span><strong>✓ Complete</strong>
+      <span>Shrink a large assignment into a useful next action</span><strong>✓ Complete</strong>
+      <span>Choose a re-entry strategy when behind</span><strong>✓ Complete</strong>
+    </div>
+    <p><strong>Completed:</strong> <span id="date"></span></p>
+    <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+  </div>
+  <div class="row"><button id="restart" class="quiet" type="button">Bust the Blocks Again</button></div>
+</section>
+<footer>Progress stays in this browser. This lab does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id), KEY="writersBlockBusterV1";
+let i=0, cracked=[];
+const blocks=["CONFUSION","BLANK PAGE","TOO MANY IDEAS","CAN'T FIND WORDS","PERFECTION","INTRO LOOP","NEED INFO","TOO BIG","BEHIND"];
+const nextMoves=[
+"Write one sentence beginning: “What I'm trying to say is…”",
+"Skip to the part of the assignment you understand best.",
+"Write three questions instead of trying to write three answers.",
+"Find one example. Don't explain it yet.",
+"Turn the assignment into one question you can try to answer.",
+"Explain your idea as if a classmate asked, “Okay, what do you mean?”",
+"Put [COME BACK] where you're stuck and continue somewhere else.",
+"Read only the assignment's main verb and ask what kind of thinking it requires.",
+"Open one source and look only for one thing that helps your current question.",
+"Write a deliberately temporary sentence. Give yourself something to revise.",
+"Choose one idea for NOW and put the others in a parking lot.",
+"Ask: What is the smallest useful action I can take next?"
+];
+const moments=[
+["1 · What Kind of Stuck Is This?","diagnose"],
+["2 · Block Buster Principle","principle"],
+["3 · Blank Page","questions"],
+["4 · Stuck Simulator","choice","Maya has spent 45 minutes trying to think of a thesis, but she hasn't written down any questions or observations yet.","What could be a useful next move?",[
+["Stop demanding a thesis and generate questions about the topic first.",1,"Exactly. Questions can create raw material before a claim exists."],
+["Keep staring at the blank page until the thesis appears.",0,"Waiting harder is not a strategy. Give your thinking something concrete to do."],
+["Choose a more academic-sounding title.",0,"A title does not solve the missing-ideas problem."],
+["Add three quotations immediately.",0,"Evidence is most useful when you have some idea what you're investigating."]
+],"BLANK PAGE"],
+["5 · Too Many Ideas","parking"],
+["6 · Stuck Simulator","choice","Luis wants to discuss textbook costs, transportation, evening classes, childcare, financial aid, counseling hours, and food insecurity in one short essay.","What might help?",[
+["Choose the idea that best serves this assignment and park the others for later.",1,"Yes. Saving an idea for later is not the same as throwing it away."],
+["Force every idea into the paper so none are wasted.",0,"That can make it harder for the reader to see what the paper is really developing."],
+["Make every idea one sentence long.",0,"That reduces space, but it does not create focus."],
+["Use smaller font.",0,"Creative, but the problem is scope, not typography."]
+],"TOO MANY IDEAS"],
+["7 · Can't Find the Words","sayit"],
+["8 · The Academic-Sounding Trap","choice","Jordan knows what they mean but keeps deleting the sentence because it doesn't sound “college enough.” What is the most useful next move?",[
+["Say the idea clearly in ordinary language first, then decide what this reader and situation need.",1,"Yes. Clear raw material can be shaped. You do not need to perform formality before you have the idea."],
+["Replace every short word with a longer synonym.",0,"Longer words do not automatically make reasoning stronger."],
+["Delete the idea because it sounds too natural.",0,"The writer's own language can be the starting material."],
+["Wait until the sentence sounds like a textbook.",0,"That standard can keep the writer from getting any usable thinking onto the page."]
+],"CAN'T FIND WORDS"],
+["9 · Terrible Sentence Challenge","terrible"],
+["10 · Perfection Detector","choice","A writer has rewritten the first two sentences eight times. The rest of the page is blank.","What is most likely to help?",[
+["Allow temporary wording and move forward so there is something larger to revise.",1,"Exactly. Revision needs material. A temporary sentence can do its job for now."],
+["Rewrite sentence one a ninth time.",0,"That keeps the writer inside the same loop."],
+["Start choosing fonts.",0,"Formatting will not solve a perfection loop."],
+["Delete the document and begin again.",0,"Starting over can recreate the same problem."]
+],"PERFECTION"],
+["11 · Introduction Loop Detected","intro"],
+["12 · Escape the Introduction","choice","You know what your second body paragraph needs to explain, but your introduction isn't working. What are you allowed to do?",[
+["Write [INTRO LATER] and draft the body paragraph I understand.",1,"Yes. Essays can be composed out of order."],
+["Nothing. The introduction must be finished before any other paragraph can exist.",0,"That's a common assumption, not a writing law."],
+["Keep polishing the title.",0,"The title does not have to come first either."],
+["Give up on the draft.",0,"Knowing another part of the paper gives you an excellent re-entry point."]
+],"INTRO LOOP"],
+["13 · Need More Information","research"],
+["14 · Research or Avoidance?","choice","Ari has fourteen research tabs open and keeps finding new articles because they never feel “ready” to draft. They already have several useful sources.","What might be the next move?",[
+["Pause the search and write what the existing evidence is making them notice; return to research if a real gap appears.",1,"Yes. Research can solve an information problem, but endless searching can also postpone using what you already know."],
+["Open fourteen more tabs.",0,"More sources do not automatically create a clearer argument."],
+["Read every article from beginning to end before writing one sentence.",0,"Academic reading can be selective and purpose-driven."],
+["Wait until they know everything about the topic.",0,"No paper requires knowing everything."]
+],"NEED INFO"],
+["15 · Shrink Ray","shrink"],
+["16 · Find the Smallest Useful Move","choice","“Write my research essay” feels impossible tonight. Which is a better next action?",[
+["Open the assignment and identify the main question it asks me to answer.",1,"Good. That's small enough to do and useful enough to move the project forward."],
+["Finish the entire essay immediately.",0,"That's the whole project, not a next move."],
+["Think about how much work remains.",0,"That may increase the feeling of size without changing the draft."],
+["Decide whether I'm a good writer.",0,"The project needs an action, not a verdict about the writer."]
+],"TOO BIG"],
+["17 · Re-Entry Mode","reentry"],
+["18 · Behind and Avoiding It","choice","The due date is close—or has passed—and embarrassment is making a student avoid Canvas, the draft, and the professor. What is a useful re-entry move?",[
+["Open the assignment, see what is actually possible now, and communicate with the professor if clarification, time, or next steps need to be discussed.",1,"Yes. Re-entry begins with information and one useful action. Communication can be part of the writing process."],
+["Avoid the class until the problem disappears.",0,"Avoidance usually removes information and options rather than creating them."],
+["Write an elaborate apology instead of checking the assignment.",0,"A short, specific message plus a concrete next step is usually more useful."],
+["Assume there are no options without checking.",0,"First find out what the actual situation is."]
+],"BEHIND"],
+["19 · Stuck Simulator: Diagnose the Block","simulator"],
+["20 · Build Your Block Buster Toolkit","finish"]
+];
+function save(done=false){localStorage.setItem(KEY,JSON.stringify({i,cracked,done}))}
+function crack(name){if(!cracked.includes(name))cracked.push(name);wall()}
+function wall(){$("wall").innerHTML=blocks.map(b=>`<div class="block ${cracked.includes(b)?"cracked":""}">${cracked.includes(b)?"✓ ":""}${b}</div>`).join("")}
+function feedback(title,text,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=title;$("ftext").textContent=text;$("next").classList.remove("hidden")}
+function choiceUI(arr,block){let d=document.createElement("div");d.className="choices";arr.forEach(([label,good,msg])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=label;b.onclick=()=>{if(good){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");crack(block);feedback("💥 Useful next move.",msg)}else{b.disabled=true;feedback("That may not bust this block.",msg+" Try another move.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){
+ const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Block";
+ $("ptext").textContent=`Block-busting mission ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];wall();
+ if(m[1]==="diagnose"){
+  $("host").innerHTML=`<h2>🚧 What kind of stuck is this?</h2><p>Pick the one that feels most familiar. There isn't a “bad” answer.</p><div id="stuckgrid" class="stuckgrid"></div>`;
+  const opts=[["😵","I don't understand the assignment","CONFUSION"],["🫥","I have no idea what to say","BLANK PAGE"],["🌪️","I have too many ideas","TOO MANY IDEAS"],["🧱","I know what I mean but can't write it","CAN'T FIND WORDS"],["😬","Everything I write sounds terrible","PERFECTION"],["🔄","I keep rewriting the beginning","INTRO LOOP"],["🔍","I need more information","NEED INFO"],["📏","The assignment feels enormous","TOO BIG"],["🙈","I'm behind and avoiding it","BEHIND"]];
+  opts.forEach(([ic,t,bk])=>{let b=document.createElement("button");b.type="button";b.className="stuck";b.textContent=`${ic} ${t}`;b.onclick=()=>{crack(bk);feedback("BLOCK IDENTIFIED.","Now we need the right tool—not more willpower.")};$("stuckgrid").appendChild(b)})
+ }
+ if(m[1]==="principle"){$("host").innerHTML=`<div class="bigblock"><div class="icon">🧱</div><strong>WRITER'S BLOCK</strong><p>looks like one giant problem...</p></div><div class="arrow">↓</div><div class="buster"><h2>💥 But “stuck” can mean different things.</h2><p>Confusion needs clarification. Missing ideas need exploration. Missing information needs research. Perfection may need temporary writing. Overload may need a smaller next move.</p></div><div class="secret">🔓 <strong>College Writing Secret:</strong> A strategy works better when it matches the actual block.</div>`;feedback("Block Buster rule unlocked.","Don't ask only “Why can't I write?” Ask “What am I stuck on?”")}
+ if(m[1]==="questions"){$("host").innerHTML=`<h2>🫥 “I have nothing to say.”</h2><div class="buster"><h3>💥 BUSTER: Questions Before Answers</h3><p>Forget the thesis for a minute. Try questions:</p><p><strong>Why does ___ happen?</strong><br><strong>What surprises me about ___?</strong><br><strong>Who is affected by ___?</strong><br><strong>What do people disagree about?</strong><br><strong>What seems unfair, confusing, useful, or important?</strong></p></div><div class="secret">🔓 You can generate material for a paper <strong>before</strong> you know your thesis.</div>`;crack("BLANK PAGE");feedback("Blank-page tool unlocked.","Questions give your mind a smaller job than “produce a finished argument.”")}
+ if(m[1]==="choice"){$("host").innerHTML=`<div class="rescue"><p>${m[2]}</p></div><p class="question">${m[3]}</p>`;$("host").appendChild(choiceUI(m[4],m[5]))}
+ if(m[1]==="parking"){$("host").innerHTML=`<h2>🌪️ “I have too many ideas.”</h2><div class="parking"><div class="lot"><h3>📝 USE NOW</h3><div class="idea">One idea that directly helps this assignment</div><div class="idea">The strongest example for that idea</div></div><div class="lot"><h3>🚗 PARK FOR LATER</h3><div class="idea">Interesting side issue</div><div class="idea">Idea for another paragraph or paper</div><div class="idea">Example I like but don't need yet</div></div></div><div class="secret">🔓 <strong>Parking an idea is not throwing it away.</strong> Focus often means deciding what gets your attention now.</div>`;crack("TOO MANY IDEAS");feedback("Parking lot open.","Good writers leave useful material out when it doesn't serve the current job.")}
+ if(m[1]==="sayit"){$("host").innerHTML=`<h2>🧱 “I know what I mean, but I can't write it.”</h2><div class="buster"><h3>🎙️ BUSTER: Say It Normally</h3><p>Imagine a classmate asks: <strong>“Okay, what are you actually trying to say?”</strong></p><textarea id="saybox" aria-label="Write what you are actually trying to say" placeholder="What I'm trying to say is..."></textarea><p><strong>That's raw material.</strong> You can clarify it, support it, and shape it for this reader later.</p></div><div class="secret">🔓 The useful move is not “normal English → academic English.” It is <strong>your idea → a clearer version for this reader and situation.</strong></div>`;crack("CAN'T FIND WORDS");feedback("Voice-first tool unlocked.","You need something to work with before you can revise it.")}
+ if(m[1]==="terrible"){$("host").innerHTML=`<h2>🗑️ The Terrible Sentence Challenge</h2><p>Write a deliberately terrible temporary opening sentence.</p><div class="rescue"><strong>Example:</strong> “Social media is a thing that exists and people use it.”</div><textarea id="badbox" aria-label="Write a deliberately temporary sentence" placeholder="Make it gloriously temporary..."></textarea><div class="buster"><strong>🎉 SUCCESS:</strong> The document is no longer blank. Now ask: <em>What was I actually trying to say?</em></div><div class="secret">🔓 <strong>Temporary writing is allowed.</strong> A sentence can be useful because it helps you discover the next sentence—not because it belongs in the final draft.</div>`;crack("PERFECTION");feedback("Perfection cracked.","A draft can contain scaffolding, placeholders, awkward sentences, and unfinished thinking.")}
+ if(m[1]==="intro"){$("host").innerHTML=`<div class="loop"><h2>🚨 INTRODUCTION LOOP DETECTED</h2><p>Introduction revisions: <span class="counter">7</span><br>Body paragraphs written: <span class="counter">0</span></p></div><div class="buster"><h3>🚪 ESCAPE THE INTRODUCTION</h3><p>Explain one example.<br>Write the easiest body paragraph.<br>Answer the assignment question badly.<br>Type <strong>[INTRODUCTION LATER]</strong> and keep going.</p></div><div class="secret">🔓 <strong>You are allowed to write an essay out of order.</strong></div>`;crack("INTRO LOOP");feedback("Escape route found.","The beginning of the paper does not have to be the beginning of the writing process.")}
+ if(m[1]==="research"){$("host").innerHTML=`<h2>🔍 “I don't know enough yet.”</h2><div class="bigblock"><div class="icon">🛑</div><strong>WRITING MAY NOT BE THE NEXT MOVE</strong></div><div class="buster"><h3>💥 BUSTER: Investigate</h3><p><strong>SEARCH</strong> → find information<br><strong>READ</strong> → return to a course text<br><strong>ASK</strong> → professor, tutor, librarian, classmate<br><strong>OBSERVE</strong> → collect an example<br><strong>THINK</strong> → compare what you already know</p></div><div class="secret">🔓 You are not always supposed to solve a knowledge problem by staring harder at the draft.</div>`;crack("NEED INFO");feedback("Research tool unlocked.","Sometimes getting unstuck means leaving the draft temporarily.")}
+ if(m[1]==="shrink"){$("host").innerHTML=`<h2>📏 “The assignment feels enormous.”</h2><div class="shrink">WRITE MY RESEARCH ESSAY 😵</div><div class="arrow">↓ 🔬 SHRINK ↓</div><div class="shrink" style="font-size:1.35rem">Open the assignment.</div><div class="arrow">↓</div><div class="shrink" style="font-size:1.2rem">Identify the main question.</div><div class="arrow">↓</div><div class="shrink" style="font-size:1.1rem">Choose one useful next action.</div><div class="secret">🔓 Big projects are made out of small actions. Experienced writers often reduce the size of the <strong>next decision.</strong></div>`;crack("TOO BIG");feedback("Shrink ray activated.","The next move should be small enough to start and useful enough to matter.")}
+ if(m[1]==="reentry"){$("host").innerHTML=`<h2>🙈 “I'm behind and now I'm avoiding it.”</h2><div class="buster"><h3>🚪 RE-ENTRY MODE</h3><p>Do not solve the whole assignment right now. Choose one door:</p><p><strong>Open Canvas.</strong><br><strong>Read the assignment.</strong><br><strong>See what you already have.</strong><br><strong>Send a short, specific question.</strong><br><strong>Use tutoring or office hours.</strong><br><strong>Work on one small piece.</strong></p></div><div class="secret">🔓 If a due date is close or has passed, <strong>communication may be part of the writing process now.</strong></div>`;crack("BEHIND");feedback("Re-entry route found.","One useful action can restore information and options.")}
+ if(m[1]==="simulator"){$("host").innerHTML=`<h2>🎮 Stuck Simulator</h2><div class="rescue"><p><strong>Sam's screen:</strong> 14 research tabs. A polished title. Three versions of the introduction. Two pages of notes. No body paragraphs.</p></div><p class="question">Which diagnosis is most useful?</p>`;let arr=[
+ ["Sam may have several blocks at once: research may be turning into delay, the introduction is looping, and the next job needs to be made smaller.",1,"Exactly. “Stuck” can be a combination. Diagnose the next obstacle rather than judging the whole writer."],
+ ["Sam is simply bad at writing.",0,"That doesn't identify an actionable problem or a next move."],
+ ["Sam needs a better title.",0,"The title is already doing fine. The draft needs movement elsewhere."],
+ ["Sam should open more research tabs.",0,"More information may deepen the current avoidance pattern."]
+ ];$("host").appendChild(choiceUI(arr,"CONFUSION"))}
+ if(m[1]==="finish"){$("host").innerHTML=`<div class="buster"><h2>🧰 Build Your Block Buster Toolkit</h2><p><strong>You don't need one magic strategy.</strong> You need enough different strategies that when one kind of stuck appears, you have another move to try.</p></div><div class="secret">🔓 There isn't a secret group of college students who never get stuck. <strong>Writers learn more ways to respond when they do.</strong></div>`;blocks.forEach(crack);$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
+ save()
+}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+$("machineBtn").onclick=()=>{$("machineOutput").textContent=nextMoves[Math.floor(Math.random()*nextMoves.length)]}
+const toolkit=`MY "I'M STUCK" TOOLKIT
+
+Confused → Decode the assignment or ask a specific question.
+Blank → Generate questions before trying to generate answers.
+Too many ideas → Choose what belongs now and park the rest.
+Can't find the words → Say what you mean normally first; shape it later.
+Trying for perfect → Write something temporary that gives you material to revise.
+Stuck at the beginning → Start somewhere else. Essays do not have to be written in order.
+Need information → Stop drafting and read, search, observe, or ask.
+Overwhelmed → Shrink the job until the next action is visible.
+Behind → Re-enter with one useful action; communication may be part of the process.`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(toolkit);$("copy").textContent="✓ Stuck Toolkit Copied"}catch(e){alert(toolkit)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;cracked=[];render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(KEY);location.reload()}}
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;cracked=s.cracked||[];$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
