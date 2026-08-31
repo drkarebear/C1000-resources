@@ -3,18 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>ENGL C1000 Resources</title>
-
-  <meta
-    name="description"
-    content="Interactive learning resources for ENGL C1000 students."
-  >
-
+  <meta name="description" content="Interactive learning resources for ENGL C1000 students.">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     :root {
       --bg: #f5f7f8;
@@ -38,45 +30,35 @@
       font-size: 18px;
     }
 
-    /* Accessibility: keyboard skip link */
-
     .skip-link {
       position: absolute;
       left: -9999px;
       top: 8px;
       z-index: 100;
       padding: 12px 16px;
-      background: #ffffff;
-      color: #000000;
-      border: 2px solid #000000;
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
     }
 
-    .skip-link:focus {
-      left: 8px;
-    }
-
-    /* Accessibility: visible keyboard focus */
+    .skip-link:focus { left: 8px; }
 
     a:focus-visible {
       outline: 4px solid var(--focus);
       outline-offset: 4px;
     }
 
-    /* Main page */
-
     .page {
-      width: min(100% - 28px, 900px);
+      width: min(100% - 28px, 980px);
       margin: 0 auto;
       padding: 40px 0 56px;
     }
 
-    /* Header */
-
     .hero {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: clamp(24px, 5vw, 42px);
+      border: 1px solid var(--border);
       box-shadow: 0 5px 20px rgba(36, 52, 71, 0.08);
       margin-bottom: 28px;
     }
@@ -86,8 +68,8 @@
       color: var(--blue);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      font-size: 0.88rem;
+      letter-spacing: .07em;
+      font-size: .88rem;
     }
 
     h1 {
@@ -99,32 +81,40 @@
 
     .intro {
       margin: 0;
-      max-width: 62ch;
+      max-width: 66ch;
       color: var(--muted);
       font-size: 1.08rem;
     }
-
-    /* Resources */
 
     h2 {
       margin: 0 0 14px;
       color: var(--ink);
       font-size: clamp(1.45rem, 4vw, 1.8rem);
-      line-height: 1.25;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 68ch;
+      margin: 0 0 20px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
     }
 
     .resource-card {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
       background: var(--surface);
       color: var(--ink);
       text-decoration: none;
       border: 2px solid var(--border);
       border-radius: var(--radius);
       padding: clamp(22px, 4vw, 30px);
-      transition:
-        transform 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
     }
 
     .resource-card:hover {
@@ -135,12 +125,13 @@
 
     .resource-tag {
       display: inline-block;
+      align-self: flex-start;
       background: var(--blue-light);
       color: var(--blue-dark);
       border-radius: 999px;
       padding: 5px 10px;
       margin-bottom: 12px;
-      font-size: 0.88rem;
+      font-size: .88rem;
       font-weight: 700;
     }
 
@@ -152,7 +143,7 @@
     }
 
     .resource-card p {
-      margin: 0 0 18px;
+      margin: 0 0 20px;
       color: var(--muted);
     }
 
@@ -164,34 +155,42 @@
       padding: 10px 16px;
       border-radius: 10px;
       background: var(--blue);
-      color: #ffffff;
+      color: #fff;
       font-weight: 700;
+      margin-top: auto;
+      text-align: center;
     }
 
-    /* Footer */
+    .note {
+      margin-top: 26px;
+      padding: 16px 18px;
+      background: var(--blue-light);
+      border-left: 5px solid var(--blue);
+      border-radius: 10px;
+      color: var(--ink);
+    }
 
     footer {
-      padding: 28px 8px 0;
+      padding: 30px 8px 0;
       text-align: center;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: .9rem;
     }
 
-    /* Mobile */
+    @media (max-width: 720px) {
+      .resource-grid { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 560px) {
-      body {
-        font-size: 17px;
-      }
+      body { font-size: 17px; }
 
       .page {
-        width: min(100% - 16px, 900px);
+        width: min(100% - 16px, 980px);
         padding-top: 16px;
       }
 
       .hero {
         padding: 24px 18px;
-        margin-bottom: 22px;
       }
 
       .resource-card {
@@ -203,8 +202,6 @@
       }
     }
 
-    /* Respect reduced-motion settings */
-
     @media (prefers-reduced-motion: reduce) {
       * {
         scroll-behavior: auto !important;
@@ -215,81 +212,79 @@
 </head>
 
 <body>
-
-  <a class="skip-link" href="#resources">
-    Skip to resources
-  </a>
+  <a class="skip-link" href="#resources">Skip to resources</a>
 
   <main class="page">
-
     <header class="hero">
-
-      <p class="eyebrow">
-        Student Learning Tools
-      </p>
-
-      <h1>
-        ENGL C1000 Resources
-      </h1>
-
+      <p class="eyebrow">Student Learning Tools</p>
+      <h1>ENGL C1000 Resources</h1>
       <p class="intro">
-        Practice key skills for ENGL C1000 with interactive review
-        activities. These resources are designed for low-stakes
-        practice and can be used as often as you need.
+        Practice key reading and writing skills with interactive, low-stakes activities.
+        These labs are designed to help make college reading and writing more visible,
+        practical, and manageable. You can use them as often as you need.
       </p>
-
     </header>
 
-    <section
-      id="resources"
-      aria-labelledby="resources-heading"
-    >
+    <section id="resources" aria-labelledby="resources-heading">
+      <h2 id="resources-heading">Interactive Resources</h2>
+      <p class="section-intro">
+        Start anywhere. Each activity focuses on a different part of the reading and writing process
+        and gives you strategies you can add to your toolbox.
+      </p>
 
-      <h2 id="resources-heading">
-        Interactive Resources
-      </h2>
+      <div class="resource-grid">
 
-      <a
-        class="resource-card"
-        href="mla-review.html"
-        aria-label="Open the MLA 9 Review Lab"
-      >
+        <a class="resource-card" href="active-reading.html">
+          <span class="resource-tag">Active Reading</span>
+          <h3>Active Reading Lab: Talk to the Text</h3>
+          <p>
+            Practice previewing, questioning, annotating, identifying main ideas,
+            noticing confusion, rereading strategically, and summarizing what you read.
+          </p>
+          <span class="launch">Start the Active Reading Lab →</span>
+        </a>
 
-        <span class="resource-tag">
-          MLA 9
-        </span>
+        <a class="resource-card" href="rhetorical-choices.html">
+          <span class="resource-tag">Rhetorical Situation</span>
+          <h3>Rhetorical Choices Lab</h3>
+          <p>
+            Explore how audience, purpose, genre, context, tone, and voice shape writing.
+            Practice making intentional choices without treating one way of writing as the only right way.
+          </p>
+          <span class="launch">Start the Rhetorical Choices Lab →</span>
+        </a>
 
-        <h3>
-          MLA 9 Review Lab
-        </h3>
+        <a class="resource-card" href="writing-process.html">
+          <span class="resource-tag">Writing Process</span>
+          <h3>Writing Process Lab: Behind the Draft</h3>
+          <p>
+            See what writers actually do behind the scenes. Practice getting started,
+            getting unstuck, drafting, asking for help, revising, using feedback, and editing.
+          </p>
+          <span class="launch">Enter the Writer's Desk →</span>
+        </a>
 
-        <p>
-          Practice in-text citations, titles and containers,
-          Works Cited entries, MLA paper setup, and checking
-          AI-generated citations for accuracy.
-        </p>
+        <a class="resource-card" href="mla-review.html">
+          <span class="resource-tag">MLA 9</span>
+          <h3>MLA 9 Review Lab</h3>
+          <p>
+            Practice in-text citations, titles and containers, Works Cited entries,
+            MLA paper setup, and checking AI-generated citations for accuracy.
+          </p>
+          <span class="launch">Start the MLA Review Lab →</span>
+        </a>
 
-        <span class="launch">
-          Start the MLA Review Lab →
-        </span>
+      </div>
 
-      </a>
-
+      <div class="note">
+        <strong>These activities are for practice, not perfection.</strong>
+        Try a strategy, see what happens, and keep the tools that help you.
+      </div>
     </section>
-    <a class="resource-card" href="rhetorical-choices.html">
-  <h2>Rhetorical Choices Lab</h2>
-  <p>
-    Practice making intentional choices about audience, purpose, genre,
-    context, tone, and voice.
-  </p>
-  <span class="resource-link">Start the activity →</span>
-</a>
 
     <footer>
       ENGL C1000 Resources
     </footer>
-
   </main>
-
 </body>
 </html>
