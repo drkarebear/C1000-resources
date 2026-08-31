@@ -27,9 +27,27 @@
     }
 
     button:focus-visible,
-    textarea:focus-visible {
+    textarea:focus-visible,
+    a:focus-visible {
       outline: 3px solid #173e4b;
       outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -80px;
+      z-index: 1000;
+      background: #173e4b;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 0 0 8px 8px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 0;
     }
 
     .shell {
@@ -350,14 +368,40 @@
     }
 
     .status {
+      width: 100%;
       padding: 16px;
       border-radius: 12px;
       border: 1px solid #d4dddf;
+      color: #263943;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .status:hover {
+      border-color: #6e929e;
+    }
+
+    .status[aria-pressed="true"] {
+      outline: 3px solid #173e4b;
+      outline-offset: 2px;
     }
 
     .status strong {
       display: block;
       margin-bottom: 5px;
+    }
+
+    .status-next {
+      display: none;
+      margin-top: 18px;
+      padding: 16px 18px;
+      background: #eef5f7;
+      border: 1px solid #c9dce1;
+      border-radius: 12px;
+    }
+
+    .status-next.show {
+      display: block;
     }
 
     .green {
@@ -370,6 +414,19 @@
 
     .red {
       background: #f8eded;
+    }
+
+    .next-time {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid #d6dfe2;
+    }
+
+    .next-time label {
+      display: block;
+      margin-bottom: 8px;
+      color: #173e4b;
+      font-weight: 800;
     }
 
     .writer-move {
@@ -423,7 +480,9 @@
 
 <body>
 
-<main class="shell">
+<a class="skip-link" href="#main-content">Skip to the reading repair activity</a>
+
+<main class="shell" id="main-content" tabindex="-1">
 
   <!-- HERO -->
 
@@ -545,19 +604,19 @@
 
     <div class="choices">
 
-      <button class="choice" onclick="respond(this, 'f1', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', false)">
         Look up every word that seems academic.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f1', true)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', true)">
         Break the sentence into smaller idea chunks.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f1', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', false)">
         Start the entire paragraph over and read it faster.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f1', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', false)">
         Skip the sentence because it probably is not important.
       </button>
 
@@ -638,19 +697,19 @@
 
     <div class="choices">
 
-      <button class="choice" onclick="respond(this, 'f2', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', false)">
         Social inequalities are responsible for employment and education.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f2', true)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', true)">
         Institutions are increasingly using automated systems, and that use is creating concerns.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f2', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', false)">
         Automated systems have eliminated social inequality.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f2', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', false)">
         Lending institutions are becoming educational institutions.
       </button>
 
@@ -712,15 +771,15 @@
 
     <div class="choices">
 
-      <button class="choice" onclick="respond(this, 'f3', true)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f3" onclick="respond(this, 'f3', true)">
         Use the next sentence to see whether the context helps explain it.
       </button>
 
-      <button class="choice" onclick="respond(this, 'f3', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f3" onclick="respond(this, 'f3', false)">
         Immediately stop reading and search for every definition of “uneven.”
       </button>
 
-      <button class="choice" onclick="respond(this, 'f3', false)">
+      <button type="button" class="choice" aria-pressed="false" aria-controls="f3" onclick="respond(this, 'f3', false)">
         Ignore the entire paragraph.
       </button>
 
@@ -868,23 +927,32 @@
       Choose the description that best matches where you are now.
     </p>
 
-    <div class="status-grid">
+    <div class="status-grid" aria-label="Reading repair self-check">
 
-      <div class="status green">
+      <button type="button" class="status green" aria-pressed="false" aria-controls="status-next" onclick="chooseStatus(this, 'green')">
         <strong>Green — I got it.</strong>
         The passage makes enough sense for me to keep reading.
-      </div>
+      </button>
 
-      <div class="status yellow">
+      <button type="button" class="status yellow" aria-pressed="false" aria-controls="status-next" onclick="chooseStatus(this, 'yellow')">
         <strong>Yellow — Better, but fuzzy.</strong>
         I understand more than I did, but I may need another strategy or a quick check.
-      </div>
+      </button>
 
-      <div class="status red">
+      <button type="button" class="status red" aria-pressed="false" aria-controls="status-next" onclick="chooseStatus(this, 'red')">
         <strong>Red — Still stuck.</strong>
         I tried to repair the meaning and still cannot make sense of the passage. It is time to ask someone.
-      </div>
+      </button>
 
+    </div>
+
+    <div id="status-next" class="status-next" aria-live="polite"></div>
+
+    <div class="next-time">
+      <label for="next-repair">
+        Next time meaning breaks down, what will you try first?
+      </label>
+      <textarea id="next-repair" placeholder="For example: I will stop at the exact sentence, find the actor and action, and say the idea back in my own words."></textarea>
     </div>
 
     <div class="writer-move">
@@ -909,9 +977,11 @@
 
     buttons.forEach(function(btn) {
       btn.classList.remove("selected");
+      btn.setAttribute("aria-pressed", "false");
     });
 
     button.classList.add("selected");
+    button.setAttribute("aria-pressed", "true");
 
     const feedback = document.getElementById(feedbackId);
 
@@ -925,6 +995,29 @@
       feedback.classList.add("try", "show");
       feedback.innerHTML =
         "<strong>Try a more targeted repair.</strong> The goal is not to restart everything or solve every possible problem. Identify what is blocking meaning and work on that piece.";
+    }
+  }
+
+  function chooseStatus(button, status) {
+    const buttons = document.querySelectorAll(".status");
+    const next = document.getElementById("status-next");
+
+    buttons.forEach(function(btn) {
+      btn.setAttribute("aria-pressed", "false");
+    });
+
+    button.setAttribute("aria-pressed", "true");
+    next.classList.add("show");
+
+    if (status === "green") {
+      next.innerHTML =
+        "<strong>Next move:</strong> Keep reading. Before you move on, hold onto the repaired meaning with a quick margin note, highlight, or one-sentence paraphrase if the idea matters for your purpose.";
+    } else if (status === "yellow") {
+      next.innerHTML =
+        "<strong>Next move:</strong> Try one different repair strategy on the same small section. If you chunked the sentence first, for example, now find the actor and action or ask why the author included the idea.";
+    } else {
+      next.innerHTML =
+        "<strong>Next move:</strong> Ask a specific question. Bring the sentence or short passage with you and explain what you already tried. A professor, tutor, classmate, librarian, or other course support can respond much more effectively to a precise snag than to ‘I don't understand the reading.’";
     }
   }
 </script>
