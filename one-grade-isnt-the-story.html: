@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>One Grade Isn't the Story</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f8f7;
+      color: #263943;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    textarea,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #173e4b;
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    .hero {
+      background: #f1eef6;
+      border: 1px solid #ddd4e7;
+      border-radius: 20px;
+      padding: 34px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #675b78;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #443752;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+    }
+
+    h2,
+    h3 {
+      color: #334f48;
+      line-height: 1.3;
+    }
+
+    .note,
+    .step,
+    .grade-card {
+      background: #ffffff;
+      border: 1px solid #d8e0dc;
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      background: #edf4ef;
+      border-radius: 999px;
+      color: #496456;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .choice {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 15px;
+      text-align: left;
+      color: #263943;
+      background: #f9fbfa;
+      border: 1px solid #cbd7d0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .choice:hover {
+      background: #edf4ef;
+    }
+
+    .choice.selected {
+      background: #e5f0e8;
+      border-color: #769582;
+      font-weight: 700;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .fact-box,
+    .story-box {
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .fact-box {
+      background: #edf5ee;
+      border: 1px solid #cadfcd;
+    }
+
+    .story-box {
+      background: #f8eeee;
+      border: 1px solid #e6d1d1;
+    }
+
+    .fact-box strong,
+    .story-box strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .key-box {
+      background: #eef5f7;
+      border-left: 5px solid #628b98;
+      padding: 20px;
+      margin: 18px 0;
+    }
+
+    .key-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .warning-box {
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+      padding: 20px;
+      margin: 18px 0;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 7px;
+      font-weight: 800;
+    }
+
+    textarea,
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #aebcb5;
+      border-radius: 9px;
+      background: #ffffff;
+      color: #263943;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .skill {
+      min-height: 52px;
+      padding: 13px;
+      text-align: left;
+      color: #263943;
+      background: #f9fbfa;
+      border: 1px solid #cbd7d0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .skill:hover {
+      background: #edf4ef;
+    }
+
+    .skill.selected {
+      background: #e5f0e8;
+      border-color: #769582;
+      font-weight: 700;
+    }
+
+    .translation {
+      display: none;
+      margin-top: 20px;
+      background: #f2f6ef;
+      border: 1px solid #cfdfca;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .translation.show {
+      display: block;
+    }
+
+    .translation strong {
+      color: #36523d;
+    }
+
+    .move-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .move {
+      min-height: 52px;
+      padding: 13px;
+      text-align: left;
+      color: #263943;
+      background: #f9fbfa;
+      border: 1px solid #cbd7d0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .move:hover {
+      background: #edf4ef;
+    }
+
+    .move.selected {
+      background: #e5f0e8;
+      border-color: #769582;
+      font-weight: 700;
+    }
+
+    .build-button {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      background: #245f75;
+      color: #ffffff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .build-button:hover {
+      background: #1d5063;
+    }
+
+    .grade-card {
+      display: none;
+      background: #334f48;
+      color: #ffffff;
+      border-color: #334f48;
+    }
+
+    .grade-card.show {
+      display: block;
+    }
+
+    .grade-card h2 {
+      margin-top: 0;
+      color: #ffffff;
+    }
+
+    .card-line {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.23);
+    }
+
+    .card-line:last-child {
+      border-bottom: 0;
+    }
+
+    .card-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #dce9e3;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ending {
+      margin-top: 28px;
+      background: #eef5f0;
+      border: 1px solid #cddfd1;
+      border-radius: 16px;
+      padding: 26px;
+      text-align: center;
+    }
+
+    .ending strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #36523d;
+      font-size: 1.3rem;
+    }
+
+    .small {
+      color: #61716a;
+      font-size: 0.93rem;
+    }
+
+    @media (max-width: 720px) {
+      .fact-grid,
+      .skill-grid,
+      .move-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shell {
+        padding: 12px 10px 40px;
+      }
+
+      .hero,
+      .note,
+      .step,
+      .grade-card,
+      .ending {
+        padding: 21px 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="shell">
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <p class="eyebrow">
+      Grade Reset Tool
+    </p>
+
+    <h1>
+      One Grade Isn&rsquo;t the Story
+    </h1>
+
+    <p>
+      You saw the grade.
+      Maybe your stomach dropped.
+      Maybe you got angry, embarrassed, discouraged, or immediately started predicting what it means.
+    </p>
+
+    <p>
+      You do not have to pretend the grade does not matter.
+      But before you decide what it says about you, your writing, or the rest of the course,
+      let&rsquo;s find out what the grade can actually tell you.
+    </p>
+
+  </header>
+
+
+  <!-- NOTE -->
+
+  <section class="note">
+
+    <strong>A grade is information about a performance.</strong>
+
+    <p>
+      Your brain may turn that information into a much bigger story.
+      This tool will help you separate the two and decide what to do next.
+    </p>
+
+  </section>
+
+
+  <!-- STEP 1 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 1</span>
+
+    <h2>
+      What Did Your Brain Say?
+    </h2>
+
+    <p>
+      You do not have to enter your grade.
+      Start with the thought that showed up when you saw it.
+    </p>
+
+    <div class="choice-grid" id="thoughtChoices">
+
+      <button type="button" class="choice">
+        I&rsquo;m bad at writing.
+      </button>
+
+      <button type="button" class="choice">
+        I&rsquo;m going to fail this class.
+      </button>
+
+      <button type="button" class="choice">
+        Everyone else probably did better than I did.
+      </button>
+
+      <button type="button" class="choice">
+        My professor must think I&rsquo;m terrible at this.
+      </button>
+
+      <button type="button" class="choice">
+        I worked hard and it still wasn&rsquo;t good enough.
+      </button>
+
+      <button type="button" class="choice">
+        There&rsquo;s no point trying now.
+      </button>
+
+      <button type="button" class="choice">
+        I don&rsquo;t even want to look at the feedback.
+      </button>
+
+    </div>
+
+    <label for="ownThought">
+      Or write the thought in your own words:
+    </label>
+
+    <textarea
+      id="ownThought"
+      placeholder="Example: Maybe I'm just not a college-level writer."
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 2 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 2</span>
+
+    <h2>
+      Separate the Grade From the Story
+    </h2>
+
+    <p>
+      Compare these:
+    </p>
+
+    <div class="fact-grid">
+
+      <div class="fact-box">
+        <strong>WHAT I KNOW</strong>
+        I earned 67% on this assignment.
+      </div>
+
+      <div class="story-box">
+        <strong>WHAT MY BRAIN ADDED</strong>
+        I am bad at college.
+      </div>
+
+      <div class="fact-box">
+        <strong>WHAT I KNOW</strong>
+        My professor wrote several comments on my draft.
+      </div>
+
+      <div class="story-box">
+        <strong>WHAT MY BRAIN ADDED</strong>
+        My professor thinks I am a bad writer.
+      </div>
+
+    </div>
+
+    <div class="key-box">
+
+      <strong>The first statement is information.</strong>
+
+      <p>
+        The second is an interpretation, prediction, or judgment.
+        It may feel true without being something the grade actually proves.
+      </p>
+
+    </div>
+
+    <label for="fact">
+      What do you actually know?
+    </label>
+
+    <textarea
+      id="fact"
+      placeholder="Example: I earned a lower grade than I expected on this essay."
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 3 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 3</span>
+
+    <h2>
+      Look at the Evidence Before You Decide What It Means
+    </h2>
+
+    <p>
+      If feedback or a rubric is available, open it now.
+    </p>
+
+    <p>
+      Do not try to fix the paper yet.
+      Your job is only to answer:
+    </p>
+
+    <div class="key-box">
+
+      <strong>
+        Where did the points actually go?
+      </strong>
+
+    </div>
+
+    <p>
+      Choose the area that seems to have affected the grade most.
+      You are identifying a problem to work on—not describing yourself.
+    </p>
+
+    <div class="skill-grid" id="skillChoices">
+
+      <button type="button" class="skill"
+        data-translation="My main claim or thesis may need to be clearer, more specific, or more arguable.">
+        Claim / thesis
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="I may need stronger evidence or examples to support some of my ideas.">
+        Evidence
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="I may have evidence, but I need to explain more clearly how it supports my point and why it matters.">
+        Analysis / reasoning
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="My ideas may need a clearer order or stronger connections so the reader can follow my thinking.">
+        Organization
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="Some ideas may need more explanation, examples, or development rather than simply more words.">
+        Development
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="I may need to integrate, introduce, explain, or cite source material more effectively.">
+        Sources / citation
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="Some sentences may need editing so my ideas are easier for the reader to understand.">
+        Clarity / sentences
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="I may have missed or misunderstood an important part of the assignment directions.">
+        Assignment requirements
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="The grade may reflect work that was missing, incomplete, or submitted late rather than only the quality of my writing.">
+        Missing / incomplete work
+      </button>
+
+      <button type="button" class="skill"
+        data-translation="I do not yet understand what affected this grade. My next move is to get more information before I draw conclusions.">
+        I&rsquo;m not sure
+      </button>
+
+    </div>
+
+    <div class="translation" id="translationBox" aria-live="polite">
+      <strong>A more useful description:</strong>
+      <p id="translationText"></p>
+    </div>
+
+  </section>
+
+
+  <!-- STEP 4 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 4</span>
+
+    <h2>
+      Turn a Judgment Into a Problem You Can Work On
+    </h2>
+
+    <p>
+      Compare:
+    </p>
+
+    <div class="fact-grid">
+
+      <div class="story-box">
+        <strong>IDENTITY JUDGMENT</strong>
+        I&rsquo;m bad at writing.
+      </div>
+
+      <div class="fact-box">
+        <strong>SPECIFIC PROBLEM</strong>
+        I need to explain how my evidence supports my claim.
+      </div>
+
+    </div>
+
+    <p>
+      The second statement gives you somewhere to go.
+    </p>
+
+    <label for="specificProblem">
+      Based on the feedback, what is one specific thing you could work on?
+    </label>
+
+    <textarea
+      id="specificProblem"
+      placeholder="Example: My professor wants me to explain my quotations instead of moving immediately to the next point."
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 5 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 5</span>
+
+    <h2>
+      What Is Changeable?
+    </h2>
+
+    <p>
+      You cannot change the work you already submitted.
+      You may be able to change what happens next.
+    </p>
+
+    <div class="move-grid" id="moveChoices">
+
+      <button type="button" class="move">
+        Re-read one important piece of feedback.
+      </button>
+
+      <button type="button" class="move">
+        Revise one paragraph using the feedback.
+      </button>
+
+      <button type="button" class="move">
+        Practice the skill that cost me points.
+      </button>
+
+      <button type="button" class="move">
+        Ask my professor one specific question.
+      </button>
+
+      <button type="button" class="move">
+        Get help from a tutor or another academic support person.
+      </button>
+
+      <button type="button" class="move">
+        Check the assignment directions against what I submitted.
+      </button>
+
+      <button type="button" class="move">
+        Make a plan for missing or incomplete work.
+      </button>
+
+      <button type="button" class="move">
+        Use this feedback on my next assignment.
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- STEP 6 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 6</span>
+
+    <h2>
+      If You Don&rsquo;t Understand the Grade, Don&rsquo;t Guess
+    </h2>
+
+    <p>
+      Sometimes you look at the rubric and still do not understand what happened.
+      That does not mean you need a better attitude.
+      It means you need more information.
+    </p>
+
+    <div class="warning-box">
+
+      <strong>Turn confusion into a question.</strong>
+
+      <p>
+        Instead of:
+        &ldquo;Why did you give me this grade?&rdquo;
+      </p>
+
+      <p>
+        Try identifying the part you want to understand:
+      </p>
+
+      <p>
+        &ldquo;I saw that I lost points in analysis. Could you help me understand one place where I could have explained my evidence more fully?&rdquo;
+      </p>
+
+    </div>
+
+    <label for="question">
+      Is there one question you need answered?
+    </label>
+
+    <textarea
+      id="question"
+      placeholder="Example: Could you help me understand what stronger analysis would look like in paragraph three?"
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 7 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 7</span>
+
+    <h2>
+      Build a More Accurate Story
+    </h2>
+
+    <p>
+      This is not about replacing a negative thought with a positive one.
+      Make the thought more <strong>specific, accurate, and useful</strong>.
+    </p>
+
+    <div class="fact-grid">
+
+      <div class="story-box">
+        <strong>TOO BIG</strong>
+        I&rsquo;m terrible at writing.
+      </div>
+
+      <div class="fact-box">
+        <strong>MORE ACCURATE</strong>
+        I had trouble developing the analysis in this essay. That is something I can practice.
+      </div>
+
+    </div>
+
+    <label for="accurateThought">
+      What is a more accurate way to describe what happened?
+    </label>
+
+    <textarea
+      id="accurateThought"
+      placeholder="Example: This essay did not go the way I wanted. I need to work on connecting my evidence to my claims."
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 8 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 8</span>
+
+    <h2>
+      Make One Move
+    </h2>
+
+    <p>
+      You do not need to fix the entire grade today.
+      Choose one useful action and actually begin it.
+    </p>
+
+    <label for="nextAction">
+      What will you do next?
+    </label>
+
+    <textarea
+      id="nextAction"
+      placeholder="Example: I will revise one body paragraph and add two sentences explaining how the evidence supports my claim."
+    ></textarea>
+
+    <button type="button" class="build-button" id="buildButton">
+      Build My Grade Reset Card
+    </button>
+
+  </section>
+
+
+  <!-- GENERATED CARD -->
+
+  <section class="grade-card" id="gradeCard" aria-live="polite">
+
+    <h2>
+      My Grade Reset Card
+    </h2>
+
+    <div class="card-line">
+      <span class="card-label">What my brain said</span>
+      <span id="cardThought">
+        This grade means something bigger about me.
+      </span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">What I actually know</span>
+      <span id="cardFact">
+        I received information about one assignment.
+      </span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">The specific issue I found</span>
+      <span id="cardProblem">
+        I need to understand the feedback more clearly.
+      </span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">A more accurate story</span>
+      <span id="cardAccurate">
+        One assignment can show me something to work on without defining me as a writer.
+      </span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">What I need to ask</span>
+      <span id="cardQuestion">
+        I do not need additional information right now.
+      </span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">My next move</span>
+      <span id="cardMove">
+        Use what I learned to make one useful change.
+      </span>
+    </div>
+
+  </section>
+
+
+  <!-- HUMAN SUPPORT -->
+
+  <section class="note">
+
+    <strong>Sometimes the reaction is bigger than the assignment.</strong>
+
+    <p>
+      If you are too overwhelmed to look at the feedback, unsure what your academic options are,
+      or having a hard time getting back into the course, another person can be part of the next move.
+      A professor, tutor, counselor, or appropriate college support person can help you figure out what comes next.
+    </p>
+
+  </section>
+
+
+  <!-- ENDING -->
+
+  <section class="ending">
+
+    <strong>
+      One grade is information. It is not your whole story.
+    </strong>
+
+    <p>
+      You know more now than you did before you looked at the feedback.
+    </p>
+
+    <p>
+      <strong>Use that information for your next move.</strong>
+    </p>
+
+  </section>
+
+</main>
+
+
+<script>
+  const thoughtChoices =
+    document.querySelectorAll("#thoughtChoices .choice");
+
+  const skillChoices =
+    document.querySelectorAll("#skillChoices .skill");
+
+  const moveChoices =
+    document.querySelectorAll("#moveChoices .move");
+
+  let selectedThought = "";
+  let selectedSkill = "";
+  let selectedTranslation = "";
+  let selectedMove = "";
+
+
+  thoughtChoices.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      thoughtChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      selectedThought =
+        button.textContent.trim();
+
+    });
+
+  });
+
+
+  skillChoices.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      skillChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      selectedSkill =
+        button.textContent.trim();
+
+      selectedTranslation =
+        button.getAttribute("data-translation");
+
+      document.getElementById("translationText").textContent =
+        selectedTranslation;
+
+      document.getElementById("translationBox")
+        .classList.add("show");
+
+    });
+
+  });
+
+
+  moveChoices.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      moveChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      selectedMove =
+        button.textContent.trim();
+
+    });
+
+  });
+
+
+  document.getElementById("buildButton")
+    .addEventListener("click", function() {
+
+      const ownThought =
+        document.getElementById("ownThought").value.trim();
+
+      const fact =
+        document.getElementById("fact").value.trim();
+
+      const specificProblem =
+        document.getElementById("specificProblem").value.trim();
+
+      const question =
+        document.getElementById("question").value.trim();
+
+      const accurateThought =
+        document.getElementById("accurateThought").value.trim();
+
+      const nextAction =
+        document.getElementById("nextAction").value.trim();
+
+
+      document.getElementById("cardThought").textContent =
+        ownThought ||
+        selectedThought ||
+        "I started turning this grade into a bigger judgment about myself.";
+
+
+      document.getElementById("cardFact").textContent =
+        fact ||
+        "I received information about how one assignment went.";
+
+
+      document.getElementById("cardProblem").textContent =
+        specificProblem ||
+        selectedTranslation ||
+        selectedSkill ||
+        "I need to understand the feedback more clearly.";
+
+
+      document.getElementById("cardAccurate").textContent =
+        accurateThought ||
+        "This assignment shows me something specific I can understand, practice, or ask about.";
+
+
+      document.getElementById("cardQuestion").textContent =
+        question ||
+        "I do not need additional information before making my next move.";
+
+
+      document.getElementById("cardMove").textContent =
+        nextAction ||
+        selectedMove ||
+        "Use what I learned to make one useful change.";
+
+
+      const card =
+        document.getElementById("gradeCard");
+
+      card.classList.add("show");
+
+      card.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    });
+</script>
+
+</body>
+</html>
