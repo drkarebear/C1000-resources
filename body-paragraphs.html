@@ -1,347 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paragraph Lab: Build the Argument</title>
-<meta name="description" content="A mobile-friendly interactive body paragraph lab for ENGL C1000.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Develop, Don't Pad</title>
+<meta name="description" content="An accessible ENGL C1000 just-in-time writing lab that helps students diagnose what a reader needs when a professor says develop, expand, or go deeper.">
 <style>
 :root{
-  --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#5f6b78;--line:#d8e0e8;
-  --brand:#315a7d;--brand-dark:#203e59;--soft:#eef4f8;--warm:#fff6dc;
-  --warm-line:#d6a52b;--good:#2f7a4b;--good-bg:#eef8f1;--rose:#f8eef2;
-  --rose-line:#a85d79;--focus:#111827;--max:940px;--radius:16px;
+--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
+--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;
+--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
-button{font:inherit}
-button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex="-1"]:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
-.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#000;border:2px solid #000;padding:10px 14px}
-.skip:focus{left:8px}
-.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,62,89,.07)}
-.eyebrow{margin:0 0 6px;color:var(--brand);text-transform:uppercase;letter-spacing:.07em;font-size:.86rem;font-weight:800}
-h1,h2,h3{line-height:1.2;color:var(--brand-dark)}
-h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}
-h2{font-size:clamp(1.4rem,4.5vw,2rem);margin:.25em 0 .55em}
-h3{font-size:1.14rem;margin:.15em 0 .55em}
-.lead{font-size:1.08rem}
-.callout{background:var(--warm);border-left:5px solid var(--warm-line);padding:15px 17px;border-radius:10px;margin:16px 0}
-.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-.pill,.stage{display:inline-flex;align-items:center;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}
-.pill{border:1px solid var(--line);background:#fafbfd;color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:10px}
-.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}
-.primary{background:var(--brand);color:#fff}.secondary{background:#fff;color:var(--brand-dark);border:2px solid var(--brand)}.quiet{background:#edf1f5;color:var(--ink)}
-.progress-text{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.93rem;font-weight:700;margin-bottom:7px}
-.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s ease}
-.workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.mainpane{min-width:0}
-.sidebar{border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px;position:sticky;top:10px}
-.blueprint{display:grid;gap:8px}
-.bp{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;font-size:.92rem}
-.bp.on{border-color:var(--good);background:var(--good-bg)}
-.scenario{background:#fafcfe;border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0 18px}
-.question{font-size:1.2rem;font-weight:800;margin:12px 0}.choices{display:grid;gap:10px;margin:16px 0}
-.choice{width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #b9c5d1;padding:14px 16px}
-.choice.selected{border-color:var(--good);background:var(--good-bg)}
-.feedback{display:none;margin-top:16px;padding:16px;border-radius:12px;border:2px solid var(--brand);background:var(--soft)}
-.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--good-bg)}.feedback strong{display:block;margin-bottom:4px}
-.secret,.decoder{border:2px solid var(--warm-line);background:var(--warm);border-radius:14px;padding:18px;margin:14px 0}
-.decoder{border-style:dashed;border-color:var(--brand);background:#f8fbfd}.myth{border:2px solid var(--rose-line);background:var(--rose);border-radius:14px;padding:18px;margin:14px 0}
-.paragraph{border:2px solid var(--line);border-radius:14px;padding:18px;background:#fff;margin:15px 0}
-.sentence{padding:10px 12px;border-left:4px solid transparent;border-radius:8px;margin:6px 0}
-.sentence.claim{background:#eef4f8;border-left-color:#315a7d}.sentence.evidence{background:#f4f5f7;border-left-color:#747f8b}.sentence.analysis{background:#eef8f1;border-left-color:#2f7a4b}.sentence.connection{background:#fff6dc;border-left-color:#d6a52b}
-.reader{background:#f8fbfd;border:2px dashed var(--brand);border-radius:12px;padding:14px;margin:14px 0}
-.er{border:3px solid #a85d79;background:#fff8fb;border-radius:16px;padding:18px;margin:15px 0}.er .siren{font-weight:900;color:#7f3452;text-transform:uppercase;letter-spacing:.05em}
-.xray-label{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
-.hidden{display:none!important}.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,32px);background:#fff}
-.complete{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
-.grid{display:grid;grid-template-columns:1fr auto;gap:9px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}
-.toolrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-.tool{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
-.final-banner{border:3px solid var(--good);background:var(--good-bg);border-radius:18px;padding:22px;text-align:center;margin-bottom:18px}
-.final-banner .big{font-size:clamp(1.7rem,6vw,2.7rem);font-weight:900;color:var(--good)}
-.shot{background:var(--warm);border:2px solid var(--warm-line);border-radius:12px;padding:14px 16px;font-weight:700}
-.transfer{border:2px solid var(--brand);background:#f8fbfd;border-radius:16px;padding:clamp(18px,3vw,26px);margin:20px 0}
-.transfer label,.transfer legend{font-weight:800;color:var(--brand-dark)}
-.transfer textarea{width:100%;font:inherit;color:var(--ink);background:#fff;border:2px solid #aebbc7;border-radius:10px;padding:12px;margin:7px 0 16px;resize:vertical}
-.transfer fieldset{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:4px 0 16px}
-.transfer legend{padding:0 6px}
-.transfer .radio-row{display:flex;gap:10px;align-items:flex-start;margin:9px 0}
-.transfer .radio-row label{font-weight:600;color:var(--ink)}
-.transfer .note{color:var(--muted);font-size:.93rem}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
-@media(max-width:760px){.workspace{grid-template-columns:1fr}.sidebar{position:static;order:-1}.toolrow{grid-template-columns:1fr}}
-@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button,select,textarea{font:inherit}button{font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
+button:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:4px solid #111;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;border:2px solid #000;padding:10px 14px;z-index:20}.skip:focus{left:8px}
+.shell{max-width:1080px;margin:auto;padding:20px 12px 52px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
+h1,h2,h3{color:var(--dark);line-height:1.18}h1{font-size:clamp(2.05rem,7vw,3.55rem);margin:.1em 0 .25em}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.84rem;color:var(--blue)}
+.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}
+.row,.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.call,.secret,.good,.warn,.note{padding:16px;border-radius:14px;margin:14px 0}
+.call{background:var(--goldbg);border-left:5px solid var(--gold)}.secret{background:var(--lav);border:2px dashed var(--purple)}
+.good{background:var(--greenbg);border:2px solid var(--green)}.warn{background:var(--rosebg);border:2px solid var(--rose)}.note{background:var(--soft);border:2px solid var(--blue)}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:900}
+.track{height:12px;background:#e5ebf0;border-radius:99px;overflow:hidden;margin:7px 0 18px}.bar{height:100%;background:var(--blue)}
+.stage{display:inline-block;background:var(--soft);color:var(--blue);font-weight:900;border-radius:99px;padding:5px 10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+.side{position:sticky;top:10px;border:1px solid var(--line);background:#fbfcfd;border-radius:14px;padding:15px}
+.case,.paragraph,.meterbox,.toolbox{border:2px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;background:#fff}
+.paragraph{font-size:1.03rem}.paragraph strong{color:var(--blue)}
+.dashboard,.choices,.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.control{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:left}.control strong{display:block;color:var(--blue)}
+.control:hover{border-color:var(--blue)}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink)}.choice.ok{background:var(--greenbg);border-color:var(--green)}
+.feedback{display:none;background:var(--soft);border:2px solid var(--blue);border-radius:12px;padding:14px;margin-top:14px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}
+.meterrow{display:grid;grid-template-columns:125px 1fr;gap:10px;align-items:center;margin:8px 0}.meter{height:13px;background:#e5ebf0;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--blue)}
+.reader{border:3px solid var(--purple);background:var(--lav);border-radius:18px;padding:18px}.readerq{font-size:1.12rem;font-weight:900}
+.panic{border:4px solid var(--rose);border-radius:18px;padding:18px;background:var(--rosebg)}.panic h2{color:var(--rose)}
+.machine{border:4px solid var(--dark);border-radius:18px;padding:18px;background:#f8fafb}.machine .screen{background:#18252d;color:#fff;border-radius:12px;padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.85rem;font-weight:900;background:#fff}
+.fork{border-left:5px solid var(--blue);padding-left:14px;margin:12px 0}
+.tool{border:4px solid var(--blue);border-radius:18px;padding:20px;background:#f9fcfd}.tool select,.tool textarea{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;margin-top:6px}.tool textarea{min-height:120px;resize:vertical}.applybox{margin-top:16px;padding:16px;border:2px dashed var(--blue);border-radius:14px;background:var(--soft)}
+.result{margin-top:16px}.completion{border:4px solid var(--blue);border-radius:18px;padding:24px}.done{color:var(--green);font-weight:900}
+.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}
+@media(max-width:620px){body{font-size:17px}.dashboard,.choices,.grid2{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}.meterrow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
 </head>
 <body>
-<a href="#main" class="skip">Skip to the paragraph activity</a>
-<main id="main" class="shell" tabindex="-1">
+<a href="#main" class="skip">Skip to the development activity</a>
+<main id="main" class="shell">
 <section id="intro" class="card">
-  <p class="eyebrow">ENGL C1000 · Make the paragraph's job visible</p>
-  <h1>Paragraph Lab: Build the Argument</h1>
-  <p class="lead"><strong>A body paragraph is not a box you fill with five sentences. It is a unit of thought doing a job in your argument.</strong></p>
-  <div class="callout">In this lab, you will build a paragraph, see its hidden architecture, diagnose paragraphs that are not working, and learn what comments like <em>develop this</em>, <em>analyze</em>, and <em>how does this connect?</em> may actually be asking you to do.</div>
-  <div class="meta"><span class="pill">20 paragraph moments</span><span class="pill">Mobile friendly</span><span class="pill">No timer</span><span class="pill">No rigid paragraph formula</span></div>
-  <div class="row"><button id="start" class="primary" type="button">Enter the Paragraph Workshop</button><button id="resume" class="secondary hidden" type="button">Resume My Paragraph</button></div>
+<p class="eyebrow">ENGL C1000 · Development & Revision</p>
+<h1>📈 Develop, Don't Pad</h1>
+<h2>Make the idea bigger—not just the paper longer.</h2>
+<div class="call"><strong>PROFESSOR COMMENT:</strong> “Develop this idea.”<br><br><strong>STUDENT:</strong> “Okay... but HOW?”</div>
+<p>Words like <strong>develop, expand, go deeper, explain, be specific,</strong> and <strong>so what?</strong> can sound like instructions even when they don't tell you what move to make.</p>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> “Develop” is not one specific revision move. Usually, it means your reader needs something more before they can fully understand, believe, or appreciate the point.</div>
+<div class="good"><strong>Length is something we can count. Development is something a reader can experience.</strong></div>
+<div class="row"><button id="start" class="primary" type="button">🧪 Enter the Development Lab</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
 </section>
 
 <section id="lab" class="card hidden">
-  <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div id="progress" class="track" role="progressbar" aria-label="Paragraph lab progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage" role="heading" aria-level="3" tabindex="-1"></span>
-  <h2>The Paragraph Workshop</h2>
-  <div class="workspace">
-    <div class="mainpane">
-      <div id="host"></div>
-      <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-      <div class="row"><button id="next" class="primary hidden" type="button">Next Paragraph Moment</button></div>
-    </div>
-    <aside class="sidebar">
-      <h3>Paragraph Blueprint</h3>
-      <div id="blueprint" class="blueprint"></div>
-    </aside>
-  </div>
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div id="track" class="track" role="progressbar" aria-label="Development lab progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"><div id="bar" class="bar"></div></div>
+<span id="stage" class="stage"></span>
+<div class="layout">
+<div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden" type="button">Continue</button></div></div>
+<aside class="side">
+<h3>📈 Development Controls</h3>
+<p><strong>❓ WHY?</strong><br>Why is it true/important?</p>
+<p><strong>⚙️ HOW?</strong><br>How does it happen/work?</p>
+<p><strong>🔍 SHOW ME</strong><br>Give a specific example.</p>
+<p><strong>📚 SUPPORT IT</strong><br>Add evidence when needed.</p>
+<p><strong>🔗 CONNECT IT</strong><br>Link it to the larger claim.</p>
+<p><strong>🧩 COMPLICATE IT</strong><br>Add conditions, limits, consequences, or another perspective.</p>
+</aside></div>
 </section>
 
-<section id="done" class="card hidden">
-  <div class="final-banner">
-    <div aria-hidden="true">🏗️</div>
-    <h2 id="doneTitle" class="big" tabindex="-1">Argument Built ✓</h2>
-    <p>You figured out what the reader needed and built the paragraph to provide it.</p>
-  </div>
-
-  <div id="finalParagraph" class="paragraph"></div>
-
-  <div class="row">
-    <button id="xray" class="primary" type="button">🩻 X-Ray My Paragraph</button>
-    <button id="prompt" class="secondary" type="button">🎲 Give Me a Starting Question</button>
-    <button id="copy" class="secondary" type="button">📋 Copy My Paragraph Blueprint</button>
-  </div>
-
-  <div id="promptBox" class="decoder hidden" role="status" aria-live="polite"></div>
-
-  <div class="er">
-    <div class="siren">🚑 Final Patient Status</div>
-    <h3>Paragraph 4: Discharged ✓</h3>
-    <p><strong>Treatment:</strong> Clarified the paragraph-level claim, added analysis, and connected the evidence to the larger argument.</p>
-    <p><strong>Prognosis:</strong> Reader can follow the argument.</p>
-    <p class="note">You are now cleared to treat paragraphs without randomly adding “Furthermore.”</p>
-  </div>
-
-  <section class="transfer" aria-labelledby="transferTitle">
-    <p class="eyebrow">Transfer to your own draft</p>
-    <h3 id="transferTitle">Run the Blueprint on One of Your Paragraphs</h3>
-    <p>Choose one body paragraph from something you are actually writing. You do not need to fix everything. Diagnose the paragraph first, then choose one useful next move.</p>
-
-    <label for="ownParagraph">Paste one body paragraph from your draft (optional)</label>
-    <textarea id="ownParagraph" rows="7" placeholder="Paste one paragraph here if it helps you look at it as a reader."></textarea>
-
-    <label for="ownJob">What job does this paragraph need to do for your larger argument?</label>
-    <textarea id="ownJob" rows="3" placeholder="For example: explain why the policy creates a barrier, show a consequence, complicate an earlier point..."></textarea>
-
-    <fieldset>
-      <legend>What does your reader most need next?</legend>
-      <div class="radio-row"><input id="needClaim" type="radio" name="readerNeed" value="claim"><label for="needClaim">A clearer paragraph-level claim or point</label></div>
-      <div class="radio-row"><input id="needEvidence" type="radio" name="readerNeed" value="evidence"><label for="needEvidence">More relevant support or a better example</label></div>
-      <div class="radio-row"><input id="needAnalysis" type="radio" name="readerNeed" value="analysis"><label for="needAnalysis">More explanation of what the evidence shows</label></div>
-      <div class="radio-row"><input id="needConnection" type="radio" name="readerNeed" value="connection"><label for="needConnection">A clearer connection to the paragraph's point or larger argument</label></div>
-      <div class="radio-row"><input id="needFocus" type="radio" name="readerNeed" value="focus"><label for="needFocus">A tighter focus because the paragraph is trying to do too many jobs</label></div>
-      <div class="radio-row"><input id="needUnsure" type="radio" name="readerNeed" value="unsure"><label for="needUnsure">I'm not sure yet</label></div>
-    </fieldset>
-
-    <button id="diagnoseOwn" class="primary" type="button">Give Me One Next Move</button>
-    <div id="ownFeedback" class="decoder hidden" role="status" aria-live="polite" tabindex="-1"></div>
-    <p class="note">This check is not scored. Nothing you type here is sent anywhere.</p>
-  </section>
-
-  <div class="completion">
-    <div class="complete">✓ Lab complete</div>
-    <h3>Paragraph Lab — Complete</h3>
-    <div class="grid">
-      <div>Give the paragraph a job</div><div>✓ Complete</div>
-      <div>Write a paragraph-level claim</div><div>✓ Complete</div>
-      <div>Support the claim</div><div>✓ Complete</div>
-      <div>Analyze the evidence</div><div>✓ Complete</div>
-      <div>Connect ideas</div><div>✓ Complete</div>
-      <div>Diagnose and revise</div><div>✓ Complete</div>
-    </div>
-    <p><strong>Completed:</strong> <span id="date"></span></p>
-    <div class="shot">📸 Screenshot this completion card for Canvas.</div>
-  </div>
-
-  <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<section id="finish" class="card hidden">
+<div class="good"><h2 id="finishhead" tabindex="-1">🧠 Development Detected</h2><p><s>How can I make this longer?</s><br><strong>What does my reader need next?</strong></p></div>
+<h2>📈 My Writing Needs More... What?</h2>
+<div class="tool">
+<label for="draft"><strong>Bring in one sentence or paragraph from your own draft.</strong></label>
+<textarea id="draft" placeholder="Paste it here. This stays in your browser."></textarea>
+<label for="problem"><strong>What does this part of your draft seem to need most?</strong></label>
+<select id="problem">
+<option value="claim">I make a claim but don't support it</option>
+<option value="evidence">I have evidence but mostly summarize it</option>
+<option value="vague">My paragraph feels vague or general</option>
+<option value="repeat">I keep saying the same thing differently</option>
+<option value="disconnect">It makes sense alone but feels disconnected</option>
+<option value="absolute">My claim sounds absolute or too simple</option>
+<option value="compressed">I have a complicated idea in one sentence</option>
+<option value="unknown">I don't know what's missing</option>
+<option value="done">It already seems focused, supported, and explained</option>
+</select>
+<div class="row"><button id="diagnose" class="primary" type="button">🧪 Diagnose My Next Move</button></div>
+<div id="result" class="result" aria-live="polite"></div>
+<div id="apply" class="applybox hidden">
+<label for="draftmove"><strong id="applyPrompt">Try the move now.</strong></label>
+<textarea id="draftmove" placeholder="Write one sentence, revision, example, connection, question, or note you could use in your draft."></textarea>
+<div class="row"><button id="saveMove" class="secondary" type="button">Save My Development Move</button></div>
+<div id="moveStatus" role="status" aria-live="polite"></div>
+</div>
+</div>
+<div class="note"><h3>👀 The Curious Reader Test</h3><p>After an important sentence, imagine a curious reader asking:</p><div class="chips"><span class="badge">Why?</span><span class="badge">How?</span><span class="badge">Can you show me?</span><span class="badge">What does that show?</span><span class="badge">Why does it matter?</span><span class="badge">Is it always true?</span></div><p>You do not need to answer every question. Answer the ones your reader genuinely needs.</p></div>
+<div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Development Check</button></div>
+<div class="completion">
+<p class="done">✓ LAB COMPLETE</p>
+<h2>Develop, Don't Pad — Complete</h2>
+<p>✓ Translate “develop” into possible revision moves<br>
+✓ Distinguish more words from more reader understanding<br>
+✓ Decide when a paragraph needs evidence, analysis, specificity, connection, or complication<br>
+✓ Use reader questions to uncover development opportunities<br>
+✓ Recognize repetition and inflated language as different from development<br>
+✓ Unpack compressed ideas<br>
+✓ Recognize when a paragraph may already be developed enough</p>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
 </section>
-<footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
+<footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
 
 <script>
-(()=>{
-const $=id=>document.getElementById(id), key="paragraphBuildArgumentV1";
-let i=0, unlocked={job:false,claim:false,evidence:false,analysis:false,connection:false,revision:false};
-const paragraph={
- claim:"High textbook prices can become an academic access problem when students delay purchasing required materials.",
- evidence:"When students postpone buying or accessing a required text, they may begin a course without the same materials their classmates are using.",
- analysis:"That delay matters because course readings often provide the concepts, examples, and context students need to participate fully in early assignments and discussions.",
- connection:"Reducing avoidable course-material costs can therefore improve access not only to textbooks, but also to the learning opportunities those materials support."
-};
-const moments=[
-["1 · Give the Paragraph a Job","choice","Thesis: Colleges should expand access to zero-cost course materials because textbook costs can create avoidable barriers to required course content.","Before writing a topic sentence, what should you decide?",[
-["What job this paragraph needs to do for the larger argument.",1,"A paragraph is easier to build when you know what it needs to contribute."],
-["How many sentences it must contain.",0,"Sentence count does not tell you what intellectual work the paragraph needs to do."],
-["Which transition word to start with.",0,"Transitions come after you understand the relationship between ideas."],
-["How academic the first sentence sounds.",0,"The job of the paragraph matters more than sounding impressive."]
-],"job"],
-["1 · Give the Paragraph a Job","decoder","College Writing Decoder: “Write a body paragraph.”","A useful first question is not “How many sentences?” but “What does this paragraph need to contribute to my argument?”"],
-["2 · Make the Point Visible","choice","Paragraph job: Show how textbook cost can become an academic access problem.","Which sentence makes that paragraph-level claim visible?",[
-[paragraph.claim,1,"This tells the reader what the paragraph will show and connects directly to the larger argument."],
-["Textbooks are used in many college classes.",0,"This names the topic but does not yet make the paragraph's point."],
-["There are many things to say about textbooks.",0,"The reader still cannot see the paragraph's job."],
-["Furthermore, textbooks can be expensive.",0,"A transition word cannot replace a clear paragraph-level claim."]
-],"claim"],
-["2 · Make the Point Visible","decoder","College Writing Decoder: “You need a stronger topic sentence.”","Your instructor may mean: I can see what this paragraph is about, but I cannot yet see what you are saying about it or how it advances the argument."],
-["3 · Support the Claim","choice",paragraph.claim,"Your reader is thinking: “Okay. What makes you say that?” What does the paragraph need next?",[
-["Relevant evidence or an example.",1,"A claim needs something that helps the reader see why it is reasonable."],
-["A second topic sentence.",0,"The paragraph already has a claim. Now the reader needs support."],
-["A concluding sentence immediately.",0,"The paragraph has not yet developed the idea."],
-["A fancier word for textbook.",0,"Vocabulary is not a substitute for support."]
-],"evidence"],
-["3 · Support the Claim","build","evidence"],
-["4 · Do the Thinking","choice","Your paragraph now has a claim and evidence.","What does the reader still need after the evidence?",[
-["Your explanation of what the evidence shows and why it matters.",1,"Evidence does not explain itself. Analysis is where the writer helps the reader understand its significance."],
-["Another quotation automatically.",0,"More evidence is not always the cure for missing analysis."],
-["A longer transition.",0,"The issue is not transition length. The reader needs the writer's thinking."],
-["Nothing. Evidence should speak for itself.",0,"Readers often need the writer to explain how evidence supports the claim."]
-],"analysis"],
-["4 · Do the Thinking","decoder","College Writing Decoder: “Analyze this.”","Do not just give me more evidence. Help me understand what you think the evidence shows and why it matters to this paragraph and argument."],
-["4 · Do the Thinking","build","analysis"],
-["5 · Connect It","choice","The paragraph now contains a claim, evidence, and analysis.","What can help the reader see how this paragraph advances the larger argument?",[
-["A connection that shows why this idea matters to the thesis or what the reader should understand next.",1,"Connection keeps the paragraph from feeling like an isolated mini-essay."],
-["The word “Furthermore” no matter what comes next.",0,"Transition words only help when they accurately express the relationship between ideas."],
-["Repeating the thesis word for word.",0,"Connection should develop the argument, not merely repeat it."],
-["Adding a random fact.",0,"New information should serve the paragraph's job."]
-],"connection"],
-["5 · Connect It","build","connection"],
-["6 · See the Hidden Architecture","xray"],
-["7 · Break the Formula","myth","Every body paragraph must have exactly the same number and order of parts.","A paragraph formula can be a useful starting scaffold. But paragraphs can begin with an example, complication, question, or context when the rhetorical situation calls for it."],
-["8 · Paragraph Emergency Room","er","Patient 1","The paragraph has a topic sentence and a quotation, but the quotation is followed by another quotation. The instructor wrote: “Needs analysis.”","What is the likely problem?",[
-["The writer has support but has not yet explained what the evidence shows.",1,"Diagnosis confirmed. The treatment is explanation and reasoning, not automatically more evidence."],
-["The paragraph needs a third quotation.",0,"More quotation does not treat missing analysis."],
-["The topic sentence must be longer.",0,"The problem is not topic-sentence length."],
-["The paragraph needs “Moreover.”",0,"A transition word will not create analysis."]
-]],
-["8 · Paragraph Emergency Room","er","Patient 2","The paragraph discusses textbook costs, parking, cafeteria hours, and social media. Each idea is interesting, but they compete for attention.","What is the likely problem?",[
-["The paragraph has lost focus and may be trying to do several jobs at once.",1,"Diagnosis confirmed. Revision may mean cutting, moving, or separating ideas."],
-["The paragraph is too short.",0,"Length is not the main problem."],
-["It needs more commas.",0,"Sentence-level editing will not solve a focus problem."],
-["It needs a quotation after every sentence.",0,"More evidence will not create unity."]
-]],
-["8 · Paragraph Emergency Room","er","Patient 3","The paragraph contains a strong source, but the instructor writes: “How does this connect?”","What is the instructor probably asking for?",[
-["Help the reader see the relationship between this evidence, the paragraph's claim, and the larger argument.",1,"Exactly. The reader can see the information but has lost the argumentative connection."],
-["Use the phrase “This connects because...” whether or not it actually does.",0,"A phrase cannot manufacture a relationship that has not been explained."],
-["Add another source.",0,"The paragraph may already have enough evidence."],
-["Make the quotation longer.",0,"The issue is connection, not quotation length."]
-]],
-["9 · Transition Puzzle","choice","Paragraph A explains that students may delay accessing course materials because of cost. Paragraph B explains how delayed access can affect participation in early coursework.","What is the relationship between these ideas?",[
-["Cause → consequence.",1,"Yes. Once you know the relationship, you can choose language that helps the reader see it."],
-["Unrelated ideas.",0,"The second idea develops a consequence of the first."],
-["Pure contrast.",0,"The second paragraph is not mainly opposing the first."],
-["A list with no relationship.",0,"There is a clear conceptual connection."]
-],"revision"],
-["9 · Transition Puzzle","decoder","College Writing Decoder: “Add a transition.”","Do not begin with a transition word. Begin by asking: What is the relationship between these ideas? Addition? Contrast? Cause and effect? Complication? Example? Problem to solution? Then choose language that makes that relationship visible."],
-["10 · Final Repair","repair"],
-["10 · Final Repair","finish"]
+(()=>{const $=x=>document.getElementById(x),KEY="developDontPadV1",TRANSFER_KEY="developDontPadTransferV1";let i=0;
+const M=[
+["1 · What Does “Develop” Mean?","intro"],
+["2 · Development Dashboard","dash"],
+["3 · The Longer Sentence Button","long"],
+["4 · Add Another Quote","quote"],
+["5 · Say It Again Differently","repeat"],
+["6 · Ask WHY","why"],
+["7 · Professor Said: DEVELOP","cases"],
+["8 · Evidence or Explanation?","choice",`<div class="paragraph"><strong>Claim:</strong> Evening students may have less access to tutoring.<br><strong>Evidence:</strong> A campus report shows that the tutoring center closes at 6:00 p.m., while many evening classes begin later.</div>`,"What would most likely develop this next?",[
+["Explain what the scheduling mismatch may mean for students who work during the day.",1,"Yes. The paragraph already has evidence; now the reader needs the writer's reasoning."],
+["Add a second quotation saying the center closes at 6:00.",0,"That may repeat evidence without adding understanding."],
+["Replace “students” with “postsecondary educational participants.”",0,"Bigger vocabulary is not deeper development."],
+["Repeat the claim in a longer sentence.",0,"Repetition can increase length without increasing the idea."]]],
+["9 · The Curious Reader","reader"],
+["10 · Development Forks","forks"],
+["11 · Page Count Panic","panic"],
+["12 · Development Scan","scan"],
+["13 · One Sentence Is Hiding a Paragraph","compressed"],
+["14 · Make It Sound College™","academic"],
+["15 · Example Isn't the Finish Line","example"],
+["16 · Complicate It","complicate"],
+["17 · More Evidence or More Thinking?","choice",`<div class="paragraph"><p>Students who work full time may find evening classes more accessible because the schedule allows them to work during the day. This flexibility may make continued enrollment possible.</p></div>`,"A reader asks: “Do we know whether working students actually use evening courses?” What might the paragraph need?",[
+["Evidence or data that helps support the claim.",1,"Right. Sometimes development really does mean finding additional support."],
+["Three more sentences saying evening classes are convenient.",0,"Repeating the claim does not answer the reader's evidence question."],
+["A semicolon.",0,"Punctuation will not supply missing support."],
+["A longer title.",0,"The reader's question is about evidence."]]],
+["18 · Enough Already","enough"],
+["19 · Build the Development Check","check"],
+["20 · Reader Understanding","end"]
 ];
 
-function save(done=false){localStorage.setItem(key,JSON.stringify({i,unlocked,done,date:done?new Date().toISOString():null}))}
-function prefersReducedMotion(){return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches}
-function focusStage(){
- requestAnimationFrame(()=>{
-  $("stage").focus({preventScroll:true});
-  $("stage").scrollIntoView({behavior:prefersReducedMotion()?"auto":"smooth",block:"start"});
- });
-}
-function setUnlocked(k){if(k)unlocked[k]=true;renderBlueprint()}
-function renderBlueprint(){
- const labels=[["job","1. Give it a job"],["claim","2. Make the point visible"],["evidence","3. Support it"],["analysis","4. Do the thinking"],["connection","5. Connect it"],["revision","6. Check and revise"]];
- $("blueprint").innerHTML=labels.map(([k,l])=>`<div class="bp ${unlocked[k]?"on":""}">${unlocked[k]?"✓":"○"} ${l}</div>`).join("")
-}
-function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
-function paragraphHTML(xray=false){
- return `<div class="sentence claim">${xray?'<div class="xray-label">Paragraph-level claim / topic sentence</div>':""}${paragraph.claim}</div>
- <div class="sentence evidence">${xray?'<div class="xray-label">Evidence / example</div>':""}${paragraph.evidence}</div>
- <div class="sentence analysis">${xray?'<div class="xray-label">Analysis</div>':""}${paragraph.analysis}</div>
- <div class="sentence connection">${xray?'<div class="xray-label">Connection</div>':""}${paragraph.connection}</div>`
-}
-function render(){
- const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
- const percent=Math.round((i+1)/moments.length*100);
- $("ptext").textContent=`Paragraph moment ${i+1} of ${moments.length}`;$("pct").textContent=percent+"%";$("bar").style.width=percent+"%";$("progress").setAttribute("aria-valuenow",percent);$("progress").setAttribute("aria-valuetext",`Paragraph moment ${i+1} of ${moments.length}: ${m[0]}`);$("stage").textContent=m[0];renderBlueprint();
- if(m[1]==="choice"){
-  $("host").innerHTML=`<div class="scenario">${m[2]}</div><p class="question" id="currentQuestion">${m[3]}</p><div class="choices" id="choices" role="group" aria-labelledby="currentQuestion"></div>`;
-  m[4].forEach(([label,good,msg])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");setUnlocked(m[5]);fb("That helps the reader.",msg)}else{b.disabled=true;fb("Look at what the reader still needs.",msg+" Try another choice.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)})
- }
- if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 ${m[2]}</h3><p>${m[3]}</p></div>`;fb("Hidden instruction decoded.","College writing often compresses several thinking moves into a short comment.")}
- if(m[1]==="build"){
-  const type=m[2], labels={evidence:"Add Support",analysis:"Add Analysis",connection:"Add Connection"};
-  let partial=type==="evidence"?`<div class="sentence claim">${paragraph.claim}</div>`:type==="analysis"?`<div class="sentence claim">${paragraph.claim}</div><div class="sentence evidence">${paragraph.evidence}</div>`:`<div class="sentence claim">${paragraph.claim}</div><div class="sentence evidence">${paragraph.evidence}</div><div class="sentence analysis">${paragraph.analysis}</div>`;
-  $("host").innerHTML=`<div class="paragraph">${partial}</div><button id="addpiece" class="primary" type="button">${labels[type]}</button>`;
-  $("addpiece").onclick=()=>{setUnlocked(type);$("host").innerHTML=`<div class="paragraph">${type==="evidence"?partial+`<div class="sentence evidence">${paragraph.evidence}</div>`:type==="analysis"?partial+`<div class="sentence analysis">${paragraph.analysis}</div>`:partial+`<div class="sentence connection">${paragraph.connection}</div>`}</div>`;fb("The paragraph grew.","You added a piece because the reader needed it—not because a formula demanded a certain sentence count.")}
- }
- if(m[1]==="xray"){$("host").innerHTML=`<div class="reader">👀 <strong>Reader:</strong> “I can follow the paragraph. What is happening underneath the surface?”</div><div class="paragraph">${paragraphHTML(true)}</div><p class="note"><strong>Real essays do not contain these labels.</strong> X-ray mode is showing you the invisible work each part is doing.</p>`;fb("You can see the architecture now.","The labels are scaffolding. The goal is to understand the work, not to force every paragraph into identical slots.")}
- if(m[1]==="myth"){$("host").innerHTML=`<div class="myth"><p><strong>MYTH:</strong> ${m[2]}</p><p><strong>REALITY:</strong> ${m[3]}</p></div>`;fb("Scaffold, not law.","Keep a paragraph formula if it helps you get started. Add other structures to your toolbox as your writing situations become more complex.")}
- if(m[1]==="er"){
-  $("host").innerHTML=`<div class="er"><div class="siren">🚨 Paragraph Emergency</div><h3>${m[2]}</h3><p>${m[3]}</p></div><p class="question" id="currentQuestion">${m[4]}</p><div class="choices" id="choices" role="group" aria-labelledby="currentQuestion"></div>`;
-  m[5].forEach(([label,good,msg])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");setUnlocked("revision");fb("Diagnosis confirmed.",msg)}else{b.disabled=true;fb("That treatment does not match the problem.",msg+" Try another diagnosis.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)})
- }
- if(m[1]==="repair"){$("host").innerHTML=`<div class="er"><div class="siren">🚑 Final Repair</div><p><strong>Original paragraph:</strong> Textbooks are expensive. A source says many students worry about textbook costs. This is important. Furthermore, college is difficult.</p></div><p class="question">Repair plan</p><div class="blueprint"><div class="bp on">✓ Give the paragraph one job: explain how cost can affect academic access.</div><div class="bp on">✓ Replace the vague opening with a paragraph-level claim.</div><div class="bp on">✓ Keep relevant support.</div><div class="bp on">✓ Explain what the support shows.</div><div class="bp on">✓ Connect the point to the larger argument.</div></div><div class="paragraph">${paragraphHTML(false)}</div>`;Object.keys(unlocked).forEach(k=>unlocked[k]=true);renderBlueprint();fb("Patient stabilized.","You did not make the paragraph more academic by adding words. You made its job clearer and gave the reader what they needed.")}
- if(m[1]==="finish"){$("host").innerHTML=`<div class="callout"><strong>When someone says “write a body paragraph,” you do not have to guess.</strong><br>Start with: <em>What job does this paragraph need to do for my argument?</em><br>Then ask: <em>What does my reader need in order to follow me?</em></div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
- save(false)
- focusStage()
-}
-$("next").onclick=()=>{if(i<moments.length-1){i++;render()}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());$("finalParagraph").innerHTML=paragraphHTML(false);requestAnimationFrame(()=>{$("doneTitle").focus({preventScroll:true});$("doneTitle").scrollIntoView({behavior:prefersReducedMotion()?"auto":"smooth",block:"start"})})}
-$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={job:false,claim:false,evidence:false,analysis:false,connection:false,revision:false};render()}
-$("restart").onclick=()=>{localStorage.removeItem(key);location.reload()}
-let xray=false;$("xray").setAttribute("aria-pressed","false");$("xray").onclick=()=>{xray=!xray;$("finalParagraph").innerHTML=paragraphHTML(xray);$("xray").textContent=xray?"👁️ Read Normally":"🩻 X-Ray My Paragraph";$("xray").setAttribute("aria-pressed",String(xray))}
-const starters=["What does my reader need to understand next?","What part of my thesis does this paragraph need to develop?","What evidence would help my reader believe this?","What do I think this evidence actually shows?","Why does this matter to the argument I'm making?","What might my reader be confused about here?"];
-$("prompt").onclick=()=>{const box=$("promptBox");box.classList.remove("hidden");box.innerHTML=`<h3>Starting Question</h3><p>${starters[Math.floor(Math.random()*starters.length)]}</p>`}
-$("copy").onclick=async()=>{const text=`MY PARAGRAPH BLUEPRINT
+function fb(t,g=true){$("fb").textContent=t;$("fb").className="feedback show"+(g?" good":"");$("next").classList.remove("hidden")}
+function choices(opts,label){let d=document.createElement("div");d.className="choices";d.setAttribute("role","group");d.setAttribute("aria-label",label);opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("📈 "+m)}else{b.disabled=true;fb(m+" Try a different move.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function motionBehavior(){return window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}
+function focusCurrentMove(){const h=$("host").querySelector("h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({block:"start",behavior:motionBehavior()})}}
+function meters(vals){let labels=["Words","Evidence","Explanation","Specificity","Connection","Complexity"];return `<div class="meterbox">${labels.map((x,n)=>`<div class="meterrow"><strong>${x}</strong><div class="meter" role="img" aria-label="${x}: ${vals[n]} percent"><div class="fill" style="width:${vals[n]}%"></div></div></div>`).join("")}</div>`}
+function render(){let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Development move ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";$("track").setAttribute("aria-valuenow",i+1);$("track").setAttribute("aria-valuetext",`${m[0]}, ${Math.round((i+1)/M.length*100)} percent complete`);
+if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4],m[3]))}
+if(m[1]==="intro"){$("host").innerHTML=`<h2>🕵️ “Develop This.”</h2><div class="paragraph"><p>Evening students can have difficulty using campus services. Many services close before evening classes begin. This can make college more difficult.</p></div>${meters([30,15,15,15,10,0])}<div class="secret">🔓 The question is not automatically “How do I add sentences?” It is <strong>“What does my reader still need?”</strong></div>`;fb("First diagnose the missing work. Then choose a development move.")}
+if(m[1]==="dash"){$("host").innerHTML=`<h2>🎛️ Development Dashboard</h2><div class="dashboard"><div class="control"><strong>❓ WHY?</strong>Why is this true or important?</div><div class="control"><strong>⚙️ HOW?</strong>How does this happen?</div><div class="control"><strong>🔍 SHOW ME</strong>What would this look like?</div><div class="control"><strong>📚 SUPPORT IT</strong>What evidence would help?</div><div class="control"><strong>🔗 CONNECT IT</strong>How does this relate to the claim?</div><div class="control"><strong>🧩 COMPLICATE IT</strong>What condition, limit, consequence, or perspective matters?</div></div>`;fb("These are thinking moves, not a checklist every paragraph must complete.")}
+if(m[1]==="long"){$("host").innerHTML=`<h2>🎈 Make the Sentence Longer</h2><div class="machine"><div class="screen">Evening students attending institutions of higher education can potentially experience a variety of considerable difficulties relating to the accessibility and availability of various campus-based student support services...</div></div><div class="warn"><strong>🎈 WORDS +23</strong><br><strong>🧠 IDEA DEVELOPMENT +0</strong><br>The sentence got bigger. The idea didn't.</div>`;fb("Longer sentences can be useful, but length by itself is not development.")}
+if(m[1]==="quote"){$("host").innerHTML=`<h2>📚 Add Another Quote</h2><div class="paragraph"><p>“Tutoring closes at 6:00.”</p><p>“Many support offices end services before evening courses begin.”</p></div><div class="warn"><strong>📚 EVIDENCE +1</strong><br><strong>🧠 EXPLANATION +0</strong><p>Your reader has more evidence. They may still be waiting for you to explain what it shows.</p></div>`;fb("Another source can be useful when support is missing. It cannot automatically do the writer's explanation.")}
+if(m[1]==="repeat"){$("host").innerHTML=`<h2>🔁 Say It Again Differently</h2><div class="paragraph"><p>Evening students may have difficulty accessing services. Students attending at night may find services hard to access. Campus support can be difficult for evening students to use.</p></div><div class="warn"><strong>🔁 REPETITION +2</strong><br><strong>📈 DEVELOPMENT +0</strong></div><div class="secret">🔓 When you notice yourself repeating, ask a <em>new question</em> instead: Why? How? What does this look like? Why does it matter?</div>`;fb("Repetition often signals a place where a new thinking move could begin.")}
+if(m[1]==="why"){$("host").innerHTML=`<h2>❓ Press WHY</h2><div class="paragraph"><strong>Before:</strong><p>Many services close before evening classes begin.</p><strong>After asking WHY THIS MATTERS:</strong><p>When support offices close before evening classes begin, students who work during the day may have to choose between missing work and going without services available to daytime students.</p></div>${meters([45,15,55,55,30,20])}<div class="good"><strong>🧠 IDEA EXPANDED.</strong></div>`;fb("The new material gives the reader something new to understand.")}
+if(m[1]==="cases"){$("host").innerHTML=`<h2>📝 Professor Said: DEVELOP</h2><div class="case"><strong>Case A:</strong> Big claim, no support → <span class="badge">📚 SUPPORT IT</span></div><div class="case"><strong>Case B:</strong> Two quotations, little writer commentary → <span class="badge">❓ WHY / ⚙️ HOW</span></div><div class="case"><strong>Case C:</strong> “This creates problems for students.” → <span class="badge">🔍 SHOW ME</span></div><div class="case"><strong>Case D:</strong> Good point, thesis relationship unclear → <span class="badge">🔗 CONNECT IT</span></div><div class="case"><strong>Case E:</strong> “Online tutoring solves the problem.” → <span class="badge">🧩 COMPLICATE IT</span></div><div class="secret">🔓 <strong>“Develop” is a reader signal, not a recipe.</strong></div>`;fb("The same professor comment can point toward different revision moves.")}
+if(m[1]==="reader"){$("host").innerHTML=`<h2>👀 The Curious Reader</h2><div class="paragraph"><p>Students who work full time may find evening courses more accessible.</p></div><div class="reader"><p class="readerq">👀 Why?</p><p>Because evening schedules may allow students to work daytime hours.</p><p class="readerq">👀 Can you show me?</p><p>A student whose shift ends at 5:00 may be able to attend a 6:30 course without losing work hours.</p><p class="readerq">👀 So what?</p><p>Scheduling flexibility can affect whether work and college are realistically compatible.</p><p class="readerq">👀 Is that true for everyone?</p><p>Not necessarily; transportation, caregiving, and late work shifts can still limit access.</p></div><div class="good"><strong>Those questions were development.</strong></div>`;fb("You can borrow a curious reader's questions when you are not sure what to write next.")}
+if(m[1]==="forks"){$("host").innerHTML=`<h2>🍴 Development Forks</h2><div class="paragraph"><strong>Starting claim:</strong><p>Social media can help college students feel connected.</p></div><div class="fork"><strong>❓ WHY?</strong> Explore why connection matters.</div><div class="fork"><strong>⚙️ HOW?</strong> Explain how particular online interactions create connection.</div><div class="fork"><strong>🔍 SHOW ME</strong> Give a specific example of a student community.</div><div class="fork"><strong>📚 SUPPORT IT</strong> Bring in research about belonging.</div><div class="fork"><strong>🧩 COMPLICATE IT</strong> Consider when social media may increase isolation instead.</div><div class="secret">🔓 There is not one correct way to develop an idea. Your purpose determines which direction is useful.</div>`;fb("Development is a set of rhetorical choices, not a fill-in-the-blank formula.")}
+if(m[1]==="panic"){$("host").innerHTML=`<div class="panic"><h2>🚨 PAGE COUNT PANIC</h2><p><strong>Assignment:</strong> 5–6 pages<br><strong>Draft:</strong> 3.4 pages<br><strong>Due:</strong> Tomorrow</p></div><div class="case">📏 Increase margins → <strong>Layout changed. Idea unchanged.</strong></div><div class="case">🔎 12.5-point font → <strong>Your professor owns eyes.</strong></div><div class="case">🎈 Giant title → <strong>TITLE DEVELOPMENT +400%</strong></div><div class="case">📚 Add four quotations → <strong>Sources now have custody of the essay.</strong></div><div class="good">🎯 <strong>Better move:</strong> Look for places where the reader genuinely needs more explanation, evidence, examples, context, connection, or complexity.</div>`;fb("Page count can alert you that something may need attention. It does not tell you what the missing thinking is.")}
+if(m[1]==="scan"){$("host").innerHTML=`<h2>🔬 Development Scan</h2><div class="case">🔎 Claim without support → consider <strong>evidence</strong></div><div class="case">🔎 Evidence without explanation → consider <strong>analysis</strong></div><div class="case">🔎 General statement → consider a <strong>specific example</strong></div><div class="case">🔎 Important idea rushed through → <strong>slow down and unpack it</strong></div><div class="case">🔎 Relationship implied but not explained → <strong>connect it</strong></div><div class="case">🔎 Absolute claim → consider a <strong>condition, limit, or complication</strong></div>`;fb("This is a better response to a short draft than adding material everywhere.")}
+if(m[1]==="compressed"){$("host").innerHTML=`<h2>🧳 One Sentence Is Hiding a Paragraph</h2><div class="paragraph"><p>Working students face scheduling barriers that can affect their academic success.</p></div><div class="warn"><strong>🚨 COMPRESSED THINKING DETECTED</strong></div><div class="grid2"><div class="case"><strong>What barriers?</strong><br>Work schedules, transportation, office hours.</div><div class="case"><strong>How might they affect school?</strong><br>Less access to tutoring/advising; fewer usable sections.</div><div class="case"><strong>What might happen?</strong><br>Delayed courses, reduced support, slower progress.</div><div class="case"><strong>What varies?</strong><br>Job schedules, caregiving, transportation, online options.</div></div><div class="secret">🔓 Sometimes a thin draft does not need a brand-new idea. It needs you to unpack an idea you wrote too quickly.</div>`;fb("Look for sentences carrying several ideas at once.")}
+if(m[1]==="academic"){$("host").innerHTML=`<h2>🎓 MAKE IT SOUND COLLEGE™</h2><div class="paragraph"><strong>Clear:</strong><p>Students may miss tutoring because it closes before their evening classes.</p></div><div class="machine"><div class="screen">The multifaceted temporal inaccessibility of institutionalized pedagogical support infrastructures potentially engenders consequential impediments...</div></div><div class="warn"><strong>🚨 ACADEMIC-SOUNDING MACHINE MALFUNCTION</strong></div><div class="good"><strong>Precision &gt; performance.</strong><br>Development comes from reasoning, specificity, evidence, and connection—not inflated vocabulary.</div>`;fb("Academic writing can be sophisticated and still be clear.")}
+if(m[1]==="example"){$("host").innerHTML=`<h2>🔍 Example Added. Are We Done?</h2><div class="paragraph"><p>For example, a student who works until 5:30 may not be able to reach a tutoring center that closes at 6:00.</p></div><div class="reader"><p class="readerq">👀 Okay. What does that example show?</p></div><div class="good"><p>The example shows how a service can technically exist while remaining practically inaccessible to some students.</p></div><div class="secret">🔓 Examples create specificity. Writers may still need to explain what the example helps the reader understand.</div>`;fb("An example is material for analysis, not always the end of the analysis.")}
+if(m[1]==="complicate"){$("host").innerHTML=`<h2>🧩 Complicate It</h2><div class="paragraph"><strong>Before:</strong><p>Online tutoring solves access problems for evening students.</p><strong>After:</strong><p>Online tutoring can expand access for evening students, but its usefulness may depend on reliable technology, scheduling, and whether students can get the kind of support they need online.</p></div><div class="good"><strong>COMPLEXITY +1 · PRECISION +1</strong></div><div class="secret">🔓 Complicating a claim does not weaken an argument automatically. It can make the argument more accurate.</div>`;fb("Development can mean adding limits and conditions, not only adding support.")}
+if(m[1]==="enough"){$("host").innerHTML=`<h2>✋ Enough Already</h2><div class="paragraph"><p>This paragraph makes a focused claim, provides appropriate evidence, explains what the evidence shows, gives needed context, connects to the thesis, and acknowledges an important limitation.</p></div><div class="call"><strong>Your paper is still half a page short. Add another example here?</strong></div><div class="good"><h3>✋ STEP AWAY FROM THE PARAGRAPH.</h3><p>Not necessarily. This idea may already be doing its job. Inspect another part of the draft for a genuine development need.</p></div>`;fb("Development has no automatic sentence quota.")}
+if(m[1]==="check"){$("host").innerHTML=`<h2>🧰 Build Your Development Check</h2><div class="toolbox"><p><strong>If the reader asks “How do you know?”</strong> → 📚 SUPPORT IT</p><p><strong>If the reader asks “Why/How?”</strong> → 🧠 EXPLAIN</p><p><strong>If the reader asks “What do you mean?”</strong> → 🔍 GET SPECIFIC</p><p><strong>If the reader asks “What does this have to do with your point?”</strong> → 🔗 CONNECT IT</p><p><strong>If the reader asks “Is it really that simple?”</strong> → 🧩 COMPLICATE IT</p><p><strong>If you're saying the same thing again</strong> → ❓ ASK A NEW QUESTION</p></div>`;fb("This is the tool you can reuse whenever “develop” feels vague.")}
+if(m[1]==="end"){$("host").innerHTML=`<h2>📈 What Are We Actually Measuring?</h2><div class="warn"><strong><s>WORD COUNT</s></strong></div><div class="good"><h2>🧠 READER UNDERSTANDING</h2><p><strong>Develop an idea until your reader has what they need to follow your reasoning. Then move on.</strong></p></div><div class="secret">🔓 When you do not know what to add, don't start by asking “How can I make this longer?” Ask <strong>“What would a curious reader need next?”</strong></div>`;$("next").textContent="Finish & Open Development Tool";$("next").classList.remove("hidden")}
+localStorage.setItem(KEY,JSON.stringify({i}))}
 
-1. Give it a job — What does this paragraph need to contribute?
-2. Make the point visible — What should my reader understand?
-3. Support it — What evidence or example helps?
-4. Do the thinking — What does that evidence show?
-5. Connect it — Why does this matter to my larger argument?
-6. Check the reader — What might they still need?`;
- try{await navigator.clipboard.writeText(text);$("copy").textContent="✓ Blueprint Copied"}catch(e){$("promptBox").classList.remove("hidden");$("promptBox").innerHTML=`<h3>My Paragraph Blueprint</h3><p>${text.replace(/\n/g,"<br>")}</p>`}}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();focusCurrentMove()}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>{$("finishhead").focus({preventScroll:true});$("finish").scrollIntoView({block:"start",behavior:motionBehavior()})},50)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render();focusCurrentMove()}
 
-const nextMoves={
- claim:["Make the point visible.","Try writing one sentence that states what this paragraph is saying—not just what it is about. Then check whether the rest of the paragraph develops that point."],
- evidence:["Give the reader something to work with.","Add or replace support that directly serves this paragraph's job. One strong example, detail, quotation, paraphrase, or source can be more useful than several loosely related pieces."],
- analysis:["Do the thinking after the evidence.","After a key piece of evidence, add 1–3 sentences that answer: What does this show? How does it support my point? Why should my reader care?"],
- connection:["Reconnect the paragraph to the argument.","Name the relationship explicitly. Explain how this evidence supports the paragraph's claim and how that claim advances, complicates, or qualifies the larger argument."],
- focus:["Give the paragraph one job.","Underline the sentence that best states this paragraph's job. Anything that serves a different job may need to be cut, moved, or developed in another paragraph."],
- unsure:["X-ray before you revise.","Mark the paragraph in four ways: underline the main point, box the support, star the analysis, and circle the connection to the larger argument. The thinnest or missing part is a strong candidate for your next revision move."]
+const diagnoses={
+claim:["📚 SUPPORT IT","Your reader may need evidence, an example, or another form of support before accepting the claim.","Ask: “How do I know this? What evidence would be appropriate for this assignment?”","Name the evidence, example, or source you could add—or write a sentence that introduces it."],
+evidence:["🧠 EXPLAIN IT","You already have material. The next move may be your reasoning rather than another source.","Ask: “What does this evidence show? Why does it matter? How does it support my claim?”","Write one sentence explaining what your evidence helps the reader understand."],
+vague:["🔍 SHOW ME","Move from the general statement toward a concrete example, detail, case, or more precise description.","Ask: “What would this look like in a real situation?”","Write one specific example, detail, or concrete version of the vague idea."],
+repeat:["❓ ASK A NEW QUESTION","Repetition often means you have reached the edge of the current thought. Change the question instead of rephrasing the answer.","Try: “Why? How? What causes this? What follows from it? What might complicate it?”","Choose one new question and sketch the beginning of an answer."],
+disconnect:["🔗 CONNECT IT","The paragraph may need an explicit relationship to the larger argument.","Ask: “Why is this paragraph here? What does it help me prove, explain, or complicate?”","Write one sentence that makes the paragraph’s relationship to your larger claim visible."],
+absolute:["🧩 COMPLICATE IT","Look for a condition, exception, limitation, consequence, or perspective that makes the claim more precise.","Ask: “When is this true? For whom? Under what conditions? What might change the result?”","Revise the claim to add one meaningful condition, limit, exception, or consequence."],
+compressed:["🔬 UNPACK IT","You may already have the ideas. Slow down and separate the parts so the reader can follow them.","Ask: “What are the pieces inside this sentence? Which one deserves explanation or an example?”","Choose one hidden piece of the sentence and expand it into its own thought."],
+unknown:["👀 USE THE CURIOUS READER","Read the paragraph and imagine a genuinely interested reader asking what they still need.","Try: “Why? How? Can you show me? What does that show? Why does it matter? Is it always true?”","Pick the curious-reader question that feels hardest to answer and jot down what you would need to add."],
+done:["✋ IT MAY BE DONE","Do not add material only to make this paragraph longer. Inspect another part of the draft.","Ask: “Is there another claim, paragraph, relationship, or piece of evidence that genuinely needs more development?”","Name the next part of the draft you will inspect instead of padding this paragraph."]
 };
-$("diagnoseOwn").onclick=()=>{
- const choice=document.querySelector('input[name="readerNeed"]:checked');
- const box=$("ownFeedback");
- if(!choice){box.classList.remove("hidden");box.innerHTML=`<h3>Choose what your reader needs</h3><p>Pick the closest diagnosis—even “I'm not sure yet” is a useful starting point.</p>`;box.focus();return}
- const [title,msg]=nextMoves[choice.value];
- const job=$("ownJob").value.trim();
- box.classList.remove("hidden");
- box.innerHTML=`<h3>${title}</h3><p>${msg}</p>${job?`<p><strong>Your paragraph's job:</strong> ${escapeHTML(job)}</p>`:""}<p><strong>Revision rule:</strong> Make one purposeful change, then reread the paragraph as a reader before changing something else.</p>`;
- box.focus();
-};
-function escapeHTML(text){const d=document.createElement("div");d.textContent=text;return d.innerHTML}
+$("diagnose").onclick=()=>{let r=diagnoses[$("problem").value];$("result").innerHTML=`<div class="good"><h3 tabindex="-1">${r[0]}</h3><p>${r[1]}</p><p><strong>Next question:</strong> ${r[2]}</p></div>`;$("applyPrompt").textContent=r[3];$("apply").classList.remove("hidden");const h=$("result").querySelector("h3");h.focus({preventScroll:true});h.scrollIntoView({block:"nearest",behavior:motionBehavior()});saveTransfer()};
+function saveTransfer(){localStorage.setItem(TRANSFER_KEY,JSON.stringify({draft:$("draft").value,problem:$("problem").value,move:$("draftmove").value}))}
+$("draft").addEventListener("input",saveTransfer);$("problem").addEventListener("change",saveTransfer);$("draftmove").addEventListener("input",saveTransfer);
+$("saveMove").onclick=()=>{saveTransfer();$("moveStatus").textContent=$("draftmove").value.trim()?"✓ Your development move is saved in this browser.":"Your note is empty right now. You can still come back and add a move."};
 
-let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume My Paragraph";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
+const check=`DEVELOP, DON'T PAD — DEVELOPMENT CHECK
+
+When a reader needs more, ask what kind of more:
+
+📚 SUPPORT IT
+How do I know? What evidence would help?
+
+🧠 EXPLAIN IT
+Why? How? What does the evidence show?
+
+🔍 SHOW ME
+What would this look like in a specific situation?
+
+🔗 CONNECT IT
+How does this paragraph connect to my larger claim?
+
+🧩 COMPLICATE IT
+When is this true? For whom? Under what conditions? What limits or exceptions matter?
+
+🔬 UNPACK IT
+Am I rushing through several ideas in one sentence?
+
+❓ ASK A NEW QUESTION
+Am I repeating myself instead of extending the thinking?
+
+👀 CURIOUS READER TEST
+Why?
+How?
+Can you show me?
+What does that show?
+Why does it matter?
+Is it always true?
+
+✋ ENOUGH ALREADY
+If the idea is focused, supported, explained, connected, and appropriately complex, it may be done. Inspect another part of the draft.
+
+Remember:
+Length is something we can count.
+Development is something a reader can experience.`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(check);$("copy").textContent="✓ Development Check Copied"}catch(e){alert(check)}}
+
+let t;try{t=JSON.parse(localStorage.getItem(TRANSFER_KEY)||"null")}catch(e){}
+if(t){$("draft").value=t.draft||"";$("problem").value=t.problem||"claim";$("draftmove").value=t.move||""}
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Development Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("finishhead").focus(),50)}else{i=s.i||0;$("lab").classList.remove("hidden");render();focusCurrentMove()}}}
 })();
 </script>
 </body>
