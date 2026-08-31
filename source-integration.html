@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source Integration Lab: Join the Conversation</title>
+<meta name="description" content="An accessible interactive source integration lab for ENGL C1000.">
+<style>
+:root{
+  --bg:#f4f7f9;--surface:#ffffff;--ink:#243447;--muted:#64707d;--line:#d8e0e7;
+  --brand:#2d5f74;--brand-dark:#1d4150;--soft:#edf5f7;--accent:#f5dfb5;
+  --accent-line:#b47a20;--good:#2f7a4b;--good-bg:#eef8f1;--warn:#9b5b12;--rose:#8d4c67;
+  --rose-bg:#fbf1f5;--max:980px;--radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
+button{font:inherit}
+button:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#000;border:2px solid #000;padding:10px 14px}
+.skip:focus{left:8px}
+.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(29,65,80,.07)}
+.eyebrow{margin:0 0 6px;color:var(--brand);text-transform:uppercase;letter-spacing:.07em;font-size:.86rem;font-weight:800}
+h1,h2,h3{line-height:1.2;color:var(--brand-dark)}
+h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}
+h2{font-size:clamp(1.4rem,4.5vw,2rem);margin:.25em 0 .55em}
+h3{font-size:1.12rem;margin:.1em 0 .5em}
+.lead{font-size:1.08rem}
+.callout{background:#fff7e7;border-left:5px solid var(--accent-line);padding:15px 17px;border-radius:10px;margin:16px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.pill,.stage{display:inline-flex;align-items:center;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}
+.pill{border:1px solid var(--line);background:#fafbfd;color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:10px}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}
+.primary{background:var(--brand);color:#fff}.secondary{background:#fff;color:var(--brand-dark);border:2px solid var(--brand)}.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.93rem;font-weight:700;margin-bottom:7px}
+.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s ease}
+.controlroom{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;align-items:start}
+.side{border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px;position:sticky;top:10px}
+.argue{background:#fff;border:2px solid var(--brand);border-radius:14px;padding:15px;margin-bottom:14px}
+.argue small{display:block;text-transform:uppercase;font-weight:800;letter-spacing:.05em;color:var(--brand);margin-bottom:5px}
+.voice-meter{display:grid;gap:8px}
+.vm{border-radius:10px;padding:9px 11px;border:1px solid var(--line);background:#fff;font-size:.92rem}
+.vm.on{background:var(--good-bg);border-color:var(--good)}
+.signal{border:3px solid var(--accent-line);border-radius:16px;background:#fffaf0;padding:18px;margin:14px 0}
+.signal .label{font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--warn)}
+.sourcecard{border:2px solid var(--line);background:#fff;border-radius:14px;padding:17px;margin:14px 0}
+.sourcecard .type{font-size:.84rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.sourcecard blockquote{margin:12px 0 0;padding-left:15px;border-left:4px solid var(--brand);font-size:1rem}
+.question{font-size:1.16rem;font-weight:800;margin:15px 0}.choices{display:grid;gap:10px;margin:16px 0}
+.choice{width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #b9c5d1;padding:14px 16px}
+.choice.selected{border-color:var(--good);background:var(--good-bg)}
+.feedback{display:none;margin-top:16px;padding:16px;border-radius:12px;border:2px solid var(--brand);background:var(--soft)}
+.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--good-bg)}.feedback strong{display:block;margin-bottom:4px}
+.decoder,.secret{border:2px dashed var(--brand);background:#f8fbfd;border-radius:14px;padding:18px;margin:14px 0}
+.secret{border-style:solid;border-color:var(--accent-line);background:#fff7e7}
+.thread{display:grid;gap:10px;margin:14px 0}
+.bubble{max-width:88%;padding:13px 15px;border-radius:16px;border:1px solid var(--line)}
+.me{justify-self:end;background:var(--good-bg);border-color:#9bc9aa}.source{justify-self:start;background:var(--soft);border-color:#a9c9d3}
+.bubble strong{display:block;font-size:.84rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.ghost{border:2px solid var(--rose);background:var(--rose-bg);border-radius:14px;padding:17px;margin:14px 0}
+.bouncer{border:3px solid #555f6b;background:#f8fafc;border-radius:16px;padding:18px;margin:14px 0}
+.mixer{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.mix{border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fff}
+.mix strong{display:block;color:var(--brand-dark)}
+.machine{border:3px dashed #777;background:#fafafa;border-radius:16px;padding:18px;margin:14px 0}
+.synthesis{border:2px solid var(--good);background:var(--good-bg);border-radius:14px;padding:18px;margin:14px 0}
+.map{display:grid;place-items:center;gap:14px;margin:22px 0}
+.center{border:4px solid var(--brand);background:#fff;border-radius:50%;width:160px;height:160px;display:grid;place-items:center;text-align:center;font-weight:900;color:var(--brand-dark)}
+.nodes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
+.node{border:2px solid var(--line);background:#fff;border-radius:14px;padding:14px;text-align:center}
+.node strong{display:block;color:var(--brand-dark)}
+.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,32px);background:#fff}
+.complete{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr auto;gap:9px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}
+.shot{background:#fff7e7;border:2px solid var(--accent-line);border-radius:12px;padding:14px 16px;font-weight:700}
+.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
+@media(max-width:760px){.controlroom{grid-template-columns:1fr}.side{position:static;order:-1}.mixer{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}}
+@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.bubble{max-width:96%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to activity</a>
+<main id="main" class="shell">
+
+<section id="intro" class="card">
+  <p class="eyebrow">ENGL C1000 · Sources as conversation</p>
+  <h1>Source Integration Lab: Join the Conversation</h1>
+  <p class="lead"><strong>You are the host. Sources are guests in your argument.</strong></p>
+  <div class="callout">You decide who enters, why they are here, how much they say, and what your reader should understand after hearing them.</div>
+  <div class="meta"><span class="pill">20 source missions</span><span class="pill">No timer</span><span class="pill">Quote · Paraphrase · Summarize</span><span class="pill">Your voice stays visible</span></div>
+  <div class="row"><button id="start" class="primary" type="button">Enter the Source Control Room</button><button id="resume" class="secondary hidden" type="button">Resume Mission</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+  <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
+  <div class="track"><div id="bar" class="bar"></div></div>
+  <span id="stage" class="stage"></span>
+  <h2>Source Control Room</h2>
+
+  <div class="controlroom">
+    <div>
+      <div id="host"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+      <div class="row"><button id="next" class="primary hidden" type="button">Next Source Mission</button></div>
+    </div>
+
+    <aside class="side">
+      <div class="argue"><small>Your argument</small>Colleges should improve how they communicate essential student-services information because information students cannot easily find or understand may function as if it were unavailable.</div>
+      <h3>Conversation Meter</h3>
+      <div id="meter" class="voice-meter"></div>
+    </aside>
+  </div>
+</section>
+
+<section id="done" class="card hidden">
+  <div class="map">
+    <div class="center">🎙️ YOU<br>THE WRITER</div>
+    <div class="nodes">
+      <div class="node"><strong>Source A</strong>Provides context</div>
+      <div class="node"><strong>Source B</strong>Supports</div>
+      <div class="node"><strong>Source C</strong>Complicates</div>
+      <div class="node"><strong>Source D</strong>Offers an example</div>
+    </div>
+  </div>
+
+  <div class="secret">
+    <h2>You're Still Running the Conversation</h2>
+    <p>You chose which sources entered. You decided what jobs they performed. You chose when to quote, paraphrase, or summarize. You explained what the evidence meant. You put sources into conversation with one another.</p>
+    <p><strong>And your voice never disappeared.</strong></p>
+  </div>
+
+  <div class="row">
+    <button id="check" class="primary" type="button">🎛️ Open My Source Check</button>
+    <button id="copy" class="secondary" type="button">📋 Copy Source Check</button>
+  </div>
+
+  <div id="checkBox" class="decoder hidden" role="status" aria-live="polite">
+    <h3>Before I add this source...</h3>
+    <p>Why is it here?<br>What does my reader need from it?<br>Quote, paraphrase, or summarize?<br>How will I identify and credit it?<br>What will I say after it?<br>How does it help my argument?</p>
+  </div>
+
+  <div class="completion">
+    <div class="complete">✓ Lab complete</div>
+    <h2>Source Integration Lab — Complete</h2>
+    <div class="grid">
+      <div>Choose useful source roles</div><div>✓ Complete</div>
+      <div>Reject sources that do not help</div><div>✓ Complete</div>
+      <div>Choose quote, paraphrase, or summary</div><div>✓ Complete</div>
+      <div>Bring your voice back after evidence</div><div>✓ Complete</div>
+      <div>Repair dropped quotations</div><div>✓ Complete</div>
+      <div>Synthesize sources</div><div>✓ Complete</div>
+    </div>
+    <p><strong>Completed:</strong> <span id="date"></span></p>
+    <div class="shot">📸 Screenshot this completion card for Canvas.</div>
+  </div>
+
+  <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+</section>
+
+<footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id), key="sourceJoinConversationV1";
+let i=0, unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};
+
+const srcA={type:"Student-services usability study",text:"Students were more likely to abandon a task when important support information was buried across multiple pages or written in unfamiliar institutional language."};
+const srcB={type:"Campus communication report",text:"Students often use peer-created social media posts to understand deadlines, forms, and campus processes that are also described on official college websites."};
+const srcC={type:"Accessibility review",text:"Simplifying navigation alone does not guarantee access; information must also be readable, current, and usable with assistive technologies."};
+const srcD={type:"General higher-education article",text:"College students use social media every day for entertainment, news, and communication."};
+
+const moments=[
+["1 · Incoming Source","role",srcA,"What job could this source reasonably do in your argument?",[
+["Provide evidence that communication design can affect whether students complete a task.",1,"This source helps support the claim that findability and clarity matter."],
+["Prove that every college website is bad.",0,"The source does not justify that broad claim."],
+["Replace your entire argument.",0,"Sources contribute to your argument; they do not take over the writer's job."],
+["Serve no purpose because it is not a quotation.",0,"A source can be useful whether you quote, paraphrase, or summarize it."]
+]],
+["1 · Incoming Source","decoder","College Writing Decoder: “Use sources.”","That does not mean “insert quotations.” Start by asking what job a source can perform in your argument."],
+["2 · Source Role Badge","role",srcB,"Which role best fits this source?",[
+["Give an example of why students may turn elsewhere when official information is hard to use.",1,"This source offers a concrete example that can help the reader see the communication problem."],
+["Define the word college.",0,"That is not what this source does."],
+["Prove social media is always more accurate.",0,"The source does not make that claim."],
+["Automatically become the thesis.",0,"The thesis remains your claim."]
+]],
+["3 · Source at the Door","bouncer",srcD,"Does this source deserve a place in this paragraph?",[
+["Not necessarily. It is about students and social media, but it does not directly help the claim about access to student-services information.",1,"Good call. Finding a source does not obligate you to use it."],
+["Yes, because every source related to college belongs in a college essay.",0,"Relevance depends on the actual claim, not just the broad topic."],
+["Yes, because the source is easy to understand.",0,"Ease of reading does not make it useful for this particular argument."],
+["Yes, because more sources always make a paper stronger.",0,"More sources can create clutter if they do not serve the argument."]
+]],
+["4 · Quote, Paraphrase, or Summarize?","mix","Exact wording is especially memorable and the phrasing itself matters.","Which move best fits?",[
+["Quote.",1,"Use quotation when the author's exact language is important to what you want the reader to notice."],
+["Paraphrase only because quotations are never appropriate.",0,"Quotations can be useful when exact wording matters."],
+["Summarize the entire source.",0,"You only need a specific phrase here."],
+["Copy the wording without quotation marks.",0,"Exact borrowed wording needs clear quotation and attribution."]
+]],
+["4 · Quote, Paraphrase, or Summarize?","mix","You need one specific idea from a source, but the original phrasing is not important.","Which move best fits?",[
+["Paraphrase.",1,"Paraphrasing lets you communicate the source's idea in language that fits your sentence and argument."],
+["Quote a full paragraph.",0,"That would give the reader more source language than you need."],
+["Summarize the entire article.",0,"You need one specific idea, not the big picture."],
+["Use the idea with no citation because the words changed.",0,"Changing wording does not change where the idea came from."]
+]],
+["4 · Quote, Paraphrase, or Summarize?","mix","You need the broad findings of a six-page section.","Which move best fits?",[
+["Summarize.",1,"A summary gives the reader the larger point without reproducing every detail."],
+["Quote all six pages.",0,"That would overwhelm your own argument."],
+["Paraphrase every sentence one by one.",0,"That is not an efficient way to represent the big picture."],
+["Mention the source title only.",0,"The reader still needs the actual finding or idea."]
+]],
+["5 · Your Voice → Source Voice → Your Voice","thread"],
+["6 · Where Did the Writer Go?","ghost"],
+["6 · Where Did the Writer Go?","choice","Smith argues that college websites are confusing. Jones states that students rely on social media. Garcia explains that institutional language can be difficult. Lee also discusses online information.","What is this paragraph missing most?",[
+["The writer's interpretation and explanation of what these sources collectively show.",1,"Exactly. We can hear the sources, but we cannot yet hear what the writer thinks about them."],
+["A fifth source.",0,"Another source would make the writer disappear even more."],
+["A longer quotation.",0,"The problem is not insufficient source language."],
+["More reporting verbs.",0,"The paragraph needs the writer's thinking, not just more ways to say “says.”"]
+]],
+["7 · The Quotation Sandwich","sandwich"],
+["8 · Dropped Quote Rescue","rescue"],
+["8 · Dropped Quote Rescue","choice","College websites can be difficult to navigate. “Students were more likely to abandon a task when support information was buried across multiple pages.” Colleges should improve their websites.","What would most improve this source integration?",[
+["Identify the source, establish why it is entering, then explain what the evidence shows and why it matters.",1,"That repairs both ends of the source move: entry and return."],
+["Make the quotation longer.",0,"Length does not solve the missing context and analysis."],
+["Add “Furthermore” before the quotation.",0,"A transition word cannot explain who is speaking or why the evidence matters."],
+["Remove your own sentences.",0,"Your voice is what organizes the source for the reader."]
+]],
+["9 · Paraphrase Machine","machine"],
+["9 · Paraphrase Machine","choice","Original idea: Students were more likely to abandon a task when essential support information was difficult to locate. Which is the stronger paraphrase?",[
+["When colleges make important support information hard to find, students may be less likely to complete the process they started.",1,"This restates the idea through a new sentence structure and wording while preserving the meaning."],
+["Students were more likely to leave a task when vital support information was hard to locate.",0,"This mostly swaps synonyms while keeping the original structure."],
+["Students do tasks online.",0,"This loses important meaning."],
+["Support information exists.",0,"This is too vague to represent the original idea accurately."]
+]],
+["10 · Changing the Words","decoder","College Writing Decoder: “Put this in your own words.”","Paraphrasing changes the wording, not the ownership of the idea. Paraphrases and summaries still need attribution or citation when the idea comes from a source."],
+["11 · Credibility Has a Job Too","bouncer",srcB,"What is the most useful credibility question here?",[
+["Is this source credible enough for the particular job I want it to do in this argument?",1,"Credibility is connected to purpose. A student survey, scholarly study, government page, or news report may each be useful for different jobs."],
+["Is this source universally perfect?",0,"No source is useful for every possible purpose."],
+["Does this source agree with me?",0,"Agreement is not the same as credibility."],
+["Is the source long?",0,"Length does not establish credibility."]
+]],
+["12 · Two Sources Enter","synthesis"],
+["12 · Two Sources Enter","choice","Source A suggests poor navigation can prevent students from completing tasks. Source C warns that navigation alone is not enough because readability, currency, and accessibility also matter.","What can the writer do with these together?",[
+["Show that improving access requires more than one design choice: navigation matters, but so do clarity, currency, and accessibility.",1,"That is synthesis: showing what you notice when the sources are considered together."],
+["Choose whichever source agrees more strongly with the thesis and ignore the other.",0,"A complicating source can make the argument more precise."],
+["Summarize Source A, then summarize Source C, and stop.",0,"That reports the sources but does not yet show the relationship between them."],
+["Declare that one source must be wrong.",0,"The sources can be complementary rather than contradictory."]
+]],
+["13 · Build the Conversation","thread2"],
+["14 · Final Source Check","finish"]
+];
+
+function save(done=false){localStorage.setItem(key,JSON.stringify({i,unlocked,done,date:done?new Date().toISOString():null}))}
+function setU(k){if(k)unlocked[k]=true;renderMeter()}
+function renderMeter(){
+ const labels=[["role","Source roles"],["choice","Quote / paraphrase / summarize"],["voice","Writer voice"],["rescue","Dropped quote rescue"],["credibility","Relevance + credibility"],["synthesis","Synthesis"]];
+ $("meter").innerHTML=labels.map(([k,l])=>`<div class="vm ${unlocked[k]?"on":""}">${unlocked[k]?"✓":"○"} ${l}</div>`).join("")
+}
+function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
+function sourceCard(s){return `<div class="sourcecard"><div class="type">${s.type}</div><blockquote>${s.text}</blockquote></div>`}
+function choices(arr,onGood){
+ const wrap=document.createElement("div");wrap.className="choices";
+ arr.forEach(([label,good,msg])=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=label;b.onclick=()=>{if(good){[...wrap.children].forEach(x=>x.disabled=true);b.classList.add("selected");if(onGood)onGood();fb("That move fits the job.",msg)}else{b.disabled=true;fb("Try a different move.",msg,false);$("next").classList.add("hidden")}};wrap.appendChild(b)});
+ return wrap
+}
+function render(){
+ const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
+ $("ptext").textContent=`Source mission ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderMeter();
+
+ if(m[1]==="role"){
+   $("host").innerHTML=`<div class="signal"><div class="label">🚨 Incoming Source</div></div>${sourceCard(m[2])}<p class="question">${m[3]}</p>`;
+   $("host").appendChild(choices(m[4],()=>setU("role")))
+ }
+ if(m[1]==="decoder"){
+   $("host").innerHTML=`<div class="decoder"><h3>🔓 ${m[2]}</h3><p>${m[3]}</p></div>`;fb("Hidden instruction decoded.","Academic shorthand makes more sense when you translate it into the reader's needs.")
+ }
+ if(m[1]==="bouncer"){
+   $("host").innerHTML=`<div class="bouncer"><h3>🚪 Source at the Door</h3>${sourceCard(m[2])}</div><p class="question">${m[3]}</p>`;
+   $("host").appendChild(choices(m[4],()=>{setU(i===14?"credibility":"role")}))
+ }
+ if(m[1]==="mix"){
+   $("host").innerHTML=`<div class="mixer"><div class="mix"><strong>QUOTE</strong>Exact wording matters</div><div class="mix"><strong>PARAPHRASE</strong>Specific idea matters</div><div class="mix"><strong>SUMMARY</strong>Big picture matters</div></div><div class="callout">${m[2]}</div><p class="question">${m[3]}</p>`;
+   $("host").appendChild(choices(m[4],()=>setU("choice")))
+ }
+ if(m[1]==="thread"){
+   $("host").innerHTML=`<div class="thread">
+     <div class="bubble me"><strong>You</strong>Students need college information that is easy to locate and understand.</div>
+     <div class="bubble source"><strong>Source</strong>A usability study found that students were more likely to abandon tasks when support information was buried across multiple pages.</div>
+     <div class="bubble me"><strong>You</strong>This finding matters because information that technically exists may still be inaccessible in practice if students cannot locate it when they need it.</div>
+   </div><div class="secret"><strong>COLLEGE WRITING SECRET:</strong> An academic paragraph can contain several voices. Your job is to help the reader understand why those voices are part of your conversation.</div>`;
+   setU("voice");fb("Your voice returned.","The source contributed evidence, but the writer still interpreted its significance.")
+ }
+ if(m[1]==="ghost"){
+   $("host").innerHTML=`<div class="ghost"><h3>👻 Where Did the Writer Go?</h3><p>Smith argues... Jones states... Garcia explains... Lee also argues...</p><p><strong>We can hear everybody except the person writing the paper.</strong></p></div>`;
+   fb("Source-heavy does not automatically mean strong.","The writer's job is to select, connect, interpret, and respond—not merely report.")
+ }
+ if(m[1]==="choice"){
+   $("host").innerHTML=`<p class="question">${m[2]}</p>`;
+   $("host").appendChild(choices(m[3],()=>{if(i===8)setU("voice");if(i===11)setU("rescue");if(i===13)setU("choice");if(i===16)setU("synthesis")}))
+ }
+ if(m[1]==="sandwich"){
+   $("host").innerHTML=`<div class="secret"><h3>🥪 The Quotation Sandwich</h3>
+   <p><strong>Top bread — Set it up:</strong> Who is speaking? Why is this material entering now?</p>
+   <p><strong>Filling — Source material:</strong> Quote, paraphrase, or summary.</p>
+   <p><strong>Bottom bread — Your voice returns:</strong> What does this show? Why does it matter? How does it connect?</p>
+   </div>
+   <div class="callout"><strong>Useful scaffold, not a law.</strong> Real source integration may need more than one sentence of analysis, several sources at once, or context established earlier in the paragraph.</div>`;
+   fb("Keep the tool. Lose the rigidity.","The point of the sandwich is to prevent source material from appearing without context or response.")
+ }
+ if(m[1]==="rescue"){
+   $("host").innerHTML=`<div class="signal"><div class="label">🚨 Dropped Quote Detected</div></div>
+   <div class="thread"><div class="bubble me"><strong>You</strong>College websites can be difficult to navigate.</div><div class="bubble source"><strong>???</strong>“Students were more likely to abandon a task when support information was buried across multiple pages.”</div><div class="bubble me"><strong>You</strong>Colleges should improve their websites.</div></div>
+   <div class="secret"><strong>Rescue sequence:</strong> Identify the speaker → establish why the source is entering → present the evidence → bring your voice back → explain what it shows.</div>`;
+   setU("rescue");fb("Quote rescue protocol loaded.","A quotation should not suddenly appear with no speaker, purpose, or explanation.")
+ }
+ if(m[1]==="machine"){
+   $("host").innerHTML=`<div class="machine"><h3>🤖 Paraphrase Machine</h3><p><strong>BEEP. WORD SWAPPING DETECTED.</strong></p><p>Good paraphrasing is not a thesaurus exercise.</p><ol><li>Read the idea.</li><li>Look away from the original.</li><li>Explain what you understood.</li><li>Compare for accuracy.</li><li>Credit the source.</li></ol></div>`;
+   fb("Meaning first. Wording second.","A strong paraphrase preserves the source's meaning while genuinely reshaping the language and sentence structure.")
+ }
+ if(m[1]==="synthesis"){
+   $("host").innerHTML=`<div class="synthesis"><h3>🎙️ Two Sources Enter the Conversation</h3>
+   <div class="thread"><div class="bubble source"><strong>Source A</strong>Poor navigation can cause students to abandon important online tasks.</div><div class="bubble source"><strong>Source C</strong>Navigation alone is not enough; readability, currency, and accessibility also affect access.</div></div>
+   <p><strong>Your job:</strong> Do not just report Source A and then Source C. Show the reader what you notice when you consider them together.</p></div>`;
+   setU("synthesis");fb("This is the beginning of synthesis.","Synthesis is the writer creating a relationship among sources rather than presenting them as separate book reports.")
+ }
+ if(m[1]==="thread2"){
+   $("host").innerHTML=`<div class="thread">
+   <div class="bubble me"><strong>You</strong>Improving student-services communication requires more than simply posting information online.</div>
+   <div class="bubble source"><strong>Source A</strong>A usability study found that students may abandon tasks when support information is difficult to locate.</div>
+   <div class="bubble me"><strong>You</strong>That suggests navigation itself can become an access barrier.</div>
+   <div class="bubble source"><strong>Source C</strong>An accessibility review adds that readable language, current information, and assistive-technology compatibility also shape whether students can use what they find.</div>
+   <div class="bubble me"><strong>You</strong>Together, these sources suggest that effective communication is not just a matter of availability; colleges must also consider findability, clarity, and usability.</div>
+   </div>`;
+   setU("voice");setU("synthesis");fb("Conversation built.","The sources have distinct roles, but the writer controls the relationship among them.")
+ }
+ if(m[1]==="finish"){
+   $("host").innerHTML=`<div class="callout"><strong>Before you add a source, ask:</strong><br>Why is it here? What does my reader need from it? How should it enter? What will I say after it? How does it help my argument?</div>`;
+   $("next").textContent="Finish Lab";$("next").classList.remove("hidden")
+ }
+ save(false)
+}
+
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
+$("check").onclick=()=>{$("checkBox").classList.toggle("hidden")}
+$("copy").onclick=async()=>{
+ const text=`SOURCE CHECK
+
+Before I add this source:
+1. Why is it here?
+2. What does my reader need from it?
+3. Quote, paraphrase, or summarize?
+4. How will I identify and credit it?
+5. What will I say after it?
+6. How does it help my argument?`;
+ try{await navigator.clipboard.writeText(text);$("copy").textContent="✓ Source Check Copied"}catch(e){$("checkBox").classList.remove("hidden")}
+}
+let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume Mission";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
