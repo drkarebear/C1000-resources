@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Editing Room: Turn Feedback Into a Better Draft</title>
+<style>
+:root{
+  --bg:#f4f1eb;--ink:#222b35;--muted:#66717a;--card:#fff;--line:#d7d0c6;
+  --accent:#5949b8;--accentSoft:#efecff;--green:#2d7865;--greenSoft:#e9f6f0;
+  --rose:#a24d61;--roseSoft:#fff0f3;--gold:#9a7217;--goldSoft:#fff7dc;
+  --shadow:0 10px 30px rgba(34,43,53,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.58}
+main{max-width:980px;margin:0 auto;padding:24px 16px 56px}
+.hero{background:linear-gradient(135deg,#25273a,#484663);color:#fff;padding:28px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h1{margin:0 0 8px;font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.05}
+.hero p{margin:0;max-width:780px}.hero .mini{margin-top:13px;color:#ece9ff;font-size:.95rem}
+.progress-wrap,.screen{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.progress-wrap{padding:14px 16px;margin-bottom:18px}
+.progress-label{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:800}
+.progress{height:10px;background:#e6e0d8;border-radius:999px;overflow:hidden;margin-top:8px}
+.progress div{height:100%;width:16.67%;background:var(--accent);transition:width .25s}
+.screen{display:none;padding:24px}.screen.active{display:block}
+.kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--accent)}
+h2{margin:4px 0 10px;font-size:1.7rem}h3{margin:0 0 8px}
+.callout{padding:16px;border-radius:12px;background:var(--greenSoft);border-left:5px solid var(--green);margin:16px 0}
+.warning{padding:16px;border-radius:12px;background:var(--goldSoft);border-left:5px solid var(--gold);margin:16px 0}
+.comment{background:#faf9f6;border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0}
+.comment .who{font-size:.88rem;font-weight:900;color:var(--muted);margin-bottom:5px}
+.comment blockquote{margin:0;font-size:1.08rem;font-weight:650}
+.options{display:grid;gap:10px;margin-top:10px}
+.option,.category,.task-card,.order-card{
+  width:100%;text-align:left;border:2px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:12px;padding:14px 16px;min-height:48px;cursor:pointer;font-size:1rem
+}
+.option:hover,.option:focus-visible,.category:hover,.category:focus-visible,.task-card:hover,.task-card:focus-visible,.order-card:hover,.order-card:focus-visible{
+  border-color:var(--accent);outline:3px solid rgba(89,73,184,.14);outline-offset:2px
+}
+.option[aria-pressed="true"],.category[aria-pressed="true"],.task-card[aria-pressed="true"],.order-card[aria-pressed="true"]{border-color:var(--accent);background:var(--accentSoft)}
+.feedback{display:none;margin-top:12px;padding:14px 16px;border-radius:12px}
+.feedback.show{display:block}.feedback.good{background:var(--greenSoft);border-left:5px solid var(--green)}
+.feedback.try{background:var(--roseSoft);border-left:5px solid var(--rose)}
+.question{font-size:1.08rem;font-weight:900;margin:20px 0 10px}
+.legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:16px 0}
+.legend div{border:1px solid var(--line);border-radius:12px;padding:10px;background:#faf9f6;font-size:.9rem}
+.legend strong{display:block}
+.inbox{display:grid;gap:12px}
+.inbox-item{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.inbox-item.done{background:#f4faf7;border-color:#b9d9cd}
+.inbox-item .status{font-size:.85rem;font-weight:900;color:var(--muted)}
+.category-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:12px}
+.category{padding:9px;font-size:.87rem;text-align:center}
+.edit-board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.board{border:1px solid var(--line);border-radius:14px;padding:15px;background:#faf9f6}
+.board strong{display:block;margin-bottom:7px}
+.domino{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0}
+.domino span{padding:10px 12px;border-radius:10px;background:var(--accentSoft);border:1px solid #d4cdf5;font-weight:750}
+.arrow{background:transparent!important;border:0!important;padding:0!important}
+.controls{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;min-height:46px;font-weight:900;font-size:1rem;cursor:pointer}
+button.primary{background:var(--accent);color:#fff}button.secondary{background:#e7e1d9;color:var(--ink)}button:disabled{opacity:.5;cursor:not-allowed}
+textarea{width:100%;min-height:86px;border:2px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical}
+textarea:focus{border-color:var(--accent);outline:3px solid rgba(89,73,184,.14)}
+.plan-row{border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0;background:#faf9f6}
+.plan-row label{display:block;font-weight:900;margin:8px 0 5px}
+select{width:100%;padding:11px;border:2px solid var(--line);border-radius:10px;background:#fff;font:inherit}
+.final-plan{border:2px solid var(--accent);border-radius:18px;padding:20px;background:linear-gradient(180deg,#fff,#fbfaf8);margin-top:18px}
+.final-section{padding:12px 0;border-top:1px solid var(--line)}.final-section:first-of-type{border-top:0}
+.small{font-size:.93rem;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:780px){.legend,.category-row{grid-template-columns:1fr 1fr}.edit-board{grid-template-columns:1fr}}
+@media(max-width:480px){.legend,.category-row{grid-template-columns:1fr}.controls button{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero" aria-labelledby="title">
+  <div class="kicker" style="color:#ddd8ff">C1000 / C1000E Revision Lab</div>
+  <h1 id="title">🎬 The Editing Room</h1>
+  <p><strong>Turn Feedback Into a Better Draft.</strong> Reading comments is only the beginning. Your job is to figure out what the reader noticed, what kind of work your draft needs, and what to change first.</p>
+  <p class="mini">You are still the writer. Feedback gives you information. You make the editorial decisions.</p>
+</section>
+
+<section class="progress-wrap" aria-label="Activity progress">
+  <div class="progress-label"><span id="progressText">Scene 1 of 6</span><span id="progressLabel">Translate the comment</span></div>
+  <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+</section>
+<div id="live" class="small" aria-live="polite"></div>
+
+<section class="screen active" data-step="0">
+  <div class="kicker">Scene 1 · Translate the Comment</div>
+  <h2>What Is the Reader Actually Asking For?</h2>
+  <p>Feedback often arrives in professor-language or peer-review-language. Before revising, turn the comment into a job you understand.</p>
+  <div class="comment"><div class="who">💬 INSTRUCTOR COMMENT</div><blockquote>“Can you develop this idea further?”</blockquote></div>
+  <p class="question">What revision job does this point toward?</p>
+  <div class="options" id="translate1">
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Make the sentence longer.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Add a quotation.</button>
+    <button class="option" type="button" data-correct="true" aria-pressed="false">Explain the idea or reasoning more fully.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Fix the grammar.</button>
+  </div>
+  <div id="fb-t1" class="feedback"></div>
+
+  <div class="comment"><div class="who">💬 READER COMMENT</div><blockquote>“I'm not seeing how this evidence supports your claim.”</blockquote></div>
+  <p class="question">Translate that into a revision task.</p>
+  <div class="options" id="translate2">
+    <button class="option" type="button" data-correct="true" aria-pressed="false">Explain the connection between my evidence and my point.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Find a longer quotation.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Delete the paragraph.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Change the font or formatting.</button>
+  </div>
+  <div id="fb-t2" class="feedback"></div>
+  <div class="callout"><strong>Editing-room move:</strong> Turn “What does this comment mean?” into “What do I need to do?”</div>
+  <div class="controls"><button class="primary next" type="button" disabled>Open the Feedback Inbox</button></div>
+</section>
+
+<section class="screen" data-step="1">
+  <div class="kicker">Scene 2 · Feedback Inbox</div>
+  <h2>What Kind of Work Does This Need?</h2>
+  <p>Don't just count comments. Sort them by the kind of revision they point toward.</p>
+  <div class="legend">
+    <div><strong>🧭 RETHINK</strong>Argument or central idea</div>
+    <div><strong>✂️ MOVE / CUT</strong>Organization or relevance</div>
+    <div><strong>➕ BUILD</strong>Needs more support</div>
+    <div><strong>🔗 CONNECT</strong>Relationship isn't clear</div>
+    <div><strong>✨ POLISH</strong>Sentence, citation, format</div>
+  </div>
+  <div class="inbox" id="inbox">
+    <div class="inbox-item" data-answer="rethink"><div class="status">1 NEW COMMENT</div><strong>“Your thesis says social media is harmful, but the essay seems to argue that its effects depend on how people use it.”</strong><div class="category-row"></div></div>
+    <div class="inbox-item" data-answer="build"><div class="status">1 NEW COMMENT</div><strong>“Can you give an example here?”</strong><div class="category-row"></div></div>
+    <div class="inbox-item" data-answer="connect"><div class="status">1 NEW COMMENT</div><strong>“How does this quotation support the point you're making in this paragraph?”</strong><div class="category-row"></div></div>
+    <div class="inbox-item" data-answer="move"><div class="status">1 NEW COMMENT</div><strong>“This paragraph is interesting, but I'm not sure how it fits here.”</strong><div class="category-row"></div></div>
+    <div class="inbox-item" data-answer="polish"><div class="status">1 NEW COMMENT</div><strong>“Check the MLA citation format here.”</strong><div class="category-row"></div></div>
+  </div>
+  <div id="fb-inbox" class="feedback"></div>
+  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Enter the Cutting Room</button></div>
+</section>
+
+<section class="screen" data-step="2">
+  <div class="kicker">Scene 3 · Don't Polish a Scene You Might Cut</div>
+  <h2>You Have 30 Minutes. What Comes First?</h2>
+  <div class="warning"><strong>Your draft has seven comments:</strong> the thesis doesn't match the essay; one paragraph doesn't support the argument; one quotation needs explanation; the conclusion needs development; one comma splice; one MLA error; one typo.</div>
+  <p class="question">Where should you begin?</p>
+  <div class="options" id="priority">
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Fix the typo, comma, and MLA error first because they are quick.</button>
+    <button class="option" type="button" data-correct="true" aria-pressed="false">Start with the thesis and major argument problems, then work toward smaller changes.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Start at the first comment and work straight down the document.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Fix whichever comments are easiest so I can complete the most.</button>
+  </div>
+  <div id="fb-priority" class="feedback"></div>
+  <div class="callout"><strong>Revision isn't about completing the most comments.</strong> It's about making the changes that improve the draft most.</div>
+  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Watch the Domino Effect</button></div>
+</section>
+
+<section class="screen" data-step="3">
+  <div class="kicker">Scene 4 · The Domino Effect</div>
+  <h2>One Big Edit Can Change the Whole Draft</h2>
+  <div class="comment"><div class="who">💬 INSTRUCTOR COMMENT</div><blockquote>“Your thesis says social media is harmful, but most of your essay argues that its effects depend on how people use it.”</blockquote></div>
+  <p class="question">What should you examine first?</p>
+  <div class="options" id="dominoChoice">
+    <button class="option" type="button" data-correct="true" aria-pressed="false">The thesis</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">The Works Cited page</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">The commas in paragraph 2</button>
+  </div>
+  <div id="fb-domino" class="feedback"></div>
+  <div id="dominoPath" class="domino hidden" aria-label="Revision domino effect">
+    <span>🎯 Revise thesis</span><span class="arrow">→</span><span>✓ Paragraph 1 still works</span><span class="arrow">→</span><span>🔧 Paragraph 2 needs a new topic sentence</span><span class="arrow">→</span><span>✓ Paragraph 3 fits better</span><span class="arrow">→</span><span>🔧 Update conclusion</span>
+  </div>
+  <div class="callout"><strong>Big edits create ripples.</strong> That is why writers usually make higher-level decisions before polishing sentences.</div>
+  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Handle Tricky Feedback</button></div>
+</section>
+
+<section class="screen" data-step="4">
+  <div class="kicker">Scene 5 · You're Still the Editor</div>
+  <h2>Feedback Is Information, Not an Order</h2>
+  <div class="comment"><div class="who">💬 PEER REVIEW COMMENT</div><blockquote>“You should delete this whole paragraph.”</blockquote></div>
+  <p class="question">What is the strongest response?</p>
+  <div class="options" id="agency">
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Delete it immediately. The reviewer said it doesn't work.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Ignore it. It's my paper.</button>
+    <button class="option" type="button" data-correct="true" aria-pressed="false">Figure out what made the reader think the paragraph wasn't helping, then decide whether to cut, move, or revise it.</button>
+  </div>
+  <div id="fb-agency" class="feedback"></div>
+
+  <div class="comment"><div class="who">💬 TWO REVIEWERS</div><blockquote>Reviewer A: “I want more background here.”<br>Reviewer B: “The introduction feels too long.”</blockquote></div>
+  <p class="question">Those comments conflict. Now what?</p>
+  <div class="options" id="conflict">
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Choose the reviewer I agree with.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Count votes and follow whichever opinion appears most often.</button>
+    <button class="option" type="button" data-correct="true" aria-pressed="false">Look for the problem underneath both comments: maybe the introduction needs the right background more efficiently.</button>
+    <button class="option" type="button" data-correct="false" aria-pressed="false">Ignore both because they cancel each other out.</button>
+  </div>
+  <div id="fb-conflict" class="feedback"></div>
+  <div class="callout"><strong>Don't just count votes.</strong> Ask what reader experience might be underneath the comments.</div>
+  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Build My Editing Plan</button></div>
+</section>
+
+<section class="screen" data-step="5">
+  <div class="kicker">Final Scene · Your Draft</div>
+  <h2>Turn Your Feedback Into an Editing Plan</h2>
+  <p>Paste up to five comments from your own draft. You don't need to enter all your feedback—start with the comments that seem most important or confusing.</p>
+  <div id="planInputs"></div>
+  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary" id="makePlan" type="button">Build My Editing Plan</button></div>
+
+  <div id="finalPlan" class="final-plan hidden" aria-live="polite">
+    <h2 style="margin-top:0">🎬 My Editing Plan</h2>
+    <p>Work from bigger decisions toward smaller ones. You can change this order if your draft needs something different—you're the editor.</p>
+    <div id="planOutput"></div>
+    <div class="callout"><strong>Don't polish a scene you might cut.</strong><p style="margin-bottom:0">You don't have to “fix the whole paper.” Make the next useful change, then look again.</p></div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+const screens=[...document.querySelectorAll('.screen')], labels=['Translate the comment','Feedback inbox','Choose what comes first','The domino effect','Writer agency','Build your editing plan'];
+const live=document.getElementById('live'),bar=document.getElementById('progressBar'),pt=document.getElementById('progressText'),pl=document.getElementById('progressLabel');let current=0;
+function progress(){bar.style.width=((current+1)/screens.length*100)+'%';pt.textContent=`Scene ${current+1} of ${screens.length}`;pl.textContent=labels[current]}
+function show(n){screens[current].classList.remove('active');current=n;screens[current].classList.add('active');progress();window.scrollTo({top:0,behavior:'smooth'})}
+function nextOn(i,on){const b=screens[i].querySelector('.next');if(b)b.disabled=!on}
+function quiz(id,fbid,callback){
+ const box=document.getElementById(id),fb=document.getElementById(fbid);
+ box.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{
+  box.querySelectorAll('.option').forEach(b=>b.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');
+  const ok=btn.dataset.correct==='true';fb.className='feedback show '+(ok?'good':'try');
+  fb.textContent=ok?'Yes. That choice turns the feedback into useful revision work.':'Try again. Look for the choice that identifies the underlying writing job rather than simply obeying, polishing, or avoiding the comment.';
+  live.textContent=fb.textContent;if(callback)callback(ok);
+ }))
+}
+let t1=false,t2=false;quiz('translate1','fb-t1',ok=>{t1=ok;nextOn(0,t1&&t2)});quiz('translate2','fb-t2',ok=>{t2=ok;nextOn(0,t1&&t2)});
+const cats=[['rethink','🧭 Rethink'],['move','✂️ Move / Cut'],['build','➕ Build'],['connect','🔗 Connect'],['polish','✨ Polish']];
+const inboxItems=[...document.querySelectorAll('.inbox-item')];let inboxDone=new Set();
+inboxItems.forEach((item,idx)=>{
+ const row=item.querySelector('.category-row');
+ cats.forEach(([val,label])=>{const b=document.createElement('button');b.type='button';b.className='category';b.textContent=label;b.dataset.val=val;b.setAttribute('aria-pressed','false');row.appendChild(b);
+ b.addEventListener('click',()=>{
+  row.querySelectorAll('.category').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+  if(val===item.dataset.answer){inboxDone.add(idx);item.classList.add('done');item.querySelector('.status').textContent='✓ SORTED';live.textContent='Good read. That comment is sorted by the kind of work it points toward.'}
+  else{inboxDone.delete(idx);item.classList.remove('done');item.querySelector('.status').textContent='TRY ANOTHER LABEL';live.textContent='Look beneath the wording: is this about the central idea, organization, development, connection, or polish?'}
+  const fb=document.getElementById('fb-inbox');if(inboxDone.size===inboxItems.length){fb.className='feedback show good';fb.textContent='Inbox cleared. You sorted the comments by the work they actually require.';nextOn(1,true)}
+ })})
+});
+quiz('priority','fb-priority',ok=>nextOn(2,ok));
+quiz('dominoChoice','fb-domino',ok=>{nextOn(3,ok);document.getElementById('dominoPath').classList.toggle('hidden',!ok)});
+let agency=false,conflict=false;quiz('agency','fb-agency',ok=>{agency=ok;nextOn(4,agency&&conflict)});quiz('conflict','fb-conflict',ok=>{conflict=ok;nextOn(4,agency&&conflict)});
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>{if(current<screens.length-1)show(current+1)}));
+document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>{if(current>0)show(current-1)}));
+
+const planInputs=document.getElementById('planInputs');
+for(let i=1;i<=5;i++){
+ const div=document.createElement('div');div.className='plan-row';
+ div.innerHTML=`<h3>Feedback ${i}${i>1?' <span class="small">(optional)</span>':''}</h3>
+ <label for="comment${i}">Feedback I received</label><textarea id="comment${i}" placeholder="Paste or type one comment here."></textarea>
+ <label for="type${i}">What kind of work does this point toward?</label>
+ <select id="type${i}"><option value="">Choose one</option><option value="rethink">🧭 Rethink — argument or central idea</option><option value="move">✂️ Move / Cut — organization or relevance</option><option value="build">➕ Build — needs more support or explanation</option><option value="connect">🔗 Connect — relationship between ideas isn't clear</option><option value="polish">✨ Polish — sentence, citation, or formatting</option><option value="unsure">❓ I'm not sure yet</option></select>
+ <label for="task${i}">In my own words, I need to...</label><textarea id="task${i}" placeholder="Turn the feedback into a specific action."></textarea>`;
+ planInputs.appendChild(div);
+}
+document.getElementById('makePlan').addEventListener('click',()=>{
+ const entries=[];
+ for(let i=1;i<=5;i++){
+  const c=document.getElementById('comment'+i).value.trim(),t=document.getElementById('type'+i).value,task=document.getElementById('task'+i).value.trim();
+  if(c||t||task){if(!c||!t||!task){live.textContent=`Finish all three parts for Feedback ${i}, or clear that row.`;return}entries.push({c,t,task})}
+ }
+ if(!entries.length){live.textContent='Add at least one piece of feedback to build your plan.';return}
+ const order={rethink:1,move:2,connect:3,build:4,polish:5,unsure:0};
+ entries.sort((a,b)=>order[a.t]-order[b.t]);
+ const names={unsure:'❓ Clarify First',rethink:'🧭 Rethink',move:'✂️ Move / Cut',connect:'🔗 Connect',build:'➕ Build',polish:'✨ Polish'};
+ const grouped={};entries.forEach(e=>(grouped[e.t]??=[]).push(e));
+ const out=document.getElementById('planOutput');out.innerHTML='';
+ ['unsure','rethink','move','connect','build','polish'].forEach(type=>{
+  if(!grouped[type])return;const sec=document.createElement('div');sec.className='final-section';const h=document.createElement('h3');h.textContent=names[type];sec.appendChild(h);
+  grouped[type].forEach(e=>{const p=document.createElement('p');const strong=document.createElement('strong');strong.textContent='Revision task: ';p.appendChild(strong);p.appendChild(document.createTextNode(e.task));const small=document.createElement('div');small.className='small';small.textContent='Feedback: “'+e.c+'”';sec.appendChild(p);sec.appendChild(small)});
+  out.appendChild(sec)
+ });
+ document.getElementById('finalPlan').classList.remove('hidden');document.getElementById('finalPlan').scrollIntoView({behavior:'smooth',block:'start'});live.textContent='Your editing plan is ready.'
+});
+progress();
+})();
+</script>
+</body>
+</html>
