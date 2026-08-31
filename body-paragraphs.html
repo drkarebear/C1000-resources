@@ -16,7 +16,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
 button{font:inherit}
-button:focus-visible,a:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex="-1"]:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
 .skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#000;border:2px solid #000;padding:10px 14px}
 .skip:focus{left:8px}
 .shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
@@ -63,6 +63,15 @@ button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight
 .final-banner{border:3px solid var(--good);background:var(--good-bg);border-radius:18px;padding:22px;text-align:center;margin-bottom:18px}
 .final-banner .big{font-size:clamp(1.7rem,6vw,2.7rem);font-weight:900;color:var(--good)}
 .shot{background:var(--warm);border:2px solid var(--warm-line);border-radius:12px;padding:14px 16px;font-weight:700}
+.transfer{border:2px solid var(--brand);background:#f8fbfd;border-radius:16px;padding:clamp(18px,3vw,26px);margin:20px 0}
+.transfer label,.transfer legend{font-weight:800;color:var(--brand-dark)}
+.transfer textarea{width:100%;font:inherit;color:var(--ink);background:#fff;border:2px solid #aebbc7;border-radius:10px;padding:12px;margin:7px 0 16px;resize:vertical}
+.transfer fieldset{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:4px 0 16px}
+.transfer legend{padding:0 6px}
+.transfer .radio-row{display:flex;gap:10px;align-items:flex-start;margin:9px 0}
+.transfer .radio-row label{font-weight:600;color:var(--ink)}
+.transfer .note{color:var(--muted);font-size:.93rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 @media(max-width:760px){.workspace{grid-template-columns:1fr}.sidebar{position:static;order:-1}.toolrow{grid-template-columns:1fr}}
 @media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}}
@@ -70,8 +79,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 </style>
 </head>
 <body>
-<a href="#main" class="skip">Skip to activity</a>
-<main id="main" class="shell">
+<a href="#main" class="skip">Skip to the paragraph activity</a>
+<main id="main" class="shell" tabindex="-1">
 <section id="intro" class="card">
   <p class="eyebrow">ENGL C1000 · Make the paragraph's job visible</p>
   <h1>Paragraph Lab: Build the Argument</h1>
@@ -83,8 +92,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 
 <section id="lab" class="card hidden">
   <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div class="track"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage"></span>
+  <div id="progress" class="track" role="progressbar" aria-label="Paragraph lab progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar" class="bar"></div></div>
+  <span id="stage" class="stage" role="heading" aria-level="3" tabindex="-1"></span>
   <h2>The Paragraph Workshop</h2>
   <div class="workspace">
     <div class="mainpane">
@@ -101,8 +110,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 
 <section id="done" class="card hidden">
   <div class="final-banner">
-    <div>🏗️</div>
-    <div class="big">ARGUMENT BUILT ✓</div>
+    <div aria-hidden="true">🏗️</div>
+    <h2 id="doneTitle" class="big" tabindex="-1">Argument Built ✓</h2>
     <p>You figured out what the reader needed and built the paragraph to provide it.</p>
   </div>
 
@@ -124,9 +133,35 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
     <p class="note">You are now cleared to treat paragraphs without randomly adding “Furthermore.”</p>
   </div>
 
+  <section class="transfer" aria-labelledby="transferTitle">
+    <p class="eyebrow">Transfer to your own draft</p>
+    <h3 id="transferTitle">Run the Blueprint on One of Your Paragraphs</h3>
+    <p>Choose one body paragraph from something you are actually writing. You do not need to fix everything. Diagnose the paragraph first, then choose one useful next move.</p>
+
+    <label for="ownParagraph">Paste one body paragraph from your draft (optional)</label>
+    <textarea id="ownParagraph" rows="7" placeholder="Paste one paragraph here if it helps you look at it as a reader."></textarea>
+
+    <label for="ownJob">What job does this paragraph need to do for your larger argument?</label>
+    <textarea id="ownJob" rows="3" placeholder="For example: explain why the policy creates a barrier, show a consequence, complicate an earlier point..."></textarea>
+
+    <fieldset>
+      <legend>What does your reader most need next?</legend>
+      <div class="radio-row"><input id="needClaim" type="radio" name="readerNeed" value="claim"><label for="needClaim">A clearer paragraph-level claim or point</label></div>
+      <div class="radio-row"><input id="needEvidence" type="radio" name="readerNeed" value="evidence"><label for="needEvidence">More relevant support or a better example</label></div>
+      <div class="radio-row"><input id="needAnalysis" type="radio" name="readerNeed" value="analysis"><label for="needAnalysis">More explanation of what the evidence shows</label></div>
+      <div class="radio-row"><input id="needConnection" type="radio" name="readerNeed" value="connection"><label for="needConnection">A clearer connection to the paragraph's point or larger argument</label></div>
+      <div class="radio-row"><input id="needFocus" type="radio" name="readerNeed" value="focus"><label for="needFocus">A tighter focus because the paragraph is trying to do too many jobs</label></div>
+      <div class="radio-row"><input id="needUnsure" type="radio" name="readerNeed" value="unsure"><label for="needUnsure">I'm not sure yet</label></div>
+    </fieldset>
+
+    <button id="diagnoseOwn" class="primary" type="button">Give Me One Next Move</button>
+    <div id="ownFeedback" class="decoder hidden" role="status" aria-live="polite" tabindex="-1"></div>
+    <p class="note">This check is not scored. Nothing you type here is sent anywhere.</p>
+  </section>
+
   <div class="completion">
     <div class="complete">✓ Lab complete</div>
-    <h2>Paragraph Lab — Complete</h2>
+    <h3>Paragraph Lab — Complete</h3>
     <div class="grid">
       <div>Give the paragraph a job</div><div>✓ Complete</div>
       <div>Write a paragraph-level claim</div><div>✓ Complete</div>
@@ -223,6 +258,13 @@ const moments=[
 ];
 
 function save(done=false){localStorage.setItem(key,JSON.stringify({i,unlocked,done,date:done?new Date().toISOString():null}))}
+function prefersReducedMotion(){return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches}
+function focusStage(){
+ requestAnimationFrame(()=>{
+  $("stage").focus({preventScroll:true});
+  $("stage").scrollIntoView({behavior:prefersReducedMotion()?"auto":"smooth",block:"start"});
+ });
+}
 function setUnlocked(k){if(k)unlocked[k]=true;renderBlueprint()}
 function renderBlueprint(){
  const labels=[["job","1. Give it a job"],["claim","2. Make the point visible"],["evidence","3. Support it"],["analysis","4. Do the thinking"],["connection","5. Connect it"],["revision","6. Check and revise"]];
@@ -237,9 +279,10 @@ function paragraphHTML(xray=false){
 }
 function render(){
  const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
- $("ptext").textContent=`Paragraph moment ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderBlueprint();
+ const percent=Math.round((i+1)/moments.length*100);
+ $("ptext").textContent=`Paragraph moment ${i+1} of ${moments.length}`;$("pct").textContent=percent+"%";$("bar").style.width=percent+"%";$("progress").setAttribute("aria-valuenow",percent);$("progress").setAttribute("aria-valuetext",`Paragraph moment ${i+1} of ${moments.length}: ${m[0]}`);$("stage").textContent=m[0];renderBlueprint();
  if(m[1]==="choice"){
-  $("host").innerHTML=`<div class="scenario">${m[2]}</div><p class="question">${m[3]}</p><div class="choices" id="choices"></div>`;
+  $("host").innerHTML=`<div class="scenario">${m[2]}</div><p class="question" id="currentQuestion">${m[3]}</p><div class="choices" id="choices" role="group" aria-labelledby="currentQuestion"></div>`;
   m[4].forEach(([label,good,msg])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");setUnlocked(m[5]);fb("That helps the reader.",msg)}else{b.disabled=true;fb("Look at what the reader still needs.",msg+" Try another choice.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)})
  }
  if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 ${m[2]}</h3><p>${m[3]}</p></div>`;fb("Hidden instruction decoded.","College writing often compresses several thinking moves into a short comment.")}
@@ -252,18 +295,19 @@ function render(){
  if(m[1]==="xray"){$("host").innerHTML=`<div class="reader">👀 <strong>Reader:</strong> “I can follow the paragraph. What is happening underneath the surface?”</div><div class="paragraph">${paragraphHTML(true)}</div><p class="note"><strong>Real essays do not contain these labels.</strong> X-ray mode is showing you the invisible work each part is doing.</p>`;fb("You can see the architecture now.","The labels are scaffolding. The goal is to understand the work, not to force every paragraph into identical slots.")}
  if(m[1]==="myth"){$("host").innerHTML=`<div class="myth"><p><strong>MYTH:</strong> ${m[2]}</p><p><strong>REALITY:</strong> ${m[3]}</p></div>`;fb("Scaffold, not law.","Keep a paragraph formula if it helps you get started. Add other structures to your toolbox as your writing situations become more complex.")}
  if(m[1]==="er"){
-  $("host").innerHTML=`<div class="er"><div class="siren">🚨 Paragraph Emergency</div><h3>${m[2]}</h3><p>${m[3]}</p></div><p class="question">${m[4]}</p><div class="choices" id="choices"></div>`;
+  $("host").innerHTML=`<div class="er"><div class="siren">🚨 Paragraph Emergency</div><h3>${m[2]}</h3><p>${m[3]}</p></div><p class="question" id="currentQuestion">${m[4]}</p><div class="choices" id="choices" role="group" aria-labelledby="currentQuestion"></div>`;
   m[5].forEach(([label,good,msg])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;b.onclick=()=>{if(good){[...$("choices").children].forEach(x=>x.disabled=true);b.classList.add("selected");setUnlocked("revision");fb("Diagnosis confirmed.",msg)}else{b.disabled=true;fb("That treatment does not match the problem.",msg+" Try another diagnosis.",false);$("next").classList.add("hidden")}};$("choices").appendChild(b)})
  }
  if(m[1]==="repair"){$("host").innerHTML=`<div class="er"><div class="siren">🚑 Final Repair</div><p><strong>Original paragraph:</strong> Textbooks are expensive. A source says many students worry about textbook costs. This is important. Furthermore, college is difficult.</p></div><p class="question">Repair plan</p><div class="blueprint"><div class="bp on">✓ Give the paragraph one job: explain how cost can affect academic access.</div><div class="bp on">✓ Replace the vague opening with a paragraph-level claim.</div><div class="bp on">✓ Keep relevant support.</div><div class="bp on">✓ Explain what the support shows.</div><div class="bp on">✓ Connect the point to the larger argument.</div></div><div class="paragraph">${paragraphHTML(false)}</div>`;Object.keys(unlocked).forEach(k=>unlocked[k]=true);renderBlueprint();fb("Patient stabilized.","You did not make the paragraph more academic by adding words. You made its job clearer and gave the reader what they needed.")}
  if(m[1]==="finish"){$("host").innerHTML=`<div class="callout"><strong>When someone says “write a body paragraph,” you do not have to guess.</strong><br>Start with: <em>What job does this paragraph need to do for my argument?</em><br>Then ask: <em>What does my reader need in order to follow me?</em></div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
  save(false)
+ focusStage()
 }
-$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());$("finalParagraph").innerHTML=paragraphHTML(false)}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render()}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());$("finalParagraph").innerHTML=paragraphHTML(false);requestAnimationFrame(()=>{$("doneTitle").focus({preventScroll:true});$("doneTitle").scrollIntoView({behavior:prefersReducedMotion()?"auto":"smooth",block:"start"})})}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={job:false,claim:false,evidence:false,analysis:false,connection:false,revision:false};render()}
 $("restart").onclick=()=>{localStorage.removeItem(key);location.reload()}
-let xray=false;$("xray").onclick=()=>{xray=!xray;$("finalParagraph").innerHTML=paragraphHTML(xray);$("xray").textContent=xray?"👁️ Read Normally":"🩻 X-Ray My Paragraph"}
+let xray=false;$("xray").setAttribute("aria-pressed","false");$("xray").onclick=()=>{xray=!xray;$("finalParagraph").innerHTML=paragraphHTML(xray);$("xray").textContent=xray?"👁️ Read Normally":"🩻 X-Ray My Paragraph";$("xray").setAttribute("aria-pressed",String(xray))}
 const starters=["What does my reader need to understand next?","What part of my thesis does this paragraph need to develop?","What evidence would help my reader believe this?","What do I think this evidence actually shows?","Why does this matter to the argument I'm making?","What might my reader be confused about here?"];
 $("prompt").onclick=()=>{const box=$("promptBox");box.classList.remove("hidden");box.innerHTML=`<h3>Starting Question</h3><p>${starters[Math.floor(Math.random()*starters.length)]}</p>`}
 $("copy").onclick=async()=>{const text=`MY PARAGRAPH BLUEPRINT
@@ -275,6 +319,27 @@ $("copy").onclick=async()=>{const text=`MY PARAGRAPH BLUEPRINT
 5. Connect it — Why does this matter to my larger argument?
 6. Check the reader — What might they still need?`;
  try{await navigator.clipboard.writeText(text);$("copy").textContent="✓ Blueprint Copied"}catch(e){$("promptBox").classList.remove("hidden");$("promptBox").innerHTML=`<h3>My Paragraph Blueprint</h3><p>${text.replace(/\n/g,"<br>")}</p>`}}
+
+const nextMoves={
+ claim:["Make the point visible.","Try writing one sentence that states what this paragraph is saying—not just what it is about. Then check whether the rest of the paragraph develops that point."],
+ evidence:["Give the reader something to work with.","Add or replace support that directly serves this paragraph's job. One strong example, detail, quotation, paraphrase, or source can be more useful than several loosely related pieces."],
+ analysis:["Do the thinking after the evidence.","After a key piece of evidence, add 1–3 sentences that answer: What does this show? How does it support my point? Why should my reader care?"],
+ connection:["Reconnect the paragraph to the argument.","Name the relationship explicitly. Explain how this evidence supports the paragraph's claim and how that claim advances, complicates, or qualifies the larger argument."],
+ focus:["Give the paragraph one job.","Underline the sentence that best states this paragraph's job. Anything that serves a different job may need to be cut, moved, or developed in another paragraph."],
+ unsure:["X-ray before you revise.","Mark the paragraph in four ways: underline the main point, box the support, star the analysis, and circle the connection to the larger argument. The thinnest or missing part is a strong candidate for your next revision move."]
+};
+$("diagnoseOwn").onclick=()=>{
+ const choice=document.querySelector('input[name="readerNeed"]:checked');
+ const box=$("ownFeedback");
+ if(!choice){box.classList.remove("hidden");box.innerHTML=`<h3>Choose what your reader needs</h3><p>Pick the closest diagnosis—even “I'm not sure yet” is a useful starting point.</p>`;box.focus();return}
+ const [title,msg]=nextMoves[choice.value];
+ const job=$("ownJob").value.trim();
+ box.classList.remove("hidden");
+ box.innerHTML=`<h3>${title}</h3><p>${msg}</p>${job?`<p><strong>Your paragraph's job:</strong> ${escapeHTML(job)}</p>`:""}<p><strong>Revision rule:</strong> Make one purposeful change, then reread the paragraph as a reader before changing something else.</p>`;
+ box.focus();
+};
+function escapeHTML(text){const d=document.createElement("div");d.textContent=text;return d.innerHTML}
+
 let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume My Paragraph";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
 })();
