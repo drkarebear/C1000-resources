@@ -15,7 +15,12 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
 button{font:inherit;font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
-button:focus-visible,a:focus-visible{outline:4px solid #111;outline-offset:3px}
+button:focus-visible,a:focus-visible,textarea:focus-visible,select:focus-visible{outline:4px solid #111;outline-offset:3px}
+.skip{position:absolute;left:12px;top:-90px;background:#fff;color:var(--dark);border:3px solid var(--dark);border-radius:10px;padding:10px 14px;font-weight:900;z-index:20}.skip:focus{top:12px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.field{display:grid;gap:6px;margin:14px 0}.field label,.field legend{font-weight:900;color:var(--dark)}
+textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:2px solid #9aaab7;border-radius:12px;padding:12px}textarea{min-height:105px;resize:vertical}
+.transfer{border:3px solid var(--blue);border-radius:18px;padding:20px;margin:22px 0;background:#fbfdfe}.transfer-result{margin-top:14px}
 .shell{max-width:1060px;margin:auto;padding:20px 12px 52px}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
 h1,h2,h3{color:var(--dark);line-height:1.18}
@@ -90,6 +95,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </style>
 </head>
 <body>
+<a class="skip" href="#start">Skip to the synthesis activity</a>
 <main class="shell">
 <section id="intro" class="card">
 <p class="eyebrow">ENGL C1000 · Source Synthesis</p>
@@ -102,21 +108,21 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </div>
 <div class="warn"><strong>🚨 SOURCE PARADE DETECTED.</strong><br>The sources are standing next to each other. The writer has not yet shown us what relationship matters.</div>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> Synthesis means organizing sources around an idea, question, relationship, or claim that <em>you</em> control.</div>
-<div class="row"><button id="start" class="primary">🧠 Put the Writer Back in Charge</button><button id="resume" class="secondary hidden">Resume</button></div>
+<div class="row"><button id="start" class="primary" type="button">🧠 Put the Writer Back in Charge</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
 </section>
 
 <section id="lab" class="card hidden">
 <div class="progressline"><span id="pt"></span><span id="pc"></span></div>
-<div class="track"><div id="bar" class="bar"></div></div>
+<div class="track" id="progress" role="progressbar" aria-label="Synthesis lab progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1" aria-valuetext="Synthesis move 1 of 20"><div id="bar" class="bar"></div></div>
 <span id="stage" class="stage"></span>
 <div class="layout">
   <div>
     <div id="host"></div>
     <div id="fb" class="feedback" role="status" aria-live="polite"></div>
-    <div class="row"><button id="next" class="primary hidden">Continue</button></div>
+    <div class="row"><button id="next" class="primary hidden" type="button">Continue</button></div>
   </div>
   <aside class="side">
-    <h3>🧩 Synthesis Check</h3>
+    <h2>🧩 Synthesis Check</h2>
     <p><strong>1.</strong> What idea is this paragraph developing?</p>
     <p><strong>2.</strong> Which sources actually belong in this conversation?</p>
     <p><strong>3.</strong> How do they relate?</p>
@@ -127,7 +133,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </section>
 
 <section id="finish" class="card hidden">
-<div class="good"><h2>🧩 Conversation Built</h2><p><strong>Synthesis is not squeezing more sources into a paragraph. It is showing the reader what you notice when ideas are placed in conversation.</strong></p></div>
+<div class="good"><h2 id="finishTitle" tabindex="-1">🧩 Conversation Built</h2><p><strong>Synthesis is not squeezing more sources into a paragraph. It is showing the reader what you notice when ideas are placed in conversation.</strong></p></div>
 
 <h2>🧩 I Have Multiple Sources. Now What?</h2>
 <div class="case">
@@ -145,9 +151,23 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 “Source B complicates Source A by...”<br>
 “Viewed together, these findings raise a question about...”</p></div>
 
-<div class="row"><button id="copy" class="secondary">📋 Copy My Synthesis Check</button></div>
+<div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Synthesis Check</button></div>
 
-<div id="completion" class="completion">
+<section class="transfer" aria-labelledby="transfer-title">
+<h2 id="transfer-title">🔗 Build One Synthesis Move From Your Own Sources</h2>
+<p>You do not need to draft a whole paragraph here. Bring in two sources from a project you are actually working on and make <strong>one relationship visible</strong>.</p>
+<div class="field"><label for="ownIdea">What idea, question, or claim are these sources helping you develop?</label><textarea id="ownIdea" placeholder="Example: Access depends on whether students can realistically use a service."></textarea></div>
+<div class="field"><label for="ownSourceA">Source A: what is one relevant finding, idea, example, or piece of evidence?</label><textarea id="ownSourceA" placeholder="Briefly summarize or paste the relevant part."></textarea></div>
+<div class="field"><label for="ownSourceB">Source B: what is one relevant finding, idea, example, or piece of evidence?</label><textarea id="ownSourceB" placeholder="Briefly summarize or paste the relevant part."></textarea></div>
+<div class="field"><label for="ownRelation">What relationship seems most useful?</label><select id="ownRelation"><option value="">Choose one</option><option>Agree</option><option>Add or extend</option><option>Contrast</option><option>Complicate</option><option>Qualify</option><option>Give an example</option><option>Another relationship</option></select></div>
+<div class="field"><label for="ownInsight">What becomes visible when you put these sources together?</label><textarea id="ownInsight" placeholder="Try: Taken together... / While both..., they differ in... / Source B complicates Source A by..."></textarea></div>
+<div class="field"><label for="ownWhy">Why does that relationship matter to your idea or claim?</label><textarea id="ownWhy" placeholder="What should your reader understand because you made this connection?"></textarea></div>
+<div class="row"><button id="buildOwn" class="primary" type="button">🧩 Check My Synthesis Move</button></div>
+<div id="ownResult" class="transfer-result note hidden" role="status" aria-live="polite" tabindex="-1"></div>
+<p><small>This practice is not scored. Your notes stay in this browser.</small></p>
+</section>
+
+<div id="completion" class="completion" tabindex="-1">
 <p class="done">✓ LAB COMPLETE</p>
 <h2>Synthesis Lab: Get the Sources Talking — Complete</h2>
 <p>✓ Distinguish source-by-source summary from synthesis<br>
@@ -166,7 +186,9 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </main>
 
 <script>
-(()=>{const $=x=>document.getElementById(x),KEY="synthesisGetSourcesTalkingV1";let i=0;
+(()=>{const $=x=>document.getElementById(x),KEY="synthesisGetSourcesTalkingV1",TKEY="synthesisTransferV1";let i=0;
+const reduceMotion=()=>window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function focusInto(el){if(!el)return;el.focus({preventScroll:true});el.scrollIntoView({behavior:reduceMotion()?"auto":"smooth",block:"start"})}
 const M=[
 ["1 · Source Parade","parade"],
 ["2 · Where Did the Writer Go?","ghost"],
@@ -200,7 +222,7 @@ function feedback(text,good=true){
   $("fb").textContent=text;$("fb").className="feedback show"+(good?" good":"");$("next").classList.remove("hidden")
 }
 function choices(opts){
-  let d=document.createElement("div");d.className="choices";
+  let d=document.createElement("div");d.className="choices";d.setAttribute("role","group");d.setAttribute("aria-label","Choose an answer");
   opts.forEach(([label,good,msg])=>{
     let b=document.createElement("button");b.className="choice";b.type="button";b.textContent=label;
     b.onclick=()=>{if(good){[...d.children].forEach(x=>x.disabled=true);b.classList.add("ok");feedback("🧩 "+msg)}
@@ -211,12 +233,14 @@ function choices(opts){
 function relButtons(target){
   const rels=["🤝 Agrees","➕ Adds","🧩 Complicates","⚖ Qualifies","↔ Contrasts","🔍 Example"];
   let d=document.createElement("div");d.className="relbuttons";
-  rels.forEach(r=>{let b=document.createElement("button");b.type="button";b.textContent=r;b.onclick=()=>{[...d.children].forEach(x=>x.classList.remove("selected"));b.classList.add("selected");target.textContent=r+" — relationship chosen";feedback("Nice. Now the important question is: what does that relationship help the writer notice?")};d.appendChild(b)});
+  d.setAttribute("role","group");d.setAttribute("aria-label","Choose a relationship between the sources");
+  rels.forEach(r=>{let b=document.createElement("button");b.type="button";b.textContent=r;b.setAttribute("aria-pressed","false");b.onclick=()=>{[...d.children].forEach(x=>{x.classList.remove("selected");x.setAttribute("aria-pressed","false")});b.classList.add("selected");b.setAttribute("aria-pressed","true");target.textContent=r+" — relationship chosen";feedback("Nice. Now the important question is: what does that relationship help the writer notice?")};d.appendChild(b)});
   return d
 }
 function render(){
   let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";
   $("stage").textContent=m[0];$("pt").textContent=`Synthesis move ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";
+  $("progress").setAttribute("aria-valuemax",M.length);$("progress").setAttribute("aria-valuenow",i+1);$("progress").setAttribute("aria-valuetext",`Synthesis move ${i+1} of ${M.length}: ${m[0]}`);
 
   if(m[1]==="choice"){
     $("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;
@@ -268,7 +292,7 @@ function render(){
     feedback("Conflict among sources gives the writer something to explain.")
   }
   if(m[1]==="matrix"){
-    $("host").innerHTML=`<h2>📊 The Synthesis Matrix</h2><div class="matrix"><table><thead><tr><th>Idea / Question</th><th>Smith</th><th>Jones</th><th>Garcia</th></tr></thead><tbody><tr><td>Belonging matters</td><td>✓</td><td>✓</td><td></td></tr><tr><td>Online spaces may help</td><td></td><td>✓</td><td>✓</td></tr><tr><td>Effects vary by use</td><td></td><td></td><td>✓</td></tr></tbody></table></div><div class="secret">🔓 A synthesis matrix is basically a conversation map. It helps you organize by <strong>ideas</strong> rather than by source.</div>`;
+    $("host").innerHTML=`<h2>📊 The Synthesis Matrix</h2><div class="matrix"><table><caption class="sr-only">Synthesis matrix showing which sources address three shared ideas or questions</caption><thead><tr><th>Idea / Question</th><th>Smith</th><th>Jones</th><th>Garcia</th></tr></thead><tbody><tr><td>Belonging matters</td><td>✓</td><td>✓</td><td></td></tr><tr><td>Online spaces may help</td><td></td><td>✓</td><td>✓</td></tr><tr><td>Effects vary by use</td><td></td><td></td><td>✓</td></tr></tbody></table></div><div class="secret">🔓 A synthesis matrix is basically a conversation map. It helps you organize by <strong>ideas</strong> rather than by source.</div>`;
     feedback("This is especially useful when you have several sources and begin seeing repeated themes.")
   }
   if(m[1]==="clique"){
@@ -295,16 +319,17 @@ function render(){
     $("host").innerHTML=`<h2>🎉 Writer Back in Charge</h2><div class="parade"><div class="source"><strong>BEFORE</strong><p>Smith → Jones → Garcia</p><small>“Here are three things I read.”</small></div><span class="arrow">→</span><div class="source"><strong>AFTER</strong><p>Sources ↔ 🧠 YOUR IDEA ↔ Sources</p><small>“Here is what I notice when these ideas are in conversation.”</small></div></div><div class="good"><strong>SOURCES TALKING.</strong><p>Synthesis is not about squeezing more sources into a paragraph. It is about showing the reader what you notice when ideas are placed in conversation.</p></div>`;
     $("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")
   }
-  localStorage.setItem(KEY,JSON.stringify({i}))
+  localStorage.setItem(KEY,JSON.stringify({i}));
+  const heading=$("host").querySelector("h2");if(heading){heading.tabIndex=-1;setTimeout(()=>focusInto(heading),0)}
 }
 
 $("next").onclick=()=>{
-  if(i<M.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}
+  if(i<M.length-1){i++;render()}
   else{
     $("lab").classList.add("hidden");$("finish").classList.remove("hidden");
     $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());
     localStorage.setItem(KEY,JSON.stringify({done:true}));
-    setTimeout(()=>$("completion").scrollIntoView({behavior:"smooth",block:"center"}),200)
+    setTimeout(()=>focusInto($("finishTitle")),80)
   }
 };
 
@@ -334,6 +359,22 @@ Remember: the sentence starter is scaffolding. The relationship is the synthesis
 
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText(toolkit);$("copy").textContent="✓ Synthesis Check Copied"}catch(e){alert(toolkit)}};
 
+const transferIds=["ownIdea","ownSourceA","ownSourceB","ownRelation","ownInsight","ownWhy"];
+function saveTransfer(){const data={};transferIds.forEach(id=>data[id]=$(id).value);localStorage.setItem(TKEY,JSON.stringify(data))}
+transferIds.forEach(id=>$(id).addEventListener(id==="ownRelation"?"change":"input",saveTransfer));
+try{const savedTransfer=JSON.parse(localStorage.getItem(TKEY)||"null");if(savedTransfer)transferIds.forEach(id=>{if(savedTransfer[id])$(id).value=savedTransfer[id]})}catch(e){}
+$("buildOwn").onclick=()=>{
+  saveTransfer();
+  const missing=transferIds.filter(id=>!$(id).value.trim());
+  const box=$("ownResult");box.classList.remove("hidden");
+  if(missing.length){
+    box.innerHTML="<strong>One more move:</strong> complete each field so the relationship does not float away from your own idea. Synthesis needs the sources <em>and</em> the writer's interpretation.";
+    $(missing[0]).focus();return
+  }
+  box.innerHTML=`<strong>Reader check:</strong> You named a <strong>${$("ownRelation").value.toLowerCase()}</strong> relationship. Now read your last two boxes together. Your synthesis is doing real work if the first explains <em>what you notice because the sources are together</em> and the second explains <em>why that matters to your idea or claim</em>. If either sentence only repeats a source, push one step further: <strong>So what becomes visible here?</strong>`;
+  focusInto(box)
+};
+
 let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){
   $("resume").classList.remove("hidden");
@@ -342,7 +383,7 @@ if(s){
     $("intro").classList.add("hidden");
     if(s.done){
       $("finish").classList.remove("hidden");
-      $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())
+      $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>focusInto($("finishTitle")),0)
     }else{
       i=s.i||0;$("lab").classList.remove("hidden");render()
     }
