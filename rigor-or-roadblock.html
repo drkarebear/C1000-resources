@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rigor or Roadblock? | ENGL C1000 Faculty Lab</title>
+<meta name="description" content="A short interactive faculty lab for ENGL C1000 instructors about preserving rigor while reducing unnecessary barriers.">
+<style>
+:root{
+  --ink:#1f2937;
+  --muted:#5b6472;
+  --paper:#fffdf8;
+  --panel:#ffffff;
+  --line:#d9dee7;
+  --accent:#5b4b8a;
+  --accent-dark:#43356f;
+  --soft:#f3effb;
+  --gold:#f2c14e;
+  --green:#2f7d5b;
+  --green-soft:#edf8f2;
+  --amber:#9a6b12;
+  --amber-soft:#fff7e5;
+  --red:#9a3f46;
+  --red-soft:#fff0f1;
+  --focus:#0b63ce;
+  --radius:20px;
+  --shadow:0 10px 30px rgba(31,41,55,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 5%, #f8f3ff 0 13%, transparent 14%),
+    linear-gradient(180deg,#fbfaf7 0%,#f4f6fb 100%);
+  line-height:1.55;
+}
+a{color:var(--accent-dark)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+button{font:inherit}
+.skip-link{
+  position:absolute;left:-999px;top:8px;
+  background:#000;color:#fff;padding:.7rem 1rem;border-radius:8px;z-index:10
+}
+.skip-link:focus{left:8px}
+.site-shell{max-width:1180px;margin:0 auto;padding:24px}
+.hero{
+  background:linear-gradient(135deg,#2f3142 0%,#51456f 60%,#695b8a 100%);
+  color:#fff;
+  border-radius:28px;
+  padding:34px clamp(22px,5vw,54px);
+  box-shadow:var(--shadow);
+  margin-bottom:24px;
+}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.78rem;
+  font-weight:800;
+  opacity:.88;
+  margin:0 0 8px
+}
+.hero h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.15em 0 .2em}
+.hero p{max-width:760px;font-size:1.08rem;margin:.6rem 0 0;color:#f1eef9}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.11);
+  border-radius:999px;padding:7px 11px;font-size:.88rem
+}
+.progress-wrap{margin:18px 0 0}
+.progress-label{font-size:.9rem;margin-bottom:6px;color:#ede9f6}
+.progress-track{height:10px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--gold);transition:width .25s ease}
+
+.game-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 280px;
+  gap:24px;
+  align-items:start;
+}
+.main-card,.raccoon-card,.research-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.main-card{padding:clamp(22px,4vw,38px)}
+.raccoon-card{
+  padding:18px;
+  position:sticky;
+  top:18px;
+}
+.raccoon-card img{
+  display:block;
+  max-width:190px;
+  width:100%;
+  height:auto;
+  margin:0 auto 12px;
+  image-rendering:pixelated;
+}
+.raccoon-title{font-weight:800;margin:0 0 6px}
+.raccoon-text{margin:0;color:var(--muted);font-size:.95rem}
+.raccoon-card[hidden]{display:none}
+.section-kicker{color:var(--accent-dark);font-weight:800;margin:0 0 4px}
+.main-card h2{font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.2;margin:.1em 0 .5em}
+.scenario-note{
+  background:var(--soft);
+  border-left:5px solid var(--accent);
+  padding:14px 16px;
+  border-radius:12px;
+  margin:18px 0;
+}
+.choice-list{display:grid;gap:12px;margin-top:22px}
+.choice{
+  width:100%;
+  text-align:left;
+  border:2px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  border-radius:14px;
+  padding:15px 16px;
+  cursor:pointer;
+  transition:transform .12s ease,border-color .12s ease,background .12s ease;
+}
+.choice:hover{border-color:#aea7c6;background:#fcfaff;transform:translateY(-1px)}
+.choice strong{display:block;margin-bottom:3px}
+.feedback{
+  margin-top:22px;
+  border-radius:16px;
+  padding:18px;
+  border:1px solid var(--line);
+}
+.feedback.good{background:var(--green-soft);border-color:#b8ddca}
+.feedback.mixed{background:var(--amber-soft);border-color:#ead49c}
+.feedback.roadblock{background:var(--red-soft);border-color:#e3b8bb}
+.feedback h3{margin:0 0 8px;font-size:1.1rem}
+.feedback p{margin:.45rem 0}
+.feedback .student-side{
+  margin-top:14px;
+  padding:14px 15px;
+  border-radius:12px;
+  background:#fff;
+  border:1px dashed #b8bec8;
+}
+.feedback .student-side strong{display:block;margin-bottom:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{
+  appearance:none;
+  border:0;
+  border-radius:12px;
+  padding:11px 16px;
+  font-weight:800;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-secondary{background:#eef1f5;color:var(--ink)}
+.btn-secondary:hover{background:#e2e6ec}
+.btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.sort-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.sort-box{border:2px solid var(--line);border-radius:14px;padding:15px}
+.sort-box h3{font-size:1rem;margin:0 0 8px}
+.sort-box.keep{border-color:#b8ddca;background:var(--green-soft)}
+.sort-box.remove{border-color:#ead49c;background:var(--amber-soft)}
+.sort-box ul{padding-left:20px;margin:8px 0}
+.finish{
+  text-align:left;
+}
+.takeaway{
+  font-size:clamp(1.2rem,2.5vw,1.55rem);
+  font-weight:800;
+  padding:18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#f1ecfb,#fff8e8);
+  margin:18px 0;
+}
+.try-tomorrow{
+  border:2px solid #d4c7ef;
+  background:#faf7ff;
+  border-radius:16px;
+  padding:18px;
+  margin:20px 0;
+}
+.try-tomorrow h3{margin-top:0}
+.research-card{
+  margin-top:24px;
+  padding:clamp(22px,4vw,34px);
+}
+.research-card h2{margin-top:0}
+.research-card details{border-top:1px solid var(--line);padding:13px 0}
+.research-card details:last-child{border-bottom:1px solid var(--line)}
+.research-card summary{font-weight:800;cursor:pointer}
+.research-card p{color:var(--muted)}
+footer{
+  color:var(--muted);
+  font-size:.9rem;
+  padding:28px 8px 10px;
+  text-align:center
+}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0
+}
+@media (max-width:840px){
+  .game-grid{grid-template-columns:1fr}
+  .raccoon-card{position:static;display:grid;grid-template-columns:90px 1fr;align-items:center}
+  .raccoon-card img{max-width:90px;margin:0 14px 0 0}
+}
+@media (max-width:580px){
+  .site-shell{padding:12px}
+  .hero{border-radius:20px;padding:24px 20px}
+  .main-card{padding:20px}
+  .sort-grid{grid-template-columns:1fr}
+  .actions{flex-direction:column}
+  .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#game">Skip to the faculty lab</a>
+
+<div class="site-shell">
+  <header class="hero">
+    <p class="eyebrow">ENGL C1000 Faculty Mini-Lab</p>
+    <h1>🚧 Rigor or Roadblock?</h1>
+    <p>Where does the rigor actually live? Work through six common teaching situations and separate productive intellectual challenge from obstacles that make the work harder to reach.</p>
+    <div class="meta" aria-label="Lab details">
+      <span class="pill">About 7 minutes</span>
+      <span class="pill">No score</span>
+      <span class="pill">Works for in-person + online teaching</span>
+    </div>
+    <div class="progress-wrap" aria-label="Lab progress">
+      <div class="progress-label" id="progressLabel">Scenario 1 of 6</div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+  </header>
+
+  <main id="game" tabindex="-1">
+    <div class="game-grid">
+      <section class="main-card" id="gameCard" aria-live="polite"></section>
+
+      <aside class="raccoon-card" id="raccoonCard" aria-label="Raccoon teaching companion">
+        <img src="raccoon.png" alt="">
+        <div>
+          <p class="raccoon-title">Raccoon Check 🦝</p>
+          <p class="raccoon-text" id="raccoonText">A useful test: if we remove this obstacle, does the intellectual task become less demanding?</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="research-card" id="learn-more">
+      <h2>Learn Why This Works</h2>
+      <p>This lab is built around a simple distinction: support can change the route into difficult work without changing the intellectual work itself.</p>
+
+      <details>
+        <summary>Why focus on scaffolding?</summary>
+        <p>Research on adult digital learning emphasizes focused lessons, visual supports, accessible resources, learner–instructor communication, and peer interaction as forms of support that can help learners progress toward stronger independence.</p>
+      </details>
+      <details>
+        <summary>Why include online-course friction?</summary>
+        <p>Online learning requires learners to manage more of the learning process themselves. Course design can either make that self-regulation more workable or add avoidable navigation, access, and cognitive-load barriers.</p>
+      </details>
+      <details>
+        <summary>What is the practical test?</summary>
+        <p>Ask: <strong>“If I remove this difficulty, have I reduced the level of thinking students must do?”</strong> If the answer is no, you may be looking at a roadblock rather than rigor.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    This faculty mini-lab is part of a collection created by Karen Crozer to support ENGL C1000 teaching and learning in California Community Colleges.
+  </footer>
+</div>
+
+<script>
+const scenarios = [
+{
+  title:"The Challenging Reading",
+  text:"Students are struggling with a dense, college-level essay that matters to the unit. Several say they cannot follow the argument.",
+  prompt:"What move best preserves the rigor while improving access to the reading?",
+  choices:[
+    {
+      label:"Replace it with an easier text that makes the same general point.",
+      kind:"mixed",
+      heading:"The content becomes easier—but so may the reading work.",
+      feedback:"Replacing a text can be appropriate sometimes, but here it removes the very challenge students need practice navigating. The key question is whether we can support students through the difficult reading before we remove it.",
+      student:"I can understand the new reading, but I still may not know what to do when the next difficult text shows up.",
+      raccoon:"Can the support help students eventually do the reading work without us?"
+    },
+    {
+      label:"Give students a short reading guide that asks them to track the author's main claim, shifts in reasoning, and one confusing passage.",
+      kind:"good",
+      heading:"This changes the route into the text, not the level of thinking.",
+      feedback:"Students still have to read, interpret, and make sense of a difficult text. The guide externalizes part of the reading process and gives them a manageable way into the work.",
+      student:"I still have to figure this out—but now I know what I am looking for.",
+      raccoon:"Tiny distinction: support is not the same thing as simplification."
+    },
+    {
+      label:"Explain the entire reading in a lecture before students read it.",
+      kind:"mixed",
+      heading:"Helpful—but the instructor may end up doing too much of the meaning-making.",
+      feedback:"Context and modeling can help, but a complete explanation can unintentionally replace the reading work. Consider modeling one difficult section, then letting students use the strategy on the rest.",
+      student:"I understand the lecture. I'm less sure whether I can make sense of the text myself.",
+      raccoon:"Model enough to reveal the process—not so much that the process disappears."
+    },
+    {
+      label:"Keep the assignment exactly as is. College-level students need to learn to handle difficult texts.",
+      kind:"roadblock",
+      heading:"The standard stays high, but the learning pathway stays hidden.",
+      feedback:"Expecting students to engage difficult texts is rigorous. Assuming they already know how strong readers repair confusion is not the same thing as teaching that skill.",
+      student:"Everyone else must know how to do this. Maybe I just don't belong here.",
+      raccoon:"Rigor can require struggle. It does not require invisible strategies."
+    }
+  ]
+},
+{
+  title:"“Analyze This”",
+  text:"Your prompt says, “Analyze how the author develops the argument.” Many students submit accurate summaries instead.",
+  prompt:"Which response is most likely to preserve the analytical demand?",
+  choices:[
+    {
+      label:"Add more emphasis: “Do NOT summarize. ANALYZE.”",
+      kind:"roadblock",
+      heading:"The expectation is louder, but not clearer.",
+      feedback:"Students may understand that summary is insufficient while still not knowing what analytical thinking looks like.",
+      student:"I know I'm doing the wrong thing. I still don't know what the right thing is.",
+      raccoon:"Sometimes a hidden curriculum survives boldface."
+    },
+    {
+      label:"Show a short paragraph that moves from observation to interpretation, and label the moves.",
+      kind:"good",
+      heading:"The thinking becomes visible.",
+      feedback:"A worked example can reveal what experts often do automatically: notice a choice, interpret its effect, connect it to the author's larger purpose, and explain why it matters.",
+      student:"Oh. Analysis is not 'more summary.' It is a different move.",
+      raccoon:"If students can see the move, they have a better chance of practicing the move."
+    },
+    {
+      label:"Lower the assignment to a summary so students can succeed first.",
+      kind:"mixed",
+      heading:"This may build confidence, but it changes the target.",
+      feedback:"Summary can be a useful scaffold, but if the course goal is analysis, students still need an explicit bridge from summary into interpretation.",
+      student:"I can do this assignment. I still may not know how to cross into analysis.",
+      raccoon:"A scaffold should point toward the target, not quietly replace it."
+    },
+    {
+      label:"Grade the summaries strictly so students learn the difference.",
+      kind:"mixed",
+      heading:"A consequence may signal the standard, but it does not teach the missing move.",
+      feedback:"Assessment can communicate expectations, but students need instruction or modeling if the problem is that the analytical process itself is hidden.",
+      student:"My grade tells me I missed the target. It does not tell me how to reach it.",
+      raccoon:"Diagnosis before penalty."
+    }
+  ]
+},
+{
+  title:"The Assignment Gauntlet",
+  text:"A strong essay assignment asks students to synthesize two readings, develop an arguable claim, use evidence, and revise. But the directions are spread across four Canvas pages, two PDFs, a rubric, and a separate submission page.",
+  prompt:"Where does the rigor belong?",
+  choices:[
+    {
+      label:"Keep all of it. Navigating complex systems is part of college.",
+      kind:"roadblock",
+      heading:"Some complexity is academic. Some is simply interface friction.",
+      feedback:"Synthesis, argument, evidence, and revision are the intellectual work. Finding scattered directions is not what ENGL C1000 is trying to assess.",
+      student:"I spent so much energy figuring out what to click that I have less energy left for the essay.",
+      raccoon:"Hard to navigate is not the same as intellectually demanding."
+    },
+    {
+      label:"Create one assignment hub with the prompt, steps, rubric, model, and submission link in a predictable order.",
+      kind:"good",
+      heading:"You simplified access without simplifying the assignment.",
+      feedback:"The essay still requires synthesis, argument, evidence, and revision. The course simply stops asking students to solve a navigation puzzle first.",
+      student:"I can see the whole task. Now I can spend my energy doing it.",
+      raccoon:"Keep the thinking complicated. Make the route boringly clear."
+    },
+    {
+      label:"Remove the rubric and model so students are forced to think independently.",
+      kind:"mixed",
+      heading:"Independence is the goal, but mystery is not independence.",
+      feedback:"Students can make independent choices while still having transparent criteria and examples of quality. Removing all guidance can turn the assignment into a guessing game.",
+      student:"I am making choices, but I am also guessing what counts as successful.",
+      raccoon:"Transparency does not write the essay for them."
+    }
+  ]
+},
+{
+  title:"The Grammar Question",
+  text:"A student's draft has a promising claim and interesting evidence, but sentence-level errors are frequent. The paper also needs stronger reasoning between evidence and claims.",
+  prompt:"What would you prioritize in feedback right now?",
+  choices:[
+    {
+      label:"Correct every grammar and punctuation error so the student sees the professional standard.",
+      kind:"roadblock",
+      heading:"High standards can become high noise.",
+      feedback:"Correctness matters, but marking everything at once can bury the higher-order work the student needs to do next. Prioritizing is not the same as ignoring correctness.",
+      student:"There are so many marks that I don't know what to fix first.",
+      raccoon:"A page can contain a lot of feedback without containing a clear next move."
+    },
+    {
+      label:"Prioritize the claim–evidence–reasoning problem, then identify one recurring sentence-level pattern to work on.",
+      kind:"good",
+      heading:"This protects the larger writing goal while still addressing sentence-level development.",
+      feedback:"The student gets a manageable hierarchy: first strengthen the reasoning, then work on a recurring language pattern that can transfer to future drafts.",
+      student:"I know the two things I need to work on first.",
+      raccoon:"Triage is not lowering standards. It is sequencing learning."
+    },
+    {
+      label:"Ignore sentence-level issues entirely because ideas are all that matter.",
+      kind:"mixed",
+      heading:"The priority is understandable, but the message may swing too far.",
+      feedback:"Ideas and rhetorical effectiveness are central, but students also benefit from targeted support with recurring sentence-level patterns. The key is timing and focus.",
+      student:"I know my ideas matter. I also need help making them readable to other people.",
+      raccoon:"Not everything needs attention today. That does not mean nothing else matters."
+    }
+  ]
+},
+{
+  title:"The Student Who Isn't There Yet",
+  text:"A student submits a draft that is substantially below the course standard. The central claim is unclear, evidence is thin, and the organization makes the argument difficult to follow.",
+  prompt:"Which response best combines high expectations with a pathway forward?",
+  choices:[
+    {
+      label:"Give the grade the draft currently earns and move on. Standards only matter if we enforce them.",
+      kind:"mixed",
+      heading:"The grade may be accurate. The instructional question is what happens next.",
+      feedback:"Clear standards matter, but a grade alone does not create the pathway toward those standards. If revision is part of the course, the student also needs a prioritized next step.",
+      student:"I know this is not passing work. I don't know where to start making it better.",
+      raccoon:"A standard tells us where the student needs to go. Teaching helps build the route."
+    },
+    {
+      label:"Tell the student exactly what thesis to use and where each paragraph should go.",
+      kind:"roadblock",
+      heading:"The draft may improve while the student's independence does not.",
+      feedback:"Over-directing can produce a cleaner paper while taking over the decision-making students need to practice. Scaffold the process rather than authoring the argument.",
+      student:"I can follow these instructions. I'm not sure I could make these decisions next time.",
+      raccoon:"Support should leave some thinking in the student's hands."
+    },
+    {
+      label:"Identify the highest-leverage problem, provide a concrete strategy or model, and ask for a focused revision.",
+      kind:"good",
+      heading:"The standard remains visible, and the next step becomes doable.",
+      feedback:"A focused revision creates a bridge between the current draft and the course expectation. The student still has to make decisions, but the task is no longer an undifferentiated wall of problems.",
+      student:"I have a real next move—and I still have to do the thinking.",
+      raccoon:"Good scaffolds narrow the next step without shrinking the destination."
+    }
+  ]
+},
+{
+  title:"The Online Version",
+  text:"Your asynchronous module contains a difficult reading, a mini-lecture, an annotation activity, a discussion, a model paragraph, a quiz, and a writing task. Students keep missing pieces and asking what is due.",
+  prompt:"What redesign best preserves rigor while reducing online friction?",
+  choices:[
+    {
+      label:"Cut half the activities so the module feels lighter.",
+      kind:"mixed",
+      heading:"Less content may help, but the deeper issue may be sequence and visibility.",
+      feedback:"Removing activities can be appropriate if they are redundant. But if each activity serves the learning goal, clearer chunking and sequencing may solve the problem without reducing practice.",
+      student:"There is less to do, but I still need to understand how the pieces fit together.",
+      raccoon:"Before deleting the learning, inspect the pathway."
+    },
+    {
+      label:"Organize the module into a predictable sequence: Learn → Try → Check → Apply, with one clear overview and due-date pattern.",
+      kind:"good",
+      heading:"The intellectual work stays; the self-management burden becomes more workable.",
+      feedback:"Students still complete the difficult reading, practice, discussion, and writing. The course makes the structure visible so learners can use their energy on the learning rather than reconstructing the instructor's plan.",
+      student:"I can tell where I am, what comes next, and why I am doing it.",
+      raccoon:"Online does not remove the teacher. It makes the teacher's thinking part of the design."
+    },
+    {
+      label:"Add a longer syllabus explanation telling students they are responsible for checking every page carefully.",
+      kind:"roadblock",
+      heading:"Responsibility matters, but explanation is not the same as usable design.",
+      feedback:"Students do need to manage their learning online. A predictable course structure supports that self-regulation rather than turning navigation into another academic hurdle.",
+      student:"I know it is my responsibility. I still have to hunt for the structure every week.",
+      raccoon:"Independence grows better with a map than with a maze."
+    }
+  ]
+}
+];
+
+let current = 0;
+let answered = false;
+const card = document.getElementById("gameCard");
+const progressBar = document.getElementById("progressBar");
+const progressLabel = document.getElementById("progressLabel");
+const raccoonText = document.getElementById("raccoonText");
+
+function renderScenario() {
+  answered = false;
+  const s = scenarios[current];
+  progressLabel.textContent = `Scenario ${current+1} of ${scenarios.length}`;
+  progressBar.style.width = `${(current / scenarios.length) * 100}%`;
+  raccoonText.textContent = "A useful test: if we remove this obstacle, does the intellectual task become less demanding?";
+  card.innerHTML = `
+    <p class="section-kicker">Scenario ${current+1}</p>
+    <h2>${s.title}</h2>
+    <p>${s.text}</p>
+    <div class="scenario-note"><strong>${s.prompt}</strong></div>
+    <div class="choice-list" role="group" aria-label="Choose a teaching move">
+      ${s.choices.map((c,i)=>`
+        <button class="choice" data-index="${i}">
+          <strong>Option ${String.fromCharCode(65+i)}</strong>
+          ${c.label}
+        </button>`).join("")}
+    </div>
+    <div id="feedbackArea" tabindex="-1"></div>
+  `;
+  card.querySelectorAll(".choice").forEach(btn=>{
+    btn.addEventListener("click",()=>showFeedback(Number(btn.dataset.index)));
+  });
+  card.querySelector(".choice").focus();
+}
+
+function showFeedback(i){
+  if(answered) return;
+  answered = true;
+  const s = scenarios[current];
+  const c = s.choices[i];
+
+  card.querySelectorAll(".choice").forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx === i){
+      b.style.borderColor = "#5b4b8a";
+      b.style.background = "#f7f3ff";
+    }
+  });
+
+  raccoonText.textContent = c.raccoon;
+
+  const feedbackArea = document.getElementById("feedbackArea");
+  feedbackArea.innerHTML = `
+    <div class="feedback ${c.kind}">
+      <h3>${c.heading}</h3>
+      <p>${c.feedback}</p>
+      <div class="student-side">
+        <strong>👀 From the student's side</strong>
+        <span>${c.student}</span>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" id="tryAgain">Try another choice</button>
+      <button class="btn btn-primary" id="nextBtn">${current === scenarios.length-1 ? "See the takeaway" : "Next scenario"}</button>
+    </div>
+  `;
+  feedbackArea.focus();
+
+  document.getElementById("tryAgain").addEventListener("click", renderScenario);
+  document.getElementById("nextBtn").addEventListener("click", ()=>{
+    if(current < scenarios.length-1){
+      current++;
+      renderScenario();
+      window.scrollTo({top:0,behavior:"smooth"});
+    } else {
+      renderFinish();
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+  });
+}
+
+function renderFinish(){
+  progressLabel.textContent = "Lab complete";
+  progressBar.style.width = "100%";
+  raccoonText.textContent = "Keep the challenge. Clear the path.";
+  card.innerHTML = `
+    <div class="finish">
+      <p class="section-kicker">Lab Complete</p>
+      <h2>You found the line.</h2>
+
+      <div class="takeaway">
+        Rigor asks students to do challenging intellectual work. Support helps students reach that work.
+      </div>
+
+      <p>Removing an unnecessary obstacle does not automatically lower the bar. The useful question is whether the change reduces the <em>thinking</em> students must do—or simply makes the route to that thinking clearer.</p>
+
+      <div class="sort-grid" aria-label="Rigor and roadblock examples">
+        <div class="sort-box keep">
+          <h3>Keep the Challenge</h3>
+          <ul>
+            <li>Read demanding texts</li>
+            <li>Develop arguable claims</li>
+            <li>Analyze evidence</li>
+            <li>Synthesize ideas</li>
+            <li>Revise substantially</li>
+          </ul>
+        </div>
+        <div class="sort-box remove">
+          <h3>Reduce the Roadblock</h3>
+          <ul>
+            <li>Hidden expectations</li>
+            <li>Unexplained academic moves</li>
+            <li>Confusing navigation</li>
+            <li>Scattered instructions</li>
+            <li>Feedback with no priority</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="try-tomorrow">
+        <h3>Try This Tomorrow</h3>
+        <p>Choose one ENGL C1000 assignment. Mark one thing that makes students <strong>think harder</strong> and one thing that merely makes the task <strong>harder to access</strong>. Keep the first. Reconsider the second.</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" id="playAgain">↻ Play Again</button>
+        <a class="btn btn-ghost" href="#learn-more">📚 Learn Why This Works</a>
+        <a class="btn btn-primary" href="hidden-curriculum.html">Next Lab: The Hidden Curriculum →</a>
+      </div>
+    </div>
+  `;
+  document.getElementById("playAgain").addEventListener("click",()=>{
+    current=0;
+    renderScenario();
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+  card.focus();
+}
+
+renderScenario();
+</script>
+</body>
+</html>
