@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editing Lab: What Needs Attention?</title>
+<meta name="description" content="An accessible, first-gen-friendly editing and mechanics lab for ENGL C1000.">
+<style>
+:root{
+ --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#63707c;--line:#d7e0e8;
+ --brand:#365f78;--dark:#213f52;--soft:#edf5f8;--gold:#fff5d9;--goldline:#b5821c;
+ --good:#2f7749;--goodbg:#eef8f1;--rose:#8c5066;--rosebg:#fbf0f4;--gray:#f3f5f7;
+ --max:980px;--r:16px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button{font:inherit}
+button:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:99;background:#fff;color:#000;border:2px solid #000;padding:10px}.skip:focus{left:8px}
+.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(33,63,82,.07)}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:800;font-size:.86rem;color:var(--brand);margin:0 0 6px}
+h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}h2{font-size:clamp(1.4rem,4.5vw,2rem)}h3{font-size:1.12rem}
+.lead{font-size:1.08rem}.callout,.decoder,.explain,.case,.machine,.prescription{border-radius:14px;padding:17px;margin:15px 0}
+.callout{background:var(--gold);border-left:5px solid var(--goldline)}.decoder{background:#f8fbfd;border:2px dashed var(--brand)}.explain{background:#fffaf0;border:2px solid var(--goldline)}.case{background:#f8fafc;border:3px solid #626d78}.machine{background:#fafafa;border:3px dashed #777}.prescription{background:var(--goodbg);border:2px solid var(--good)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill,.stage{display:inline-flex;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}.pill{border:1px solid var(--line);color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:8px}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:var(--brand);color:#fff}.secondary{background:#fff;border:2px solid var(--brand);color:var(--dark)}.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.93rem;font-weight:700}.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin:7px 0 20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:18px;align-items:start}.side{position:sticky;top:10px;border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px}
+.lens{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;margin:8px 0;font-size:.92rem}.lens.on{background:var(--goodbg);border-color:var(--good)}
+.sentence{font-size:1.12rem;background:#fff;border:2px solid var(--line);border-radius:13px;padding:18px;margin:14px 0}
+.question{font-size:1.18rem;font-weight:800;margin:15px 0}.choices{display:grid;gap:10px;margin:15px 0}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink);padding:14px 16px}.choice.selected{border-color:var(--good);background:var(--goodbg)}
+.feedback{display:none;border:2px solid var(--brand);background:var(--soft);border-radius:12px;padding:16px;margin-top:16px}.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--goodbg)}.feedback strong{display:block}
+.case .status{text-transform:uppercase;font-weight:900;letter-spacing:.05em}.clear{border-color:var(--good);background:var(--goodbg)}.alert{border-color:var(--rose);background:var(--rosebg)}
+.blocks{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}.block{border:2px solid var(--brand);background:#fff;border-radius:10px;padding:10px}.punct{font-size:1.5rem;font-weight:900}
+.goggles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.goggle{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.goggle strong{display:block;color:var(--brand)}
+.pattern{display:grid;gap:8px}.pattern div{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.before,.after{border-radius:13px;padding:15px}.before{background:var(--rosebg);border:2px solid var(--rose)}.after{background:var(--goodbg);border:2px solid var(--good)}
+.license{border:4px double var(--brand);border-radius:18px;padding:24px;text-align:center;background:#fff}.license .big{font-size:clamp(1.7rem,6vw,2.6rem);font-weight:900;color:var(--brand)}
+.completion{border:3px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,30px);margin-top:18px}.complete{color:var(--good);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.grid{display:grid;grid-template-columns:1fr auto;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;margin:16px 0}.shot{background:var(--gold);border:2px solid var(--goldline);border-radius:12px;padding:14px;font-weight:700}
+.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:760px){.workspace{grid-template-columns:1fr}.side{position:static;order:-1}.compare{grid-template-columns:1fr}}
+@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.goggles{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card">
+ <p class="eyebrow">ENGL C1000 · Editing without the grammar panic</p>
+ <h1>Editing Lab: What Needs Attention?</h1>
+ <p class="lead"><strong>Something looks different. Does it actually need fixing?</strong></p>
+ <div class="callout">Good editors do more than hunt for mistakes. They figure out what may make writing easier for a reader to follow—and they know when to leave something alone.</div>
+ <div class="meta"><span class="pill">20 editing cases</span><span class="pill">Professor Comment Translator</span><span class="pill">No timer</span><span class="pill">Difference ≠ error</span></div>
+ <div class="row"><button id="start" class="primary" type="button">Open the Case Files</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+ <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+ <span id="stage" class="stage"></span><h2>Editing Investigation Desk</h2>
+ <div class="workspace">
+  <div>
+   <div id="host"></div>
+   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+   <div class="row"><button id="next" class="primary hidden" type="button">Next Case</button></div>
+  </div>
+  <aside class="side"><h3>Editor Toolkit</h3><div id="tools"></div></aside>
+ </div>
+</section>
+
+<section id="done" class="card hidden">
+ <div class="license"><div>🔎</div><div class="big">EDITOR LICENSE</div><p>You can investigate writing without assuming every difference is a defect.</p></div>
+ <div class="prescription">
+  <h2>🧰 Your 5-Minute Editing Routine</h2>
+  <p><strong>1. Meaning:</strong> Can I tell what I mean?<br>
+  <strong>2. Sentence boundaries:</strong> Where does each complete thought begin and end?<br>
+  <strong>3. One known pattern:</strong> What issue do I know I should check for?<br>
+  <strong>4. Read aloud:</strong> Hear what your eyes may skip.<br>
+  <strong>5. Formatting:</strong> Check the assignment's final conventions.</p>
+ </div>
+ <div class="row"><button id="random" class="primary" type="button">🎲 Give Me an Editing Lens</button><button id="speak" class="secondary" type="button">🔊 Read the Routine Aloud</button><button id="copy" class="secondary" type="button">📋 Copy My Editing Routine</button></div>
+ <div id="randomBox" class="decoder hidden" role="status" aria-live="polite"></div>
+ <div class="completion">
+  <div class="complete">✓ Lab complete</div><h2>Editing Lab — Complete</h2>
+  <div class="grid"><div>Check meaning before correcting</div><div>✓ Complete</div><div>Identify sentence-boundary patterns</div><div>✓ Complete</div><div>Decode common professor comments</div><div>✓ Complete</div><div>Separate revision from editing</div><div>✓ Complete</div><div>Know when not to edit</div><div>✓ Complete</div></div>
+  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 Screenshot this completion card for Canvas.</div>
+ </div>
+ <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+</section>
+<footer>Progress stays in this browser. Read-aloud is optional and depends on browser support. This activity does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id),key="editingNeedsAttentionV1";
+let i=0,skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false};
+const moments=[
+["1 · Suspicious Sentence","choice","I went to the tutoring center because my essay was due tomorrow, but they were closed.","🚨 Grammar emergency or not?",[
+["No emergency detected. The sentence is clear and the ideas are joined understandably.",1,"Good editors know when not to edit."],
+["Emergency! Every long sentence is a run-on.",0,"Length alone does not make a sentence a run-on."],
+["Replace all the words with more formal vocabulary.",0,"Formality is not automatically clarity."],
+["Remove “but” because academic writing cannot use it.",0,"Writers can use coordinating conjunctions such as “but” when they fit the relationship between ideas."]
+],"voice"],
+["2 · Editor Goggles","goggles"],
+["3 · Meaning First","choice","The support office helped the student with it because they told them about that after it happened.","What should an editor investigate first?",[
+["Meaning: identify who “they/them” and what “it/that” refer to so the reader can follow the sentence.",1,"Before applying a grammar rule, make sure the meaning is visible."],
+["Comma rules.",0,"Punctuation is not the main reason this sentence is hard to follow."],
+["Whether the sentence sounds sophisticated.",0,"The reader needs clarity more than sophistication."],
+["How many words it contains.",0,"Word count does not identify the clarity problem."]
+],"meaning"],
+["4 · Nobody Ever Explained This","explain","Comma splice","Two complete sentences are being held together by only a comma.","I finished my draft, I submitted it."],
+["5 · Sentence Boundary Lab","choice","I finished my draft, I submitted it.","What is happening?",[
+["Two complete thoughts are joined only by a comma.",1,"That's the pattern commonly called a comma splice."],
+["The sentence is wrong because it has the word “I.”",0,"First person is not the sentence-boundary issue."],
+["The sentence needs bigger words.",0,"Vocabulary does not repair the boundary between complete thoughts."],
+["The sentence is too short.",0,"Length is not the issue."]
+],"boundaries"],
+["6 · More Than One Repair","repairs"],
+["7 · Nobody Ever Explained This","explain","Fragment","A group of words is being used like a sentence even though it does not yet express a complete thought in context.","Because the tutoring center was closed."],
+["8 · Fragment in Context","choice","Because the tutoring center was closed.","What should you ask before editing?",[
+["Does this group of words complete a thought in the surrounding context, or does the reader get left waiting for the rest?",1,"Context matters. A fragment label describes a sentence-boundary pattern; writers still make rhetorical choices."],
+["How can I make it longer?",0,"Length does not determine completeness."],
+["Can I replace “because” with a bigger word?",0,"Vocabulary is not the issue."],
+["Is every sentence beginning with “Because” automatically forbidden?",0,"No. Context and purpose matter."]
+],"boundaries"],
+["9 · Professor Comment Translator","decoder","Awk.","Your reader may be saying: “I had trouble following this sentence.” Start with: What was I trying to say? Then identify where the reader may lose the meaning."],
+["10 · Professor Comment Translator","decoder","Proofread.","This does not mean “stare at the paper again and hope.” Proofreading works better when you look for one kind of issue at a time."],
+["11 · Professor Comment Translator","decoder","Watch your commas.","Your instructor may have noticed a recurring punctuation pattern. You do not need to relearn every comma rule tonight. Find the pattern first."],
+["12 · Spot the Pattern","pattern"],
+["13 · Pattern, Not Identity","message"],
+["14 · Academic-Sounding Machine","machine"],
+["15 · Revision or Editing?","choice","You decide that a paragraph needs a new example and more explanation after its evidence.","What kind of work is this?",[
+["Revision.",1,"You're changing what the writing is doing and developing the idea."],
+["Editing only.",0,"This is larger than correcting sentence-level conventions."],
+["Proofreading only.",0,"Proofreading is a later check for surface-level issues."],
+["Formatting.",0,"The change concerns development, not document format."]
+],"process"],
+["16 · Revision or Editing?","choice","You notice that two complete sentences are joined by only a comma and decide how to repair the boundary.","What kind of work is this?",[
+["Editing.",1,"You're improving how an existing idea is communicated at the sentence level."],
+["Changing the thesis.",0,"The argument itself does not need to change."],
+["Research.",0,"No new evidence is required for this repair."],
+["Peer review.",0,"This is the writer editing their own sentence."]
+],"process"],
+["17 · Difference Is Not an Error","choice","A writer uses a familiar expression from their community. The meaning is clear, the voice is intentional, and the assignment does not require a different convention.","What is the strongest editing move?",[
+["Leave it alone unless there is a reader, purpose, or convention-based reason to reconsider it.",1,"Good editing protects meaning and writer agency. Difference itself is not a defect."],
+["Replace it because it is unfamiliar to me.",0,"An editor's unfamiliarity is not a universal rule."],
+["Make it sound more academic automatically.",0,"Academic writing is not a vocabulary costume."],
+["Delete the writer's voice.",0,"Editing should not homogenize every writer."]
+],"voice"],
+["18 · One Lens at a Time","passes"],
+["19 · Final Case","finalcase"],
+["20 · Case Closed","finish"]
+];
+
+function save(done=false){localStorage.setItem(key,JSON.stringify({i,skills,done}))}
+function setSkill(k){if(k)skills[k]=true;renderTools()}
+function renderTools(){const a=[["meaning","🔎 Meaning"],["boundaries","✂️ Sentence boundaries"],["conventions","🔧 Conventions"],["voice","🎙️ Voice / context"],["patterns","🎯 Pattern spotting"],["process","🧭 Editing process"]];$("tools").innerHTML=a.map(([k,v])=>`<div class="lens ${skills[k]?"on":""}">${skills[k]?"✓":"○"} ${v}</div>`).join("")}
+function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
+function choices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);fb("Case finding confirmed.",m)}else{b.disabled=true;fb("Check the actual reader problem.",m+" Try another answer.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){
+ const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Case";
+ $("ptext").textContent=`Editing case ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderTools();
+ if(m[1]==="choice"){$("host").innerHTML=`<div class="sentence">${m[2]}</div><p class="question">${m[3]}</p>`;$("host").appendChild(choices(m[4],m[5]))}
+ if(m[1]==="goggles"){$("host").innerHTML=`<div class="goggles"><div class="goggle"><strong>🔎 Meaning</strong>Can my reader follow what I mean?</div><div class="goggle"><strong>✂️ Boundaries</strong>Where does one complete thought end and another begin?</div><div class="goggle"><strong>🔧 Conventions</strong>Is there a convention that matters in this situation?</div><div class="goggle"><strong>🎙️ Voice</strong>Is this a problem, or simply the writer's way of saying it?</div></div>`;setSkill("meaning");setSkill("conventions");fb("Editor goggles equipped.","Different lenses answer different questions. You do not need to inspect everything at once.")}
+ if(m[1]==="explain"){$("host").innerHTML=`<div class="explain"><h3>🤷 Nobody Ever Explained This: ${m[2]}</h3><p>${m[3]}</p><div class="sentence">${m[4]}</div></div>`;fb("Translation complete.","The terminology becomes more useful when you can see the actual pattern it names.")}
+ if(m[1]==="repairs"){$("host").innerHTML=`<div class="sentence">I finished my draft, I submitted it.</div><div class="compare"><div class="before"><strong>Boundary needs attention</strong><p>I finished my draft, I submitted it.</p></div><div class="after"><strong>Several possible repairs</strong><p>I finished my draft. I submitted it.</p><p>I finished my draft, and I submitted it.</p><p>I finished my draft; I submitted it.</p></div></div>`;setSkill("boundaries");setSkill("conventions");fb("One pattern, several choices.","Editing is often decision-making, not discovering one magical correct sentence.")}
+ if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 Professor Comment Translator</h3><p><strong>Comment: ${m[2]}</strong></p><p>${m[3]}</p></div>`;setSkill("process");fb("Hidden instruction decoded.","Short instructor comments often compress several possible next steps. Translate them into something you can actually do.")}
+ if(m[1]==="pattern"){$("host").innerHTML=`<div class="case"><div class="status">🔎 Spot the Pattern</div><div class="pattern"><div>I finished the application, I submitted it.</div><div>I called the office, nobody answered.</div><div>I checked Canvas. The announcement was there.</div><div>I found the form, I completed it.</div><div>I emailed my professor. She replied later.</div></div><p><strong>What keeps happening?</strong> Several sentences join two complete thoughts with only a comma.</p></div>`;setSkill("patterns");fb("🎯 Pattern found.","This is much more useful than deciding “I'm bad at grammar.” You found one pattern you can learn to check for.")}
+ if(m[1]==="message"){$("host").innerHTML=`<div class="callout"><strong>You are not a grammar problem.</strong><br>A draft may contain a recurring editing pattern. Naming one pattern gives you something specific and learnable to work on.</div>`;setSkill("patterns");fb("Specific beats global.","“Check for comma splices” gives you a next move. “Be better at grammar” does not.")}
+ if(m[1]==="machine"){$("host").innerHTML=`<div class="machine"><h3>✨ MAKE IT ACADEMIC™</h3><p><strong>Original:</strong> Students may stop looking when college information is hard to find.</p><p>⚙️ adding unnecessary vocabulary...</p><p><strong>Machine output:</strong> It is therefore fundamentally imperative to acknowledge the multifaceted paradigmatic complexities pertaining to institutional informational accessibility...</p><p><strong>🚫 ACADEMIC-SOUNDING MACHINE MALFUNCTION</strong></p></div><div class="decoder"><strong>Academic writing is not a vocabulary costume.</strong> Start with what you mean. Then make choices based on purpose, reader, and context.</div>`;setSkill("voice");fb("Bigger words are not automatically better.","Precision and clarity usually matter more than performing formality.")}
+ if(m[1]==="passes"){$("host").innerHTML=`<div class="case"><div class="status">👓 Editing Goggles: One Pass at a Time</div><p><strong>PASS 1 — Meaning:</strong> Ignore punctuation. Where is the meaning hard to follow?</p><p><strong>PASS 2 — Sentence boundaries:</strong> Ignore spelling. Where do complete thoughts begin and end?</p><p><strong>PASS 3 — One known pattern:</strong> Check for something you know appears in your drafts.</p><p><strong>PASS 4 — Read aloud:</strong> Listen for missing words, repetitions, or places you stumble.</p><p><strong>PASS 5 — Formatting:</strong> Check the assignment's final conventions.</p></div>`;setSkill("process");fb("That's a proofreading process.","“Proofread” becomes manageable when you stop trying to notice everything at the same time.")}
+ if(m[1]==="finalcase"){$("host").innerHTML=`<div class="case clear"><div class="status">✓ Final Case Finding</div><p>A good editor asks:</p><p><strong>What am I trying to help my reader understand?</strong></p><p>Then the editor chooses the lens that fits the problem instead of changing language simply because it looks unfamiliar.</p></div>`;Object.keys(skills).forEach(k=>skills[k]=true);renderTools();fb("Investigation complete.","You can identify a real clarity or convention issue without treating every difference as a defect.")}
+ if(m[1]==="finish"){$("host").innerHTML=`<div class="prescription"><h3>CASE CLOSED</h3><p><strong>Revision changes what the writing is doing.</strong></p><p><strong>Editing helps the writing communicate that work clearly.</strong></p><p>And sometimes the best editing decision is: <strong>leave it alone.</strong></p></div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
+ save()
+}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
+const lenses=["🔎 MEANING: Read one paragraph and ask only: Can I tell exactly what I mean?","✂️ SENTENCE BOUNDARIES: Look only for where complete thoughts begin and end.","🎯 ONE KNOWN PATTERN: Pick one issue you've seen before and scan only for that.","🔊 READ ALOUD: Listen for missing words, repetitions, and places where you stumble.","🔧 FORMATTING: Check the assignment's required format after the writing itself is settled."];
+$("random").onclick=()=>{const b=$("randomBox");b.classList.remove("hidden");b.innerHTML=`<h3>Your Editing Lens</h3><p>${lenses[Math.floor(Math.random()*lenses.length)]}</p>`}
+const routine=`5-MINUTE EDITING ROUTINE
+
+1. MEANING — Can I tell what I mean?
+2. SENTENCE BOUNDARIES — Where does each complete thought begin and end?
+3. ONE KNOWN PATTERN — What issue do I know I should check for?
+4. READ ALOUD — Hear what my eyes may skip.
+5. FORMATTING — Check the assignment's final conventions.
+
+Most important question: What am I trying to help my reader understand?`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(routine);$("copy").textContent="✓ Editing Routine Copied"}catch(e){$("randomBox").classList.remove("hidden");$("randomBox").textContent=routine}}
+$("speak").onclick=()=>{if("speechSynthesis" in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("Your five minute editing routine. First, meaning. Can I tell what I mean? Second, sentence boundaries. Where does each complete thought begin and end? Third, one known pattern. Fourth, read aloud. Fifth, formatting. Most important question: What am I trying to help my reader understand?");speechSynthesis.speak(u)}else{$("randomBox").classList.remove("hidden");$("randomBox").textContent="Read-aloud is not supported in this browser. The full routine is displayed above."}}
+let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
