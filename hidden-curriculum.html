@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hidden Curriculum | ENGL C1000 Faculty Lab</title>
+<meta name="description" content="A short interactive faculty lab for ENGL C1000 instructors about uncovering hidden academic expectations in reading and writing assignments.">
+<style>
+:root{
+  --ink:#1f2937;
+  --muted:#5c6470;
+  --paper:#fbfaf7;
+  --panel:#ffffff;
+  --line:#d8dde6;
+  --accent:#6a4c93;
+  --accent-dark:#4f3772;
+  --soft:#f5effb;
+  --gold:#f2c14e;
+  --green:#2f7d5b;
+  --green-soft:#edf8f2;
+  --amber:#8a6215;
+  --amber-soft:#fff7e5;
+  --rose:#914753;
+  --rose-soft:#fff0f3;
+  --focus:#0b63ce;
+  --shadow:0 10px 30px rgba(31,41,55,.08);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 90% 4%, #f5eefc 0 12%, transparent 13%),
+    linear-gradient(180deg,#fbfaf7 0%,#f4f6fa 100%);
+  line-height:1.55;
+}
+a{color:var(--accent-dark)}
+button{font:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.skip-link{
+  position:absolute;left:-999px;top:8px;background:#000;color:#fff;
+  padding:.7rem 1rem;border-radius:8px;z-index:10
+}
+.skip-link:focus{left:8px}
+.shell{max-width:1180px;margin:0 auto;padding:24px}
+.hero{
+  background:linear-gradient(135deg,#342c46 0%,#5a447a 58%,#76609a 100%);
+  color:#fff;border-radius:28px;padding:34px clamp(22px,5vw,54px);
+  box-shadow:var(--shadow);margin-bottom:24px;
+}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;opacity:.88;margin:0 0 8px}
+.hero h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.15em 0 .2em}
+.hero p{max-width:800px;font-size:1.08rem;margin:.6rem 0 0;color:#f3eef8}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.pill{
+  display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.11);border-radius:999px;padding:7px 11px;font-size:.88rem
+}
+.progress-wrap{margin-top:18px}
+.progress-label{font-size:.9rem;margin-bottom:6px;color:#efe9f8}
+.progress-track{height:10px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--gold);transition:width .25s ease}
+
+.game-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start
+}
+.main-card,.raccoon-card,.research-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+}
+.main-card{padding:clamp(22px,4vw,38px)}
+.raccoon-card{padding:18px;position:sticky;top:18px}
+.raccoon-card img{
+  display:block;max-width:190px;width:100%;height:auto;margin:0 auto 12px;image-rendering:pixelated
+}
+.raccoon-title{font-weight:800;margin:0 0 6px}
+.raccoon-text{margin:0;color:var(--muted);font-size:.95rem}
+.section-kicker{color:var(--accent-dark);font-weight:800;margin:0 0 4px}
+.main-card h2{font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.2;margin:.1em 0 .5em}
+.scenario-note{
+  background:var(--soft);border-left:5px solid var(--accent);padding:14px 16px;border-radius:12px;margin:18px 0
+}
+.assignment{
+  border:1px solid var(--line);background:#fcfcfd;border-radius:16px;padding:18px;margin:18px 0
+}
+.assignment .label{
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);margin-bottom:7px
+}
+.assignment blockquote{margin:0;font-size:1.05rem}
+.choice-list{display:grid;gap:12px;margin-top:22px}
+.choice{
+  width:100%;text-align:left;border:2px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:14px;padding:15px 16px;cursor:pointer;transition:.12s ease
+}
+.choice:hover{border-color:#aea7c6;background:#fcfaff;transform:translateY(-1px)}
+.choice strong{display:block;margin-bottom:3px}
+.feedback{
+  margin-top:22px;border-radius:16px;padding:18px;border:1px solid var(--line)
+}
+.feedback.good{background:var(--green-soft);border-color:#b8ddca}
+.feedback.mixed{background:var(--amber-soft);border-color:#ead49c}
+.feedback.hidden{background:var(--rose-soft);border-color:#e2bbc2}
+.feedback h3{margin:0 0 8px;font-size:1.1rem}
+.feedback p{margin:.45rem 0}
+.reveal{
+  margin-top:14px;padding:14px 15px;border-radius:12px;background:#fff;border:1px dashed #b8bec8
+}
+.reveal strong{display:block;margin-bottom:5px}
+.moves{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px
+}
+.move{
+  background:#fff;border:1px solid #d9dee7;border-radius:12px;padding:10px 12px;font-size:.92rem
+}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{
+  border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-secondary{background:#eef1f5;color:var(--ink)}
+.btn-secondary:hover{background:#e2e6ec}
+.btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.finish-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.finish-box{border:2px solid var(--line);border-radius:14px;padding:16px}
+.finish-box h3{margin-top:0}
+.finish-box.visible{background:var(--green-soft);border-color:#b8ddca}
+.finish-box.hidden{background:var(--amber-soft);border-color:#ead49c}
+.takeaway{
+  font-size:clamp(1.2rem,2.5vw,1.55rem);font-weight:800;padding:18px;border-radius:16px;
+  background:linear-gradient(135deg,#f3edfb,#fff8e8);margin:18px 0
+}
+.try-tomorrow{border:2px solid #d4c7ef;background:#faf7ff;border-radius:16px;padding:18px;margin:20px 0}
+.try-tomorrow h3{margin-top:0}
+.research-card{margin-top:24px;padding:clamp(22px,4vw,34px)}
+.research-card h2{margin-top:0}
+.research-card details{border-top:1px solid var(--line);padding:13px 0}
+.research-card details:last-child{border-bottom:1px solid var(--line)}
+.research-card summary{font-weight:800;cursor:pointer}
+.research-card p{color:var(--muted)}
+footer{color:var(--muted);font-size:.9rem;padding:28px 8px 10px;text-align:center}
+@media (max-width:840px){
+  .game-grid{grid-template-columns:1fr}
+  .raccoon-card{position:static;display:grid;grid-template-columns:90px 1fr;align-items:center}
+  .raccoon-card img{max-width:90px;margin:0 14px 0 0}
+}
+@media (max-width:620px){
+  .shell{padding:12px}.hero{border-radius:20px;padding:24px 20px}.main-card{padding:20px}
+  .moves,.finish-grid{grid-template-columns:1fr}.actions{flex-direction:column}.btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#game">Skip to the faculty lab</a>
+
+<div class="shell">
+<header class="hero">
+  <p class="eyebrow">ENGL C1000 Faculty Mini-Lab</p>
+  <h1>🕵️ The Hidden Curriculum</h1>
+  <p>Students can be capable of the thinking we want and still miss expectations we never made visible. Your task: uncover the academic moves hiding inside ordinary assignment language.</p>
+  <div class="meta" aria-label="Lab details">
+    <span class="pill">About 7 minutes</span>
+    <span class="pill">No score</span>
+    <span class="pill">Assignment-design focus</span>
+  </div>
+  <div class="progress-wrap" aria-label="Lab progress">
+    <div class="progress-label" id="progressLabel">Scenario 1 of 6</div>
+    <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+</header>
+
+<main id="game" tabindex="-1">
+  <div class="game-grid">
+    <section class="main-card" id="gameCard" aria-live="polite"></section>
+
+    <aside class="raccoon-card" aria-label="Raccoon teaching companion">
+      <img src="raccoon.png" alt="">
+      <div>
+        <p class="raccoon-title">Raccoon Check 🦝</p>
+        <p class="raccoon-text" id="raccoonText">What would a student have to already know in order to follow this direction?</p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="research-card" id="learn-more">
+    <h2>Learn Why This Works</h2>
+    <p>Transparent teaching does not mean doing the thinking for students. It means making the task, purpose, criteria, and academic moves easier to see so students can direct their effort toward the learning itself.</p>
+    <details>
+      <summary>What counts as hidden curriculum?</summary>
+      <p>Hidden curriculum includes expectations that experienced college readers and writers may recognize automatically but that are not actually explained: what “analyze” requires, what makes a source scholarly, how evidence connects to a claim, what substantial revision looks like, or what successful participation sounds like.</p>
+    </details>
+    <details>
+      <summary>Does explaining the moves lower rigor?</summary>
+      <p>No. Showing students what a move is does not perform the move for them. A model, checklist, annotated example, or brief explanation can make expectations visible while leaving students responsible for interpretation, judgment, and composition.</p>
+    </details>
+    <details>
+      <summary>What is the practical test?</summary>
+      <p>Ask: <strong>“Could a capable student misunderstand what I mean because the academic move is named but not shown?”</strong> If yes, there may be hidden curriculum worth making visible.</p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  This faculty mini-lab is part of a collection created by Karen Crozer to support ENGL C1000 teaching and learning in California Community Colleges.
+</footer>
+</div>
+
+<script>
+const scenarios = [
+{
+  title:"“Analyze the Author's Argument”",
+  assignment:"Analyze how the author develops the argument. Avoid summary.",
+  prompt:"What is most likely hidden inside this instruction?",
+  moves:["Distinguishing observation from interpretation","Identifying rhetorical choices","Explaining effects or significance","Connecting details to a larger claim"],
+  choices:[
+    {
+      label:"Nothing. “Analyze” is a standard college verb students should already understand.",
+      kind:"hidden",
+      heading:"The verb names the destination, not necessarily the route.",
+      feedback:"Students may know that analysis is different from summary without knowing the sequence of thinking that produces analysis.",
+      reveal:"The hidden curriculum is the set of moves between noticing a detail and explaining what that detail means.",
+      raccoon:"A familiar academic word can still hide an unfamiliar process."
+    },
+    {
+      label:"Add a brief model showing one sentence of summary and one sentence of analysis, then label the difference.",
+      kind:"good",
+      heading:"You made the academic move visible without doing the assignment for them.",
+      feedback:"The model gives students something concrete to notice: analysis interprets evidence and explains significance rather than simply recounting content.",
+      reveal:"Students still have to make their own analytical choices; they just have a clearer picture of the kind of thinking expected.",
+      raccoon:"Showing the move is not the same as making the move for them."
+    },
+    {
+      label:"Replace “analyze” with “write about” so the directions feel less intimidating.",
+      kind:"mixed",
+      heading:"The wording is friendlier, but the expectation becomes less precise.",
+      feedback:"Students benefit from approachable language, but removing the disciplinary verb can make the target fuzzier. Better: keep “analyze” and explain what it means in this task.",
+      reveal:"Transparency can preserve academic vocabulary while making its meaning usable.",
+      raccoon:"Plain language and disciplinary language do not have to be enemies."
+    }
+  ]
+},
+{
+  title:"“Use Scholarly Sources”",
+  assignment:"Use at least three scholarly sources to support your argument.",
+  prompt:"What might a student reasonably not know yet?",
+  moves:["Where scholarly sources are found","How to recognize peer review","How a journal article differs from a web article","How source type connects to purpose"],
+  choices:[
+    {
+      label:"Give students the library homepage and tell them to search there.",
+      kind:"mixed",
+      heading:"The resource is visible, but the decision-making may still be hidden.",
+      feedback:"Students can reach the library and still not know which database to choose, what filters mean, or how to recognize the kind of source the assignment requires.",
+      reveal:"Access to a resource is not the same as knowing how to use it strategically.",
+      raccoon:"A door can be open and still not show you where to go."
+    },
+    {
+      label:"Show two sample search results and ask students which one better fits the assignment—and why.",
+      kind:"good",
+      heading:"You exposed the judgment behind “scholarly.”",
+      feedback:"A comparison lets students practice recognition and reasoning instead of memorizing a definition disconnected from real search results.",
+      reveal:"The hidden move is classification: noticing publication context, author information, citations, and the role of peer review.",
+      raccoon:"Experts recognize patterns. Novices often need the pattern pointed out first."
+    },
+    {
+      label:"Assume this was covered in high school or orientation.",
+      kind:"hidden",
+      heading:"Prior exposure is possible; prior mastery is not guaranteed.",
+      feedback:"Students arrive with very different experiences of libraries, databases, and academic publishing. Treating this knowledge as universal can turn a research assignment into a guessing game.",
+      reveal:"A quick diagnostic or model can reveal what students already know without reteaching everything.",
+      raccoon:"“They've seen it before” and “they can use it now” are different claims."
+    }
+  ]
+},
+{
+  title:"“Develop Your Ideas”",
+  assignment:"Your draft has a good start, but you need to develop your ideas more fully.",
+  prompt:"What could “develop” be hiding?",
+  moves:["Adding reasons","Explaining evidence","Considering implications","Making relationships between ideas explicit"],
+  choices:[
+    {
+      label:"Leave the comment as is. The student needs room to make independent choices.",
+      kind:"hidden",
+      heading:"Independence is important, but the direction may be too abstract to act on.",
+      feedback:"Students can remain fully responsible for the content while receiving a clearer description of the writing move that is missing.",
+      reveal:"The problem is not lack of freedom; it is lack of a usable next step.",
+      raccoon:"Vagueness can look like freedom from the instructor side."
+    },
+    {
+      label:"Write the missing sentences for the student as an example.",
+      kind:"mixed",
+      heading:"The example is concrete—but it may take over too much of the composing.",
+      feedback:"A model can help, but writing the student's actual reasoning may shift the intellectual work away from the student.",
+      reveal:"Better scaffolds often model a parallel example or ask a targeted question that prompts the student to generate the reasoning.",
+      raccoon:"A scaffold should support authorship, not quietly replace it."
+    },
+    {
+      label:"Translate the comment into one or two specific questions: “How does this evidence support your claim?” and “Why does that connection matter?”",
+      kind:"good",
+      heading:"The feedback now points toward the hidden reasoning move.",
+      feedback:"The student still decides what to say, but the questions clarify what “development” means in this particular paragraph.",
+      reveal:"Specific prompts can make expert expectations visible without scripting the answer.",
+      raccoon:"Sometimes the best explanation is a better question."
+    }
+  ]
+},
+{
+  title:"“Revise Substantially”",
+  assignment:"Revise your essay substantially before submitting the final draft.",
+  prompt:"What expectation might remain invisible?",
+  moves:["Rethinking claims","Reorganizing ideas","Adding or replacing evidence","Changing reasoning—not just proofreading"],
+  choices:[
+    {
+      label:"Provide examples of substantive revision versus editing and proofreading.",
+      kind:"good",
+      heading:"You clarified the level of change the assignment is asking for.",
+      feedback:"Students often equate revision with fixing sentences because that is the most visible form of change. Examples can show that revision may involve rethinking the argument itself.",
+      reveal:"The hidden curriculum is the difference between improving the surface and reconsidering the writing.",
+      raccoon:"If “revise” means everything, students may default to the easiest visible thing."
+    },
+    {
+      label:"Require a minimum number of changed words or paragraphs.",
+      kind:"mixed",
+      heading:"The requirement makes change measurable, but not necessarily meaningful.",
+      feedback:"Students can satisfy a numerical rule without making purposeful rhetorical decisions. A revision memo or targeted revision goal may better reveal the thinking behind the changes.",
+      reveal:"Visible change and substantive change are not always the same thing.",
+      raccoon:"Counting changes is easier than judging whether the writing actually changed."
+    },
+    {
+      label:"Assume students understand revision because they have written essays before.",
+      kind:"hidden",
+      heading:"Past writing experience does not guarantee a shared revision process.",
+      feedback:"Students may have encountered very different definitions of revision. Making the distinction visible helps everyone work toward the same expectation.",
+      reveal:"The assignment can stay demanding while the revision process becomes more explicit.",
+      raccoon:"Shared vocabulary does not always mean shared meaning."
+    }
+  ]
+},
+{
+  title:"“Participate in Peer Review”",
+  assignment:"Give your partner useful feedback on their draft.",
+  prompt:"What expertise could be hidden in the word “useful”?",
+  moves:["Knowing what to prioritize","Describing a reader response","Asking productive questions","Avoiding copyediting everything"],
+  choices:[
+    {
+      label:"Give students a short protocol: identify one strength, one place you got lost, and one question about the writer's reasoning.",
+      kind:"good",
+      heading:"The protocol makes quality feedback more learnable.",
+      feedback:"Peer review becomes practice in reading as a writer rather than a vague request to “help” someone. Students still make judgments; the protocol focuses those judgments.",
+      reveal:"The hidden curriculum includes what experienced writers know about useful response: priority, specificity, and reader impact.",
+      raccoon:"“Give feedback” sounds simple until you ask what good feedback actually does."
+    },
+    {
+      label:"Tell students to correct as many errors as they can find.",
+      kind:"hidden",
+      heading:"This defines usefulness too narrowly.",
+      feedback:"Students may conclude that peer review is primarily proofreading, even when the assignment needs feedback on argument, organization, evidence, or clarity.",
+      reveal:"Without guidance, students often default to the most visible and familiar kind of commenting.",
+      raccoon:"What students practice in peer review teaches them what we think matters."
+    },
+    {
+      label:"Let students decide completely on their own what useful feedback means.",
+      kind:"mixed",
+      heading:"Open choice can work—but novices may not yet have a framework for the choice.",
+      feedback:"Independence is valuable, but a light structure can help students develop the judgment they will later use more independently.",
+      reveal:"Scaffolding can be temporary: teach the protocol, practice it, then loosen it.",
+      raccoon:"Structure can be training wheels without becoming permanent handlebars."
+    }
+  ]
+},
+{
+  title:"The Full Prompt",
+  assignment:"Write a 5–6 page essay that synthesizes two course readings, develops an arguable thesis, integrates evidence smoothly, addresses a counterargument, and uses MLA style.",
+  prompt:"Final challenge: what is the best first move if students repeatedly miss several of these expectations?",
+  moves:["Identify which moves are unfamiliar","Separate task from criteria","Show a model or partial model","Sequence practice before the full essay"],
+  choices:[
+    {
+      label:"Make the prompt longer so every possible requirement is explained in detail.",
+      kind:"mixed",
+      heading:"More information can clarify—or simply create a larger wall of text.",
+      feedback:"Transparency is not measured by word count. Students need visible structure, examples, criteria, and opportunities to practice the underlying moves—not just more prose.",
+      reveal:"A short prompt plus a well-organized checklist, model, or sequence of practice can be more transparent than a dense multi-page explanation.",
+      raccoon:"More words are not automatically more visible."
+    },
+    {
+      label:"Break the prompt into the academic moves students must perform, then identify which ones need modeling or practice before the essay.",
+      kind:"good",
+      heading:"You turned the prompt into a map of teachable moves.",
+      feedback:"This preserves the complexity of the final essay while helping the instructor see what students may need to learn before they can successfully combine everything.",
+      reveal:"The goal is not to explain away difficulty. It is to teach the moves that make the difficulty intellectually productive.",
+      raccoon:"Hidden curriculum becomes teachable curriculum once we can name the moves."
+    },
+    {
+      label:"Keep the prompt unchanged and remind students to ask questions if they are confused.",
+      kind:"hidden",
+      heading:"Office hours help, but students cannot always ask about expectations they do not realize they are missing.",
+      feedback:"Students may believe they understand the assignment while interpreting academic terms differently from the instructor. Proactive transparency catches those mismatches earlier.",
+      reveal:"“Ask if you need help” is valuable, but it cannot replace visible expectations.",
+      raccoon:"Students cannot ask about every thing they don't know they don't know."
+    }
+  ]
+}
+];
+
+let current=0, answered=false;
+const card=document.getElementById("gameCard");
+const progressBar=document.getElementById("progressBar");
+const progressLabel=document.getElementById("progressLabel");
+const raccoonText=document.getElementById("raccoonText");
+
+function renderScenario(){
+  answered=false;
+  const s=scenarios[current];
+  progressLabel.textContent=`Scenario ${current+1} of ${scenarios.length}`;
+  progressBar.style.width=`${(current/scenarios.length)*100}%`;
+  raccoonText.textContent="What would a student have to already know in order to follow this direction?";
+  card.innerHTML=`
+    <p class="section-kicker">Scenario ${current+1}</p>
+    <h2>${s.title}</h2>
+    <div class="assignment">
+      <div class="label">What the student sees</div>
+      <blockquote>“${s.assignment}”</blockquote>
+    </div>
+    <div class="scenario-note"><strong>${s.prompt}</strong></div>
+    <div class="choice-list" role="group" aria-label="Choose a teaching move">
+      ${s.choices.map((c,i)=>`
+      <button class="choice" data-index="${i}">
+        <strong>Option ${String.fromCharCode(65+i)}</strong>${c.label}
+      </button>`).join("")}
+    </div>
+    <div id="feedbackArea" tabindex="-1"></div>
+  `;
+  card.querySelectorAll(".choice").forEach(btn=>{
+    btn.addEventListener("click",()=>showFeedback(Number(btn.dataset.index)));
+  });
+  card.querySelector(".choice").focus();
+}
+
+function showFeedback(i){
+  if(answered)return;
+  answered=true;
+  const s=scenarios[current], c=s.choices[i];
+  card.querySelectorAll(".choice").forEach((b,idx)=>{
+    b.disabled=true;
+    if(idx===i){b.style.borderColor="#6a4c93";b.style.background="#faf6ff";}
+  });
+  raccoonText.textContent=c.raccoon;
+  const area=document.getElementById("feedbackArea");
+  area.innerHTML=`
+    <div class="feedback ${c.kind}">
+      <h3>${c.heading}</h3>
+      <p>${c.feedback}</p>
+      <div class="reveal">
+        <strong>🔎 What was hiding?</strong>
+        <p>${c.reveal}</p>
+        <div class="moves" aria-label="Hidden academic moves">
+          ${s.moves.map(m=>`<div class="move">${m}</div>`).join("")}
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" id="tryAgain">Try another choice</button>
+      <button class="btn btn-primary" id="nextBtn">${current===scenarios.length-1?"See the takeaway":"Next scenario"}</button>
+    </div>
+  `;
+  area.focus();
+  document.getElementById("tryAgain").addEventListener("click",renderScenario);
+  document.getElementById("nextBtn").addEventListener("click",()=>{
+    if(current<scenarios.length-1){
+      current++;renderScenario();window.scrollTo({top:0,behavior:"smooth"});
+    }else{
+      renderFinish();window.scrollTo({top:0,behavior:"smooth"});
+    }
+  });
+}
+
+function renderFinish(){
+  progressLabel.textContent="Lab complete";
+  progressBar.style.width="100%";
+  raccoonText.textContent="If students have to guess the move, we are partly measuring whether they already know the code.";
+  card.innerHTML=`
+    <p class="section-kicker">Lab Complete</p>
+    <h2>Make the moves visible.</h2>
+
+    <div class="takeaway">
+      Transparency does not remove intellectual challenge. It helps students see what kind of intellectual work the assignment is actually asking them to do.
+    </div>
+
+    <div class="finish-grid">
+      <div class="finish-box visible">
+        <h3>Make Visible</h3>
+        <ul>
+          <li>What the task is asking students to do</li>
+          <li>What academic verbs mean in this assignment</li>
+          <li>What successful work looks like</li>
+          <li>Which criteria matter most</li>
+          <li>What process can help students get there</li>
+        </ul>
+      </div>
+      <div class="finish-box hidden">
+        <h3>Watch for Hidden Curriculum</h3>
+        <ul>
+          <li>“Analyze” without showing analysis</li>
+          <li>“Develop” without identifying the missing move</li>
+          <li>“Scholarly” without source-recognition practice</li>
+          <li>“Revise” without distinguishing revision from editing</li>
+          <li>“Participate” without defining useful participation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="try-tomorrow">
+      <h3>Try This Tomorrow</h3>
+      <p>Choose one assignment and circle every academic verb: <strong>analyze, synthesize, integrate, develop, evaluate, revise</strong>. For each one, ask: <em>Have I shown students what this move looks like here?</em> Pick just one hidden move to make more visible.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" id="playAgain">↻ Play Again</button>
+      <a class="btn btn-ghost" href="#learn-more">📚 Learn Why This Works</a>
+      <a class="btn btn-primary" href="scaffold-dont-simplify.html">Next Lab: Scaffold It, Don’t Simplify It →</a>
+    </div>
+  `;
+  document.getElementById("playAgain").addEventListener("click",()=>{
+    current=0;renderScenario();window.scrollTo({top:0,behavior:"smooth"});
+  });
+  card.focus();
+}
+renderScenario();
+</script>
+</body>
+</html>
