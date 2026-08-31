@@ -28,6 +28,17 @@ h1{max-width:900px;margin:10px auto 16px;color:var(--navy);font-size:clamp(2.5re
 .lede{max-width:820px;margin:0 auto;color:#4f5d65;font-size:clamp(1.08rem,2vw,1.25rem)}
 .note{max-width:800px;margin:20px auto 0;padding:15px 18px;border:1px solid var(--line);border-radius:14px;background:white;color:var(--muted)}
 .orientation{padding:8px 0 36px}
+.live-labs{padding:0 0 38px}
+.live-head{text-align:center;max-width:760px;margin:0 auto 18px}
+.live-head h2{margin:0 0 7px;color:var(--navy);font-size:clamp(1.6rem,3vw,2.2rem)}
+.live-head p{margin:0;color:var(--muted)}
+.live-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.live-lab{display:block;padding:22px;border:1px solid #b9d5cb;border-radius:18px;background:linear-gradient(145deg,#fff,#f0f8f5);text-decoration:none;box-shadow:var(--shadow);transition:.15s}
+.live-lab:hover{transform:translateY(-2px);border-color:var(--green)}
+.live-lab .kicker{color:var(--green)}
+.live-lab .lab-title{font-size:1.18rem}
+.live-lab .go{display:block;margin-top:13px;color:var(--green);font-weight:850}
+.coming-note{margin:16px auto 0;max-width:760px;padding:12px 16px;border-radius:13px;background:var(--gold-soft);color:#6c5824;text-align:center;font-weight:750}
 .orientation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .orientation-card{padding:20px;border-radius:16px;border:1px solid var(--line);background:white}
 .orientation-card strong{display:block;color:var(--navy);margin-bottom:5px}
@@ -68,7 +79,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);f
 .foot{display:flex;justify-content:space-between;gap:20px;align-items:flex-end}.credit strong{color:var(--ink)}
 @media(max-width:800px){
   .topbar,.foot{display:block}.topbar nav{margin-top:12px}
-  .orientation-grid,.faculty-labs,.student-tools,.framework-grid{grid-template-columns:1fr}
+  .orientation-grid,.live-grid,.faculty-labs,.student-tools,.framework-grid{grid-template-columns:1fr}
   .hero{padding-top:40px}.path summary{padding:18px}.path-body{padding:0 16px 18px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -105,6 +116,31 @@ footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);f
       <div class="orientation-card"><strong>Try one small change.</strong><p>Faculty labs are designed around practical decisions you can test rather than broad advice you are expected to “implement.”</p></div>
       <div class="orientation-card"><strong>Connect it to student practice.</strong><p>Each pathway points to student mini-labs that make the same reading, writing, or help-seeking move visible to learners.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="live-labs" aria-labelledby="faculty-labs-now">
+  <div class="wrap">
+    <div class="live-head">
+      <span class="eyebrow">Faculty mini-labs available now</span>
+      <h2>Try a short teaching challenge.</h2>
+      <p>Each lab puts you inside a familiar ENGL C1000 teaching decision. Choose what you would do, see the situation from another angle, and leave with one small move to try.</p>
+    </div>
+    <div class="live-grid">
+      <a class="live-lab" href="rigor-or-roadblock.html">
+        <span class="kicker">Interactive faculty mini-lab</span>
+        <span class="lab-title">🚧 Rigor or Roadblock?</span>
+        <span class="lab-desc">Decide whether common course practices create productive intellectual challenge or unnecessary barriers. Explore how to preserve rigor while making the route into difficult work clearer.</span>
+        <span class="go">Try Rigor or Roadblock? →</span>
+      </a>
+      <a class="live-lab" href="hidden-curriculum.html">
+        <span class="kicker">Interactive faculty mini-lab</span>
+        <span class="lab-title">🕵️ The Hidden Curriculum</span>
+        <span class="lab-desc">Uncover the academic moves hiding inside familiar directions such as <em>analyze</em>, <em>develop</em>, <em>synthesize</em>, <em>revise</em>, and <em>use scholarly sources</em>.</span>
+        <span class="go">Try The Hidden Curriculum →</span>
+      </a>
+    </div>
+    <p class="coming-note">More faculty mini-labs are coming soon. The collection will continue to grow across reading, writing, assignment design, feedback, belonging, persistence, and online teaching.</p>
   </div>
 </section>
 
