@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Lab: Figure Out How You Get Work Done</title>
+<style>
+:root{
+ --bg:#f5f3ee;--ink:#24313b;--muted:#66737c;--card:#fff;--line:#d9d3ca;
+ --purple:#6253b5;--purple2:#eeebff;--green:#2f7967;--green2:#eaf6f1;
+ --gold:#946e16;--gold2:#fff7dc;--rose:#9e5264;--rose2:#fff0f4;
+ --shadow:0 10px 28px rgba(36,49,59,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+main{max-width:980px;margin:auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,#293044,#4c5575);color:white;padding:28px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;margin:0 0 8px}
+.hero p{max-width:790px;margin:6px 0}.mini{font-size:.94rem;color:#eceeff}
+.progressbox,.screen{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}
+.progressbox{padding:14px 16px;margin-bottom:18px}
+.proglabel{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:850}
+.track{height:10px;background:#e8e2da;border-radius:999px;overflow:hidden;margin-top:8px}.bar{height:100%;width:12.5%;background:var(--purple);transition:width .25s}
+.screen{display:none;padding:24px}.screen.active{display:block}
+.kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--purple)}
+h2{font-size:1.7rem;margin:4px 0 10px}h3{margin:8px 0}
+.callout,.note,.warning{padding:15px 16px;border-radius:12px;margin:16px 0}
+.callout{background:var(--green2);border-left:5px solid var(--green)}
+.note{background:var(--purple2);border-left:5px solid var(--purple)}
+.warning{background:var(--gold2);border-left:5px solid var(--gold)}
+.q{font-weight:900;font-size:1.08rem;margin:20px 0 9px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.options{display:grid;gap:9px}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 15px;min-height:48px;font:inherit;color:var(--ink);cursor:pointer}
+.choice:hover,.choice:focus-visible{border-color:var(--purple);outline:3px solid rgba(98,83,181,.14);outline-offset:2px}
+.choice[aria-pressed=true]{border-color:var(--purple);background:var(--purple2)}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.check{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:#fff}
+.check input{width:20px;height:20px;margin-top:3px}
+.feedback{display:none;padding:14px 16px;border-radius:12px;margin-top:12px}.feedback.show{display:block}.good{background:var(--green2);border-left:5px solid var(--green)}.try{background:var(--rose2);border-left:5px solid var(--rose)}
+.taskgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.taskcol{border:1px solid var(--line);border-radius:14px;padding:14px;background:#faf9f6}.taskcol strong{display:block;margin-bottom:6px}
+.scenario{border:1px solid var(--line);background:#faf9f6;border-radius:14px;padding:16px;margin:16px 0}
+.controls{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;min-height:46px;font-size:1rem;font-weight:900;cursor:pointer}
+.primary{background:var(--purple);color:white}.secondary{background:#e7e1d9;color:var(--ink)}button:disabled{opacity:.5;cursor:not-allowed}
+.recipe{border:2px solid var(--purple);border-radius:18px;padding:20px;background:linear-gradient(180deg,#fff,#fbfaf8);margin-top:18px}
+.recipe-row{border-top:1px solid var(--line);padding:11px 0}.recipe-row:first-of-type{border-top:0}
+.small{font-size:.92rem;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:720px){.grid,.checks,.taskgrid{grid-template-columns:1fr}}
+@media(max-width:480px){.controls button{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+ <div class="kicker" style="color:#ddd9ff">College Learning Lab</div>
+ <h1>🧪 Study Lab</h1>
+ <p><strong>Figure out how you get work done.</strong></p>
+ <p>You don't need the “perfect” study routine. You need to notice what helps you focus, match your work to the conditions you actually have, and test what works.</p>
+ <p class="mini">This activity does not assign you a learning style. You're running a small experiment on yourself.</p>
+</section>
+
+<section class="progressbox" aria-label="Activity progress">
+ <div class="proglabel"><span id="stepText">Experiment 1 of 8</span><span id="stepName">Start with a hypothesis</span></div>
+ <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+</section>
+<div id="live" class="small" aria-live="polite"></div>
+
+<section class="screen active" data-step="0">
+ <div class="kicker">Experiment 1 · Start Here</div>
+ <h2>There Is No Perfect Place to Study</h2>
+ <div class="note"><strong>The question isn't:</strong> “What's the best way to study?”<br><strong>The better question:</strong> “What helps my brain do <em>this kind of work</em>?”</div>
+ <p>Some people need silence. Some like background noise. Some focus around other people. Some need to be alone. And the conditions that work for difficult reading may not be the conditions that work for proofreading or checking Canvas.</p>
+ <p class="q">Which idea will guide this lab?</p>
+ <div class="options" id="startQuiz">
+  <button class="choice" data-ok="false" aria-pressed="false">Successful college students all need basically the same study routine.</button>
+  <button class="choice" data-ok="true" aria-pressed="false">I can notice patterns, test conditions, and adjust based on the kind of work I'm doing.</button>
+  <button class="choice" data-ok="false" aria-pressed="false">If I cannot create ideal study conditions, I probably cannot do useful work.</button>
+ </div>
+ <div id="fb0" class="feedback"></div>
+ <div class="controls"><button class="primary next" disabled>Test My Time</button></div>
+</section>
+
+<section class="screen" data-step="1">
+ <div class="kicker">Experiment 2 · Time</div>
+ <h2>When Does Your Brain Have More to Give?</h2>
+ <div class="scenario"><strong>Scenario:</strong> It's 9:00 p.m. You've been awake since early morning. You finally have 45 minutes available. You planned to tackle the hardest reading of the week.</div>
+ <p class="q">What's the strongest first question?</p>
+ <div class="options" id="timeQuiz">
+  <button class="choice" data-ok="false" aria-pressed="false">“Do I technically have 45 minutes?”</button>
+  <button class="choice" data-ok="true" aria-pressed="false">“Can I actually concentrate on difficult reading right now?”</button>
+  <button class="choice" data-ok="false" aria-pressed="false">“Should everyone avoid studying at night?”</button>
+ </div>
+ <div id="fb1" class="feedback"></div>
+ <div class="callout"><strong>Available time ≠ useful focus time.</strong> A time slot can still be useful even if it isn't the right time for your hardest task.</div>
+ <p class="q">When does difficult thinking seem most promising for you?</p>
+ <div class="grid singlePick" data-key="time">
+  <button class="choice" aria-pressed="false">🌅 Early morning</button><button class="choice" aria-pressed="false">☀️ Late morning</button>
+  <button class="choice" aria-pressed="false">🌤️ Afternoon</button><button class="choice" aria-pressed="false">🌆 Evening</button>
+  <button class="choice" aria-pressed="false">🌙 Late night</button><button class="choice" aria-pressed="false">🤷 I don't know yet — I can test it</button>
+ </div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Test My Place</button></div>
+</section>
+
+<section class="screen" data-step="2">
+ <div class="kicker">Experiment 3 · Place</div>
+ <h2>Where Do You Actually Finish Things?</h2>
+ <p>Your favorite place to sit is not always your best place for every kind of work.</p>
+ <p class="q">Where have you actually gotten focused work done — or where would you like to test it?</p>
+ <div class="grid singlePick" data-key="place">
+  <button class="choice" aria-pressed="false">📚 Library</button><button class="choice" aria-pressed="false">🏫 Campus study area</button>
+  <button class="choice" aria-pressed="false">🍽️ Table or desk at home</button><button class="choice" aria-pressed="false">🛋️ Couch</button>
+  <button class="choice" aria-pressed="false">🛏️ Bedroom</button><button class="choice" aria-pressed="false">☕ Coffee shop</button>
+  <button class="choice" aria-pressed="false">🌳 Outside</button><button class="choice" aria-pressed="false">🚌 Bus/train or while commuting</button>
+  <button class="choice" aria-pressed="false">💼 Work break</button><button class="choice" aria-pressed="false">🤷 I need to experiment</button>
+ </div>
+ <div class="note"><strong>Useful question:</strong> Don't only ask “Where do I usually start?” Ask “Where do I actually finish things?”</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Test Sound + People</button></div>
+</section>
+
+<section class="screen" data-step="3">
+ <div class="kicker">Experiment 4 · Sound + People</div>
+ <h2>Quiet, Noise, or Someone Nearby?</h2>
+ <p class="q">For difficult reading or writing, what seems most promising?</p>
+ <div class="grid singlePick" data-key="sound">
+  <button class="choice" aria-pressed="false">🔇 Silence</button><button class="choice" aria-pressed="false">🎧 Noise-reducing headphones</button>
+  <button class="choice" aria-pressed="false">🎵 Music without lyrics</button><button class="choice" aria-pressed="false">🎶 Music with lyrics</button>
+  <button class="choice" aria-pressed="false">🌧️ Ambient sound</button><button class="choice" aria-pressed="false">☕ Background chatter</button>
+  <button class="choice" aria-pressed="false">🤷 I need to test different sound levels</button>
+ </div>
+ <p class="q">What about other people?</p>
+ <div class="grid singlePick" data-key="people">
+  <button class="choice" aria-pressed="false">🙋 I focus better by myself</button>
+  <button class="choice" aria-pressed="false">👥 I may focus better when other people are working nearby</button>
+  <button class="choice" aria-pressed="false">📱 A virtual study buddy might help</button>
+  <button class="choice" aria-pressed="false">🏫 Going somewhere where people are studying helps me start</button>
+  <button class="choice" aria-pressed="false">🤷 I've never paid attention — I'll test it</button>
+ </div>
+ <div class="callout"><strong>Study buddy doesn't have to mean tutor.</strong> Sometimes another person quietly doing their own work makes it easier to start and stay with yours. You can test that without deciding it has to work for you.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Check the Basics</button></div>
+</section>
+
+<section class="screen" data-step="4">
+ <div class="kicker">Experiment 5 · Your Body Is in the Room Too</div>
+ <h2>Before You Blame Your Focus, Check the Basics</h2>
+ <p>You don't need to optimize yourself like a machine. But physical discomfort can use attention too.</p>
+ <p class="q">Before a study session, what might be worth checking? Select any that are useful to you.</p>
+ <div class="checks" id="bodyChecks">
+  <label class="check"><input type="checkbox" value="🥤 Get water"><span>🥤 Am I thirsty?</span></label>
+  <label class="check"><input type="checkbox" value="🍎 Eat if I need to"><span>🍎 Am I hungry or do I need to eat?</span></label>
+  <label class="check"><input type="checkbox" value="🚶 Move for a few minutes"><span>🚶 Would a little movement help?</span></label>
+  <label class="check"><input type="checkbox" value="😴 Notice my energy level"><span>😴 Am I too exhausted for the hardest task?</span></label>
+  <label class="check"><input type="checkbox" value="🚻 Take care of physical needs"><span>🚻 Do I need a bathroom break?</span></label>
+  <label class="check"><input type="checkbox" value="🪑 Get physically comfortable"><span>🪑 Am I physically comfortable enough to work?</span></label>
+  <label class="check"><input type="checkbox" value="👀 Take a screen break if needed"><span>👀 Have I been staring at a screen too long?</span></label>
+  <label class="check"><input type="checkbox" value="🔌 Get materials ready"><span>🔌 Do I have the charger, reading, notes, or materials I need?</span></label>
+ </div>
+ <div class="small" style="margin-top:10px">Food, caffeine, sleep, medication, and health needs vary from person to person. This activity is about noticing your own practical needs, not following a universal rule.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next">Run the Phone Test</button></div>
+</section>
+
+<section class="screen" data-step="5">
+ <div class="kicker">Experiment 6 · Distraction</div>
+ <h2>The Two-Minute Phone Check</h2>
+ <div class="scenario">You pick up your phone to check one notification during a study session.</div>
+ <p class="q">Be extremely honest: what tends to happen next?</p>
+ <div class="grid singlePick" data-key="phonePattern">
+  <button class="choice" aria-pressed="false">⚡ I usually come right back</button><button class="choice" aria-pressed="false">⏳ A few minutes disappear</button>
+  <button class="choice" aria-pressed="false">🕰️ It can become 15–30 minutes</button><button class="choice" aria-pressed="false">😅 Sometimes I forget what I was doing</button>
+  <button class="choice" aria-pressed="false">🤷 My phone isn't usually my main distraction</button>
+ </div>
+ <div class="callout"><strong>No judgment — just data.</strong> If a two-minute check reliably becomes twenty minutes, that's useful information.</div>
+ <p class="q">Choose one phone setup you could test.</p>
+ <div class="grid singlePick" data-key="phonePlan">
+  <button class="choice" aria-pressed="false">🔕 Do Not Disturb</button><button class="choice" aria-pressed="false">🎒 Phone in my bag</button>
+  <button class="choice" aria-pressed="false">↔️ Phone farther away</button><button class="choice" aria-pressed="false">⏱️ Check after a work interval</button>
+  <button class="choice" aria-pressed="false">📱 Face down / notifications hidden</button><button class="choice" aria-pressed="false">✓ I don't need a phone change right now</button>
+ </div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Match Task to Conditions</button></div>
+</section>
+
+<section class="screen" data-step="6">
+ <div class="kicker">Experiment 7 · Task Matching</div>
+ <h2>Not Every Task Needs the Same Amount of Focus</h2>
+ <div class="taskgrid">
+  <div class="taskcol"><strong>🔴 Higher Focus</strong>Dense reading<br>Figuring out an argument<br>Drafting a difficult paragraph</div>
+  <div class="taskcol"><strong>🟡 Medium Focus</strong>Reviewing notes<br>Finding sources<br>Revising an existing section</div>
+  <div class="taskcol"><strong>🟢 Lower Focus</strong>Checking due dates<br>Downloading readings<br>Formatting<br>Organizing files</div>
+ </div>
+ <div class="scenario"><strong>You have 25 minutes on the bus.</strong> It's noisy and you know dense reading is difficult for you there. What is the strongest move?</div>
+ <div class="options" id="matchQuiz">
+  <button class="choice" data-ok="false" aria-pressed="false">Force myself through the hardest reading. Any study time should go to the hardest task.</button>
+  <button class="choice" data-ok="true" aria-pressed="false">Use the time for a task that fits the conditions, then save the dense reading for a better focus window.</button>
+  <button class="choice" data-ok="false" aria-pressed="false">Do nothing. If conditions aren't ideal, studying isn't worthwhile.</button>
+ </div>
+ <div id="fb6" class="feedback"></div>
+ <div class="callout"><strong>Don't waste usable time. Match the task to the conditions.</strong> A less-than-ideal study window can still be useful.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Build My Experiment</button></div>
+</section>
+
+<section class="screen" data-step="7">
+ <div class="kicker">Experiment 8 · Build + Test</div>
+ <h2>Your Focus Experiment</h2>
+ <p>These are not permanent rules. They are hypotheses based on what you noticed. Try the plan a few times and see what actually happens.</p>
+ <p class="q">Choose a work interval to test.</p>
+ <div class="grid singlePick" data-key="interval">
+  <button class="choice" aria-pressed="false">⏱️ 15 minutes</button><button class="choice" aria-pressed="false">⏱️ 25 minutes</button>
+  <button class="choice" aria-pressed="false">⏱️ 40 minutes</button><button class="choice" aria-pressed="false">⏱️ 50 minutes</button>
+  <button class="choice" aria-pressed="false">🧭 I'll stop at a natural break</button><button class="choice" aria-pressed="false">🤷 I want to compare two intervals</button>
+ </div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeRecipe" disabled>Make My Study Experiment</button></div>
+
+ <div class="recipe hidden" id="recipe" aria-live="polite">
+  <h2 style="margin-top:0">🧪 My Study Experiment</h2>
+  <div class="recipe-row"><strong>Hard thinking seems most promising:</strong><div id="rTime"></div></div>
+  <div class="recipe-row"><strong>Place I want to use or test:</strong><div id="rPlace"></div></div>
+  <div class="recipe-row"><strong>Sound:</strong><div id="rSound"></div></div>
+  <div class="recipe-row"><strong>People:</strong><div id="rPeople"></div></div>
+  <div class="recipe-row"><strong>Before I start, I may:</strong><div id="rBody"></div></div>
+  <div class="recipe-row"><strong>Phone experiment:</strong><div id="rPhone"></div></div>
+  <div class="recipe-row"><strong>Work interval:</strong><div id="rInterval"></div></div>
+  <div class="recipe-row"><strong>When conditions aren't great:</strong><div>I'll choose a task that fits the conditions instead of assuming the whole study session is ruined.</div></div>
+  <div class="note"><strong>This is a hypothesis, not your “learning style.”</strong><br>Try it two or three times. Did you actually start more easily, stay with the work longer, understand more, or finish more? <strong>Keep what helps. Change what doesn't.</strong></div>
+ </div>
+</section>
+</main>
+<script>
+(()=> {
+ const screens=[...document.querySelectorAll('.screen')], names=['Start with a hypothesis','Time','Place','Sound + people','Check the basics','Distraction','Task matching','Build + test'];
+ const bar=document.getElementById('bar'),stepText=document.getElementById('stepText'),stepName=document.getElementById('stepName'),live=document.getElementById('live');
+ let cur=0; const answers={};
+ function update(){bar.style.width=((cur+1)/screens.length*100)+'%';stepText.textContent=`Experiment ${cur+1} of ${screens.length}`;stepName.textContent=names[cur]}
+ function show(n){screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();window.scrollTo({top:0,behavior:'smooth'})}
+ function nextEnabled(i,on){const b=screens[i].querySelector('.next');if(b)b.disabled=!on}
+ document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
+ document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
+ function quiz(id,fbid,screen,goodText){
+   const box=document.getElementById(id),fb=document.getElementById(fbid);
+   box.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+     box.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+     const ok=b.dataset.ok==='true';fb.className='feedback show '+(ok?'good':'try');
+     fb.textContent=ok?goodText:'Try again. Look for the choice that treats your conditions as useful information rather than a rule about what “good students” should do.';
+     nextEnabled(screen,ok);live.textContent=fb.textContent;
+   }))
+ }
+ quiz('startQuiz','fb0',0,'Exactly. This lab is about noticing, testing, and adjusting — not finding one universal study routine.');
+ let timeQuizOK=false;
+ const tq=document.getElementById('timeQuiz'),tf=document.getElementById('fb1');
+ tq.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+   tq.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+   timeQuizOK=b.dataset.ok==='true';tf.className='feedback show '+(timeQuizOK?'good':'try');tf.textContent=timeQuizOK?'Yes. Having time and having enough focus for a difficult task are not always the same thing.':'Try again. The useful question is about what your attention can handle right now.';checkTime();
+ }));
+ function setupSingle(group){
+   const key=group.dataset.key;
+   group.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+     group.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');answers[key]=b.textContent.trim();
+     if(key==='time')checkTime();
+     if(key==='place')nextEnabled(2,true);
+     if(key==='sound'||key==='people')nextEnabled(3,!!answers.sound&&!!answers.people);
+     if(key==='phonePattern'||key==='phonePlan')nextEnabled(5,!!answers.phonePattern&&!!answers.phonePlan);
+     if(key==='interval')document.getElementById('makeRecipe').disabled=false;
+   }))
+ }
+ document.querySelectorAll('.singlePick').forEach(setupSingle);
+ function checkTime(){nextEnabled(1,timeQuizOK&&!!answers.time)}
+ quiz('matchQuiz','fb6',6,'Exactly. Use the conditions you have strategically. Save high-focus work for a stronger window when possible, and use imperfect windows for tasks that still move you forward.');
+ document.getElementById('makeRecipe').addEventListener('click',()=>{
+   const body=[...document.querySelectorAll('#bodyChecks input:checked')].map(x=>x.value);
+   document.getElementById('rTime').textContent=answers.time||'Still testing';
+   document.getElementById('rPlace').textContent=answers.place||'Still testing';
+   document.getElementById('rSound').textContent=answers.sound||'Still testing';
+   document.getElementById('rPeople').textContent=answers.people||'Still testing';
+   document.getElementById('rBody').textContent=body.length?body.join(' · '):'Check what I need in the moment';
+   document.getElementById('rPhone').textContent=answers.phonePlan||'No change selected';
+   document.getElementById('rInterval').textContent=answers.interval||'Still testing';
+   document.getElementById('recipe').classList.remove('hidden');
+   document.getElementById('recipe').scrollIntoView({behavior:'smooth',block:'start'});
+   live.textContent='Your study experiment is ready. Try it, notice what happens, and adjust.';
+ });
+ update();
+})();
+</script>
+</body>
+</html>
