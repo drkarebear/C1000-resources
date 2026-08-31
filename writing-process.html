@@ -1,1 +1,1029 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing Process Lab: Behind the Draft</title>
+<meta name="description" content="A mobile-friendly interactive ENGL C1000 writing-process simulation that demystifies college writing.">
+<style>
+:root{
+  --bg:#f5f7fa;
+  --surface:#ffffff;
+  --ink:#243447;
+  --muted:#5b6674;
+  --line:#d7dee8;
+  --brand:#315a7d;
+  --brand-dark:#203e59;
+  --soft:#eef4f8;
+  --warm:#fff7df;
+  --warm-line:#d7a92f;
+  --good:#2f7a4b;
+  --good-bg:#eef8f1;
+  --info:#2d648f;
+  --info-bg:#eef6fb;
+  --rose:#f8eef2;
+  --rose-line:#af607a;
+  --focus:#111827;
+  --max:900px;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:18px;
+  line-height:1.6;
+}
+button,textarea{font:inherit}
+button:focus-visible,textarea:focus-visible,a:focus-visible{
+  outline:4px solid var(--focus);
+  outline-offset:3px;
+}
+.skip{
+  position:absolute;
+  left:-9999px;
+  top:8px;
+  background:#fff;
+  color:#000;
+  border:2px solid #000;
+  padding:10px 14px;
+  z-index:100;
+}
+.skip:focus{left:8px}
+.shell{
+  width:min(100% - 22px,var(--max));
+  margin:auto;
+  padding:20px 0 48px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:clamp(20px,4vw,34px);
+  margin-bottom:18px;
+  box-shadow:0 8px 24px rgba(32,62,89,.07);
+}
+.eyebrow{
+  margin:0 0 6px;
+  color:var(--brand);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  font-size:.86rem;
+  font-weight:800;
+}
+h1,h2,h3{line-height:1.2;color:var(--brand-dark)}
+h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}
+h2{font-size:clamp(1.4rem,4.5vw,2rem);margin:.25em 0 .55em}
+h3{font-size:1.14rem;margin:.15em 0 .55em}
+.lead{font-size:1.08rem}
+.callout{
+  background:var(--warm);
+  border-left:5px solid var(--warm-line);
+  padding:15px 17px;
+  border-radius:10px;
+  margin:16px 0;
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0;
+}
+.pill,.stage{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:6px 11px;
+  font-size:.92rem;
+  font-weight:700;
+}
+.pill{
+  border:1px solid var(--line);
+  background:#fafbfd;
+  color:var(--muted);
+}
+.stage{
+  background:var(--soft);
+  color:var(--brand);
+  margin-bottom:10px;
+}
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:20px;
+}
+button{
+  border:0;
+  border-radius:12px;
+  min-height:48px;
+  padding:12px 17px;
+  font-weight:700;
+  cursor:pointer;
+}
+.primary{background:var(--brand);color:#fff}
+.primary:hover{background:var(--brand-dark)}
+.secondary{
+  background:#fff;
+  color:var(--brand-dark);
+  border:2px solid var(--brand);
+}
+.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:var(--muted);
+  font-size:.93rem;
+  font-weight:700;
+  margin-bottom:7px;
+}
+.track{
+  height:12px;
+  background:#e6ebf0;
+  border-radius:999px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.bar{
+  height:100%;
+  background:var(--brand);
+  width:0;
+  transition:width .2s ease;
+}
+.workspace{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 280px;
+  gap:18px;
+  align-items:start;
+}
+.mainpane{min-width:0}
+.sidebar{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fbfcfd;
+  padding:15px;
+  position:sticky;
+  top:10px;
+}
+.sidebar h3{font-size:1rem}
+.draftbox{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px;
+  font-size:.94rem;
+}
+.draftbox p{margin:.45em 0}
+.path{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+.path span{
+  background:var(--soft);
+  color:var(--brand-dark);
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:.8rem;
+  font-weight:700;
+}
+.scenario{
+  background:#fafcfe;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px;
+  margin:10px 0 18px;
+}
+.question{
+  font-size:1.2rem;
+  font-weight:800;
+  margin:12px 0;
+}
+.choices{
+  display:grid;
+  gap:10px;
+  margin:16px 0;
+}
+.choice{
+  width:100%;
+  text-align:left;
+  background:#fff;
+  color:var(--ink);
+  border:2px solid #b9c5d1;
+  padding:14px 16px;
+}
+.choice:hover{border-color:var(--brand);background:#f8fbfd}
+.choice[disabled]{cursor:default;opacity:1}
+.choice.selected{
+  border-color:var(--good);
+  background:var(--good-bg);
+}
+.feedback{
+  display:none;
+  margin-top:16px;
+  padding:16px;
+  border-radius:12px;
+  border:2px solid var(--info);
+  background:var(--info-bg);
+}
+.feedback.show{display:block}
+.feedback.good{
+  border-color:var(--good);
+  background:var(--good-bg);
+}
+.feedback strong{display:block;margin-bottom:4px}
+.secret{
+  border:2px solid var(--warm-line);
+  background:var(--warm);
+  border-radius:14px;
+  padding:18px;
+  margin:14px 0;
+}
+.secret .tag{
+  font-size:.82rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-weight:800;
+  color:#775700;
+}
+.myth{
+  border:2px solid var(--rose-line);
+  background:var(--rose);
+  border-radius:14px;
+  padding:18px;
+  margin:14px 0;
+}
+.myth strong{color:#6f3650}
+.toolbox{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.tool{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  background:#fff;
+}
+.tool.locked{opacity:.45}
+.tool .icon{font-size:1.25rem}
+.askbox{
+  border:2px dashed var(--brand);
+  border-radius:14px;
+  padding:16px;
+  background:#f8fbfd;
+  margin:16px 0;
+}
+textarea{
+  width:100%;
+  min-height:110px;
+  border:2px solid #aebbc8;
+  border-radius:10px;
+  padding:12px;
+  resize:vertical;
+  color:var(--ink);
+  background:#fff;
+}
+.note{font-size:.92rem;color:var(--muted)}
+.hidden{display:none!important}
+.completion{
+  border:3px solid var(--brand);
+  border-radius:18px;
+  padding:clamp(20px,4vw,32px);
+  background:#fff;
+}
+.complete{
+  color:var(--good);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:9px 18px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:16px 0;
+  margin:18px 0;
+}
+.status{font-weight:700}
+.shot{
+  background:var(--warm);
+  border:2px solid var(--warm-line);
+  border-radius:12px;
+  padding:14px 16px;
+  font-weight:700;
+}
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.9rem;
+  padding-top:5px;
+}
+body.shotmode{background:#fff}
+body.shotmode .hide-shot{display:none!important}
+body.shotmode .shell{width:min(100% - 16px,760px);padding:8px 0}
+body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
+@media(max-width:760px){
+  .workspace{grid-template-columns:1fr}
+  .sidebar{position:static;order:-1}
+  .toolbox{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  body{font-size:17px}
+  .shell{width:min(100% - 14px,var(--max));padding-top:10px}
+  .card{padding:19px 15px}
+  .row{display:grid;grid-template-columns:1fr}
+  .row button{width:100%}
+  .grid{grid-template-columns:1fr;gap:4px}
+  .status{margin-bottom:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to activity</a>
+
+<main id="main" class="shell">
+<section id="intro" class="card" aria-labelledby="title">
+  <p class="eyebrow">ENGL C1000 · Make the invisible process visible</p>
+  <h1 id="title">Writing Process Lab: Behind the Draft</h1>
+  <p class="lead"><strong>See what writers actually do when writing gets messy.</strong></p>
+
+  <div class="callout">
+    <strong>Writing is not magic.</strong> Experienced writers do not always know exactly what they want to say before they begin. They use strategies, get stuck, ask questions, write incomplete drafts, change their minds, get feedback, revise, and try again.
+  </div>
+
+  <p>College writing also comes with expectations that are not always explained. This lab makes some of those expectations visible and gives you practical strategies you can use when you are unsure what to do next.</p>
+
+  <div class="meta" aria-label="Activity details">
+    <span class="pill">20 writing moments</span>
+    <span class="pill">About 12–15 minutes</span>
+    <span class="pill">No timer</span>
+    <span class="pill">No single perfect process</span>
+  </div>
+
+  <div class="row">
+    <button id="start" class="primary" type="button">Enter the Writer's Desk</button>
+    <button id="resume" class="secondary hidden" type="button">Resume My Draft</button>
+  </div>
+</section>
+
+<section id="lab" class="card hidden" aria-labelledby="labhead">
+  <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
+  <div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
+  <span id="stage" class="stage"></span>
+  <h2 id="labhead">The Writer's Desk</h2>
+
+  <div class="workspace">
+    <div class="mainpane">
+      <div id="host"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">
+        <strong id="ftitle"></strong>
+        <div id="ftext"></div>
+      </div>
+      <div class="row">
+        <button id="next" class="primary hidden" type="button">Next Writing Moment</button>
+      </div>
+    </div>
+
+    <aside class="sidebar" aria-label="Your writing process so far">
+      <h3>Your Draft So Far</h3>
+      <div id="draftbox" class="draftbox"></div>
+
+      <h3 style="margin-top:18px;">Your Writing Path</h3>
+      <div id="path" class="path" aria-live="polite"></div>
+
+      <h3 style="margin-top:18px;">Toolbox</h3>
+      <div id="toolcount" class="note">0 strategies unlocked</div>
+    </aside>
+  </div>
+</section>
+
+<section id="done" class="card hidden" aria-labelledby="donehead">
+  <div class="completion">
+    <div class="complete">✓ Lab complete</div>
+    <h2 id="donehead">Writing Process Lab — Complete</h2>
+    <p>You practiced making decisions across a real writing process instead of memorizing a fixed list of steps.</p>
+
+    <div class="grid">
+      <div>Understanding the Assignment</div><div class="status">✓ Complete</div>
+      <div>Getting Started</div><div class="status">✓ Complete</div>
+      <div>Drafting &amp; Getting Unstuck</div><div class="status">✓ Complete</div>
+      <div>Revision &amp; Feedback</div><div class="status">✓ Complete</div>
+      <div>Editing &amp; Proofreading</div><div class="status">✓ Complete</div>
+      <div>Writer Agency</div><div class="status">✓ Complete</div>
+    </div>
+
+    <p><strong>Strategies unlocked:</strong> <span id="finaltools"></span><br>
+    <strong>Completed:</strong> <span id="date"></span></p>
+
+    <div class="shot">📸 Screenshot this completion card for Canvas.</div>
+  </div>
+
+  <div class="row hide-shot">
+    <button id="shot" class="primary" type="button">Prepare Screenshot View</button>
+    <button id="exit" class="secondary hidden" type="button">Exit Screenshot View</button>
+    <button id="restart" class="quiet" type="button">Practice Again</button>
+  </div>
+</section>
+
+<footer class="hide-shot">Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+const $=id=>document.getElementById(id);
+const intro=$("intro"), lab=$("lab"), done=$("done"), host=$("host");
+const feedback=$("feedback"), ftitle=$("ftitle"), ftext=$("ftext"), next=$("next"), resume=$("resume");
+const key="writingProcessBehindDraftV1";
+
+const tools = [
+  ["🧭","Return to the prompt"],
+  ["🧠","Brainstorm freely"],
+  ["🗣️","Talk it out"],
+  ["✏️","Write a messy version"],
+  ["⏭️","Skip ahead"],
+  ["📝","Leave yourself a note"],
+  ["🔎","Look for evidence"],
+  ["❓","Ask a specific question"],
+  ["🏫","Use tutoring or office hours"],
+  ["💬","Get a reader"],
+  ["🔄","Change a working thesis"],
+  ["↔️","Move sections around"],
+  ["✂️","Cut what no longer fits"],
+  ["🧩","Develop an idea"],
+  ["🔍","Edit after revising"]
+];
+
+const moments = [
+{
+ stage:"1 · Read the Assignment",
+ kind:"choice",
+ scenario:"Your assignment says: “Write an argument about a change that would improve students' experience at a community college. Use at least two credible sources and address an audience that could realistically influence the issue.”",
+ q:"Before you start drafting, what is the most useful first move?",
+ choices:[
+  ["Look for the task, audience, source requirements, and limits in the prompt.",true,"You are decoding what the assignment is actually asking you to do."],
+  ["Start writing the introduction immediately so you do not waste time.",false,"Starting immediately can feel productive, but first understanding the task can prevent a lot of unnecessary rewriting."],
+  ["Choose the most complicated topic you can think of.",false,"Complexity is not the goal. A workable topic that fits the assignment gives you something you can actually develop."],
+  ["Wait until you know exactly what your thesis will be.",false,"You often discover your thesis by writing. You do not need the final answer before you begin."]
+ ],
+ unlock:[0], path:"Prompt"
+},
+{
+ stage:"1 · Read the Assignment",
+ kind:"secret",
+ title:"College Writing Secret #1",
+ body:"A prompt is not just a topic. It usually contains several hidden decisions: What are you being asked to do? Who are you writing to? What kind of evidence is expected? What limits or requirements matter?",
+ path:"Decode"
+},
+{
+ stage:"2 · Generate Possibilities",
+ kind:"choice",
+ scenario:"You are considering the topic of evening course availability. You have a few scattered thoughts but no clear argument yet.",
+ q:"What is brainstorming for?",
+ choices:[
+  ["Generating possibilities without committing to all of them.",true,"Brainstorming gives you material to think with. You are allowed to generate ideas you later abandon."],
+  ["Producing the exact outline you must follow.",false,"A brainstorm is exploratory. It does not lock you into a final structure."],
+  ["Making every idea sound academic.",false,"At this stage, usefulness matters more than polish."],
+  ["Proving that your first idea was correct.",false,"Brainstorming is for discovery, not confirmation."]
+ ],
+ unlock:[1], path:"Brainstorm"
+},
+{
+ stage:"2 · Generate Possibilities",
+ kind:"write",
+ prompt:"Make a quick messy brainstorm. What comes to mind when you think about evening classes and students who work?",
+ placeholder:"Work schedules... required classes... transportation... childcare... online options...",
+ saveKey:"brainstorm",
+ unlock:[3], path:"Messy ideas"
+},
+{
+ stage:"3 · Find a Direction",
+ kind:"choice",
+ scenario:"Your brainstorm includes: work schedules, required classes, evening transportation, childcare, parking, online classes, and weekend classes.",
+ q:"What might an experienced writer do next?",
+ choices:[
+  ["Look for clusters and choose a promising direction to explore.",true,"You do not have to use every idea you generated. Grouping and narrowing can help you find a direction."],
+  ["Force every brainstormed idea into the essay.",false,"Brainstorming creates possibilities. A focused essay usually uses only some of them."],
+  ["Delete the brainstorm because it is messy.",false,"Messiness is often exactly what brainstorming is supposed to look like."],
+  ["Begin proofreading the brainstorm.",false,"Proofreading is not useful yet. Your ideas are still developing."]
+ ],
+ unlock:[13], path:"Focus"
+},
+{
+ stage:"3 · Find a Direction",
+ kind:"myth",
+ myth:"Good writers know exactly what they want to say before they start.",
+ reality:"Writing can be a way of figuring out what you think. Your direction may become clearer only after you generate, draft, read, research, or talk through ideas.",
+ path:"Rethink"
+},
+{
+ stage:"4 · Draft Before You Feel Ready",
+ kind:"choice",
+ scenario:"You have a possible working claim: “Colleges should offer more evening classes.” You are still unsure whether that is your final thesis.",
+ q:"What does “working thesis” mean?",
+ choices:[
+  ["It is your current best direction, and you are allowed to change it.",true,"The word working matters. A working thesis gives you direction without pretending your thinking is finished."],
+  ["It is the final sentence you are not allowed to revise.",false,"A thesis often changes as the draft and research develop."],
+  ["It must contain all of your evidence already.",false,"The thesis can guide your research and drafting before all evidence is in place."],
+  ["It should be as long and complicated as possible.",false,"A useful thesis needs direction and focus, not unnecessary complexity."]
+ ],
+ unlock:[10], path:"Working thesis"
+},
+{
+ stage:"4 · Draft Before You Feel Ready",
+ kind:"choice",
+ scenario:"You stare at the first sentence for 20 minutes. You know what you want to say in a body paragraph, but you cannot figure out the introduction.",
+ q:"Which move could help you keep going?",
+ choices:[
+  ["Skip the introduction and draft the body paragraph you already understand.",true,"Essays do not have to be written in order. You can come back to the introduction after you know more about what the paper became."],
+  ["Keep rewriting the first sentence until it is perfect.",false,"Perfecting one sentence can stop the rest of the draft from existing."],
+  ["Decide you are not ready to write.",false,"Feeling stuck on the opening does not mean you have nothing to say."],
+  ["Start over with a completely different assignment.",false,"You already have usable material. Try changing your process before abandoning the idea."]
+ ],
+ unlock:[4], path:"Skip ahead"
+},
+{
+ stage:"4 · Draft Before You Feel Ready",
+ kind:"secret",
+ title:"College Writing Secret #2",
+ body:"A draft can contain placeholders: [find a source here], [explain this more], [better transition later], or even an unfinished introduction. A draft is something you can work on—not a nearly perfect final paper with a few typos.",
+ path:"Draft"
+},
+{
+ stage:"4 · Draft Before You Feel Ready",
+ kind:"choice",
+ scenario:"You are drafting and realize you need evidence, but stopping now to research might make you lose your train of thought.",
+ q:"What could you do?",
+ choices:[
+  ["Write [find evidence about evening enrollment here] and keep drafting.",true,"A placeholder lets you preserve momentum while leaving Future You a clear task."],
+  ["Invent a statistic and fix it later.",false,"Placeholders are useful; invented evidence is not."],
+  ["Delete the paragraph because it is incomplete.",false,"Incomplete is normal in a draft. Leave yourself a useful note."],
+  ["Stop writing until you have researched every possible source.",false,"Research and drafting can happen recursively rather than in one rigid sequence."]
+ ],
+ unlock:[5,6], path:"Placeholder"
+},
+{
+ stage:"5 · Use Help as Part of the Process",
+ kind:"help",
+ path:"Ask for help"
+},
+{
+ stage:"5 · Use Help as Part of the Process",
+ kind:"secret",
+ title:"College Writing Secret #3",
+ body:"You do not need a finished paper before you ask your professor, tutor, or classmate for help. You can bring a question, a paragraph, two possible ideas, a confusing part of the prompt, or even a blank page and explain where you are stuck.",
+ unlock:[7,8,9], path:"Reader"
+},
+{
+ stage:"6 · Let the Draft Teach You",
+ kind:"choice",
+ scenario:"After drafting and doing some research, you discover that the real problem is not simply the number of evening classes. Required courses are especially difficult to find after 5 p.m.",
+ q:"What should happen to your original claim?",
+ choices:[
+  ["Revise it so it reflects what you are now discovering.",true,"Changing your claim is not evidence that you failed. It can mean your thinking became more precise."],
+  ["Keep the original wording because changing your thesis means you did the process wrong.",false,"A writing process is allowed to change direction as your thinking develops."],
+  ["Ignore the new insight because it arrived too late.",false,"New understanding is exactly what revision can respond to."],
+  ["Delete the entire draft and start from nothing.",false,"You can revise what you have rather than treating development as failure."]
+ ],
+ unlock:[10], path:"Revise thesis"
+},
+{
+ stage:"6 · Let the Draft Teach You",
+ kind:"draftchange",
+ path:"New claim"
+},
+{
+ stage:"7 · Revise Before You Edit",
+ kind:"choice",
+ scenario:"Your draft has a clear claim, but one body paragraph mostly summarizes a source and never explains why the evidence matters.",
+ q:"Your instructor writes: “Develop this.” What might that mean here?",
+ choices:[
+  ["Add explanation that connects the evidence to the paragraph's point and the larger claim.",true,"“Develop” often means giving the reader more of what they need: reasoning, explanation, evidence, examples, or connection."],
+  ["Add more adjectives.",false,"More words are not automatically more development."],
+  ["Fix commas first.",false,"Commas may matter later, but the larger problem right now is missing explanation."],
+  ["Make the paragraph sound more formal without changing the ideas.",false,"Tone does not solve the missing reasoning."]
+ ],
+ unlock:[13], path:"Develop"
+},
+{
+ stage:"7 · Revise Before You Edit",
+ kind:"choice",
+ scenario:"One paragraph about parking is interesting, but it no longer supports your narrower argument about access to required evening courses.",
+ q:"What can revision include?",
+ choices:[
+  ["Cutting or moving material that no longer serves the paper.",true,"Revision is not only adding. Writers also remove, relocate, combine, and reshape material."],
+  ["Keeping every paragraph because deleting writing wastes it.",false,"Not every drafted paragraph has to survive into the final version."],
+  ["Correcting only grammar.",false,"Grammar is editing. Revision works at the level of ideas, structure, evidence, and reader needs."],
+  ["Adding a sentence that says “This relates to my thesis.”",false,"A sentence cannot make unrelated material relevant if the paragraph's actual work no longer fits."]
+ ],
+ unlock:[11,12], path:"Cut / move"
+},
+{
+ stage:"7 · Revise Before You Edit",
+ kind:"myth",
+ myth:"Revision means fixing grammar.",
+ reality:"Revision means re-seeing the draft. Writers may rethink the claim, add explanation, strengthen evidence, move sections, cut material, or change the organization. Editing comes later.",
+ path:"Re-see"
+},
+{
+ stage:"8 · Use Feedback Without Giving Away the Draft",
+ kind:"choice",
+ scenario:"A peer reader says, “I understand your argument, but I got lost between paragraphs 2 and 3. I wasn't sure how transportation connected to course availability.”",
+ q:"What makes this feedback useful?",
+ choices:[
+  ["It describes the reader's experience and points to a specific place the writer can reconsider.",true,"Feedback gives writers information about how the draft is being experienced. The writer still decides what revision will help."],
+  ["It tells the writer exactly what sentence to write.",false,"Useful feedback does not need to take control of the draft."],
+  ["It proves the writer is wrong.",false,"Reader difficulty is information, not a verdict on the writer."],
+  ["It focuses only on grammar.",false,"The comment addresses organization and connection between ideas."]
+ ],
+ unlock:[9], path:"Feedback"
+},
+{
+ stage:"8 · Use Feedback Without Giving Away the Draft",
+ kind:"choice",
+ scenario:"Two readers give you different suggestions. One wants more personal experience; another wants you to shorten that section and foreground research.",
+ q:"What should you do?",
+ choices:[
+  ["Return to your purpose, audience, assignment, and goals, then decide what to use, adapt, or reject.",true,"Feedback is information. Writers make the final rhetorical decisions."],
+  ["Follow whichever reader sounds more confident.",false,"Confidence is not the same as fit."],
+  ["Use both suggestions exactly as written, even if they conflict.",false,"Writers interpret feedback rather than mechanically applying every comment."],
+  ["Ignore all feedback because disagreement makes it useless.",false,"Different reader responses can help you see the choices and tradeoffs more clearly."]
+ ],
+ path:"Decide"
+},
+{
+ stage:"9 · Edit and Proofread",
+ kind:"choice",
+ scenario:"Your ideas, organization, evidence, and explanation are now in place.",
+ q:"What is editing most useful for at this point?",
+ choices:[
+  ["Working closely with sentences, wording, clarity, and conventions.",true,"Editing is most efficient after the larger content and structure are relatively stable."],
+  ["Changing the entire argument again sentence by sentence.",false,"Large-scale revision should happen before final editing when possible."],
+  ["Making the paper sound like someone else wrote it.",false,"Editing can improve clarity without erasing the writer's voice."],
+  ["Adding new sources at random.",false,"Editing is a later-stage sentence-level process, not random expansion."]
+ ],
+ unlock:[14], path:"Edit"
+},
+{
+ stage:"10 · Look Back at the Process",
+ kind:"finish",
+ path:"Reflect"
+}
+];
+
+let i=0;
+let unlocked=new Set();
+let path=[];
+let notes={brainstorm:""};
+let claim="Colleges should offer more evening classes.";
+
+function load(){
+  try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}
+}
+function save(completed=false){
+  localStorage.setItem(key,JSON.stringify({
+    i,
+    unlocked:[...unlocked],
+    path,
+    notes,
+    claim,
+    completed,
+    date:completed?new Date().toISOString():null
+  }));
+}
+function addPath(label){
+  if(!label)return;
+  path.push(label);
+  renderSidebar();
+}
+function unlock(indices=[]){
+  indices.forEach(n=>unlocked.add(n));
+  renderSidebar();
+}
+function renderSidebar(){
+  const draft=$("draftbox");
+  draft.innerHTML=
+    `<p><strong>Topic:</strong> Evening course access</p>
+     <p><strong>Working claim:</strong><br>${escapeHtml(claim)}</p>
+     <p><strong>Brainstorm:</strong><br>${notes.brainstorm?escapeHtml(notes.brainstorm):"<span class='note'>Not added yet</span>"}</p>`;
+  const p=$("path");p.innerHTML="";
+  path.slice(-12).forEach(label=>{
+    const s=document.createElement("span");s.textContent=label;p.appendChild(s);
+  });
+  $("toolcount").textContent=`${unlocked.size} strateg${unlocked.size===1?"y":"ies"} unlocked`;
+}
+function setProgress(){
+  const pc=Math.round(((i+1)/moments.length)*100);
+  $("ptext").textContent=`Writing moment ${i+1} of ${moments.length}`;
+  $("pct").textContent=`${pc}%`;
+  $("bar").style.width=`${pc}%`;
+  $("stage").textContent=moments[i].stage;
+}
+function resetFeedback(){
+  feedback.className="feedback";
+  next.classList.add("hidden");
+  host.innerHTML="";
+}
+function showFeedback(title,text){
+  feedback.className="feedback show good";
+  ftitle.textContent=title;
+  ftext.textContent=text;
+  next.classList.remove("hidden");
+  next.focus();
+}
+function render(){
+  resetFeedback();
+  setProgress();
+  renderSidebar();
+  const m=moments[i];
+
+  if(m.kind==="choice"){
+    if(m.scenario){
+      const sc=document.createElement("div");
+      sc.className="scenario";
+      sc.textContent=m.scenario;
+      host.appendChild(sc);
+    }
+    const q=document.createElement("p");
+    q.className="question";
+    q.id="currentq";
+    q.textContent=m.q;
+    host.appendChild(q);
+
+    const wrap=document.createElement("div");
+    wrap.className="choices";
+    wrap.setAttribute("role","group");
+    wrap.setAttribute("aria-labelledby","currentq");
+
+    m.choices.forEach(([label,isGood,msg])=>{
+      const b=document.createElement("button");
+      b.type="button";
+      b.className="choice";
+      b.textContent=label;
+      b.addEventListener("click",()=>{
+        [...wrap.children].forEach(x=>x.disabled=true);
+        if(isGood){
+          b.classList.add("selected");
+          unlock(m.unlock||[]);
+          addPath(m.path);
+          showFeedback("That moves the writing forward.",msg);
+        }else{
+          feedback.className="feedback show";
+          ftitle.textContent="Notice what this move would do.";
+          ftext.textContent=msg+" You can choose another strategy.";
+          [...wrap.children].forEach(x=>x.disabled=false);
+          b.disabled=true;
+        }
+      });
+      wrap.appendChild(b);
+    });
+    host.appendChild(wrap);
+  }
+
+  if(m.kind==="secret"){
+    const box=document.createElement("div");
+    box.className="secret";
+    box.innerHTML=`<div class="tag">🔓 ${escapeHtml(m.title)}</div><h3>${escapeHtml(m.body.split(".")[0]+".")}</h3><p>${escapeHtml(m.body.substring(m.body.indexOf(".")+1).trim())}</p>`;
+    host.appendChild(box);
+    unlock(m.unlock||[]);
+    addPath(m.path);
+    showFeedback("Hidden expectation made visible.","College writing includes a lot of tacit knowledge. Making it visible gives you another strategy to use.");
+  }
+
+  if(m.kind==="myth"){
+    const box=document.createElement("div");
+    box.className="myth";
+    box.innerHTML=`<p><strong>MYTH:</strong> ${escapeHtml(m.myth)}</p><p><strong>REALITY:</strong> ${escapeHtml(m.reality)}</p>`;
+    host.appendChild(box);
+    addPath(m.path);
+    showFeedback("Process myth challenged.","A writing process does not have to be neat, linear, or identical to someone else's process.");
+  }
+
+  if(m.kind==="write"){
+    const q=document.createElement("p");
+    q.className="question";
+    q.textContent=m.prompt;
+    host.appendChild(q);
+
+    const ta=document.createElement("textarea");
+    ta.placeholder=m.placeholder;
+    ta.value=notes[m.saveKey]||"";
+    ta.setAttribute("aria-label",m.prompt);
+    host.appendChild(ta);
+
+    const hint=document.createElement("p");
+    hint.className="note";
+    hint.textContent="This does not need to be polished. Fragments, questions, abbreviations, and half-formed ideas are welcome.";
+    host.appendChild(hint);
+
+    const b=document.createElement("button");
+    b.type="button";
+    b.className="primary";
+    b.textContent="Save Messy Brainstorm";
+    b.addEventListener("click",()=>{
+      notes[m.saveKey]=ta.value.trim();
+      unlock(m.unlock||[]);
+      addPath(m.path);
+      save(false);
+      renderSidebar();
+      showFeedback("You created material to work with.",notes[m.saveKey]?"A brainstorm is useful because it gives you possibilities. You do not have to keep every idea.":"Even a blank brainstorm can tell you something: you may need a different way in, such as talking the idea out or returning to the prompt.");
+    });
+    host.appendChild(b);
+    ta.focus();
+  }
+
+  if(m.kind==="help"){
+    const box=document.createElement("div");
+    box.className="askbox";
+    box.innerHTML="<h3>🆘 I'm stuck. What kind of stuck am I?</h3><p>Choose the problem that sounds closest to what is happening.</p>";
+    host.appendChild(box);
+
+    const options=[
+      ["I don't understand the assignment.","Return to the prompt. Circle or list the task words. Ask your instructor: “Am I understanding this part correctly?”"],
+      ["I don't know what to write about.","Brainstorm, talk the prompt through with someone, review course readings, or list questions you actually care about."],
+      ["I know my idea but I can't start.","Skip the introduction. Write bullets. Dictate the idea. Write a deliberately rough sentence. Start where you have something to say."],
+      ["I don't have enough to say.","Ask: Why? How? So what? What example would help? What evidence would a reader need? What would someone disagree with?"],
+      ["I don't know if my draft is working.","Get a reader. Visit tutoring or office hours. Compare the draft to the prompt and rubric. Ask a specific question about the part worrying you."],
+      ["I'm overwhelmed.","Shrink the task. Do the next visible action: open the prompt, choose one paragraph, find one source, or write for ten focused minutes."]
+    ];
+    const wrap=document.createElement("div");wrap.className="choices";
+    options.forEach(([label,answer])=>{
+      const b=document.createElement("button");
+      b.type="button";b.className="choice";b.textContent=label;
+      b.addEventListener("click",()=>{
+        [...wrap.children].forEach(x=>x.classList.remove("selected"));
+        b.classList.add("selected");
+        feedback.className="feedback show good";
+        ftitle.textContent="A next step you can actually do";
+        ftext.textContent=answer;
+        next.classList.remove("hidden");
+      });
+      wrap.appendChild(b);
+    });
+    host.appendChild(wrap);
+    unlock([0,1,2,3,4,5,7,8,9,13]);
+    addPath(m.path);
+  }
+
+  if(m.kind==="draftchange"){
+    claim="Colleges should expand evening sections of high-demand required courses because limited scheduling options can create another barrier to degree completion for students who work during the day.";
+    renderSidebar();
+    const box=document.createElement("div");
+    box.className="secret";
+    box.innerHTML=`<div class="tag">Your Draft Changed</div>
+      <h3>Where you started</h3>
+      <p>“Colleges should offer more evening classes.”</p>
+      <h3>Where your thinking is now</h3>
+      <p>“${escapeHtml(claim)}”</p>
+      <p><strong>You did not just clean up the first sentence. Your thinking developed.</strong></p>`;
+    host.appendChild(box);
+    addPath(m.path);
+    showFeedback("This is revision.","The draft taught you something. Your new claim is more specific because the process gave you more information.");
+  }
+
+  if(m.kind==="finish"){
+    const box=document.createElement("div");
+    box.className="callout";
+    box.innerHTML="<strong>Your process was not a straight line.</strong> You read the prompt, generated ideas, drafted before everything was settled, left placeholders, asked for help, changed your thesis, used feedback, revised, and edited.";
+    host.appendChild(box);
+
+    const pathbox=document.createElement("div");
+    pathbox.className="secret";
+    pathbox.innerHTML="<div class='tag'>Your Writing Path</div>";
+    const p=document.createElement("div");p.className="path";
+    [...path,m.path].forEach(label=>{const s=document.createElement("span");s.textContent=label;p.appendChild(s)});
+    pathbox.appendChild(p);
+    host.appendChild(pathbox);
+
+    const th=document.createElement("h3");th.textContent="Your Writing Toolbox";host.appendChild(th);
+    const tw=document.createElement("div");tw.className="toolbox";
+    tools.forEach(([icon,label],idx)=>{
+      const d=document.createElement("div");
+      d.className="tool"+(unlocked.has(idx)?"":" locked");
+      d.innerHTML=`<div class="icon">${icon}</div><strong>${escapeHtml(label)}</strong>${unlocked.has(idx)?"":"<div class='note'>Not used this time</div>"}`;
+      tw.appendChild(d);
+    });
+    host.appendChild(tw);
+
+    const close=document.createElement("div");
+    close.className="callout";
+    close.innerHTML="<strong>There is no secret club of people who just know how to write.</strong> Writing is made of learnable choices and strategies. You do not need every strategy every time. The goal is to have options when you need them.";
+    host.appendChild(close);
+
+    addPath(m.path);
+    next.textContent="Finish Lab";
+    next.classList.remove("hidden");
+  }
+
+  save(false);
+}
+
+function startLab(){
+  intro.classList.add("hidden");
+  done.classList.add("hidden");
+  lab.classList.remove("hidden");
+  render();
+  lab.scrollIntoView({block:"start"});
+}
+
+next.addEventListener("click",()=>{
+  if(i<moments.length-1){
+    i++;
+    next.textContent="Next Writing Moment";
+    render();
+    window.scrollTo({top:lab.offsetTop-8,behavior:"smooth"});
+  }else{
+    finish();
+  }
+});
+
+function finish(){
+  save(true);
+  lab.classList.add("hidden");
+  done.classList.remove("hidden");
+  $("finaltools").textContent=`${unlocked.size} of ${tools.length}`;
+  $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());
+  done.scrollIntoView({block:"start"});
+}
+
+$("start").addEventListener("click",()=>{
+  i=0;
+  unlocked=new Set();
+  path=[];
+  notes={brainstorm:""};
+  claim="Colleges should offer more evening classes.";
+  startLab();
+});
+
+resume.addEventListener("click",()=>{
+  const s=load();
+  if(!s)return;
+  i=Number.isInteger(s.i)?Math.min(s.i,moments.length-1):0;
+  unlocked=new Set(s.unlocked||[]);
+  path=s.path||[];
+  notes=s.notes||{brainstorm:""};
+  claim=s.claim||claim;
+  if(s.completed){
+    intro.classList.add("hidden");
+    done.classList.remove("hidden");
+    $("finaltools").textContent=`${unlocked.size} of ${tools.length}`;
+    $("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(s.date?new Date(s.date):new Date());
+  }else startLab();
+});
+
+$("shot").addEventListener("click",()=>{
+  document.body.classList.add("shotmode");
+  $("shot").classList.add("hidden");
+  $("exit").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+$("exit").addEventListener("click",()=>{
+  document.body.classList.remove("shotmode");
+  $("exit").classList.add("hidden");
+  $("shot").classList.remove("hidden");
+  done.scrollIntoView({block:"start"});
+});
+$("restart").addEventListener("click",()=>{
+  if(!confirm("Restart the Writing Process Lab from the beginning?"))return;
+  localStorage.removeItem(key);
+  i=0;unlocked=new Set();path=[];notes={brainstorm:""};
+  claim="Colleges should offer more evening classes.";
+  document.body.classList.remove("shotmode");
+  done.classList.add("hidden");
+  intro.classList.remove("hidden");
+  resume.classList.add("hidden");
+  $("start").focus();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[m]));
+}
+
+const saved=load();
+if(saved){
+  resume.classList.remove("hidden");
+  resume.textContent=saved.completed?"View Completion Card":"Resume My Draft";
+}
+})();
+</script>
+</body>
+</html>
