@@ -1,1 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Faculty mini-labs and student tools for teaching ENGL C1000 in California Community Colleges.">
+<title>Faculty Learning Lab | ENGL C1000 Learning Lab</title>
+<style>
+:root{
+  --bg:#f6f3ed;--paper:#fff;--ink:#26343b;--muted:#66737a;--line:#d9d4cb;
+  --navy:#29354a;--green:#2f7666;--green-soft:#eaf6f1;--purple:#6557b5;
+  --purple-soft:#f0edff;--blue:#356d87;--blue-soft:#edf7fb;--gold:#8b6d24;
+  --gold-soft:#fff6dc;--rose:#985d68;--rose-soft:#fff0f3;--shadow:0 10px 30px rgba(38,52,59,.07)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+a{color:inherit}a:focus-visible,summary:focus-visible{outline:3px solid #2d65a0;outline-offset:4px}
+.skip{position:absolute;left:-9999px;top:10px;background:white;padding:10px 14px;border-radius:8px;z-index:99}.skip:focus{left:10px}
+.wrap{max-width:1160px;margin:auto;padding:0 20px}
+header{padding:18px 0;border-bottom:1px solid rgba(217,212,203,.7)}
+.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;color:var(--navy);text-decoration:none}
+.mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--green-soft)}
+nav{display:flex;gap:16px;flex-wrap:wrap}nav a{text-underline-offset:3px;color:var(--muted)}nav a[aria-current="page"]{color:var(--navy);font-weight:800}
+.hero{padding:58px 0 34px;text-align:center}
+.eyebrow{display:inline-block;color:var(--green);font-size:.82rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+h1{max-width:900px;margin:10px auto 16px;color:var(--navy);font-size:clamp(2.5rem,6vw,4.9rem);line-height:1;letter-spacing:-.04em}
+.lede{max-width:820px;margin:0 auto;color:#4f5d65;font-size:clamp(1.08rem,2vw,1.25rem)}
+.note{max-width:800px;margin:20px auto 0;padding:15px 18px;border:1px solid var(--line);border-radius:14px;background:white;color:var(--muted)}
+.orientation{padding:8px 0 36px}
+.orientation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.orientation-card{padding:20px;border-radius:16px;border:1px solid var(--line);background:white}
+.orientation-card strong{display:block;color:var(--navy);margin-bottom:5px}
+.orientation-card p{margin:0;color:var(--muted);font-size:.94rem}
+.jump{padding:4px 0 30px}
+.jump h2{text-align:center;color:var(--navy);font-size:1.2rem;margin:0 0 14px}
+.chips{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}
+.chip{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:white;text-decoration:none;font-size:.91rem;font-weight:750;color:#4e5d65}.chip:hover{border-color:var(--green);color:var(--green)}
+.pathways{padding:0 0 62px}
+.path{margin:0 0 16px;border:1px solid var(--line);border-radius:20px;background:white;box-shadow:var(--shadow);overflow:hidden}
+.path summary{list-style:none;cursor:pointer;padding:22px 24px;display:grid;grid-template-columns:auto 1fr auto;gap:15px;align-items:center}.path summary::-webkit-details-marker{display:none}
+.path-icon{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;background:var(--green-soft)}
+.path h2{margin:0;color:var(--navy);font-size:1.4rem;line-height:1.18}.path-sub{display:block;margin-top:3px;color:var(--muted);font-size:.93rem;font-weight:500}.chev{color:var(--muted);font-size:1.25rem;transition:transform .18s}details[open] .chev{transform:rotate(180deg)}
+.path-body{padding:0 22px 24px}
+.problem{padding:14px 16px;background:#f7faf8;border-left:4px solid var(--green);border-radius:12px;margin-bottom:16px;color:#526168}
+.problem strong{color:var(--navy)}
+.section-title{margin:18px 0 10px;color:var(--navy);font-size:1rem;text-transform:uppercase;letter-spacing:.05em}
+.faculty-labs,.student-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.lab{display:block;padding:17px;border:1px solid var(--line);border-radius:15px;background:#fcfbf9;text-decoration:none;transition:.15s}
+.lab:hover{transform:translateY(-2px);border-color:#a8c9bd;background:#fff}
+.lab.planned{background:#f8fbf9;border-style:dashed;text-decoration:none;cursor:default}
+.lab-title{display:block;color:var(--navy);font-weight:900;font-size:1.03rem;margin-bottom:4px}
+.kicker{display:block;color:var(--green);font-weight:850;font-size:.79rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.lab-desc{display:block;color:#59676e;font-size:.94rem}
+.use{display:block;margin-top:9px;color:#3f4f57;font-size:.88rem}
+.use strong{color:var(--navy)}
+.planned .kicker{color:var(--gold)}
+.bridge{margin-top:18px;padding:15px 17px;background:var(--purple-soft);border-radius:13px;color:#4f4a68;font-size:.92rem}
+.bridge strong{color:var(--navy)}
+.framework{padding:0 0 66px}
+.framework-card{padding:30px;border-radius:20px;background:var(--navy);color:white;box-shadow:var(--shadow)}
+.framework-card h2{margin:0 0 10px;font-size:1.9rem}
+.framework-card p{margin:0;color:#e7e9ef;max-width:900px}
+.framework-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.framework-item{padding:16px;border:1px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(255,255,255,.05)}
+.framework-item strong{display:block;margin-bottom:4px}.framework-item span{color:#e7e9ef;font-size:.92rem}
+footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);font-size:.92rem}
+.foot{display:flex;justify-content:space-between;gap:20px;align-items:flex-end}.credit strong{color:var(--ink)}
+@media(max-width:800px){
+  .topbar,.foot{display:block}.topbar nav{margin-top:12px}
+  .orientation-grid,.faculty-labs,.student-tools,.framework-grid{grid-template-columns:1fr}
+  .hero{padding-top:40px}.path summary{padding:18px}.path-body{padding:0 16px 18px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
 
+<header>
+  <div class="wrap topbar">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">✦</span><span>ENGL C1000 Learning Lab</span></a>
+    <nav aria-label="Main navigation">
+      <a href="student.html">Students</a>
+      <a href="faculty.html" aria-current="page">Faculty</a>
+      <a href="toolkit.html">All tools</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">For ENGL C1000 instructors</span>
+    <h1>Make the invisible parts of college writing easier to teach.</h1>
+    <p class="lede">Use short faculty learning labs to examine common teaching moments, then connect those ideas to student-facing mini-labs you can assign, embed, or use in class.</p>
+    <p class="note"><strong>This is not a checklist of “best practices.”</strong> It is a place to test teaching choices, make expert processes more visible, and preserve rigor while reducing unnecessary friction.</p>
+  </div>
+</section>
+
+<section class="orientation">
+  <div class="wrap">
+    <div class="orientation-grid">
+      <div class="orientation-card"><strong>Start with a teaching problem.</strong><p>Choose the moment you want to improve: reading, assignment design, feedback, persistence, or something else.</p></div>
+      <div class="orientation-card"><strong>Try one small change.</strong><p>Faculty labs are designed around practical decisions you can test rather than broad advice you are expected to “implement.”</p></div>
+      <div class="orientation-card"><strong>Connect it to student practice.</strong><p>Each pathway points to student mini-labs that make the same reading, writing, or help-seeking move visible to learners.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="jump" aria-label="Jump to a faculty pathway">
+  <div class="wrap">
+    <h2>What are you trying to improve?</h2>
+    <div class="chips">
+      <a class="chip" href="#reading">Reading</a>
+      <a class="chip" href="#writing">Writing processes</a>
+      <a class="chip" href="#design">Course + assignment design</a>
+      <a class="chip" href="#belonging">Belonging + rigor</a>
+      <a class="chip" href="#feedback">Feedback</a>
+      <a class="chip" href="#connection">Persistence + support</a>
+    </div>
+  </div>
+</section>
+
+<section class="pathways">
+<div class="wrap">
+
+<details class="path" id="reading" open>
+  <summary>
+    <span class="path-icon" aria-hidden="true">📖</span>
+    <span><h2>Make Reading More Teachable</h2><span class="path-sub">Move beyond “do the reading” by making expert reading decisions visible.</span></span>
+    <span class="chev" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="path-body">
+    <div class="problem"><strong>Teaching problem:</strong> Students may complete a reading without knowing what to prioritize, how to repair confusion, or how the reading is supposed to become material for writing.</div>
+    <h3 class="section-title">Faculty mini-labs</h3>
+    <div class="faculty-labs">
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">What Are We Actually Asking Students to Do When We Say “Read”?</span><span class="lab-desc">Unpack the hidden decisions experienced readers make before, during, and after a course reading.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">The Hidden Reading Curriculum</span><span class="lab-desc">Identify which reading moves your assignments assume students already know—and which ones might need to be taught explicitly.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">When “They Didn’t Do the Reading” Isn’t the Whole Story</span><span class="lab-desc">Distinguish non-completion from comprehension breakdown, purpose confusion, overload, and weak reading-to-writing transfer.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Reading → Thinking → Writing</span><span class="lab-desc">Design a bridge between course readings and the analytical moves students need for discussion and writing.</span></div>
+    </div>
+    <h3 class="section-title">Student tools you can use now</h3>
+    <div class="student-tools">
+      <a class="lab" href="wait-what-did-i-just-read.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Wait, What Did I Just Read?</span><span class="lab-desc">Students practice repairing comprehension when a sentence or paragraph stops making sense.</span><span class="use"><strong>Useful when:</strong> students reread passively, get stuck on dense prose, or interpret confusion as failure.</span></a>
+      <a class="lab" href="read-like-you-have-a-purpose.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Read Like You Have a Purpose</span><span class="lab-desc">Students practice reading and annotating for a specific task instead of trying to mark everything.</span><span class="use"><strong>Useful when:</strong> annotation is indiscriminate or students cannot tell what matters for the assignment.</span></a>
+      <a class="lab" href="active-reading.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Active Reading</span><span class="lab-desc">Students practice interacting with the text rather than moving through pages without monitoring meaning.</span><span class="use"><strong>Useful when:</strong> students report “I read it, but nothing stuck.”</span></a>
+      <a class="lab" href="decode-assignment.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Decode the Assignment</span><span class="lab-desc">Students separate the task, requirements, choices, and evidence of success in a prompt.</span><span class="use"><strong>Useful when:</strong> assignment language itself is creating reading load or task confusion.</span></a>
+    </div>
+  </div>
+</details>
+
+<details class="path" id="writing">
+  <summary>
+    <span class="path-icon" aria-hidden="true">✍️</span>
+    <span><h2>Make Writing Processes Visible</h2><span class="path-sub">Teach the moves inside the product—not only the qualities of a finished essay.</span></span>
+    <span class="chev" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="path-body">
+    <div class="problem"><strong>Teaching problem:</strong> Instructions such as “develop this,” “analyze more,” or “write a strong thesis” describe outcomes but may not reveal the decisions an experienced writer makes to produce them.</div>
+    <h3 class="section-title">Faculty mini-labs</h3>
+    <div class="faculty-labs">
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">What Does an Expert Writer Do That Students Can’t See?</span><span class="lab-desc">Surface the planning, testing, rereading, restructuring, and decision-making hidden inside fluent academic writing.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Teach the Move, Not Just the Product</span><span class="lab-desc">Turn broad criteria such as “analysis,” “development,” and “organization” into actions students can practice.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Why “Write a Strong Thesis” Isn’t an Instruction</span><span class="lab-desc">Examine what students need to notice and decide before they can create a useful working claim.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">From “Needs Development” to a Teachable Next Step</span><span class="lab-desc">Translate a common writing weakness into a specific reasoning move students can attempt.</span></div>
+    </div>
+    <h3 class="section-title">Student tools you can use now</h3>
+    <div class="student-tools">
+      <a class="lab" href="analysis-detective.html"><span class="kicker">Student mini-lab</span><span class="lab-title">The Analysis Detective</span><span class="lab-desc">Moves students from clue → pattern → interpretation → significance.</span><span class="use"><strong>Useful when:</strong> students summarize accurately but struggle to generate analysis.</span></a>
+      <a class="lab" href="make-your-case.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Make Your Case</span><span class="lab-desc">Helps students turn an idea into an arguable, supportable claim.</span><span class="use"><strong>Useful when:</strong> claims are descriptive, obvious, or too broad to develop.</span></a>
+      <a class="lab" href="show-me-the-connection.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Show Me the Connection</span><span class="lab-desc">Makes claim → evidence → reasoning visible.</span><span class="use"><strong>Useful when:</strong> students include evidence but leave the warrant implicit.</span></a>
+      <a class="lab" href="develop-dont-pad.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Develop, Don’t Pad</span><span class="lab-desc">Teaches expansion through explanation, specificity, and reasoning rather than word-count inflation.</span><span class="use"><strong>Useful when:</strong> students equate development with adding sentences.</span></a>
+      <a class="lab" href="reverse-outline.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Reverse Outline</span><span class="lab-desc">Students diagnose what each paragraph is currently doing after a draft exists.</span><span class="use"><strong>Useful when:</strong> organization advice feels abstract or students revise sentence-by-sentence only.</span></a>
+      <a class="lab" href="writing-process.html"><span class="kicker">Student mini-lab</span><span class="lab-title">The Writing Process</span><span class="lab-desc">Breaks writing into different jobs rather than presenting the essay as one giant act.</span><span class="use"><strong>Useful when:</strong> students expect drafting, revising, and editing to happen simultaneously.</span></a>
+    </div>
+  </div>
+</details>
+
+<details class="path" id="design">
+  <summary>
+    <span class="path-icon" aria-hidden="true">🧠</span>
+    <span><h2>Design for the Brain Students Actually Bring to Class</h2><span class="path-sub">Preserve complexity while reducing avoidable cognitive and procedural friction.</span></span>
+    <span class="chev" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="path-body">
+    <div class="problem"><strong>Teaching problem:</strong> A task can be appropriately rigorous and still contain unnecessary barriers—unclear first steps, hidden expectations, overloaded directions, or too many decisions at once.</div>
+    <h3 class="section-title">Faculty mini-labs</h3>
+    <div class="faculty-labs">
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Is This Assignment Hard—or Hard to Decode?</span><span class="lab-desc">Separate disciplinary challenge from ambiguity, navigation burden, and hidden procedural knowledge.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">How Much Are Students Holding in Working Memory?</span><span class="lab-desc">Notice when instructions, new concepts, source material, and writing demands compete for the same limited attention.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Make the First Step Smaller</span><span class="lab-desc">Design an entry point that gets students into meaningful work without simplifying the final intellectual task.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Productive Struggle or Unnecessary Friction?</span><span class="lab-desc">Decide which difficulty belongs to learning and which difficulty is merely consuming students’ energy.</span></div>
+    </div>
+    <h3 class="section-title">Student tools you can use now</h3>
+    <div class="student-tools">
+      <a class="lab" href="focus-rescue.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Focus Rescue</span><span class="lab-desc">Students identify the kind of stuck they are experiencing and test a matching strategy.</span><span class="use"><strong>Useful when:</strong> “just focus” or generic time-management advice is not enough.</span></a>
+      <a class="lab" href="study-lab.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Study Lab</span><span class="lab-desc">Students notice, predict, test, and adjust their study conditions rather than relying on fixed “learning styles.”</span><span class="use"><strong>Useful when:</strong> students need metacognitive practice with task-condition matching.</span></a>
+      <a class="lab" href="good-enough-to-draft.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Good Enough to Draft</span><span class="lab-desc">Separates discovery from polishing so students can begin before they know the final wording.</span><span class="use"><strong>Useful when:</strong> perfectionism makes drafting unusually effortful.</span></a>
+      <a class="lab" href="crack-the-academic-code.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Crack the Academic Code</span><span class="lab-desc">Students translate academic task language into the kind of thinking or writing it requires.</span><span class="use"><strong>Useful when:</strong> familiar-looking academic verbs still hide expectations.</span></a>
+    </div>
+  </div>
+</details>
+
+<details class="path" id="belonging">
+  <summary>
+    <span class="path-icon" aria-hidden="true">🌱</span>
+    <span><h2>Support Belonging Without Lowering the Rigor</h2><span class="path-sub">Help difficulty remain a learning problem instead of becoming evidence that a student does not belong.</span></span>
+    <span class="chev" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="path-body">
+    <div class="problem"><strong>Teaching problem:</strong> Students can interpret confusion, revision, comparison, or help-seeking as signs that they are not “college material,” even when those experiences are normal parts of advanced learning.</div>
+    <h3 class="section-title">Faculty mini-labs</h3>
+    <div class="faculty-labs">
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Belonging Is Not the Same as Reassurance</span><span class="lab-desc">Compare responses to student struggle and identify which ones preserve standards, agency, and a credible path forward.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">What Does the Student Hear?</span><span class="lab-desc">Examine how ordinary classroom language can be interpreted when a student already doubts whether they belong.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Normalize the Process, Not the Outcome</span><span class="lab-desc">Make struggle, revision, questions, and uncertainty visible without promising that every attempt will succeed.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Rigor + a Way In</span><span class="lab-desc">Test whether expectations remain intellectually demanding while still giving students a usable entry point.</span></div>
+    </div>
+    <h3 class="section-title">Student tools you can use now</h3>
+    <div class="student-tools">
+      <a class="lab" href="still-a-writer.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Still a Writer</span><span class="lab-desc">Students separate a difficult writing event from a global judgment about their ability.</span><span class="use"><strong>Useful when:</strong> a grade or comment has become “I’m just bad at writing.”</span></a>
+      <a class="lab" href="you-belong-in-the-process.html"><span class="kicker">Student mini-lab</span><span class="lab-title">You Belong in the Process</span><span class="lab-desc">Makes questions, feedback, revision, collaboration, and help-seeking visible as normal college participation.</span><span class="use"><strong>Useful when:</strong> students mistake needing support for not belonging.</span></a>
+      <a class="lab" href="youre-seeing-their-highlight-reel.html"><span class="kicker">Student mini-lab</span><span class="lab-title">You’re Seeing Their Highlight Reel</span><span class="lab-desc">Helps students distinguish what they can observe about peers from the conclusions they draw about themselves.</span><span class="use"><strong>Useful when:</strong> social comparison is undermining participation or persistence.</span></a>
+      <a class="lab" href="what-if-i-ask-a-dumb-question.html"><span class="kicker">Student mini-lab</span><span class="lab-title">What If I Ask a Dumb Question?</span><span class="lab-desc">Students separate evidence from prediction and turn uncertainty into a specific question.</span><span class="use"><strong>Useful when:</strong> fear of appearing unprepared prevents clarification or help-seeking.</span></a>
+    </div>
+  </div>
+</details>
+
+<details class="path" id="feedback">
+  <summary>
+    <span class="path-icon" aria-hidden="true">💬</span>
+    <span><h2>Give Feedback Students Can Actually Use</h2><span class="path-sub">Treat comments as part of instruction, not merely a record of what was wrong.</span></span>
+    <span class="chev" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="path-body">
+    <div class="problem"><strong>Teaching problem:</strong> Feedback can be accurate but still unusable if students cannot translate it into priorities, revision decisions, or concrete next actions.</div>
+    <h3 class="section-title">Faculty mini-labs</h3>
+    <div class="faculty-labs">
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">What Does the Student Hear When You Write “Unclear”?</span><span class="lab-desc">Test common margin comments for how much actionable information they actually provide.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Comment Less, Teach More</span><span class="lab-desc">Prioritize comments that can change the draft rather than documenting every problem in it.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Which Comment Comes First?</span><span class="lab-desc">Practice sequencing feedback so high-level changes are not buried beneath sentence-level correction.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Feedback or Autopsy?</span><span class="lab-desc">Distinguish comments that help a learner make a future decision from comments that only explain the finished paper’s weaknesses.</span></div>
+    </div>
+    <h3 class="section-title">Student tools you can use now</h3>
+    <div class="student-tools">
+      <a class="lab" href="professor-comment-decoder.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Professor Comment Decoder</span><span class="lab-desc">Students translate broad comments into possible revision actions.</span><span class="use"><strong>Useful when:</strong> feedback language is familiar to instructors but opaque to students.</span></a>
+      <a class="lab" href="the-editing-room.html"><span class="kicker">Student mini-lab</span><span class="lab-title">The Editing Room</span><span class="lab-desc">Students classify and prioritize feedback before revising.</span><span class="use"><strong>Useful when:</strong> students fix easy surface issues first or try to respond to every comment equally.</span></a>
+      <a class="lab" href="reverse-outline.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Reverse Outline</span><span class="lab-desc">Gives students a way to inspect organization using the draft that actually exists.</span><span class="use"><strong>Useful when:</strong> feedback says “organization” but the student needs a diagnostic method.</span></a>
+      <a class="lab" href="proofreading-er.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Proofreading ER</span><span class="lab-desc">Moves sentence-level correction later in the process and prioritizes high-impact issues.</span><span class="use"><strong>Useful when:</strong> students equate revision with proofreading.</span></a>
+    </div>
+  </div>
+</details>
+
+<details class="path" id="connection">
+  <summary>
+    <span class="path-icon" aria-hidden="true">🚪</span>
+    <span><h2>Keep Students Connected</h2><span class="path-sub">Design clearer ways to ask for help, recover after disruption, and return to the work.</span></span>
+    <span class="chev" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="path-body">
+    <div class="problem"><strong>Teaching problem:</strong> “Reach out if you need help” sounds simple from the instructor side, but a student may still need to identify the problem, decide whom to contact, overcome embarrassment, formulate a question, and understand whether returning is still possible.</div>
+    <h3 class="section-title">Faculty mini-labs</h3>
+    <div class="faculty-labs">
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">The Student Who Disappears</span><span class="lab-desc">Examine the decisions and emotions between one missed task and full disengagement—and where course design can create a return path.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">What Does “Reach Out If You Need Help” Require?</span><span class="lab-desc">Make the hidden help-seeking workload visible and test ways to reduce ambiguity without removing student agency.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">Designing a Way Back In</span><span class="lab-desc">Consider how students can re-enter the course after missed work without pretending the disruption did not matter.</span></div>
+      <div class="lab planned"><span class="kicker">Faculty lab · coming next</span><span class="lab-title">When Flexibility Helps—and When Ambiguity Hurts</span><span class="lab-desc">Distinguish compassionate options from unclear expectations that create even more decision load.</span></div>
+    </div>
+    <h3 class="section-title">Student tools you can use now</h3>
+    <div class="student-tools">
+      <a class="lab" href="dont-disappear.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Don’t Disappear</span><span class="lab-desc">Helps students reconnect after missed work or avoidance.</span><span class="use"><strong>Useful when:</strong> embarrassment or overwhelm is turning a small disruption into disengagement.</span></a>
+      <a class="lab" href="whats-still-possible.html"><span class="kicker">Student mini-lab</span><span class="lab-title">What’s Still Possible?</span><span class="lab-desc">Students identify actions that can still affect the course rather than treating past setbacks as irreversible.</span><span class="use"><strong>Useful when:</strong> all-or-nothing thinking follows missed work or a low grade.</span></a>
+      <a class="lab" href="one-grade-isnt-the-story.html"><span class="kicker">Student mini-lab</span><span class="lab-title">One Grade Isn’t the Story</span><span class="lab-desc">Helps students interpret one score as information rather than as a complete forecast.</span><span class="use"><strong>Useful when:</strong> a single grade is driving withdrawal, avoidance, or hopelessness.</span></a>
+      <a class="lab" href="who-do-i-ask.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Who Do I Ask?</span><span class="lab-desc">Students choose the appropriate human or campus resource for the kind of problem they have.</span><span class="use"><strong>Useful when:</strong> students know they need help but do not know where to start.</span></a>
+      <a class="lab" href="what-if-i-ask-a-dumb-question.html"><span class="kicker">Student mini-lab</span><span class="lab-title">What If I Ask a Dumb Question?</span><span class="lab-desc">Students practice asking for clarification without outsourcing the thinking.</span><span class="use"><strong>Useful when:</strong> fear and uncertainty block office hours, tutoring, email, or class questions.</span></a>
+      <a class="lab" href="submit-the-imperfect-thing.html"><span class="kicker">Student mini-lab</span><span class="lab-title">Submit the Imperfect Thing</span><span class="lab-desc">Helps students distinguish a meaningful missing requirement from endless polishing.</span><span class="use"><strong>Useful when:</strong> perfectionism is about to turn assessable work into a non-submission.</span></a>
+    </div>
+    <div class="bridge"><strong>Design principle:</strong> Support does not have to mean removing consequences or lowering expectations. Often the most useful intervention is making the next decision clearer and the return path visible.</div>
+  </div>
+</details>
+
+</div>
+</section>
+
+<section class="framework">
+  <div class="wrap">
+    <div class="framework-card">
+      <h2>A simple lens for using the collection</h2>
+      <p>When a student is struggling, ask what part of the process is currently invisible. The mini-labs are designed to make one of those hidden moves easier to see and practice.</p>
+      <div class="framework-grid">
+        <div class="framework-item"><strong>What is the learner trying to do?</strong><span>Name the real intellectual task, not only the assignment product.</span></div>
+        <div class="framework-item"><strong>What decision is hidden?</strong><span>Identify the expert move a student may not yet know they are supposed to make.</span></div>
+        <div class="framework-item"><strong>What can they practice now?</strong><span>Give the learner a small authentic move that transfers back into the course work.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="credit"><strong>ENGL C1000 Learning Lab</strong><br>This collection was created by Karen Crozer to support ENGL C1000 learning in California Community Colleges (CCCs).</div>
+    <nav aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="student.html">Students</a>
+      <a href="toolkit.html">All tools</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
