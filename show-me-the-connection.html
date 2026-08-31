@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Show Me the Connection</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f6f8f8;
+      color: #263943;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid #173e4b;
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    .hero {
+      background: #e8f1f3;
+      border: 1px solid #c7dce2;
+      border-radius: 20px;
+      padding: 34px;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #56747e;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #173e4b;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+    }
+
+    h2,
+    h3 {
+      color: #173e4b;
+      line-height: 1.3;
+    }
+
+    .intro-box,
+    .section,
+    .checkout {
+      background: #ffffff;
+      border: 1px solid #d7e0e3;
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 28px;
+    }
+
+    .move-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .move-card {
+      background: #f8fbfb;
+      border: 1px solid #d2dde0;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .move-label {
+      display: block;
+      margin-bottom: 6px;
+      color: #55747e;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .move-title {
+      display: block;
+      color: #173e4b;
+      font-weight: 800;
+      font-size: 1.08rem;
+      margin-bottom: 5px;
+    }
+
+    .example {
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .example p:last-child {
+      margin-bottom: 0;
+    }
+
+    .weak {
+      background: #f8eded;
+      border: 1px solid #e8d1d1;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+
+    .strong {
+      background: #edf5ee;
+      border: 1px solid #c9ddcb;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+
+    .practice {
+      background: #ffffff;
+      border: 1px solid #d7e0e3;
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 28px;
+    }
+
+    .practice-label {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #edf3f5;
+      color: #3f626e;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .passage {
+      margin: 18px 0;
+      padding: 20px;
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+    }
+
+    .question {
+      margin-top: 22px;
+      font-weight: 800;
+      color: #294b57;
+    }
+
+    .choices {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .choice {
+      width: 100%;
+      text-align: left;
+      background: #f9fbfb;
+      border: 1px solid #cbd7da;
+      border-radius: 10px;
+      padding: 13px 15px;
+      color: #263943;
+      cursor: pointer;
+    }
+
+    .choice:hover {
+      background: #edf4f5;
+    }
+
+    .choice.selected {
+      background: #e8f1f3;
+      border-color: #6e929e;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.good {
+      background: #edf5ee;
+      border: 1px solid #c9ddcb;
+    }
+
+    .feedback.try {
+      background: #f8f1e7;
+      border: 1px solid #e4d2b7;
+    }
+
+    .connection-prompts {
+      background: #eef5f7;
+      border: 1px solid #c8dce1;
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 24px;
+    }
+
+    .connection-prompts ul {
+      margin-bottom: 0;
+    }
+
+    .real-work {
+      background: #173e4b;
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 30px;
+      margin-bottom: 28px;
+    }
+
+    .real-work h2,
+    .real-work h3 {
+      color: #ffffff;
+    }
+
+    .real-work label {
+      display: block;
+      margin: 18px 0 7px;
+      font-weight: 800;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid #aebdc2;
+      border-radius: 9px;
+      padding: 12px;
+      resize: vertical;
+      background: #ffffff;
+      color: #263943;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .status {
+      border: 1px solid #d5dfe1;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .green {
+      background: #edf5ee;
+    }
+
+    .yellow {
+      background: #fbf5e8;
+    }
+
+    .red {
+      background: #f8eded;
+    }
+
+    .writer-move {
+      margin-top: 28px;
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+      padding: 20px;
+    }
+
+    .writer-move p {
+      margin: 0;
+    }
+
+    @media (max-width: 750px) {
+      .move-grid,
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shell {
+        padding: 12px 10px 40px;
+      }
+
+      .hero,
+      .section,
+      .practice,
+      .real-work,
+      .checkout {
+        padding: 21px 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="shell">
+
+  <!-- HERO -->
+
+  <header class="hero">
+    <p class="eyebrow">Writing Lab</p>
+
+    <h1>Show Me the Connection</h1>
+
+    <p>
+      You made a claim. You included evidence. So why does your professor keep writing
+      <strong>&ldquo;Explain this&rdquo;</strong> or <strong>&ldquo;How does this support your point?&rdquo;</strong>?
+    </p>
+
+    <p>
+      Because evidence does not usually explain itself. This lab will help you make the
+      reasoning between your evidence and your point visible to your reader.
+    </p>
+  </header>
+
+
+  <!-- INTRO -->
+
+  <section class="intro-box">
+
+    <h2>Evidence Is Not the Finish Line</h2>
+
+    <p>
+      Writers sometimes assume that once they include a quotation, statistic, example, or detail,
+      the reader will automatically understand why it matters.
+    </p>
+
+    <p>
+      But your reader cannot see the connection that exists in your head unless you put that
+      reasoning on the page.
+    </p>
+
+    <div class="move-grid">
+
+      <div class="move-card">
+        <span class="move-label">Step 1</span>
+        <span class="move-title">CLAIM</span>
+        <p>What are you trying to show or argue?</p>
+      </div>
+
+      <div class="move-card">
+        <span class="move-label">Step 2</span>
+        <span class="move-title">EVIDENCE</span>
+        <p>What example, quotation, fact, or detail supports that point?</p>
+      </div>
+
+      <div class="move-card">
+        <span class="move-label">Step 3</span>
+        <span class="move-title">CONNECTION</span>
+        <p>How does that evidence support, prove, complicate, or clarify the claim?</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MODEL -->
+
+  <section class="section">
+
+    <h2>See the Difference</h2>
+
+    <p>
+      Imagine a student is writing about social media and attention.
+    </p>
+
+    <div class="weak">
+
+      <h3>Evidence Without the Connection</h3>
+
+      <p>
+        <strong>Claim:</strong> Social media platforms can shape what users pay attention to.
+      </p>
+
+      <p>
+        <strong>Evidence:</strong> A platform&rsquo;s algorithm may repeatedly place highly engaging posts at the top of a user&rsquo;s feed.
+      </p>
+
+      <p>
+        And then the paragraph moves on.
+      </p>
+
+    </div>
+
+    <p>
+      The evidence is relevant, but the reader is still left to do some of the thinking.
+    </p>
+
+    <div class="strong">
+
+      <h3>Evidence With the Connection</h3>
+
+      <p>
+        <strong>Claim:</strong> Social media platforms can shape what users pay attention to.
+      </p>
+
+      <p>
+        <strong>Evidence:</strong> A platform&rsquo;s algorithm may repeatedly place highly engaging posts at the top of a user&rsquo;s feed.
+      </p>
+
+      <p>
+        <strong>Connection:</strong> Because users are more likely to encounter the content that the algorithm repeatedly prioritizes,
+        the platform is not simply showing information neutrally; it is helping determine which topics receive the most attention.
+      </p>
+
+    </div>
+
+    <div class="example">
+      <p>
+        <strong>The useful question:</strong>
+      </p>
+
+      <p>
+        <strong>
+          How does this evidence help prove the point I just made?
+        </strong>
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- PRACTICE 1 -->
+
+  <section class="practice">
+
+    <span class="practice-label">Connection 1</span>
+
+    <h2>Which Sentence Actually Explains the Evidence?</h2>
+
+    <div class="passage">
+
+      <p>
+        <strong>Claim:</strong> Lack of reliable transportation can make college attendance more difficult for students.
+      </p>
+
+      <p>
+        <strong>Evidence:</strong> A student who depends on two buses may have a commute of more than an hour each way.
+      </p>
+
+    </div>
+
+    <p class="question">
+      Which sentence makes the strongest connection?
+    </p>
+
+    <div class="choices">
+
+      <button class="choice" onclick="respond(this, 'f1', false)">
+        Transportation is an important topic for college students.
+      </button>
+
+      <button class="choice" onclick="respond(this, 'f1', true)">
+        A long, unpredictable commute increases the chance that delays, missed connections,
+        or work conflicts will interfere with a student's ability to arrive on time and attend consistently.
+      </button>
+
+      <button class="choice" onclick="respond(this, 'f1', false)">
+        Many people take buses every day.
+      </button>
+
+      <button class="choice" onclick="respond(this, 'f1', false)">
+        This evidence proves the claim because transportation matters.
+      </button>
+
+    </div>
+
+    <div id="f1" class="feedback" aria-live="polite"></div>
+
+  </section>
+
+
+  <!-- PRACTICE 2 -->
+
+  <section class="practice">
+
+    <span class="practice-label">Connection 2</span>
+
+    <h2>Go Beyond Repeating the Evidence</h2>
+
+    <div class="passage">
+
+      <p>
+        <strong>Claim:</strong> The character feels increasingly isolated from her family.
+      </p>
+
+      <p>
+        <strong>Evidence:</strong> At dinner, she answers questions with one-word responses and leaves the table before anyone else finishes eating.
+      </p>
+
+    </div>
+
+    <p class="question">
+      Which explanation adds reasoning instead of simply restating the evidence?
+    </p>
+
+    <div class="choices">
+
+      <button class="choice" onclick="respond(this, 'f2', false)">
+        She gives one-word answers and leaves dinner early.
+      </button>
+
+      <button class="choice" onclick="respond(this, 'f2', true)">
+        Her brief responses and early departure show that she is withdrawing from opportunities
+        to interact with her family, making her emotional distance visible through her behavior.
+      </button>
+
+      <button class="choice" onclick="respond(this, 'f2', false)">
+        The family is eating dinner together.
+      </button>
+
+    </div>
+
+    <div id="f2" class="feedback" aria-live="polite"></div>
+
+  </section>
+
+
+  <!-- PRACTICE 3 -->
+
+  <section class="practice">
+
+    <span class="practice-label">Connection 3</span>
+
+    <h2>What Kind of Connection Do You Need?</h2>
+
+    <p>
+      Reasoning does more than say, &ldquo;This proves my claim.&rdquo;
+      Different evidence may require different kinds of explanation.
+    </p>
+
+    <div class="connection-prompts">
+
+      <h3>Try one of these questions:</h3>
+
+      <ul>
+        <li><strong>How does this example show the pattern I am describing?</strong></li>
+        <li><strong>Why does this detail matter?</strong></li>
+        <li><strong>What should the reader notice about this evidence?</strong></li>
+        <li><strong>What does this evidence reveal that is not obvious at first?</strong></li>
+        <li><strong>How does this evidence support my claim?</strong></li>
+        <li><strong>Does this evidence complicate or qualify my point?</strong></li>
+        <li><strong>What conclusion can I reasonably draw from this evidence?</strong></li>
+      </ul>
+
+    </div>
+
+    <div class="example">
+
+      <p>
+        <strong>Watch out for the fake connection:</strong>
+      </p>
+
+      <p>
+        &ldquo;This quote proves my point because it shows that my claim is true.&rdquo;
+      </p>
+
+      <p>
+        That sounds like explanation, but it does not actually tell the reader
+        <strong>how</strong> the evidence supports the claim.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- DIAGNOSTIC -->
+
+  <section class="section">
+
+    <h2>The Connection Test</h2>
+
+    <p>
+      After using evidence, cover up your claim for a moment and look only at the evidence and the sentence after it.
+    </p>
+
+    <p>
+      Ask:
+    </p>
+
+    <div class="move-grid">
+
+      <div class="move-card">
+        <span class="move-title">Did I interpret it?</span>
+        <p>
+          Did I explain what the reader should notice about the evidence?
+        </p>
+      </div>
+
+      <div class="move-card">
+        <span class="move-title">Did I connect it?</span>
+        <p>
+          Did I show how the evidence relates to the point I am making?
+        </p>
+      </div>
+
+      <div class="move-card">
+        <span class="move-title">Did I add thinking?</span>
+        <p>
+          Did I say something beyond simply repeating the quotation or example?
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REAL WORK -->
+
+  <section class="real-work">
+
+    <h2>Your Turn: Find the Missing Connection</h2>
+
+    <p>
+      Practice is over. Open a paragraph from something you are currently writing.
+    </p>
+
+    <p>
+      Find one place where you use a quotation, fact, example, statistic, or other evidence.
+    </p>
+
+    <label for="claim">
+      What is the claim or point you are making?
+    </label>
+
+    <textarea id="claim" placeholder="My point is..."></textarea>
+
+    <label for="evidence">
+      What evidence are you using?
+    </label>
+
+    <textarea id="evidence" placeholder="The evidence I use is..."></textarea>
+
+    <label for="connection">
+      How does that evidence support, prove, clarify, or complicate your point?
+    </label>
+
+    <textarea id="connection" placeholder="This evidence matters because..."></textarea>
+
+    <h3>Now revise the actual paragraph.</h3>
+
+    <p>
+      Spend about <strong>10–15 minutes</strong> revising that section of your draft so the connection is visible to your reader.
+    </p>
+
+    <p>
+      You may need one sentence of explanation. You may need several. The goal is not to hit a formula.
+      The goal is to give the reader the reasoning they need.
+    </p>
+
+  </section>
+
+
+  <!-- CHECKOUT -->
+
+  <section class="checkout">
+
+    <h2>Check Out</h2>
+
+    <p>
+      Which description best matches the paragraph now?
+    </p>
+
+    <div class="status-grid">
+
+      <div class="status green">
+        <strong>Green — The connection is visible.</strong>
+        My reader can see how the evidence supports my point.
+      </div>
+
+      <div class="status yellow">
+        <strong>Yellow — I can see it, but explaining it is hard.</strong>
+        I may need another sentence, example, or quick check from someone.
+      </div>
+
+      <div class="status red">
+        <strong>Red — I cannot connect this evidence to my claim.</strong>
+        The evidence may not actually be the right evidence for this point.
+      </div>
+
+    </div>
+
+    <div class="writer-move">
+      <p>
+        <strong>College Writer Move:</strong>
+        Evidence does not replace your thinking. Your job as the writer is to help the reader understand
+        <strong>what the evidence shows, why it matters, and how it connects to the larger point.</strong>
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+  function respond(button, feedbackId, correct) {
+
+    const group = button.parentElement;
+    const buttons = group.querySelectorAll(".choice");
+
+    buttons.forEach(function(btn) {
+      btn.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    const feedback = document.getElementById(feedbackId);
+
+    feedback.classList.remove("good", "try", "show");
+
+    if (correct) {
+      feedback.classList.add("good", "show");
+      feedback.innerHTML =
+        "<strong>Yes.</strong> This sentence explains the reasoning that connects the evidence to the claim instead of simply repeating what the evidence says.";
+    } else {
+      feedback.classList.add("try", "show");
+      feedback.innerHTML =
+        "<strong>Not quite.</strong> Ask yourself: does this sentence actually explain how the evidence supports the claim, or does it mostly repeat the evidence or make a general statement?";
+    }
+  }
+</script>
+
+</body>
+</html>
