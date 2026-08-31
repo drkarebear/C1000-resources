@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Make Your Case</title>
+<meta name="description" content="An accessible ENGL C1000 argument lab for building, testing, qualifying, and supporting academic claims.">
+<style>
+:root{--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button,select{font:inherit}button{font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:4px solid #111;outline-offset:3px}
+.shell{max-width:1080px;margin:auto;padding:20px 12px 52px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
+h1,h2,h3{color:var(--dark);line-height:1.18}h1{font-size:clamp(2.1rem,7vw,3.6rem);margin:.1em 0 .25em}.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.84rem;color:var(--blue)}
+.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}.row,.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.call,.secret,.good,.warn,.note{padding:16px;border-radius:14px;margin:14px 0}.call{background:var(--goldbg);border-left:5px solid var(--gold)}.secret{background:var(--lav);border:2px dashed var(--purple)}.good{background:var(--greenbg);border:2px solid var(--green)}.warn{background:var(--rosebg);border:2px solid var(--rose)}.note{background:var(--soft);border:2px solid var(--blue)}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:900}.track{height:12px;background:#e5ebf0;border-radius:99px;overflow:hidden;margin:7px 0 18px}.bar{height:100%;background:var(--blue)}
+.stage{display:inline-block;background:var(--soft);color:var(--blue);font-weight:900;border-radius:99px;padding:5px 10px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.side{position:sticky;top:10px;border:1px solid var(--line);background:#fbfcfd;border-radius:14px;padding:15px}
+.case,.claim,.machine,.test,.tool{border:2px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;background:#fff}.claim{font-size:1.05rem;border-left:7px solid var(--gold)}
+.machine{border:4px solid var(--dark);background:#f8fafb}.screen{background:#18252d;color:#fff;border-radius:12px;padding:15px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.choices,.grid2,.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink)}.choice.ok{background:var(--greenbg);border-color:var(--green)}
+.control{border:2px solid var(--line);border-radius:14px;padding:14px;background:#fff}.control strong{display:block;color:var(--blue)}
+.feedback{display:none;background:var(--soft);border:2px solid var(--blue);border-radius:12px;padding:14px;margin-top:14px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.85rem;font-weight:900;background:#fff}.stress{border:4px solid var(--purple);border-radius:18px;padding:18px;background:var(--lav)}
+.tool{border:4px solid var(--blue);background:#f9fcfd}.tool select{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff}.result{margin-top:16px}
+.completion{border:4px solid var(--blue);border-radius:18px;padding:24px}.done{color:var(--green);font-weight:900}.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}@media(max-width:620px){body{font-size:17px}.choices,.grid2,.controls{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section id="intro" class="card">
+<p class="eyebrow">ENGL C1000 · Argument & Rhetorical Choices</p>
+<h1>⚖️ Make Your Case</h1>
+<h2>Build a claim you can actually support.</h2>
+<div class="call"><strong>ARGUMENT ≠ FIGHT</strong><br>Academic argument isn't about being the loudest person in the room. It's about making a claim readers can examine and giving them reasons to consider it.</div>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> A stronger argument does not always sound more certain. Sometimes a claim becomes stronger when you make it more precise, acknowledge limits, or account for complexity.</div>
+<div class="row"><button id="start" class="primary">🧪 Start the Claim Stress Test</button><button id="resume" class="secondary hidden">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div><span id="stage" class="stage"></span>
+<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Continue</button></div></div>
+<aside class="side"><h3>🧪 Claim Stress Test</h3><p><strong>🎯 Precise?</strong><br>Can the reader tell exactly what you're claiming?</p><p><strong>👥 For whom?</strong><br>Does the claim overgeneralize?</p><p><strong>🗓️ Under what conditions?</strong><br>What limits matter?</p><p><strong>📚 Supportable?</strong><br>What evidence could reasonably support it?</p><p><strong>⚖️ Arguable?</strong><br>Could a reasonable reader question or complicate it?</p><p><strong>🧩 Nuanced?</strong><br>Is reality more complicated than the first version suggests?</p></aside></div>
+</section>
+
+<section id="finish" class="card hidden">
+<div class="good"><h2>⚖️ Case Made</h2><p><strong>A strong academic claim is one you can support, explain, qualify, and examine.</strong></p></div>
+<h2>🧪 Stress-Test My Claim</h2>
+<div class="tool">
+<label for="problem"><strong>What's happening with your claim?</strong></label>
+<select id="problem">
+<option value="broad">It feels too broad</option>
+<option value="fact">It mostly sounds like a fact</option>
+<option value="absolute">It sounds too absolute</option>
+<option value="preference">It mostly sounds like a personal preference</option>
+<option value="afraid">I'm afraid to take a position</option>
+<option value="other">I haven't considered another perspective</option>
+<option value="binary">I only see two possible sides</option>
+<option value="evidence">I have evidence but don't know what I'm arguing</option>
+<option value="good">It already seems precise and supportable</option>
+</select>
+<div class="row"><button id="diagnose" class="primary">⚖️ Stress-Test It</button></div><div id="result" class="result" aria-live="polite"></div>
+</div>
+<div class="note"><h3>🧰 Quick Claim Check</h3><p>What exactly am I claiming?<br>For whom or under what conditions?<br>Why might a reasonable reader care or question it?<br>What evidence could support it?<br>What would make it more accurate—not merely louder?<br>What do I want my reader to understand after considering my reasons?</p></div>
+<div class="row"><button id="copy" class="secondary">📋 Copy Claim Stress Test</button></div>
+<div class="completion"><p class="done">✓ LAB COMPLETE</p><h2>Make Your Case — Complete</h2><p>✓ Distinguish academic argument from conflict<br>✓ Turn broad reactions into supportable claims<br>✓ Identify facts, preferences, and arguable claims<br>✓ Make claims more precise without making them artificially extreme<br>✓ Use qualification and complication strategically<br>✓ Represent other perspectives reasonably<br>✓ Recognize false binaries<br>✓ Connect evidence to a writer-controlled claim</p><p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div></div>
+</section>
+<footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
+</main>
+<script>
+(()=>{const $=x=>document.getElementById(x),KEY="makeYourCaseV1";let i=0;
+const M=[
+["1 · Argument ≠ Fight","fight"],["2 · Argument or Not Yet?","choice",`<div class="claim">“Many community colleges offer online courses.”</div>`,"What kind of statement is this by itself?",[["Mostly a factual statement.",1,"Right. A fact can support an argument, but simply stating something verifiable does not yet tell readers what you want them to conclude."],["A complete academic argument.",0,"It may be useful information, but the writer has not yet made an arguable interpretation or conclusion."],["An insult.",0,"Nothing here attacks anyone."],["A counterargument.",0,"It does not respond to another position."]]],
+["3 · Hot Take Machine","hot"],["4 · Absolute Claim Detector","absolute"],["5 · For Whom?","whom"],["6 · Under What Conditions?","conditions"],
+["7 · Preference → Argument","choice",`<div class="claim">“Online classes are better.”</div>`,"What is the biggest problem with this claim?",[["“Better” is vague: better for whom, for what purpose, and under what conditions?",1,"Exactly. Precision can turn a reaction into something readers can actually examine."],["It needs to sound angrier.",0,"Intensity is not the same as argument quality."],["It needs the phrase “I strongly believe.”",0,"That would emphasize the writer's belief without clarifying the reasons or scope."],["It needs a longer word for classes.",0,"Vocabulary will not solve the claim problem."]]],
+["8 · Claim Upgrade","upgrade"],["9 · Stronger ≠ Louder","louder"],["10 · The Other Side Is Not an Idiot","straw"],["11 · Steelman Challenge","steel"],
+["12 · False Binary Detector","binary"],["13 · Yes, And / Yes, But / It Depends","qualify"],["14 · Evidence ≠ Argument","evidence"],
+["15 · What Does the Evidence Mean?","choice",`<div class="claim"><strong>Evidence:</strong> A survey reports that 62% of participating students used at least one online course.</div>`,"What still belongs to the writer?",[["Explain what this evidence supports, suggests, complicates, or helps the reader understand.",1,"Yes. Evidence becomes part of an argument through the writer's reasoning."],["Nothing. The number makes the argument automatically.",0,"A statistic does not tell the reader which conclusion to draw from it."],["Add another percentage immediately.",0,"More evidence is not automatically more argument."],["Call the statistic “undeniable proof.”",0,"The strength of evidence depends on what it actually supports and how the study was conducted."]]],
+["16 · Reasonable Reader Test","reader"],["17 · Claim Too Careful?","careful"],["18 · Claim Stress Test","stress"],["19 · Case Builder","builder"],["20 · Case Made","end"]
+];
+function fb(t,g=true){$("fb").textContent=t;$("fb").className="feedback show"+(g?" good":"");$("next").classList.remove("hidden")}
+function choices(opts){let d=document.createElement("div");d.className="choices";opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("⚖️ "+m)}else{b.disabled=true;fb(m+" Try another stress test.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Claim test ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";
+if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4]))}
+if(m[1]==="fight"){$("host").innerHTML=`<h2>🥊 What Students Sometimes Hear</h2><div class="warn"><strong>ARGUMENT:</strong> Pick a side. Defeat the other side. Never admit uncertainty. WIN.</div><h2>⚖️ What Academic Argument Can Be</h2><div class="good">Make a claim → give reasons/evidence → explain your reasoning → test the claim → account for relevant complexity → help readers understand why the claim is worth considering.</div><div class="secret">🔓 A reader can disagree with you and still recognize that you made a strong argument.</div>`;fb("The goal is not to overpower a reader. It is to make a case the reader can examine.")}
+if(m[1]==="hot"){$("host").innerHTML=`<h2>🔥 Hot Take Machine</h2><div class="machine"><div class="screen">INPUT: “College textbooks are a scam!”</div></div><div class="warn"><strong>🔥 ENERGY: HIGH</strong><br><strong>🎯 PRECISION: LOW</strong></div><div class="good"><strong>Keep the concern. Build the claim:</strong><p>High textbook costs can create an additional barrier for students when required materials are not available through lower-cost or open alternatives.</p></div><div class="secret">🔓 You do not have to erase your reaction. Ask what specific, supportable concern is underneath it.</div>`;fb("Hot takes can contain the beginning of an argument. Academic revision makes the claim examinable.")}
+if(m[1]==="absolute"){$("host").innerHTML=`<h2>🚨 Absolute Claim Detector</h2><div class="claim">“Online courses are always better for working students.”</div><div class="warn"><strong>ALWAYS DETECTED.</strong><p>Would this be true for every working student, course, schedule, technology situation, and learning need?</p></div><div class="good"><strong>Possible revision:</strong><p>For some students working full time, asynchronous courses can increase scheduling flexibility, although that flexibility may come with challenges such as reduced real-time interaction or the need for greater self-management.</p></div>`;fb("Qualification can make a claim more accurate and therefore more defensible.")}
+if(m[1]==="whom"){$("host").innerHTML=`<h2>👥 For Whom?</h2><div class="claim">“Flexible deadlines help students.”</div><div class="controls"><div class="control"><strong>👥 Which students?</strong>All students? Working students? Caregivers? Students in a particular course?</div><div class="control"><strong>🎯 Help with what?</strong>Completion? Learning? Stress? Access?</div></div><div class="secret">🔓 Words like <em>students, people, everyone, society</em> can hide important differences. Precision often strengthens a claim.</div>`;fb("Scope is part of argument quality.")}
+if(m[1]==="conditions"){$("host").innerHTML=`<h2>🗓️ Under What Conditions?</h2><div class="claim">“Online tutoring improves access.”</div><div class="controls"><div class="control"><strong>WHEN?</strong>When appointments are available?</div><div class="control"><strong>FOR WHOM?</strong>Students with reliable technology?</div><div class="control"><strong>FOR WHAT?</strong>Certain kinds of support?</div><div class="control"><strong>COMPARED WITH?</strong>No evening option? In-person tutoring?</div></div>`;fb("Conditions do not automatically weaken a claim. They tell the reader what you are actually claiming.")}
+if(m[1]==="upgrade"){$("host").innerHTML=`<h2>🛠️ Claim Upgrade</h2><div class="warn"><strong>V1:</strong> Online classes are better.</div><div class="note"><strong>V2:</strong> Online classes can be better for working students.</div><div class="good"><strong>V3:</strong> For students working full time, asynchronous courses can increase access by allowing coursework to fit around changing work schedules, though that flexibility may not address every barrier to participation.</div><div class="chips"><span class="badge">👥 FOR WHOM</span><span class="badge">⚙️ HOW</span><span class="badge">🧩 LIMIT</span></div>`;fb("The claim got stronger by becoming more specific—not more dramatic.")}
+if(m[1]==="louder"){$("host").innerHTML=`<h2>📢 Stronger ≠ Louder</h2><div class="machine"><div class="screen">CLAIM ENHANCER 9000<br>“Online classes are ABSOLUTELY, UNDENIABLY, WITHOUT QUESTION the BEST educational format ever created.”</div></div><div class="warn"><strong>CONFIDENCE WORDS +5</strong><br><strong>SUPPORTABILITY −3</strong></div><div class="secret">🔓 Words like <em>clearly, obviously, undeniably, everyone knows</em> cannot substitute for reasons and evidence.</div>`;fb("Academic confidence comes from what the claim can support, not how forcefully it is announced.")}
+if(m[1]==="straw"){$("host").innerHTML=`<h2>🥤 The Other Side Is Not an Idiot</h2><div class="warn"><strong>STRAW PERSON:</strong><p>“People who prefer in-person classes just hate technology and don't understand modern education.”</p></div><div class="good"><strong>REASONABLE ALTERNATIVE:</strong><p>Students may prefer in-person courses because they value immediate interaction, structured meeting times, access to campus resources, or face-to-face collaboration.</p></div><div class="secret">🔓 Representing another view fairly makes your response more meaningful.</div>`;fb("If your argument only works against a ridiculous version of another position, stress-test it again.")}
+if(m[1]==="steel"){$("host").innerHTML=`<h2>🛡️ Steelman Challenge</h2><div class="claim">Your position: Colleges should expand asynchronous course options.</div><div class="note"><strong>Before responding, build the strongest reasonable concern:</strong><p>Some courses may depend heavily on live interaction, hands-on practice, immediate feedback, or structured participation that is harder to reproduce asynchronously.</p></div><div class="good"><strong>Now the real question gets more interesting:</strong><p>Which courses and students benefit from asynchronous access, and where might other formats better support the learning goals?</p></div>`;fb("A strong alternative perspective can improve the question you're actually arguing about.")}
+if(m[1]==="binary"){$("host").innerHTML=`<h2>🚨 False Binary Detected</h2><div class="claim">“Either professors ban AI completely or students will never learn to write.”</div><div class="warn"><strong>ONLY TWO BUTTONS FOUND.</strong></div><div class="grid2"><div class="case">Different policies for different assignments</div><div class="case">AI allowed for selected purposes</div><div class="case">Process documentation or reflection</div><div class="case">Explicit instruction about appropriate use</div></div><div class="secret">🔓 Complex questions often have more than two possible positions.</div>`;fb("Finding additional possibilities can produce a more interesting argument.")}
+if(m[1]==="qualify"){$("host").innerHTML=`<h2>🧩 Yes, And / Yes, But / It Depends</h2><div class="case"><strong>YES, AND...</strong><br>Accept part of a point and extend it.</div><div class="case"><strong>YES, BUT...</strong><br>Accept part and identify a limit or complication.</div><div class="case"><strong>IT DEPENDS...</strong><br>Identify the conditions that change the answer.</div><div class="secret">🔓 Qualification is not “being wishy-washy” when the evidence really supports a conditional claim.</div>`;fb("Nuance should come from the issue and evidence—not from a requirement to mention every possible side.")}
+if(m[1]==="evidence"){$("host").innerHTML=`<h2>🧱 Evidence Does Not Automatically Equal Argument</h2><div class="claim"><strong>SOURCE:</strong> “62% of surveyed students reported...”</div><div class="machine"><div class="screen">STUDENT: “There. I proved it.”<br><br>READER: “Proved... what?”</div></div><div class="good"><strong>Writer's job:</strong><p>Tell the reader what the evidence supports, how it connects to the claim, what it does not establish, and why it matters.</p></div>`;fb("Evidence is part of the case. The writer still controls the argument.")}
+if(m[1]==="reader"){$("host").innerHTML=`<h2>👀 Reasonable Reader Test</h2><div class="stress"><p>Imagine a thoughtful reader who does not automatically agree with you.</p><p><strong>They ask:</strong></p><p>“What exactly are you claiming?”<br>“What makes you think that?”<br>“Does your evidence support that much?”<br>“When might this not be true?”<br>“What am I supposed to understand because of this evidence?”</p></div><div class="secret">🔓 A skeptical reader is not necessarily an enemy. Their questions can help you find the places your argument needs work.</div>`;fb("Stress-testing a claim before submission is a revision strategy.")}
+if(m[1]==="careful"){$("host").innerHTML=`<h2>🐢 Can a Claim Be Too Careful?</h2><div class="warn"><p>“There may perhaps possibly be some situations in which online courses could maybe have certain effects for some people.”</p></div><div class="good"><strong>Qualification ≠ refusing to say anything.</strong><p>Say what the evidence reasonably allows you to say. Then name the limits that actually matter.</p></div><div class="secret">🔓 Nuance and commitment can coexist.</div>`;fb("A precise claim can take a real position without pretending to know more than the evidence supports.")}
+if(m[1]==="stress"){$("host").innerHTML=`<h2>🧪 Claim Stress Test</h2><div class="controls"><div class="control"><strong>🎯 PRECISE?</strong>Could a reader restate the claim?</div><div class="control"><strong>⚖️ ARGUABLE?</strong>Is there something to examine rather than merely verify?</div><div class="control"><strong>📚 SUPPORTABLE?</strong>Could appropriate evidence support this much?</div><div class="control"><strong>👥 SCOPE?</strong>Who/what does the claim actually cover?</div><div class="control"><strong>🧩 LIMITS?</strong>Which qualifications matter?</div><div class="control"><strong>🔗 SIGNIFICANCE?</strong>Why should the reader care?</div></div>`;fb("A claim does not need to pass by being perfect. The test tells you what to revise.")}
+if(m[1]==="builder"){$("host").innerHTML=`<h2>🏗️ Case Builder</h2><div class="case"><strong>1. CLAIM</strong><br>What do I want the reader to consider?</div><div class="case"><strong>2. REASONS</strong><br>Why does this claim make sense?</div><div class="case"><strong>3. EVIDENCE</strong><br>What supports those reasons?</div><div class="case"><strong>4. REASONING</strong><br>What does the evidence show and how does it connect?</div><div class="case"><strong>5. COMPLEXITY</strong><br>What relevant condition, limitation, consequence, or perspective should I account for?</div><div class="secret">🔓 This is a toolbox, not a mandatory five-part paragraph formula.</div>`;fb("The case belongs to the writer; sources help you build it.")}
+if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>⚖️ CASE MADE</h2><p><strong>Strong argument ≠ strongest-sounding claim.</strong></p><p>A strong academic claim is one you can <strong>support, explain, qualify, and examine.</strong></p></div><div class="call">You don't have to “win.”<br>You do have to show readers what you're claiming, why, and how well that claim holds up.</div>`;$("next").textContent="Finish & Open Claim Tool";$("next").classList.remove("hidden")}
+localStorage.setItem(KEY,JSON.stringify({i}))}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
+const R={
+broad:["🎯 NARROW THE SCOPE","Ask who, what, where, when, or which part of the issue you actually mean.","Try: “For whom is this true? In what setting? What specific outcome am I talking about?”"],
+fact:["⚖️ ADD THE WRITER'S CLAIM","Facts can support an argument. Ask what interpretation, conclusion, recommendation, or relationship you want readers to consider.","Try: “Given this fact, what do I think readers should understand?”"],
+absolute:["🧩 TEST THE LIMITS","Look for words like always, never, everyone, completely, proves, or best. Ask whether your evidence supports that much.","Try: “Under what conditions is this true? What important exception or limit matters?”"],
+preference:["🔍 FIND THE REASONS","Your preference can be a starting point. Move toward reasons that a reader who does not share the preference can examine.","Try: “What makes this important or effective beyond the fact that I personally prefer it?”"],
+afraid:["🎯 SAY WHAT THE EVIDENCE ALLOWS","You do not need an extreme position. State the conclusion your evidence reasonably supports.","Try: “After looking at the evidence, what am I comfortable saying is likely, useful, important, or worth changing?”"],
+other:["🛡️ BUILD A REASONABLE CHALLENGE","Imagine the strongest reasonable question or alternative—not a ridiculous opponent.","Try: “What would a thoughtful person who sees this differently point out?”"],
+binary:["🚨 LOOK FOR MORE BUTTONS","Ask whether the issue really has only two possible answers.","Try: “What mixed, conditional, partial, or context-dependent positions are possible?”"],
+evidence:["🧠 PUT THE WRITER BACK IN CHARGE","Your source provides information. You decide what it means for your argument.","Try: “What does this evidence support or suggest? How much can I reasonably conclude from it?”"],
+good:["✋ DON'T MAKE IT LOUDER JUST TO SOUND ACADEMIC","If the claim is precise, arguable, supportable, appropriately qualified, and meaningful, it may already be doing its job.","Next: test whether your reasons and evidence actually support the claim you made."]
+};
+$("diagnose").onclick=()=>{let r=R[$("problem").value];$("result").innerHTML=`<div class="good"><h3>${r[0]}</h3><p>${r[1]}</p><p><strong>Stress-test question:</strong> ${r[2]}</p></div>`}
+const check=`MAKE YOUR CASE — CLAIM STRESS TEST
+
+🎯 PRECISE?
+What exactly am I claiming?
+Who or what does it apply to?
+
+⚖️ ARGUABLE?
+Is there something for a reasonable reader to examine—not merely a fact to verify?
+
+📚 SUPPORTABLE?
+What evidence could support this claim?
+Does my evidence support as much as I am claiming?
+
+🧩 QUALIFIED?
+Under what conditions is this true?
+What important limits or exceptions matter?
+
+🛡️ FAIR?
+Could I describe another reasonable perspective without making it sound ridiculous?
+
+🚨 FALSE BINARY?
+Am I pretending there are only two possible positions?
+
+🧠 WRITER IN CHARGE?
+Have I explained what my evidence means for my argument?
+
+🔗 SIGNIFICANCE?
+Why should a reader care about this claim?
+
+Remember:
+Strong argument ≠ strongest-sounding claim.
+A strong academic claim is one you can support, explain, qualify, and examine.`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(check);$("copy").textContent="✓ Claim Stress Test Copied"}catch(e){alert(check)}}
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Claim Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
