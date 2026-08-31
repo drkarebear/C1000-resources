@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still a Writer</title>
+<style>
+:root{
+  --bg:#f6f3ee;
+  --ink:#23303b;
+  --muted:#64707b;
+  --card:#ffffff;
+  --line:#d9d2c7;
+  --accent:#6a5acd;
+  --accent-soft:#efecff;
+  --green:#2f7d68;
+  --green-soft:#eaf6f1;
+  --rose:#a44f67;
+  --rose-soft:#fff0f4;
+  --sand:#f7efe1;
+  --shadow:0 10px 28px rgba(35,48,59,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.6;
+}
+main{
+  max-width:980px;
+  margin:0 auto;
+  padding:24px 16px 56px;
+}
+.hero{
+  background:linear-gradient(135deg,#3f3d56,#5b5675);
+  color:#fff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+.hero h1{
+  margin:0 0 8px;
+  font-size:clamp(2.2rem,5vw,3.6rem);
+  line-height:1.03;
+}
+.hero p{margin:0;max-width:760px}
+.hero .mini{margin-top:14px;font-size:.95rem;color:#ece9ff}
+.progress-wrap{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:18px;
+}
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  font-weight:800;
+}
+.progress{
+  height:10px;
+  background:#e7e1d9;
+  border-radius:999px;
+  margin-top:8px;
+  overflow:hidden;
+}
+.progress > div{
+  height:100%;
+  width:20%;
+  background:var(--accent);
+  transition:width .25s ease;
+}
+.screen{
+  display:none;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.screen.active{display:block}
+.kicker{
+  color:var(--accent);
+  font-size:.82rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+h2{margin-top:4px;font-size:1.7rem}
+h3{margin-bottom:8px}
+.callout{
+  background:var(--green-soft);
+  border-left:5px solid var(--green);
+  padding:16px;
+  border-radius:12px;
+  margin:16px 0;
+}
+.story-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.story-card{
+  border:2px solid var(--line);
+  background:#fff;
+  border-radius:16px;
+  padding:18px;
+  text-align:left;
+  cursor:pointer;
+  min-height:180px;
+}
+.story-card:hover,.story-card:focus-visible{
+  border-color:var(--accent);
+  outline:3px solid rgba(106,90,205,.14);
+  outline-offset:2px;
+}
+.story-card[aria-pressed="true"]{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+.story-card .emoji{font-size:2rem}
+.quote{
+  margin-top:10px;
+  padding:12px;
+  background:#faf8f5;
+  border-radius:10px;
+  font-style:italic;
+}
+.question{
+  font-weight:900;
+  margin:20px 0 10px;
+  font-size:1.08rem;
+}
+.options{
+  display:grid;
+  gap:10px;
+}
+.option{
+  width:100%;
+  text-align:left;
+  border:2px solid var(--line);
+  border-radius:12px;
+  padding:14px 16px;
+  background:#fff;
+  color:var(--ink);
+  min-height:48px;
+  cursor:pointer;
+  font-size:1rem;
+}
+.option:hover,.option:focus-visible{
+  border-color:var(--accent);
+  outline:3px solid rgba(106,90,205,.14);
+  outline-offset:2px;
+}
+.option[aria-pressed="true"]{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+.feedback{
+  display:none;
+  margin-top:12px;
+  padding:14px 16px;
+  border-radius:12px;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:var(--green-soft);
+  border-left:5px solid var(--green);
+}
+.feedback.try{
+  background:var(--rose-soft);
+  border-left:5px solid var(--rose);
+}
+.checklist{
+  display:grid;
+  gap:10px;
+}
+.check-item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+}
+.check-item input{
+  margin-top:4px;
+  width:20px;
+  height:20px;
+}
+.story-evidence{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:18px 0;
+}
+.panel{
+  border-radius:14px;
+  padding:16px;
+}
+.panel.story{background:var(--rose-soft);border:1px solid #ecc8d2}
+.panel.evidence{background:var(--green-soft);border:1px solid #c9e5da}
+.panel strong{display:block;margin-bottom:5px}
+.reminder-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.reminder{
+  border:2px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  background:#fff;
+  cursor:pointer;
+  text-align:left;
+  min-height:130px;
+}
+.reminder:hover,.reminder:focus-visible{
+  border-color:var(--accent);
+  outline:3px solid rgba(106,90,205,.14);
+  outline-offset:2px;
+}
+.reminder[aria-pressed="true"]{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+.next-moves{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.move{
+  border:2px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  background:#fff;
+  cursor:pointer;
+  text-align:left;
+}
+.move[aria-pressed="true"]{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  margin-top:22px;
+}
+button.primary,button.secondary{
+  border:none;
+  border-radius:12px;
+  min-height:46px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  font-size:1rem;
+}
+button.primary{background:var(--accent);color:#fff}
+button.secondary{background:#e8e2d9;color:var(--ink)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.writer-card{
+  background:linear-gradient(180deg,#fff,#fbfaf8);
+  border:2px solid var(--accent);
+  border-radius:18px;
+  padding:22px;
+  margin-top:16px;
+}
+.writer-card .big{
+  font-size:1.2rem;
+  font-weight:900;
+}
+.card-line{
+  padding:12px 0;
+  border-top:1px solid var(--line);
+}
+.card-line:first-of-type{border-top:none}
+.small{font-size:.93rem;color:var(--muted)}
+.hidden{display:none!important}
+textarea{
+  width:100%;
+  min-height:90px;
+  padding:12px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  font:inherit;
+  resize:vertical;
+}
+textarea:focus{
+  border-color:var(--accent);
+  outline:3px solid rgba(106,90,205,.14)
+}
+@media(max-width:720px){
+  .story-grid,.reminder-grid,.next-moves,.story-evidence{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="title">
+    <div class="kicker" style="color:#ded9ff">C1000 / C1000E Writing Lab</div>
+    <h1 id="title">🌱 Still a Writer</h1>
+    <p>Writing can get personal. This activity helps you separate a rough writing moment from a story about who you are.</p>
+    <p class="mini">No points. No perfect answers. Just a reset you can actually use.</p>
+  </section>
+
+  <section class="progress-wrap" aria-label="Activity progress">
+    <div class="progress-label">
+      <span id="progressText">Step 1 of 5</span>
+      <span id="progressLabel">Meet the writers</span>
+    </div>
+    <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+  </section>
+
+  <div id="live" class="small" aria-live="polite"></div>
+
+  <section class="screen active" data-step="0">
+    <div class="kicker">Step 1 · Meet the Writers</div>
+    <h2>Someone Here Might Feel Familiar</h2>
+    <p>Choose one student whose situation feels interesting or recognizable. You are not choosing who is “most struggling.” You are choosing a story to explore.</p>
+
+    <div class="story-grid">
+      <button type="button" class="story-card" data-name="Marisol" data-thought="Maybe everyone else is just smarter than me." data-evidence="I'm still learning how college reading and writing work." aria-pressed="false">
+        <div class="emoji">🌻</div>
+        <h3>Marisol</h3>
+        <p>First semester of college. Everyone in discussion seems to understand the readings faster.</p>
+        <div class="quote">“Maybe everyone else is just smarter than me.”</div>
+      </button>
+
+      <button type="button" class="story-card" data-name="Andre" data-thought="I'm already behind. Why even turn it in?" data-evidence="I missed some work, but one missed deadline does not decide the semester." aria-pressed="false">
+        <div class="emoji">🚌</div>
+        <h3>Andre</h3>
+        <p>Works evenings. Transportation problems made him miss a reading and a draft.</p>
+        <div class="quote">“I'm already behind. Why even turn it in?”</div>
+      </button>
+
+      <button type="button" class="story-card" data-name="Linh" data-thought="Everyone else's writing sounds smarter." data-evidence="I have ideas. I'm still learning how to shape them into academic writing." aria-pressed="false">
+        <div class="emoji">🌙</div>
+        <h3>Linh</h3>
+        <p>Has strong ideas in discussion but freezes when trying to make them sound “academic.”</p>
+        <div class="quote">“Everyone else's writing sounds smarter.”</div>
+      </button>
+
+      <button type="button" class="story-card" data-name="Mateo" data-thought="Real college students probably don't write essays like this." data-evidence="College students write in all kinds of real-life conditions. The work still counts." aria-pressed="false">
+        <div class="emoji">👨‍👧</div>
+        <h3>Mateo</h3>
+        <p>Works and helps with family responsibilities. He writes in small pockets of time.</p>
+        <div class="quote">“Real college students probably don't write essays like this.”</div>
+      </button>
+
+      <button type="button" class="story-card" data-name="Jay" data-thought="My paper has so many comments. Apparently I can't write." data-evidence="I received a lot of feedback. Feedback tells me what to work on next." aria-pressed="false">
+        <div class="emoji">📝</div>
+        <h3>Jay</h3>
+        <p>Gets back a draft covered in comments and assumes the comments are a verdict.</p>
+        <div class="quote">“Apparently I can't write.”</div>
+      </button>
+
+      <button type="button" class="story-card" data-name="Nia" data-thought="If I were a good writer, this wouldn't be so hard." data-evidence="I'm stuck in revision and perfectionism. Difficulty is part of writing, not proof that I don't belong." aria-pressed="false">
+        <div class="emoji">🔄</div>
+        <h3>Nia</h3>
+        <p>Has started the same paragraph six times because she wants the first draft to be good.</p>
+        <div class="quote">“If I were a good writer, this wouldn't be so hard.”</div>
+      </button>
+    </div>
+
+    <div class="controls">
+      <button class="primary next" type="button" disabled>Explore This Story</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="1">
+    <div class="kicker">Step 2 · Change the Story</div>
+    <h2 id="storyName">What Would You Tell a Classmate?</h2>
+    <div class="callout">
+      <strong id="storyThought"></strong>
+    </div>
+
+    <p class="question">If this student were sitting next to you, which response would actually help?</p>
+    <div class="options" id="responseOptions">
+      <button class="option" type="button" data-correct="false" aria-pressed="false">Don't worry. Everything will work out.</button>
+      <button class="option" type="button" data-correct="false" aria-pressed="false">You just need to manage your time better.</button>
+      <button class="option" type="button" data-correct="true" aria-pressed="false">What happened is real, but it does not decide what happens next. Pick the smallest next move you can make.</button>
+      <button class="option" type="button" data-correct="false" aria-pressed="false">Try harder so you do not fall behind again.</button>
+    </div>
+    <div id="responseFeedback" class="feedback"></div>
+
+    <div class="story-evidence">
+      <div class="panel story">
+        <strong>❌ Story</strong>
+        <span id="storyPanel"></span>
+      </div>
+      <div class="panel evidence">
+        <strong>🔎 Evidence</strong>
+        <span id="evidencePanel"></span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Recovery thought:</strong> It does not pretend everything is fine. It separates <em>what happened</em> from <em>what happens next</em>.
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Try This With Me</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="2">
+    <div class="kicker">Step 3 · Your Turn</div>
+    <h2>Which Thought Has Shown Up for You?</h2>
+    <p>Select any that feel familiar. This is not a quiz, and nothing here is a diagnosis.</p>
+
+    <div class="checklist" id="thoughtList">
+      <label class="check-item"><input type="checkbox" value="I don't know what I'm doing."><span>I don't know what I'm doing.</span></label>
+      <label class="check-item"><input type="checkbox" value="Everyone else is better at this."><span>Everyone else is better at this.</span></label>
+      <label class="check-item"><input type="checkbox" value="I'm too far behind."><span>I'm too far behind.</span></label>
+      <label class="check-item"><input type="checkbox" value="I should be better at writing by now."><span>I should be better at writing by now.</span></label>
+      <label class="check-item"><input type="checkbox" value="I don't sound academic enough."><span>I don't sound “academic” enough.</span></label>
+      <label class="check-item"><input type="checkbox" value="Feedback means I did badly."><span>Feedback means I did badly.</span></label>
+      <label class="check-item"><input type="checkbox" value="I don't have enough time."><span>I don't have enough time.</span></label>
+      <label class="check-item"><input type="checkbox" value="I don't belong here."><span>I don't belong here.</span></label>
+      <label class="check-item"><input type="checkbox" value="I don't know how to start."><span>I don't know how to start.</span></label>
+    </div>
+
+    <div style="margin-top:16px">
+      <label for="otherThought"><strong>Something else?</strong></label>
+      <textarea id="otherThought" placeholder="Optional"></textarea>
+    </div>
+
+    <p class="question">What actually happened underneath that story?</p>
+    <div class="options" id="evidenceChoices">
+      <button class="option" type="button" aria-pressed="false">I got a grade I did not want.</button>
+      <button class="option" type="button" aria-pressed="false">I received a lot of feedback.</button>
+      <button class="option" type="button" aria-pressed="false">I'm struggling with this assignment.</button>
+      <button class="option" type="button" aria-pressed="false">I do not understand something yet.</button>
+      <button class="option" type="button" aria-pressed="false">Writing is taking me a long time.</button>
+      <button class="option" type="button" aria-pressed="false">I made sentence-level errors.</button>
+      <button class="option" type="button" aria-pressed="false">I have not written this kind of assignment before.</button>
+      <button class="option" type="button" aria-pressed="false">Something outside class is making school harder right now.</button>
+    </div>
+
+    <div class="story-evidence">
+      <div class="panel story">
+        <strong>❌ Big conclusion</strong>
+        <span id="myStory">Choose a thought above.</span>
+      </div>
+      <div class="panel evidence">
+        <strong>🔎 What actually happened</strong>
+        <span id="myEvidence">Choose the closest evidence.</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Build My Writer Reminder</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="3">
+    <div class="kicker">Step 4 · Build a Writer Reminder</div>
+    <h2>Choose Something True Enough to Believe</h2>
+    <p>A useful writer reminder does not have to sound inspirational. It just has to be credible enough to help you move.</p>
+
+    <div class="reminder-grid" id="reminders">
+      <button class="reminder" type="button" aria-pressed="false">I don't need the whole essay yet. I need the next sentence.</button>
+      <button class="reminder" type="button" aria-pressed="false">A rough draft is allowed to be rough. That's why it has a name.</button>
+      <button class="reminder" type="button" aria-pressed="false">Feedback gives me somewhere to go next. It isn't a verdict on me.</button>
+      <button class="reminder" type="button" aria-pressed="false">I can't see how long someone else's writing took.</button>
+      <button class="reminder" type="button" aria-pressed="false">I don't have to already be good at something I'm here to learn.</button>
+      <button class="reminder" type="button" aria-pressed="false">My ideas matter before they sound polished. I can work on the language after I know what I want to say.</button>
+      <button class="reminder" type="button" aria-pressed="false">Behind is a location, not an identity. I can choose my next move from here.</button>
+      <button class="reminder" type="button" aria-pressed="false">Difficulty is part of writing. It is not proof that I do not belong here.</button>
+    </div>
+
+    <p class="question">What would help most right now?</p>
+    <div class="next-moves" id="moves">
+      <button class="move" type="button" aria-pressed="false">👩‍🏫 Ask my professor one clear question.</button>
+      <button class="move" type="button" aria-pressed="false">🧑‍🤝‍🧑 Ask someone to look at one part of my writing.</button>
+      <button class="move" type="button" aria-pressed="false">📚 Get help understanding the assignment.</button>
+      <button class="move" type="button" aria-pressed="false">⏱️ Work for 15 minutes and then reassess.</button>
+      <button class="move" type="button" aria-pressed="false">🧠 Stop for tonight and come back with a clearer head.</button>
+      <button class="move" type="button" aria-pressed="false">✍️ Write badly for 10 minutes just to get words on the page.</button>
+      <button class="move" type="button" aria-pressed="false">🏫 Reach out for support with something outside class that is making school harder.</button>
+      <button class="move" type="button" aria-pressed="false">🔎 Decide exactly what part of the assignment is confusing me.</button>
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Make My Writer Card</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="4">
+    <div class="kicker">Step 5 · Your Reset</div>
+    <h2>Still a Writer</h2>
+    <p>Your card does not promise that writing will be easy. It reminds you what you can do when writing gets hard.</p>
+
+    <div class="writer-card">
+      <div class="big">🌱 My Writer Reset Card</div>
+      <div class="card-line">
+        <strong>When my brain says:</strong>
+        <p id="cardStory"></p>
+      </div>
+      <div class="card-line">
+        <strong>What actually happened:</strong>
+        <p id="cardEvidence"></p>
+      </div>
+      <div class="card-line">
+        <strong>I'm going to remember:</strong>
+        <p id="cardReminder"></p>
+      </div>
+      <div class="card-line">
+        <strong>My next move:</strong>
+        <p id="cardMove"></p>
+      </div>
+      <div class="card-line">
+        <strong>One more thing:</strong>
+        <p>Asking for help is part of doing college. It is not evidence that you cannot do college.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>You're still a writer when writing is going badly.</strong>
+      <p style="margin-bottom:0">College writers get confused. They get feedback. They miss things. They revise. They ask questions. They start again. The goal is not to never struggle. The goal is to know what you can do when struggle shows up.</p>
+    </div>
+
+    <div class="controls">
+      <button class="secondary" type="button" id="restart">Start Over</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const screens=[...document.querySelectorAll('.screen')];
+  const progressBar=document.getElementById('progressBar');
+  const progressText=document.getElementById('progressText');
+  const progressLabel=document.getElementById('progressLabel');
+  const live=document.getElementById('live');
+  const labels=['Meet the writers','Change the story','Your turn','Build a reminder','Your reset'];
+  let current=0;
+
+  const state={
+    character:null,
+    characterThought:'',
+    characterEvidence:'',
+    myStory:'',
+    myEvidence:'',
+    reminder:'',
+    move:''
+  };
+
+  function updateProgress(){
+    progressBar.style.width=((current+1)/screens.length*100)+'%';
+    progressText.textContent=`Step ${current+1} of ${screens.length}`;
+    progressLabel.textContent=labels[current];
+  }
+
+  function showStep(n){
+    screens[current].classList.remove('active');
+    current=n;
+    screens[current].classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function enableNext(screenIndex,enabled){
+    const btn=screens[screenIndex].querySelector('.next');
+    if(btn) btn.disabled=!enabled;
+  }
+
+  document.querySelectorAll('.story-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      document.querySelectorAll('.story-card').forEach(c=>c.setAttribute('aria-pressed','false'));
+      card.setAttribute('aria-pressed','true');
+      state.character=card.dataset.name;
+      state.characterThought=card.dataset.thought;
+      state.characterEvidence=card.dataset.evidence;
+      document.getElementById('storyName').textContent=`What Would You Tell ${state.character}?`;
+      document.getElementById('storyThought').textContent=state.characterThought;
+      document.getElementById('storyPanel').textContent=state.characterThought;
+      document.getElementById('evidencePanel').textContent=state.characterEvidence;
+      enableNext(0,true);
+      live.textContent=`You selected ${state.character}.`;
+    });
+  });
+
+  const responseFeedback=document.getElementById('responseFeedback');
+  document.querySelectorAll('#responseOptions .option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#responseOptions .option').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const ok=btn.dataset.correct==='true';
+      responseFeedback.className='feedback show '+(ok?'good':'try');
+      responseFeedback.textContent=ok
+        ? 'Yes. That response is realistic and useful. It acknowledges the problem without turning it into an identity.'
+        : 'That response may sound supportive, but it either minimizes the problem or turns the struggle into blame. Try the response that names a next move.';
+      enableNext(1,ok);
+      live.textContent=responseFeedback.textContent;
+    });
+  });
+
+  const thoughtInputs=[...document.querySelectorAll('#thoughtList input[type="checkbox"]')];
+  const otherThought=document.getElementById('otherThought');
+  function updateMyStory(){
+    const selected=thoughtInputs.filter(i=>i.checked).map(i=>i.value);
+    const other=otherThought.value.trim();
+    const parts=[...selected];
+    if(other) parts.push(other);
+    state.myStory=parts[0] || '';
+    document.getElementById('myStory').textContent=state.myStory || 'Choose a thought above.';
+    enableNext(2,Boolean(state.myStory && state.myEvidence));
+  }
+  thoughtInputs.forEach(i=>i.addEventListener('change',updateMyStory));
+  otherThought.addEventListener('input',updateMyStory);
+
+  document.querySelectorAll('#evidenceChoices .option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#evidenceChoices .option').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      state.myEvidence=btn.textContent.trim();
+      document.getElementById('myEvidence').textContent=state.myEvidence;
+      enableNext(2,Boolean(state.myStory && state.myEvidence));
+      live.textContent='You identified what actually happened underneath the bigger story.';
+    });
+  });
+
+  document.querySelectorAll('#reminders .reminder').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#reminders .reminder').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      state.reminder=btn.textContent.trim();
+      enableNext(3,Boolean(state.reminder && state.move));
+      live.textContent='Writer reminder selected.';
+    });
+  });
+
+  document.querySelectorAll('#moves .move').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#moves .move').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      state.move=btn.textContent.trim();
+      enableNext(3,Boolean(state.reminder && state.move));
+      live.textContent='Next move selected.';
+    });
+  });
+
+  document.querySelectorAll('.next').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(current===3){
+        document.getElementById('cardStory').textContent=state.myStory;
+        document.getElementById('cardEvidence').textContent=state.myEvidence;
+        document.getElementById('cardReminder').textContent=state.reminder;
+        document.getElementById('cardMove').textContent=state.move;
+      }
+      if(current<screens.length-1) showStep(current+1);
+    });
+  });
+
+  document.querySelectorAll('.back').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(current>0) showStep(current-1);
+    });
+  });
+
+  document.getElementById('restart').addEventListener('click',()=>{
+    state.character=null;
+    state.characterThought='';
+    state.characterEvidence='';
+    state.myStory='';
+    state.myEvidence='';
+    state.reminder='';
+    state.move='';
+
+    document.querySelectorAll('[aria-pressed]').forEach(el=>el.setAttribute('aria-pressed','false'));
+    thoughtInputs.forEach(i=>i.checked=false);
+    otherThought.value='';
+    document.getElementById('myStory').textContent='Choose a thought above.';
+    document.getElementById('myEvidence').textContent='Choose the closest evidence.';
+    responseFeedback.className='feedback';
+    responseFeedback.textContent='';
+    screens.forEach((s,i)=>{
+      const next=s.querySelector('.next');
+      if(next) next.disabled=true;
+    });
+    showStep(0);
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
