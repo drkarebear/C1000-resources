@@ -20,6 +20,20 @@
   --shadow:0 10px 30px rgba(34,48,60,.08);
 }
 *{box-sizing:border-box}
+.skip-link{
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:1000;
+  transform:translateY(-180%);
+  background:#fff;
+  color:var(--ink);
+  border:2px solid var(--accent);
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:800;
+}
+.skip-link:focus{transform:translateY(0);outline:3px solid rgba(108,92,231,.2);outline-offset:2px}
 body{
   margin:0;
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -72,6 +86,7 @@ main{
 }
 .case.active{display:block}
 .case h2{margin-top:0;font-size:1.65rem}
+.case h2:focus,.summary-box:focus{outline:3px solid rgba(108,92,231,.22);outline-offset:5px;border-radius:6px}
 .kicker{
   text-transform:uppercase;
   letter-spacing:.09em;
@@ -204,7 +219,8 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
 </style>
 </head>
 <body>
-<main>
+<a class="skip-link" href="#casework">Skip to the analysis activity</a>
+<main id="casework">
   <section class="hero" aria-labelledby="title">
     <div class="kicker" style="color:#d8d2ff">C1000 / C1000E Writing Lab Game</div>
     <h1 id="title">🔎 The Analysis Detective</h1>
@@ -229,14 +245,14 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
 
   <section class="case active" data-step="0">
     <div class="kicker">Case 1 · Something Doesn't Match</div>
-    <h2>Find the Clue</h2>
+    <h2 tabindex="-1">Find the Clue</h2>
     <p>Your job is not to summarize the whole passage. Find one detail that gives you something to investigate.</p>
 
     <div class="passage">
       Maya checked her phone again. No messages. She placed it facedown on the table, picked it up thirty seconds later, and refreshed the screen. Across the restaurant, her friends were laughing. Maya smiled at something someone said, although she had not heard it.
     </div>
 
-    <p class="question">Which detail is most useful to investigate?</p>
+    <p class="question">Which detail is most useful to investigate? Choose one strong clue.</p>
     <div class="options" data-question="q1">
       <button class="option" type="button" data-correct="false">The scene takes place in a restaurant.</button>
       <button class="option" type="button" data-correct="true">Maya repeatedly checks a phone that has no new messages.</button>
@@ -272,7 +288,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
 
   <section class="case" data-step="1">
     <div class="kicker">Case 2 · Why That Word?</div>
-    <h2>Investigate the Language</h2>
+    <h2 tabindex="-1">Investigate the Language</h2>
     <p>This time, the clue is not an event. It is a word choice.</p>
 
     <div class="passage">
@@ -287,7 +303,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     </div>
     <div class="feedback" id="fb-q4"></div>
 
-    <p class="question">What could that phrase be doing?</p>
+    <p class="question">What could that phrase be doing? Choose one defensible interpretation.</p>
     <div class="options" data-question="q5">
       <button class="option" type="button" data-correct="false">It proves the company is treating workers fairly.</button>
       <button class="option" type="button" data-correct="true">It emphasizes freedom and independence, which may make the work arrangement sound more appealing.</button>
@@ -308,7 +324,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
 
   <section class="case" data-step="2">
     <div class="kicker">Case 3 · What's Missing?</div>
-    <h2>Investigate the Gap</h2>
+    <h2 tabindex="-1">Investigate the Gap</h2>
     <p>Sometimes the most revealing clue is an assumption the writer never says out loud.</p>
 
     <div class="passage">
@@ -324,7 +340,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     </div>
     <div class="feedback" id="fb-q6"></div>
 
-    <p class="question">Why does that missing perspective matter?</p>
+    <p class="question">Why does that missing perspective matter? Choose one strong explanation.</p>
     <div class="options" data-question="q7">
       <button class="option" type="button" data-correct="true">The recommendation assumes students can simply choose to work less, which may not be realistic for everyone.</button>
       <button class="option" type="button" data-correct="false">It proves the writer knows nothing about college students.</button>
@@ -341,7 +357,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
 
   <section class="case" data-step="3">
     <div class="kicker">Final Case · Crack It Yourself</div>
-    <h2>Build the Evidence Board</h2>
+    <h2 tabindex="-1">Build the Evidence Board</h2>
     <p>No multiple choice this time. Use the same detective moves on a new passage.</p>
 
     <div class="passage">
@@ -379,8 +395,8 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
       </div>
     </form>
 
-    <div id="finalResult" class="summary-box hidden" aria-live="polite">
-      <h2 style="margin-top:0">🎉 Case Closed</h2>
+    <div id="finalResult" class="summary-box hidden" aria-live="polite" tabindex="-1">
+      <h3 style="margin-top:0">🎉 Case Closed</h3>
       <p>You just performed textual analysis.</p>
       <p><strong>You noticed:</strong> <span id="outClue"></span></p>
       <p><strong>You connected the details:</strong> <span id="outPattern"></span></p>
@@ -390,6 +406,15 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
         <strong>That is what “go deeper” looks like.</strong>
         <p style="margin-bottom:0">You did not find a hidden answer in the passage. You built an interpretation from evidence.</p>
       </div>
+
+      <div class="callout">
+        <h3 style="margin-top:0">Take the Detective Move to Your Own Reading</h3>
+        <p>Choose one detail from a text you are actually reading for class. You do not need to analyze the whole text. Follow one clue far enough to make a claim about it.</p>
+        <label for="transfer">What did you notice, what might it suggest, and why might it matter?</label>
+        <textarea id="transfer" placeholder="I noticed… This might suggest… This matters because…"></textarea>
+        <p class="small" style="margin-bottom:0">This is not scored. The goal is to carry the method out of the practice passage and into your own reading.</p>
+      </div>
+
       <div class="controls">
         <button class="secondary" type="button" id="restart">Play Again</button>
       </div>
@@ -406,6 +431,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
   const live=document.getElementById('live');
   let current=0;
   let solved=0;
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const requiredByCase = {
     0:['q1','q2','q3'],
@@ -446,6 +472,7 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     const feedback=document.getElementById('fb-'+qid);
     group.querySelectorAll('.option').forEach(btn=>{
       btn.setAttribute('aria-pressed','false');
+      btn.setAttribute('aria-describedby',feedback.id);
       btn.addEventListener('click',()=>{
         group.querySelectorAll('.option').forEach(b=>b.setAttribute('aria-pressed','false'));
         btn.setAttribute('aria-pressed','true');
@@ -463,29 +490,28 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     });
   });
 
+  function moveToCase(nextIndex){
+    cases[current].classList.remove('active');
+    current=nextIndex;
+    cases[current].classList.add('active');
+    updateProgress();
+    const heading=cases[current].querySelector('h2');
+    heading.focus({preventScroll:true});
+    heading.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+  }
+
   document.querySelectorAll('.next').forEach(btn=>{
     btn.addEventListener('click',()=>{
       if(current<cases.length-1){
         if(current<3) solved=Math.max(solved,current+1);
-        cases[current].classList.remove('active');
-        current++;
-        cases[current].classList.add('active');
-        updateProgress();
-        cases[current].querySelector('h2').focus?.();
-        window.scrollTo({top:0,behavior:'smooth'});
+        moveToCase(current+1);
       }
     });
   });
 
   document.querySelectorAll('.back').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      if(current>0){
-        cases[current].classList.remove('active');
-        current--;
-        cases[current].classList.add('active');
-        updateProgress();
-        window.scrollTo({top:0,behavior:'smooth'});
-      }
+      if(current>0) moveToCase(current-1);
     });
   });
 
@@ -494,15 +520,16 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     e.preventDefault();
     const fields=['clue','pattern','inference','sowhat'];
     const values={};
-    let valid=true;
+    let firstMissing=null;
     fields.forEach(id=>{
       const el=document.getElementById(id);
       const value=el.value.trim();
       values[id]=value;
-      if(!value){valid=false;el.focus();}
+      if(!value && !firstMissing) firstMissing=el;
     });
-    if(!valid){
+    if(firstMissing){
       live.textContent='Complete all four parts of the evidence board before closing the case.';
+      firstMissing.focus();
       return;
     }
     document.getElementById('outClue').textContent=values.clue;
@@ -514,7 +541,9 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     scoreText.textContent='Case files solved: 4';
     progressBar.style.width='100%';
     live.textContent='Case closed. You completed the analysis process.';
-    document.getElementById('finalResult').scrollIntoView({behavior:'smooth',block:'start'});
+    const result=document.getElementById('finalResult');
+    result.focus({preventScroll:true});
+    result.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
   });
 
   document.getElementById('restart').addEventListener('click',()=>{
@@ -534,7 +563,9 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
     cases.forEach(c=>c.classList.remove('active'));
     cases[0].classList.add('active');
     updateProgress();
-    window.scrollTo({top:0,behavior:'smooth'});
+    const firstHeading=cases[0].querySelector('h2');
+    firstHeading.focus({preventScroll:true});
+    firstHeading.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
   });
 
   updateProgress();
