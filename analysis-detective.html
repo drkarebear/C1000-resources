@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Analysis Detective: Crack the Case</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --ink:#22303c;
+  --muted:#5d6872;
+  --card:#ffffff;
+  --line:#d8d2c4;
+  --accent:#6c5ce7;
+  --accent2:#1f8a70;
+  --warn:#b85c38;
+  --soft:#ece9ff;
+  --good:#e7f6ef;
+  --bad:#fff1ec;
+  --shadow:0 10px 30px rgba(34,48,60,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.55;
+}
+main{
+  max-width:920px;
+  margin:0 auto;
+  padding:24px 16px 56px;
+}
+.hero{
+  background:linear-gradient(135deg,#2b2d42,#3a405a);
+  color:white;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:0 0 10px}
+.hero p{margin:0;max-width:740px;font-size:1.05rem}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:.92rem;
+}
+.progress-wrap{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:18px;
+}
+.progress-label{display:flex;justify-content:space-between;gap:12px;font-weight:700}
+.progress{
+  height:10px;background:#e8e5dd;border-radius:999px;overflow:hidden;margin-top:8px
+}
+.progress > div{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.case{
+  display:none;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.case.active{display:block}
+.case h2{margin-top:0;font-size:1.65rem}
+.kicker{
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-size:.8rem;
+  font-weight:800;
+  color:var(--accent);
+}
+.passage{
+  background:#fbfaf7;
+  border-left:5px solid var(--accent2);
+  padding:18px;
+  border-radius:10px;
+  margin:18px 0;
+  font-size:1.06rem;
+}
+.question{
+  margin:22px 0 10px;
+  font-weight:800;
+  font-size:1.12rem;
+}
+.options{
+  display:grid;
+  gap:10px;
+}
+.option{
+  width:100%;
+  text-align:left;
+  border:2px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  padding:14px 16px;
+  border-radius:12px;
+  font-size:1rem;
+  cursor:pointer;
+  min-height:48px;
+}
+.option:hover,.option:focus-visible{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15);outline-offset:2px}
+.option[aria-pressed="true"]{border-color:var(--accent);background:var(--soft)}
+.feedback{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:12px;
+  display:none;
+}
+.feedback.show{display:block}
+.feedback.good{background:var(--good);border-left:5px solid var(--accent2)}
+.feedback.bad{background:var(--bad);border-left:5px solid var(--warn)}
+.controls{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+}
+button.primary,button.secondary{
+  border:none;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:800;
+  font-size:1rem;
+  min-height:46px;
+  cursor:pointer;
+}
+button.primary{background:var(--accent);color:white}
+button.secondary{background:#e9e5da;color:var(--ink)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.detective-board{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:18px 0;
+}
+.board-step{
+  border:1px dashed #a8a293;
+  border-radius:12px;
+  padding:12px;
+  background:#fbfaf7;
+  min-width:0;
+}
+.board-step strong{display:block;margin-bottom:4px}
+.impostor{
+  border:2px solid #d96c52;
+  background:#fff4ef;
+  border-radius:14px;
+  padding:16px;
+  margin:18px 0;
+}
+.callout{
+  background:#f0f6f5;
+  border-left:5px solid var(--accent2);
+  padding:16px;
+  border-radius:10px;
+  margin:18px 0;
+}
+.final-grid{
+  display:grid;
+  gap:14px;
+}
+label{font-weight:800;display:block;margin-bottom:6px}
+textarea{
+  width:100%;
+  min-height:92px;
+  padding:12px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  font:inherit;
+  resize:vertical;
+}
+textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)}
+.summary-box{
+  background:var(--soft);
+  border-radius:14px;
+  padding:18px;
+  margin-top:18px;
+}
+.hidden{display:none!important}
+.small{font-size:.93rem;color:var(--muted)}
+@media(max-width:700px){
+  .detective-board{grid-template-columns:1fr 1fr}
+  .hero{padding:22px}
+}
+@media(max-width:480px){
+  .detective-board{grid-template-columns:1fr}
+  .controls{justify-content:stretch}
+  .controls button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="title">
+    <div class="kicker" style="color:#d8d2ff">C1000 / C1000E Writing Lab Game</div>
+    <h1 id="title">🔎 The Analysis Detective</h1>
+    <p><strong>Crack the Case:</strong> You already read the text. Now your job is to figure out what the details might reveal.</p>
+    <div class="badge-row" aria-label="Skills practiced">
+      <span class="badge">Find a clue</span>
+      <span class="badge">Spot a pattern</span>
+      <span class="badge">Make an inference</span>
+      <span class="badge">Answer “So what?”</span>
+    </div>
+  </section>
+
+  <section class="progress-wrap" aria-label="Game progress">
+    <div class="progress-label">
+      <span id="progressText">Case 1 of 4</span>
+      <span id="scoreText">Case files solved: 0</span>
+    </div>
+    <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+  </section>
+
+  <div id="live" class="small" aria-live="polite"></div>
+
+  <section class="case active" data-step="0">
+    <div class="kicker">Case 1 · Something Doesn't Match</div>
+    <h2>Find the Clue</h2>
+    <p>Your job is not to summarize the whole passage. Find one detail that gives you something to investigate.</p>
+
+    <div class="passage">
+      Maya checked her phone again. No messages. She placed it facedown on the table, picked it up thirty seconds later, and refreshed the screen. Across the restaurant, her friends were laughing. Maya smiled at something someone said, although she had not heard it.
+    </div>
+
+    <p class="question">Which detail is most useful to investigate?</p>
+    <div class="options" data-question="q1">
+      <button class="option" type="button" data-correct="false">The scene takes place in a restaurant.</button>
+      <button class="option" type="button" data-correct="true">Maya repeatedly checks a phone that has no new messages.</button>
+      <button class="option" type="button" data-correct="false">Maya's friends are laughing.</button>
+      <button class="option" type="button" data-correct="true">Maya smiles even though she did not hear what her friend said.</button>
+    </div>
+    <div class="feedback" id="fb-q1"></div>
+
+    <p class="question">Now look at the clues together. What pattern do they create?</p>
+    <div class="options" data-question="q2">
+      <button class="option" type="button" data-correct="false">Maya is eating dinner.</button>
+      <button class="option" type="button" data-correct="false">Phones appear several times.</button>
+      <button class="option" type="button" data-correct="true">Maya is physically with other people but seems mentally somewhere else.</button>
+      <button class="option" type="button" data-correct="false">Maya should stop using her phone.</button>
+    </div>
+    <div class="feedback" id="fb-q2"></div>
+
+    <div class="impostor">
+      <strong>🚨 Summary Impostor Alert</strong>
+      <p>“Maya is at dinner with her friends and keeps checking her phone.”</p>
+      <p class="question">Is this analysis?</p>
+      <div class="options" data-question="q3">
+        <button class="option" type="button" data-correct="false">Yes — it tells us what the passage is about.</button>
+        <button class="option" type="button" data-correct="true">No — it reports what happened but does not explain what the details might mean.</button>
+      </div>
+      <div class="feedback" id="fb-q3"></div>
+    </div>
+
+    <div class="controls">
+      <button class="primary next" type="button" disabled>Close Case 1</button>
+    </div>
+  </section>
+
+  <section class="case" data-step="1">
+    <div class="kicker">Case 2 · Why That Word?</div>
+    <h2>Investigate the Language</h2>
+    <p>This time, the clue is not an event. It is a word choice.</p>
+
+    <div class="passage">
+      A delivery company describes its drivers as “independent partners” who have the freedom to choose when they work. Drivers use their own cars, pay for their own gas, and receive no guaranteed number of hours each week.
+    </div>
+
+    <p class="question">Which phrase deserves investigation?</p>
+    <div class="options" data-question="q4">
+      <button class="option" type="button" data-correct="true">“independent partners”</button>
+      <button class="option" type="button" data-correct="false">“their own cars”</button>
+      <button class="option" type="button" data-correct="false">“each week”</button>
+    </div>
+    <div class="feedback" id="fb-q4"></div>
+
+    <p class="question">What could that phrase be doing?</p>
+    <div class="options" data-question="q5">
+      <button class="option" type="button" data-correct="false">It proves the company is treating workers fairly.</button>
+      <button class="option" type="button" data-correct="true">It emphasizes freedom and independence, which may make the work arrangement sound more appealing.</button>
+      <button class="option" type="button" data-correct="true">It may shift attention away from the costs and risks the drivers carry themselves.</button>
+      <button class="option" type="button" data-correct="false">It means the drivers legally own part of the company.</button>
+    </div>
+    <div class="feedback" id="fb-q5"></div>
+
+    <div class="callout">
+      <strong>Detective Rule:</strong> More than one interpretation can be defensible. What matters is whether you can connect it back to evidence.
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Close Case 2</button>
+    </div>
+  </section>
+
+  <section class="case" data-step="2">
+    <div class="kicker">Case 3 · What's Missing?</div>
+    <h2>Investigate the Gap</h2>
+    <p>Sometimes the most revealing clue is an assumption the writer never says out loud.</p>
+
+    <div class="passage">
+      College students should work no more than fifteen hours per week. Students who work less have more time to study, attend office hours, and participate in campus life. Colleges should encourage all students to reduce their work schedules during the semester.
+    </div>
+
+    <p class="question">What important complication is missing from the argument?</p>
+    <div class="options" data-question="q6">
+      <button class="option" type="button" data-correct="false">Some students do not like office hours.</button>
+      <button class="option" type="button" data-correct="true">Some students work because they need income for rent, food, transportation, or family responsibilities.</button>
+      <button class="option" type="button" data-correct="false">Some college campuses have clubs.</button>
+      <button class="option" type="button" data-correct="false">Some students study in the morning.</button>
+    </div>
+    <div class="feedback" id="fb-q6"></div>
+
+    <p class="question">Why does that missing perspective matter?</p>
+    <div class="options" data-question="q7">
+      <button class="option" type="button" data-correct="true">The recommendation assumes students can simply choose to work less, which may not be realistic for everyone.</button>
+      <button class="option" type="button" data-correct="false">It proves the writer knows nothing about college students.</button>
+      <button class="option" type="button" data-correct="true">The argument may sound reasonable while overlooking the financial realities that shape some students' choices.</button>
+      <button class="option" type="button" data-correct="false">It means students should always work more hours.</button>
+    </div>
+    <div class="feedback" id="fb-q7"></div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Open Final Case</button>
+    </div>
+  </section>
+
+  <section class="case" data-step="3">
+    <div class="kicker">Final Case · Crack It Yourself</div>
+    <h2>Build the Evidence Board</h2>
+    <p>No multiple choice this time. Use the same detective moves on a new passage.</p>
+
+    <div class="passage">
+      The college library recently extended its evening hours, describing the change as an effort to make campus resources more accessible. The announcement celebrates the extra study time but does not mention transportation. The final bus serving the campus leaves shortly after 8:00 p.m., while the library now remains open until 10:00 p.m.
+    </div>
+
+    <div class="detective-board" aria-label="Analysis process">
+      <div class="board-step"><strong>🔎 Clue</strong><span>What catches your attention?</span></div>
+      <div class="board-step"><strong>🧩 Pattern</strong><span>What do the details reveal together?</span></div>
+      <div class="board-step"><strong>💭 Inference</strong><span>What might that suggest?</span></div>
+      <div class="board-step"><strong>💥 So What?</strong><span>Why might it matter?</span></div>
+    </div>
+
+    <form id="finalForm" class="final-grid">
+      <div>
+        <label for="clue">🔎 Clue: What detail caught your attention?</label>
+        <textarea id="clue" required placeholder="Example: I noticed that..."></textarea>
+      </div>
+      <div>
+        <label for="pattern">🧩 Pattern: What do you notice when you put the details together?</label>
+        <textarea id="pattern" required placeholder="The details seem to show..."></textarea>
+      </div>
+      <div>
+        <label for="inference">💭 Inference: What might that suggest?</label>
+        <textarea id="inference" required placeholder="This might suggest..."></textarea>
+      </div>
+      <div>
+        <label for="sowhat">💥 So What? Why could this matter?</label>
+        <textarea id="sowhat" required placeholder="This matters because..."></textarea>
+      </div>
+
+      <div class="controls">
+        <button class="secondary back" type="button">Back</button>
+        <button class="primary" type="submit">Crack the Case</button>
+      </div>
+    </form>
+
+    <div id="finalResult" class="summary-box hidden" aria-live="polite">
+      <h2 style="margin-top:0">🎉 Case Closed</h2>
+      <p>You just performed textual analysis.</p>
+      <p><strong>You noticed:</strong> <span id="outClue"></span></p>
+      <p><strong>You connected the details:</strong> <span id="outPattern"></span></p>
+      <p><strong>You inferred:</strong> <span id="outInference"></span></p>
+      <p><strong>You explained why it matters:</strong> <span id="outSoWhat"></span></p>
+      <div class="callout">
+        <strong>That is what “go deeper” looks like.</strong>
+        <p style="margin-bottom:0">You did not find a hidden answer in the passage. You built an interpretation from evidence.</p>
+      </div>
+      <div class="controls">
+        <button class="secondary" type="button" id="restart">Play Again</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const cases=[...document.querySelectorAll('.case')];
+  const progressBar=document.getElementById('progressBar');
+  const progressText=document.getElementById('progressText');
+  const scoreText=document.getElementById('scoreText');
+  const live=document.getElementById('live');
+  let current=0;
+  let solved=0;
+
+  const requiredByCase = {
+    0:['q1','q2','q3'],
+    1:['q4','q5'],
+    2:['q6','q7']
+  };
+
+  const correctMessage = {
+    q1:'Good clue. Both of these details create something worth investigating.',
+    q2:'Exactly. You moved from isolated details to a pattern.',
+    q3:'Busted. Summary tells what happened; analysis asks what the details might mean.',
+    q4:'Yes. “Independent partners” is loaded language worth examining.',
+    q5:'Strong inference. Both of these interpretations are defensible because they connect to the wording and the surrounding details.',
+    q6:'Exactly. The recommendation leaves out the fact that work hours are not always optional.',
+    q7:'Yes. A missing perspective can reveal an assumption inside an argument.'
+  };
+
+  const tryAgain = 'Not quite. Look for the option that moves beyond a surface fact and gives you something you could investigate.';
+
+  function updateProgress(){
+    progressBar.style.width=((current+1)/cases.length*100)+'%';
+    progressText.textContent=`Case ${current+1} of ${cases.length}`;
+    scoreText.textContent=`Case files solved: ${solved}`;
+  }
+
+  function checkCaseComplete(caseIndex){
+    const ids=requiredByCase[caseIndex]||[];
+    const done=ids.every(id=>{
+      const group=document.querySelector(`[data-question="${id}"]`);
+      return group && group.dataset.correctDone==='true';
+    });
+    const next=cases[caseIndex].querySelector('.next');
+    if(next) next.disabled=!done;
+  }
+
+  document.querySelectorAll('[data-question]').forEach(group=>{
+    const qid=group.dataset.question;
+    const feedback=document.getElementById('fb-'+qid);
+    group.querySelectorAll('.option').forEach(btn=>{
+      btn.setAttribute('aria-pressed','false');
+      btn.addEventListener('click',()=>{
+        group.querySelectorAll('.option').forEach(b=>b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        const ok=btn.dataset.correct==='true';
+        feedback.className='feedback show '+(ok?'good':'bad');
+        feedback.textContent=ok ? correctMessage[qid] : tryAgain;
+        if(ok){
+          group.dataset.correctDone='true';
+          live.textContent='Correct. '+correctMessage[qid];
+        }else{
+          live.textContent='Try again. '+tryAgain;
+        }
+        checkCaseComplete(current);
+      });
+    });
+  });
+
+  document.querySelectorAll('.next').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(current<cases.length-1){
+        if(current<3) solved=Math.max(solved,current+1);
+        cases[current].classList.remove('active');
+        current++;
+        cases[current].classList.add('active');
+        updateProgress();
+        cases[current].querySelector('h2').focus?.();
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    });
+  });
+
+  document.querySelectorAll('.back').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(current>0){
+        cases[current].classList.remove('active');
+        current--;
+        cases[current].classList.add('active');
+        updateProgress();
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    });
+  });
+
+  const finalForm=document.getElementById('finalForm');
+  finalForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    const fields=['clue','pattern','inference','sowhat'];
+    const values={};
+    let valid=true;
+    fields.forEach(id=>{
+      const el=document.getElementById(id);
+      const value=el.value.trim();
+      values[id]=value;
+      if(!value){valid=false;el.focus();}
+    });
+    if(!valid){
+      live.textContent='Complete all four parts of the evidence board before closing the case.';
+      return;
+    }
+    document.getElementById('outClue').textContent=values.clue;
+    document.getElementById('outPattern').textContent=values.pattern;
+    document.getElementById('outInference').textContent=values.inference;
+    document.getElementById('outSoWhat').textContent=values.sowhat;
+    document.getElementById('finalResult').classList.remove('hidden');
+    solved=4;
+    scoreText.textContent='Case files solved: 4';
+    progressBar.style.width='100%';
+    live.textContent='Case closed. You completed the analysis process.';
+    document.getElementById('finalResult').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  document.getElementById('restart').addEventListener('click',()=>{
+    solved=0;
+    current=0;
+    document.querySelectorAll('[data-question]').forEach(group=>{
+      delete group.dataset.correctDone;
+      group.querySelectorAll('.option').forEach(b=>b.setAttribute('aria-pressed','false'));
+    });
+    document.querySelectorAll('.feedback').forEach(f=>{
+      f.className='feedback';
+      f.textContent='';
+    });
+    document.querySelectorAll('.next').forEach(b=>b.disabled=true);
+    document.querySelectorAll('textarea').forEach(t=>t.value='');
+    document.getElementById('finalResult').classList.add('hidden');
+    cases.forEach(c=>c.classList.remove('active'));
+    cases[0].classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
