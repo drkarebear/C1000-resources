@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professor Comment Decoder</title>
+<meta name="description" content="An accessible, first-gen-friendly college writing lab for turning instructor feedback into useful revision decisions.">
+<style>
+:root{
+ --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
+ --blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;
+ --gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;
+ --max:1040px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button{font:inherit}button:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;border:2px solid #000;padding:10px;z-index:99}.skip:focus{left:8px}
+.shell{width:min(calc(100% - 22px),var(--max));margin:auto;padding:20px 0 50px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,63,82,.07)}
+h1,h2,h3{line-height:1.18;color:var(--dark)}h1{font-size:clamp(2.15rem,7vw,3.45rem);margin:.1em 0 .2em}h2{font-size:clamp(1.45rem,4vw,2rem)}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.85rem;color:var(--blue);margin:0}.lead{font-size:1.14rem}
+.callout,.secret,.decoded,.warning,.reader{padding:16px;border-radius:14px;margin:14px 0}
+.callout{background:var(--goldbg);border-left:5px solid var(--gold)}.secret{background:#f8f3fb;border:2px dashed var(--purple)}
+.decoded{background:var(--greenbg);border:2px solid var(--green)}.warning{background:var(--rosebg);border:2px solid var(--rose)}.reader{background:var(--soft);border:2px solid var(--blue)}
+.pills,.row,.chips{display:flex;flex-wrap:wrap;gap:9px}.pills{margin:15px 0}.pill,.stage,.chip{border-radius:999px;padding:6px 11px;font-size:.89rem;font-weight:800}.pill{border:1px solid var(--line);color:var(--muted)}.stage{display:inline-flex;background:var(--soft);color:var(--blue)}.chip{background:#fff;border:1px solid var(--line)}
+.row{margin-top:18px}button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}.quiet{background:#edf1f5;color:var(--ink)}
+.progressline{display:flex;justify-content:space-between;gap:10px;font-size:.92rem;font-weight:800;color:var(--muted)}.track{height:12px;background:#e5ebf0;border-radius:999px;overflow:hidden;margin:7px 0 20px}.bar{height:100%;width:0;background:var(--blue)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:18px;align-items:start}.side{position:sticky;top:10px;background:#fbfcfd;border:1px solid var(--line);border-radius:14px;padding:15px}
+.machine{border:4px solid var(--blue);border-radius:18px;background:#f8fbfd;padding:18px;text-align:center}.screen{background:#fff;border:2px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;text-align:left}.input{font-size:clamp(1.8rem,6vw,3rem);font-weight:900;color:var(--rose);text-align:center}.processing{font-family:monospace;font-weight:900;color:var(--blue)}
+.case{border:2px solid var(--line);border-radius:14px;padding:17px;margin:14px 0;background:#fff}.comment{display:inline-block;background:var(--goldbg);border:2px solid var(--gold);border-radius:8px;padding:5px 9px;font-weight:900;transform:rotate(-1deg)}
+.question{font-size:1.16rem;font-weight:900}.choices{display:grid;gap:10px}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink);padding:14px 16px}.choice.selected{background:var(--greenbg);border-color:var(--green)}
+.feedback{display:none;border:2px solid var(--blue);background:var(--soft);border-radius:12px;padding:15px;margin-top:15px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}.feedback strong{display:block}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:11px}.sample{border:2px solid var(--line);border-radius:13px;padding:14px}.sample h3{margin-top:0}
+.translator{display:grid;grid-template-columns:145px 1fr;gap:9px;border-bottom:1px solid var(--line);padding:10px 0}.translator:last-child{border-bottom:0}.translator strong{color:var(--blue)}
+.patterns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.pattern{border:2px solid var(--line);border-radius:13px;padding:14px;text-align:center}.num{font-size:2.3rem;font-weight:900;color:var(--blue)}
+.email{background:#fff;border:2px solid var(--line);border-radius:13px;padding:16px}.email p{margin:.4em 0}
+.agency{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.agency div{border:2px solid var(--line);border-radius:12px;padding:12px}.agency strong{color:var(--blue)}
+.toolkit{display:grid;gap:8px}.tool{border:2px solid var(--line);border-radius:12px;padding:12px}.tool strong{color:var(--blue)}
+.completion{border:4px solid var(--blue);border-radius:18px;padding:clamp(20px,4vw,30px);background:#fff}.complete{color:var(--green);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.completegrid{display:grid;grid-template-columns:1fr auto;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;margin:16px 0}.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}
+.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}.patterns{grid-template-columns:1fr}}
+@media(max-width:600px){body{font-size:17px}.shell{width:min(calc(100% - 14px),var(--max));padding-top:9px}.card{padding:19px 15px}.twocol,.agency{grid-template-columns:1fr}.translator,.completegrid{grid-template-columns:1fr;gap:3px}.row{display:grid}.row button{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card">
+ <p class="eyebrow">ENGL C1000 · The unwritten rules</p>
+ <h1>💬 Professor Comment Decoder</h1>
+ <p class="lead"><strong>“Develop.” Cool. What do I actually do?</strong></p>
+ <div class="callout">Instructor comments are often <strong>compressed messages</strong>: “unclear,” “develop,” “focus,” “awk.,” “so what?” A professor may know what those words mean in context. A student may reasonably see only a mystery.</div>
+ <div class="secret">🔓 <strong>Unwritten Rule:</strong> Feedback usually needs interpretation before it needs obedience. Look at the comment <em>and</em> the writing around it to decide what your reader may need.</div>
+ <div class="pills"><span class="pill">20 decoder missions</span><span class="pill">Translator 3000™</span><span class="pill">Same Comment, Different Problem</span><span class="pill">Find the Pattern</span><span class="pill">Ask the Professor</span></div>
+ <div class="row"><button id="start" class="primary" type="button">⚙️ Start the Decoder</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+ <div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+ <span id="stage" class="stage"></span>
+ <div class="layout">
+  <div>
+   <div id="host"></div>
+   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+   <div class="row"><button id="next" class="primary hidden" type="button">Next Comment</button></div>
+  </div>
+  <aside class="side">
+   <h3>🔦 Decoder Questions</h3>
+   <p><strong>1.</strong> Where did the reader comment?</p>
+   <p><strong>2.</strong> What happened for the reader there?</p>
+   <p><strong>3.</strong> Is this local or a pattern?</p>
+   <p><strong>4.</strong> What revision move might help?</p>
+   <p><strong>5.</strong> Do I need clarification?</p>
+  </aside>
+ </div>
+</section>
+
+<section id="done" class="card hidden">
+ <div class="decoded"><h2>⚙️ Decoder Online</h2><p><strong>A comment is information. Your job is to interpret it, look at the writing, notice patterns, and make a revision decision.</strong></p></div>
+ <h2>💬 My Feedback Decoder</h2>
+ <div class="toolkit">
+  <div class="tool"><strong>LOCATE</strong> — Where exactly did my reader have this response?</div>
+  <div class="tool"><strong>TRANSLATE</strong> — What might the comment mean in this context?</div>
+  <div class="tool"><strong>DIAGNOSE</strong> — Evidence? Analysis? Focus? Organization? Clarity? Convention?</div>
+  <div class="tool"><strong>LOOK FOR PATTERNS</strong> — Does this comment or problem repeat?</div>
+  <div class="tool"><strong>CHOOSE</strong> — What do I want to keep, adapt, add, move, cut, or clarify?</div>
+  <div class="tool"><strong>ASK</strong> — If I still can't tell what the feedback means, ask a specific question.</div>
+ </div>
+ <div class="machine" style="margin-top:20px">
+  <h2>🆘 Comment Decoder 3000™</h2>
+  <p>Choose a common comment to see possible meanings—not automatic instructions.</p>
+  <div class="chips" id="decoderButtons"></div>
+  <div id="decoderOutput" class="screen" aria-live="polite">Choose a comment above.</div>
+ </div>
+ <div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Feedback Decoder</button></div>
+ <div id="completionCard" class="completion" style="margin-top:24px">
+  <div class="complete">✓ Lab complete</div>
+  <h2>Professor Comment Decoder — Complete</h2>
+  <div class="completegrid">
+   <span>Translate common instructor shorthand</span><strong>✓ Complete</strong>
+   <span>Use the surrounding writing to interpret feedback</span><strong>✓ Complete</strong>
+   <span>Recognize that the same comment can signal different needs</span><strong>✓ Complete</strong>
+   <span>Distinguish local comments from recurring patterns</span><strong>✓ Complete</strong>
+   <span>Respond to feedback without automatically erasing voice</span><strong>✓ Complete</strong>
+   <span>Ask a specific clarification question when needed</span><strong>✓ Complete</strong>
+  </div>
+  <p><strong>Completed:</strong> <span id="date"></span></p>
+  <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+ </div>
+ <div class="row"><button id="restart" class="quiet" type="button">Decode Again</button></div>
+</section>
+<footer>Progress stays in this browser. This lab does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id),KEY="professorCommentDecoderV1";let i=0;
+const common={
+"Develop":"Your reader may need more evidence, an example, explanation, reasoning, context, or a clearer connection. Look at the paragraph before deciding which.",
+"Unclear":"Your reader lost the thread somewhere here. Find the exact point where meaning became hard to follow; then decide whether context, wording, organization, or a missing connection is the issue.",
+"Analyze":"Your reader may be asking to see more of your thinking: what the evidence shows, how it connects, why it matters, or how it complicates the claim.",
+"So what?":"Usually: help me understand the significance. Why does this observation matter to your argument?",
+"Be specific":"The reader may need a more precise claim, example, reference, description, or relationship. It does not automatically mean “make the sentence longer.”",
+"Awk.":"The reader experienced friction in the sentence. First recover what you meant; then decide whether sentence structure, wording, missing context, or something else made it difficult to follow.",
+"Transition?":"The relationship between ideas may not be visible yet. Identify the relationship first; then decide whether a transition word, phrase, sentence, or structural change would help.",
+"Focus":"The reader may see competing ideas, a paragraph doing too many jobs, or a claim whose boundaries are unclear.",
+"Evidence?":"The reader may need support for a factual claim, an example, a source, or clearer indication of where information came from.",
+"Proofread":"The reader may be noticing recurring surface-level issues. Look for a pattern rather than staring at the page hoping to catch everything."
+};
+const M=[
+["1 · Feedback Has Arrived","arrival"],
+["2 · Comment ≠ Complete Instruction","compressed"],
+["3 · Translator 3000™: DEVELOP","develop"],
+["4 · Same Comment, Different Problem","different"],
+["5 · Diagnose “Develop”","choice","Paragraph A makes a strong claim but gives no example or source.","The professor writes “Develop.” What might this paragraph need?",[
+["Evidence, an example, or support for the claim.",1,"Yes. Here, “develop” may point toward support."],
+["Automatically make every sentence longer.",0,"Length does not diagnose the missing piece."],
+["Change the font.",0,"Typography does not supply support."],
+["Add “Furthermore.”",0,"A transition does not create evidence."]
+]],
+["6 · Diagnose “Develop” Again","choice","Paragraph B already contains two quotations, but the writer moves from one quotation directly to the next.","The professor also writes “Develop.” What might this paragraph need?",[
+["More explanation of what the existing evidence shows and why it matters.",1,"Exactly. Same comment, different problem."],
+["A third quotation automatically.",0,"That could create even more unexplained evidence."],
+["A longer title.",0,"The comment is attached to the paragraph's development."],
+["More formal vocabulary.",0,"Diction does not replace reasoning."]
+]],
+["7 · “Unclear”","unclear"],
+["8 · “Awk.”","awk"],
+["9 · “Be Specific”","specific"],
+["10 · “Transition?”","transition"],
+["11 · “So What?”","sowhat"],
+["12 · “Analyze”","analyze"],
+["13 · Comment or Command?","agency"],
+["14 · Voice Is Not an Error","voice"],
+["15 · Find the Pattern","pattern"],
+["16 · Seventeen Comments","seventeen"],
+["17 · Ask the Professor","ask"],
+["18 · Build a Better Question","choice","You genuinely cannot tell what “develop” means beside one paragraph. Which question is most useful?",[
+["“When you wrote ‘develop’ here, were you looking for more evidence, more explanation of the evidence I already have, or something else?”",1,"Yes. It names the location and gives the professor a concrete question to answer."],
+["“What do you want?”",0,"Understandable, but too broad to make clarification easy."],
+["“Is my whole paper bad?”",0,"That turns a local revision question into a verdict about the entire paper."],
+["Say nothing and guess.",0,"Guessing is not required when clarification is available."]
+]],
+["19 · Final Boss: Feedback Avalanche","boss"],
+["20 · Feedback Is Information","finish"]
+];
+function save(done=false){localStorage.setItem(KEY,JSON.stringify({i,done}))}
+function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
+function choiceUI(opts){let d=document.createElement("div");d.className="choices";opts.forEach(([label,good,msg])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=label;b.onclick=()=>{if(good){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");fb("⚙️ Useful translation.",msg)}else{b.disabled=true;fb("Decoder says: look again.",msg+" Try another interpretation.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){
+let m=M[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Comment";
+$("ptext").textContent=`Decoder mission ${i+1} of ${M.length}`;$("pct").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";$("stage").textContent=m[0];
+
+if(m[1]==="arrival"){$("host").innerHTML=`<div class="case"><h2>📄 Feedback has arrived.</h2><p><span class="comment">Develop.</span> &nbsp; <span class="comment">Unclear.</span> &nbsp; <span class="comment">So what?</span> &nbsp; <span class="comment">Awk.</span></p><p style="font-size:1.25rem"><strong>😐 Okay. What am I supposed to DO with that?</strong></p></div><div class="secret">🔓 College feedback often uses shorthand that assumes you already know the longer conversation behind the comment.</div>`;fb("Decoder needed.","A short comment may describe a reader response without fully explaining the revision move.")}
+if(m[1]==="compressed"){$("host").innerHTML=`<h2>🗜️ Comments Are Compressed Messages</h2><div class="translator"><strong>COMMENT</strong><span>What the professor typed.</span></div><div class="translator"><strong>CONTEXT</strong><span>Where the comment appears and what the writing is doing there.</span></div><div class="translator"><strong>READER EXPERIENCE</strong><span>What may have happened for the reader.</span></div><div class="translator"><strong>REVISION DECISION</strong><span>What you decide to do after considering all three.</span></div><div class="secret">🔓 <strong>Feedback usually needs interpretation before action.</strong></div>`;fb("Message expanded.","The comment alone may not tell you the treatment.")}
+if(m[1]==="develop"){$("host").innerHTML=`<div class="machine"><h2>⚙️ COMMENT TRANSLATOR 3000™</h2><div class="screen input">DEVELOP</div><div class="processing">PROCESSING... MULTIPLE POSSIBLE MEANINGS DETECTED</div><div class="screen"><strong>Your reader might need:</strong><p>• another example<br>• more evidence<br>• explanation of existing evidence<br>• more reasoning<br>• context<br>• a clearer connection to the claim</p></div></div><div class="warning"><strong>🚨 “Develop” does NOT automatically mean “make the paragraph longer.”</strong></div>`;fb("Translation requires context.","Look at what the paragraph already has before deciding what development means here.")}
+if(m[1]==="different"){$("host").innerHTML=`<h2>🧪 Same Comment. Different Problem.</h2><div class="twocol"><div class="sample"><h3>Paragraph A</h3><p><strong>Claim:</strong> Evening service hours can limit access for working students.</p><p><em>No example or evidence follows.</em></p><span class="comment">Develop.</span><p>Possible need: <strong>support.</strong></p></div><div class="sample"><h3>Paragraph B</h3><p><strong>Claim + statistic + quotation + citation.</strong></p><p><em>Then the paragraph ends.</em></p><span class="comment">Develop.</span><p>Possible need: <strong>analysis/explanation.</strong></p></div></div>`;fb("Same word ≠ same revision.","Feedback makes more sense when you read the comment together with the writing.")}
+if(m[1]==="choice"){$("host").innerHTML=`<div class="case"><p>${m[2]}</p><p><span class="comment">Develop.</span></p></div><p class="question">${m[3]}</p>`;if(i===17)$("host").innerHTML=`<div class="case"><p>${m[2]}</p></div><p class="question">${m[3]}</p>`;$("host").appendChild(choiceUI(m[4]))}
+if(m[1]==="unclear"){$("host").innerHTML=`<h2>🔦 “Unclear”</h2><div class="warning"><strong>Unhelpful translation:</strong> “I am a confusing writer.”</div><div class="decoded"><strong>More useful translation:</strong> “My reader lost the thread somewhere here.”</div><p>Now locate the break:</p><div class="chips"><span class="chip">Missing context?</span><span class="chip">Unclear reference?</span><span class="chip">Idea jumped?</span><span class="chip">Sentence hard to follow?</span><span class="chip">Connection missing?</span></div>`;fb("Locate before rewriting.","“Unclear” is a reader response. Your next job is to find where and why the thread became difficult to follow.")}
+if(m[1]==="awk"){$("host").innerHTML=`<h2>😬 “Awk.”</h2><div class="callout"><strong>It does not mean:</strong> “This is bad English.”</div><div class="reader"><strong>Reader information:</strong> Something about this sentence created friction for this reader.</div><p>Try:</p><p><strong>1.</strong> What was I trying to say?<br><strong>2.</strong> Can I say that clearly in my own words?<br><strong>3.</strong> Is the problem structure, wording, missing context, or something else?<br><strong>4.</strong> What revision preserves my meaning?</p>`;fb("Meaning first.","Recover the idea before trying to make the sentence sound more “academic.”")}
+if(m[1]==="specific"){$("host").innerHTML=`<h2>🎯 “Be Specific”</h2><div class="machine"><div class="screen input" style="font-size:2rem">BE SPECIFIC</div><div class="screen"><strong>Could mean:</strong><p>Which students? Which policy? What kind of effect? What example? What part of the text? Which reason? What exact relationship?</p></div></div><div class="warning"><strong>🚨 Specific ≠ automatically longer.</strong><br>Precision can sometimes make a sentence shorter.</div>`;fb("Precision, not padding.","Ask what exact information the reader is missing.")}
+if(m[1]==="transition"){$("host").innerHTML=`<h2>🔗 “Transition?”</h2><div class="callout"><strong>Student response:</strong> Adds “Furthermore.”</div><div class="machine"><div class="screen"><strong>DECODER:</strong><p>First identify the relationship:</p><p>Addition? Contrast? Cause/effect? Example? Complication? Problem → solution? Time/order?</p></div></div><div class="secret">🔓 A transition word cannot create a relationship that the ideas themselves do not have.</div>`;fb("Relationship first; wording second.","Sometimes the fix is a word. Sometimes it is a sentence, reordered material, or a clearer logical connection.")}
+if(m[1]==="sowhat"){$("host").innerHTML=`<h2>💡 “So what?”</h2><div class="warning"><strong>Student hears:</strong> “My professor doesn't care about my idea.”</div><div class="decoded"><strong>Possible translation:</strong> “Help me understand why this observation matters to your argument.”</div><p>Try asking: <strong>What changes if my reader accepts this point? Why is this worth noticing here?</strong></p>`;fb("Significance requested.","A terse comment can feel evaluative even when the underlying request is for more reasoning.")}
+if(m[1]==="analyze"){$("host").innerHTML=`<h2>🧠 “Analyze”</h2><div class="reader"><p>Your reader may need to see more of the thinking between <strong>evidence</strong> and <strong>claim</strong>.</p></div><div class="chips"><span class="chip">What do I notice?</span><span class="chip">What might it mean?</span><span class="chip">How does it connect?</span><span class="chip">Why?</span><span class="chip">How?</span><span class="chip">So what?</span><span class="chip">What complicates it?</span></div><div class="secret">🔓 Adding another quotation is not automatically adding analysis.</div>`;fb("Thinking move needed.","Use a concrete analysis question instead of trying to “sound deeper.”")}
+if(m[1]==="agency"){$("host").innerHTML=`<h2>🚦 Comment or Command?</h2><div class="reader"><strong>Feedback tells you something about a reader's experience.</strong></div><div class="agency"><div><strong>KEEP</strong><br>What is already doing useful work?</div><div><strong>ADAPT</strong><br>What could change to serve this reader/purpose better?</div><div><strong>QUESTION</strong><br>What do I need to understand before revising?</div></div><div class="secret">🔓 Revision involves judgment. A comment matters, but it does not always dictate one single acceptable sentence.</div>`;fb("Writer agency retained.","Use feedback as information for a rhetorical decision.")}
+if(m[1]==="voice"){$("host").innerHTML=`<h2>🎙️ “This Sounds Too Informal.”</h2><div class="warning"><strong>Automatic translation:</strong> “My voice is wrong.”</div><div class="decoded"><strong>Better questions:</strong><p>What feature sounded informal to this reader?<br>What does this assignment, audience, and purpose call for?<br>What do I want to keep?<br>What might I adapt for this situation?</p></div><div class="secret">🔓 <strong>Difference is not automatically an error.</strong> Feedback can start a conversation about rhetorical choices rather than require a writer to erase their voice.</div>`;fb("Context before conformity.","The goal is purposeful communication, not automatic homogenization.")}
+if(m[1]==="pattern"){$("host").innerHTML=`<h2>🔎 Find the Pattern</h2><div class="twocol"><div class="sample"><h3>One comment</h3><span class="comment">Unclear.</span><p>Could be one local problem.</p></div><div class="sample"><h3>Five comments</h3><span class="comment">Unclear.</span> <span class="comment">Unclear.</span> <span class="comment">?</span><p>May reveal a recurring clarity or connection pattern worth investigating.</p></div></div><div class="secret">🔓 Don't only count comments. <strong>Group them.</strong></div>`;fb("Pattern detector online.","Repeated reader responses often deserve more attention than isolated surface notes.")}
+if(m[1]==="seventeen"){$("host").innerHTML=`<h2>😱 YOUR PAPER HAS 17 COMMENTS</h2><div class="patterns"><div class="pattern"><span class="num">7</span><br><strong>Analysis / development</strong></div><div class="pattern"><span class="num">6</span><br><strong>Paragraph focus / connection</strong></div><div class="pattern"><span class="num">4</span><br><strong>Sentence boundaries / local notes</strong></div></div><div class="decoded"><h3>🎉 17 COMMENTS → 3 PATTERNS TO INVESTIGATE</h3><p>You do not necessarily have 17 separate revision emergencies.</p></div>`;fb("Feedback avalanche sorted.","This connects directly to essay triage: identify the highest-value pattern, then choose where to begin.")}
+if(m[1]==="ask"){$("host").innerHTML=`<h2>🙋 You Are Allowed to Ask</h2><div class="email"><p><strong>Subject:</strong> Question about feedback on Essay 2</p><p>Hi Professor,</p><p>I'm revising Paragraph 3, and I want to make sure I understand your “develop” comment. Were you looking for more evidence there, more explanation of the evidence I already have, or something else?</p><p>Thank you.</p></div><div class="secret">🔓 <strong>Office hours, class questions, tutoring, and email can be part of the revision process.</strong> You are not required to decode every comment alone.</div>`;fb("Clarification is a writing strategy.","Specific questions make it easier for another person to help you.")}
+if(m[1]==="boss"){$("host").innerHTML=`<div class="warning"><h2>👑 FINAL BOSS: FEEDBACK AVALANCHE</h2><p><span class="comment">Develop</span> <span class="comment">So what?</span> <span class="comment">Focus</span> <span class="comment">Unclear</span> <span class="comment">Analyze</span> <span class="comment">Transition?</span> <span class="comment">Awk.</span> <span class="comment">Develop</span></p></div><div class="machine"><h3>⚙️ DECODER RESULT</h3><div class="screen"><strong>Don't revise comment-by-comment yet.</strong><p>1. Group repeated comments.<br>2. Locate where readers lose the thread.<br>3. Separate argument/development issues from local editing.<br>4. Choose the highest-value revision pattern.<br>5. Ask about anything you still cannot interpret.</p></div></div>`;fb("Final boss decoded.","Feedback becomes more manageable when you turn marks into patterns and decisions.")}
+if(m[1]==="finish"){$("host").innerHTML=`<div class="decoded"><h2>💬 Feedback Is Information</h2><p>You don't have to treat every comment as a mysterious command.</p><p><strong>Locate → Translate → Diagnose → Look for Patterns → Choose → Ask</strong></p></div><div class="secret">🔓 A useful question is not just <strong>“How do I fix this?”</strong> It is also <strong>“What happened for my reader here, and what revision would help this piece of writing do its job?”</strong></div>`;$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
+save()
+}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+Object.entries(common).forEach(([k,v])=>{let b=document.createElement("button");b.type="button";b.className="secondary";b.textContent=k;b.onclick=()=>{$("decoderOutput").innerHTML=`<strong>${k}</strong><p>${v}</p>`};$("decoderButtons").appendChild(b)})
+const toolkit=`MY FEEDBACK DECODER
+
+1. LOCATE
+Where exactly did my reader have this response?
+
+2. TRANSLATE
+What might the comment mean in this context?
+
+3. DIAGNOSE
+Evidence? Analysis? Focus? Organization? Clarity? Convention?
+
+4. LOOK FOR PATTERNS
+Does this comment or problem repeat?
+
+5. CHOOSE
+What do I want to keep, adapt, add, move, cut, or clarify?
+
+6. ASK
+If I still can't tell what the feedback means, ask a specific question.
+
+Useful clarification:
+“When you wrote ___ here, were you looking for ___, ___, or something else?”`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(toolkit);$("copy").textContent="✓ Feedback Decoder Copied"}catch(e){alert(toolkit)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(KEY);location.reload()}}
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
