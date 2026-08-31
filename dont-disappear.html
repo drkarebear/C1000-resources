@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Don't Disappear</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f8f8;
+      color: #263943;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    textarea,
+    input {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #173e4b;
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    .hero {
+      background: #eef3f7;
+      border: 1px solid #cedbe3;
+      border-radius: 20px;
+      padding: 34px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #587184;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #173e4b;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+    }
+
+    h2,
+    h3 {
+      color: #173e4b;
+      line-height: 1.3;
+    }
+
+    .note,
+    .step,
+    .reentry-card {
+      background: #ffffff;
+      border: 1px solid #d7e0e3;
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      background: #edf3f5;
+      border-radius: 999px;
+      color: #496470;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .choice {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 15px;
+      text-align: left;
+      color: #263943;
+      background: #f9fbfb;
+      border: 1px solid #cbd7da;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .choice:hover {
+      background: #edf4f5;
+    }
+
+    .choice.selected {
+      background: #e8f1f3;
+      border-color: #6e929e;
+      font-weight: 700;
+    }
+
+    .fact-story {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .fact-box,
+    .story-box {
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .fact-box {
+      background: #edf5ee;
+      border: 1px solid #cadfcd;
+    }
+
+    .story-box {
+      background: #f8eeee;
+      border: 1px solid #e6d1d1;
+    }
+
+    .fact-box strong,
+    .story-box strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .unknown-box {
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .unknown-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .scan {
+      background: #eef5f7;
+      border: 1px solid #c9dce1;
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 18px;
+    }
+
+    .scan ol {
+      margin-bottom: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border: 1px solid #aebdc2;
+      border-radius: 9px;
+      resize: vertical;
+      background: #ffffff;
+      color: #263943;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 7px;
+      font-weight: 800;
+    }
+
+    .three-way {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .bucket {
+      background: #f9fbfb;
+      border: 1px solid #d2dde0;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .bucket strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #294b57;
+    }
+
+    .message-box {
+      background: #f2f6ef;
+      border: 1px solid #cfdfca;
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 20px;
+    }
+
+    .message-example {
+      background: #ffffff;
+      border: 1px solid #d4ded1;
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .move-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .move {
+      text-align: left;
+      background: #f9fbfb;
+      border: 1px solid #cbd7da;
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+    }
+
+    .move:hover {
+      background: #edf4f5;
+    }
+
+    .move.selected {
+      background: #e8f1f3;
+      border-color: #6e929e;
+      font-weight: 700;
+    }
+
+    .build-button {
+      width: 100%;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      background: #245f75;
+      color: #ffffff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .build-button:hover {
+      background: #1d5063;
+    }
+
+    .reentry-card {
+      display: none;
+      background: #173e4b;
+      color: #ffffff;
+      border-color: #173e4b;
+    }
+
+    .reentry-card.show {
+      display: block;
+    }
+
+    .reentry-card h2 {
+      color: #ffffff;
+      margin-top: 0;
+    }
+
+    .card-line {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.24);
+    }
+
+    .card-line:last-child {
+      border-bottom: 0;
+    }
+
+    .card-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #d5e5ea;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ending {
+      margin-top: 28px;
+      background: #f2f6ef;
+      border: 1px solid #cfdfca;
+      border-radius: 16px;
+      padding: 26px;
+      text-align: center;
+    }
+
+    .ending strong {
+      display: block;
+      color: #36523d;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 760px) {
+      .fact-story,
+      .three-way,
+      .move-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shell {
+        padding: 12px 10px 40px;
+      }
+
+      .hero,
+      .note,
+      .step,
+      .reentry-card,
+      .ending {
+        padding: 21px 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="shell">
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <p class="eyebrow">
+      5–10 Minute Re-Entry Tool
+    </p>
+
+    <h1>
+      Don&rsquo;t Disappear
+    </h1>
+
+    <p>
+      Maybe you missed a deadline. Maybe you stopped checking Canvas.
+      Maybe you got confused, fell behind, or felt embarrassed about coming back.
+    </p>
+
+    <p>
+      You do not have to solve the whole semester right now.
+      First, find out <strong>what is actually true</strong> and make one useful move back into the course.
+    </p>
+
+  </header>
+
+
+  <!-- OPENING NOTE -->
+
+  <section class="note">
+
+    <strong>Falling behind and deciding what to do next are two different things.</strong>
+
+    <p>
+      Avoiding the course cannot tell you what your options are.
+      Checking can.
+    </p>
+
+  </section>
+
+
+  <!-- STEP 1 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 1</span>
+
+    <h2>
+      What Is Your Brain Telling You?
+    </h2>
+
+    <p>
+      Choose the thought that sounds closest to what is making it hard to come back.
+    </p>
+
+    <div class="choice-grid" id="thoughtChoices">
+
+      <button type="button" class="choice">
+        I&rsquo;m too far behind.
+      </button>
+
+      <button type="button" class="choice">
+        I already ruined my grade.
+      </button>
+
+      <button type="button" class="choice">
+        My professor is probably annoyed with me.
+      </button>
+
+      <button type="button" class="choice">
+        It&rsquo;s embarrassing to come back now.
+      </button>
+
+      <button type="button" class="choice">
+        There&rsquo;s no point if I can&rsquo;t catch up on everything.
+      </button>
+
+      <button type="button" class="choice">
+        I don&rsquo;t even know where to start.
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- STEP 2 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 2</span>
+
+    <h2>
+      Separate the Facts From the Story
+    </h2>
+
+    <p>
+      Your brain may be filling in missing information with conclusions.
+      Try separating what happened from what you think it means.
+    </p>
+
+    <div class="fact-story">
+
+      <div class="fact-box">
+        <strong>FACT</strong>
+        I missed two assignments.
+      </div>
+
+      <div class="story-box">
+        <strong>STORY</strong>
+        There is no point coming back now.
+      </div>
+
+      <div class="fact-box">
+        <strong>FACT</strong>
+        I have not checked Canvas in six days.
+      </div>
+
+      <div class="story-box">
+        <strong>STORY</strong>
+        My professor must think I do not care.
+      </div>
+
+    </div>
+
+    <label for="fact">
+      What do you actually know happened?
+    </label>
+
+    <textarea
+      id="fact"
+      placeholder="Example: I missed last week's discussion and have not started the current reading."
+    ></textarea>
+
+    <label for="story">
+      What are you telling yourself that this means?
+    </label>
+
+    <textarea
+      id="story"
+      placeholder="Example: I'm too far behind to recover."
+    ></textarea>
+
+    <div class="unknown-box">
+
+      <strong>Unknown is not the same as bad news.</strong>
+
+      <p>
+        You may not know whether late work can be submitted.
+        You may not know how much a missed assignment affects your grade.
+        You may not know what your professor recommends.
+      </p>
+
+      <p>
+        Those are <strong>questions</strong>, not answers.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- STEP 3 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 3</span>
+
+    <h2>
+      Orient First. Catch Up Second.
+    </h2>
+
+    <p>
+      Do not review the entire semester right now.
+      Spend about <strong>three minutes</strong> checking only what you need to re-enter.
+    </p>
+
+    <div class="scan">
+
+      <strong>Open Canvas and check four things:</strong>
+
+      <ol>
+        <li>What is happening <strong>right now</strong> in the course?</li>
+        <li>What is the <strong>next upcoming deadline</strong>?</li>
+        <li>Is there an announcement, grade comment, or message I need to see?</li>
+        <li>Is there one missed item I need to ask about?</li>
+      </ol>
+
+    </div>
+
+    <p>
+      Then come back here.
+    </p>
+
+  </section>
+
+
+  <!-- STEP 4 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 4</span>
+
+    <h2>
+      Sort What You Found
+    </h2>
+
+    <p>
+      Everything does not need the same kind of attention.
+    </p>
+
+    <div class="three-way">
+
+      <div class="bucket">
+        <strong>DO NOW</strong>
+        Current work that is still open and actionable.
+      </div>
+
+      <div class="bucket">
+        <strong>ASK ABOUT</strong>
+        Missing work, unclear policies, or something you cannot figure out alone.
+      </div>
+
+      <div class="bucket">
+        <strong>LET GO FOR NOW</strong>
+        Something you cannot change today or do not need to solve before re-entering.
+      </div>
+
+    </div>
+
+    <label for="doNow">
+      What can you do now?
+    </label>
+
+    <textarea
+      id="doNow"
+      placeholder="Example: Start this week's reading and complete the current discussion."
+    ></textarea>
+
+    <label for="askAbout">
+      What do you need to ask about?
+    </label>
+
+    <textarea
+      id="askAbout"
+      placeholder="Example: I need to ask whether I should still submit the missed draft."
+    ></textarea>
+
+    <label for="letGo">
+      What are you not going to solve right now?
+    </label>
+
+    <textarea
+      id="letGo"
+      placeholder="Example: I am not going to work backward through every missed task before starting the current module."
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 5 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 5</span>
+
+    <h2>
+      Re-Enter Before You Catch Up
+    </h2>
+
+    <p>
+      You may be assuming:
+    </p>
+
+    <div class="unknown-box">
+      <strong>
+        &ldquo;I cannot participate again until I finish everything I missed.&rdquo;
+      </strong>
+    </div>
+
+    <p>
+      But re-entering the course and catching up are not always the same task.
+    </p>
+
+    <p>
+      Sometimes the strongest move is to start participating in what is happening
+      <strong>now</strong> while separately figuring out what can still be recovered from the past.
+    </p>
+
+  </section>
+
+
+  <!-- STEP 6 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 6</span>
+
+    <h2>
+      Ask One Clear Question
+    </h2>
+
+    <p>
+      If you need information from your professor, you do not need to write a long apology.
+      Give enough context, show what you have already checked, and ask one specific question.
+    </p>
+
+    <div class="message-box">
+
+      <strong>A useful structure:</strong>
+
+      <p>
+        <strong>Context → What I&rsquo;ve already checked or done → One clear question</strong>
+      </p>
+
+      <div class="message-example">
+
+        <p>
+          Hi Professor,
+        </p>
+
+        <p>
+          I&rsquo;m working on getting re-engaged with the course. I see that I missed the draft due Friday,
+          and I&rsquo;ve checked Canvas and started this week&rsquo;s work.
+          Could you let me know whether I should still submit the missed draft or focus on the next assignment?
+        </p>
+
+        <p>
+          Thank you.
+        </p>
+
+      </div>
+
+    </div>
+
+    <label for="question">
+      What is the one question you need answered?
+    </label>
+
+    <textarea
+      id="question"
+      placeholder="Example: Should I still submit the missed draft, or should I focus on the current essay?"
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 7 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 7</span>
+
+    <h2>
+      Choose Your Re-Entry Move
+    </h2>
+
+    <p>
+      Pick one action that can move you from
+      <strong>&ldquo;avoiding the course&rdquo;</strong>
+      to
+      <strong>&ldquo;participating again.&rdquo;</strong>
+    </p>
+
+    <div class="move-grid" id="moveChoices">
+
+      <button type="button" class="move">
+        Open the current module.
+      </button>
+
+      <button type="button" class="move">
+        Read the current assignment directions.
+      </button>
+
+      <button type="button" class="move">
+        Work on the current task for 15 minutes.
+      </button>
+
+      <button type="button" class="move">
+        Send my professor one clear question.
+      </button>
+
+      <button type="button" class="move">
+        Read the feedback I have been avoiding.
+      </button>
+
+      <button type="button" class="move">
+        Figure out which support person I need to contact.
+      </button>
+
+    </div>
+
+    <button type="button" class="build-button" id="buildButton">
+      Build My Re-Entry Card
+    </button>
+
+  </section>
+
+
+  <!-- GENERATED CARD -->
+
+  <section class="reentry-card" id="reentryCard" aria-live="polite">
+
+    <h2>
+      My Re-Entry Card
+    </h2>
+
+    <div class="card-line">
+      <span class="card-label">What my brain was saying</span>
+      <span id="cardThought">I was telling myself I could not come back.</span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">What actually happened</span>
+      <span id="cardFact">Something got off track.</span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">What I can do now</span>
+      <span id="cardDoNow">Focus on current, actionable work.</span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">What I need to ask</span>
+      <span id="cardQuestion">Nothing right now.</span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">What I am not solving today</span>
+      <span id="cardLetGo">Everything at once.</span>
+    </div>
+
+    <div class="card-line">
+      <span class="card-label">My next move</span>
+      <span id="cardMove">Take one step back into the course.</span>
+    </div>
+
+  </section>
+
+
+  <!-- ENDING -->
+
+  <section class="ending">
+
+    <strong>You&rsquo;re back.</strong>
+
+    <p>
+      Not caught up. Not finished. <strong>Back.</strong>
+    </p>
+
+    <p>
+      Now do the next move on your card.
+    </p>
+
+  </section>
+
+</main>
+
+
+<script>
+  const thoughtChoices = document.querySelectorAll("#thoughtChoices .choice");
+  const moveChoices = document.querySelectorAll("#moveChoices .move");
+
+  let selectedThought = "";
+  let selectedMove = "";
+
+  thoughtChoices.forEach(function(button) {
+    button.addEventListener("click", function() {
+
+      thoughtChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+      selectedThought = button.textContent.trim();
+    });
+  });
+
+
+  moveChoices.forEach(function(button) {
+    button.addEventListener("click", function() {
+
+      moveChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+      selectedMove = button.textContent.trim();
+    });
+  });
+
+
+  document.getElementById("buildButton").addEventListener("click", function() {
+
+    const fact = document.getElementById("fact").value.trim();
+    const doNow = document.getElementById("doNow").value.trim();
+    const question = document.getElementById("question").value.trim();
+    const letGo = document.getElementById("letGo").value.trim();
+
+    document.getElementById("cardThought").textContent =
+      selectedThought || "I was telling myself I could not come back.";
+
+    document.getElementById("cardFact").textContent =
+      fact || "Something got off track, and I am checking what is actually true now.";
+
+    document.getElementById("cardDoNow").textContent =
+      doNow || "Focus on current, actionable work.";
+
+    document.getElementById("cardQuestion").textContent =
+      question || "I do not have a question I need answered right now.";
+
+    document.getElementById("cardLetGo").textContent =
+      letGo || "I am not going to solve everything at once.";
+
+    document.getElementById("cardMove").textContent =
+      selectedMove || "Take one small step back into the course.";
+
+    const card = document.getElementById("reentryCard");
+    card.classList.add("show");
+    card.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  });
+</script>
+
+</body>
+</html>
