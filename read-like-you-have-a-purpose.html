@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read Like You Have a Purpose</title>
+<style>
+:root{
+  --bg:#f6f4ef;
+  --ink:#22303c;
+  --muted:#65717b;
+  --card:#ffffff;
+  --line:#d8d2c8;
+  --accent:#6c5ce7;
+  --accent-soft:#efecff;
+  --green:#2f7d68;
+  --green-soft:#eaf6f1;
+  --gold:#b68518;
+  --gold-soft:#fff8df;
+  --rose:#a34f65;
+  --rose-soft:#fff0f4;
+  --shadow:0 10px 28px rgba(34,48,60,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.6;
+}
+main{
+  max-width:980px;
+  margin:0 auto;
+  padding:24px 16px 56px;
+}
+.hero{
+  background:linear-gradient(135deg,#2f334d,#50587b);
+  color:white;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+.hero h1{
+  margin:0 0 8px;
+  font-size:clamp(2.1rem,5vw,3.5rem);
+  line-height:1.05;
+}
+.hero p{margin:0;max-width:760px}
+.hero .mini{margin-top:14px;color:#ececff;font-size:.95rem}
+.progress-wrap{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px 16px;
+  margin-bottom:18px;
+}
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  font-weight:800;
+}
+.progress{
+  height:10px;
+  background:#e8e2da;
+  border-radius:999px;
+  margin-top:8px;
+  overflow:hidden;
+}
+.progress>div{
+  height:100%;
+  width:16.66%;
+  background:var(--accent);
+  transition:width .25s ease;
+}
+.screen{
+  display:none;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.screen.active{display:block}
+.kicker{
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:.82rem;
+  font-weight:900;
+}
+h2{margin-top:4px;font-size:1.7rem}
+.callout{
+  background:var(--green-soft);
+  border-left:5px solid var(--green);
+  padding:16px;
+  border-radius:12px;
+  margin:16px 0;
+}
+.warning{
+  background:var(--gold-soft);
+  border-left:5px solid var(--gold);
+  padding:16px;
+  border-radius:12px;
+  margin:16px 0;
+}
+.passage{
+  background:#fbfaf7;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  margin:18px 0;
+}
+.sentence{
+  display:block;
+  padding:7px 8px;
+  border-radius:8px;
+  margin:3px 0;
+}
+.sentence.selectable{
+  cursor:pointer;
+  border:1px solid transparent;
+}
+.sentence.selectable:hover,.sentence.selectable:focus-visible{
+  border-color:var(--accent);
+  outline:3px solid rgba(108,92,231,.14);
+  outline-offset:2px;
+}
+.sentence.selected{
+  background:#fff3a6;
+  border-color:#d0b93e;
+}
+.mission{
+  background:var(--accent-soft);
+  border:1px solid #d5cff8;
+  border-radius:14px;
+  padding:16px;
+  margin:16px 0;
+}
+.budget{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  font-weight:900;
+}
+.token{
+  width:28px;height:28px;border-radius:50%;
+  display:inline-grid;place-items:center;
+  background:#ffe677;border:1px solid #cbb24f;
+}
+.token.used{opacity:.25}
+.question{
+  font-weight:900;
+  margin:20px 0 10px;
+  font-size:1.08rem;
+}
+.options{
+  display:grid;
+  gap:10px;
+}
+.option{
+  width:100%;
+  text-align:left;
+  border:2px solid var(--line);
+  border-radius:12px;
+  padding:14px 16px;
+  background:#fff;
+  color:var(--ink);
+  min-height:48px;
+  cursor:pointer;
+  font-size:1rem;
+}
+.option:hover,.option:focus-visible{
+  border-color:var(--accent);
+  outline:3px solid rgba(108,92,231,.14);
+  outline-offset:2px;
+}
+.option[aria-pressed="true"]{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+.feedback{
+  display:none;
+  margin-top:12px;
+  padding:14px 16px;
+  border-radius:12px;
+}
+.feedback.show{display:block}
+.feedback.good{
+  background:var(--green-soft);
+  border-left:5px solid var(--green);
+}
+.feedback.try{
+  background:var(--rose-soft);
+  border-left:5px solid var(--rose);
+}
+.compare{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+.compare-card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  background:#fbfaf7;
+}
+.compare-card strong{display:block;margin-bottom:6px}
+.code-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.code-card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+.code-card strong{display:block;margin-bottom:4px}
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  margin-top:22px;
+}
+button.primary,button.secondary{
+  border:none;
+  border-radius:12px;
+  min-height:46px;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+  font-size:1rem;
+}
+button.primary{background:var(--accent);color:white}
+button.secondary{background:#e8e2da;color:var(--ink)}
+button:disabled{opacity:.5;cursor:not-allowed}
+textarea{
+  width:100%;
+  min-height:100px;
+  padding:12px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  font:inherit;
+  resize:vertical;
+}
+textarea:focus{
+  border-color:var(--accent);
+  outline:3px solid rgba(108,92,231,.14)
+}
+.checklist{
+  display:grid;
+  gap:10px;
+}
+.check-item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.check-item input{
+  width:20px;height:20px;margin-top:3px
+}
+.mission-card{
+  border:2px solid var(--accent);
+  border-radius:18px;
+  padding:20px;
+  background:linear-gradient(180deg,#fff,#fbfaf8);
+  margin-top:18px;
+}
+.mission-card ul{margin-bottom:0}
+.small{font-size:.93rem;color:var(--muted)}
+.hidden{display:none!important}
+@media(max-width:760px){
+  .compare,.code-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="title">
+    <div class="kicker" style="color:#ded9ff">C1000 / C1000E Reading Lab</div>
+    <h1 id="title">🎯 Read Like You Have a Purpose</h1>
+    <p>You do not annotate a reading. You annotate <strong>for something</strong>.</p>
+    <p class="mini">The goal: stop highlighting everything and start marking what actually helps.</p>
+  </section>
+
+  <section class="progress-wrap" aria-label="Activity progress">
+    <div class="progress-label">
+      <span id="progressText">Step 1 of 6</span>
+      <span id="progressLabel">The highlight trap</span>
+    </div>
+    <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+  </section>
+
+  <div id="live" class="small" aria-live="polite"></div>
+
+  <section class="screen active" data-step="0">
+    <div class="kicker">Step 1 · The Highlight Trap</div>
+    <h2>When Everything Looks Important</h2>
+    <div class="warning">
+      <strong>Classic problem:</strong> You start highlighting. Important. Important. Definitely important. Three pages later, almost everything is yellow.
+    </div>
+    <p>The issue is not that you are bad at annotation. The issue is that you started without a mission.</p>
+
+    <p class="question">What should you look at first when you know a reading will be used for an assignment?</p>
+    <div class="options" id="firstLook">
+      <button class="option" type="button" data-correct="false" aria-pressed="false">The first page of the article</button>
+      <button class="option" type="button" data-correct="true" aria-pressed="false">The assignment or question you will eventually answer</button>
+      <button class="option" type="button" data-correct="false" aria-pressed="false">Your highlighter</button>
+    </div>
+    <div id="fb-firstLook" class="feedback"></div>
+
+    <div class="callout">
+      <strong>Reading rule:</strong> Knowing what you will eventually have to do changes what you notice while you read.
+    </div>
+
+    <div class="controls">
+      <button class="primary next" type="button" disabled>Start Mission 1</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="1">
+    <div class="kicker">Step 2 · Mission 1</div>
+    <h2>Find the Author's Position</h2>
+
+    <div class="mission">
+      <strong>🎯 Your mission:</strong> Tomorrow you need to explain what the author believes about phones in college classrooms.
+      <div class="budget" style="margin-top:10px">Annotation budget: <span class="token">1</span><span class="token">2</span><span class="token">3</span> three highlights only.</div>
+    </div>
+
+    <div class="passage" id="passage1">
+      <button type="button" class="sentence selectable" data-good="true">1. Many instructors worry that phones divide students' attention during class.</button>
+      <button type="button" class="sentence selectable" data-good="false">2. Smartphones have become a normal part of daily life for most college students.</button>
+      <button type="button" class="sentence selectable" data-good="true">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
+      <button type="button" class="sentence selectable" data-good="true">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
+      <button type="button" class="sentence selectable" data-good="false">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
+      <button type="button" class="sentence selectable" data-good="false">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+    </div>
+    <div id="budgetMessage" class="small"></div>
+    <div id="fb-mission1" class="feedback"></div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>See What Changed</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="2">
+    <div class="kicker">Step 3 · Same Reading, New Mission</div>
+    <h2>Find Evidence You Could Actually Use</h2>
+
+    <div class="mission">
+      <strong>🎯 Essay question:</strong> Should colleges limit phone use in classrooms?
+      <p style="margin-bottom:0">This time, choose <strong>two details</strong> that could actually help you write about that question.</p>
+    </div>
+
+    <div class="passage" id="passage2">
+      <button type="button" class="sentence selectable" data-good="true">1. Many instructors worry that phones divide students' attention during class.</button>
+      <button type="button" class="sentence selectable" data-good="false">2. Smartphones have become a normal part of daily life for most college students.</button>
+      <button type="button" class="sentence selectable" data-good="false">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
+      <button type="button" class="sentence selectable" data-good="true">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
+      <button type="button" class="sentence selectable" data-good="false">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
+      <button type="button" class="sentence selectable" data-good="false">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+    </div>
+    <div id="fb-mission2" class="feedback"></div>
+
+    <div class="callout">
+      <strong>Key idea:</strong> Something can be important to the reading without being useful for your particular writing task.
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Try Mission 3</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="3">
+    <div class="kicker">Step 4 · Mission 3</div>
+    <h2>Find Something Worth Questioning</h2>
+
+    <div class="mission">
+      <strong>🎯 Your mission:</strong> Find a place where you could question, complicate, or push against the author.
+    </div>
+
+    <div class="passage" id="passage3">
+      <button type="button" class="sentence selectable" data-good="false">1. Many instructors worry that phones divide students' attention during class.</button>
+      <button type="button" class="sentence selectable" data-good="false">2. Smartphones have become a normal part of daily life for most college students.</button>
+      <button type="button" class="sentence selectable" data-good="false">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
+      <button type="button" class="sentence selectable" data-good="false">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
+      <button type="button" class="sentence selectable" data-good="true">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
+      <button type="button" class="sentence selectable" data-good="true">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+    </div>
+    <div id="fb-mission3" class="feedback"></div>
+
+    <div class="compare">
+      <div class="compare-card">
+        <strong>Understand the argument</strong>
+        Claim + reason + qualification
+      </div>
+      <div class="compare-card">
+        <strong>Find usable evidence</strong>
+        Details that help answer your essay question
+      </div>
+      <div class="compare-card">
+        <strong>Find something to question</strong>
+        Assumptions, complications, missing perspectives, tensions
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Same reading. Different maps.</strong> There is no single correct way to annotate a text. What you mark depends on what you plan to do with it.
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Clean Up the Crime Scene</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="4">
+    <div class="kicker">Step 5 · Highlight Crime Scene</div>
+    <h2>Save the Annotation</h2>
+    <p>Someone highlighted almost everything. Your job: keep only the parts that help with the mission.</p>
+
+    <div class="mission">
+      <strong>🎯 Mission:</strong> Tomorrow you must explain the author's main argument. Keep only <strong>three highlights</strong>.
+    </div>
+
+    <div class="passage" id="crimeScene">
+      <button type="button" class="sentence selectable selected" data-good="true">1. Colleges should not ban phones completely.</button>
+      <button type="button" class="sentence selectable selected" data-good="false">2. Phones are common on nearly every campus.</button>
+      <button type="button" class="sentence selectable selected" data-good="true">3. The stronger approach is to teach students how to manage attention and use devices intentionally.</button>
+      <button type="button" class="sentence selectable selected" data-good="false">4. Some classrooms have charging stations near the walls.</button>
+      <button type="button" class="sentence selectable selected" data-good="true">5. Limited-use policies can reduce distraction without removing useful academic tools.</button>
+      <button type="button" class="sentence selectable selected" data-good="false">6. Faculty members have different opinions about technology.</button>
+    </div>
+    <div id="fb-crime" class="feedback"></div>
+
+    <p class="question">Which margin note will Future You understand?</p>
+    <div class="options" id="futureNote">
+      <button class="option" type="button" data-correct="false" aria-pressed="false">IMPORTANT!!!</button>
+      <button class="option" type="button" data-correct="false" aria-pressed="false">Phones</button>
+      <button class="option" type="button" data-correct="true" aria-pressed="false">Main claim: teach responsible use instead of banning phones</button>
+      <button class="option" type="button" data-correct="false" aria-pressed="false">⭐⭐⭐</button>
+    </div>
+    <div id="fb-futureNote" class="feedback"></div>
+
+    <div class="code-grid">
+      <div class="code-card"><strong>🎯 TARGET</strong>Directly helps with my assignment.</div>
+      <div class="code-card"><strong>💡 IDEA</strong>Important to the author's argument.</div>
+      <div class="code-card"><strong>❓ QUESTION</strong>I do not understand this, or I want to challenge it.</div>
+      <div class="code-card"><strong>🔗 CONNECTION</strong>Connects to another idea, source, experience, or part of my essay.</div>
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Build My Reading Mission</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="5">
+    <div class="kicker">Step 6 · Your Reading Mission</div>
+    <h2>Decide What You Are Hunting For</h2>
+
+    <label for="assignment"><strong>What is your next writing task or reading question?</strong></label>
+    <textarea id="assignment" placeholder="Paste or type the question, assignment, or purpose here."></textarea>
+
+    <p class="question">What will you need from the reading? Choose up to three.</p>
+    <div class="checklist" id="needList">
+      <label class="check-item"><input type="checkbox" value="Understand the author's main argument"><span>Understand the author's main argument</span></label>
+      <label class="check-item"><input type="checkbox" value="Find evidence"><span>Find evidence</span></label>
+      <label class="check-item"><input type="checkbox" value="Find examples"><span>Find examples</span></label>
+      <label class="check-item"><input type="checkbox" value="Find something to analyze"><span>Find something to analyze</span></label>
+      <label class="check-item"><input type="checkbox" value="Compare this author with another author"><span>Compare this author with another author</span></label>
+      <label class="check-item"><input type="checkbox" value="Identify assumptions"><span>Identify assumptions</span></label>
+      <label class="check-item"><input type="checkbox" value="Find a counterargument"><span>Find a counterargument</span></label>
+      <label class="check-item"><input type="checkbox" value="Understand an unfamiliar concept"><span>Understand an unfamiliar concept</span></label>
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary" type="button" id="makeMission" disabled>Make My Mission</button>
+    </div>
+
+    <div id="missionCard" class="mission-card hidden" aria-live="polite">
+      <h2 style="margin-top:0">🎯 My Reading Mission</h2>
+      <p><strong>My task:</strong> <span id="outTask"></span></p>
+      <p><strong>While I read, I am hunting for:</strong></p>
+      <ul id="outNeeds"></ul>
+      <p><strong>Annotation budget:</strong> Start small. Mark only what helps with the mission.</p>
+      <p><strong>My rule:</strong> If I cannot explain why I am marking it, I probably do not need to mark it yet.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const screens=[...document.querySelectorAll('.screen')];
+  const labels=['The highlight trap','Find the author’s position','Find usable evidence','Find something to question','Highlight crime scene','Build your mission'];
+  const progressBar=document.getElementById('progressBar');
+  const progressText=document.getElementById('progressText');
+  const progressLabel=document.getElementById('progressLabel');
+  const live=document.getElementById('live');
+  let current=0;
+
+  function updateProgress(){
+    progressBar.style.width=((current+1)/screens.length*100)+'%';
+    progressText.textContent=`Step ${current+1} of ${screens.length}`;
+    progressLabel.textContent=labels[current];
+  }
+  function showStep(n){
+    screens[current].classList.remove('active');
+    current=n;
+    screens[current].classList.add('active');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function enableNext(index,on){
+    const btn=screens[index].querySelector('.next');
+    if(btn) btn.disabled=!on;
+  }
+
+  document.querySelectorAll('#firstLook .option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#firstLook .option').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const ok=btn.dataset.correct==='true';
+      const fb=document.getElementById('fb-firstLook');
+      fb.className='feedback show '+(ok?'good':'try');
+      fb.textContent=ok
+        ? 'Exactly. The assignment gives you a reason to read and helps you know what to notice.'
+        : 'Try again. The strongest first move is the one that gives your reading a purpose.';
+      enableNext(0,ok);
+      live.textContent=fb.textContent;
+    });
+  });
+
+  function setupBudgetPassage(id,limit,screenIndex,feedbackId){
+    const wrap=document.getElementById(id);
+    const items=[...wrap.querySelectorAll('.sentence')];
+    const fb=document.getElementById(feedbackId);
+    items.forEach(item=>{
+      item.addEventListener('click',()=>{
+        const selected=items.filter(i=>i.classList.contains('selected'));
+        if(item.classList.contains('selected')){
+          item.classList.remove('selected');
+        }else{
+          if(selected.length>=limit){
+            live.textContent=`Annotation budget spent. Remove one before choosing another.`;
+            return;
+          }
+          item.classList.add('selected');
+        }
+        const now=items.filter(i=>i.classList.contains('selected'));
+        if(now.length===limit){
+          const good=now.filter(i=>i.dataset.good==='true').length;
+          fb.className='feedback show '+(good>=Math.ceil(limit/2)?'good':'try');
+          fb.textContent=good>=Math.ceil(limit/2)
+            ? 'Strong choices. You used your limited highlights to mark details that fit the mission.'
+            : 'You used the full budget, but some highlights are more general than useful. Try replacing one with a detail that better fits the mission.';
+          enableNext(screenIndex,good>=Math.ceil(limit/2));
+        }else{
+          fb.className='feedback';
+          fb.textContent='';
+          enableNext(screenIndex,false);
+        }
+      });
+    });
+  }
+
+  setupBudgetPassage('passage1',3,1,'fb-mission1');
+  setupBudgetPassage('passage2',2,2,'fb-mission2');
+  setupBudgetPassage('passage3',1,3,'fb-mission3');
+
+  const crime=document.getElementById('crimeScene');
+  const crimeItems=[...crime.querySelectorAll('.sentence')];
+  const crimeFb=document.getElementById('fb-crime');
+  function evaluateCrime(){
+    const selected=crimeItems.filter(i=>i.classList.contains('selected'));
+    const goodSelected=selected.filter(i=>i.dataset.good==='true').length;
+    const exactlyThree=selected.length===3;
+    if(exactlyThree){
+      crimeFb.className='feedback show '+(goodSelected===3?'good':'try');
+      crimeFb.textContent=goodSelected===3
+        ? 'Clean save. You kept the claim, the main reasoning, and the useful support.'
+        : 'You are down to three highlights, but one is still not doing much work for this mission. Try one more cleanup.';
+    }else{
+      crimeFb.className='feedback';
+      crimeFb.textContent='';
+    }
+    checkStep5();
+  }
+  crimeItems.forEach(item=>{
+    item.addEventListener('click',()=>{
+      item.classList.toggle('selected');
+      evaluateCrime();
+    });
+  });
+
+  let futureNoteCorrect=false;
+  document.querySelectorAll('#futureNote .option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#futureNote .option').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const ok=btn.dataset.correct==='true';
+      futureNoteCorrect=ok;
+      const fb=document.getElementById('fb-futureNote');
+      fb.className='feedback show '+(ok?'good':'try');
+      fb.textContent=ok
+        ? 'Yes. Future You can immediately see what the note means and why the sentence mattered.'
+        : 'That note might make sense now, but Future You may not remember what it meant. Try the note that names the job the sentence is doing.';
+      checkStep5();
+    });
+  });
+
+  function checkStep5(){
+    const selected=crimeItems.filter(i=>i.classList.contains('selected'));
+    const goodSelected=selected.filter(i=>i.dataset.good==='true').length;
+    enableNext(4,selected.length===3 && goodSelected===3 && futureNoteCorrect);
+  }
+
+  document.querySelectorAll('.next').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(current<screens.length-1) showStep(current+1);
+    });
+  });
+  document.querySelectorAll('.back').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(current>0) showStep(current-1);
+    });
+  });
+
+  const assignment=document.getElementById('assignment');
+  const needInputs=[...document.querySelectorAll('#needList input')];
+  const makeMission=document.getElementById('makeMission');
+
+  function validateMission(){
+    const checked=needInputs.filter(i=>i.checked);
+    if(checked.length>3){
+      needInputs.forEach(i=>{
+        if(!i.checked) return;
+      });
+      live.textContent='Choose up to three reading needs.';
+    }
+    makeMission.disabled=!(assignment.value.trim() && checked.length>=1 && checked.length<=3);
+  }
+
+  needInputs.forEach(input=>{
+    input.addEventListener('change',()=>{
+      const checked=needInputs.filter(i=>i.checked);
+      if(checked.length>3){
+        input.checked=false;
+        live.textContent='Choose up to three. A mission works best when it stays focused.';
+      }
+      validateMission();
+    });
+  });
+  assignment.addEventListener('input',validateMission);
+
+  makeMission.addEventListener('click',()=>{
+    const checked=needInputs.filter(i=>i.checked).map(i=>i.value);
+    if(!assignment.value.trim() || checked.length<1 || checked.length>3) return;
+    document.getElementById('outTask').textContent=assignment.value.trim();
+    const ul=document.getElementById('outNeeds');
+    ul.innerHTML='';
+    checked.forEach(v=>{
+      const li=document.createElement('li');
+      li.textContent=v;
+      ul.appendChild(li);
+    });
+    document.getElementById('missionCard').classList.remove('hidden');
+    document.getElementById('missionCard').scrollIntoView({behavior:'smooth',block:'start'});
+    live.textContent='Your reading mission is ready.';
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
