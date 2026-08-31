@@ -8,8 +8,11 @@
 <style>
 :root{--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
-button,select{font:inherit}button{font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
-button:focus-visible,select:focus-visible{outline:4px solid #111;outline-offset:3px}
+button,select,textarea{font:inherit}button{font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
+button:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:4px solid #111;outline-offset:3px}
+textarea{width:100%;min-height:110px;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);resize:vertical}
+.skip-link{position:absolute;left:12px;top:-100px;background:#111;color:#fff;padding:10px 14px;border-radius:0 0 10px 10px;z-index:9999;font-weight:900}.skip-link:focus{top:0}
+.small{font-size:.92rem;color:var(--muted)}
 .shell{max-width:1080px;margin:auto;padding:20px 12px 52px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
 h1,h2,h3{color:var(--dark);line-height:1.18}h1{font-size:clamp(2.1rem,7vw,3.6rem);margin:.1em 0 .25em}.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.84rem;color:var(--blue)}
 .primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}.row,.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
@@ -29,19 +32,20 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </style>
 </head>
 <body>
-<main class="shell">
+<a class="skip-link" href="#intro">Skip to the Make Your Case lab</a>
+<main id="main" class="shell">
 <section id="intro" class="card">
 <p class="eyebrow">ENGL C1000 · Argument & Rhetorical Choices</p>
 <h1>⚖️ Make Your Case</h1>
 <h2>Build a claim you can actually support.</h2>
 <div class="call"><strong>ARGUMENT ≠ FIGHT</strong><br>Academic argument isn't about being the loudest person in the room. It's about making a claim readers can examine and giving them reasons to consider it.</div>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> A stronger argument does not always sound more certain. Sometimes a claim becomes stronger when you make it more precise, acknowledge limits, or account for complexity.</div>
-<div class="row"><button id="start" class="primary">🧪 Start the Claim Stress Test</button><button id="resume" class="secondary hidden">Resume</button></div>
+<div class="row"><button id="start" type="button" class="primary">🧪 Start the Claim Stress Test</button><button id="resume" type="button" class="secondary hidden">Resume</button></div>
 </section>
 
 <section id="lab" class="card hidden">
-<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div><span id="stage" class="stage"></span>
-<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Continue</button></div></div>
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div id="progress" class="track" role="progressbar" aria-label="Claim stress test progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"><div id="bar" class="bar"></div></div><span id="stage" class="stage" aria-live="polite"></span>
+<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" type="button" class="primary hidden">Continue</button></div></div>
 <aside class="side"><h3>🧪 Claim Stress Test</h3><p><strong>🎯 Precise?</strong><br>Can the reader tell exactly what you're claiming?</p><p><strong>👥 For whom?</strong><br>Does the claim overgeneralize?</p><p><strong>🗓️ Under what conditions?</strong><br>What limits matter?</p><p><strong>📚 Supportable?</strong><br>What evidence could reasonably support it?</p><p><strong>⚖️ Arguable?</strong><br>Could a reasonable reader question or complicate it?</p><p><strong>🧩 Nuanced?</strong><br>Is reality more complicated than the first version suggests?</p></aside></div>
 </section>
 
@@ -49,6 +53,9 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <div class="good"><h2>⚖️ Case Made</h2><p><strong>A strong academic claim is one you can support, explain, qualify, and examine.</strong></p></div>
 <h2>🧪 Stress-Test My Claim</h2>
 <div class="tool">
+<label for="ownClaim"><strong>Paste or write the claim you want to stress-test.</strong></label>
+<textarea id="ownClaim" placeholder="Write the working claim you are considering for your actual assignment."></textarea>
+<p class="small">A working claim is allowed to change. The point of this test is to find the next useful revision—not to prove that the sentence is perfect.</p>
 <label for="problem"><strong>What's happening with your claim?</strong></label>
 <select id="problem">
 <option value="broad">It feels too broad</option>
@@ -61,16 +68,23 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <option value="evidence">I have evidence but don't know what I'm arguing</option>
 <option value="good">It already seems precise and supportable</option>
 </select>
-<div class="row"><button id="diagnose" class="primary">⚖️ Stress-Test It</button></div><div id="result" class="result" aria-live="polite"></div>
+<div class="row"><button id="diagnose" type="button" class="primary">⚖️ Stress-Test It</button></div><div id="result" class="result" role="status" aria-live="polite"></div>
+<div id="revisionWrap" class="hidden">
+<label for="revision"><strong>Now revise the claim—or name the next move you need to make.</strong></label>
+<textarea id="revision" placeholder="My revised working claim / next move..."></textarea>
+<p class="small">Not scored. This is the handoff from the lab to your own draft.</p>
+</div>
 </div>
 <div class="note"><h3>🧰 Quick Claim Check</h3><p>What exactly am I claiming?<br>For whom or under what conditions?<br>Why might a reasonable reader care or question it?<br>What evidence could support it?<br>What would make it more accurate—not merely louder?<br>What do I want my reader to understand after considering my reasons?</p></div>
-<div class="row"><button id="copy" class="secondary">📋 Copy Claim Stress Test</button></div>
+<div class="row"><button id="copy" type="button" class="secondary">📋 Copy Claim Stress Test</button></div>
 <div class="completion"><p class="done">✓ LAB COMPLETE</p><h2>Make Your Case — Complete</h2><p>✓ Distinguish academic argument from conflict<br>✓ Turn broad reactions into supportable claims<br>✓ Identify facts, preferences, and arguable claims<br>✓ Make claims more precise without making them artificially extreme<br>✓ Use qualification and complication strategically<br>✓ Represent other perspectives reasonably<br>✓ Recognize false binaries<br>✓ Connect evidence to a writer-controlled claim</p><p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div></div>
 </section>
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
 <script>
-(()=>{const $=x=>document.getElementById(x),KEY="makeYourCaseV1";let i=0;
+(()=>{const $=x=>document.getElementById(x),KEY="makeYourCaseV1",TKEY="makeYourCaseTransferV1";let i=0;
+const motion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth";
+function focusCurrent(){setTimeout(()=>{const h=$("host").querySelector("h2");if(!h)return;h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({behavior:motion(),block:"start"})},0)}
 const M=[
 ["1 · Argument ≠ Fight","fight"],["2 · Argument or Not Yet?","choice",`<div class="claim">“Many community colleges offer online courses.”</div>`,"What kind of statement is this by itself?",[["Mostly a factual statement.",1,"Right. A fact can support an argument, but simply stating something verifiable does not yet tell readers what you want them to conclude."],["A complete academic argument.",0,"It may be useful information, but the writer has not yet made an arguable interpretation or conclusion."],["An insult.",0,"Nothing here attacks anyone."],["A counterargument.",0,"It does not respond to another position."]]],
 ["3 · Hot Take Machine","hot"],["4 · Absolute Claim Detector","absolute"],["5 · For Whom?","whom"],["6 · Under What Conditions?","conditions"],
@@ -81,9 +95,9 @@ const M=[
 ["16 · Reasonable Reader Test","reader"],["17 · Claim Too Careful?","careful"],["18 · Claim Stress Test","stress"],["19 · Case Builder","builder"],["20 · Case Made","end"]
 ];
 function fb(t,g=true){$("fb").textContent=t;$("fb").className="feedback show"+(g?" good":"");$("next").classList.remove("hidden")}
-function choices(opts){let d=document.createElement("div");d.className="choices";opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("⚖️ "+m)}else{b.disabled=true;fb(m+" Try another stress test.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
-function render(){let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Claim test ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";
-if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4]))}
+function choices(opts,label){let d=document.createElement("div");d.className="choices";d.setAttribute("role","group");d.setAttribute("aria-label",label);opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("⚖️ "+m)}else{b.disabled=true;fb(m+" Try another stress test.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Claim test ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";$("progress").setAttribute("aria-valuenow",String(i+1));$("progress").setAttribute("aria-valuetext",`Claim test ${i+1} of ${M.length}: ${m[0].replace(/^\d+ · /,"")}`);
+if(m[1]==="choice"){$("host").innerHTML=`<h2>${m[0].replace(/^\d+ · /,"")}</h2>`+m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4],m[3]))}
 if(m[1]==="fight"){$("host").innerHTML=`<h2>🥊 What Students Sometimes Hear</h2><div class="warn"><strong>ARGUMENT:</strong> Pick a side. Defeat the other side. Never admit uncertainty. WIN.</div><h2>⚖️ What Academic Argument Can Be</h2><div class="good">Make a claim → give reasons/evidence → explain your reasoning → test the claim → account for relevant complexity → help readers understand why the claim is worth considering.</div><div class="secret">🔓 A reader can disagree with you and still recognize that you made a strong argument.</div>`;fb("The goal is not to overpower a reader. It is to make a case the reader can examine.")}
 if(m[1]==="hot"){$("host").innerHTML=`<h2>🔥 Hot Take Machine</h2><div class="machine"><div class="screen">INPUT: “College textbooks are a scam!”</div></div><div class="warn"><strong>🔥 ENERGY: HIGH</strong><br><strong>🎯 PRECISION: LOW</strong></div><div class="good"><strong>Keep the concern. Build the claim:</strong><p>High textbook costs can create an additional barrier for students when required materials are not available through lower-cost or open alternatives.</p></div><div class="secret">🔓 You do not have to erase your reaction. Ask what specific, supportable concern is underneath it.</div>`;fb("Hot takes can contain the beginning of an argument. Academic revision makes the claim examinable.")}
 if(m[1]==="absolute"){$("host").innerHTML=`<h2>🚨 Absolute Claim Detector</h2><div class="claim">“Online courses are always better for working students.”</div><div class="warn"><strong>ALWAYS DETECTED.</strong><p>Would this be true for every working student, course, schedule, technology situation, and learning need?</p></div><div class="good"><strong>Possible revision:</strong><p>For some students working full time, asynchronous courses can increase scheduling flexibility, although that flexibility may come with challenges such as reduced real-time interaction or the need for greater self-management.</p></div>`;fb("Qualification can make a claim more accurate and therefore more defensible.")}
@@ -101,8 +115,8 @@ if(m[1]==="careful"){$("host").innerHTML=`<h2>🐢 Can a Claim Be Too Careful?</
 if(m[1]==="stress"){$("host").innerHTML=`<h2>🧪 Claim Stress Test</h2><div class="controls"><div class="control"><strong>🎯 PRECISE?</strong>Could a reader restate the claim?</div><div class="control"><strong>⚖️ ARGUABLE?</strong>Is there something to examine rather than merely verify?</div><div class="control"><strong>📚 SUPPORTABLE?</strong>Could appropriate evidence support this much?</div><div class="control"><strong>👥 SCOPE?</strong>Who/what does the claim actually cover?</div><div class="control"><strong>🧩 LIMITS?</strong>Which qualifications matter?</div><div class="control"><strong>🔗 SIGNIFICANCE?</strong>Why should the reader care?</div></div>`;fb("A claim does not need to pass by being perfect. The test tells you what to revise.")}
 if(m[1]==="builder"){$("host").innerHTML=`<h2>🏗️ Case Builder</h2><div class="case"><strong>1. CLAIM</strong><br>What do I want the reader to consider?</div><div class="case"><strong>2. REASONS</strong><br>Why does this claim make sense?</div><div class="case"><strong>3. EVIDENCE</strong><br>What supports those reasons?</div><div class="case"><strong>4. REASONING</strong><br>What does the evidence show and how does it connect?</div><div class="case"><strong>5. COMPLEXITY</strong><br>What relevant condition, limitation, consequence, or perspective should I account for?</div><div class="secret">🔓 This is a toolbox, not a mandatory five-part paragraph formula.</div>`;fb("The case belongs to the writer; sources help you build it.")}
 if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>⚖️ CASE MADE</h2><p><strong>Strong argument ≠ strongest-sounding claim.</strong></p><p>A strong academic claim is one you can <strong>support, explain, qualify, and examine.</strong></p></div><div class="call">You don't have to “win.”<br>You do have to show readers what you're claiming, why, and how well that claim holds up.</div>`;$("next").textContent="Finish & Open Claim Tool";$("next").classList.remove("hidden")}
-localStorage.setItem(KEY,JSON.stringify({i}))}
-$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+localStorage.setItem(KEY,JSON.stringify({i}));focusCurrent()}
+$("next").onclick=()=>{if(i<M.length-1){i++;render()}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>{const h=$("finish").querySelector("h2");h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({behavior:motion(),block:"start"})},0)}}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
 const R={
 broad:["🎯 NARROW THE SCOPE","Ask who, what, where, when, or which part of the issue you actually mean.","Try: “For whom is this true? In what setting? What specific outcome am I talking about?”"],
@@ -115,7 +129,10 @@ binary:["🚨 LOOK FOR MORE BUTTONS","Ask whether the issue really has only two 
 evidence:["🧠 PUT THE WRITER BACK IN CHARGE","Your source provides information. You decide what it means for your argument.","Try: “What does this evidence support or suggest? How much can I reasonably conclude from it?”"],
 good:["✋ DON'T MAKE IT LOUDER JUST TO SOUND ACADEMIC","If the claim is precise, arguable, supportable, appropriately qualified, and meaningful, it may already be doing its job.","Next: test whether your reasons and evidence actually support the claim you made."]
 };
-$("diagnose").onclick=()=>{let r=R[$("problem").value];$("result").innerHTML=`<div class="good"><h3>${r[0]}</h3><p>${r[1]}</p><p><strong>Stress-test question:</strong> ${r[2]}</p></div>`}
+function saveTransfer(){localStorage.setItem(TKEY,JSON.stringify({claim:$("ownClaim").value,problem:$("problem").value,revision:$("revision").value}))}
+$("diagnose").onclick=()=>{const claim=$("ownClaim").value.trim();if(!claim){$("ownClaim").setAttribute("aria-invalid","true");$("result").innerHTML='<div class="warn"><strong>Bring in a real claim first.</strong><p>Paste or write the working claim you want to test, then choose the issue you are noticing.</p></div>';$("ownClaim").focus();return}$("ownClaim").removeAttribute("aria-invalid");let r=R[$("problem").value];$("result").innerHTML=`<div class="good"><h3>${r[0]}</h3><p>${r[1]}</p><p><strong>Stress-test question:</strong> ${r[2]}</p></div>`;$("revisionWrap").classList.remove("hidden");saveTransfer();setTimeout(()=>$("revision").focus(),0)}
+$("ownClaim").addEventListener("input",saveTransfer);$("problem").addEventListener("change",saveTransfer);$("revision").addEventListener("input",saveTransfer);
+let transfer;try{transfer=JSON.parse(localStorage.getItem(TKEY)||"null")}catch(e){}if(transfer){$("ownClaim").value=transfer.claim||"";$("problem").value=transfer.problem||"broad";$("revision").value=transfer.revision||"";if(transfer.revision)$("revisionWrap").classList.remove("hidden")}
 const check=`MAKE YOUR CASE — CLAIM STRESS TEST
 
 🎯 PRECISE?
@@ -150,7 +167,7 @@ Strong argument ≠ strongest-sounding claim.
 A strong academic claim is one you can support, explain, qualify, and examine.`;
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText(check);$("copy").textContent="✓ Claim Stress Test Copied"}catch(e){alert(check)}}
 let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Claim Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Claim Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>{const h=$("finish").querySelector("h2");h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({behavior:motion(),block:"start"})},0)}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
 </body>
