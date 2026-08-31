@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crack the Academic Code</title>
+<style>
+:root{
+ --bg:#f5f3ee;--ink:#24313b;--muted:#68747d;--card:#fff;--line:#d8d2c8;
+ --accent:#5e52b2;--accent2:#efecff;--green:#2f7867;--green2:#eaf6f1;
+ --gold:#926c17;--gold2:#fff7dc;--rose:#9c5364;--rose2:#fff0f4;
+ --shadow:0 10px 28px rgba(36,49,59,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58}
+main{max-width:980px;margin:auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,#283043,#515a78);color:#fff;padding:28px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.05;margin:0 0 8px}
+.hero p{max-width:800px;margin:6px 0}.mini{font-size:.94rem;color:#eceeff}
+.progressbox,.screen{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}
+.progressbox{padding:14px 16px;margin-bottom:18px}.proglabel{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:850}
+.track{height:10px;background:#e7e1d9;border-radius:999px;overflow:hidden;margin-top:8px}.bar{height:100%;width:11.11%;background:var(--accent);transition:width .2s}
+.screen{display:none;padding:24px}.screen.active{display:block}
+.kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--accent)}
+h2{font-size:1.75rem;margin:4px 0 10px}h3{margin:8px 0}
+.note,.callout,.warning{padding:15px 16px;border-radius:12px;margin:16px 0}.note{background:var(--accent2);border-left:5px solid var(--accent)}.callout{background:var(--green2);border-left:5px solid var(--green)}.warning{background:var(--gold2);border-left:5px solid var(--gold)}
+.q{font-weight:900;font-size:1.08rem;margin:20px 0 9px}.options,.grid{display:grid;gap:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 15px;min-height:48px;font:inherit;color:var(--ink);cursor:pointer}
+.choice:hover,.choice:focus-visible{border-color:var(--accent);outline:3px solid rgba(94,82,178,.14);outline-offset:2px}.choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent2)}
+.feedback{display:none;padding:14px 16px;border-radius:12px;margin-top:12px}.feedback.show{display:block}.good{background:var(--green2);border-left:5px solid var(--green)}.try{background:var(--rose2);border-left:5px solid var(--rose)}
+.assignment{background:#faf9f6;border:1px solid var(--line);border-radius:14px;padding:18px;margin:15px 0;font-size:1.06rem}
+.word{font-weight:950;text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:#c9c1ff;text-underline-offset:3px}
+.decode{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:start;margin:14px 0}.decode .tag{font-weight:900;color:var(--accent)}
+.code-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.code-card{border:1px solid var(--line);border-radius:13px;padding:13px;background:#faf9f6}.code-card strong{display:block}
+.controls{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;min-height:46px;font-size:1rem;font-weight:900;cursor:pointer}.primary{background:var(--accent);color:#fff}.secondary{background:#e7e1d9;color:var(--ink)}button:disabled{opacity:.5;cursor:not-allowed}
+input[type=text],textarea,select{width:100%;border:2px solid var(--line);border-radius:11px;padding:11px;font:inherit;background:#fff}textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px solid rgba(94,82,178,.14)}
+.cheat{border:2px solid var(--accent);border-radius:18px;padding:20px;background:#fff;margin-top:18px}.row{border-top:1px solid var(--line);padding:11px 0}.row:first-of-type{border-top:0}
+.small{font-size:.92rem;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:760px){.grid,.code-grid{grid-template-columns:1fr}.decode{grid-template-columns:1fr}.controls button{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+ <div class="kicker" style="color:#ddd9ff">Academic Language Lab</div>
+ <h1>🔓 Crack the Academic Code</h1>
+ <p><strong>Professors use the same academic words again and again. The trick is learning what those words are asking you to do.</strong></p>
+ <p class="mini">This is not a vocabulary test. You will use context clues, compare meanings, and translate academic directions into plain language.</p>
+</section>
+
+<section class="progressbox">
+ <div class="proglabel"><span id="stepText">Code 1 of 9</span><span id="stepName">Read the whole direction</span></div>
+ <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+</section>
+<div id="live" class="small" aria-live="polite"></div>
+
+<section class="screen active" data-step="0">
+ <div class="kicker">Code 1 · Start Here</div>
+ <h2>One Word Can Change the Whole Assignment</h2>
+ <div class="assignment">“<span class="word">Analyze</span> how the author uses personal experience to challenge common assumptions about poverty.”</div>
+ <p>Imagine you know what the reading is about, but you are not sure what <strong>analyze</strong> means here.</p>
+ <p class="q">What is the strongest first move?</p>
+ <div class="options" id="q0">
+  <button class="choice" data-ok="false">Look up the word and copy the first dictionary definition.</button>
+  <button class="choice" data-ok="true">Read the entire direction and ask what kind of thinking the sentence is asking me to do.</button>
+  <button class="choice" data-ok="false">Ignore the word and just summarize the reading.</button>
+ </div>
+ <div id="fb0" class="feedback"></div>
+ <div class="note"><strong>Academic words live in sentences.</strong> A definition helps, but the rest of the assignment tells you what the word means <em>here</em>.</div>
+ <div class="controls"><button class="primary next" disabled>Decode ANALYZE</button></div>
+</section>
+
+<section class="screen" data-step="1">
+ <div class="kicker">Code 2 · Analyze</div>
+ <h2>ANALYZE ≠ Summarize</h2>
+ <div class="assignment">“<span class="word">Analyze</span> how the author's use of repetition shapes the tone of the passage.”</div>
+ <p class="q">Which response is actually analysis?</p>
+ <div class="options" id="q1">
+  <button class="choice" data-ok="false">The author repeats the phrase “we waited” several times.</button>
+  <button class="choice" data-ok="true">The repeated phrase “we waited” slows the passage and creates a feeling of frustration and powerlessness.</button>
+  <button class="choice" data-ok="false">The passage is about a family waiting for help.</button>
+ </div>
+ <div id="fb1" class="feedback"></div>
+ <div class="callout"><strong>ANALYZE:</strong> break something into parts and explain how those parts work, connect, or create an effect.<br><strong>Plain-language question:</strong> “What is happening here, and how/why does it matter?”</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode EVALUATE</button></div>
+</section>
+
+<section class="screen" data-step="2">
+ <div class="kicker">Code 3 · Evaluate</div>
+ <h2>EVALUATE Means Judge Using Reasons</h2>
+ <div class="assignment">“<span class="word">Evaluate</span> the effectiveness of the author's evidence.”</div>
+ <p class="q">What does the assignment want?</p>
+ <div class="options" id="q2">
+  <button class="choice" data-ok="false">List all of the evidence the author uses.</button>
+  <button class="choice" data-ok="true">Decide how convincing or useful the evidence is and explain the standards behind that judgment.</button>
+  <button class="choice" data-ok="false">Say whether I personally like the article.</button>
+ </div>
+ <div id="fb2" class="feedback"></div>
+ <div class="callout"><strong>EVALUATE:</strong> make a judgment using criteria or reasons.<br><strong>Plain-language question:</strong> “How strong, effective, credible, useful, or successful is this—and why?”</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode IMPLY</button></div>
+</section>
+
+<section class="screen" data-step="3">
+ <div class="kicker">Code 4 · Imply + Assumption</div>
+ <h2>Sometimes the Meaning Is Not Stated Directly</h2>
+ <div class="assignment">“What does the advertisement <span class="word">imply</span> about success, and what <span class="word">assumption</span> about its audience does it rely on?”</div>
+ <p class="q">Which interpretation best matches these words?</p>
+ <div class="options" id="q3">
+  <button class="choice" data-ok="false">Only repeat exactly what the advertisement says.</button>
+  <button class="choice" data-ok="true">Infer an unstated message and identify something the advertisement seems to take for granted.</button>
+  <button class="choice" data-ok="false">Guess what the advertiser was secretly thinking.</button>
+ </div>
+ <div id="fb3" class="feedback"></div>
+ <div class="callout"><strong>IMPLY:</strong> communicate something without stating it directly.<br><strong>ASSUMPTION:</strong> an idea treated as true without being fully argued or proven.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode CONTEXT</button></div>
+</section>
+
+<section class="screen" data-step="4">
+ <div class="kicker">Code 5 · Context + Significant</div>
+ <h2>The Clue May Be Outside the Sentence</h2>
+ <div class="assignment">“Explain the historical <span class="word">context</span> of the speech and identify one <span class="word">significant</span> detail.”</div>
+ <p class="q">What does <strong>context</strong> mean here?</p>
+ <div class="options" id="q4">
+  <button class="choice" data-ok="false">Define every difficult word in the speech.</button>
+  <button class="choice" data-ok="true">Explain relevant circumstances around the speech that help us understand it.</button>
+  <button class="choice" data-ok="false">Summarize the speech paragraph by paragraph.</button>
+ </div>
+ <div id="fb4" class="feedback"></div>
+ <div class="note"><strong>CONTEXT:</strong> relevant circumstances surrounding an idea, event, text, quotation, or decision.<br><strong>SIGNIFICANT:</strong> important in a way you can explain—not merely noticeable.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode QUALIFY</button></div>
+</section>
+
+<section class="screen" data-step="5">
+ <div class="kicker">Code 6 · Qualify</div>
+ <h2>QUALIFY Does Not Mean “Make It Better”</h2>
+ <div class="assignment">“<span class="word">Qualify</span> the claim that social media is harmful to teenagers.”</div>
+ <p class="q">Which move qualifies the claim?</p>
+ <div class="options" id="q5">
+  <button class="choice" data-ok="false">Social media is definitely harmful to all teenagers.</button>
+  <button class="choice" data-ok="true">Social media can contribute to harm in some circumstances, but effects differ by platform, use, and individual experience.</button>
+  <button class="choice" data-ok="false">Social media exists on phones and computers.</button>
+ </div>
+ <div id="fb5" class="feedback"></div>
+ <div class="callout"><strong>QUALIFY:</strong> limit, complicate, or add conditions to a claim so it is more accurate.<br><strong>Plain-language question:</strong> “When is this true? When might it not be? What limits belong on this claim?”</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode SYNTHESIZE</button></div>
+</section>
+
+<section class="screen" data-step="6">
+ <div class="kicker">Code 7 · Synthesize</div>
+ <h2>SYNTHESIZE Means Put Sources Into Conversation</h2>
+ <div class="assignment">“<span class="word">Synthesize</span> the three sources to explain why students leave college before completing a degree.”</div>
+ <p class="q">Which response is closest to synthesis?</p>
+ <div class="options" id="q6">
+  <button class="choice" data-ok="false">Source A says this. Source B says this. Source C says this.</button>
+  <button class="choice" data-ok="true">Sources A and B both emphasize financial pressure, while Source C shows how that pressure interacts with transportation and family responsibilities.</button>
+  <button class="choice" data-ok="false">Choose the source I agree with most and ignore the others.</button>
+ </div>
+ <div id="fb6" class="feedback"></div>
+ <div class="callout"><strong>SYNTHESIZE:</strong> combine ideas from multiple sources to show relationships, patterns, agreements, tensions, or a larger conclusion.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Crack a Mixed Code</button></div>
+</section>
+
+<section class="screen" data-step="7">
+ <div class="kicker">Code 8 · Mixed Assignment</div>
+ <h2>Translate the Professor Sentence</h2>
+ <div class="assignment">“<span class="word">Evaluate</span> the author's central claim by considering its <span class="word">assumptions</span>, evidence, and historical <span class="word">context</span>.”</div>
+ <p class="q">Which plain-language translation is strongest?</p>
+ <div class="options" id="q7">
+  <button class="choice" data-ok="false">Summarize the article and define its vocabulary.</button>
+  <button class="choice" data-ok="true">Judge how convincing the main claim is by examining what it takes for granted, the support it uses, and the circumstances surrounding it.</button>
+  <button class="choice" data-ok="false">Explain whether the topic is interesting to me.</button>
+ </div>
+ <div id="fb7" class="feedback"></div>
+ <div class="code-grid">
+  <div class="code-card"><strong>ANALYZE</strong>How/why does it work?</div>
+  <div class="code-card"><strong>EVALUATE</strong>How strong/effective is it, and why?</div>
+  <div class="code-card"><strong>IMPLY</strong>What unstated meaning is suggested?</div>
+  <div class="code-card"><strong>ASSUMPTION</strong>What is being taken for granted?</div>
+  <div class="code-card"><strong>CONTEXT</strong>What surrounding circumstances matter?</div>
+  <div class="code-card"><strong>QUALIFY</strong>What limits or conditions belong on the claim?</div>
+  <div class="code-card"><strong>SIGNIFICANT</strong>Why is this detail important?</div>
+  <div class="code-card"><strong>SYNTHESIZE</strong>How do multiple sources connect?</div>
+  <div class="code-card"><strong>INTERPRET</strong>What meaning can I reasonably explain from the evidence?</div>
+ </div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode My Own Assignment</button></div>
+</section>
+
+<section class="screen" data-step="8">
+ <div class="kicker">Code 9 · Your Turn</div>
+ <h2>Decode a Real Academic Direction</h2>
+ <label for="assignment"><strong>Paste or type one sentence from an assignment, prompt, rubric, or professor comment.</strong></label>
+ <textarea id="assignment" placeholder="Example: Analyze how the author qualifies her argument and evaluate the significance of the evidence."></textarea>
+
+ <p class="q">Which academic word are you decoding?</p>
+ <select id="term">
+  <option value="">Choose a word</option>
+  <option value="Analyze">Analyze</option>
+  <option value="Evaluate">Evaluate</option>
+  <option value="Imply">Imply</option>
+  <option value="Assumption">Assumption</option>
+  <option value="Context">Context</option>
+  <option value="Qualify">Qualify</option>
+  <option value="Significant">Significant</option>
+  <option value="Synthesize">Synthesize</option>
+  <option value="Interpret">Interpret</option>
+  <option value="Other">Another academic word</option>
+ </select>
+
+ <label for="plain" style="display:block;margin-top:14px"><strong>Translate the direction into plain language.</strong></label>
+ <textarea id="plain" placeholder="In other words, my professor wants me to..."></textarea>
+
+ <label for="action" style="display:block;margin-top:14px"><strong>What would you actually DO in your paper?</strong></label>
+ <textarea id="action" placeholder="Example: Compare the evidence, decide how convincing it is, and explain why."></textarea>
+
+ <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeCard" disabled>Make My Decoder Card</button></div>
+
+ <div id="card" class="cheat hidden" aria-live="polite">
+  <h2 style="margin-top:0">🔓 My Academic Code Decoder</h2>
+  <div class="row"><strong>Original direction:</strong><div id="cAssignment"></div></div>
+  <div class="row"><strong>Word I'm decoding:</strong><div id="cTerm"></div></div>
+  <div class="row"><strong>In plain language:</strong><div id="cPlain"></div></div>
+  <div class="row"><strong>What I will actually do:</strong><div id="cAction"></div></div>
+  <div class="note"><strong>Decoder rule:</strong><br>Do not stop at “What does this word mean?” Ask: <strong>“What kind of thinking or writing is this word asking me to do here?”</strong></div>
+ </div>
+</section>
+</main>
+
+<script>
+(()=>{
+ const screens=[...document.querySelectorAll('.screen')];
+ const names=['Read the whole direction','Analyze','Evaluate','Imply + assumption','Context + significant','Qualify','Synthesize','Mixed assignment','Your assignment'];
+ let cur=0;
+ const bar=document.getElementById('bar'),stepText=document.getElementById('stepText'),stepName=document.getElementById('stepName'),live=document.getElementById('live');
+
+ function update(){
+  bar.style.width=((cur+1)/screens.length*100)+'%';
+  stepText.textContent=`Code ${cur+1} of ${screens.length}`;
+  stepName.textContent=names[cur];
+ }
+ function show(n){
+  screens[cur].classList.remove('active');
+  cur=n;
+  screens[cur].classList.add('active');
+  update();
+  window.scrollTo({top:0,behavior:'smooth'});
+ }
+ document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
+ document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
+
+ function enable(i,on=true){
+  const b=screens[i].querySelector('.next');
+  if(b)b.disabled=!on;
+ }
+
+ const messages={
+  q0:'Exactly. Academic vocabulary is easier to decode when you read the whole direction and identify the kind of thinking it requires.',
+  q1:'Yes. Analysis moves beyond naming the feature and explains what it does or why it matters.',
+  q2:'Exactly. Evaluation requires a judgment plus reasons or criteria.',
+  q3:'Yes. “Imply” asks for an evidence-based inference; “assumption” asks what is being taken for granted.',
+  q4:'Exactly. Context is the relevant situation surrounding the text—not every possible background fact.',
+  q5:'Yes. Qualifying a claim adds limits, exceptions, or conditions so the claim becomes more precise.',
+  q6:'Exactly. Synthesis shows relationships among sources instead of reporting them one at a time.',
+  q7:'Exactly. You translated several academic terms into concrete thinking moves.'
+ };
+
+ Object.keys(messages).forEach((id,idx)=>{
+  const box=document.getElementById(id),fb=document.getElementById('fb'+idx);
+  box.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+   box.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed','false'));
+   b.setAttribute('aria-pressed','true');
+   const ok=b.dataset.ok==='true';
+   fb.className='feedback show '+(ok?'good':'try');
+   fb.textContent=ok?messages[id]:'Try again. Ask what kind of thinking the academic word requires—not merely what topic the sentence mentions.';
+   enable(idx,ok);
+   live.textContent=fb.textContent;
+  }));
+ });
+
+ const assignment=document.getElementById('assignment'),term=document.getElementById('term'),plain=document.getElementById('plain'),action=document.getElementById('action'),make=document.getElementById('makeCard');
+ function check(){
+  make.disabled=!(assignment.value.trim()&&term.value&&plain.value.trim()&&action.value.trim());
+ }
+ [assignment,plain,action].forEach(el=>el.addEventListener('input',check));
+ term.addEventListener('change',check);
+
+ make.addEventListener('click',()=>{
+  document.getElementById('cAssignment').textContent=assignment.value.trim();
+  document.getElementById('cTerm').textContent=term.value;
+  document.getElementById('cPlain').textContent=plain.value.trim();
+  document.getElementById('cAction').textContent=action.value.trim();
+  document.getElementById('card').classList.remove('hidden');
+  document.getElementById('card').scrollIntoView({behavior:'smooth',block:'start'});
+  live.textContent='Your academic code decoder card is ready.';
+ });
+ update();
+})();
+</script>
+</body>
+</html>
