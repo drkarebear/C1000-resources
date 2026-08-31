@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>What's Still Possible?</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f8f7;
+      color: #263943;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    button,
+    textarea,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #173e4b;
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    .hero {
+      background: #edf4ef;
+      border: 1px solid #cedfd2;
+      border-radius: 20px;
+      padding: 34px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #557062;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #26483a;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+    }
+
+    h2,
+    h3 {
+      color: #26483a;
+      line-height: 1.3;
+    }
+
+    .note,
+    .step,
+    .plan-card {
+      background: #ffffff;
+      border: 1px solid #d8e0dc;
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      background: #edf4ef;
+      border-radius: 999px;
+      color: #496456;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brain-box {
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+      padding: 20px;
+      margin: 18px 0;
+    }
+
+    .task-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .task-entry input {
+      min-width: 0;
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 12px;
+      border: 1px solid #aebcb5;
+      border-radius: 9px;
+      background: #ffffff;
+      color: #263943;
+    }
+
+    .add-button,
+    .build-button {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 16px;
+      background: #245f75;
+      color: #ffffff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .add-button:hover,
+    .build-button:hover {
+      background: #1d5063;
+    }
+
+    .task-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #f8faf9;
+      border: 1px solid #d5dfda;
+      border-radius: 10px;
+    }
+
+    .task-text {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .remove-button {
+      flex: 0 0 auto;
+      border: 1px solid #c7d3cd;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #475c52;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+
+    .sort-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .sort-card {
+      border-radius: 12px;
+      padding: 17px;
+      border: 1px solid #d6dfdb;
+    }
+
+    .sort-card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #26483a;
+    }
+
+    .do {
+      background: #edf5ee;
+    }
+
+    .ask {
+      background: #eef5f7;
+    }
+
+    .later {
+      background: #f7f3e9;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 7px;
+      font-weight: 800;
+    }
+
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #aebcb5;
+      border-radius: 9px;
+      background: #ffffff;
+      color: #263943;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    select {
+      min-height: 48px;
+    }
+
+    .question-box {
+      background: #eef5f7;
+      border: 1px solid #c9dce1;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 18px;
+    }
+
+    .priority-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .priority-item {
+      background: #f9fbfa;
+      border: 1px solid #d0dbd5;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .priority-item strong {
+      color: #26483a;
+    }
+
+    .guilt-box {
+      background: #f8eeee;
+      border: 1px solid #e5d0d0;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 18px;
+    }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .time-choice,
+    .status-choice {
+      min-height: 48px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #cbd7d0;
+      border-radius: 10px;
+      background: #f9fbfa;
+      color: #263943;
+      cursor: pointer;
+    }
+
+    .time-choice:hover,
+    .status-choice:hover {
+      background: #edf4ef;
+    }
+
+    .time-choice.selected,
+    .status-choice.selected {
+      background: #e5f0e8;
+      border-color: #769582;
+      font-weight: 700;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .support-note {
+      background: #f7f3e9;
+      border-left: 5px solid #9b7d48;
+      padding: 20px;
+      margin-top: 18px;
+      display: none;
+    }
+
+    .support-note.show {
+      display: block;
+    }
+
+    .build-button {
+      width: 100%;
+      margin-top: 18px;
+      min-height: 50px;
+    }
+
+    .plan-card {
+      display: none;
+      background: #26483a;
+      color: #ffffff;
+      border-color: #26483a;
+    }
+
+    .plan-card.show {
+      display: block;
+    }
+
+    .plan-card h2 {
+      color: #ffffff;
+      margin-top: 0;
+    }
+
+    .plan-line {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+    }
+
+    .plan-line:last-child {
+      border-bottom: 0;
+    }
+
+    .plan-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #d8e8dc;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ending {
+      margin-top: 28px;
+      padding: 26px;
+      text-align: center;
+      background: #eef5f0;
+      border: 1px solid #cddfd1;
+      border-radius: 16px;
+    }
+
+    .ending strong {
+      display: block;
+      color: #36523d;
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 760px) {
+      .sort-grid,
+      .time-grid,
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .task-entry {
+        grid-template-columns: 1fr;
+      }
+
+      .shell {
+        padding: 12px 10px 40px;
+      }
+
+      .hero,
+      .note,
+      .step,
+      .plan-card,
+      .ending {
+        padding: 21px 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="shell">
+
+  <!-- HERO -->
+
+  <header class="hero">
+    <p class="eyebrow">
+      Academic Triage Tool
+    </p>
+
+    <h1>
+      What&rsquo;s Still Possible?
+    </h1>
+
+    <p>
+      When several things pile up at once, your brain may turn
+      <strong>&ldquo;I have a lot to deal with&rdquo;</strong>
+      into
+      <strong>&ldquo;There&rsquo;s no point trying.&rdquo;</strong>
+    </p>
+
+    <p>
+      This tool will help you sort what is actually actionable, what needs information,
+      what can wait, and what your next move should be.
+    </p>
+  </header>
+
+
+  <!-- OPENING -->
+
+  <section class="note">
+
+    <strong>You do not have to save everything to improve your situation.</strong>
+
+    <p>
+      A realistic plan may include doing some things now, asking about others,
+      and intentionally setting some things aside.
+    </p>
+
+  </section>
+
+
+  <!-- STEP 1 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 1</span>
+
+    <h2>
+      Get It Out of Your Head
+    </h2>
+
+    <p>
+      Start by listing the things that feel like they are hanging over you.
+      Do not organize them yet.
+    </p>
+
+    <div class="task-entry">
+      <input
+        type="text"
+        id="taskInput"
+        aria-label="Add something that is hanging over you"
+        placeholder="Example: Essay due tomorrow"
+      >
+
+      <button type="button" class="add-button" id="addTask">
+        Add
+      </button>
+    </div>
+
+    <div class="task-list" id="taskList" aria-live="polite"></div>
+
+    <div class="brain-box">
+      <strong>
+        Your brain has been trying to hold all of this at once.
+      </strong>
+      <p>
+        Now that it is outside your head, you can sort it instead of carrying it as one giant problem.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- STEP 2 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 2</span>
+
+    <h2>
+      Not Everything on the List Is the Same
+    </h2>
+
+    <p>
+      Sort what you found into three kinds of problems.
+    </p>
+
+    <div class="sort-grid">
+
+      <div class="sort-card do">
+        <strong>DO NOW</strong>
+        Something is open, actionable, and worth attention.
+      </div>
+
+      <div class="sort-card ask">
+        <strong>ASK ABOUT</strong>
+        You need information before you know what to do.
+      </div>
+
+      <div class="sort-card later">
+        <strong>NOT NOW</strong>
+        It is closed, less urgent, or can wait while something else matters more.
+      </div>
+
+    </div>
+
+    <label for="doNow">
+      What belongs in DO NOW?
+    </label>
+
+    <textarea
+      id="doNow"
+      placeholder="Example: Essay due tomorrow; current reading"
+    ></textarea>
+
+    <label for="askAbout">
+      What belongs in ASK ABOUT?
+    </label>
+
+    <textarea
+      id="askAbout"
+      placeholder="Example: Can Quiz 3 still be reopened?"
+    ></textarea>
+
+    <label for="notNow">
+      What belongs in NOT NOW?
+    </label>
+
+    <textarea
+      id="notNow"
+      placeholder="Example: Closed discussion from two weeks ago"
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 3 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 3</span>
+
+    <h2>
+      Is It a Task or a Question?
+    </h2>
+
+    <div class="question-box">
+
+      <p>
+        <strong>
+          &ldquo;Make up Quiz 3&rdquo;
+        </strong>
+        is not actually a task if you do not know whether Quiz 3 can be reopened.
+      </p>
+
+      <p>
+        The real task may be:
+      </p>
+
+      <p>
+        <strong>
+          &ldquo;Ask whether Quiz 3 is still available to make up.&rdquo;
+        </strong>
+      </p>
+
+    </div>
+
+    <p>
+      Some things feel huge because you are trying to solve a question as though it were a task.
+    </p>
+
+    <label for="questionNeeded">
+      Is there one question that would make your situation clearer?
+    </label>
+
+    <textarea
+      id="questionNeeded"
+      placeholder="Example: Should I still submit the missed assignment or focus on the current one?"
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 4 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 4</span>
+
+    <h2>
+      Find the Move With the Most Leverage
+    </h2>
+
+    <p>
+      Do not automatically choose the oldest task.
+      Ask which action would help your situation the most.
+    </p>
+
+    <div class="priority-list">
+
+      <div class="priority-item">
+        <strong>Nearest deadline:</strong>
+        Is something due very soon?
+      </div>
+
+      <div class="priority-item">
+        <strong>Big impact:</strong>
+        Is one task worth much more than another?
+      </div>
+
+      <div class="priority-item">
+        <strong>Unlocks something:</strong>
+        Will doing this help you move forward on other work?
+      </div>
+
+      <div class="priority-item">
+        <strong>Needs another person:</strong>
+        Should you ask a question now because you are waiting on information?
+      </div>
+
+      <div class="priority-item">
+        <strong>Small restart:</strong>
+        Is there a short task that would help you regain momentum?
+      </div>
+
+    </div>
+
+    <div class="guilt-box">
+
+      <strong>Do not let guilt choose your priority.</strong>
+
+      <p>
+        Let information choose it.
+      </p>
+
+      <p>
+        A closed 10-point assignment from two weeks ago may feel emotionally louder than
+        a 100-point essay due tomorrow. That does not make it the better place to spend your time.
+      </p>
+
+    </div>
+
+    <label for="priority">
+      What is the highest-impact thing you can actually work on now?
+    </label>
+
+    <textarea
+      id="priority"
+      placeholder="Example: The essay due tomorrow"
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 5 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 5</span>
+
+    <h2>
+      Decide What You Are Not Doing Right Now
+    </h2>
+
+    <p>
+      A realistic plan includes limits.
+      Choosing not to work on something right now does not mean it never matters.
+    </p>
+
+    <p>
+      It means you are protecting your attention for what matters more.
+    </p>
+
+    <label for="letGo">
+      What are you intentionally not working on right now?
+    </label>
+
+    <textarea
+      id="letGo"
+      placeholder="Example: I am not going to work backward through every closed assignment tonight."
+    ></textarea>
+
+    <label for="whyLetGo">
+      Why is that a reasonable choice?
+    </label>
+
+    <select id="whyLetGo">
+      <option value="">Choose one</option>
+      <option value="It is already closed.">It is already closed.</option>
+      <option value="Something else is more urgent.">Something else is more urgent.</option>
+      <option value="I need information first.">I need information first.</option>
+      <option value="It can wait.">It can wait.</option>
+      <option value="I need help before I can continue.">I need help before I can continue.</option>
+      <option value="I am protecting my limited time for something more important.">
+        I am protecting my limited time for something more important.
+      </option>
+    </select>
+
+  </section>
+
+
+  <!-- STEP 6 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 6</span>
+
+    <h2>
+      Plan for the Time You Actually Have
+    </h2>
+
+    <p>
+      Do not make a plan for the time you wish you had.
+      Choose the amount of usable time you actually have right now.
+    </p>
+
+    <div class="time-grid" id="timeChoices">
+
+      <button type="button" class="time-choice">
+        5 minutes
+      </button>
+
+      <button type="button" class="time-choice">
+        15 minutes
+      </button>
+
+      <button type="button" class="time-choice">
+        30 minutes
+      </button>
+
+      <button type="button" class="time-choice">
+        About an hour
+      </button>
+
+    </div>
+
+    <label for="nextMove">
+      What can you realistically do in that time?
+    </label>
+
+    <textarea
+      id="nextMove"
+      placeholder="Example: Read the prompt, choose one piece of evidence, and draft one paragraph."
+    ></textarea>
+
+  </section>
+
+
+  <!-- STEP 7 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 7</span>
+
+    <h2>
+      Do You Need a Plan or Better Information?
+    </h2>
+
+    <p>
+      Which description is closest to your situation?
+    </p>
+
+    <div class="status-grid" id="statusChoices">
+
+      <button type="button" class="status-choice" data-support="no">
+        I mostly need a plan.
+      </button>
+
+      <button type="button" class="status-choice" data-support="yes">
+        I need information from my professor.
+      </button>
+
+      <button type="button" class="status-choice" data-support="yes">
+        I am significantly behind and do not understand my options.
+      </button>
+
+      <button type="button" class="status-choice" data-support="yes">
+        I may need help understanding bigger course or enrollment options.
+      </button>
+
+    </div>
+
+    <div class="support-note" id="supportNote">
+
+      <strong>This may be an information problem now.</strong>
+
+      <p>
+        Working harder cannot answer questions you do not have enough information to answer.
+        Before making a major decision, contact the appropriate professor, counselor, or college support person
+        so you can understand your actual options and deadlines.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- STEP 8 -->
+
+  <section class="step">
+
+    <span class="step-number">Step 8</span>
+
+    <h2>
+      Build Your Possible Plan
+    </h2>
+
+    <p>
+      Your plan does not need to fix everything.
+      It only needs to make your situation better than it was before you started.
+    </p>
+
+    <button type="button" class="build-button" id="buildButton">
+      Build My What&rsquo;s Still Possible Card
+    </button>
+
+  </section>
+
+
+  <!-- GENERATED CARD -->
+
+  <section class="plan-card" id="planCard" aria-live="polite">
+
+    <h2>
+      🌱 What&rsquo;s Still Possible
+    </h2>
+
+    <div class="plan-line">
+      <span class="plan-label">What actually needs attention now</span>
+      <span id="cardDoNow">Focus on what is still actionable.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">What I need information about</span>
+      <span id="cardQuestion">Nothing right now.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">What can wait</span>
+      <span id="cardNotNow">Not everything needs attention today.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">What I am intentionally not working on</span>
+      <span id="cardLetGo">Everything at once.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">Why that is reasonable</span>
+      <span id="cardWhy">I am protecting my attention for what matters most.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">My highest-impact priority</span>
+      <span id="cardPriority">Choose one useful priority.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">The time I actually have</span>
+      <span id="cardTime">A manageable amount of time.</span>
+    </div>
+
+    <div class="plan-line">
+      <span class="plan-label">My next move</span>
+      <span id="cardMove">Take one useful step.</span>
+    </div>
+
+  </section>
+
+
+  <!-- ENDING -->
+
+  <section class="ending">
+
+    <strong>
+      You do not need to fix everything to improve your situation.
+    </strong>
+
+    <p>
+      Do the next move on your card.
+    </p>
+
+    <p>
+      <strong>
+        Do not reopen the whole list yet.
+      </strong>
+    </p>
+
+  </section>
+
+</main>
+
+
+<script>
+  const taskInput = document.getElementById("taskInput");
+  const addTaskButton = document.getElementById("addTask");
+  const taskList = document.getElementById("taskList");
+
+  const timeChoices = document.querySelectorAll("#timeChoices .time-choice");
+  const statusChoices = document.querySelectorAll("#statusChoices .status-choice");
+
+  let tasks = [];
+  let selectedTime = "";
+  let selectedStatus = "";
+
+  function renderTasks() {
+    taskList.innerHTML = "";
+
+    tasks.forEach(function(task, index) {
+      const item = document.createElement("div");
+      item.className = "task-item";
+
+      const text = document.createElement("span");
+      text.className = "task-text";
+      text.textContent = task;
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "remove-button";
+      remove.textContent = "Remove";
+      remove.setAttribute("aria-label", "Remove " + task);
+
+      remove.addEventListener("click", function() {
+        tasks.splice(index, 1);
+        renderTasks();
+      });
+
+      item.appendChild(text);
+      item.appendChild(remove);
+      taskList.appendChild(item);
+    });
+  }
+
+  function addTask() {
+    const value = taskInput.value.trim();
+
+    if (!value) {
+      taskInput.focus();
+      return;
+    }
+
+    if (tasks.length >= 12) {
+      alert("Keep the list short for now. Twelve items is enough to sort.");
+      return;
+    }
+
+    tasks.push(value);
+    taskInput.value = "";
+    renderTasks();
+    taskInput.focus();
+  }
+
+  addTaskButton.addEventListener("click", addTask);
+
+  taskInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      addTask();
+    }
+  });
+
+  timeChoices.forEach(function(button) {
+    button.addEventListener("click", function() {
+      timeChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+      selectedTime = button.textContent.trim();
+    });
+  });
+
+  statusChoices.forEach(function(button) {
+    button.addEventListener("click", function() {
+      statusChoices.forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+      selectedStatus = button.textContent.trim();
+
+      const needsSupport = button.getAttribute("data-support") === "yes";
+      document.getElementById("supportNote").classList.toggle("show", needsSupport);
+    });
+  });
+
+  document.getElementById("buildButton").addEventListener("click", function() {
+
+    const doNow = document.getElementById("doNow").value.trim();
+    const askAbout = document.getElementById("askAbout").value.trim();
+    const notNow = document.getElementById("notNow").value.trim();
+    const questionNeeded = document.getElementById("questionNeeded").value.trim();
+    const priority = document.getElementById("priority").value.trim();
+    const letGo = document.getElementById("letGo").value.trim();
+    const whyLetGo = document.getElementById("whyLetGo").value;
+    const nextMove = document.getElementById("nextMove").value.trim();
+
+    document.getElementById("cardDoNow").textContent =
+      doNow || "Focus on what is still open and actionable.";
+
+    document.getElementById("cardQuestion").textContent =
+      questionNeeded || askAbout || "I do not need more information before starting.";
+
+    document.getElementById("cardNotNow").textContent =
+      notNow || "Some things can wait while I focus on what matters now.";
+
+    document.getElementById("cardLetGo").textContent =
+      letGo || "I am not trying to solve everything at once.";
+
+    document.getElementById("cardWhy").textContent =
+      whyLetGo || "I am protecting my limited attention for what matters most.";
+
+    document.getElementById("cardPriority").textContent =
+      priority || "Choose the most useful actionable task.";
+
+    document.getElementById("cardTime").textContent =
+      selectedTime || "A manageable amount of time.";
+
+    document.getElementById("cardMove").textContent =
+      nextMove || "Take one useful step on the highest-impact task.";
+
+    const planCard = document.getElementById("planCard");
+    planCard.classList.add("show");
+    planCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
+
+</body>
+</html>
