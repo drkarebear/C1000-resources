@@ -14,6 +14,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58}
 main{max-width:980px;margin:auto;padding:24px 16px 60px}
+.skip-link{position:absolute;left:12px;top:-60px;background:#fff;color:#211b63;border:2px solid var(--accent);border-radius:10px;padding:10px 14px;font-weight:900;z-index:1000}.skip-link:focus{top:12px}
 .hero{background:linear-gradient(135deg,#283043,#515a78);color:#fff;padding:28px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:18px}
 .hero h1{font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.05;margin:0 0 8px}
 .hero p{max-width:800px;margin:6px 0}.mini{font-size:.94rem;color:#eceeff}
@@ -37,13 +38,14 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
 input[type=text],textarea,select{width:100%;border:2px solid var(--line);border-radius:11px;padding:11px;font:inherit;background:#fff}textarea{min-height:90px;resize:vertical}
 input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px solid rgba(94,82,178,.14)}
 .cheat{border:2px solid var(--accent);border-radius:18px;padding:20px;background:#fff;margin-top:18px}.row{border-top:1px solid var(--line);padding:11px 0}.row:first-of-type{border-top:0}
-.small{font-size:.92rem;color:var(--muted)}.hidden{display:none!important}
+.small{font-size:.92rem;color:var(--muted)}.field-label{display:block;margin-top:14px;font-weight:900}.hint{margin-top:10px;padding:12px 14px;border-radius:11px;background:var(--accent2);border-left:5px solid var(--accent)}.hidden{display:none!important}
 @media(max-width:760px){.grid,.code-grid{grid-template-columns:1fr}.decode{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
-<main>
+<a class="skip-link" href="#activity">Skip to the academic language activity</a>
+<main id="activity">
 <section class="hero">
  <div class="kicker" style="color:#ddd9ff">Academic Language Lab</div>
  <h1>🔓 Crack the Academic Code</h1>
@@ -64,13 +66,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <p>Imagine you know what the reading is about, but you are not sure what <strong>analyze</strong> means here.</p>
  <p class="q">What is the strongest first move?</p>
  <div class="options" id="q0">
-  <button class="choice" data-ok="false">Look up the word and copy the first dictionary definition.</button>
-  <button class="choice" data-ok="true">Read the entire direction and ask what kind of thinking the sentence is asking me to do.</button>
-  <button class="choice" data-ok="false">Ignore the word and just summarize the reading.</button>
+  <button type="button" class="choice" data-ok="false">Look up the word and copy the first dictionary definition.</button>
+  <button type="button" class="choice" data-ok="true">Read the entire direction and ask what kind of thinking the sentence is asking me to do.</button>
+  <button type="button" class="choice" data-ok="false">Ignore the word and just summarize the reading.</button>
  </div>
  <div id="fb0" class="feedback"></div>
  <div class="note"><strong>Academic words live in sentences.</strong> A definition helps, but the rest of the assignment tells you what the word means <em>here</em>.</div>
- <div class="controls"><button class="primary next" disabled>Decode ANALYZE</button></div>
+ <div class="controls"><button type="button" class="primary next" disabled>Decode ANALYZE</button></div>
 </section>
 
 <section class="screen" data-step="1">
@@ -79,13 +81,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“<span class="word">Analyze</span> how the author's use of repetition shapes the tone of the passage.”</div>
  <p class="q">Which response is actually analysis?</p>
  <div class="options" id="q1">
-  <button class="choice" data-ok="false">The author repeats the phrase “we waited” several times.</button>
-  <button class="choice" data-ok="true">The repeated phrase “we waited” slows the passage and creates a feeling of frustration and powerlessness.</button>
-  <button class="choice" data-ok="false">The passage is about a family waiting for help.</button>
+  <button type="button" class="choice" data-ok="false">The author repeats the phrase “we waited” several times.</button>
+  <button type="button" class="choice" data-ok="true">The repeated phrase “we waited” slows the passage and creates a feeling of frustration and powerlessness.</button>
+  <button type="button" class="choice" data-ok="false">The passage is about a family waiting for help.</button>
  </div>
  <div id="fb1" class="feedback"></div>
  <div class="callout"><strong>ANALYZE:</strong> break something into parts and explain how those parts work, connect, or create an effect.<br><strong>Plain-language question:</strong> “What is happening here, and how/why does it matter?”</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode EVALUATE</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Decode EVALUATE</button></div>
 </section>
 
 <section class="screen" data-step="2">
@@ -94,13 +96,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“<span class="word">Evaluate</span> the effectiveness of the author's evidence.”</div>
  <p class="q">What does the assignment want?</p>
  <div class="options" id="q2">
-  <button class="choice" data-ok="false">List all of the evidence the author uses.</button>
-  <button class="choice" data-ok="true">Decide how convincing or useful the evidence is and explain the standards behind that judgment.</button>
-  <button class="choice" data-ok="false">Say whether I personally like the article.</button>
+  <button type="button" class="choice" data-ok="false">List all of the evidence the author uses.</button>
+  <button type="button" class="choice" data-ok="true">Decide how convincing or useful the evidence is and explain the standards behind that judgment.</button>
+  <button type="button" class="choice" data-ok="false">Say whether I personally like the article.</button>
  </div>
  <div id="fb2" class="feedback"></div>
  <div class="callout"><strong>EVALUATE:</strong> make a judgment using criteria or reasons.<br><strong>Plain-language question:</strong> “How strong, effective, credible, useful, or successful is this—and why?”</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode IMPLY</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Decode IMPLY</button></div>
 </section>
 
 <section class="screen" data-step="3">
@@ -109,13 +111,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“What does the advertisement <span class="word">imply</span> about success, and what <span class="word">assumption</span> about its audience does it rely on?”</div>
  <p class="q">Which interpretation best matches these words?</p>
  <div class="options" id="q3">
-  <button class="choice" data-ok="false">Only repeat exactly what the advertisement says.</button>
-  <button class="choice" data-ok="true">Infer an unstated message and identify something the advertisement seems to take for granted.</button>
-  <button class="choice" data-ok="false">Guess what the advertiser was secretly thinking.</button>
+  <button type="button" class="choice" data-ok="false">Only repeat exactly what the advertisement says.</button>
+  <button type="button" class="choice" data-ok="true">Infer an unstated message and identify something the advertisement seems to take for granted.</button>
+  <button type="button" class="choice" data-ok="false">Guess what the advertiser was secretly thinking.</button>
  </div>
  <div id="fb3" class="feedback"></div>
  <div class="callout"><strong>IMPLY:</strong> communicate something without stating it directly.<br><strong>ASSUMPTION:</strong> an idea treated as true without being fully argued or proven.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode CONTEXT</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Decode CONTEXT</button></div>
 </section>
 
 <section class="screen" data-step="4">
@@ -124,13 +126,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“Explain the historical <span class="word">context</span> of the speech and identify one <span class="word">significant</span> detail.”</div>
  <p class="q">What does <strong>context</strong> mean here?</p>
  <div class="options" id="q4">
-  <button class="choice" data-ok="false">Define every difficult word in the speech.</button>
-  <button class="choice" data-ok="true">Explain relevant circumstances around the speech that help us understand it.</button>
-  <button class="choice" data-ok="false">Summarize the speech paragraph by paragraph.</button>
+  <button type="button" class="choice" data-ok="false">Define every difficult word in the speech.</button>
+  <button type="button" class="choice" data-ok="true">Explain relevant circumstances around the speech that help us understand it.</button>
+  <button type="button" class="choice" data-ok="false">Summarize the speech paragraph by paragraph.</button>
  </div>
  <div id="fb4" class="feedback"></div>
  <div class="note"><strong>CONTEXT:</strong> relevant circumstances surrounding an idea, event, text, quotation, or decision.<br><strong>SIGNIFICANT:</strong> important in a way you can explain—not merely noticeable.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode QUALIFY</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Decode QUALIFY</button></div>
 </section>
 
 <section class="screen" data-step="5">
@@ -139,13 +141,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“<span class="word">Qualify</span> the claim that social media is harmful to teenagers.”</div>
  <p class="q">Which move qualifies the claim?</p>
  <div class="options" id="q5">
-  <button class="choice" data-ok="false">Social media is definitely harmful to all teenagers.</button>
-  <button class="choice" data-ok="true">Social media can contribute to harm in some circumstances, but effects differ by platform, use, and individual experience.</button>
-  <button class="choice" data-ok="false">Social media exists on phones and computers.</button>
+  <button type="button" class="choice" data-ok="false">Social media is definitely harmful to all teenagers.</button>
+  <button type="button" class="choice" data-ok="true">Social media can contribute to harm in some circumstances, but effects differ by platform, use, and individual experience.</button>
+  <button type="button" class="choice" data-ok="false">Social media exists on phones and computers.</button>
  </div>
  <div id="fb5" class="feedback"></div>
  <div class="callout"><strong>QUALIFY:</strong> limit, complicate, or add conditions to a claim so it is more accurate.<br><strong>Plain-language question:</strong> “When is this true? When might it not be? What limits belong on this claim?”</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode SYNTHESIZE</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Decode SYNTHESIZE</button></div>
 </section>
 
 <section class="screen" data-step="6">
@@ -154,13 +156,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“<span class="word">Synthesize</span> the three sources to explain why students leave college before completing a degree.”</div>
  <p class="q">Which response is closest to synthesis?</p>
  <div class="options" id="q6">
-  <button class="choice" data-ok="false">Source A says this. Source B says this. Source C says this.</button>
-  <button class="choice" data-ok="true">Sources A and B both emphasize financial pressure, while Source C shows how that pressure interacts with transportation and family responsibilities.</button>
-  <button class="choice" data-ok="false">Choose the source I agree with most and ignore the others.</button>
+  <button type="button" class="choice" data-ok="false">Source A says this. Source B says this. Source C says this.</button>
+  <button type="button" class="choice" data-ok="true">Sources A and B both emphasize financial pressure, while Source C shows how that pressure interacts with transportation and family responsibilities.</button>
+  <button type="button" class="choice" data-ok="false">Choose the source I agree with most and ignore the others.</button>
  </div>
  <div id="fb6" class="feedback"></div>
  <div class="callout"><strong>SYNTHESIZE:</strong> combine ideas from multiple sources to show relationships, patterns, agreements, tensions, or a larger conclusion.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Crack a Mixed Code</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Crack a Mixed Code</button></div>
 </section>
 
 <section class="screen" data-step="7">
@@ -169,9 +171,9 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <div class="assignment">“<span class="word">Evaluate</span> the author's central claim by considering its <span class="word">assumptions</span>, evidence, and historical <span class="word">context</span>.”</div>
  <p class="q">Which plain-language translation is strongest?</p>
  <div class="options" id="q7">
-  <button class="choice" data-ok="false">Summarize the article and define its vocabulary.</button>
-  <button class="choice" data-ok="true">Judge how convincing the main claim is by examining what it takes for granted, the support it uses, and the circumstances surrounding it.</button>
-  <button class="choice" data-ok="false">Explain whether the topic is interesting to me.</button>
+  <button type="button" class="choice" data-ok="false">Summarize the article and define its vocabulary.</button>
+  <button type="button" class="choice" data-ok="true">Judge how convincing the main claim is by examining what it takes for granted, the support it uses, and the circumstances surrounding it.</button>
+  <button type="button" class="choice" data-ok="false">Explain whether the topic is interesting to me.</button>
  </div>
  <div id="fb7" class="feedback"></div>
  <div class="code-grid">
@@ -185,7 +187,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
   <div class="code-card"><strong>SYNTHESIZE</strong>How do multiple sources connect?</div>
   <div class="code-card"><strong>INTERPRET</strong>What meaning can I reasonably explain from the evidence?</div>
  </div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Decode My Own Assignment</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary next" disabled>Decode My Own Assignment</button></div>
 </section>
 
 <section class="screen" data-step="8">
@@ -194,8 +196,8 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <label for="assignment"><strong>Paste or type one sentence from an assignment, prompt, rubric, or professor comment.</strong></label>
  <textarea id="assignment" placeholder="Example: Analyze how the author qualifies her argument and evaluate the significance of the evidence."></textarea>
 
- <p class="q">Which academic word are you decoding?</p>
- <select id="term">
+ <label class="field-label" for="term">Which academic word are you decoding?</label>
+ <select id="term" aria-describedby="termHint">
   <option value="">Choose a word</option>
   <option value="Analyze">Analyze</option>
   <option value="Evaluate">Evaluate</option>
@@ -208,6 +210,12 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
   <option value="Interpret">Interpret</option>
   <option value="Other">Another academic word</option>
  </select>
+ <div id="termHint" class="hint hidden" aria-live="polite"></div>
+
+ <div id="otherWrap" class="hidden">
+  <label class="field-label" for="otherTerm">What is the academic word?</label>
+  <input id="otherTerm" type="text" placeholder="Example: compare, discuss, examine, or justify">
+ </div>
 
  <label for="plain" style="display:block;margin-top:14px"><strong>Translate the direction into plain language.</strong></label>
  <textarea id="plain" placeholder="In other words, my professor wants me to..."></textarea>
@@ -215,10 +223,10 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
  <label for="action" style="display:block;margin-top:14px"><strong>What would you actually DO in your paper?</strong></label>
  <textarea id="action" placeholder="Example: Compare the evidence, decide how convincing it is, and explain why."></textarea>
 
- <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeCard" disabled>Make My Decoder Card</button></div>
+ <div class="controls"><button type="button" class="secondary back">Back</button><button type="button" class="primary" id="makeCard" disabled>Make My Decoder Card</button></div>
 
  <div id="card" class="cheat hidden" aria-live="polite">
-  <h2 style="margin-top:0">🔓 My Academic Code Decoder</h2>
+  <h3 style="margin-top:0">🔓 My Academic Code Decoder</h3>
   <div class="row"><strong>Original direction:</strong><div id="cAssignment"></div></div>
   <div class="row"><strong>Word I'm decoding:</strong><div id="cTerm"></div></div>
   <div class="row"><strong>In plain language:</strong><div id="cPlain"></div></div>
@@ -279,21 +287,49 @@ input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px s
   }));
  });
 
- const assignment=document.getElementById('assignment'),term=document.getElementById('term'),plain=document.getElementById('plain'),action=document.getElementById('action'),make=document.getElementById('makeCard');
- function check(){
-  make.disabled=!(assignment.value.trim()&&term.value&&plain.value.trim()&&action.value.trim());
+ const assignment=document.getElementById('assignment'),term=document.getElementById('term'),otherTerm=document.getElementById('otherTerm'),otherWrap=document.getElementById('otherWrap'),termHint=document.getElementById('termHint'),plain=document.getElementById('plain'),action=document.getElementById('action'),make=document.getElementById('makeCard');
+ const hints={
+  Analyze:'Ask: What are the important parts, how do they work together, and why does that matter?',
+  Evaluate:'Ask: What judgment am I making, what criteria am I using, and what evidence supports that judgment?',
+  Imply:'Ask: What meaning is suggested without being stated directly, and what evidence makes that inference reasonable?',
+  Assumption:'Ask: What idea is being taken for granted here?',
+  Context:'Ask: What surrounding circumstances help me understand this text, idea, event, or quotation?',
+  Qualify:'Ask: What limits, exceptions, or conditions would make this claim more accurate?',
+  Significant:'Ask: Why is this detail important to the larger point rather than merely noticeable?',
+  Synthesize:'Ask: What relationship can I show among these sources—agreement, difference, pattern, tension, or complication?',
+  Interpret:'Ask: What meaning can I reasonably explain from the available evidence?',
+  Other:'Use the whole sentence as context. Ask what mental action this word requires you to perform—not just what the word means in isolation.'
+ };
+ function selectedTerm(){
+  return term.value==='Other'?otherTerm.value.trim():term.value;
  }
- [assignment,plain,action].forEach(el=>el.addEventListener('input',check));
- term.addEventListener('change',check);
+ function check(){
+  const namedTerm=term.value && (term.value!=='Other'||otherTerm.value.trim());
+  make.disabled=!(assignment.value.trim()&&namedTerm&&plain.value.trim()&&action.value.trim());
+ }
+ function updateTermSupport(){
+  const isOther=term.value==='Other';
+  otherWrap.classList.toggle('hidden',!isOther);
+  if(term.value){
+   termHint.textContent=hints[term.value];
+   termHint.classList.remove('hidden');
+  }else{
+   termHint.textContent='';
+   termHint.classList.add('hidden');
+  }
+  check();
+ }
+ [assignment,plain,action,otherTerm].forEach(el=>el.addEventListener('input',check));
+ term.addEventListener('change',updateTermSupport);
 
  make.addEventListener('click',()=>{
   document.getElementById('cAssignment').textContent=assignment.value.trim();
-  document.getElementById('cTerm').textContent=term.value;
+  document.getElementById('cTerm').textContent=selectedTerm();
   document.getElementById('cPlain').textContent=plain.value.trim();
   document.getElementById('cAction').textContent=action.value.trim();
   document.getElementById('card').classList.remove('hidden');
   document.getElementById('card').scrollIntoView({behavior:'smooth',block:'start'});
-  live.textContent='Your academic code decoder card is ready.';
+  live.textContent='Your academic code decoder card is ready. You have translated the academic word into a concrete thinking and writing move.';
  });
  update();
 })();
