@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Submit the Imperfect Thing</title>
+<style>
+:root{
+ --bg:#f6f3ed;--ink:#25323a;--muted:#66727b;--card:#fff;--line:#d9d3ca;
+ --accent:#6757b8;--accent2:#f0edff;--green:#2f7666;--green2:#eaf6f1;
+ --gold:#8e691c;--gold2:#fff7dc;--rose:#98596b;--rose2:#fff0f4;
+ --blue:#356c87;--blue2:#edf7fb;--shadow:0 10px 28px rgba(37,50,58,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+main{max-width:980px;margin:auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,#2a3143,#565e7c);color:#fff;border-radius:20px;padding:28px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:3px 0 8px}
+.hero p{max-width:820px;margin:6px 0}.mini{color:#eeeefe;font-size:.94rem}
+.progressbox,.screen{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}
+.progressbox{padding:14px 16px;margin-bottom:18px}.proglabel{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:850}
+.track{height:10px;background:#e7e1d9;border-radius:999px;overflow:hidden;margin-top:8px}.bar{height:100%;background:var(--accent);width:12.5%;transition:width .2s}
+.screen{display:none;padding:24px}.screen.active{display:block}
+.kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--accent)}
+h2{font-size:1.75rem;line-height:1.2;margin:4px 0 10px}h3{margin:8px 0}
+.scene,.note,.callout,.warning,.thought{padding:15px 16px;border-radius:12px;margin:16px 0}
+.scene{background:#faf9f6;border:1px solid var(--line)}
+.note{background:var(--accent2);border-left:5px solid var(--accent)}
+.callout{background:var(--green2);border-left:5px solid var(--green)}
+.warning{background:var(--gold2);border-left:5px solid var(--gold)}
+.thought{background:var(--blue2);border-left:5px solid var(--blue)}
+.q{font-weight:900;font-size:1.08rem;margin:20px 0 9px}
+.options,.grid{display:grid;gap:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 15px;min-height:48px;font:inherit;color:var(--ink);cursor:pointer}
+.choice:hover,.choice:focus-visible{border-color:var(--accent);outline:3px solid rgba(103,87,184,.14);outline-offset:2px}
+.choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent2)}
+.feedback{display:none;padding:14px 16px;border-radius:12px;margin-top:12px}.feedback.show{display:block}.good{background:var(--green2);border-left:5px solid var(--green)}.try{background:var(--rose2);border-left:5px solid var(--rose)}
+.scorecard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}.score{border:1px solid var(--line);border-radius:13px;padding:14px;background:#faf9f6}.score strong{display:block}
+.controls{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;min-height:46px;font-size:1rem;font-weight:900;cursor:pointer}.primary{background:var(--accent);color:#fff}.secondary{background:#e7e1d9;color:var(--ink)}button:disabled{opacity:.5;cursor:not-allowed}
+textarea,select,input[type=text]{width:100%;border:2px solid var(--line);border-radius:11px;padding:11px;font:inherit;background:#fff}
+textarea{min-height:88px;resize:vertical}textarea:focus,select:focus,input:focus{border-color:var(--accent);outline:3px solid rgba(103,87,184,.14)}
+.card{border:2px solid var(--accent);border-radius:18px;padding:20px;background:#fff;margin-top:18px}.row{border-top:1px solid var(--line);padding:11px 0}.row:first-of-type{border-top:0}
+.small{font-size:.92rem;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:760px){.grid,.scorecard{grid-template-columns:1fr}.controls button{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+ <div class="kicker" style="color:#ddd9ff">Perfectionism + Submission Lab</div>
+ <h1>📤 Submit the Imperfect Thing</h1>
+ <p><strong>Sometimes the choice is not “perfect paper” versus “bad paper.” It is “submit the best version I have” versus “keep polishing until I miss the chance to submit.”</strong></p>
+ <p class="mini">This lab helps you tell the difference between a draft that needs one useful fix and a draft that is already good enough to turn in.</p>
+</section>
+
+<section class="progressbox" aria-label="Activity progress">
+ <div class="proglabel"><span id="stepText">Part 1 of 8</span><span id="stepName">Catch the perfectionism thought</span></div>
+ <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+</section>
+<div id="live" class="small" aria-live="polite"></div>
+
+<section class="screen active" data-step="0">
+ <div class="kicker">Part 1 · Catch It</div>
+ <h2>“It’s Not Good Enough Yet”</h2>
+ <div class="scene">
+  Your essay is due in 18 minutes. It has a clear thesis, body paragraphs, evidence, and a conclusion that feels rushed.
+  <div class="thought"><strong>Your brain:</strong> “If I submit this and it isn’t polished, everyone will see I’m a bad writer.”</div>
+ </div>
+ <p class="q">Which response checks the thought without pretending the paper is perfect?</p>
+ <div class="options" id="q0">
+  <button class="choice" data-ok="false">This paper is definitely amazing.</button>
+  <button class="choice" data-ok="true">The paper may have weaknesses, but submitting an assessable draft gives me a chance to earn credit and get feedback.</button>
+  <button class="choice" data-ok="false">If it has flaws, I should probably wait.</button>
+ </div>
+ <div id="fb0" class="feedback"></div>
+ <div class="note"><strong>CBT move:</strong> replace all-or-nothing thinking with a more accurate question: <strong>“Is this complete enough to be assessed?”</strong></div>
+ <div class="controls"><button class="primary next" disabled>Check What Matters Most</button></div>
+</section>
+
+<section class="screen" data-step="1">
+ <div class="kicker">Part 2 · Assess It</div>
+ <h2>Imperfect Is Not the Same as Unsubmit-able</h2>
+ <div class="scorecard">
+  <div class="score"><strong>✅ Core task</strong>Answers the prompt</div>
+  <div class="score"><strong>✅ Main structure</strong>Has thesis + developed body</div>
+  <div class="score"><strong>⚠️ Polish</strong>Conclusion is rushed; a few sentences are awkward</div>
+ </div>
+ <p class="q">What is the best classification?</p>
+ <div class="options" id="q1">
+  <button class="choice" data-ok="true">Imperfect but assessable.</button>
+  <button class="choice" data-ok="false">Not ready because every part is not polished.</button>
+  <button class="choice" data-ok="false">A failure because the conclusion is weak.</button>
+ </div>
+ <div id="fb1" class="feedback"></div>
+ <div class="callout"><strong>Ask in this order:</strong><br>1. Did I answer the task?<br>2. Is the main work there?<br>3. Is there one quick fix that changes meaning or clarity?<br>4. If not, submit.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Choose the Last Fix</button></div>
+</section>
+
+<section class="screen" data-step="2">
+ <div class="kicker">Part 3 · Last Useful Fix</div>
+ <h2>Not Every Improvement Is Equally Important</h2>
+ <div class="scene">You have 10 minutes left.</div>
+ <p class="q">Which change is worth doing first?</p>
+ <div class="options" id="q2">
+  <button class="choice" data-ok="false">Spend 8 minutes finding a more impressive title.</button>
+  <button class="choice" data-ok="true">Fix a sentence in paragraph 3 that currently says the opposite of what you mean.</button>
+  <button class="choice" data-ok="false">Replace three ordinary words with more sophisticated vocabulary.</button>
+ </div>
+ <div id="fb2" class="feedback"></div>
+ <div class="note"><strong>Adult-learning move:</strong> prioritize the change with the biggest effect on meaning, task completion, or readability—not the change that makes the paper feel more “finished.”</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Spot the Perfectionism Trap</button></div>
+</section>
+
+<section class="screen" data-step="3">
+ <div class="kicker">Part 4 · Trap</div>
+ <h2>Polishing Can Become Avoidance</h2>
+ <div class="scene">
+  You have rewritten the first sentence of your introduction six times. The current sentence is clear and accurate.
+ </div>
+ <p class="q">What is the most useful next move?</p>
+ <div class="options" id="q3">
+  <button class="choice" data-ok="false">Keep rewriting until the sentence feels impressive.</button>
+  <button class="choice" data-ok="true">Leave it. Use the remaining time to check whether the paper actually answers the prompt.</button>
+  <button class="choice" data-ok="false">Delete the introduction and start over.</button>
+ </div>
+ <div id="fb3" class="feedback"></div>
+ <div class="warning"><strong>Perfectionism can disguise itself as productivity.</strong> You are technically “working” while avoiding the more important decision: <em>Is this ready enough to submit?</em></div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Take the Deadline Challenge</button></div>
+</section>
+
+<section class="screen" data-step="4">
+ <div class="kicker">Part 5 · Deadline Challenge</div>
+ <h2>What Would You Do With the Last 12 Minutes?</h2>
+ <div class="scene">
+  <strong>Your draft:</strong><br>
+  • Answers the prompt<br>
+  • Has a thesis<br>
+  • Uses two required sources<br>
+  • One body paragraph is shorter than you wanted<br>
+  • Two MLA citations need a quick check<br>
+  • The conclusion exists but is basic
+ </div>
+ <p class="q">Pick the strongest plan.</p>
+ <div class="options" id="q4">
+  <button class="choice" data-ok="false">Rewrite the short body paragraph from scratch and hope I finish.</button>
+  <button class="choice" data-ok="true">Check the two citations, skim for a major missing piece, and submit with time to spare.</button>
+  <button class="choice" data-ok="false">Keep revising until the system closes because submitting something imperfect feels wrong.</button>
+ </div>
+ <div id="fb4" class="feedback"></div>
+ <div class="callout"><strong>Submission strategy:</strong> protect the work you already did. A minor weakness does not need to become a missed submission.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Compare the Outcomes</button></div>
+</section>
+
+<section class="screen" data-step="5">
+ <div class="kicker">Part 6 · Outcome Check</div>
+ <h2>Which Risk Is Bigger?</h2>
+ <div class="compare grid">
+  <div class="scene"><strong>Option A</strong><br>Submit a complete but imperfect essay.<br><br>Possible outcome: partial or strong credit + feedback.</div>
+  <div class="scene"><strong>Option B</strong><br>Keep polishing, miss the deadline, submit nothing.<br><br>Possible outcome: zero, late penalty, or no feedback.</div>
+ </div>
+ <p class="q">What is the more accurate question?</p>
+ <div class="options" id="q5">
+  <button class="choice" data-ok="true">Which choice protects more of the work I have already done?</button>
+  <button class="choice" data-ok="false">Which choice proves I care the most?</button>
+  <button class="choice" data-ok="false">Which choice guarantees a perfect grade?</button>
+ </div>
+ <div id="fb5" class="feedback"></div>
+ <div class="note"><strong>CBT move:</strong> shift from “What if they judge this?” to <strong>“What action best serves my actual goal right now?”</strong></div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Practice With My Assignment</button></div>
+</section>
+
+<section class="screen" data-step="6">
+ <div class="kicker">Part 7 · Your Turn</div>
+ <h2>Run a Submission Check</h2>
+ <label for="assignment"><strong>What are you deciding whether to submit?</strong></label>
+ <input id="assignment" type="text" placeholder="Example: Essay 2">
+
+ <label for="status" style="display:block;margin-top:14px"><strong>Which description fits best?</strong></label>
+ <select id="status">
+  <option value="">Choose one</option>
+  <option>It answers the prompt, but some parts are rough.</option>
+  <option>Most of the work is there, but one required part is missing.</option>
+  <option>I keep polishing even though the main work is complete.</option>
+  <option>I am worried about being judged if it is not strong.</option>
+  <option>I am not sure whether it is complete enough to assess.</option>
+ </select>
+
+ <label for="mustfix" style="display:block;margin-top:14px"><strong>What is the ONE thing that truly needs attention before submitting?</strong></label>
+ <textarea id="mustfix" placeholder="Example: Fix the missing in-text citation in paragraph 4."></textarea>
+
+ <label for="leave" style="display:block;margin-top:14px"><strong>What are you willing to leave imperfect for now?</strong></label>
+ <textarea id="leave" placeholder="Example: The conclusion could be more elegant, but it does the job."></textarea>
+
+ <div class="warning"><strong>Important:</strong> If a required part is genuinely missing, this lab is not telling you to ignore it. The skill is distinguishing <em>required work</em> from <em>endless polishing</em>.</div>
+
+ <div class="controls"><button class="secondary back">Back</button><button class="primary" id="toLast" disabled>Make My Submission Plan</button></div>
+</section>
+
+<section class="screen" data-step="7">
+ <div class="kicker">Part 8 · Submit</div>
+ <h2>Protect the Work You Did</h2>
+ <p>Choose the thought you want to use at submission time.</p>
+ <div class="options" id="reminders">
+  <button class="choice">📤 “Complete enough to assess is enough to submit.”</button>
+  <button class="choice">🧭 “I can fix the highest-impact issue and stop.”</button>
+  <button class="choice">🌱 “A submitted draft can teach me something. An invisible draft cannot.”</button>
+  <button class="choice">🔄 “This assignment is one version of my work, not a final verdict on my ability.”</button>
+ </div>
+
+ <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeCard" disabled>Make My Submit Card</button></div>
+
+ <div id="card" class="card hidden" aria-live="polite">
+  <h2 style="margin-top:0">📤 My Submit-the-Imperfect-Thing Plan</h2>
+  <div class="row"><strong>Assignment:</strong><div id="cAssignment"></div></div>
+  <div class="row"><strong>What is true right now:</strong><div id="cStatus"></div></div>
+  <div class="row"><strong>One must-fix item:</strong><div id="cFix"></div></div>
+  <div class="row"><strong>What I can leave imperfect:</strong><div id="cLeave"></div></div>
+  <div class="row"><strong>My submission reminder:</strong><div id="cReminder"></div></div>
+  <div class="note"><strong>Final check:</strong><br>Does it answer the task? Is the required work there? Is there a major error that changes meaning? If the answer is yes / yes / no, <strong>submit the thing.</strong></div>
+ </div>
+</section>
+</main>
+
+<script>
+(()=>{
+ const screens=[...document.querySelectorAll('.screen')];
+ const names=['Catch the perfectionism thought','Assess what matters','Choose the last useful fix','Spot polishing-as-avoidance','Deadline challenge','Compare outcomes','Your assignment','Submit'];
+ let cur=0,reminder='';
+ const bar=document.getElementById('bar'),stepText=document.getElementById('stepText'),stepName=document.getElementById('stepName'),live=document.getElementById('live');
+
+ function update(){
+  bar.style.width=((cur+1)/screens.length*100)+'%';
+  stepText.textContent=`Part ${cur+1} of ${screens.length}`;
+  stepName.textContent=names[cur];
+ }
+ function show(n){
+  screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();
+  window.scrollTo({top:0,behavior:'smooth'});
+ }
+ document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
+ document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
+
+ function enable(i,on=true){const b=screens[i].querySelector('.next');if(b)b.disabled=!on}
+
+ const configs=[
+  ['q0','fb0',0,'Exactly. This response acknowledges the paper may have weaknesses without turning those weaknesses into a reason to lose the entire submission.'],
+  ['q1','fb1',1,'Yes. “Imperfect but assessable” is the key category. Not every weakness is a reason to withhold the work.'],
+  ['q2','fb2',2,'Exactly. Fix the issue that changes meaning before spending time on cosmetic improvements.'],
+  ['q3','fb3',3,'Yes. Once a sentence is clear, further polishing may have less value than checking the actual assignment requirements.'],
+  ['q4','fb4',4,'Exactly. This protects the required work, fixes a real issue, and reduces the risk of missing the submission.'],
+  ['q5','fb5',5,'Yes. The useful goal is to protect the work and make the strongest decision available—not to prove how much you care through endless revision.']
+ ];
+
+ configs.forEach(([qid,fid,screen,msg])=>{
+  const box=document.getElementById(qid),fb=document.getElementById(fid);
+  box.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+   box.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed','false'));
+   b.setAttribute('aria-pressed','true');
+   const ok=b.dataset.ok==='true';
+   fb.className='feedback show '+(ok?'good':'try');
+   fb.textContent=ok?msg:'Try another choice. Look for the option that protects the core work, distinguishes required fixes from polishing, and avoids all-or-nothing thinking.';
+   enable(screen,ok);live.textContent=fb.textContent;
+  }));
+ });
+
+ const assignment=document.getElementById('assignment'),status=document.getElementById('status'),mustfix=document.getElementById('mustfix'),leave=document.getElementById('leave'),toLast=document.getElementById('toLast');
+ function check(){toLast.disabled=!(assignment.value.trim()&&status.value&&mustfix.value.trim()&&leave.value.trim())}
+ [assignment,mustfix,leave].forEach(x=>x.addEventListener('input',check));status.addEventListener('change',check);
+ toLast.addEventListener('click',()=>show(7));
+
+ document.querySelectorAll('#reminders .choice').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#reminders .choice').forEach(x=>x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');reminder=b.textContent.trim();document.getElementById('makeCard').disabled=false;
+ }));
+
+ document.getElementById('makeCard').addEventListener('click',()=>{
+  document.getElementById('cAssignment').textContent=assignment.value.trim();
+  document.getElementById('cStatus').textContent=status.value;
+  document.getElementById('cFix').textContent=mustfix.value.trim();
+  document.getElementById('cLeave').textContent=leave.value.trim();
+  document.getElementById('cReminder').textContent=reminder;
+  document.getElementById('card').classList.remove('hidden');
+  document.getElementById('card').scrollIntoView({behavior:'smooth',block:'start'});
+  live.textContent='Your submission plan is ready.';
+ });
+ update();
+})();
+</script>
+</body>
+</html>
