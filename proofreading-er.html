@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What Does “Reflect” Mean?</title>
+<meta name="description" content="An accessible ENGL C1000 reflection lab that helps students move beyond summary or confession toward meaningful reflective thinking.">
+<style>
+:root{
+--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
+--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;
+--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button,select{font:inherit}button{font-weight:800;border:0;border-radius:12px;min-height:48px;padding:12px 16px;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:4px solid #111;outline-offset:3px}
+.shell{max-width:1080px;margin:auto;padding:20px 12px 52px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px #203f5212}
+h1,h2,h3{color:var(--dark);line-height:1.18}h1{font-size:clamp(2.05rem,7vw,3.5rem);margin:.1em 0 .25em}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.84rem;color:var(--blue)}
+.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}
+.row,.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.call,.secret,.good,.warn,.note{padding:16px;border-radius:14px;margin:14px 0}
+.call{background:var(--goldbg);border-left:5px solid var(--gold)}.secret{background:var(--lav);border:2px dashed var(--purple)}
+.good{background:var(--greenbg);border:2px solid var(--green)}.warn{background:var(--rosebg);border:2px solid var(--rose)}.note{background:var(--soft);border:2px solid var(--blue)}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;font-weight:900}
+.track{height:12px;background:#e5ebf0;border-radius:99px;overflow:hidden;margin:7px 0 18px}.bar{height:100%;background:var(--blue)}
+.stage{display:inline-block;background:var(--soft);color:var(--blue);font-weight:900;border-radius:99px;padding:5px 10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+.side{position:sticky;top:10px;border:1px solid var(--line);background:#fbfcfd;border-radius:14px;padding:15px}
+.case,.sample,.machine,.tool{border:2px solid var(--line);border-radius:14px;padding:15px;margin:12px 0;background:#fff}
+.sample{border-left:7px solid var(--gold)}
+.machine{border:4px solid var(--dark);background:#f8fafb}.screen{background:#18252d;color:#fff;border-radius:12px;padding:15px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.choices,.grid2,.moves{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink)}.choice.ok{background:var(--greenbg);border-color:var(--green)}
+.move{border:2px solid var(--line);border-radius:14px;padding:14px;background:#fff}.move strong{display:block;color:var(--blue)}
+.feedback{display:none;background:var(--soft);border:2px solid var(--blue);border-radius:12px;padding:14px;margin-top:14px}
+.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.85rem;font-weight:900;background:#fff}
+.tool{border:4px solid var(--blue);background:#f9fcfd}.tool select{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;background:#fff}
+.result{margin-top:16px}.completion{border:4px solid var(--blue);border-radius:18px;padding:24px}.done{color:var(--green);font-weight:900}
+.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}
+@media(max-width:620px){body{font-size:17px}.choices,.grid2,.moves{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="shell">
+
+<section id="intro" class="card">
+<p class="eyebrow">ENGL C1000 · Reflection & Writing Process</p>
+<h1>🪞 What Does “Reflect” Mean?</h1>
+<h2>It’s more than “I liked it” or “I learned a lot.”</h2>
+<div class="call"><strong>ASSIGNMENT SAYS:</strong> “Reflect on your writing process.”<br><br><strong>STUDENT:</strong> “Okay... so do I just say how I felt?”</div>
+<p>Reflection is another college word that can sound obvious until you actually have to do it.</p>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> Reflection means looking back at an experience, choice, process, or piece of learning and figuring out what you understand now because you examined it.</div>
+<div class="good"><strong>Reflection is not proving that you learned. It is examining your learning closely enough to understand it.</strong></div>
+<div class="row"><button id="start" class="primary">🪞 Open the Reflection Lab</button><button id="resume" class="secondary hidden">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+<span id="stage" class="stage"></span>
+<div class="layout">
+<div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Continue</button></div></div>
+<aside class="side"><h3>🪞 Reflection Moves</h3>
+<p><strong>🔙 BEFORE</strong><br>What did I think, expect, or do at first?</p>
+<p><strong>👀 NOTICE</strong><br>What happened? What stood out?</p>
+<p><strong>🧠 INTERPRET</strong><br>What do I understand about it now?</p>
+<p><strong>🔄 CHANGE</strong><br>Did my thinking, strategy, or process shift?</p>
+<p><strong>➡️ TRANSFER</strong><br>What might I carry into another situation?</p>
+<p><small>You do not need all five every time.</small></p>
+</aside></div>
+</section>
+
+<section id="finish" class="card hidden">
+<div class="good"><h2>🪞 Reflection Detected</h2><p><strong>Reflection is not a performance of learning. It is a way to notice what your experience now teaches you.</strong></p></div>
+
+<h2>🧭 Help Me Go Deeper</h2>
+<div class="tool">
+<label for="problem"><strong>What's happening in your reflection?</strong></label>
+<select id="problem">
+<option value="nothing">I don't know what to reflect on</option>
+<option value="summary">I'm mostly summarizing what happened</option>
+<option value="feelings">I'm only talking about feelings</option>
+<option value="success">Nothing really went wrong</option>
+<option value="failure">Everything feels like it went wrong</option>
+<option value="same">I didn't really change my mind</option>
+<option value="ending">I don't know how to end</option>
+<option value="confession">It feels like I'm confessing what I did badly</option>
+<option value="good">I already have a specific insight</option>
+</select>
+<div class="row"><button id="diagnose" class="primary">🪞 Find My Next Reflection Move</button></div>
+<div id="result" class="result" aria-live="polite"></div>
+</div>
+
+<div class="note"><h3>🧰 Quick Reflection Check</h3>
+<p>What did I expect or do at first?<br>
+What actually happened?<br>
+What do I understand now that I did not understand before?<br>
+What worked, failed, surprised, confused, or became clearer?<br>
+Why does that matter?<br>
+What might I do differently—or intentionally repeat—next time?</p></div>
+
+<div class="row"><button id="copy" class="secondary">📋 Copy Reflection Check</button></div>
+
+<div class="completion">
+<p class="done">✓ LAB COMPLETE</p>
+<h2>What Does “Reflect” Mean? — Complete</h2>
+<p>✓ Distinguish reflection from summary<br>
+✓ Move from feelings to interpretation<br>
+✓ Analyze both successful and unsuccessful choices<br>
+✓ Reflect without turning the assignment into a confession<br>
+✓ Identify changes in thinking, strategy, or understanding<br>
+✓ Recognize that reflection does not require changing your mind<br>
+✓ Connect learning from one situation to a future one</p>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+</section>
+
+<footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
+</main>
+
+<script>
+(()=>{const $=x=>document.getElementById(x),KEY="whatDoesReflectMeanV1";let i=0;
+const M=[
+["1 · Reflection Isn't a Diary Entry","intro"],
+["2 · The Reflection Moves","moves"],
+["3 · “I Learned a Lot”","machine"],
+["4 · Summary or Reflection?","choice",`<div class="sample">“First I wrote my thesis. Then I found sources. Then I revised my draft.”</div>`,"What is this doing?",[
+["Mostly summarizing the sequence of events.",1,"Right. It tells us what happened, but not yet what the writer understands because of it."],
+["Deep reflection.",0,"The sequence may be useful context, but the interpretation is still missing."],
+["Analysis of a source.",0,"This is describing a process, not analyzing source evidence."],
+["A counterargument.",0,"It does not respond to another claim."]]],
+["5 · Add the Thinking","thinking"],
+["6 · Reflection Is Not a Confession Booth","confession"],
+["7 · Procrastination Confession","choice",`<div class="sample">“I procrastinated and should have worked harder.”</div>`,"What would make this more reflective?",[
+["Examine what happened in the process and what strategy or condition might change next time.",1,"Yes. Reflection can investigate the process instead of stopping at self-judgment."],
+["Add “I was very bad.”",0,"More self-criticism does not create more insight."],
+["Repeat that the writer should have started earlier.",0,"That may be true, but reflection asks what the writer now understands about the process."],
+["Make the sentence sound more formal.",0,"Vocabulary is not the missing thinking."]]],
+["8 · A Better Process Reflection","process"],
+["9 · Nothing Went Wrong","success"],
+["10 · Everything Went Wrong","failure"],
+["11 · Feelings Can Be Evidence","feelings"],
+["12 · But Feelings Aren't the Whole Reflection","choice",`<div class="sample">“I felt frustrated during peer review.”</div>`,"What could move this toward reflection?",[
+["Ask what caused the frustration and what it reveals about expectations, feedback, or process.",1,"Exactly. The feeling can become evidence for thinking."],
+["Replace “frustrated” with “displeased.”",0,"A synonym does not add reflection."],
+["Delete the feeling because emotions never belong in academic reflection.",0,"Feelings can be relevant when the writer interprets what they mean."],
+["Add “very, very frustrated.”",0,"Intensity is not interpretation."]]],
+["13 · The Fake Reflection Generator","fake"],
+["14 · Reflection Without Changing Your Mind","same"],
+["15 · Before / After / Because","bab"],
+["16 · Transfer: What Goes With You?","transfer"],
+["17 · Reflection Can Be Specific and Small","small"],
+["18 · Reflection Stress Test","stress"],
+["19 · Build Your Reflection Check","builder"],
+["20 · Look Back to Move Forward","end"]
+];
+
+function fb(t,g=true){$("fb").textContent=t;$("fb").className="feedback show"+(g?" good":"");$("next").classList.remove("hidden")}
+function choices(opts){let d=document.createElement("div");d.className="choices";opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("🪞 "+m)}else{b.disabled=true;fb(m+" Try another reflection move.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Reflection move ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";
+if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4]))}
+
+if(m[1]==="intro"){$("host").innerHTML=`<h2>📓 Reflection ≠ “Dear Diary”</h2><div class="warn">“I liked the assignment. It was interesting. I learned a lot.”</div><div class="good"><strong>Reflection asks for the thinking underneath the reaction:</strong><p>What happened? What did you notice? What do you understand now? What might that change?</p></div><div class="secret">🔓 You can write personally and still think analytically.</div>`;fb("Reflection can include experience and feeling, but it does something with them.")}
+if(m[1]==="moves"){$("host").innerHTML=`<h2>🪞 Five Useful Reflection Moves</h2><div class="moves"><div class="move"><strong>🔙 BEFORE</strong>What did I expect, assume, or try?</div><div class="move"><strong>👀 NOTICE</strong>What happened? What stood out?</div><div class="move"><strong>🧠 INTERPRET</strong>What do I understand about it now?</div><div class="move"><strong>🔄 CHANGE</strong>Did my thinking or strategy shift?</div><div class="move"><strong>➡️ TRANSFER</strong>What might I use again later?</div></div><div class="secret">🔓 These are options, not a five-sentence formula.</div>`;fb("Choose the moves that help you make sense of the experience.")}
+if(m[1]==="machine"){$("host").innerHTML=`<h2>🤖 Reflection Machine</h2><div class="machine"><div class="screen">INPUT: “I learned a lot from peer review.”<br><br>SCANNING...<br>LEARNED WHAT?<br>HOW DO YOU KNOW?<br>WHAT CHANGED?<br>WHAT WILL YOU CARRY FORWARD?</div></div><div class="good"><strong>UPGRADED REFLECTION:</strong><p>Peer review showed me that I often assume readers can see connections between my evidence and claim that I have not actually explained. I want to look for those gaps earlier when I revise.</p></div>`;fb("The new version names a specific realization and a possible future move.")}
+if(m[1]==="thinking"){$("host").innerHTML=`<h2>🧠 Put the Thinking Back In</h2><div class="warn"><strong>PROCESS RECAP:</strong><p>First I wrote my thesis. Then I found sources. Then I revised.</p></div><div class="good"><strong>REFLECTION:</strong><p>I originally wrote my thesis before researching because I thought I needed to decide my position first. After finding sources that complicated my assumption, I realized my thesis could change during research instead of staying fixed.</p></div><div class="chips"><span class="badge">🔙 BEFORE</span><span class="badge">👀 NOTICE</span><span class="badge">🧠 INTERPRET</span><span class="badge">🔄 CHANGE</span></div>`;fb("The event sequence became reflection when the writer explained what they now understand about it.")}
+if(m[1]==="confession"){$("host").innerHTML=`<h2>🚫 Reflection Is Not a Confession Booth</h2><div class="warn">“I was lazy. I procrastinated. I should have done better.”</div><div class="secret">🔓 Reflection is not about proving you feel bad enough.</div><div class="good"><strong>More useful questions:</strong><p>Where did the process break down?<br>What did I believe I had to do first?<br>What made it hard to re-enter the work?<br>What strategy helped—or might help next time?</p></div>`;fb("Self-judgment can stop the investigation. Reflection keeps investigating.")}
+if(m[1]==="process"){$("host").innerHTML=`<h2>🔄 A Better Process Reflection</h2><div class="sample"><p>I kept restarting my introduction because I thought I had to write the essay in order. Once I drafted the body first, I could see what the introduction actually needed to prepare the reader for. On my next essay, I want to give myself permission to begin wherever I have the clearest idea.</p></div><div class="good"><strong>Notice:</strong> no dramatic failure. No confession. Just a process, a realization, and a possible future strategy.</div>`;fb("Reflection can make invisible writing decisions visible.")}
+if(m[1]==="success"){$("host").innerHTML=`<h2>🏆 “But Nothing Went Wrong.”</h2><div class="warn">MYTH: Reflection requires a mistake, struggle, or dramatic transformation.</div><div class="good"><strong>SUCCESS CAN BE ANALYZED TOO:</strong><p>I recorded citation information when I saved each source. That strategy worked because I did not have to reconstruct citations at the end. I want to keep doing this on future research projects.</p></div><div class="secret">🔓 If something worked, ask <strong>why</strong> it worked and whether you want to repeat it.</div>`;fb("A successful choice can teach you as much as a failed one.")}
+if(m[1]==="failure"){$("host").innerHTML=`<h2>🌪️ “Everything Went Wrong.”</h2><div class="warn">“This whole paper was a disaster.”</div><div class="good"><strong>ZOOM IN.</strong><p>Choose one moment: starting, researching, drafting, using feedback, revising, or submitting. Reflection gets stronger when you examine a specific decision or pattern instead of judging the entire experience at once.</p></div>`;fb("Specific moments are easier to understand—and easier to learn from.")}
+if(m[1]==="feelings"){$("host").innerHTML=`<h2>💭 Feelings Can Be Evidence</h2><div class="sample">“I felt frustrated when my peer said my thesis was unclear.”</div><div class="good"><strong>Now interpret the feeling:</strong><p>The frustration came partly from thinking the thesis was already obvious. When two readers described the main point differently, I realized I had been relying on what I knew in my head rather than what I had actually written.</p></div><div class="secret">🔓 Feelings can point toward expectations, assumptions, or patterns worth examining.</div>`;fb("Reflection does not have to remove emotion. It can ask what the emotion helps you notice.")}
+if(m[1]==="fake"){$("host").innerHTML=`<h2>🎭 Fake Reflection Generator</h2><div class="machine"><div class="screen">This assignment was a valuable learning experience that taught me many important things that I will use in the future.</div></div><div class="warn"><strong>🎓 ACADEMIC-SOUNDING REFLECTION GENERATED</strong><br><strong>🧠 ACTUAL INSIGHT: 0</strong></div><div class="good"><strong>Try specificity instead:</strong><p>Before this assignment, I treated revision mostly as sentence editing. Comparing my draft to a reverse outline showed me that two paragraphs were doing the same job, so my biggest revision was actually reorganizing the argument.</p></div>`;fb("Specific insight is more reflective than ceremonial language about learning.")}
+if(m[1]==="same"){$("host").innerHTML=`<h2>🧭 “But I Didn't Change My Mind.”</h2><div class="secret">🔓 Reflection does not require a dramatic opinion change.</div><div class="good"><p>You might discover that your original view became <strong>clearer, more complicated, more specific, better supported, or more uncertain in a useful way.</strong></p><p>You might also confirm that a strategy worked and understand why.</p></div>`;fb("Change is one possible reflective outcome, not a requirement.")}
+if(m[1]==="bab"){$("host").innerHTML=`<h2>🔙 BEFORE → AFTER → BECAUSE</h2><div class="case"><strong>BEFORE:</strong> I thought every paragraph needed a quotation.</div><div class="case"><strong>AFTER:</strong> I now decide whether a paragraph needs evidence before adding a source.</div><div class="case"><strong>BECAUSE:</strong> In revision, I noticed that one quotation interrupted a paragraph that was already making a clear analytical point.</div><div class="secret">🔓 The “because” often contains the actual reflection.</div>`;fb("A shift becomes more meaningful when you explain what produced it.")}
+if(m[1]==="transfer"){$("host").innerHTML=`<h2>➡️ What Goes With You?</h2><div class="sample"><p>I learned that making a reverse outline after drafting helps me see repeated paragraph jobs. On my next long paper, I want to do that before sentence-level editing so I do not polish paragraphs I may later move or cut.</p></div><div class="good"><strong>TRANSFER:</strong> A strategy from one experience becomes a deliberate choice in another.</div>`;fb("Reflection can connect one assignment to future writing, reading, research, or learning.")}
+if(m[1]==="small"){$("host").innerHTML=`<h2>🔬 Reflection Can Be Small</h2><div class="warn">You do not need: “This assignment changed my entire life.”</div><div class="good"><p>“I noticed that writing down why I saved each source made synthesis easier later.”</p><p>That is enough to reflect on if you explain <strong>why</strong> it mattered and what you learned from noticing it.</p></div>`;fb("A specific, modest insight can be more meaningful than a dramatic claim you do not actually believe.")}
+if(m[1]==="stress"){$("host").innerHTML=`<h2>🧪 Reflection Stress Test</h2><div class="moves"><div class="move"><strong>📍 SPECIFIC?</strong>Am I examining something identifiable?</div><div class="move"><strong>🧠 INTERPRETED?</strong>Did I explain what I now understand?</div><div class="move"><strong>🔗 CONNECTED?</strong>Did I connect the experience to a choice, expectation, strategy, or learning?</div><div class="move"><strong>🎭 REAL?</strong>Am I saying something I actually learned or noticed rather than performing what “reflection” sounds like?</div><div class="move"><strong>➡️ USEFUL?</strong>Is there something I might carry forward?</div></div>`;fb("A reflection does not need every feature, but these questions help identify where it may still be thin.")}
+if(m[1]==="builder"){$("host").innerHTML=`<h2>🧰 Build Your Reflection Check</h2><div class="case"><strong>If you're summarizing:</strong> What do I understand now because this happened?</div><div class="case"><strong>If you're only describing feelings:</strong> What does the feeling reveal about my expectations, choices, or process?</div><div class="case"><strong>If you're blaming yourself:</strong> What pattern, condition, or strategy can I actually examine?</div><div class="case"><strong>If nothing went wrong:</strong> What worked, why, and should I repeat it?</div><div class="case"><strong>If everything went wrong:</strong> What one moment would teach me the most?</div><div class="case"><strong>If you didn't change your mind:</strong> What became clearer, more complex, or better supported?</div>`;fb("Reflection becomes easier when you know what kind of question to ask.")}
+if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>🪞 Look Back to Move Forward</h2><p><strong>Reflection is not proving that you learned.</strong></p><p>It is examining your learning closely enough to understand it.</p></div><div class="call">You do not need a dramatic transformation.<br>You do not need to confess.<br>You do not need to pretend everything went badly—or perfectly.<br><strong>You need something specific enough to examine.</strong></div>`;$("next").textContent="Finish & Open Reflection Tool";$("next").classList.remove("hidden")}
+localStorage.setItem(KEY,JSON.stringify({i}))}
+
+$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
+
+const R={
+nothing:["👀 LOOK FOR A MOMENT WORTH NOTICING","You do not need a huge revelation. Start with something that surprised, confused, worked, failed, changed, or became easier.","Ask: “What moment in this assignment do I keep thinking about—and why?”"],
+summary:["🧠 ADD THE INTERPRETATION","You have the events. Now ask what they taught you about your thinking, process, strategy, or expectations.","Ask: “What do I understand now because this happened?”"],
+feelings:["🔍 INTERPRET THE FEELING","The feeling may be relevant. Use it as evidence rather than the whole reflection.","Ask: “What does this feeling reveal about what I expected, valued, feared, assumed, or needed?”"],
+success:["🏆 ANALYZE WHAT WORKED","Reflection does not require a failure.","Ask: “What worked? Why did it work? Would I intentionally repeat this strategy?”"],
+failure:["🔬 ZOOM IN","Do not reflect on the entire experience as one giant success/failure judgment. Choose a specific moment or decision.","Ask: “Which one moment would teach me the most if I examined it closely?”"],
+same:["🧩 LOOK FOR CLARITY OR COMPLEXITY","You do not have to change your opinion.","Ask: “What became clearer, more specific, more complicated, better supported, or more uncertain in a useful way?”"],
+ending:["➡️ TRANSFER IT","A useful ending often looks forward.","Ask: “What will I carry into my next assignment, and why?”"],
+confession:["🚫 SWITCH FROM JUDGMENT TO INVESTIGATION","Reflection is not about proving that you feel bad about a mistake.","Ask: “What happened in the process? What belief, condition, or strategy contributed? What might I try next time?”"],
+good:["✋ DON'T INVENT A DRAMATIC LESSON","If you have a specific insight and have explained why it matters, you may already have what the reflection needs.","Next: make sure the insight is supported by a concrete experience or example."]
+};
+$("diagnose").onclick=()=>{let r=R[$("problem").value];$("result").innerHTML=`<div class="good"><h3>${r[0]}</h3><p>${r[1]}</p><p><strong>Reflection question:</strong> ${r[2]}</p></div>`};
+
+const check=`WHAT DOES “REFLECT” MEAN? — REFLECTION CHECK
+
+🔙 BEFORE
+What did I expect, assume, believe, or try at first?
+
+👀 NOTICE
+What actually happened?
+What surprised, confused, worked, failed, or became easier?
+
+🧠 INTERPRET
+What do I understand now because I examined that experience?
+
+🔄 CHANGE
+Did my thinking, strategy, process, or level of certainty shift?
+If not, what became clearer or better supported?
+
+➡️ TRANSFER
+What might I intentionally repeat, change, or carry into another situation?
+
+IF I'M JUST SUMMARIZING:
+What do I understand now because this happened?
+
+IF I'M ONLY TALKING ABOUT FEELINGS:
+What does this feeling reveal about my expectations, assumptions, choices, or process?
+
+IF NOTHING WENT WRONG:
+What worked, why, and would I repeat it?
+
+IF EVERYTHING WENT WRONG:
+Choose one specific moment instead of judging the whole experience.
+
+IF I FEEL LIKE I'M CONFESSING:
+Switch from self-judgment to investigation.
+What happened? What pattern or condition can I examine?
+
+Remember:
+Reflection is not proving that you learned.
+It is examining your learning closely enough to understand it.`;
+
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(check);$("copy").textContent="✓ Reflection Check Copied"}catch(e){alert(check)}}
+
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Reflection Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
