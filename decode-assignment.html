@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decode the Assignment Lab</title>
+<meta name="description" content="An accessible first-gen-friendly ENGL C1000 lab for decoding college writing assignments.">
+<style>
+:root{
+ --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#64717d;--line:#d7e0e8;
+ --brand:#315f78;--dark:#203f52;--soft:#edf5f8;--gold:#fff5d9;--goldline:#b5821c;
+ --good:#2f7749;--goodbg:#eef8f1;--rose:#8b4f66;--rosebg:#fbf0f4;--max:1000px;--r:16px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button,textarea{font:inherit}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:99;background:#fff;color:#000;border:2px solid #000;padding:10px}.skip:focus{left:8px}
+.shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,63,82,.07)}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:800;font-size:.86rem;color:var(--brand);margin:0 0 6px}
+h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);margin:.1em 0 .3em}h2{font-size:clamp(1.4rem,4.5vw,2rem)}h3{font-size:1.12rem}
+.lead{font-size:1.08rem}.callout,.decoder,.mystery,.time,.askbox{border-radius:14px;padding:17px;margin:15px 0}
+.callout{background:var(--gold);border-left:5px solid var(--goldline)}.decoder{background:#f8fbfd;border:2px dashed var(--brand)}.mystery{background:var(--rosebg);border:2px solid var(--rose)}.time{background:#f5f1fb;border:2px solid #75559a}.askbox{background:var(--goodbg);border:2px solid var(--good)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.pill,.stage{display:inline-flex;border-radius:999px;padding:6px 11px;font-size:.92rem;font-weight:700}.pill{border:1px solid var(--line);color:var(--muted)}.stage{background:var(--soft);color:var(--brand);margin-bottom:8px}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:700;cursor:pointer}.primary{background:var(--brand);color:#fff}.secondary{background:#fff;border:2px solid var(--brand);color:var(--dark)}.quiet{background:#edf1f5;color:var(--ink)}
+.progress-text{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.93rem;font-weight:700}.track{height:12px;background:#e6ebf0;border-radius:999px;overflow:hidden;margin:7px 0 20px}.bar{height:100%;background:var(--brand);width:0;transition:width .2s}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.side{position:sticky;top:10px;border:1px solid var(--line);border-radius:14px;background:#fbfcfd;padding:15px}
+.tool{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;margin:8px 0;font-size:.92rem}.tool.on{background:var(--goodbg);border-color:var(--good)}
+.assignment{border:2px solid var(--line);border-radius:14px;background:#fff;padding:18px;margin:14px 0}.assignment .title{font-size:1.18rem;font-weight:900;color:var(--dark)}
+.question{font-size:1.18rem;font-weight:800;margin:15px 0}.choices{display:grid;gap:10px;margin:15px 0}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink);padding:14px 16px}.choice.selected{border-color:var(--good);background:var(--goodbg)}
+.feedback{display:none;border:2px solid var(--brand);background:var(--soft);border-radius:12px;padding:16px;margin-top:16px}.feedback.show{display:block}.feedback.good{border-color:var(--good);background:var(--goodbg)}.feedback strong{display:block}
+.brief{border:3px solid var(--brand);border-radius:16px;background:#f8fbfd;padding:20px}.brief-grid{display:grid;grid-template-columns:auto 1fr;gap:8px 14px}.brief-grid strong{color:var(--brand)}
+.verb{font-size:clamp(2rem,9vw,4rem);font-weight:900;text-align:center;color:var(--brand);margin:10px 0}.heard{display:grid;grid-template-columns:1fr 1fr;gap:12px}.prof,.student{border-radius:13px;padding:15px}.prof{background:var(--soft);border:2px solid var(--brand)}.student{background:var(--rosebg);border:2px solid var(--rose)}
+.requirement{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;border-bottom:1px solid var(--line);padding:10px 0}.requirement:last-child{border-bottom:0}
+.lock{font-size:1.2rem;font-weight:900}.unlock{border:3px solid var(--good);background:var(--goodbg);border-radius:16px;padding:20px}
+textarea{width:100%;min-height:110px;border:2px solid #aebbc7;border-radius:12px;padding:12px;color:var(--ink);background:#fff}
+.completion{border:4px solid var(--brand);border-radius:18px;padding:clamp(20px,4vw,30px);background:#fff}.complete{color:var(--good);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.grid{display:grid;grid-template-columns:1fr auto;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;margin:16px 0}.shot{background:var(--gold);border:2px solid var(--goldline);border-radius:12px;padding:14px;font-weight:700}
+.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:760px){.workspace{grid-template-columns:1fr}.side{position:static;order:-1}.heard{grid-template-columns:1fr}}
+@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.brief-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card">
+ <p class="eyebrow">ENGL C1000 · The unwritten rules</p>
+ <h1>🔓 Decode the Assignment</h1>
+ <p class="lead"><strong>Figure out what your professor is actually asking you to do.</strong></p>
+ <div class="callout">College assignments can pack the task, evidence, audience, format, grading expectations, and unfamiliar academic language into one page. Experienced students learn to take that page apart. <strong>You can learn that strategy too.</strong></div>
+ <div class="meta"><span class="pill">20 decoder missions</span><span class="pill">Verb Decoder</span><span class="pill">Rubric Time Machine</span><span class="pill">No timer</span></div>
+ <div class="row"><button id="start" class="primary" type="button">Open the Assignment File</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+ <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+ <span id="stage" class="stage"></span><h2>Assignment Decoder</h2>
+ <div class="workspace">
+  <div>
+   <div id="host"></div>
+   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+   <div class="row"><button id="next" class="primary hidden" type="button">Next Decoder Mission</button></div>
+  </div>
+  <aside class="side"><h3>Decoder Toolkit</h3><div id="tools"></div></aside>
+ </div>
+</section>
+
+<section id="done" class="card hidden">
+ <div class="unlock">
+  <div class="lock">🔓 ASSIGNMENT UNLOCKED</div>
+  <h2>You learned how to take an assignment apart.</h2>
+  <p>You do not have to understand an entire assignment all at once. Find the job, the evidence, the reader, the deliverable, the constraints, and anything you still need to ask about.</p>
+ </div>
+ <div class="decoder">
+  <h2>📄 Decode My Real Assignment</h2>
+  <p>Open your actual Canvas assignment and answer these six questions:</p>
+  <p><strong>1.</strong> What am I making?<br><strong>2.</strong> What am I being asked to <em>do</em> with the topic?<br><strong>3.</strong> What evidence or materials must I use?<br><strong>4.</strong> Who am I writing for?<br><strong>5.</strong> What constraints must I follow?<br><strong>6.</strong> What am I still unsure about?</p>
+ </div>
+ <div class="row"><button id="copy" class="primary" type="button">📋 Copy My Assignment Decoder</button></div>
+
+ <div class="completion" id="completionCard">
+  <div class="complete">✓ Lab complete</div>
+  <h2>Decode the Assignment Lab — Complete</h2>
+  <div class="grid">
+   <div>Identify the assignment's main job</div><div>✓ Complete</div>
+   <div>Decode common academic verbs</div><div>✓ Complete</div>
+   <div>Separate thinking requirements from surface requirements</div><div>✓ Complete</div>
+   <div>Use a rubric before drafting</div><div>✓ Complete</div>
+   <div>Turn instructions into a workable plan</div><div>✓ Complete</div>
+   <div>Build a specific clarification question</div><div>✓ Complete</div>
+  </div>
+  <p><strong>Completed:</strong> <span id="date"></span></p>
+  <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+ </div>
+ <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+</section>
+<footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id),key="decodeAssignmentV1";
+let i=0,skills={job:false,verb:false,evidence:false,audience:false,constraints:false,rubric:false,ask:false};
+const assignment=`<div class="assignment"><div class="title">Essay 2: Community Analysis</div><p>Write a 4–5 page essay <strong>analyzing</strong> how a community you belong to communicates its values. Develop a focused thesis and support your analysis with specific examples from at least two course readings. Your essay should address an audience unfamiliar with the community. Use MLA documentation.</p><p><strong>Due:</strong> October 18</p></div>`;
+const finalA=`<div class="assignment"><div class="title">Campus Solutions Essay</div><p>Write a 5–6 page essay evaluating two proposed solutions to a campus problem. Using at least three credible sources, determine which solution would be more effective and explain the criteria you used to make that judgment. Write for college decision-makers and use MLA documentation.</p></div>`;
+const moments=[
+["1 · Assignment Crime Scene","choice",assignment,"Before drafting, what is the most useful first move?",[
+["Take the assignment apart to identify what I am making, what kind of thinking I need to do, what evidence I need, and what constraints matter.",1,"Exactly. The assignment is information you can organize, not a wall of instructions you have to memorize."],
+["Start writing the introduction immediately.",0,"You may eventually start there, but first it helps to know what job the paper needs to do."],
+["Only look at the page count.",0,"Page count is one requirement, but it does not tell you the intellectual task."],
+["Wait until I understand every word perfectly.",0,"You can decode one layer at a time and identify what still needs clarification."]
+],"job"],
+["2 · Decoder Lenses","lenses"],
+["3 · Find the Main Job","choice",assignment,"What is the main thinking job?",[
+["Analyze how a community communicates its values.",1,"Yes. “Analyze” is doing important work in this prompt."],
+["Write exactly five pages.",0,"Length is a constraint, not the main thinking job."],
+["Use MLA.",0,"MLA is a documentation convention."],
+["Turn something in on October 18.",0,"The deadline matters, but it does not tell you what thinking the essay must do."]
+],"job"],
+["4 · Verb Decoder","verb","ANALYZE","Break something into meaningful parts, notice patterns or relationships, explain how or why something works, and show the reader what your evidence means."],
+["5 · Analyze in Action","choice","","The prompt says: “Analyze how social media influences students' perceptions of college.” Which plan actually moves toward analysis?",[
+["Examine several kinds of college-related posts, identify patterns in how college is represented, and explain how those patterns might shape expectations.",1,"This plan gives the writer something to notice, interpret, and explain."],
+["List several social media platforms.",0,"That is closer to listing or describing."],
+["Define social media.",0,"A definition might provide context, but it does not complete the analysis."],
+["Summarize three posts and stop.",0,"Summary can provide material for analysis, but the writer still needs to explain what the examples show."]
+],"verb"],
+["6 · Verb Decoder","verbs"],
+["7 · Background or Requirement?","choice","For generations, communities have used language, traditions, and stories to communicate shared values.","What kind of information is this sentence most likely providing?",[
+["Background or context.",1,"Right. It helps frame the topic but does not itself tell you something you must include."],
+["A requirement to research every generation.",0,"The sentence does not ask you to do that."],
+["A page-length rule.",0,"No length requirement appears here."],
+["A source requirement.",0,"It does not specify evidence you must use."]
+],"constraints"],
+["8 · Requirement Detector","requirements"],
+["9 · Surface vs. Thinking Requirements","choice","","A student submits five pages, uses three sources, includes a Works Cited page, and follows MLA—but mostly summarizes when the prompt asks for analysis. What happened?",[
+["They met several surface requirements but missed an important thinking requirement.",1,"Exactly. Following directions includes both what the paper looks like and what the writer is being asked to do intellectually."],
+["Nothing. Page count and MLA are the only requirements that matter.",0,"The thinking verb is often one of the most important parts of the assignment."],
+["They needed a fourth source.",0,"More evidence would not automatically create analysis."],
+["They should make the vocabulary more formal.",0,"The issue is the kind of thinking, not the vocabulary level."]
+],"verb"],
+["10 · I Followed the Instructions! Mystery","mystery"],
+["11 · Professor Says / Student Hears","translate","Develop your analysis using specific evidence.","Write something smart.","Make a claim or interpretation, use specific evidence, explain what you notice in that evidence, and connect that thinking to the larger point."],
+["12 · Professor Says / Student Hears","translate","Engage critically with the readings.","Criticize the authors.","Question, interpret, connect, complicate, agree with reasons, disagree with reasons, or notice implications. “Critical” does not simply mean negative."],
+["13 · Mission Briefing","brief"],
+["14 · Rubric Time Machine","rubric"],
+["15 · Turn the Rubric Into a Plan","choice","","The rubric says: “Analysis uses specific evidence and explains how evidence supports the writer's interpretation.” What can you do with that information before drafting?",[
+["Plan to include specific evidence, my interpretation, and explanation connecting the two.",1,"You just used the rubric as a planning tool instead of waiting for it to become a grading tool."],
+["Ignore it until the paper is returned.",0,"The rubric can reveal expectations before you write."],
+["Only count how many points the category is worth.",0,"The point value matters, but the description tells you what the work involves."],
+["Copy the rubric sentence into my essay.",0,"The rubric guides the work; it is not content for the paper."]
+],"rubric"],
+["16 · Where Can I Start?","choice","","You've decoded the Community Analysis assignment. Which could be a reasonable next move?",[
+["Brainstorm communities, revisit the readings, write questions, collect examples, or ask whether a possible topic fits.",1,"Yes. There isn't one secret starting place used by all successful college writers."],
+["I must write the introduction first.",0,"You can start with whatever part helps you begin thinking productively."],
+["I must know my final thesis before looking at evidence.",0,"A working thesis can develop as you read, think, and draft."],
+["I cannot ask questions until I have a full draft.",0,"Questions are useful before and during drafting."]
+],"job"],
+["17 · Asking Is a Strategy","ask"],
+["18 · Build a Better Question","choice","","You understand the assignment except whether both required course readings must support the same part of your analysis. Which question is most useful?",[
+["I'm working on Essay 2. I understand that we're analyzing a community's communication, but I'm unsure whether the two course readings need to support the same part of the analysis. Could you clarify that requirement?",1,"Specific questions help your professor see exactly where the uncertainty is."],
+["I don't get it.",0,"This is a valid feeling, but giving a little more information can make the question easier to answer."],
+["What are we doing?",0,"Try identifying what you do understand and the exact point that remains unclear."],
+["Never mind. I'll guess.",0,"Clarification is a legitimate college strategy."]
+],"ask"],
+["19 · Final Assignment Unlock","final"],
+["20 · Your Decoder","finish"]
+];
+function save(done=false){localStorage.setItem(key,JSON.stringify({i,skills,done}))}
+function setSkill(k){if(k)skills[k]=true;tools()}
+function tools(){const a=[["job","🎯 The job"],["verb","🧠 Thinking verb"],["evidence","📚 Evidence"],["audience","👥 Reader"],["constraints","📏 Constraints"],["rubric","📊 Rubric"],["ask","❓ Clarify"]];$("tools").innerHTML=a.map(([k,v])=>`<div class="tool ${skills[k]?"on":""}">${skills[k]?"✓":"○"} ${v}</div>`).join("")}
+function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
+function choices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m])=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);fb("Decoder match.",m)}else{b.disabled=true;fb("Look for the job underneath the wording.",m+" Try another response.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){
+ const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Decoder Mission";
+ $("ptext").textContent=`Decoder mission ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];tools();
+ if(m[1]==="choice"){$("host").innerHTML=(m[2]||"")+`<p class="question">${m[3]}</p>`;$("host").appendChild(choices(m[4],m[5]))}
+ if(m[1]==="lenses"){$("host").innerHTML=`<div class="brief"><h3>🕵️ Your Decoder Lenses</h3><div class="requirement"><span>🎯</span><div><strong>THE JOB</strong><br>What are you actually being asked to do?</div></div><div class="requirement"><span>📦</span><div><strong>THE DELIVERABLE</strong><br>What are you turning in?</div></div><div class="requirement"><span>🧠</span><div><strong>THE THINKING</strong><br>Analyze? Argue? Evaluate? Reflect? Compare?</div></div><div class="requirement"><span>👥</span><div><strong>THE READER</strong><br>Who are you writing for?</div></div><div class="requirement"><span>📚</span><div><strong>THE EVIDENCE</strong><br>What materials must you use?</div></div><div class="requirement"><span>📏</span><div><strong>THE CONSTRAINTS</strong><br>Length, format, sources, deadline.</div></div></div>`;setSkill("evidence");setSkill("audience");setSkill("constraints");fb("Lenses unlocked.","You do not have to process every sentence on an assignment sheet in the same way.")}
+ if(m[1]==="verb"){$("host").innerHTML=`<div class="verb">${m[2]}</div><div class="decoder"><h3>😐 Okay...but what do I actually DO?</h3><p>${m[3]}</p></div>`;setSkill("verb");fb("Verb decoded.","Academic verbs are instructions for kinds of thinking—not decorations in the prompt.")}
+ if(m[1]==="verbs"){$("host").innerHTML=`<div class="brief"><h3>🧠 Quick Verb Decoder</h3><div class="requirement"><strong>SUMMARIZE</strong><div>What does it say? Represent the main ideas accurately and concisely.</div></div><div class="requirement"><strong>EXPLAIN</strong><div>How or why does it work or happen?</div></div><div class="requirement"><strong>ANALYZE</strong><div>What do I notice, how does it work, and what does it mean?</div></div><div class="requirement"><strong>COMPARE</strong><div>What meaningful similarities, differences, or relationships do I notice?</div></div><div class="requirement"><strong>EVALUATE</strong><div>What criteria am I using to judge something, and what judgment does the evidence support?</div></div><div class="requirement"><strong>ARGUE</strong><div>What claim am I asking the reader to consider, and why?</div></div><div class="requirement"><strong>REFLECT</strong><div>What have I noticed or learned, and what does it mean to me now?</div></div></div>`;setSkill("verb");fb("The verb is a map.","If the verb is unclear, ask what intellectual move the assignment expects you to make.")}
+ if(m[1]==="requirements"){$("host").innerHTML=`${assignment}<div class="brief"><h3>🚨 Requirement Detector</h3><div class="requirement"><span>🧠</span><div><strong>Analyze</strong> — thinking job</div></div><div class="requirement"><span>📦</span><div><strong>4–5 page essay</strong> — deliverable</div></div><div class="requirement"><span>📚</span><div><strong>At least two course readings</strong> — evidence</div></div><div class="requirement"><span>👥</span><div><strong>Audience unfamiliar with community</strong> — reader</div></div><div class="requirement"><span>🔧</span><div><strong>MLA documentation</strong> — convention</div></div><div class="requirement"><span>📅</span><div><strong>October 18</strong> — deadline</div></div></div>`;setSkill("evidence");setSkill("audience");setSkill("constraints");fb("Requirements sorted.","The assignment is already becoming a plan.")}
+ if(m[1]==="mystery"){$("host").innerHTML=`<div class="mystery"><h3>🧨 “BUT I FOLLOWED ALL THE DIRECTIONS!”</h3><p>✓ 5 pages &nbsp; ✓ MLA &nbsp; ✓ 3 sources &nbsp; ✓ Works Cited &nbsp; ✓ On topic</p><p><strong>But the prompt asked the writer to ANALYZE, and the paper mostly summarized.</strong></p></div><div class="decoder"><strong>Hidden rule:</strong> College assignments often contain both <em>surface requirements</em> and <em>thinking requirements</em>. Both matter.</div>`;setSkill("verb");fb("Mystery solved.","Meeting visible requirements cannot substitute for the intellectual job named by the prompt.")}
+ if(m[1]==="translate"){$("host").innerHTML=`<div class="heard"><div class="prof"><strong>PROFESSOR SAYS:</strong><p>${m[2]}</p></div><div class="student"><strong>STUDENT HEARS:</strong><p>😵 “${m[3]}”</p></div></div><div class="decoder"><h3>🔓 DECODER</h3><p>${m[4]}</p></div>`;fb("Academic shorthand translated.","Once you turn the phrase into actions, you have something you can actually do.")}
+ if(m[1]==="brief"){$("host").innerHTML=`<div class="brief"><h3>🎮 Mission Briefing</h3><div class="brief-grid"><strong>MISSION</strong><span>Analyze how a community communicates its values.</span><strong>YOU'LL NEED</strong><span>A focused thesis, specific examples, and 2+ course readings.</span><strong>READER</strong><span>Someone unfamiliar with the community.</span><strong>DELIVERABLE</strong><span>4–5 page essay.</span><strong>DOCUMENTATION</strong><span>MLA.</span><strong>DEADLINE</strong><span>October 18.</span></div></div><div class="callout"><strong>That's the same assignment.</strong> It becomes much more manageable when you unpack it.</div>`;fb("Mission visible.","Decoding turns instructions into usable information.")}
+ if(m[1]==="rubric"){$("host").innerHTML=`<div class="time"><h3>📊 Rubric Time Machine</h3><p><strong>Most students first look closely at the rubric after writing.</strong></p><p>⏪ USE RUBRIC BEFORE WRITING</p><div class="assignment"><strong>Analysis:</strong> Uses specific evidence and explains how evidence supports the writer's interpretation.</div><p><strong>Before drafting, that tells you:</strong><br>□ I need specific evidence.<br>□ I need my interpretation.<br>□ I need explanation connecting the two.</p></div><div class="decoder"><strong>Unwritten rule unlocked:</strong> The rubric isn't only how your professor grades the paper. It can help tell you how to build it.</div>`;setSkill("rubric");fb("Time machine activated.","You can reverse-engineer expectations before the draft exists.")}
+ if(m[1]==="ask"){$("host").innerHTML=`<div class="askbox"><h3>🆘 I Still Don't Understand Something</h3><p><strong>Guessing is not your only option.</strong></p><p>Asking for clarification is a college writing strategy. A useful question usually says what assignment you're working on, what you already understand, and exactly where you're uncertain.</p></div>`;setSkill("ask");fb("Clarification unlocked.","You do not have to know the answer before you ask the question.")}
+ if(m[1]==="final"){$("host").innerHTML=`${finalA}<div class="brief"><h3>🔐 FINAL ASSIGNMENT</h3><p>Decode it before you write:</p><div class="requirement"><span>🎯</span><div><strong>DO:</strong> Evaluate two proposed solutions.</div></div><div class="requirement"><span>🧠</span><div><strong>DECIDE:</strong> Which is more effective and why, using stated criteria.</div></div><div class="requirement"><span>📚</span><div><strong>USE:</strong> At least three credible sources.</div></div><div class="requirement"><span>👥</span><div><strong>WRITE FOR:</strong> College decision-makers.</div></div><div class="requirement"><span>📦</span><div><strong>DELIVER:</strong> 5–6 page essay, MLA.</div></div><div class="requirement"><span>❓</span><div><strong>THINK BEFORE STARTING:</strong> What criteria will you use to judge “effective”?</div></div></div>`;Object.keys(skills).forEach(k=>skills[k]=true);tools();fb("🔓 Assignment unlocked.","You found the intellectual job as well as the visible requirements.")}
+ if(m[1]==="finish"){$("host").innerHTML=`<div class="unlock"><h3>🔓 YOUR DECODER</h3><p><strong>You didn't suddenly become better at following directions. You learned how college assignments are built.</strong></p><p>The next time an assignment looks overwhelming, decode one layer at a time.</p></div>`;$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
+ save()
+}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={job:false,verb:false,evidence:false,audience:false,constraints:false,rubric:false,ask:false};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
+const decoder=`DECODE MY ASSIGNMENT
+
+1. What am I making?
+2. What am I being asked to DO with the topic?
+3. What evidence or materials must I use?
+4. Who am I writing for?
+5. What constraints must I follow?
+6. What am I still unsure about?
+
+Tip: Check the rubric BEFORE drafting. It may reveal what the assignment expects you to build.`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(decoder);$("copy").textContent="✓ Assignment Decoder Copied"}catch(e){alert(decoder)}}
+let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
