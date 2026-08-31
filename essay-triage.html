@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essay Triage</title>
+<meta name="description" content="An accessible college writing revision lab that helps students decide what to revise first.">
+<style>
+:root{
+ --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#66737e;--line:#d6e0e7;
+ --blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;
+ --gold:#946807;--goldbg:#fff6dc;--rose:#8a4c63;--rosebg:#fbf0f4;--purple:#72559a;
+ --redbg:#fff0f0;--max:1040px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
+button{font:inherit}button:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:#000;border:2px solid #000;padding:10px;z-index:99}.skip:focus{left:8px}
+.shell{width:min(calc(100% - 22px),var(--max));margin:auto;padding:20px 0 50px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,34px);margin-bottom:18px;box-shadow:0 8px 24px rgba(32,63,82,.07)}
+h1,h2,h3{line-height:1.18;color:var(--dark)}h1{font-size:clamp(2.2rem,7vw,3.5rem);margin:.1em 0 .2em}h2{font-size:clamp(1.45rem,4vw,2rem)}
+.eyebrow{text-transform:uppercase;letter-spacing:.07em;font-weight:900;font-size:.85rem;color:var(--blue);margin:0}
+.lead{font-size:1.14rem}.callout,.secret,.stable,.alert,.rescue{padding:16px;border-radius:14px;margin:14px 0}
+.callout{background:var(--goldbg);border-left:5px solid var(--gold)}.secret{background:#f8f3fb;border:2px dashed var(--purple)}
+.stable{background:var(--greenbg);border:2px solid var(--green)}.alert{background:var(--redbg);border:2px solid var(--rose)}.rescue{background:var(--soft);border:2px solid var(--blue)}
+.pills,.row,.checks{display:flex;flex-wrap:wrap;gap:9px}.pills{margin:15px 0}.pill,.tag{border-radius:999px;padding:6px 11px;font-size:.89rem;font-weight:800}.pill{border:1px solid var(--line);color:var(--muted)}.tag{background:var(--soft);color:var(--blue)}
+.row{margin-top:18px}button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;border:2px solid var(--blue);color:var(--dark)}.quiet{background:#edf1f5;color:var(--ink)}
+.progressline{display:flex;justify-content:space-between;gap:10px;font-size:.92rem;font-weight:800;color:var(--muted)}.track{height:12px;background:#e5ebf0;border-radius:999px;overflow:hidden;margin:7px 0 20px}.bar{height:100%;width:0;background:var(--blue)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:18px;align-items:start}.side{position:sticky;top:10px;background:#fbfcfd;border:1px solid var(--line);border-radius:14px;padding:15px}
+.triage{display:grid;gap:8px}.lane{padding:11px;border-radius:11px;border:2px solid var(--line);background:#fff}.lane.red{border-left:7px solid #a84747}.lane.yellow{border-left:7px solid #b17c08}.lane.green{border-left:7px solid var(--green)}
+.case{border:2px solid var(--line);border-radius:15px;background:#fff;padding:17px;margin:14px 0}.casehead{font-weight:900;color:var(--blue);text-transform:uppercase;letter-spacing:.04em;font-size:.9rem}
+.question{font-size:1.17rem;font-weight:900}.choices{display:grid;gap:10px}.choice{width:100%;text-align:left;background:#fff;border:2px solid #b8c4cf;color:var(--ink);padding:14px 16px}.choice.selected{background:var(--greenbg);border-color:var(--green)}
+.feedback{display:none;border:2px solid var(--blue);background:var(--soft);border-radius:12px;padding:15px;margin-top:15px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border-color:var(--green)}.feedback strong{display:block}
+.xray{border:3px solid var(--blue);background:#f8fbfd;border-radius:16px;padding:17px}.xrow{border-bottom:1px solid var(--line);padding:10px 0}.xrow:last-child{border-bottom:0}.xrow.off{background:var(--goldbg);padding:10px;border-radius:8px}
+.hospital{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.room{border:2px solid var(--line);border-radius:13px;padding:13px;background:#fff}.room h3{margin-top:0}
+.zombie{text-align:center;border:3px dashed var(--purple);background:#faf7fc;border-radius:16px;padding:18px}.zombie .emoji{font-size:3rem}
+.scoreboard{display:grid;grid-template-columns:1fr auto;gap:8px 13px;border:2px solid var(--line);border-radius:12px;padding:15px}.bad{font-weight:900;color:var(--rose)}.goodtxt{font-weight:900;color:var(--green)}
+.patterns{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pattern{border:2px solid var(--line);border-radius:12px;padding:13px}.count{font-size:2rem;font-weight:900;color:var(--blue)}
+.plan{display:grid;gap:8px}.planstep{display:grid;grid-template-columns:80px 1fr;gap:10px;align-items:start;border:2px solid var(--line);border-radius:12px;padding:12px}.planstep strong{color:var(--blue)}
+.decision{border:3px solid var(--blue);background:#f8fbfd;border-radius:16px;padding:18px}.decision .q{font-weight:900;margin-top:12px}.decision .ans{padding-left:14px;border-left:4px solid var(--green)}
+.completion{border:4px solid var(--blue);border-radius:18px;padding:clamp(20px,4vw,30px);background:#fff}.complete{color:var(--green);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.completegrid{display:grid;grid-template-columns:1fr auto;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;margin:16px 0}.shot{background:var(--goldbg);border:2px solid var(--gold);border-radius:12px;padding:14px;font-weight:800}
+.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}.hospital{grid-template-columns:1fr}}
+@media(max-width:580px){body{font-size:17px}.shell{width:min(calc(100% - 14px),var(--max));padding-top:9px}.card{padding:19px 15px}.patterns{grid-template-columns:1fr}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.completegrid,.planstep{grid-template-columns:1fr;gap:3px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to activity</a>
+<main id="main" class="shell">
+<section id="intro" class="card">
+ <p class="eyebrow">ENGL C1000 · College Writer Toolkit</p>
+ <h1>🩺 Essay Triage</h1>
+ <p class="lead"><strong>Your draft has arrived. What needs attention first?</strong></p>
+ <div class="callout"><strong>You probably can't fix everything at once.</strong> Revision gets easier when you stop treating every comment, typo, paragraph, and citation as equally urgent.</div>
+ <div class="secret">🔓 <strong>Unwritten Rule:</strong> Experienced writers prioritize. They diagnose what would help this particular draft most <em>before</em> polishing everything they see.</div>
+ <div class="pills"><span class="pill">20 triage cases</span><span class="pill">Essay X-Ray</span><span class="pill">Zombie Paragraph</span><span class="pill">Wrong Treatment Game</span><span class="pill">Revision Rescue Tool</span></div>
+ <div class="row"><button id="start" class="primary" type="button">🚑 Admit the Draft</button><button id="resume" class="secondary hidden" type="button">Resume Triage</button></div>
+</section>
+
+<section id="lab" class="card hidden">
+ <div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
+ <span id="stage" class="tag"></span>
+ <div class="layout">
+  <div>
+   <div id="host"></div>
+   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
+   <div class="row"><button id="next" class="primary hidden" type="button">Next Case</button></div>
+  </div>
+  <aside class="side" aria-label="Essay triage board">
+   <h3>🏥 Triage Board</h3>
+   <div class="triage">
+    <div class="lane red"><strong>🔴 BIG MOVES</strong><br><small>Purpose · thesis · ideas · organization · development</small></div>
+    <div class="lane yellow"><strong>🟡 READER CARE</strong><br><small>Evidence · analysis · connections · context</small></div>
+    <div class="lane green"><strong>🟢 POLISH</strong><br><small>Sentences · proofreading · citations · formatting</small></div>
+   </div>
+   <p style="font-size:.9rem"><strong>Recurring question:</strong><br>What change would help this draft most right now?</p>
+  </aside>
+ </div>
+</section>
+
+<section id="done" class="card hidden">
+ <div class="stable"><h2>💚 Draft Stabilized</h2><p><strong>You didn't fix everything. You learned how to decide what deserves your attention first.</strong></p></div>
+ <h2>🩺 My Essay Triage Card</h2>
+ <div class="plan">
+  <div class="planstep"><strong>1 · JOB</strong><span>Does my paper still answer the assignment?</span></div>
+  <div class="planstep"><strong>2 · CLAIM</strong><span>Can I find the paper's main point?</span></div>
+  <div class="planstep"><strong>3 · X-RAY</strong><span>What job does each paragraph actually do?</span></div>
+  <div class="planstep"><strong>4 · THINK</strong><span>Where does my reader need more evidence, analysis, context, or connection?</span></div>
+  <div class="planstep"><strong>5 · PATTERNS</strong><span>What one or two issues repeat?</span></div>
+  <div class="planstep"><strong>6 · POLISH</strong><span>Edit, proofread, cite, and format the version I'm actually submitting.</span></div>
+ </div>
+ <div class="decision" style="margin-top:20px">
+  <h2>🆘 I Don't Know What to Fix First</h2>
+  <div id="rescueOutput" aria-live="polite">Press the button for one triage question.</div>
+  <button id="rescueBtn" class="secondary" type="button" style="margin-top:12px">Start Revision Rescue</button>
+ </div>
+ <div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Triage Card</button></div>
+ <div id="completionCard" class="completion" style="margin-top:24px">
+  <div class="complete">✓ Lab complete</div>
+  <h2>Essay Triage — Complete</h2>
+  <div class="completegrid">
+   <span>Prioritize revision before polishing</span><strong>✓ Complete</strong>
+   <span>Distinguish revision from editing</span><strong>✓ Complete</strong>
+   <span>Use an essay X-ray / reverse outline</span><strong>✓ Complete</strong>
+   <span>Identify paragraph and feedback patterns</span><strong>✓ Complete</strong>
+   <span>Choose a useful response to common draft problems</span><strong>✓ Complete</strong>
+   <span>Recognize when the normal priority order needs an exception</span><strong>✓ Complete</strong>
+   <span>Create a realistic revision treatment plan</span><strong>✓ Complete</strong>
+  </div>
+  <p><strong>Completed:</strong> <span id="date"></span></p>
+  <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+ </div>
+ <div class="row"><button id="restart" class="quiet" type="button">Triage Another Draft</button></div>
+</section>
+<footer>Progress stays in this browser. This lab does not ask for your name, email, or login.</footer>
+</main>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id),KEY="essayTriageV1"; let i=0;
+const cases=[
+["1 · Draft Incoming","intro"],
+["2 · Learn the Triage Board","board"],
+["3 · What Gets Treated First?","choice","Your thesis argues that textbook costs can affect student success. Paragraph 4 is entirely about campus parking. Paragraph 4 also has a typo, a comma error, and a weak transition.","What should get attention first?",[
+["Decide whether Paragraph 4 belongs in this essay.",1,"Exactly. Determine whether you're keeping the paragraph before polishing it."],
+["Fix the comma.",0,"That comma may disappear along with the paragraph."],
+["Correct the typo.",0,"Useful eventually—if the paragraph survives revision."],
+["Add “Furthermore.”",0,"A transition word cannot make an unrelated paragraph support the thesis."]
+],"🪦 Beautiful comma. Paragraph deleted."],
+["4 · Revision Emergency Room","rooms"],
+["5 · Revision or Editing?","choice","You move Paragraph 5 before Paragraph 3 because the argument makes more sense in that order.","What kind of work is this?",[
+["Revision — you're changing what the paper is doing and how ideas are organized.",1,"Yes. Revision can involve rethinking, moving, adding, cutting, or developing ideas."],
+["Editing — because all changes are editing.",0,"In college writing, revision usually refers to larger changes in ideas, purpose, development, or structure."],
+["Proofreading — because you're checking the draft.",0,"Proofreading usually focuses on surface errors in a fairly stable draft."],
+["Formatting — because paragraph numbers changed.",0,"The change is structural, not formatting."]
+],""],
+["6 · Essay X-Ray","xray"],
+["7 · X-Ray Diagnosis","choice","The essay's thesis is about access to evening student services. Its paragraph jobs are: P2 working students' schedules; P3 tutoring hours; P4 parking permit prices; P5 online service options.","What should you investigate first?",[
+["Whether the parking paragraph serves the current argument.",1,"Right. The X-ray makes the paragraph's job visible so you can decide whether to cut, move, or change it."],
+["The font in Paragraph 4.",0,"The paragraph's relationship to the argument is the larger question."],
+["Whether Paragraph 3 contains a semicolon.",0,"That may matter later, but the X-ray is revealing a structural issue."],
+["Whether the title is exciting enough.",0,"The argument has a more important question waiting."]
+],""],
+["8 · Zombie Paragraph","zombie"],
+["9 · Wrong Treatment","wrong"],
+["10 · Develop This","choice","A professor writes “Develop this” after a paragraph containing a claim, two quotations, and almost no explanation.","Which treatment is most promising?",[
+["Explain what the evidence shows and why it matters to the paragraph's claim.",1,"Yes. This paragraph already has evidence; development may require more reasoning."],
+["Add a third quotation automatically.",0,"Possible side effect: even more unexplained evidence."],
+["Make every sentence longer.",0,"Length does not identify what kind of development the reader needs."],
+["Change the font.",0,"The paragraph's thinking—not its typography—needs attention."]
+],""],
+["11 · Feedback Triage","feedback"],
+["12 · Nineteen Comments?","patterns"],
+["13 · Thirty-Minute Revision","choice","You have limited time. Your thesis only partly answers the prompt, one paragraph no longer fits, two quotations need explanation, and your Works Cited indentation is wrong.","Which is the strongest place to begin?",[
+["Recheck the assignment and thesis, then decide what major content still belongs.",1,"Yes. A clearer purpose can affect every later revision decision."],
+["Perfect the Works Cited indentation first.",0,"Formatting matters, but it probably won't solve the draft's largest current problem."],
+["Choose a more creative title.",0,"The title is lower leverage than the paper's purpose and argument."],
+["Fix every comma before rereading the prompt.",0,"You may end up polishing material you later change or remove."]
+],""],
+["14 · Triage Is Not a Law","exceptions"],
+["15 · Exception Alert","choice","A sentence-level problem makes a key sentence impossible to understand. Should you always ignore it until the final proofreading pass?",[
+["No. Triage means prioritizing; a clarity problem that blocks meaning may need attention now.",1,"Exactly. The three levels guide attention, but they are not rigid laws."],
+["Yes. Sentence-level issues are forbidden until the end.",0,"That would turn a useful strategy into an inflexible rule."],
+["Delete the entire essay.",0,"The problem is specific and treatable."],
+["Only fix MLA first.",0,"The reader currently cannot understand a key sentence."]
+],""],
+["16 · Three-Pass Revision","passes"],
+["17 · Pattern or One-Off?","choice","Your professor wrote “So what?” in four different paragraphs and marked one misspelled word.","What is probably the higher-value pattern to investigate?",[
+["The repeated requests for significance or analysis.",1,"Yes. Repetition across the paper can reveal a revision priority."],
+["The single misspelled word.",0,"Fix it, but one typo is less likely to explain a paper-wide pattern."],
+["The page number font.",0,"That doesn't address the repeated feedback."],
+["The professor's handwriting.",0,"Creative diagnosis, wrong patient."]
+],""],
+["18 · Final Boss: 20-Minute Revision","boss"],
+["19 · Build the Treatment Plan","plan"],
+["20 · Discharge Instructions","finish"]
+];
+function save(done=false){localStorage.setItem(KEY,JSON.stringify({i,done}))}
+function fb(title,text,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=title;$("ftext").textContent=text;$("next").classList.remove("hidden")}
+function choiceUI(opts,joke){let d=document.createElement("div");d.className="choices";opts.forEach(([label,good,msg])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=label;b.onclick=()=>{if(good){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");fb("💚 Correct triage.",msg+(joke?" "+joke:""))}else{b.disabled=true;fb("🚨 Treatment may miss the bigger problem.",msg+" Try another treatment.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function render(){
+ let c=cases[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Case";
+ $("ptext").textContent=`Triage case ${i+1} of ${cases.length}`;$("pct").textContent=Math.round((i+1)/cases.length*100)+"%";$("bar").style.width=Math.round((i+1)/cases.length*100)+"%";$("stage").textContent=c[0];
+
+ if(c[1]==="intro"){$("host").innerHTML=`<div class="alert"><h2>🚑 DRAFT INCOMING</h2><p><strong>Patient:</strong> Essay 2<br><strong>Due:</strong> Soon<br><strong>Time available:</strong> Limited<br><strong>Current condition:</strong> 😵‍💫</p></div><div class="case"><span class="casehead">Symptoms detected</span><p>🫀 Thesis doesn't quite answer the assignment<br>🦴 Paragraph 3 seems unrelated<br>🧠 Evidence is present but analysis is thin<br>🧭 Paragraph order is confusing<br>🩹 Several awkward sentences<br>🦠 Three comma errors<br>📎 Works Cited indentation is wrong</p></div><div class="secret">🔓 <strong>You cannot treat everything first.</strong> The question is not “What is wrong?” but “What change would help this draft most right now?”</div>`;fb("Triage begins with diagnosis.","Not every visible issue deserves equal attention at the same moment.")}
+ if(c[1]==="board"){$("host").innerHTML=`<h2>🏥 Three Levels of Attention</h2><div class="hospital"><div class="room"><h3>🔴 Big Moves</h3><p>Purpose<br>Thesis<br>Main ideas<br>Organization<br>Development</p></div><div class="room"><h3>🟡 Reader Care</h3><p>Evidence<br>Analysis<br>Connections<br>Context<br>Transitions</p></div><div class="room"><h3>🟢 Polish</h3><p>Sentence clarity<br>Grammar patterns<br>Proofreading<br>Citations<br>Formatting</p></div></div><div class="secret">🔓 You may hear terms such as <strong>global revision</strong> and <strong>local revision/editing</strong>. The useful idea is simpler: <strong>decide what level needs your attention now.</strong></div>`;fb("Triage board unlocked.","Usually, stabilize the paper's purpose and ideas before spending most of your time polishing—but context matters.")}
+ if(c[1]==="choice"){$("host").innerHTML=`<div class="case"><span class="casehead">Case file</span><p>${c[2]}</p></div><p class="question">${c[3]}</p>`;$("host").appendChild(choiceUI(c[4],c[5]))}
+ if(c[1]==="rooms"){$("host").innerHTML=`<h2>🚪 Send the Problem to the Right Room</h2><div class="hospital"><div class="room"><h3>🔴 Revision ER</h3><p>“I can't tell what this paper is arguing.”<br><strong>→ Purpose / thesis</strong></p><p>“Paragraphs 2 and 5 make the same point.”<br><strong>→ Organization / focus</strong></p></div><div class="room"><h3>🟡 Reader Care</h3><p>“I see the quotation, but why does it matter?”<br><strong>→ Analysis</strong></p><p>“How does this example connect?”<br><strong>→ Relationship / context</strong></p></div><div class="room"><h3>🟢 Polish Clinic</h3><p>“Comma splice.”<br><strong>→ Sentence editing</strong></p><p>“Works Cited needs hanging indents.”<br><strong>→ Formatting</strong></p></div></div>`;fb("Different symptoms need different treatment.","Calling every change “fixing the paper” can hide the actual decision you need to make.")}
+ if(c[1]==="xray"){$("host").innerHTML=`<h2>🩻 X-RAY MY ESSAY</h2><div class="xray"><div class="xrow"><strong>THESIS:</strong> Colleges should expand evening student services because limited hours can create barriers for working students.</div><div class="xrow"><strong>P2:</strong> Many students work while attending college.</div><div class="xrow"><strong>P3:</strong> Tutoring closes before some evening courses begin.</div><div class="xrow off"><strong>P4:</strong> Parking permits are expensive.</div><div class="xrow"><strong>P5:</strong> Online services can reduce some access barriers.</div></div><div class="secret">🔓 <strong>Writer tool unlocked: Reverse Outline.</strong> After drafting, write down what each paragraph actually does. The pattern can reveal repetition, gaps, or paragraphs that belong to an earlier version of the paper.</div>`;fb("X-ray complete.","Looking only at paragraph jobs can make structure easier to see.")}
+ if(c[1]==="zombie"){$("host").innerHTML=`<div class="zombie"><div class="emoji">🧟</div><h2>ZOMBIE PARAGRAPH DETECTED</h2><p>You wrote it early. Your thesis changed. The paragraph still wanders through the essay serving an argument that no longer exists.</p></div><div class="rescue"><strong>Possible treatments:</strong><br>✂️ Cut it<br>🔧 Give it a new job<br>🔗 Connect useful material to the current argument<br>🚗 Park it for another project</div><div class="secret">🔓 <strong>Deleting writing does not mean writing it was a waste.</strong> Drafting can help you discover what the paper becomes.</div>`;fb("Zombie contained.","Drafts accumulate leftovers. Revision includes deciding what the current paper no longer needs.")}
+ if(c[1]==="wrong"){$("host").innerHTML=`<h2>💊 Wrong Treatment Game</h2><div class="scoreboard"><span><strong>SYMPTOM:</strong> “I don't see how this paragraph supports your thesis.”<br>Prescription: ADD “FURTHERMORE.”</span><span class="bad">Relationship unchanged</span><span><strong>SYMPTOM:</strong> Paragraph needs development.<br>Prescription: ADD ANOTHER QUOTATION.</span><span class="bad">Possible side effect: more unexplained evidence</span><span><strong>SYMPTOM:</strong> Thesis doesn't answer prompt.<br>Prescription: FIX MLA HEADER.</span><span class="goodtxt">Header stabilized.<br>Thesis unchanged.</span></div><div class="callout">😂 A treatment can be technically useful and still fail to address the draft's most important current problem.</div>`;fb("Diagnosis before treatment.","Ask what kind of problem you're looking at before reaching for a familiar fix.")}
+ if(c[1]==="feedback"){$("host").innerHTML=`<h2>💬 Feedback Triage</h2><div class="case"><p><strong>Comments on one draft:</strong><br>Thesis?<br>Develop.<br>Interesting!<br>How does this connect?<br>comma<br>citation?<br>Awk.<br>This paragraph seems important.<br>So what?<br>spelling</p></div><div class="rescue"><strong>Don't just count comments. Sort them.</strong><p>🚨 <strong>PATTERN:</strong> Does an issue repeat or affect the whole paper?<br>🔧 <strong>LOCAL:</strong> Is it one specific place?<br>💬 <strong>QUESTION:</strong> Do I need clarification before revising?</p></div>`;fb("Feedback is data.","A page full of comments may contain only a few recurring revision priorities.")}
+ if(c[1]==="patterns"){$("host").innerHTML=`<h2>😰 “I Have 19 Things Wrong With My Paper.”</h2><div class="patterns"><div class="pattern"><span class="count">7</span><br><strong>Analysis comments</strong></div><div class="pattern"><span class="count">5</span><br><strong>Paragraph focus comments</strong></div><div class="pattern"><span class="count">4</span><br><strong>Sentence-boundary comments</strong></div><div class="pattern"><span class="count">3</span><br><strong>One-off notes</strong></div></div><div class="stable"><strong>19 comments → 3 recurring things to investigate.</strong><p>Grouping feedback into patterns can turn a wall of marks into a manageable revision plan.</p></div>`;fb("Pattern detected.","You can prioritize patterns instead of treating every margin note as a separate emergency.")}
+ if(c[1]==="exceptions"){$("host").innerHTML=`<h2>🚨 Exception Alert</h2><div class="secret"><strong>TRIAGE IS NOT A UNIVERSAL CHECKLIST.</strong><p>A sentence problem may need immediate attention if it blocks meaning. Citation accuracy may be urgent if the assignment depends heavily on source documentation. A required section may need attention before a lower-level issue.</p><p><strong>Triage means prioritizing—not blindly following an order.</strong></p></div>`;fb("Judgment required.","The best next move depends on the draft, assignment, reader, requirements, and time available.")}
+ if(c[1]==="passes"){$("host").innerHTML=`<h2>🔄 A Three-Pass Revision Strategy</h2><div class="triage"><div class="lane red"><strong>🔴 PASS 1 — WHAT IS THIS PAPER DOING?</strong><br>Read the assignment, thesis, paragraph jobs, and conclusion. Does the paper still answer the assignment? Does each major section belong?</div><div class="lane yellow"><strong>🟡 PASS 2 — CAN MY READER FOLLOW MY THINKING?</strong><br>Look for evidence → analysis, missing context, paragraph relationships, and places a reader might ask why/how/so what?</div><div class="lane green"><strong>🟢 PASS 3 — CLEAN THE VERSION I'M SUBMITTING</strong><br>Now edit sentences, check recurring patterns, proofread, verify citations, and format.</div></div><div class="stable"><strong>Polish the paper you're actually keeping.</strong></div>`;fb("Reusable strategy unlocked.","Separate passes can keep proofreading from consuming the time you needed for revision.")}
+ if(c[1]==="boss"){$("host").innerHTML=`<div class="alert"><h2>👑 FINAL BOSS: 20-MINUTE REVISION</h2><p>🚨 Thesis partly answers prompt<br>🚨 Paragraph 3 no longer fits<br>🟡 Two quotations need analysis<br>🟢 Repeated comma-splice pattern<br>🟢 Three typos<br>🟢 Works Cited indentation<br>🙂 Title is boring</p><p><strong>You cannot do everything first.</strong></p></div><div class="secret">There can be more than one reasonable plan. Your job is to make a defensible decision about what has the greatest effect on this draft.</div>`;fb("Final boss admitted.","Start with high-leverage decisions, then work toward the stable version you will actually submit.")}
+ if(c[1]==="plan"){$("host").innerHTML=`<h2>📋 Revision Treatment Plan</h2><div class="plan"><div class="planstep"><strong>FIRST</strong><span>Recheck prompt + thesis. Decide what the paper is actually trying to do.</span></div><div class="planstep"><strong>NEXT</strong><span>Decide whether Paragraph 3 belongs, moves, or changes jobs.</span></div><div class="planstep"><strong>THEN</strong><span>Develop the two places where evidence needs analysis.</span></div><div class="planstep"><strong>NEXT</strong><span>Check the recurring sentence-boundary pattern.</span></div><div class="planstep"><strong>FINAL</strong><span>Proofread and check Works Cited formatting.</span></div><div class="planstep"><strong>IF TIME</strong><span>Revisit the title.</span></div></div><div class="secret">🔓 A revision plan is not proof that one issue “matters more” in every paper. It is a decision about <strong>this draft, this assignment, and this moment.</strong></div>`;fb("Treatment plan ready.","Revision becomes more manageable when the next few decisions are visible.")}
+ if(c[1]==="finish"){$("host").innerHTML=`<div class="stable"><h2>💚 PATIENT STABILIZED</h2><p>You diagnosed before treating. You looked for patterns. You separated major revision from polishing. You also recognized when an exception could change the order.</p></div><div class="callout"><h3>🩺 The question to keep:</h3><p style="font-size:1.3rem"><strong>What change would help this draft most right now?</strong></p></div>`;$("next").textContent="Discharge Draft & Get Canvas Completion";$("next").classList.remove("hidden")}
+ save()
+}
+$("next").onclick=()=>{if(i<cases.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+const rescue=[
+"<div class='q'>1. Does your draft answer the assignment?</div><div class='ans'>If you're not sure, reread the prompt and compare it with your thesis. Start there.</div>",
+"<div class='q'>2. Can you state the paper's main claim?</div><div class='ans'>If not, investigate the thesis or focus before polishing individual sentences.</div>",
+"<div class='q'>3. Does each paragraph help the current claim?</div><div class='ans'>If you're not sure, make a quick reverse outline: write one line describing each paragraph's job.</div>",
+"<div class='q'>4. Can the reader follow your evidence and thinking?</div><div class='ans'>Look for places needing evidence, analysis, context, or a clearer connection.</div>",
+"<div class='q'>5. What issue repeats?</div><div class='ans'>Choose one recurring sentence, citation, or clarity pattern rather than trying to hunt every possible error at once.</div>",
+"<div class='q'>6. Is the draft's content fairly stable?</div><div class='ans'>Now polish the version you're actually planning to submit: edit, proofread, cite, and format.</div>"
+];let r=0;
+$("rescueBtn").onclick=()=>{$("rescueOutput").innerHTML=rescue[r];r=(r+1)%rescue.length;$("rescueBtn").textContent=r===0?"Start Rescue Again":"Next Triage Question"}
+const triage=`MY ESSAY TRIAGE CARD
+
+1. CHECK THE JOB
+Does my paper still answer the assignment?
+
+2. CHECK THE CLAIM
+Can I find the paper's main point?
+
+3. X-RAY THE PARAGRAPHS
+What job does each paragraph actually do?
+
+4. CHECK THE THINKING
+Where does my reader need more evidence, analysis, context, or connection?
+
+5. FIND PATTERNS
+What 1–2 issues repeat?
+
+6. POLISH
+Edit, proofread, cite, and format the version I'm actually submitting.
+
+TRIAGE QUESTION:
+What change would help this draft most right now?`;
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(triage);$("copy").textContent="✓ Triage Card Copied"}catch(e){alert(triage)}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(KEY);location.reload()}}
+let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume Triage";$("resume").onclick=()=>{i=s.i||0;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+})();
+</script>
+</body>
+</html>
