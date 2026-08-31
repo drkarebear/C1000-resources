@@ -16,7 +16,8 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
 button{font:inherit}
-button:focus-visible,a:focus-visible{outline:4px solid #111827;outline-offset:3px}
+button:focus-visible,a:focus-visible,textarea:focus-visible,select:focus-visible{outline:4px solid #111827;outline-offset:3px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .skip{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;color:#000;border:2px solid #000;padding:10px 14px}
 .skip:focus{left:8px}
 .shell{width:min(100% - 22px,var(--max));margin:auto;padding:20px 0 48px}
@@ -75,6 +76,15 @@ button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight
 .complete{color:var(--good);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
 .grid{display:grid;grid-template-columns:1fr auto;gap:9px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0}
 .shot{background:#fff7e7;border:2px solid var(--accent-line);border-radius:12px;padding:14px 16px;font-weight:700}
+.transfer{border:2px solid var(--brand);background:#f8fbfd;border-radius:16px;padding:18px;margin:20px 0}
+.form-grid{display:grid;gap:14px;margin-top:14px}
+.form-group{display:grid;gap:6px}
+.form-group label,.form-group legend{font-weight:800;color:var(--brand-dark)}
+textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:2px solid #aebbc7;border-radius:10px;padding:11px 12px}
+textarea{min-height:105px;resize:vertical}
+.help{color:var(--muted);font-size:.93rem;margin:0}
+.transfer-result{display:none;margin-top:14px;padding:15px;border-radius:12px;background:var(--good-bg);border:2px solid var(--good)}
+.transfer-result.show{display:block}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 @media(max-width:760px){.controlroom{grid-template-columns:1fr}.side{position:static;order:-1}.mixer{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}}
@@ -83,7 +93,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 </style>
 </head>
 <body>
-<a href="#main" class="skip">Skip to activity</a>
+<a href="#main" class="skip">Skip to the source integration activity</a>
 <main id="main" class="shell">
 
 <section id="intro" class="card">
@@ -97,8 +107,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 
 <section id="lab" class="card hidden">
   <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div class="track"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage"></span>
+  <div id="progress" class="track" role="progressbar" aria-label="Source mission progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"><div id="bar" class="bar"></div></div>
+  <span id="stage" class="stage" role="heading" aria-level="3" tabindex="-1"></span>
   <h2>Source Control Room</h2>
 
   <div class="controlroom">
@@ -134,13 +144,57 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
   </div>
 
   <div class="row">
-    <button id="check" class="primary" type="button">🎛️ Open My Source Check</button>
+    <button id="check" class="primary" type="button" aria-expanded="false" aria-controls="checkBox">🎛️ Open My Source Check</button>
     <button id="copy" class="secondary" type="button">📋 Copy Source Check</button>
   </div>
 
   <div id="checkBox" class="decoder hidden" role="status" aria-live="polite">
     <h3>Before I add this source...</h3>
     <p>Why is it here?<br>What does my reader need from it?<br>Quote, paraphrase, or summarize?<br>How will I identify and credit it?<br>What will I say after it?<br>How does it help my argument?</p>
+  </div>
+
+  <div class="transfer" aria-labelledby="transferHeading">
+    <h2 id="transferHeading">Take One Source Into Your Own Draft</h2>
+    <p>You have practiced controlling a source conversation. Now use the same moves on one source you are actually considering for a paper. This is a planning tool, not a graded quiz.</p>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="ownPoint">1. What point are <em>you</em> trying to make?</label>
+        <textarea id="ownPoint" placeholder="Write the claim or idea this source needs to help you develop."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="ownSource">2. What source material are you considering?</label>
+        <textarea id="ownSource" placeholder="Paste a short passage, paraphrase the source idea, or describe the evidence you may use."></textarea>
+        <p class="help">You do not need to paste an entire article. Bring in only the source material you are deciding how to use.</p>
+      </div>
+      <div class="form-group">
+        <label for="ownRole">3. What job should this source perform?</label>
+        <select id="ownRole">
+          <option value="">Choose the closest role</option>
+          <option value="context">Provide context or background</option>
+          <option value="support">Support or extend my point</option>
+          <option value="example">Offer a concrete example</option>
+          <option value="complicate">Complicate or qualify my point</option>
+          <option value="counter">Represent another position</option>
+          <option value="define">Define or clarify an idea</option>
+          <option value="other">Do another useful job</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ownMove">4. How will you bring the source in?</label>
+        <select id="ownMove">
+          <option value="">Choose a source move</option>
+          <option value="quote">Quote — the exact wording matters</option>
+          <option value="paraphrase">Paraphrase — the specific idea matters</option>
+          <option value="summary">Summarize — the larger point matters</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ownReturn">5. After the source speaks, what will <em>you</em> say?</label>
+        <textarea id="ownReturn" placeholder="Explain what the evidence shows, why it matters, or how it connects to your point."></textarea>
+      </div>
+    </div>
+    <div class="row"><button id="buildMove" class="primary" type="button">Check My Source Move</button></div>
+    <div id="transferResult" class="transfer-result" role="status" aria-live="polite"></div>
   </div>
 
   <div class="completion">
@@ -166,7 +220,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 
 <script>
 (()=>{
-const $=id=>document.getElementById(id), key="sourceJoinConversationV1";
+const $=id=>document.getElementById(id), key="sourceJoinConversationV1", transferKey="sourceJoinConversationTransferV1";
+const reduceMotion=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let i=0, unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};
 
 const srcA={type:"Student-services usability study",text:"Students were more likely to abandon a task when important support information was buried across multiple pages or written in unfamiliar institutional language."};
@@ -261,14 +316,14 @@ function renderMeter(){
 }
 function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
 function sourceCard(s){return `<div class="sourcecard"><div class="type">${s.type}</div><blockquote>${s.text}</blockquote></div>`}
-function choices(arr,onGood){
- const wrap=document.createElement("div");wrap.className="choices";
- arr.forEach(([label,good,msg])=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=label;b.onclick=()=>{if(good){[...wrap.children].forEach(x=>x.disabled=true);b.classList.add("selected");if(onGood)onGood();fb("That move fits the job.",msg)}else{b.disabled=true;fb("Try a different move.",msg,false);$("next").classList.add("hidden")}};wrap.appendChild(b)});
+function choices(arr,onGood,label="Choose the strongest response"){
+ const wrap=document.createElement("div");wrap.className="choices";wrap.setAttribute("role","group");wrap.setAttribute("aria-label",label);
+ arr.forEach(([labelText,good,msg])=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=labelText;b.setAttribute("aria-pressed","false");b.setAttribute("aria-describedby","feedback");b.onclick=()=>{if(good){[...wrap.children].forEach(x=>{x.disabled=true;x.setAttribute("aria-pressed","false")});b.classList.add("selected");b.setAttribute("aria-pressed","true");if(onGood)onGood();fb("That move fits the job.",msg)}else{b.disabled=true;fb("Try a different move.",msg,false);$("next").classList.add("hidden")}};wrap.appendChild(b)});
  return wrap
 }
 function render(){
  const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
- $("ptext").textContent=`Source mission ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderMeter();
+ $("ptext").textContent=`Source mission ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("progress").setAttribute("aria-valuemax",moments.length);$("progress").setAttribute("aria-valuenow",i+1);$("progress").setAttribute("aria-valuetext",`Source mission ${i+1} of ${moments.length}: ${m[0]}`);$("stage").textContent=m[0];renderMeter();
 
  if(m[1]==="role"){
    $("host").innerHTML=`<div class="signal"><div class="label">🚨 Incoming Source</div></div>${sourceCard(m[2])}<p class="question">${m[3]}</p>`;
@@ -339,15 +394,18 @@ function render(){
  if(m[1]==="finish"){
    $("host").innerHTML=`<div class="callout"><strong>Before you add a source, ask:</strong><br>Why is it here? What does my reader need from it? How should it enter? What will I say after it? How does it help my argument?</div>`;
    $("next").textContent="Finish Lab";$("next").classList.remove("hidden")
+ } else {
+   $("next").textContent="Next Source Mission";
  }
- save(false)
+ save(false);
+ requestAnimationFrame(()=>$("stage").focus({preventScroll:true}));
 }
 
-$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();$("stage").scrollIntoView({behavior:reduceMotion()?"auto":"smooth",block:"start"})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());$("transferHeading").setAttribute("tabindex","-1");requestAnimationFrame(()=>{$("transferHeading").focus({preventScroll:true});$("transferHeading").scrollIntoView({behavior:reduceMotion()?"auto":"smooth",block:"start"})})}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};render()}
-$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
-$("check").onclick=()=>{$("checkBox").classList.toggle("hidden")}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);localStorage.removeItem(transferKey);location.reload()}}
+$("check").onclick=()=>{const opening=$("checkBox").classList.contains("hidden");$("checkBox").classList.toggle("hidden");$("check").setAttribute("aria-expanded",String(opening));$("check").textContent=opening?"🎛️ Close My Source Check":"🎛️ Open My Source Check"}
 $("copy").onclick=async()=>{
  const text=`SOURCE CHECK
 
@@ -360,6 +418,22 @@ Before I add this source:
 6. How does it help my argument?`;
  try{await navigator.clipboard.writeText(text);$("copy").textContent="✓ Source Check Copied"}catch(e){$("checkBox").classList.remove("hidden")}
 }
+const transferFields=["ownPoint","ownSource","ownRole","ownMove","ownReturn"];
+function saveTransfer(){const data={};transferFields.forEach(id=>data[id]=$(id).value);localStorage.setItem(transferKey,JSON.stringify(data))}
+transferFields.forEach(id=>$(id).addEventListener("input",saveTransfer));
+try{const savedTransfer=JSON.parse(localStorage.getItem(transferKey)||"null");if(savedTransfer)transferFields.forEach(id=>{if(savedTransfer[id])$(id).value=savedTransfer[id]})}catch(e){}
+$("buildMove").onclick=()=>{
+ const point=$("ownPoint").value.trim(), source=$("ownSource").value.trim(), role=$("ownRole").value, move=$("ownMove").value, ret=$("ownReturn").value.trim();
+ const missing=[];if(!point)missing.push("your point");if(!source)missing.push("the source material");if(!role)missing.push("the source's job");if(!move)missing.push("quote, paraphrase, or summarize");if(!ret)missing.push("what your voice will say after the source");
+ if(missing.length){$("transferResult").className="transfer-result show";$("transferResult").innerHTML=`<strong>Your source move is not built yet.</strong><br>Add ${missing.join(", ")}. The goal is not to fill boxes; it is to make the relationship between your idea and the source visible.`;const firstMissing=!point?"ownPoint":!source?"ownSource":!role?"ownRole":!move?"ownMove":"ownReturn";$(firstMissing).focus();return}
+ const roleText=$("ownRole").options[$("ownRole").selectedIndex].text;
+ const moveText=$("ownMove").options[$("ownMove").selectedIndex].text.split(" — ")[0];
+ $("transferResult").className="transfer-result show";
+ $("transferResult").innerHTML=`<strong>Your source has a job.</strong><br><strong>Your point:</strong> ${escapeHTML(point)}<br><strong>Source role:</strong> ${escapeHTML(roleText)}<br><strong>Entry move:</strong> ${escapeHTML(moveText)}<br><strong>Your voice returns:</strong> ${escapeHTML(ret)}<br><br><strong>Reader check:</strong> When you draft the paragraph, make sure the source does not have to explain its own significance. Your sentence after the evidence should help the reader see how it serves your point.`;
+ saveTransfer();
+};
+function escapeHTML(value){return value.replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]))}
+
 let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume Mission";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
 })();
