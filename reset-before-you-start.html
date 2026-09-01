@@ -1,669 +1,234 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Reset Before You Start</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #f7f8f6;
-      color: #263943;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.65;
-    }
-
-    button,
-    textarea {
-      font: inherit;
-    }
-
-    button:focus-visible,
-    textarea:focus-visible {
-      outline: 3px solid #173e4b;
-      outline-offset: 3px;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 24px 18px 60px;
-    }
-
-    .hero {
-      background: #edf4ef;
-      border: 1px solid #cedfd2;
-      border-radius: 20px;
-      padding: 34px;
-      margin-bottom: 24px;
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: #557062;
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      color: #26483a;
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.08;
-    }
-
-    h2 {
-      color: #26483a;
-      line-height: 1.3;
-    }
-
-    .note {
-      background: #ffffff;
-      border: 1px solid #d8e0dc;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 28px;
-    }
-
-    .step {
-      background: #ffffff;
-      border: 1px solid #d8e0dc;
-      border-radius: 16px;
-      padding: 26px;
-      margin-bottom: 20px;
-    }
-
-    .step-number {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 5px 10px;
-      background: #edf4ef;
-      border-radius: 999px;
-      color: #496456;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .step h2 {
-      margin: 0 0 10px;
-    }
-
-    .choice-grid {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .choice {
-      width: 100%;
-      min-height: 48px;
-      padding: 13px 15px;
-      text-align: left;
-      color: #263943;
-      background: #f9fbfa;
-      border: 1px solid #cbd7d0;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .choice:hover {
-      background: #edf4ef;
-    }
-
-    .choice.selected {
-      background: #e5f0e8;
-      border-color: #769582;
-      font-weight: 700;
-    }
-
-    .breath-box {
-      background: #f2f6f3;
-      border-left: 5px solid #708f79;
-      padding: 20px;
-      margin: 18px 0;
-    }
-
-    .breath-box p:last-child {
-      margin-bottom: 0;
-    }
-
-    .small {
-      color: #607169;
-      font-size: 0.92rem;
-    }
-
-    .reframe {
-      background: #f7f3e9;
-      border-left: 5px solid #9b7d48;
-      padding: 20px;
-      margin-top: 18px;
-    }
-
-    .move-options {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .move {
-      background: #ffffff;
-      border: 1px solid #d1dbd6;
-      border-radius: 11px;
-      padding: 15px;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .move:hover {
-      background: #f1f6f2;
-    }
-
-    .move.selected {
-      background: #e5f0e8;
-      border-color: #769582;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 90px;
-      padding: 12px;
-      border: 1px solid #aebcb5;
-      border-radius: 9px;
-      resize: vertical;
-      background: #ffffff;
-      color: #263943;
-    }
-
-    .reset-card {
-      display: none;
-      background: #26483a;
-      color: #ffffff;
-      border-radius: 18px;
-      padding: 28px;
-      margin-top: 28px;
-    }
-
-    .reset-card.show {
-      display: block;
-    }
-
-    .reset-card h2 {
-      color: #ffffff;
-      margin-top: 0;
-    }
-
-    .reset-line {
-      padding: 13px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.25);
-    }
-
-    .reset-line:last-child {
-      border-bottom: 0;
-    }
-
-    .reset-label {
-      display: block;
-      margin-bottom: 3px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #d7e8dc;
-    }
-
-    .finish-button {
-      width: 100%;
-      margin-top: 18px;
-      border: 0;
-      border-radius: 10px;
-      padding: 14px 18px;
-      background: #285d70;
-      color: #ffffff;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .finish-button:hover {
-      background: #214e5e;
-    }
-
-    .final-note {
-      margin-top: 24px;
-      background: #eef5f7;
-      border: 1px solid #cadde2;
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    @media (max-width: 650px) {
-      .shell {
-        padding: 12px 10px 40px;
-      }
-
-      .hero,
-      .step,
-      .reset-card {
-        padding: 21px 17px;
-      }
-
-      .move-options {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reset Before You Start | ENGL C1000 Learning Lab</title>
+<link rel="icon" type="image/png" href="Favicon2.png">
+<style>
+:root{
+  --bg:#f7f8f6;--paper:#fff;--ink:#263943;--muted:#607169;--line:#d8e0dc;
+  --green:#26483a;--green2:#496456;--green-soft:#edf4ef;--blue:#285d70;
+  --blue-dark:#214e5e;--gold:#9b7d48;--gold-soft:#f7f3e9;--shadow:0 14px 34px rgba(38,72,58,.09)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#f7f8f6,#f2f6f3);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+button,textarea{font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.shell{width:100%;max-width:820px;margin:0 auto;padding:18px 14px 54px}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:14px}
+.brand{font-weight:800;color:var(--green);font-size:.92rem}
+.progress-label{font-size:.84rem;color:var(--muted);font-weight:700}
+.progress{height:8px;background:#dfe7e1;border-radius:999px;overflow:hidden;margin-bottom:18px}
+.progress>span{display:block;height:100%;background:var(--green2);width:0;transition:width .2s ease}
+.card{display:none;background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:clamp(22px,4vw,38px)}
+.card.active{display:block}
+.eyebrow{margin:0 0 8px;color:#557062;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+h1,h2{color:var(--green);line-height:1.2}
+h1{font-size:clamp(2.2rem,7vw,3.7rem);margin:0 0 14px}
+h2{font-size:clamp(1.55rem,4vw,2.1rem);margin:0 0 12px}
+p{margin:0 0 14px}
+.note{background:#f8faf8;border:1px solid #d5dfda;border-radius:14px;padding:17px;margin-top:18px}
+.note strong{color:var(--green)}
+.choice-grid,.move-grid{display:grid;gap:10px;margin-top:17px}
+.move-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.choice,.move{width:100%;min-height:50px;padding:13px 15px;text-align:left;color:var(--ink);background:#f9fbfa;border:1px solid #cbd7d0;border-radius:10px;cursor:pointer}
+.choice:hover,.move:hover{background:var(--green-soft)}
+.choice.selected,.move.selected{background:#e5f0e8;border-color:#769582;font-weight:700;box-shadow:inset 0 0 0 1px #769582}
+.grounding{background:#f2f6f3;border-left:5px solid #708f79;padding:20px;margin:18px 0;border-radius:8px}
+.grounding ol,.tension-list{margin:8px 0 0;padding-left:22px}
+.breath{background:#f2f6f3;border-left:5px solid #708f79;padding:20px;margin:18px 0;border-radius:8px}
+.small{color:var(--muted);font-size:.92rem}
+.reframe{background:var(--gold-soft);border-left:5px solid var(--gold);padding:18px;margin:18px 0;border-radius:8px}
+textarea{width:100%;min-height:100px;padding:12px;border:1px solid #aebcb5;border-radius:9px;resize:vertical;background:#fff;color:var(--ink)}
+label{display:block;margin:17px 0 6px;font-weight:800;color:var(--green)}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+.navbtn{border:0;border-radius:11px;padding:12px 16px;font-weight:800;cursor:pointer}
+.back{background:#edf1ef;color:var(--green)}
+.next{background:var(--blue);color:#fff;margin-left:auto}
+.next:hover{background:var(--blue-dark)}
+.next:disabled{opacity:.45;cursor:not-allowed}
+.reset-card{background:var(--green);color:#fff;border-radius:16px;padding:20px;margin-top:18px}
+.reset-card h2{color:#fff;margin-top:0}
+.reset-line{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.reset-line:last-child{border-bottom:0}
+.reset-label{display:block;margin-bottom:3px;color:#d7e8dc;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.ending{margin-top:18px;padding:18px;border-radius:14px;background:#eef5f7;border:1px solid #cadde2;text-align:center}
+.ending strong{display:block;color:var(--blue-dark);font-size:1.18rem;margin-bottom:4px}
+.restart{background:#fff;color:var(--green);border:1px solid #b8c7bd}
+@media(max-width:680px){
+  .move-grid{grid-template-columns:1fr}
+  .shell{padding:10px 10px 38px}.card{padding:21px 17px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
 </head>
-
 <body>
-
 <main class="shell">
+  <div class="top">
+    <div class="brand">ENGL C1000 Learning Lab</div>
+    <div class="progress-label" id="progressLabel">1 of 8</div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-  <!-- HERO -->
-
-  <header class="hero">
-
-    <p class="eyebrow">
-      3-Minute Academic Reset
-    </p>
-
-    <h1>
-      Reset Before You Start
-    </h1>
-
-    <p>
-      Sometimes you open a reading, assignment, or draft and your brain immediately says:
-      <strong>&ldquo;Nope.&rdquo;</strong>
-    </p>
-
-    <p>
-      You do not have to feel perfectly calm before you begin.
-      Give yourself a few minutes to settle, reduce the pressure, and choose one manageable next move.
-    </p>
-
-  </header>
-
-
-  <!-- SAFETY / CHOICE -->
-
-  <section class="note">
-
-    <strong>You are in charge of this reset.</strong>
-
-    <p>
-      Skip anything that feels uncomfortable or unhelpful.
-      There is no perfect breathing pattern, posture, or way to calm down.
-      The goal is simply to become a little more ready to work.
-    </p>
-
+  <section class="card active" data-step="0">
+    <p class="eyebrow">3-minute academic reset</p>
+    <h1>Reset Before You Start</h1>
+    <p>Sometimes you open a reading, assignment, or draft and your brain immediately says: <strong>&ldquo;Nope.&rdquo;</strong></p>
+    <p>You do not have to feel perfectly calm before you begin. Give yourself a few minutes to settle, reduce the pressure, and choose one manageable next move.</p>
+    <div class="note"><strong>You are in charge of this reset.</strong><br>Skip anything that feels uncomfortable or unhelpful. There is no perfect breathing pattern, posture, or way to calm down. The goal is simply to become a little more ready to work.</div>
+    <div class="navrow"><button class="navbtn next" type="button" data-next>Start →</button></div>
   </section>
 
-
-  <!-- STEP 1 -->
-
-  <section class="step">
-
-    <span class="step-number">Step 1</span>
-
-    <h2>
-      Notice What Is Happening
-    </h2>
-
-    <p>
-      You do not need to fix anything yet.
-      Which description is closest to what you are experiencing?
-    </p>
-
+  <section class="card" data-step="1">
+    <p class="eyebrow">Step 1</p>
+    <h2>Notice What Is Happening</h2>
+    <p>You do not need to fix anything yet. Which description is closest to what you are experiencing?</p>
     <div class="choice-grid" id="stateChoices">
-
-      <button type="button" class="choice">
-        My thoughts are racing.
-      </button>
-
-      <button type="button" class="choice">
-        I feel tense or keyed up.
-      </button>
-
-      <button type="button" class="choice">
-        I feel frozen and cannot start.
-      </button>
-
-      <button type="button" class="choice">
-        I feel overwhelmed by how much there is to do.
-      </button>
-
-      <button type="button" class="choice">
-        I am not sure. I just know starting feels hard.
-      </button>
-
+      <button type="button" class="choice">My thoughts are racing.</button>
+      <button type="button" class="choice">I feel tense or keyed up.</button>
+      <button type="button" class="choice">I feel frozen and cannot start.</button>
+      <button type="button" class="choice">I feel overwhelmed by how much there is to do.</button>
+      <button type="button" class="choice">I am not sure. I just know starting feels hard.</button>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Continue →</button></div>
   </section>
 
-
-  <!-- STEP 2 -->
-
-  <section class="step">
-
-    <span class="step-number">Step 2</span>
-
-    <h2>
-      Come Back to Where You Are
-    </h2>
-
-    <p>
-      Look away from the assignment for a moment.
-    </p>
-
-    <p>
-      Without trying too hard, notice:
-    </p>
-
-    <ul>
-      <li><strong>3 things you can see</strong></li>
-      <li><strong>2 things you can physically feel</strong> — your feet on the floor, the chair underneath you, your hands, the temperature</li>
-      <li><strong>1 sound you can hear</strong></li>
-    </ul>
-
-    <p>
-      You do not have to write them down.
-      Just notice that you are here, in this room, at this moment.
-    </p>
-
+  <section class="card" data-step="2">
+    <p class="eyebrow">Step 2</p>
+    <h2>Come Back to Where You Are</h2>
+    <p>Look away from the assignment for a moment. Without trying too hard, notice:</p>
+    <div class="grounding">
+      <ol>
+        <li><strong>3 things you can see</strong></li>
+        <li><strong>2 things you can physically feel</strong> — your feet on the floor, the chair underneath you, your hands, the temperature</li>
+        <li><strong>1 sound you can hear</strong></li>
+      </ol>
+    </div>
+    <p>You do not have to write them down. Just notice that you are here, in this room, at this moment.</p>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
   </section>
 
-
-  <!-- STEP 3 -->
-
-  <section class="step">
-
-    <span class="step-number">Step 3</span>
-
-    <h2>
-      Release a Little Tension
-    </h2>
-
-    <p>
-      Check three places where people often hold tension:
-    </p>
-
-    <ul>
+  <section class="card" data-step="3">
+    <p class="eyebrow">Step 3</p>
+    <h2>Release a Little Tension</h2>
+    <p>Check three places where people often hold tension:</p>
+    <ul class="tension-list">
       <li>Let your shoulders drop if they are raised.</li>
       <li>Unclench your jaw if it is tight.</li>
       <li>Let your hands rest instead of gripping.</li>
     </ul>
-
-    <div class="breath-box">
-
+    <div class="breath">
       <strong>If comfortable, try two or three slower breaths.</strong>
-
-      <p>
-        Let the exhale be a little longer than the inhale.
-      </p>
-
-      <p>
-        For example:
-        breathe in gently, then breathe out slowly.
-      </p>
-
-      <p class="small">
-        If focusing on breathing makes you uncomfortable, skip this part and simply keep noticing your feet, chair, or surroundings.
-      </p>
-
+      <p>Let the exhale be a little longer than the inhale. For example: breathe in gently, then breathe out slowly.</p>
+      <p class="small">If focusing on breathing makes you uncomfortable, skip this part and simply keep noticing your feet, chair, or surroundings.</p>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
   </section>
 
-
-  <!-- STEP 4 -->
-
-  <section class="step">
-
-    <span class="step-number">Step 4</span>
-
-    <h2>
-      Take the Assignment Down to Size
-    </h2>
-
-    <p>
-      Anxiety often turns:
-    </p>
-
+  <section class="card" data-step="4">
+    <p class="eyebrow">Step 4</p>
+    <h2>Take the Assignment Down to Size</h2>
+    <p>Anxiety can turn:</p>
     <div class="reframe">
-
-      <p>
-        <strong>&ldquo;I have something difficult to do.&rdquo;</strong>
-      </p>
-
-      <p>
-        into
-      </p>
-
-      <p>
-        <strong>&ldquo;I have to solve all of this right now.&rdquo;</strong>
-      </p>
-
+      <p><strong>&ldquo;I have something difficult to do.&rdquo;</strong></p>
+      <p>into</p>
+      <p><strong>&ldquo;I have to solve all of this right now.&rdquo;</strong></p>
     </div>
-
-    <p>
-      You do not need to finish the reading or paper right now.
-      You only need a next move.
-    </p>
-
-    <p>
-      Which one sounds possible?
-    </p>
-
-    <div class="move-options" id="moveChoices">
-
-      <button type="button" class="move">
-        📄 Open the assignment directions.
-      </button>
-
-      <button type="button" class="move">
-        📖 Read just one paragraph.
-      </button>
-
-      <button type="button" class="move">
-        ✏️ Write one messy sentence.
-      </button>
-
-      <button type="button" class="move">
-        🔎 Find the place where I got confused.
-      </button>
-
-      <button type="button" class="move">
-        🧩 Break the task into smaller pieces.
-      </button>
-
-      <button type="button" class="move">
-        🙋 Write down one question I need answered.
-      </button>
-
+    <p>You do not need to finish the reading or paper right now. You only need a next move.</p>
+    <p>Which one sounds possible?</p>
+    <div class="move-grid" id="moveChoices">
+      <button type="button" class="move">📄 Open the assignment directions.</button>
+      <button type="button" class="move">📖 Read just one paragraph.</button>
+      <button type="button" class="move">✏️ Write one messy sentence.</button>
+      <button type="button" class="move">🔎 Find the place where I got confused.</button>
+      <button type="button" class="move">🧩 Break the task into smaller pieces.</button>
+      <button type="button" class="move">🙋 Write down one question I need answered.</button>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Continue →</button></div>
   </section>
 
-
-  <!-- STEP 5 -->
-
-  <section class="step">
-
-    <span class="step-number">Step 5</span>
-
-    <h2>
-      Replace the Pressure With Something More Accurate
-    </h2>
-
-    <p>
-      Finish this sentence:
-    </p>
-
-    <label for="thought">
-      <strong>I do not have to ____________________. I only need to ____________________.</strong>
-    </label>
-
-    <textarea
-      id="thought"
-      placeholder="Example: I do not have to finish the whole paper tonight. I only need to figure out what my first paragraph is trying to say."
-    ></textarea>
-
+  <section class="card" data-step="5">
+    <p class="eyebrow">Step 5</p>
+    <h2>Replace the Pressure With Something More Accurate</h2>
+    <p>Finish this sentence:</p>
+    <label for="thought"><strong>I do not have to ____________________. I only need to ____________________.</strong></label>
+    <textarea id="thought" placeholder="Example: I do not have to finish the whole paper tonight. I only need to figure out what my first paragraph is trying to say."></textarea>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
   </section>
 
-
-  <!-- STEP 6 -->
-
-  <section class="step">
-
-    <span class="step-number">Step 6</span>
-
-    <h2>
-      Start Before Your Brain Renegotiates
-    </h2>
-
-    <p>
-      You do not need another planning session.
-    </p>
-
-    <p>
-      When you are ready, choose your next move and begin it for
-      <strong>five minutes</strong>.
-    </p>
-
-    <p>
-      Five minutes is enough to cross the line from
-      <strong>&ldquo;I am avoiding this&rdquo;</strong>
-      to
-      <strong>&ldquo;I have started.&rdquo;</strong>
-    </p>
-
-    <button type="button" class="finish-button" id="finishButton">
-      Build My Reset Card
-    </button>
-
+  <section class="card" data-step="6">
+    <p class="eyebrow">Step 6</p>
+    <h2>Start Before Your Brain Renegotiates</h2>
+    <p>You do not need another planning session.</p>
+    <p>When you are ready, begin your next move for <strong>five minutes</strong>.</p>
+    <div class="callout note"><strong>Five minutes is enough to cross the line from &ldquo;I am avoiding this&rdquo; to &ldquo;I have started.&rdquo;</strong></div>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Build my reset card →</button></div>
   </section>
 
-
-  <!-- GENERATED RESET CARD -->
-
-  <section class="reset-card" id="resetCard" aria-live="polite">
-
-    <h2>
-      🌿 My Reset Card
-    </h2>
-
-    <div class="reset-line">
-      <span class="reset-label">What I noticed</span>
-      <span id="cardState">Starting felt hard.</span>
+  <section class="card" data-step="7">
+    <p class="eyebrow">Your reset</p>
+    <h2>🌿 My Reset Card</h2>
+    <div class="reset-card" aria-live="polite">
+      <div class="reset-line"><span class="reset-label">What I noticed</span><span id="cardState"></span></div>
+      <div class="reset-line"><span class="reset-label">What I did</span>I paused, oriented to where I am, and released some tension.</div>
+      <div class="reset-line"><span class="reset-label">What I&rsquo;m remembering</span>I do not have to solve the whole assignment right now.</div>
+      <div class="reset-line"><span class="reset-label">My next move</span><span id="cardMove"></span></div>
+      <div class="reset-line"><span class="reset-label">My reminder</span><span id="cardThought"></span></div>
     </div>
-
-    <div class="reset-line">
-      <span class="reset-label">What I did</span>
-      I paused, oriented to where I am, and released some tension.
+    <div class="ending">
+      <strong>You do not have to wait until stress disappears to work.</strong>
+      <p>Sometimes the goal is simply to bring the intensity down enough that you can make one useful academic move.</p>
+      <p>If you are still too overwhelmed to continue, reaching out to a professor, tutor, counselor, or another support person can be a reasonable next step.</p>
     </div>
-
-    <div class="reset-line">
-      <span class="reset-label">What I'm remembering</span>
-      I do not have to solve the whole assignment right now.
-    </div>
-
-    <div class="reset-line">
-      <span class="reset-label">My next move</span>
-      <span id="cardMove">Take one small step.</span>
-    </div>
-
-    <div class="reset-line">
-      <span class="reset-label">My reminder</span>
-      <span id="cardThought">
-        Starting small still counts as starting.
-      </span>
-    </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn restart" type="button" id="restart">Start over</button></div>
   </section>
-
-
-  <section class="final-note">
-
-    <strong>You do not have to wait until anxiety disappears to work.</strong>
-
-    <p>
-      Sometimes the goal is simply to bring the intensity down enough that you can make one useful academic move.
-      If you are still too overwhelmed to continue, reaching out to a professor, tutor, counselor, or another support person can be a reasonable next step.
-    </p>
-
-  </section>
-
 </main>
 
-
 <script>
-  const stateChoices = document.querySelectorAll("#stateChoices .choice");
-  const moveChoices = document.querySelectorAll("#moveChoices .move");
+const cards=[...document.querySelectorAll('.card')];
+const progressBar=document.getElementById('progressBar');
+const progressLabel=document.getElementById('progressLabel');
+let current=0,selectedState='',selectedMove='';
 
-  let selectedState = "";
-  let selectedMove = "";
+function render(){
+  cards.forEach((c,i)=>c.classList.toggle('active',i===current));
+  progressLabel.textContent=`${current+1} of ${cards.length}`;
+  progressBar.style.width=`${((current+1)/cards.length)*100}%`;
+  if(current===7) buildCard();
+  window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>{if(current<cards.length-1){current++;render();}}));
+document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>{if(current>0){current--;render();}}));
 
-  stateChoices.forEach(function(button) {
-    button.addEventListener("click", function() {
+const stateButtons=[...document.querySelectorAll('#stateChoices .choice')];
+stateButtons.forEach(b=>b.addEventListener('click',()=>{
+  stateButtons.forEach(x=>x.classList.remove('selected'));b.classList.add('selected');
+  selectedState=b.textContent.trim();cards[1].querySelector('[data-next]').disabled=false;
+}));
 
-      stateChoices.forEach(function(item) {
-        item.classList.remove("selected");
-      });
+const moveButtons=[...document.querySelectorAll('#moveChoices .move')];
+moveButtons.forEach(b=>b.addEventListener('click',()=>{
+  moveButtons.forEach(x=>x.classList.remove('selected'));b.classList.add('selected');
+  selectedMove=b.textContent.trim();cards[4].querySelector('[data-next]').disabled=false;
+}));
 
-      button.classList.add("selected");
-      selectedState = button.textContent.trim();
-    });
-  });
-
-
-  moveChoices.forEach(function(button) {
-    button.addEventListener("click", function() {
-
-      moveChoices.forEach(function(item) {
-        item.classList.remove("selected");
-      });
-
-      button.classList.add("selected");
-      selectedMove = button.textContent.trim();
-    });
-  });
-
-
-  document.getElementById("finishButton").addEventListener("click", function() {
-
-    const thought = document.getElementById("thought").value.trim();
-
-    document.getElementById("cardState").textContent =
-      selectedState || "Starting felt hard.";
-
-    document.getElementById("cardMove").textContent =
-      selectedMove || "Take one small step.";
-
-    document.getElementById("cardThought").textContent =
-      thought || "I do not have to do everything right now. I only need to begin one manageable step.";
-
-    const card = document.getElementById("resetCard");
-    card.classList.add("show");
-    card.scrollIntoView({ behavior: "smooth", block: "start" });
-
-  });
+function buildCard(){
+  const thought=document.getElementById('thought').value.trim();
+  document.getElementById('cardState').textContent=selectedState||'Starting felt hard.';
+  document.getElementById('cardMove').textContent=selectedMove||'Take one small step.';
+  document.getElementById('cardThought').textContent=thought||'I do not have to do everything right now. I only need to begin one manageable step.';
+}
+document.getElementById('restart').addEventListener('click',()=>{
+  selectedState='';selectedMove='';
+  document.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));
+  document.getElementById('thought').value='';
+  cards[1].querySelector('[data-next]').disabled=true;
+  cards[4].querySelector('[data-next]').disabled=true;
+  current=0;render();
+});
+render();
 </script>
-
 </body>
 </html>
