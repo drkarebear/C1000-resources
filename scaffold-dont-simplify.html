@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scaffold It, Don’t Simplify It | Faculty Learning Lab</title>
+<link rel="icon" type="image/png" href="Favicon2.png">
+<style>
+:root{
+  --ink:#202432; --muted:#666b78; --paper:#f6f2ec; --card:#ffffff;
+  --line:#ddd7ce; --accent:#6554b7; --accent-soft:#f0edfb;
+  --navy:#242842; --gold:#f7dda0; --green:#e9f4eb; --blue:#eaf2fa;
+  --rose:#f8ecec; --sand:#fbf6e9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif
+}
+main{max-width:940px;margin:auto;padding:24px 18px 64px}
+.hero,.screen,.progress{background:var(--card);border:1px solid var(--line);border-radius:22px}
+.hero{background:var(--navy);color:white;padding:30px}
+.hero h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.04;margin:.25rem 0 .8rem}
+.hero p{max-width:760px}
+.eyebrow{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:900;color:#ded9ff}
+.progress{margin:16px 0;padding:14px 18px}
+.progress-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.9rem;font-weight:800}
+.track{height:8px;background:#ece8e2;border-radius:999px;overflow:hidden;margin-top:9px}
+.bar{height:100%;background:var(--accent);width:0}
+.screen{display:none;padding:27px;margin-top:16px}
+.screen.active{display:block}
+.screen h2{font-size:clamp(1.45rem,3.5vw,2.15rem);line-height:1.15;margin:.2rem 0 .8rem}
+.kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--accent)}
+.scene,.reveal,.callout,.thinking-box,.meter-wrap{
+  border:1px solid var(--line);border-radius:16px;padding:17px;margin:16px 0
+}
+.scene{background:white}
+.scene .label,.reveal .label{
+  display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;
+  font-weight:900;color:var(--accent);margin-bottom:5px
+}
+.callout{background:var(--accent-soft);border-left:5px solid var(--accent)}
+.thinking-box{background:var(--sand)}
+.reveal{display:none;background:var(--accent-soft);border:2px solid var(--accent)}
+.reveal.show{display:block}
+.choices{display:grid;gap:11px;margin:16px 0}
+.choice{
+  width:100%;text-align:left;border:2px solid var(--line);background:white;color:var(--ink);
+  border-radius:14px;padding:15px;font:inherit;cursor:pointer;min-height:52px
+}
+.choice:hover,.choice:focus-visible{
+  border-color:var(--accent);outline:3px solid rgba(101,84,183,.16);outline-offset:2px
+}
+.choice[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent)}
+.choice .ctitle{display:block;font-weight:900;margin-bottom:3px}
+.raccoon{
+  display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;
+  background:#fff7dd;border:1px solid #ead28e;border-radius:17px;padding:15px;margin:18px 0
+}
+.raccoon img{width:100%;max-height:106px;object-fit:contain}
+.raccoon strong{display:block;margin-bottom:3px}
+.raccoon p{margin:0}
+.controls{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.primary,button.secondary{
+  border:0;border-radius:12px;min-height:46px;padding:12px 18px;font:inherit;font-weight:900;cursor:pointer
+}
+.primary{background:var(--accent);color:white}
+.secondary{background:#e8e2da;color:var(--ink)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.mini-card{border:1px solid var(--line);border-radius:15px;padding:16px}
+.mini-card.keep{background:var(--green)}
+.mini-card.clear{background:var(--blue)}
+.tag{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;font-weight:900;color:var(--accent)}
+.meter-wrap{background:#fbfaf8}
+.meters{display:grid;gap:13px}
+.meter-label{display:flex;justify-content:space-between;gap:10px;font-weight:800;font-size:.92rem}
+.meter{height:12px;background:#e8e3dc;border-radius:999px;overflow:hidden}
+.meter > span{display:block;height:100%;background:var(--accent);transition:width .25s ease}
+.meter.challenge > span{background:#4f7894}
+.meter.path > span{background:#8b7041}
+.small{font-size:.92rem;color:var(--muted)}
+.lens-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin:16px 0}
+.lens{border:1px solid var(--line);border-radius:14px;padding:15px}
+.lens strong{display:block;margin-bottom:4px}
+.try-card{background:var(--green);border:1px solid #cadfcc;border-radius:16px;padding:18px;margin:18px 0}
+details{border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin:16px 0;background:white}
+summary{font-weight:900;cursor:pointer}
+#live{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+@media(max-width:640px){
+  .screen{padding:20px}
+  .raccoon{grid-template-columns:72px 1fr}
+  .mini-grid,.lens-grid{grid-template-columns:1fr}
+  .controls button{flex:1}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+  <div class="eyebrow">Faculty Learning Lab · ENGL C1000</div>
+  <h1>🪜 Scaffold It, Don’t Simplify It</h1>
+  <p>Can we make the path clearer <strong>without making the thinking easier?</strong> In this short teaching simulation, you’ll protect the intellectual work of a college-level task while deciding what support helps students actually enter it.</p>
+  <p class="small" style="color:#e8e5f3">No score. No perfect-teacher test. About 6–8 minutes.</p>
+</section>
+
+<section class="progress" aria-label="Activity progress">
+  <div class="progress-row"><span id="stepText">View 1 of 9</span><span id="stepName">The challenge</span></div>
+  <div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
+</section>
+<div id="live" aria-live="polite"></div>
+
+<section class="screen active">
+  <div class="kicker">Start here</div>
+  <h2>What Are We Trying to Protect?</h2>
+  <p>A student struggles with a demanding task. Two reactions can feel tempting:</p>
+  <div class="mini-grid">
+    <div class="mini-card"><span class="tag">Reaction 1</span><p><strong>“They’re not ready for this.”</strong></p><p class="small">Reduce the reading, simplify the task, lower the complexity.</p></div>
+    <div class="mini-card"><span class="tag">Reaction 2</span><p><strong>“College is supposed to be hard.”</strong></p><p class="small">Keep every obstacle and assume struggle itself proves rigor.</p></div>
+  </div>
+  <div class="callout"><strong>The third move:</strong> identify the intellectual work that actually matters, keep it, and make the path to that work more visible and doable.</div>
+  <div class="raccoon"><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon’s working theory</strong><p>“Tiny chunks ≠ tiny ideas.”</p></div></div>
+  <div class="controls"><button class="primary next">Try It</button></div>
+</section>
+
+<section class="screen scenario">
+  <div class="kicker">Round 1 · Dense reading</div>
+  <h2>A Difficult Scholarly Reading</h2>
+  <div class="scene"><span class="label">The task</span><p>Students need to read a challenging article and identify the author’s central claim, reasoning, and use of evidence before discussing it.</p></div>
+  <div class="meter-wrap">
+    <div class="meters">
+      <div><div class="meter-label"><span>Intellectual challenge to protect</span><span>High</span></div><div class="meter challenge"><span style="width:88%"></span></div></div>
+      <div><div class="meter-label"><span>Path visibility right now</span><span>Low</span></div><div class="meter path"><span style="width:27%"></span></div></div>
+    </div>
+  </div>
+  <p><strong>Which support best preserves the real work?</strong></p>
+  <div class="choices">
+    <button class="choice"><span class="ctitle">Replace the article with a short summary.</span>Students can discuss the same topic without wrestling with the original text.</button>
+    <button class="choice"><span class="ctitle">Give a reading purpose and stopping points.</span>Preview 2–3 questions, mark natural sections, model one paragraph aloud, then have students continue the same kind of work.</button>
+    <button class="choice"><span class="ctitle">Keep the article exactly as assigned.</span>Students need practice pushing through difficult college texts independently.</button>
+  </div>
+  <div class="reveal"><span class="label">What changed?</span><p>The middle option changes the <strong>entry conditions</strong>, not the intellectual target. Students still interpret the original article. The scaffold makes expert reading moves visible, limits unnecessary working-memory demands, and gives students a repeatable process.</p></div>
+  <div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Keep the challenge. Clear the path.</strong><p>“The article survived. We just stopped hiding the trailhead.”</p></div></div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next</button></div>
+</section>
+
+<section class="screen scenario">
+  <div class="kicker">Round 2 · Analysis</div>
+  <h2>“They Keep Summarizing Instead of Analyzing.”</h2>
+  <div class="scene"><span class="label">The task</span><p>Students can identify evidence, but many paragraphs stop after a quotation or paraphrase. You want them to explain how the evidence supports the claim and why it matters.</p></div>
+  <p><strong>What would you add?</strong></p>
+  <div class="choices">
+    <button class="choice"><span class="ctitle">A simpler topic.</span>If students know the subject better, analysis should happen more naturally.</button>
+    <button class="choice"><span class="ctitle">A model of the hidden reasoning move.</span>Show a claim → evidence → reasoning example, think aloud through the reasoning, then give students a partially completed example to finish before trying their own.</button>
+    <button class="choice"><span class="ctitle">More reminders in the rubric.</span>Increase the points for “analysis” and bold the word in the assignment.</button>
+  </div>
+  <div class="reveal"><span class="label">The hidden move</span><p>“Analyze more” names the desired outcome, but it doesn’t necessarily teach the move. A worked example plus a think-aloud exposes the thinking that experienced writers may perform automatically. The assignment remains analytical; students get a bridge into the reasoning.</p></div>
+  <div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon notices something invisible.</strong><p>“If we can do it automatically, students may not know there was a step there.”</p></div></div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next</button></div>
+</section>
+
+<section class="screen scenario">
+  <div class="kicker">Round 3 · Research</div>
+  <h2>A Big Research Assignment</h2>
+  <div class="scene"><span class="label">The task</span><p>Students must develop a research question, find credible sources, synthesize them, and make an evidence-based argument. Several students freeze after reading the prompt.</p></div>
+  <p><strong>Which redesign is most likely to support rigor rather than dilute it?</strong></p>
+  <div class="choices">
+    <button class="choice"><span class="ctitle">Reduce the number of intellectual decisions.</span>Give everyone a topic, thesis, and source set so no one gets stuck.</button>
+    <button class="choice"><span class="ctitle">Stage the decisions.</span>Question → source search → source conversation → working claim → draft → revision, with brief examples and feedback at high-leverage points.</button>
+    <button class="choice"><span class="ctitle">Leave the full assignment intact.</span>Research requires independence, so students need to learn to manage the whole process themselves.</button>
+  </div>
+  <div class="reveal"><span class="label">Sequence ≠ simplification</span><p>Staging complex work can reduce planning overload while preserving the authentic decisions students need to make. The eventual task remains research, synthesis, argument, and revision. The scaffold temporarily organizes the process so students can practice those moves rather than spending all their energy figuring out where to begin.</p></div>
+  <div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon has a clipboard now.</strong><p>“We can sequence the mountain without turning it into a speed bump.”</p></div></div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next</button></div>
+</section>
+
+<section class="screen scenario">
+  <div class="kicker">Round 4 · Revision</div>
+  <h2>A Student Says, “But I Already Fixed It.”</h2>
+  <div class="scene"><span class="label">The task</span><p>You ask for substantial revision. The student corrects commas, changes a few words, and resubmits. They genuinely believe they revised.</p></div>
+  <p><strong>Which response teaches the more complex version of revision?</strong></p>
+  <div class="choices">
+    <button class="choice"><span class="ctitle">Accept editing as revision for now.</span>Substantive revision may be too demanding at this stage.</button>
+    <button class="choice"><span class="ctitle">Make the levels of revision visible.</span>Show two short before/after examples—one edited, one substantively revised—then ask students to choose one high-level change their own draft needs before sentence editing.</button>
+    <button class="choice"><span class="ctitle">Tell students to revise more deeply.</span>Add “substantive revision required” to the directions.</button>
+  </div>
+  <div class="reveal"><span class="label">A scaffold can change the student's mental model</span><p>Here the difficulty is partly conceptual: the student may not yet know what substantive revision looks like. Contrasting examples make the distinction concrete while preserving the expectation that writers rethink ideas, evidence, organization, and reasoning.</p></div>
+  <div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon translates.</strong><p>“Don’t just say ‘go deeper.’ Show me what deeper does.”</p></div></div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next</button></div>
+</section>
+
+<section class="screen scenario">
+  <div class="kicker">Round 5 · Online learning</div>
+  <h2>The Assignment Is Rigorous. The Navigation Is Too.</h2>
+  <div class="scene"><span class="label">The situation</span><p>In an online section, students must open four pages, locate a PDF in a module, remember a discussion deadline listed elsewhere, and return to a separate assignment page to submit the work.</p></div>
+  <p><strong>What counts as a scaffold here?</strong></p>
+  <div class="choices">
+    <button class="choice"><span class="ctitle">A single “Start Here” path.</span>Put the reading, purpose, steps, due date, and submission link in a predictable sequence while keeping the intellectual task unchanged.</button>
+    <button class="choice"><span class="ctitle">Shorten the assignment.</span>If there are fewer requirements, navigation mistakes will matter less.</button>
+    <button class="choice"><span class="ctitle">Keep the current structure.</span>Managing a learning platform is part of becoming an independent college student.</button>
+  </div>
+  <div class="reveal"><span class="label">Not every difficulty is academic rigor</span><p>Students do need independence, but remembering where information lives is not the same intellectual work as reading, reasoning, writing, or research. Predictable navigation can free attention for the course's actual learning goals.</p></div>
+  <div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Important distinction</strong><p>“Canvas hide-and-seek is not one of the course outcomes.”</p></div></div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next</button></div>
+</section>
+
+<section class="screen scenario">
+  <div class="kicker">Round 6 · When support works</div>
+  <h2>Should the Scaffold Stay Forever?</h2>
+  <div class="scene"><span class="label">Later in the semester</span><p>Early in the term, you gave students a paragraph frame that prompted: claim → evidence → reasoning → significance. Students have now practiced the pattern several times and many use it independently.</p></div>
+  <p><strong>What is the next teaching move?</strong></p>
+  <div class="choices">
+    <button class="choice"><span class="ctitle">Keep the frame required for every paragraph.</span>It worked, so consistency will keep students successful.</button>
+    <button class="choice"><span class="ctitle">Fade the scaffold.</span>Offer the frame as an optional planning tool, show more varied successful paragraphs, and ask students to make structural choices based on purpose and audience.</button>
+    <button class="choice"><span class="ctitle">Remove all support immediately.</span>Students need to prove they can perform without assistance.</button>
+  </div>
+  <div class="reveal"><span class="label">Scaffolds have an exit strategy</span><p>A scaffold is most powerful when it helps learners perform increasingly independently. If a support hardens into a permanent formula, it can eventually constrain the thinking it was meant to enable. Fade structure as students gain control, while keeping support available when useful.</p></div>
+  <div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon lets go of the ladder.</strong><p>“The goal was never to carry the ladder forever.”</p></div></div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next</button></div>
+</section>
+
+<section class="screen">
+  <div class="kicker">The pattern</div>
+  <h2>Before You Add a Scaffold, Ask Four Questions</h2>
+  <div class="lens-grid">
+    <div class="lens"><strong>1. What is the real intellectual work?</strong><span class="small">Interpret? Analyze? Synthesize? Make an argument? Revise? Make a rhetorical decision?</span></div>
+    <div class="lens"><strong>2. What is making entry unnecessarily hard?</strong><span class="small">Hidden steps? Working-memory load? Unfamiliar genre? Navigation? Missing model? Too many simultaneous decisions?</span></div>
+    <div class="lens"><strong>3. What support preserves the thinking?</strong><span class="small">Think-aloud, worked example, chunking, sequence, checklist, prompt, guided practice, model, predictable course pathway.</span></div>
+    <div class="lens"><strong>4. How will the support fade?</strong><span class="small">Move from model → guided attempt → independent choice. Keep optional tools available without making the scaffold the destination.</span></div>
+  </div>
+  <div class="callout"><strong>A useful test:</strong> After adding the support, ask, <em>“Who is doing the important thinking now?”</em> If the instructor, template, or shortcut is doing the core intellectual work for the student, the support may have crossed into simplification.</div>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary next">One Last Challenge</button></div>
+</section>
+
+<section class="screen">
+  <div class="kicker">Try this tomorrow</div>
+  <h2>Keep One Hard Thing Hard</h2>
+  <p>Choose one demanding task in your course. Don't start by asking how to make it easier.</p>
+  <div class="try-card">
+    <strong>Try This Tomorrow</strong>
+    <p><strong>1.</strong> Name the intellectual work you refuse to remove.</p>
+    <p><strong>2.</strong> Name one obstacle that is <em>not</em> essential to that intellectual work.</p>
+    <p><strong>3.</strong> Add one small support that makes the path more visible.</p>
+    <p><strong>4.</strong> Decide how students can eventually do more of the work without that support.</p>
+  </div>
+  <div class="raccoon"><img src="raccoon.png" alt=""><div><strong>🦝 Final test</strong><p>“Did we remove the obstacle—or the thinking?”</p></div></div>
+  <div class="scene"><span class="label">For a faculty conversation</span><p><strong>Which support in your course currently helps students enter difficult work—and which support might be ready to fade?</strong></p></div>
+  <details>
+    <summary>Why this approach is brain-friendly</summary>
+    <p>This lab models the same design principle it teaches: one decision at a time, brief scenarios, repeated structure, immediate explanation, visible progress, and a final synthesis after the examples. The goal is to reduce extraneous cognitive demands without reducing conceptual complexity.</p>
+  </details>
+  <div class="controls"><button class="secondary back">Back</button><button class="primary" id="restart">Start Over</button></div>
+</section>
+</main>
+
+<script>
+(()=>{
+  const screens=[...document.querySelectorAll('.screen')];
+  const bar=document.getElementById('bar');
+  const stepText=document.getElementById('stepText');
+  const stepName=document.getElementById('stepName');
+  const live=document.getElementById('live');
+  const names=['The challenge','Dense reading','Analysis','Research','Revision','Online learning','Fading support','The pattern','Try this tomorrow'];
+  let current=0;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function update(){
+    stepText.textContent=`View ${current+1} of ${screens.length}`;
+    stepName.textContent=names[current];
+    bar.style.width=`${((current+1)/screens.length)*100}%`;
+  }
+  function show(n){
+    if(n<0||n>=screens.length)return;
+    screens[current].classList.remove('active');
+    current=n;
+    screens[current].classList.add('active');
+    update();
+    const h=screens[current].querySelector('h2');
+    if(h){h.tabIndex=-1;h.focus({preventScroll:true})}
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+  }
+
+  document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(current+1)));
+  document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(current-1)));
+
+  document.querySelectorAll('.scenario').forEach(screen=>{
+    const choices=[...screen.querySelectorAll('.choice')];
+    const reveal=screen.querySelector('.reveal');
+    const raccoon=screen.querySelector('.raccoon');
+    const next=screen.querySelector('.next');
+    choices.forEach(choice=>{
+      choice.setAttribute('aria-pressed','false');
+      choice.addEventListener('click',()=>{
+        choices.forEach(c=>c.setAttribute('aria-pressed','false'));
+        choice.setAttribute('aria-pressed','true');
+        reveal.classList.add('show');
+        raccoon.hidden=false;
+        next.disabled=false;
+        live.textContent='Reflection revealed. Review the reasoning, then continue when ready.';
+      });
+    });
+  });
+
+  document.getElementById('restart').addEventListener('click',()=>{
+    document.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed','false'));
+    document.querySelectorAll('.scenario').forEach(screen=>{
+      screen.querySelector('.reveal').classList.remove('show');
+      screen.querySelector('.raccoon').hidden=true;
+      screen.querySelector('.next').disabled=true;
+    });
+    show(0);
+  });
+  update();
+})();
+</script>
+</body>
+</html>
