@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Still a Writer</title>
+<link rel="icon" type="image/png" href="Favicon2.png">
 <style>
 :root{
   --bg:#f6f3ee;
@@ -482,7 +483,22 @@ textarea:focus{
       <button class="reminder" type="button" aria-pressed="false">Difficulty is part of writing. It is not proof that I do not belong here.</button>
     </div>
 
-    <p class="question">What would help most right now?</p>
+    <div class="callout">
+      <strong>Pick the one you can actually believe today.</strong>
+      <p style="margin-bottom:0">You do not need the most positive sentence. You need a sentence that interrupts the big conclusion without pretending the writing moment is easy.</p>
+    </div>
+
+    <div class="controls">
+      <button class="secondary back" type="button">Back</button>
+      <button class="primary next" type="button" disabled>Choose My Next Move</button>
+    </div>
+  </section>
+
+  <section class="screen" data-step="4">
+    <div class="kicker">Step 5 · Choose a Next Move</div>
+    <h2>What Would Help Most Right Now?</h2>
+    <p>Your reminder changes the story. Your next move changes what happens next.</p>
+
     <div class="next-moves" id="moves">
       <button class="move" type="button" aria-pressed="false">👩‍🏫 Ask my professor one clear question.</button>
       <button class="move" type="button" aria-pressed="false">🧑‍🤝‍🧑 Ask someone to look at one part of my writing.</button>
@@ -494,14 +510,19 @@ textarea:focus{
       <button class="move" type="button" aria-pressed="false">🔎 Decide exactly what part of the assignment is confusing me.</button>
     </div>
 
+    <div class="callout">
+      <strong>You only need one next move.</strong>
+      <p style="margin-bottom:0">Choose the action that would make the situation a little more workable—not the action that proves you can handle everything alone.</p>
+    </div>
+
     <div class="controls">
       <button class="secondary back" type="button">Back</button>
       <button class="primary next" type="button" disabled>Make My Writer Card</button>
     </div>
   </section>
 
-  <section class="screen" data-step="4">
-    <div class="kicker">Step 5 · Your Reset</div>
+  <section class="screen" data-step="5">
+    <div class="kicker">Step 6 · Your Reset</div>
     <h2>Still a Writer</h2>
     <p>Your card does not promise that writing will be easy. It reminds you what you can do when writing gets hard.</p>
 
@@ -547,7 +568,7 @@ textarea:focus{
   const progressText=document.getElementById('progressText');
   const progressLabel=document.getElementById('progressLabel');
   const live=document.getElementById('live');
-  const labels=['Meet the writers','Change the story','Your turn','Build a reminder','Your reset'];
+  const labels=['Notice the story','Try it on a writer','Separate story from evidence','Choose a believable reminder','Choose one next move','Your writer reset'];
   let current=0;
 
   const state={
@@ -640,7 +661,7 @@ textarea:focus{
       document.querySelectorAll('#reminders .reminder').forEach(b=>b.setAttribute('aria-pressed','false'));
       btn.setAttribute('aria-pressed','true');
       state.reminder=btn.textContent.trim();
-      enableNext(3,Boolean(state.reminder && state.move));
+      enableNext(3,Boolean(state.reminder));
       live.textContent='Writer reminder selected.';
     });
   });
@@ -650,14 +671,14 @@ textarea:focus{
       document.querySelectorAll('#moves .move').forEach(b=>b.setAttribute('aria-pressed','false'));
       btn.setAttribute('aria-pressed','true');
       state.move=btn.textContent.trim();
-      enableNext(3,Boolean(state.reminder && state.move));
+      enableNext(4,Boolean(state.move));
       live.textContent='Next move selected.';
     });
   });
 
   document.querySelectorAll('.next').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      if(current===3){
+      if(current===4){
         document.getElementById('cardStory').textContent=state.myStory;
         document.getElementById('cardEvidence').textContent=state.myEvidence;
         document.getElementById('cardReminder').textContent=state.reminder;
