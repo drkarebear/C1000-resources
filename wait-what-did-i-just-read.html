@@ -1,1026 +1,319 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Wait, What Did I Just Read?</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #f5f7f7;
-      color: #263943;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.65;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    button:focus-visible,
-    textarea:focus-visible,
-    a:focus-visible {
-      outline: 3px solid #173e4b;
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -80px;
-      z-index: 1000;
-      background: #173e4b;
-      color: #ffffff;
-      padding: 10px 14px;
-      border-radius: 0 0 8px 8px;
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    .skip-link:focus {
-      top: 0;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 18px 60px;
-    }
-
-    /* HERO */
-
-    .hero {
-      background: #e8f1f3;
-      border: 1px solid #c7dce2;
-      border-radius: 20px;
-      padding: 34px;
-      margin-bottom: 24px;
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: #56747e;
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      color: #173e4b;
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.08;
-    }
-
-    .hero p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* INTRO */
-
-    .reassurance {
-      background: #ffffff;
-      border: 1px solid #d8e0e3;
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 28px;
-    }
-
-    .reassurance strong {
-      color: #173e4b;
-    }
-
-    /* STRATEGY */
-
-    .strategy {
-      margin-bottom: 34px;
-    }
-
-    h2 {
-      color: #173e4b;
-      line-height: 1.25;
-    }
-
-    .strategy-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .strategy-card {
-      background: #ffffff;
-      border: 1px solid #d4dee1;
-      border-radius: 13px;
-      padding: 17px;
-    }
-
-    .strategy-number {
-      display: block;
-      margin-bottom: 5px;
-      color: #55747e;
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .strategy-title {
-      display: block;
-      color: #173e4b;
-      font-weight: 800;
-      font-size: 1.04rem;
-      margin-bottom: 5px;
-    }
-
-    .strategy-card p {
-      margin: 0;
-      font-size: 0.92rem;
-      color: #53666e;
-    }
-
-    /* LAB */
-
-    .lab {
-      background: #ffffff;
-      border: 1px solid #d6dfe2;
-      border-radius: 18px;
-      padding: 28px;
-      margin-bottom: 28px;
-    }
-
-    .lab-label {
-      display: inline-block;
-      background: #edf3f5;
-      color: #3d616d;
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .passage {
-      margin: 20px 0;
-      padding: 22px;
-      background: #f7f3e9;
-      border-left: 5px solid #a4864f;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.08rem;
-    }
-
-    .question {
-      margin-top: 24px;
-      font-weight: 800;
-      color: #294b57;
-    }
-
-    .choices {
-      display: grid;
-      gap: 10px;
-      margin-top: 13px;
-    }
-
-    .choice {
-      width: 100%;
-      text-align: left;
-      border: 1px solid #cbd7da;
-      border-radius: 10px;
-      padding: 13px 15px;
-      background: #f9fbfb;
-      color: #263943;
-      cursor: pointer;
-    }
-
-    .choice:hover {
-      background: #edf4f5;
-    }
-
-    .choice.selected {
-      background: #e8f1f3;
-      border-color: #6e929e;
-    }
-
-    .feedback {
-      display: none;
-      margin-top: 14px;
-      padding: 15px;
-      border-radius: 10px;
-    }
-
-    .feedback.show {
-      display: block;
-    }
-
-    .feedback.good {
-      background: #edf5ee;
-      border: 1px solid #c9ddcb;
-    }
-
-    .feedback.try {
-      background: #f8f1e7;
-      border: 1px solid #e4d2b7;
-    }
-
-    .repair-box {
-      margin-top: 24px;
-      padding: 20px;
-      background: #eef5f7;
-      border: 1px solid #c9dce1;
-      border-radius: 12px;
-    }
-
-    .repair-box h3 {
-      margin-top: 0;
-      color: #173e4b;
-    }
-
-    .chunk {
-      display: inline;
-      background: #ffffff;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 100px;
-      resize: vertical;
-      border: 1px solid #aebdc2;
-      border-radius: 9px;
-      padding: 12px;
-      background: #ffffff;
-      color: #263943;
-    }
-
-    .check-button {
-      margin-top: 12px;
-      border: 0;
-      border-radius: 9px;
-      background: #245f75;
-      color: #ffffff;
-      padding: 11px 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .check-button:hover {
-      background: #1d5063;
-    }
-
-    /* DIAGNOSIS */
-
-    .diagnosis {
-      background: #f2f6ef;
-      border: 1px solid #d0dec9;
-      border-radius: 18px;
-      padding: 28px;
-      margin-bottom: 28px;
-    }
-
-    .diagnosis h2 {
-      margin-top: 0;
-    }
-
-    .diagnosis-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .diagnosis-item {
-      background: #ffffff;
-      border: 1px solid #d8e2d4;
-      border-radius: 11px;
-      padding: 15px;
-    }
-
-    .diagnosis-item strong {
-      display: block;
-      color: #36523d;
-      margin-bottom: 3px;
-    }
-
-    /* REAL WORK */
-
-    .real-work {
-      background: #173e4b;
-      color: #ffffff;
-      border-radius: 18px;
-      padding: 30px;
-      margin-top: 34px;
-    }
-
-    .real-work h2 {
-      color: #ffffff;
-      margin-top: 0;
-    }
-
-    .real-work textarea {
-      margin-top: 6px;
-    }
-
-    .real-work label {
-      display: block;
-      margin: 18px 0 7px;
-      font-weight: 800;
-    }
-
-    .checklist {
-      background: rgba(255,255,255,0.09);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin: 20px 0;
-    }
-
-    .checklist ol {
-      margin: 8px 0 0;
-      padding-left: 22px;
-    }
-
-    /* CHECKOUT */
-
-    .checkout {
-      background: #ffffff;
-      border: 1px solid #d6dfe2;
-      border-radius: 18px;
-      padding: 28px;
-      margin-top: 28px;
-    }
-
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .status {
-      width: 100%;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid #d4dddf;
-      color: #263943;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .status:hover {
-      border-color: #6e929e;
-    }
-
-    .status[aria-pressed="true"] {
-      outline: 3px solid #173e4b;
-      outline-offset: 2px;
-    }
-
-    .status strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .status-next {
-      display: none;
-      margin-top: 18px;
-      padding: 16px 18px;
-      background: #eef5f7;
-      border: 1px solid #c9dce1;
-      border-radius: 12px;
-    }
-
-    .status-next.show {
-      display: block;
-    }
-
-    .green {
-      background: #edf5ee;
-    }
-
-    .yellow {
-      background: #fbf5e8;
-    }
-
-    .red {
-      background: #f8eded;
-    }
-
-    .next-time {
-      margin-top: 24px;
-      padding-top: 22px;
-      border-top: 1px solid #d6dfe2;
-    }
-
-    .next-time label {
-      display: block;
-      margin-bottom: 8px;
-      color: #173e4b;
-      font-weight: 800;
-    }
-
-    .writer-move {
-      margin-top: 28px;
-      background: #f7f3e9;
-      border-left: 5px solid #a4864f;
-      padding: 20px;
-    }
-
-    .writer-move p {
-      margin: 0;
-    }
-
-    @media (max-width: 800px) {
-      .strategy-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .status-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .shell {
-        padding: 12px 10px 40px;
-      }
-
-      .hero,
-      .lab,
-      .diagnosis,
-      .real-work,
-      .checkout {
-        padding: 21px 17px;
-      }
-
-      .strategy-grid,
-      .diagnosis-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wait, What Did I Just Read? | ENGL C1000 Learning Lab</title>
+<link rel="icon" type="image/png" href="Favicon2.png">
+<style>
+:root{
+  --bg:#f5f7f7;--paper:#fff;--ink:#263943;--muted:#60727a;--line:#d6dfe2;
+  --navy:#173e4b;--blue:#245f75;--blue-dark:#1d5063;--blue-soft:#eef5f7;
+  --gold:#a4864f;--gold-soft:#f7f3e9;--green:#36523d;--green-soft:#edf5ee;
+  --rose-soft:#f8eded;--shadow:0 14px 34px rgba(23,62,75,.09)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#f6f8f8,#f2f6f6);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+button,textarea{font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
+.shell{width:100%;max-width:840px;margin:0 auto;padding:18px 14px 54px}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:14px}
+.brand{font-weight:800;color:var(--navy);font-size:.92rem}
+.progress-label{font-size:.84rem;color:var(--muted);font-weight:700}
+.progress{height:8px;background:#dfe7ea;border-radius:999px;overflow:hidden;margin-bottom:18px}
+.progress>span{display:block;height:100%;background:var(--blue);width:0;transition:width .2s ease}
+.card{display:none;background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:clamp(22px,4vw,38px)}
+.card.active{display:block}
+.eyebrow{margin:0 0 8px;color:#56747e;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+h1,h2,h3{color:var(--navy);line-height:1.2}
+h1{font-size:clamp(2.2rem,7vw,3.7rem);margin:0 0 14px}
+h2{font-size:clamp(1.55rem,4vw,2.1rem);margin:0 0 12px}
+h3{margin:0 0 8px}
+p{margin:0 0 14px}
+.note{background:#fff;border:1px solid #d8e0e3;border-radius:14px;padding:17px;margin-top:17px}
+.note strong{color:var(--navy)}
+.move-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.move-card{background:#f8fafb;border:1px solid #d4dee1;border-radius:12px;padding:14px}
+.move-card span{display:block;font-size:.76rem;color:#55747e;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.move-card strong{display:block;color:var(--navy);margin:3px 0 4px}
+.passage{margin:18px 0;padding:20px;background:var(--gold-soft);border-left:5px solid var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:1.06rem}
+.question{font-weight:800;color:#294b57;margin-top:18px}
+.choices{display:grid;gap:10px;margin-top:13px}
+.choice{width:100%;text-align:left;border:1px solid #cbd7da;border-radius:10px;padding:13px 15px;background:#f9fbfb;color:var(--ink);cursor:pointer}
+.choice:hover{background:#edf4f5}
+.choice.selected{background:#e8f1f3;border-color:#6e929e;font-weight:700}
+.feedback{display:none;margin-top:14px;padding:15px;border-radius:10px}
+.feedback.show{display:block}
+.feedback.good{background:var(--green-soft);border:1px solid #c9ddcb}
+.feedback.try{background:#f8f1e7;border:1px solid #e4d2b7}
+.repair-box{display:none;margin-top:18px;padding:18px;background:var(--blue-soft);border:1px solid #c9dce1;border-radius:12px}
+.repair-box.show{display:block}
+.chunk{display:inline;background:#fff;padding:2px 4px;border-radius:4px}
+.diagnosis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+.diagnosis-item{background:#f7faf7;border:1px solid #d7e1d4;border-radius:11px;padding:14px}
+.diagnosis-item strong{display:block;color:var(--green);margin-bottom:3px}
+label{display:block;margin:17px 0 7px;font-weight:800;color:var(--navy)}
+textarea{width:100%;min-height:94px;resize:vertical;border:1px solid #aebdc2;border-radius:9px;padding:12px;background:#fff;color:var(--ink)}
+.checklist{background:var(--navy);color:#fff;border-radius:14px;padding:18px 20px;margin:17px 0}
+.checklist ol{margin:8px 0 0;padding-left:22px}
+.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.status{width:100%;padding:15px;border-radius:11px;border:1px solid #d4dddf;text-align:left;color:var(--ink);cursor:pointer}
+.status strong{display:block;margin-bottom:4px}
+.status.green{background:var(--green-soft)}
+.status.yellow{background:#fbf5e8}
+.status.red{background:var(--rose-soft)}
+.status.selected{outline:3px solid var(--navy);outline-offset:2px}
+.status-next{display:none;margin-top:16px;padding:15px 17px;background:var(--blue-soft);border:1px solid #c9dce1;border-radius:11px}
+.status-next.show{display:block}
+.summary-card{background:var(--navy);color:#fff;border-radius:16px;padding:20px;margin-top:18px}
+.summary-line{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.2)}
+.summary-line:last-child{border-bottom:0}
+.summary-label{display:block;color:#d7e8ed;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.writer-move{margin-top:18px;background:var(--gold-soft);border-left:5px solid var(--gold);padding:18px;border-radius:8px}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+.navbtn{border:0;border-radius:11px;padding:12px 16px;font-weight:800;cursor:pointer}
+.back{background:#edf1f2;color:var(--navy)}
+.next{background:var(--blue);color:#fff;margin-left:auto}
+.next:hover{background:var(--blue-dark)}
+.next:disabled{opacity:.45;cursor:not-allowed}
+.restart{background:#fff;color:var(--navy);border:1px solid #b8c7cc}
+@media(max-width:700px){
+  .move-strip,.diagnosis-grid,.status-grid{grid-template-columns:1fr}
+  .shell{padding:10px 10px 38px}.card{padding:21px 17px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
 </head>
-
-
 <body>
+<main class="shell">
+  <div class="top">
+    <div class="brand">ENGL C1000 Learning Lab</div>
+    <div class="progress-label" id="progressLabel">1 of 10</div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-<a class="skip-link" href="#main-content">Skip to the reading repair activity</a>
-
-<main class="shell" id="main-content" tabindex="-1">
-
-  <!-- HERO -->
-
-  <header class="hero">
-
-    <p class="eyebrow">
-      Reading Repair Lab
-    </p>
-
-    <h1>
-      Wait, What Did I Just Read?
-    </h1>
-
-    <p>
-      You read the sentence. Maybe you even read it twice.
-      And somehow you still have no idea what it just said.
-    </p>
-
-    <p>
-      Instead of starting over from the top, this lab will help you figure out
-      <strong>where meaning broke down and what to do about it.</strong>
-    </p>
-
-  </header>
-
-
-  <!-- NORMALIZE -->
-
-  <section class="reassurance">
-
-    <strong>Difficult reading is supposed to slow readers down sometimes.</strong>
-
-    <p>
-      College texts can pack unfamiliar ideas, vocabulary, and complicated sentence structures
-      into a small amount of space. Strong readers do not understand every sentence instantly.
-      They notice when meaning breaks down and use strategies to repair it.
-    </p>
-
+  <section class="card active" data-step="0">
+    <p class="eyebrow">Reading Repair Lab</p>
+    <h1>Wait, What Did I Just Read?</h1>
+    <p>You read the sentence. Maybe you even read it twice. And somehow you still have no idea what it just said.</p>
+    <p>Instead of starting over from the top, this lab helps you figure out <strong>where meaning broke down and what to do about it.</strong></p>
+    <div class="note"><strong>Difficult reading is supposed to slow readers down sometimes.</strong><br>Strong readers do not understand every sentence instantly. They notice when meaning breaks down and use strategies to repair it.</div>
+    <div class="navrow"><button class="navbtn next" type="button" data-next>Start →</button></div>
   </section>
 
-
-  <!-- STRATEGY -->
-
-  <section class="strategy">
-
-    <h2>
-      The Reading Repair Move
-    </h2>
-
-    <p>
-      When something stops making sense, try this instead of automatically rereading the whole page.
-    </p>
-
-    <div class="strategy-grid">
-
-      <div class="strategy-card">
-        <span class="strategy-number">Step 1</span>
-        <span class="strategy-title">STOP</span>
-        <p>
-          Notice the exact place where you lost the meaning.
-        </p>
-      </div>
-
-      <div class="strategy-card">
-        <span class="strategy-number">Step 2</span>
-        <span class="strategy-title">FIND THE SNAG</span>
-        <p>
-          Is it the sentence structure, an idea, a word, or a missing connection?
-        </p>
-      </div>
-
-      <div class="strategy-card">
-        <span class="strategy-number">Step 3</span>
-        <span class="strategy-title">REPAIR</span>
-        <p>
-          Chunk it, find the actor and action, use context, or look up what is actually blocking you.
-        </p>
-      </div>
-
-      <div class="strategy-card">
-        <span class="strategy-number">Step 4</span>
-        <span class="strategy-title">SAY IT BACK</span>
-        <p>
-          Put the idea into your own words to check whether the repair worked.
-        </p>
-      </div>
-
+  <section class="card" data-step="1">
+    <p class="eyebrow">The strategy</p>
+    <h2>The Reading Repair Move</h2>
+    <p>When something stops making sense, try this instead of automatically rereading the whole page.</p>
+    <div class="move-strip">
+      <div class="move-card"><span>Step 1</span><strong>STOP</strong>Notice the exact place where you lost the meaning.</div>
+      <div class="move-card"><span>Step 2</span><strong>FIND THE SNAG</strong>Sentence structure, idea, word, or missing connection?</div>
+      <div class="move-card"><span>Step 3</span><strong>REPAIR</strong>Chunk it, find actor + action, use context, or look up what blocks you.</div>
+      <div class="move-card"><span>Step 4</span><strong>SAY IT BACK</strong>Put the idea into your own words.</div>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Try Repair 1 →</button></div>
   </section>
 
-
-  <!-- PRACTICE 1 -->
-
-  <section class="lab">
-
-    <span class="lab-label">
-      Repair 1
-    </span>
-
-    <h2>
-      This Sentence Is Doing Too Much
-    </h2>
-
-    <p>
-      Read this sentence once.
-    </p>
-
-    <div class="passage">
-      Although social media platforms are often described as neutral technologies
-      that simply allow users to communicate, the algorithms that determine which
-      posts users encounter can shape public attention by making some voices,
-      topics, and forms of information considerably more visible than others.
-    </div>
-
-    <p class="question">
-      If this sentence feels difficult, what would be the most useful first move?
-    </p>
-
+  <section class="card practice" data-step="2" data-repair="1">
+    <p class="eyebrow">Repair 1</p>
+    <h2>This Sentence Is Doing Too Much</h2>
+    <p>Read this sentence once.</p>
+    <div class="passage">Although social media platforms are often described as neutral technologies that simply allow users to communicate, the algorithms that determine which posts users encounter can shape public attention by making some voices, topics, and forms of information considerably more visible than others.</div>
+    <p class="question">If this sentence feels difficult, what would be the most useful first move?</p>
     <div class="choices">
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', false)">
-        Look up every word that seems academic.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', true)">
-        Break the sentence into smaller idea chunks.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', false)">
-        Start the entire paragraph over and read it faster.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f1" onclick="respond(this, 'f1', false)">
-        Skip the sentence because it probably is not important.
-      </button>
-
+      <button type="button" class="choice" data-correct="false">Look up every word that seems academic.</button>
+      <button type="button" class="choice" data-correct="true">Break the sentence into smaller idea chunks.</button>
+      <button type="button" class="choice" data-correct="false">Start the entire paragraph over and read it faster.</button>
+      <button type="button" class="choice" data-correct="false">Skip the sentence because it probably is not important.</button>
     </div>
-
-    <div id="f1" class="feedback" aria-live="polite"></div>
-
-
+    <div class="feedback" aria-live="polite"></div>
     <div class="repair-box">
-
-      <h3>
-        Repair It: Chunk the Sentence
-      </h3>
-
-      <p>
-        Try separating the sentence where the ideas shift:
-      </p>
-
-      <p>
-        <span class="chunk">
-          Although social media platforms are often described as neutral technologies
-        </span>
-        /
-        <span class="chunk">
-          the algorithms determine which posts users encounter
-        </span>
-        /
-        <span class="chunk">
-          those choices can shape public attention
-        </span>
-        /
-        <span class="chunk">
-          because some voices and information become more visible than others.
-        </span>
-      </p>
-
-      <p>
-        Now the basic idea is easier to see:
-      </p>
-
-      <p>
-        <strong>
-          Social media may look neutral, but algorithms influence what people see and therefore what gets attention.
-        </strong>
-      </p>
-
+      <h3>Repair It: Chunk the Sentence</h3>
+      <p><span class="chunk">Although social media platforms are often described as neutral technologies</span> / <span class="chunk">the algorithms determine which posts users encounter</span> / <span class="chunk">those choices can shape public attention</span> / <span class="chunk">because some voices and information become more visible than others.</span></p>
+      <p><strong>Basic idea:</strong> Social media may look neutral, but algorithms influence what people see and therefore what gets attention.</p>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Next repair →</button></div>
   </section>
 
-
-  <!-- PRACTICE 2 -->
-
-  <section class="lab">
-
-    <span class="lab-label">
-      Repair 2
-    </span>
-
-    <h2>
-      Who Is Doing What?
-    </h2>
-
-    <p>
-      Sometimes a sentence becomes clearer once you find its main
-      <strong>actor</strong> and <strong>action</strong>.
-    </p>
-
-    <div class="passage">
-      The increasing reliance on automated decision-making systems by institutions
-      responsible for employment, lending, and education has raised concerns about
-      the reproduction of existing social inequalities.
-    </div>
-
-    <p class="question">
-      What is the main thing this sentence says is happening?
-    </p>
-
+  <section class="card practice" data-step="3" data-repair="2">
+    <p class="eyebrow">Repair 2</p>
+    <h2>Who Is Doing What?</h2>
+    <p>Sometimes a sentence becomes clearer once you find its main <strong>actor</strong> and <strong>action</strong>.</p>
+    <div class="passage">The increasing reliance on automated decision-making systems by institutions responsible for employment, lending, and education has raised concerns about the reproduction of existing social inequalities.</div>
+    <p class="question">What is the main thing this sentence says is happening?</p>
     <div class="choices">
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', false)">
-        Social inequalities are responsible for employment and education.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', true)">
-        Institutions are increasingly using automated systems, and that use is creating concerns.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', false)">
-        Automated systems have eliminated social inequality.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f2" onclick="respond(this, 'f2', false)">
-        Lending institutions are becoming educational institutions.
-      </button>
-
+      <button type="button" class="choice" data-correct="false">Social inequalities are responsible for employment and education.</button>
+      <button type="button" class="choice" data-correct="true">Institutions are increasingly using automated systems, and that use is creating concerns.</button>
+      <button type="button" class="choice" data-correct="false">Automated systems have eliminated social inequality.</button>
+      <button type="button" class="choice" data-correct="false">Lending institutions are becoming educational institutions.</button>
     </div>
-
-    <div id="f2" class="feedback" aria-live="polite"></div>
-
+    <div class="feedback" aria-live="polite"></div>
     <div class="repair-box">
-
-      <h3>
-        Repair It: Find Actor + Action
-      </h3>
-
-      <p>
-        Strip away some of the detail temporarily:
-      </p>
-
-      <p>
-        <strong>Actor:</strong> institutions
-      </p>
-
-      <p>
-        <strong>Action:</strong> are increasingly relying on automated decision-making
-      </p>
-
-      <p>
-        <strong>Why the author mentions it:</strong> people are concerned this could reproduce existing inequalities
-      </p>
-
-      <p>
-        Once you understand the backbone, you can add the details back in.
-      </p>
-
+      <h3>Repair It: Find Actor + Action</h3>
+      <p><strong>Actor:</strong> institutions</p>
+      <p><strong>Action:</strong> are increasingly relying on automated decision-making</p>
+      <p><strong>Why the author mentions it:</strong> people are concerned this could reproduce existing inequalities.</p>
+      <p>Once you understand the backbone, you can add the details back in.</p>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Next repair →</button></div>
   </section>
 
-
-  <!-- PRACTICE 3 -->
-
-  <section class="lab">
-
-    <span class="lab-label">
-      Repair 3
-    </span>
-
-    <h2>
-      Do I Actually Need to Look Up That Word?
-    </h2>
-
-    <div class="passage">
-      The policy produced an <strong>uneven</strong> response across the region.
-      Some communities adopted the recommendations immediately, while others rejected them entirely.
-    </div>
-
-    <p class="question">
-      Imagine you are unsure what <em>uneven</em> means here. What should you try first?
-    </p>
-
+  <section class="card practice" data-step="4" data-repair="3">
+    <p class="eyebrow">Repair 3</p>
+    <h2>Do I Actually Need to Look Up That Word?</h2>
+    <div class="passage">The policy produced an <strong>uneven</strong> response across the region. Some communities adopted the recommendations immediately, while others rejected them entirely.</div>
+    <p class="question">Imagine you are unsure what <em>uneven</em> means here. What should you try first?</p>
     <div class="choices">
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f3" onclick="respond(this, 'f3', true)">
-        Use the next sentence to see whether the context helps explain it.
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f3" onclick="respond(this, 'f3', false)">
-        Immediately stop reading and search for every definition of “uneven.”
-      </button>
-
-      <button type="button" class="choice" aria-pressed="false" aria-controls="f3" onclick="respond(this, 'f3', false)">
-        Ignore the entire paragraph.
-      </button>
-
+      <button type="button" class="choice" data-correct="true">Use the next sentence to see whether the context helps explain it.</button>
+      <button type="button" class="choice" data-correct="false">Immediately stop reading and search for every definition of “uneven.”</button>
+      <button type="button" class="choice" data-correct="false">Ignore the entire paragraph.</button>
     </div>
-
-    <div id="f3" class="feedback" aria-live="polite"></div>
-
+    <div class="feedback" aria-live="polite"></div>
     <div class="repair-box">
-
-      <h3>
-        Repair It: Use Context
-      </h3>
-
-      <p>
-        The next sentence gives you two very different reactions:
-        some communities accepted the recommendations and others rejected them.
-      </p>
-
-      <p>
-        So you can probably infer that <strong>uneven</strong> means something like
-        <strong>not consistent or not the same everywhere</strong>.
-      </p>
-
-      <p>
-        You did not need a dictionary because the surrounding text gave you enough information.
-      </p>
-
+      <h3>Repair It: Use Context</h3>
+      <p>The next sentence shows two very different reactions: some communities accepted the recommendations and others rejected them.</p>
+      <p>So <strong>uneven</strong> probably means <strong>not consistent or not the same everywhere</strong>.</p>
+      <p>The surrounding text gave you enough information; a dictionary was not necessary this time.</p>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Continue →</button></div>
   </section>
 
-
-  <!-- DIAGNOSIS -->
-
-  <section class="diagnosis">
-
-    <h2>
-      Diagnose Before You Repair
-    </h2>
-
-    <p>
-      “I don't understand” can mean several different things.
-      The repair depends on the problem.
-    </p>
-
-    <div class="diagnosis-list">
-
-      <div class="diagnosis-item">
-        <strong>The sentence is too packed.</strong>
-        Break it into smaller chunks.
-      </div>
-
-      <div class="diagnosis-item">
-        <strong>I can't tell who is doing what.</strong>
-        Find the main actor and action.
-      </div>
-
-      <div class="diagnosis-item">
-        <strong>One word is blocking me.</strong>
-        Try context first. Look it up if you still need it.
-      </div>
-
-      <div class="diagnosis-item">
-        <strong>I understand the words but not the point.</strong>
-        Ask: “Why is the author telling me this?”
-      </div>
-
-      <div class="diagnosis-item">
-        <strong>I lost the connection.</strong>
-        Reread the sentence immediately before this one.
-      </div>
-
-      <div class="diagnosis-item">
-        <strong>My brain just checked out.</strong>
-        Pause, reset, and reread only the small section where meaning disappeared.
-      </div>
-
+  <section class="card" data-step="5">
+    <p class="eyebrow">Diagnose first</p>
+    <h2>“I Don’t Understand” Can Mean Different Things</h2>
+    <p>The repair depends on the problem.</p>
+    <div class="diagnosis-grid">
+      <div class="diagnosis-item"><strong>The sentence is too packed.</strong>Break it into smaller chunks.</div>
+      <div class="diagnosis-item"><strong>I can’t tell who is doing what.</strong>Find the main actor and action.</div>
+      <div class="diagnosis-item"><strong>One word is blocking me.</strong>Try context first. Look it up if you still need it.</div>
+      <div class="diagnosis-item"><strong>I understand the words but not the point.</strong>Ask: “Why is the author telling me this?”</div>
+      <div class="diagnosis-item"><strong>I lost the connection.</strong>Reread the sentence immediately before this one.</div>
+      <div class="diagnosis-item"><strong>My brain just checked out.</strong>Pause, reset, and reread only the small section where meaning disappeared.</div>
     </div>
-
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Try it on a real reading →</button></div>
   </section>
 
-
-  <!-- REAL WORK -->
-
-  <section class="real-work">
-
-    <h2>
-      Your Turn: Repair a Real Reading
-    </h2>
-
-    <p>
-      Practice is over. Open something you actually need to read for one of your classes.
-    </p>
-
-    <p>
-      Find <strong>one sentence or short paragraph that genuinely does not make sense to you yet.</strong>
-    </p>
-
-    <div class="checklist">
-
-      <strong>Run the Reading Repair:</strong>
-
-      <ol>
-        <li>Stop at the exact place where meaning breaks down.</li>
-        <li>Identify the snag.</li>
-        <li>Choose one repair strategy.</li>
-        <li>Try the repair.</li>
-        <li>Say the idea back in your own words.</li>
-      </ol>
-
-    </div>
-
-    <label for="snag">
-      What was making the passage difficult?
-    </label>
-
+  <section class="card" data-step="6">
+    <p class="eyebrow">Your turn</p>
+    <h2>Repair a Real Reading</h2>
+    <p>Open something you actually need to read for one of your classes. Find <strong>one sentence or short paragraph that genuinely does not make sense to you yet.</strong></p>
+    <div class="checklist"><strong>Run the Reading Repair:</strong><ol><li>Stop at the exact place where meaning breaks down.</li><li>Identify the snag.</li><li>Choose one repair strategy.</li><li>Try the repair.</li><li>Say the idea back in your own words.</li></ol></div>
+    <label for="snag">What was making the passage difficult?</label>
     <textarea id="snag" placeholder="For example: The sentence was long and I couldn't tell what the main point was."></textarea>
-
-
-    <label for="repair">
-      What repair did you try?
-    </label>
-
+    <label for="repair">What repair did you try?</label>
     <textarea id="repair" placeholder="For example: I broke the sentence into three smaller chunks and found the main actor and action."></textarea>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Say it back →</button></div>
+  </section>
 
-
-    <label for="paraphrase">
-      Now say the idea back in your own words.
-    </label>
-
+  <section class="card" data-step="7">
+    <p class="eyebrow">Check the repair</p>
+    <h2>Say the Idea Back</h2>
+    <p>This is the part that tells you whether the repair actually worked.</p>
+    <label for="paraphrase">In your own words, what is the passage basically saying?</label>
     <textarea id="paraphrase" placeholder="In my own words, the passage is basically saying..."></textarea>
-
+    <p class="note"><strong>You are not trying to make it elegant.</strong><br>You are checking whether you can now explain the idea without simply repeating the original sentence.</p>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Check where I am →</button></div>
   </section>
 
-
-  <!-- CHECKOUT -->
-
-  <section class="checkout">
-
-    <h2>
-      Did the Repair Work?
-    </h2>
-
-    <p>
-      Choose the description that best matches where you are now.
-    </p>
-
-    <div class="status-grid" aria-label="Reading repair self-check">
-
-      <button type="button" class="status green" aria-pressed="false" aria-controls="status-next" onclick="chooseStatus(this, 'green')">
-        <strong>Green — I got it.</strong>
-        The passage makes enough sense for me to keep reading.
-      </button>
-
-      <button type="button" class="status yellow" aria-pressed="false" aria-controls="status-next" onclick="chooseStatus(this, 'yellow')">
-        <strong>Yellow — Better, but fuzzy.</strong>
-        I understand more than I did, but I may need another strategy or a quick check.
-      </button>
-
-      <button type="button" class="status red" aria-pressed="false" aria-controls="status-next" onclick="chooseStatus(this, 'red')">
-        <strong>Red — Still stuck.</strong>
-        I tried to repair the meaning and still cannot make sense of the passage. It is time to ask someone.
-      </button>
-
+  <section class="card" data-step="8">
+    <p class="eyebrow">Self-check</p>
+    <h2>Did the Repair Work?</h2>
+    <p>Choose the description that best matches where you are now.</p>
+    <div class="status-grid" id="statusGrid">
+      <button type="button" class="status green" data-status="green"><strong>Green — I got it.</strong>The passage makes enough sense for me to keep reading.</button>
+      <button type="button" class="status yellow" data-status="yellow"><strong>Yellow — Better, but fuzzy.</strong>I understand more, but I may need another strategy or a quick check.</button>
+      <button type="button" class="status red" data-status="red"><strong>Red — Still stuck.</strong>I tried to repair the meaning and still cannot make sense of the passage. It is time to ask someone.</button>
     </div>
-
-    <div id="status-next" class="status-next" aria-live="polite"></div>
-
-    <div class="next-time">
-      <label for="next-repair">
-        Next time meaning breaks down, what will you try first?
-      </label>
-      <textarea id="next-repair" placeholder="For example: I will stop at the exact sentence, find the actor and action, and say the idea back in my own words."></textarea>
-    </div>
-
-    <div class="writer-move">
-      <p>
-        <strong>College Reader Move:</strong>
-        Strong readers are not people who understand everything immediately.
-        They notice when comprehension breaks down, figure out what is causing the problem,
-        and choose a strategy instead of repeatedly rereading without a plan.
-      </p>
-    </div>
-
+    <div class="status-next" id="statusNext" aria-live="polite"></div>
+    <label for="nextRepair">Next time meaning breaks down, what will you try first?</label>
+    <textarea id="nextRepair" placeholder="For example: I will stop at the exact sentence, find the actor and action, and say the idea back in my own words."></textarea>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Finish →</button></div>
   </section>
 
+  <section class="card" data-step="9">
+    <p class="eyebrow">Your reading repair</p>
+    <h2>📖 My Repair Card</h2>
+    <div class="summary-card" aria-live="polite">
+      <div class="summary-line"><span class="summary-label">What snagged me</span><span id="cardSnag"></span></div>
+      <div class="summary-line"><span class="summary-label">What I tried</span><span id="cardRepair"></span></div>
+      <div class="summary-line"><span class="summary-label">What the passage means in my own words</span><span id="cardParaphrase"></span></div>
+      <div class="summary-line"><span class="summary-label">Where I am now</span><span id="cardStatus"></span></div>
+      <div class="summary-line"><span class="summary-label">What I’ll try first next time</span><span id="cardNext"></span></div>
+    </div>
+    <div class="writer-move"><strong>College Reader Move:</strong> Strong readers are not people who understand everything immediately. They notice when comprehension breaks down, figure out what is causing the problem, and choose a strategy instead of repeatedly rereading without a plan.</div>
+    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn restart" type="button" id="restart">Start over</button></div>
+  </section>
 </main>
 
-
 <script>
-  function respond(button, feedbackId, correct) {
+const cards=[...document.querySelectorAll('.card')];
+const bar=document.getElementById('progressBar');
+const label=document.getElementById('progressLabel');
+let current=0, statusChoice='';
 
-    const group = button.parentElement;
-    const buttons = group.querySelectorAll(".choice");
+function render(){
+  cards.forEach((c,i)=>c.classList.toggle('active',i===current));
+  label.textContent=`${current+1} of ${cards.length}`;
+  bar.style.width=`${((current+1)/cards.length)*100}%`;
+  if(current===9) buildCard();
+  window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>{if(current<cards.length-1){current++;render();}}));
+document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>{if(current>0){current--;render();}}));
 
-    buttons.forEach(function(btn) {
-      btn.classList.remove("selected");
-      btn.setAttribute("aria-pressed", "false");
-    });
+document.querySelectorAll('.practice').forEach(card=>{
+  const choices=[...card.querySelectorAll('.choice')];
+  const feedback=card.querySelector('.feedback');
+  const repair=card.querySelector('.repair-box');
+  const next=card.querySelector('[data-next]');
+  choices.forEach(btn=>btn.addEventListener('click',()=>{
+    choices.forEach(x=>x.classList.remove('selected'));
+    btn.classList.add('selected');
+    const correct=btn.dataset.correct==='true';
+    feedback.className='feedback show '+(correct?'good':'try');
+    feedback.innerHTML=correct
+      ? '<strong>Yes.</strong> That targets the actual comprehension problem instead of restarting everything.'
+      : '<strong>Try a more targeted repair.</strong> When meaning breaks down, identify what is blocking you before rereading or looking up more than you need.';
+    repair.classList.add('show');
+    next.disabled=false;
+  }));
+});
 
-    button.classList.add("selected");
-    button.setAttribute("aria-pressed", "true");
+const statuses=[...document.querySelectorAll('#statusGrid .status')];
+statuses.forEach(btn=>btn.addEventListener('click',()=>{
+  statuses.forEach(x=>x.classList.remove('selected'));
+  btn.classList.add('selected');
+  statusChoice=btn.dataset.status;
+  const box=document.getElementById('statusNext');
+  box.classList.add('show');
+  if(statusChoice==='green') box.innerHTML='<strong>Keep going.</strong> You repaired enough meaning to continue reading.';
+  if(statusChoice==='yellow') box.innerHTML='<strong>Try one more targeted move.</strong> You might use a second strategy, reread only the snag, or check your interpretation.';
+  if(statusChoice==='red') box.innerHTML='<strong>Ask someone.</strong> You have already tried to repair the passage. Bring the exact sentence and explain what you tried to a professor, tutor, classmate, or another appropriate support person.';
+  cards[8].querySelector('[data-next]').disabled=false;
+}));
 
-    const feedback = document.getElementById(feedbackId);
-
-    feedback.classList.remove("good", "try", "show");
-
-    if (correct) {
-      feedback.classList.add("good", "show");
-      feedback.innerHTML =
-        "<strong>Good repair choice.</strong> Start with the smallest strategy that might restore meaning. You can always do more if you still need it.";
-    } else {
-      feedback.classList.add("try", "show");
-      feedback.innerHTML =
-        "<strong>Try a more targeted repair.</strong> The goal is not to restart everything or solve every possible problem. Identify what is blocking meaning and work on that piece.";
-    }
-  }
-
-  function chooseStatus(button, status) {
-    const buttons = document.querySelectorAll(".status");
-    const next = document.getElementById("status-next");
-
-    buttons.forEach(function(btn) {
-      btn.setAttribute("aria-pressed", "false");
-    });
-
-    button.setAttribute("aria-pressed", "true");
-    next.classList.add("show");
-
-    if (status === "green") {
-      next.innerHTML =
-        "<strong>Next move:</strong> Keep reading. Before you move on, hold onto the repaired meaning with a quick margin note, highlight, or one-sentence paraphrase if the idea matters for your purpose.";
-    } else if (status === "yellow") {
-      next.innerHTML =
-        "<strong>Next move:</strong> Try one different repair strategy on the same small section. If you chunked the sentence first, for example, now find the actor and action or ask why the author included the idea.";
-    } else {
-      next.innerHTML =
-        "<strong>Next move:</strong> Ask a specific question. Bring the sentence or short passage with you and explain what you already tried. A professor, tutor, classmate, librarian, or other course support can respond much more effectively to a precise snag than to ‘I don't understand the reading.’";
-    }
-  }
+function val(id,fallback){const v=document.getElementById(id).value.trim();return v||fallback;}
+function buildCard(){
+  document.getElementById('cardSnag').textContent=val('snag','I noticed the exact place where meaning broke down.');
+  document.getElementById('cardRepair').textContent=val('repair','I chose a targeted reading repair.');
+  document.getElementById('cardParaphrase').textContent=val('paraphrase','I need another pass before I can say the idea back clearly.');
+  const statusMap={green:'Green — I got it.',yellow:'Yellow — Better, but fuzzy.',red:'Red — Still stuck; it is time to ask someone.'};
+  document.getElementById('cardStatus').textContent=statusMap[statusChoice]||'I checked whether the repair worked.';
+  document.getElementById('cardNext').textContent=val('nextRepair','Stop at the exact snag and choose one targeted repair.');
+}
+document.getElementById('restart').addEventListener('click',()=>{
+  document.querySelectorAll('textarea').forEach(x=>x.value='');
+  document.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));
+  document.querySelectorAll('.feedback').forEach(x=>{x.className='feedback';x.innerHTML='';});
+  document.querySelectorAll('.repair-box').forEach(x=>x.classList.remove('show'));
+  document.querySelectorAll('.practice [data-next]').forEach(x=>x.disabled=true);
+  document.getElementById('statusNext').className='status-next';
+  document.getElementById('statusNext').innerHTML='';
+  cards[8].querySelector('[data-next]').disabled=true;
+  statusChoice='';current=0;render();
+});
+render();
 </script>
-
 </body>
 </html>
