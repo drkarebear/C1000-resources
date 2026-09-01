@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Study Lab: Figure Out How You Get Work Done</title>
+<link rel="icon" type="image/png" href="Favicon2.png">
 <style>
 :root{
  --bg:#f5f3ee;--ink:#24313b;--muted:#66737c;--card:#fff;--line:#d9d3ca;
@@ -201,19 +202,28 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
 </section>
 
 <section class="screen" data-step="7">
- <div class="kicker">Experiment 8 · Build + Test</div>
- <h2>Your Focus Experiment</h2>
- <p>These are not permanent rules. They are hypotheses based on what you noticed. Try the plan a few times and see what actually happens.</p>
- <p class="q">Choose a work interval to test.</p>
+ <div class="kicker">Experiment 8 · Choose a Work Boundary</div>
+ <h2>How Long Will You Test the Conditions?</h2>
+ <p>You have already noticed patterns about time, place, sound, people, physical needs, distractions, and task difficulty. Now choose a <strong>work boundary to test</strong>.</p>
+ <p class="q">Which interval feels realistic enough to try?</p>
  <div class="grid singlePick" data-key="interval">
-  <button class="choice" aria-pressed="false">⏱️ 15 minutes</button><button class="choice" aria-pressed="false">⏱️ 25 minutes</button>
-  <button class="choice" aria-pressed="false">⏱️ 40 minutes</button><button class="choice" aria-pressed="false">⏱️ 50 minutes</button>
-  <button class="choice" aria-pressed="false">🧭 I'll stop at a natural break</button><button class="choice" aria-pressed="false">🤷 I want to compare two intervals</button>
+  <button class="choice" aria-pressed="false">⏱️ 15 minutes</button>
+  <button class="choice" aria-pressed="false">⏱️ 25 minutes</button>
+  <button class="choice" aria-pressed="false">⏱️ 40 minutes</button>
+  <button class="choice" aria-pressed="false">⏱️ 50 minutes</button>
+  <button class="choice" aria-pressed="false">🧭 I'll stop at a natural break</button>
+  <button class="choice" aria-pressed="false">🤷 I want to compare two intervals</button>
  </div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeRecipe" disabled>Make My Study Experiment</button></div>
+ <div class="note"><strong>The goal is not to discover your perfect number.</strong><br>Pick something you can test, then notice whether it helps you start, stay with the task, understand more, or finish more.</div>
+ <div class="controls"><button class="secondary back">Back</button><button class="primary next" id="makeRecipe" disabled>Build My Study Experiment</button></div>
+</section>
 
- <div class="recipe hidden" id="recipe" aria-live="polite">
-  <h2 style="margin-top:0">🧪 My Study Experiment</h2>
+<section class="screen" data-step="8">
+ <div class="kicker">Experiment 9 · Your Plan</div>
+ <h2>🧪 My Study Experiment</h2>
+ <p>This is a <strong>hypothesis</strong> based on what you noticed—not a permanent rule about how you learn.</p>
+
+ <div class="recipe" id="recipe" aria-live="polite">
   <div class="recipe-row"><strong>Hard thinking seems most promising:</strong><div id="rTime"></div></div>
   <div class="recipe-row"><strong>Place I want to use or test:</strong><div id="rPlace"></div></div>
   <div class="recipe-row"><strong>Sound:</strong><div id="rSound"></div></div>
@@ -222,17 +232,27 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
   <div class="recipe-row"><strong>Phone experiment:</strong><div id="rPhone"></div></div>
   <div class="recipe-row"><strong>Work interval:</strong><div id="rInterval"></div></div>
   <div class="recipe-row"><strong>When conditions aren't great:</strong><div>I'll choose a task that fits the conditions instead of assuming the whole study session is ruined.</div></div>
-  <div class="note"><strong>This is a hypothesis, not your “learning style.”</strong><br>Try it two or three times. Did you actually start more easily, stay with the work longer, understand more, or finish more? <strong>Keep what helps. Change what doesn't.</strong></div>
  </div>
+
+ <div class="note"><strong>Run the experiment two or three times.</strong><br>Did you actually start more easily, stay with the work longer, understand more, or finish more? <strong>Keep what helps. Change what doesn't.</strong></div>
+
+ <div class="callout"><strong>One useful question after each attempt:</strong><br>“What should I keep, change, or test next time?”</div>
+
+ <div class="controls"><button class="secondary back">Back</button><button class="primary" id="restartExperiment">Start Over</button></div>
 </section>
 </main>
 <script>
 (()=> {
- const screens=[...document.querySelectorAll('.screen')], names=['Start with a hypothesis','Time','Place','Sound + people','Check the basics','Distraction','Task matching','Build + test'];
+ const screens=[...document.querySelectorAll('.screen')], names=['Start with a hypothesis','Time','Place','Sound + people','Check the basics','Distraction','Task matching','Choose a work boundary','Your study experiment'];
  const bar=document.getElementById('bar'),stepText=document.getElementById('stepText'),stepName=document.getElementById('stepName'),live=document.getElementById('live');
- let cur=0; const answers={};
+ let cur=0; const answers={}; const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  function update(){bar.style.width=((cur+1)/screens.length*100)+'%';stepText.textContent=`Experiment ${cur+1} of ${screens.length}`;stepName.textContent=names[cur]}
- function show(n){screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();window.scrollTo({top:0,behavior:'smooth'})}
+ function show(n){
+   screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();
+   if(cur===8)buildRecipe();
+   const h=screens[cur].querySelector('h2');if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+   window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'})
+ }
  function nextEnabled(i,on){const b=screens[i].querySelector('.next');if(b)b.disabled=!on}
  document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
  document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
@@ -266,7 +286,7 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
  document.querySelectorAll('.singlePick').forEach(setupSingle);
  function checkTime(){nextEnabled(1,timeQuizOK&&!!answers.time)}
  quiz('matchQuiz','fb6',6,'Exactly. Use the conditions you have strategically. Save high-focus work for a stronger window when possible, and use imperfect windows for tasks that still move you forward.');
- document.getElementById('makeRecipe').addEventListener('click',()=>{
+ function buildRecipe(){
    const body=[...document.querySelectorAll('#bodyChecks input:checked')].map(x=>x.value);
    document.getElementById('rTime').textContent=answers.time||'Still testing';
    document.getElementById('rPlace').textContent=answers.place||'Still testing';
@@ -275,9 +295,17 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
    document.getElementById('rBody').textContent=body.length?body.join(' · '):'Check what I need in the moment';
    document.getElementById('rPhone').textContent=answers.phonePlan||'No change selected';
    document.getElementById('rInterval').textContent=answers.interval||'Still testing';
-   document.getElementById('recipe').classList.remove('hidden');
-   document.getElementById('recipe').scrollIntoView({behavior:'smooth',block:'start'});
    live.textContent='Your study experiment is ready. Try it, notice what happens, and adjust.';
+ }
+ document.getElementById('restartExperiment').addEventListener('click',()=>{
+   Object.keys(answers).forEach(k=>delete answers[k]);
+   document.querySelectorAll('[aria-pressed]').forEach(el=>el.setAttribute('aria-pressed','false'));
+   document.querySelectorAll('input[type="checkbox"]').forEach(el=>el.checked=false);
+   document.querySelectorAll('.feedback').forEach(el=>{el.className='feedback';el.textContent=''});
+   screens.forEach((s,i)=>{const n=s.querySelector('.next');if(n)n.disabled=true});
+   cur=0;screens.forEach((s,i)=>s.classList.toggle('active',i===0));update();
+   const h=screens[0].querySelector('h2');if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+   window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'});
  });
  update();
 })();
