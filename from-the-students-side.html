@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From the Student's Side | Faculty Learning Lab</title>
+<link rel="icon" type="image/png" href="Favicon2.png">
+<style>
+:root{--ink:#202333;--muted:#626579;--paper:#f7f3ed;--card:#fff;--line:#ddd7cf;--purple:#6656b8;--soft:#eeeafd;--navy:#222742;--gold:#f3c969;--green:#e8f3eb}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{background:var(--card);border:1px solid var(--line);border-radius:20px}
+.hero{padding:28px;background:var(--navy);color:#fff}.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.25rem 0}.hero p{max-width:720px}.eyebrow{font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:#ded9ff}
+.progress{padding:14px 18px;margin:16px 0}.progrow{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;font-weight:800}.track{height:8px;background:#ece8e2;border-radius:99px;overflow:hidden;margin-top:8px}.bar{height:100%;background:var(--purple);width:0}
+.screen{display:none;padding:26px;margin-top:16px}.screen.active{display:block}.screen h2{font-size:clamp(1.45rem,3vw,2rem);line-height:1.15;margin:.25rem 0 1rem}.kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;font-weight:900;color:var(--purple)}
+.scene{border:2px solid var(--line);border-radius:16px;padding:18px;margin:18px 0;background:#fff}.scene strong.label{display:block;color:var(--purple);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.choices{display:grid;gap:10px;margin:16px 0}.choice{border:2px solid var(--line);background:#fff;border-radius:13px;padding:14px;text-align:left;font:inherit;cursor:pointer}.choice:hover,.choice:focus-visible{border-color:var(--purple);outline:3px solid rgba(102,86,184,.15);outline-offset:2px}.choice[aria-pressed=true]{border-color:var(--purple);background:var(--soft)}
+.flip{display:none;border:2px solid var(--purple);border-radius:16px;margin:18px 0;overflow:hidden}.flip.show{display:block}.student{padding:18px;background:var(--soft)}.student strong.label{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:#4e438e;margin-bottom:6px}
+.raccoon{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;background:#fff7dc;border:1px solid #ead18b;border-radius:16px;padding:15px;margin:18px 0}.raccoon img{width:100%;max-height:105px;object-fit:contain}.raccoon strong{display:block;margin-bottom:3px}.raccoon p{margin:0}
+.good{background:var(--green);border-color:#a8cbb0}.callout{padding:16px;border-left:5px solid var(--purple);background:#f4f1ff;border-radius:8px;margin:18px 0}
+.controls{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}button.primary,button.secondary{border:0;border-radius:12px;min-height:46px;padding:12px 18px;font:inherit;font-weight:900;cursor:pointer}.primary{background:var(--purple);color:#fff}.secondary{background:#e8e2d9;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}
+.summary{display:grid;gap:12px}.summary div{border:1px solid var(--line);border-radius:12px;padding:14px}.tiny{font-size:.92rem;color:var(--muted)}
+@media(max-width:620px){.raccoon{grid-template-columns:72px 1fr}.screen{padding:20px}.controls button{flex:1}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body><main>
+<section class="hero">
+<div class="eyebrow">Faculty Learning Lab · ENGL C1000</div>
+<h1>👀 From the Student's Side</h1>
+<p>You know your course because you built it. Students encounter it from the other direction. In this lab, you'll look at familiar teaching choices, make a judgment from the instructor side, and then turn the camera around.</p>
+<p class="tiny" style="color:#e6e3f1">No score. No “gotcha.” About 7 minutes.</p>
+</section>
+
+<section class="progress" aria-label="Activity progress"><div class="progrow"><span id="stepText">View 1 of 8</span><span id="stepName">Turn the camera around</span></div><div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div></section>
+<div id="live" class="tiny" aria-live="polite"></div>
+
+<section class="screen active">
+<div class="kicker">Start here</div><h2>Same Course. Different View.</h2>
+<p>Most teaching choices make sense from the instructor side. That's not the question we're testing.</p>
+<div class="callout"><strong>The question:</strong> What does this choice require a student to notice, know, infer, navigate, or decide?</div>
+<div class="raccoon"><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“You know the course because you built the course.”</p></div></div>
+<p>For each scene, choose the response closest to your first reaction. Then reveal the student side. Sometimes the original teaching choice will work just fine.</p>
+<div class="controls"><button class="primary next">Turn the Camera Around</button></div>
+</section>
+
+<section class="screen scenario" data-title="Independence">
+<div class="kicker">Scene 1 · Independence</div><h2>“Students Can Ask If They're Confused.”</h2>
+<div class="scene"><strong class="label">Instructor side</strong><p>Your assignment sheet includes the prompt, requirements, and due date. You don't want to over-explain. College students need opportunities to become independent, and you tell them to ask questions if anything is unclear.</p></div>
+<p><strong>What is your first reaction?</strong></p>
+<div class="choices">
+<button class="choice">This supports independence. Students can ask when they need clarification.</button>
+<button class="choice">I'd add a quick way for students to check whether they understand the task before they begin.</button>
+<button class="choice">I'd explain every step students should take from beginning to end.</button>
+</div>
+<div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I read the directions twice. I think I understand them. I don't know that I'm misunderstanding the word <em>analyze</em>, so I don't have a question to ask.”</p></div></div>
+<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“You can't ask about the thing you don't know you don't know.”</p></div></div>
+<div class="callout" hidden><strong>Possible move:</strong> Independence can include a checkpoint: a sample response, a “before you begin” question, a short task-decoding activity, or an invitation to paraphrase the assignment. The student still does the thinking.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+</section>
+
+<section class="screen scenario" data-title="Feedback">
+<div class="kicker">Scene 2 · Feedback</div><h2>“I Gave Them Detailed Feedback.”</h2>
+<div class="scene"><strong class="label">Instructor side</strong><p>You spend substantial time responding to a draft. You mark unclear sentences, MLA problems, weak transitions, missing analysis, paragraph structure, grammar patterns, source integration, and places where the thesis needs work.</p></div>
+<p><strong>What seems most important?</strong></p>
+<div class="choices">
+<button class="choice">Thorough feedback gives students more information to learn from.</button>
+<button class="choice">I'd make the highest-priority revision work unmistakable, even if I notice other problems too.</button>
+<button class="choice">I'd avoid written feedback and just give the grade.</button>
+</div>
+<div class="flip"><div class="student"><strong class="label">Student side</strong><p>“There are comments everywhere. I fixed the commas because I knew how. I wasn't sure which of the other 41 things mattered most.”</p></div></div>
+<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Forty-one priorities is a fascinating number of priorities.”</p></div></div>
+<div class="callout" hidden><strong>Possible move:</strong> Signal the one to three changes with the greatest payoff. Detailed feedback isn't inherently bad; the student needs help seeing a path through it.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+</section>
+
+<section class="screen scenario" data-title="Canvas">
+<div class="kicker">Scene 3 · Course Navigation</div><h2>“It's All in Canvas.”</h2>
+<div class="scene"><strong class="label">Instructor side</strong><p>The assignment instructions are on the assignment page. The rubric is attached there. The model is in Files. You announced a deadline adjustment last week. Feedback appears in Grades. Everything students need is available.</p></div>
+<p><strong>What would you check first?</strong></p>
+<div class="choices">
+<button class="choice">Whether all of the materials technically exist in the course.</button>
+<button class="choice">Whether a student can tell where to start and find the connected pieces from that starting point.</button>
+<button class="choice">Whether students completed the Canvas orientation.</button>
+</div>
+<div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I found the assignment. I didn't know there was a model in Files. I saw the announcement about the new deadline, but now I can't remember where it was. I think my professor left comments, but I'm not sure where to open them.”</p></div></div>
+<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Available and findable are cousins. Not twins.”</p></div></div>
+<div class="callout" hidden><strong>Possible move:</strong> Give each major task a clear home base that points outward to the rubric, model, feedback location, and current deadline.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+</section>
+
+<section class="screen scenario" data-title="Modeling">
+<div class="kicker">Scene 4 · Modeling</div><h2>“Am I Doing Too Much for Them?”</h2>
+<div class="scene good"><strong class="label">Instructor side</strong><p>Before students analyze their own passage, you project a different paragraph. You underline a detail, think aloud about two possible interpretations, reject the weaker one, and explain why the stronger interpretation better fits the text.</p></div>
+<p><strong>What does this do to the rigor?</strong></p>
+<div class="choices">
+<button class="choice">It lowers the rigor because students should discover the analytical process independently.</button>
+<button class="choice">It makes an expert thinking process visible while leaving students responsible for doing that thinking on new material.</button>
+<button class="choice">It only helps if students copy the same interpretation structure exactly.</button>
+</div>
+<div class="flip"><div class="student"><strong class="label">Student side</strong><p>“Oh. Analysis isn't just finding a quote and explaining what happened. I saw how she moved from the detail to an interpretation—and that she considered an idea that didn't work.”</p></div></div>
+<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Support happened. Thinking is still required. Everybody survives.”</p></div></div>
+<div class="callout" hidden><strong>What worked:</strong> The instructor exposed the process without completing the students' task. Not every student-side flip reveals a problem.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+</section>
+
+<section class="screen scenario" data-title="Standards">
+<div class="kicker">Scene 5 · Standards</div><h2>“The Rubric Is Accurate.”</h2>
+<div class="scene"><strong class="label">Instructor side</strong><p>A student's paper earns a low score in analysis. Your rubric accurately identifies the problem, and your end comment says: “Needs more analysis of evidence.”</p></div>
+<p><strong>What might still be missing?</strong></p>
+<div class="choices">
+<button class="choice">Nothing. The rubric accurately tells the student what is weak.</button>
+<button class="choice">A bridge between the diagnosis and something the student can actually try in the next paragraph or draft.</button>
+<button class="choice">A higher score so the student doesn't become discouraged.</button>
+</div>
+<div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I understand that my analysis is weak. I still don't know what I was supposed to write after the quote.”</p></div></div>
+<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“A diagnosis can be completely accurate and still not be directions.”</p></div></div>
+<div class="callout" hidden><strong>Possible move:</strong> Keep the standard. Add a next-step cue: “After this quotation, tell me what specific words/details you want the reader to notice and how they support your claim.”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+</section>
+
+<section class="screen scenario" data-title="Availability">
+<div class="kicker">Scene 6 · Help-Seeking</div><h2>“I Told Them I'm Available.”</h2>
+<div class="scene"><strong class="label">Instructor side</strong><p>Your syllabus lists office hours, and you regularly tell the class: “Come see me if you need help. That's what office hours are for.”</p></div>
+<p><strong>What else might affect whether students come?</strong></p>
+<div class="choices">
+<button class="choice">Nothing. Students know what office hours are and can decide whether to use them.</button>
+<button class="choice">Whether students know what counts as a reason to come, what will happen there, and whether they need a polished question first.</button>
+<button class="choice">Whether office hours are mandatory.</button>
+</div>
+<div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I know she has office hours. I don't know if my problem is important enough. Also, I don't really know what to ask. I mostly just know I'm lost.”</p></div></div>
+<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Availability and approachability aren't quite the same thing.”</p></div></div>
+<div class="callout" hidden><strong>Possible move:</strong> Normalize specific reasons to come: “You can bring a paragraph, a confusing comment, the assignment directions, or just the sentence ‘I don't know where I'm stuck.’”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Finish the Lab</button></div>
+</section>
+
+<section class="screen">
+<div class="kicker">Try this tomorrow</div><h2>Same Classroom. Different View.</h2>
+<p>Most teaching choices make sense from the instructor side. The useful question is what those choices require students to <strong>notice, know, infer, navigate, or decide</strong> from their side.</p>
+<div class="summary">
+<div><strong>🚧 Directions</strong><br>Can students recognize what they don't yet understand?</div>
+<div><strong>💬 Feedback</strong><br>Can students tell what matters most and what to do next?</div>
+<div><strong>🧭 Navigation</strong><br>Is important information merely available—or findable from where students begin?</div>
+<div><strong>🧠 Modeling</strong><br>Can we expose expert thinking while leaving the intellectual work to students?</div>
+<div><strong>🚪 Help</strong><br>Does “I'm available” also tell students how to enter?</div>
+</div>
+<div class="raccoon"><img src="raccoon.png" alt=""><div><strong>🦝 One last rummage</strong><p>“What does this look like if I don't already know what I know?”</p></div></div>
+<div class="callout"><strong>Try This Tomorrow:</strong> Pick one routine part of your course—an announcement, assignment, feedback comment, Canvas module, late-work policy, or invitation to office hours. Look at it from the starting point of a student encountering it for the first time.</div>
+<div class="scene"><strong class="label">For a faculty conversation</strong><p><strong>Which part of your course probably looks most different from the student side than it does from yours?</strong></p></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary" id="restart">Start Over</button></div>
+</section>
+</main>
+<script>
+(()=>{
+const screens=[...document.querySelectorAll('.screen')],bar=document.getElementById('bar'),stepText=document.getElementById('stepText'),stepName=document.getElementById('stepName'),live=document.getElementById('live');
+const names=['Turn the camera around','Independence','Feedback','Course navigation','Modeling','Standards','Help-seeking','Try this tomorrow'];
+let cur=0;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function update(){bar.style.width=((cur+1)/screens.length*100)+'%';stepText.textContent=`View ${cur+1} of ${screens.length}`;stepName.textContent=names[cur]}
+function show(n){screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();const h=screens[cur].querySelector('h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true})}scrollTo({top:0,behavior:reduce?'auto':'smooth'})}
+document.querySelectorAll('.next').forEach(b=>b.onclick=()=>show(cur+1));document.querySelectorAll('.back').forEach(b=>b.onclick=()=>show(cur-1));
+document.querySelectorAll('.scenario').forEach(s=>{
+ const choices=[...s.querySelectorAll('.choice')],flip=s.querySelector('.flip'),r=s.querySelector('.raccoon'),c=s.querySelector('.callout'),next=s.querySelector('.next');
+ choices.forEach(b=>b.onclick=()=>{
+  choices.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+  flip.classList.add('show');r.hidden=false;c.hidden=false;next.disabled=false;
+  live.textContent='Student side revealed. Compare it with your first reaction.';
+ });
+});
+document.getElementById('restart').onclick=()=>{
+ document.querySelectorAll('.choice').forEach(x=>x.setAttribute('aria-pressed','false'));
+ document.querySelectorAll('.scenario').forEach(s=>{s.querySelector('.flip').classList.remove('show');s.querySelector('.raccoon').hidden=true;s.querySelector('.callout').hidden=true;s.querySelector('.next').disabled=true});
+ show(0);
+};
+update();
+})();
+</script>
+</body></html>
