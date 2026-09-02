@@ -293,6 +293,15 @@ textarea{
   background:#fff;
 }
 .note{font-size:.92rem;color:var(--muted)}
+.instruction{
+  margin:12px 0 6px;
+  padding:10px 12px;
+  border-left:4px solid var(--brand);
+  background:var(--soft);
+  border-radius:8px;
+  font-size:.94rem;
+}
+.instruction strong{color:var(--brand-dark)}
 .hidden{display:none!important}
 .completion{
   border:3px solid var(--brand);
@@ -369,7 +378,7 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
   <p>College writing also comes with expectations that are not always explained. This lab makes some of those expectations visible and gives you practical strategies you can use when you are unsure what to do next.</p>
 
   <div class="meta" aria-label="Activity details">
-    <span class="pill">20 writing moments</span>
+    <span class="pill">21 writing moments</span>
     <span class="pill">About 12–15 minutes</span>
     <span class="pill">No timer</span>
     <span class="pill">No single perfect process</span>
@@ -697,19 +706,23 @@ function load(){
   try{return JSON.parse(localStorage.getItem(key)||"null")}catch(e){return null}
 }
 function save(completed=false){
-  localStorage.setItem(key,JSON.stringify({
-    i,
-    unlocked:[...unlocked],
-    path,
-    notes,
-    claim,
-    completed,
-    date:completed?new Date().toISOString():null
-  }));
+  try{
+    localStorage.setItem(key,JSON.stringify({
+      i,
+      unlocked:[...unlocked],
+      path,
+      notes,
+      claim,
+      completed,
+      date:completed?new Date().toISOString():null
+    }));
+  }catch(e){
+    // The lab should still work if browser privacy settings block local storage.
+  }
 }
 function addPath(label){
   if(!label)return;
-  path.push(label);
+  if(path[path.length-1]!==label) path.push(label);
   renderSidebar();
 }
 function unlock(indices=[]){
@@ -740,12 +753,12 @@ function resetFeedback(){
   next.classList.add("hidden");
   host.innerHTML="";
 }
-function showFeedback(title,text){
+function showFeedback(title,text,focusNext=true){
   feedback.className="feedback show good";
   ftitle.textContent=title;
   ftext.textContent=text;
   next.classList.remove("hidden");
-  next.focus();
+  if(focusNext) next.focus();
 }
 function render(){
   resetFeedback();
@@ -766,6 +779,11 @@ function render(){
     q.textContent=m.q;
     host.appendChild(q);
 
+    const instruction=document.createElement("div");
+    instruction.className="instruction";
+    instruction.innerHTML="<strong>What to do:</strong> Choose the response that would best move the writing process forward. If a choice does not fit, you can try another.";
+    host.appendChild(instruction);
+
     const wrap=document.createElement("div");
     wrap.className="choices";
     wrap.setAttribute("role","group");
@@ -782,6 +800,7 @@ function render(){
           b.classList.add("selected");
           unlock(m.unlock||[]);
           addPath(m.path);
+          save(false);
           showFeedback("That moves the writing forward.",msg);
         }else{
           feedback.className="feedback show";
@@ -803,7 +822,7 @@ function render(){
     host.appendChild(box);
     unlock(m.unlock||[]);
     addPath(m.path);
-    showFeedback("Hidden expectation made visible.","College writing includes a lot of tacit knowledge. Making it visible gives you another strategy to use.");
+    showFeedback("Hidden expectation made visible.","College writing includes a lot of tacit knowledge. Making it visible gives you another strategy to use.",false);
   }
 
   if(m.kind==="myth"){
@@ -812,7 +831,7 @@ function render(){
     box.innerHTML=`<p><strong>MYTH:</strong> ${escapeHtml(m.myth)}</p><p><strong>REALITY:</strong> ${escapeHtml(m.reality)}</p>`;
     host.appendChild(box);
     addPath(m.path);
-    showFeedback("Process myth challenged.","A writing process does not have to be neat, linear, or identical to someone else's process.");
+    showFeedback("Process myth challenged.","A writing process does not have to be neat, linear, or identical to someone else's process.",false);
   }
 
   if(m.kind==="write"){
@@ -827,9 +846,9 @@ function render(){
     ta.setAttribute("aria-label",m.prompt);
     host.appendChild(ta);
 
-    const hint=document.createElement("p");
-    hint.className="note";
-    hint.textContent="This does not need to be polished. Fragments, questions, abbreviations, and half-formed ideas are welcome.";
+    const hint=document.createElement("div");
+    hint.className="instruction";
+    hint.innerHTML="<strong>What to do:</strong> Add anything that comes to mind. This can be messy, and you may leave it blank if you truly have nothing yet. Then select <strong>Save Messy Brainstorm</strong> to unlock the next writing moment.";
     host.appendChild(hint);
 
     const b=document.createElement("button");
@@ -851,7 +870,7 @@ function render(){
   if(m.kind==="help"){
     const box=document.createElement("div");
     box.className="askbox";
-    box.innerHTML="<h3>🆘 I'm stuck. What kind of stuck am I?</h3><p>Choose the problem that sounds closest to what is happening.</p>";
+    box.innerHTML="<h3>🆘 I'm stuck. What kind of stuck am I?</h3><p>Choose the problem that sounds closest to what is happening.</p><div class='instruction'><strong>What to do:</strong> Pick one kind of stuck. You will get a specific next-step strategy, and then <strong>Next Writing Moment</strong> will appear.</div>";
     host.appendChild(box);
 
     const options=[
@@ -872,13 +891,15 @@ function render(){
         feedback.className="feedback show good";
         ftitle.textContent="A next step you can actually do";
         ftext.textContent=answer;
+        unlock([0,1,2,3,4,5,7,8,9,13]);
+        addPath(m.path);
+        save(false);
         next.classList.remove("hidden");
+        next.focus();
       });
       wrap.appendChild(b);
     });
     host.appendChild(wrap);
-    unlock([0,1,2,3,4,5,7,8,9,13]);
-    addPath(m.path);
   }
 
   if(m.kind==="draftchange"){
@@ -894,7 +915,7 @@ function render(){
       <p><strong>You did not just clean up the first sentence. Your thinking developed.</strong></p>`;
     host.appendChild(box);
     addPath(m.path);
-    showFeedback("This is revision.","The draft taught you something. Your new claim is more specific because the process gave you more information.");
+    showFeedback("This is revision.","The draft taught you something. Your new claim is more specific because the process gave you more information.",false);
   }
 
   if(m.kind==="finish"){
