@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MLA 9 Review Lab</title>
   <meta name="description" content="An accessible, mobile-friendly MLA 9 practice activity with immediate feedback and a screenshot-ready completion card.">
+  <link rel="icon" type="image/png" href="Favicon2.png">
   <style>
     :root{
       --bg:#f5f7fa;
@@ -439,6 +440,7 @@
 
     <span id="sectionLabel" class="section-label">Round 1 · Cite It or Not?</span>
     <h2 id="quiz-title">Choose the best answer</h2>
+    <p class="helper"><strong>What to do:</strong> Select the answer that best follows MLA 9. If you miss one, use the feedback and try again. A correct answer unlocks the next question.</p>
     <div id="questionHost"></div>
 
     <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">
@@ -470,7 +472,7 @@
       <p><strong>Completed:</strong> <span id="completionDate"></span><br>
       <strong>Practice completed:</strong> 20 of 20 questions</p>
 
-      <div class="screenshot-note">📸 Screenshot this completion card for Canvas.</div>
+      <div class="screenshot-note">If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
     </div>
 
     <div class="button-row hide-in-screenshot">
@@ -706,11 +708,28 @@
 
   let index = 0;
   let locked = false;
+  let answeredCorrectly = false;
 
-  const storageKey = "mla9ReviewLabProgressV1";
+  const storageKey = "mla9ReviewLabProgressV2";
+
+  function safeSetProgress(value){
+    try{
+      localStorage.setItem(storageKey, JSON.stringify(value));
+    }catch(e){
+      // Saving progress is helpful, but the activity should still work if storage is blocked.
+    }
+  }
+
+  function safeRemoveProgress(){
+    try{
+      safeRemoveProgress();
+    }catch(e){
+      // Non-blocking: restarting should still work in the current session.
+    }
+  }
 
   function saveProgress(){
-    localStorage.setItem(storageKey, JSON.stringify({ index, completed:false }));
+    safeSetProgress({ index, completed:false, answeredCorrectly });
   }
 
   function loadProgress(){
@@ -732,6 +751,8 @@
   function renderQuestion(){
     locked = false;
     const q = questions[index];
+    const saved = loadProgress();
+    answeredCorrectly = Boolean(saved && !saved.completed && saved.index === index && saved.answeredCorrectly);
     const pct = Math.round(((index + 1) / questions.length) * 100);
 
     sectionLabel.textContent = q.section;
@@ -776,10 +797,25 @@
     });
 
     questionHost.appendChild(answerWrap);
-    saveProgress();
 
-    const firstAnswer = answerWrap.querySelector("button");
-    if(firstAnswer) firstAnswer.focus();
+    if(answeredCorrectly){
+      locked = true;
+      const correctButton = answerWrap.querySelector(`[data-index="${q.correct}"]`);
+      [...answerWrap.querySelectorAll("button")].forEach(b=>b.disabled=true);
+      if(correctButton) correctButton.classList.add("correct");
+      feedback.className = "feedback show correct";
+      feedbackTitle.textContent = "Already completed";
+      feedbackText.textContent = q.right;
+      answeredCorrectly = true;
+      saveProgress();
+      nextBtn.textContent = index === questions.length - 1 ? "Finish Review" : "Next Question";
+      nextBtn.classList.remove("hidden");
+      nextBtn.focus();
+    }else{
+      saveProgress();
+      const firstAnswer = answerWrap.querySelector("button");
+      if(firstAnswer) firstAnswer.focus();
+    }
   }
 
   function checkAnswer(choice, button){
@@ -794,6 +830,8 @@
       feedback.className = "feedback show correct";
       feedbackTitle.textContent = "Correct";
       feedbackText.textContent = q.right;
+      answeredCorrectly = true;
+      saveProgress();
       nextBtn.textContent = index === questions.length - 1 ? "Finish Review" : "Next Question";
       nextBtn.classList.remove("hidden");
       nextBtn.focus();
@@ -815,12 +853,15 @@
     });
     feedback.className = "feedback";
     retryBtn.classList.add("hidden");
+    answeredCorrectly = false;
+    saveProgress();
     if(buttons[0]) buttons[0].focus();
   });
 
   nextBtn.addEventListener("click", ()=>{
     if(index < questions.length - 1){
       index += 1;
+      answeredCorrectly = false;
       renderQuestion();
       window.scrollTo({top:quiz.offsetTop - 8, behavior:"smooth"});
     }else{
@@ -829,10 +870,10 @@
   });
 
   function finishReview(){
-    localStorage.setItem(storageKey, JSON.stringify({ index:questions.length, completed:true }));
+    const now = new Date();
+    safeSetProgress({ index:questions.length, completed:true, answeredCorrectly:true, completedAt:now.toISOString() });
     quiz.classList.add("hidden");
     completion.classList.remove("hidden");
-    const now = new Date();
     completionDate.textContent = new Intl.DateTimeFormat(undefined,{
       year:"numeric", month:"long", day:"numeric"
     }).format(now);
@@ -842,12 +883,25 @@
 
   startBtn.addEventListener("click", ()=>{
     index = 0;
+    answeredCorrectly = false;
     showQuiz();
   });
 
   resumeBtn.addEventListener("click", ()=>{
     const saved = loadProgress();
+    if(saved && saved.completed){
+      intro.classList.add("hidden");
+      quiz.classList.add("hidden");
+      completion.classList.remove("hidden");
+      const date = saved.completedAt ? new Date(saved.completedAt) : new Date();
+      completionDate.textContent = new Intl.DateTimeFormat(undefined,{
+        year:"numeric", month:"long", day:"numeric"
+      }).format(date);
+      completion.scrollIntoView({block:"start"});
+      return;
+    }
     index = saved && Number.isInteger(saved.index) ? Math.min(saved.index, questions.length - 1) : 0;
+    answeredCorrectly = Boolean(saved && saved.answeredCorrectly);
     showQuiz();
   });
 
@@ -868,7 +922,7 @@
   restartBtn.addEventListener("click", ()=>{
     const ok = confirm("Restart the MLA review from the beginning?");
     if(!ok) return;
-    localStorage.removeItem(storageKey);
+    safeRemoveProgress();
     index = 0;
     document.body.classList.remove("screenshot-mode");
     completion.classList.add("hidden");
@@ -883,16 +937,7 @@
     if(saved.completed){
       resumeBtn.textContent = "View Completion Card";
       resumeBtn.classList.remove("hidden");
-      resumeBtn.onclick = function(){
-        intro.classList.add("hidden");
-        quiz.classList.add("hidden");
-        completion.classList.remove("hidden");
-        const now = new Date();
-        completionDate.textContent = new Intl.DateTimeFormat(undefined,{
-          year:"numeric", month:"long", day:"numeric"
-        }).format(now);
-      };
-    }else if(Number.isInteger(saved.index) && saved.index > 0){
+    }else if(Number.isInteger(saved.index) && (saved.index > 0 || saved.answeredCorrectly)){
       resumeBtn.classList.remove("hidden");
     }
   }
