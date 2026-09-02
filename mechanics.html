@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Editing Lab: What Needs Attention?</title>
 <meta name="description" content="An accessible, first-gen-friendly editing and mechanics lab for ENGL C1000.">
+<link rel="icon" type="image/png" href="Favicon2.png">
 <style>
 :root{
  --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#63707c;--line:#d7e0e8;
@@ -85,7 +86,7 @@ h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);mar
  <div class="completion">
   <div class="complete">✓ Lab complete</div><h2>Editing Lab — Complete</h2>
   <div class="grid"><div>Check meaning before correcting</div><div>✓ Complete</div><div>Identify sentence-boundary patterns</div><div>✓ Complete</div><div>Decode common professor comments</div><div>✓ Complete</div><div>Separate revision from editing</div><div>✓ Complete</div><div>Know when not to edit</div><div>✓ Complete</div></div>
-  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 Screenshot this completion card for Canvas.</div>
+  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
  </div>
  <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
 </section>
@@ -95,7 +96,7 @@ h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);mar
 <script>
 (()=>{
 const $=id=>document.getElementById(id),key="editingNeedsAttentionV1";
-let i=0,skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false};
+let i=0,skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false},completed={};
 const moments=[
 ["1 · Suspicious Sentence","choice","I went to the tutoring center because my essay was due tomorrow, but they were closed.","🚨 Grammar emergency or not?",[
 ["No emergency detected. The sentence is clear and the ideas are joined understandably.",1,"Good editors know when not to edit."],
@@ -154,15 +155,15 @@ const moments=[
 ["20 · Case Closed","finish"]
 ];
 
-function save(done=false){localStorage.setItem(key,JSON.stringify({i,skills,done}))}
+function save(done=false){try{localStorage.setItem(key,JSON.stringify({i,skills,completed,done}))}catch(e){}}
 function setSkill(k){if(k)skills[k]=true;renderTools()}
 function renderTools(){const a=[["meaning","🔎 Meaning"],["boundaries","✂️ Sentence boundaries"],["conventions","🔧 Conventions"],["voice","🎙️ Voice / context"],["patterns","🎯 Pattern spotting"],["process","🧭 Editing process"]];$("tools").innerHTML=a.map(([k,v])=>`<div class="lens ${skills[k]?"on":""}">${skills[k]?"✓":"○"} ${v}</div>`).join("")}
 function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
-function choices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);fb("Case finding confirmed.",m)}else{b.disabled=true;fb("Check the actual reader problem.",m+" Try another answer.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function choices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m],idx)=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");completed[i]=idx;setSkill(skill);save();fb("Case finding confirmed.",m)}else{b.disabled=true;fb("Check the actual reader problem.",m+" Try another answer.",false);$("next").classList.add("hidden")}};d.appendChild(b)});if(Object.prototype.hasOwnProperty.call(completed,i)){const idx=completed[i];[...d.children].forEach(x=>x.disabled=true);if(d.children[idx])d.children[idx].classList.add("selected");setSkill(skill);const hit=arr[idx];fb("Case finding confirmed.",hit?hit[2]:"This case is already complete.")}return d}
 function render(){
  const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Case";
  $("ptext").textContent=`Editing case ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];renderTools();
- if(m[1]==="choice"){$("host").innerHTML=`<div class="sentence">${m[2]}</div><p class="question">${m[3]}</p>`;$("host").appendChild(choices(m[4],m[5]))}
+ if(m[1]==="choice"){$("host").innerHTML=`<div class="sentence">${m[2]}</div><p class="question">${m[3]}</p><div class="callout"><strong>What to do:</strong> Choose the editing move that best addresses the reader's actual problem. A correct choice unlocks the next case.</div>`;$("host").appendChild(choices(m[4],m[5]))}
  if(m[1]==="goggles"){$("host").innerHTML=`<div class="goggles"><div class="goggle"><strong>🔎 Meaning</strong>Can my reader follow what I mean?</div><div class="goggle"><strong>✂️ Boundaries</strong>Where does one complete thought end and another begin?</div><div class="goggle"><strong>🔧 Conventions</strong>Is there a convention that matters in this situation?</div><div class="goggle"><strong>🎙️ Voice</strong>Is this a problem, or simply the writer's way of saying it?</div></div>`;setSkill("meaning");setSkill("conventions");fb("Editor goggles equipped.","Different lenses answer different questions. You do not need to inspect everything at once.")}
  if(m[1]==="explain"){$("host").innerHTML=`<div class="explain"><h3>🤷 Nobody Ever Explained This: ${m[2]}</h3><p>${m[3]}</p><div class="sentence">${m[4]}</div></div>`;fb("Translation complete.","The terminology becomes more useful when you can see the actual pattern it names.")}
  if(m[1]==="repairs"){$("host").innerHTML=`<div class="sentence">I finished my draft, I submitted it.</div><div class="compare"><div class="before"><strong>Boundary needs attention</strong><p>I finished my draft, I submitted it.</p></div><div class="after"><strong>Several possible repairs</strong><p>I finished my draft. I submitted it.</p><p>I finished my draft, and I submitted it.</p><p>I finished my draft; I submitted it.</p></div></div>`;setSkill("boundaries");setSkill("conventions");fb("One pattern, several choices.","Editing is often decision-making, not discovering one magical correct sentence.")}
@@ -177,8 +178,8 @@ function render(){
 }
 $("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
 function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
-$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false};render()}
-$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false};completed={};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){try{localStorage.removeItem(key)}catch(e){}location.reload()}}
 const lenses=["🔎 MEANING: Read one paragraph and ask only: Can I tell exactly what I mean?","✂️ SENTENCE BOUNDARIES: Look only for where complete thoughts begin and end.","🎯 ONE KNOWN PATTERN: Pick one issue you've seen before and scan only for that.","🔊 READ ALOUD: Listen for missing words, repetitions, and places where you stumble.","🔧 FORMATTING: Check the assignment's required format after the writing itself is settled."];
 $("random").onclick=()=>{const b=$("randomBox");b.classList.remove("hidden");b.innerHTML=`<h3>Your Editing Lens</h3><p>${lenses[Math.floor(Math.random()*lenses.length)]}</p>`}
 const routine=`5-MINUTE EDITING ROUTINE
@@ -193,7 +194,7 @@ Most important question: What am I trying to help my reader understand?`;
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText(routine);$("copy").textContent="✓ Editing Routine Copied"}catch(e){$("randomBox").classList.remove("hidden");$("randomBox").textContent=routine}}
 $("speak").onclick=()=>{if("speechSynthesis" in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("Your five minute editing routine. First, meaning. Can I tell what I mean? Second, sentence boundaries. Where does each complete thought begin and end? Third, one known pattern. Fourth, read aloud. Fifth, formatting. Most important question: What am I trying to help my reader understand?");speechSynthesis.speak(u)}else{$("randomBox").classList.remove("hidden");$("randomBox").textContent="Read-aloud is not supported in this browser. The full routine is displayed above."}}
 let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;completed=s.completed||{};$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
 </body>
