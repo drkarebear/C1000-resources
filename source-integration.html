@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+=<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Source Integration Lab: Join the Conversation</title>
 <meta name="description" content="An accessible interactive source integration lab for ENGL C1000.">
+<link rel="icon" type="image/png" href="Favicon2.png">
 <style>
 :root{
   --bg:#f4f7f9;--surface:#ffffff;--ink:#243447;--muted:#64707d;--line:#d8e0e7;
@@ -101,13 +102,13 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
   <h1>Source Integration Lab: Join the Conversation</h1>
   <p class="lead"><strong>You are the host. Sources are guests in your argument.</strong></p>
   <div class="callout">You decide who enters, why they are here, how much they say, and what your reader should understand after hearing them.</div>
-  <div class="meta"><span class="pill">20 source missions</span><span class="pill">No timer</span><span class="pill">Quote · Paraphrase · Summarize</span><span class="pill">Your voice stays visible</span></div>
+  <div class="meta"><span class="pill">21 source missions</span><span class="pill">No timer</span><span class="pill">Quote · Paraphrase · Summarize</span><span class="pill">Your voice stays visible</span></div>
   <div class="row"><button id="start" class="primary" type="button">Enter the Source Control Room</button><button id="resume" class="secondary hidden" type="button">Resume Mission</button></div>
 </section>
 
 <section id="lab" class="card hidden">
   <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div id="progress" class="track" role="progressbar" aria-label="Source mission progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"><div id="bar" class="bar"></div></div>
+  <div id="progress" class="track" role="progressbar" aria-label="Source mission progress" aria-valuemin="1" aria-valuemax="21" aria-valuenow="1"><div id="bar" class="bar"></div></div>
   <span id="stage" class="stage" role="heading" aria-level="3" tabindex="-1"></span>
   <h2>Source Control Room</h2>
 
@@ -154,8 +155,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
   </div>
 
   <div class="transfer" aria-labelledby="transferHeading">
-    <h2 id="transferHeading">Take One Source Into Your Own Draft</h2>
-    <p>You have practiced controlling a source conversation. Now use the same moves on one source you are actually considering for a paper. This is a planning tool, not a graded quiz.</p>
+    <h2 id="transferHeading">Optional: Take One Source Into Your Own Draft</h2>
+    <p><strong>This transfer tool is optional. Your lab is already complete.</strong> Use it if you want to practice the same moves with one source you are considering for a paper. This is a planning tool, not a graded quiz.</p>
     <div class="form-grid">
       <div class="form-group">
         <label for="ownPoint">1. What point are <em>you</em> trying to make?</label>
@@ -209,7 +210,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
       <div>Synthesize sources</div><div>✓ Complete</div>
     </div>
     <p><strong>Completed:</strong> <span id="date"></span></p>
-    <div class="shot">📸 Screenshot this completion card for Canvas.</div>
+    <div class="shot">📸 If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
   </div>
 
   <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
@@ -222,7 +223,11 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 (()=>{
 const $=id=>document.getElementById(id), key="sourceJoinConversationV1", transferKey="sourceJoinConversationTransferV1";
 const reduceMotion=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-let i=0, unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};
+let i=0, unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false}, completed={};
+
+function getStored(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function setStored(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+function removeStored(k){try{localStorage.removeItem(k)}catch(e){}}
 
 const srcA={type:"Student-services usability study",text:"Students were more likely to abandon a task when important support information was buried across multiple pages or written in unfamiliar institutional language."};
 const srcB={type:"Campus communication report",text:"Students often use peer-created social media posts to understand deadlines, forms, and campus processes that are also described on official college websites."};
@@ -308,7 +313,7 @@ const moments=[
 ["14 · Final Source Check","finish"]
 ];
 
-function save(done=false){localStorage.setItem(key,JSON.stringify({i,unlocked,done,date:done?new Date().toISOString():null}))}
+function save(done=false){setStored(key,JSON.stringify({i,unlocked,completed,done,date:done?new Date().toISOString():null}))}
 function setU(k){if(k)unlocked[k]=true;renderMeter()}
 function renderMeter(){
  const labels=[["role","Source roles"],["choice","Quote / paraphrase / summarize"],["voice","Writer voice"],["rescue","Dropped quote rescue"],["credibility","Relevance + credibility"],["synthesis","Synthesis"]];
@@ -318,27 +323,32 @@ function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good"
 function sourceCard(s){return `<div class="sourcecard"><div class="type">${s.type}</div><blockquote>${s.text}</blockquote></div>`}
 function choices(arr,onGood,label="Choose the strongest response"){
  const wrap=document.createElement("div");wrap.className="choices";wrap.setAttribute("role","group");wrap.setAttribute("aria-label",label);
- arr.forEach(([labelText,good,msg])=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=labelText;b.setAttribute("aria-pressed","false");b.setAttribute("aria-describedby","feedback");b.onclick=()=>{if(good){[...wrap.children].forEach(x=>{x.disabled=true;x.setAttribute("aria-pressed","false")});b.classList.add("selected");b.setAttribute("aria-pressed","true");if(onGood)onGood();fb("That move fits the job.",msg)}else{b.disabled=true;fb("Try a different move.",msg,false);$("next").classList.add("hidden")}};wrap.appendChild(b)});
+ arr.forEach(([labelText,good,msg])=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=labelText;b.setAttribute("aria-pressed","false");b.setAttribute("aria-describedby","feedback");b.onclick=()=>{if(good){[...wrap.children].forEach(x=>{x.disabled=true;x.setAttribute("aria-pressed","false")});b.classList.add("selected");b.setAttribute("aria-pressed","true");if(onGood)onGood();completed[i]=true;save(false);fb("That move fits the job.",msg)}else{b.disabled=true;fb("Try a different move.",msg,false);$("next").classList.add("hidden")}};wrap.appendChild(b)});
  return wrap
+}
+function restoreChoiceSet(wrap,arr){
+ if(!completed[i])return;
+ [...wrap.children].forEach((b,idx)=>{b.disabled=true;b.setAttribute("aria-pressed","false");if(arr[idx][1]){b.classList.add("selected");b.setAttribute("aria-pressed","true")}});
+ fb("This mission is already complete.","Your correct response was saved. You can continue to the next source mission.")
 }
 function render(){
  const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");
  $("ptext").textContent=`Source mission ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("progress").setAttribute("aria-valuemax",moments.length);$("progress").setAttribute("aria-valuenow",i+1);$("progress").setAttribute("aria-valuetext",`Source mission ${i+1} of ${moments.length}: ${m[0]}`);$("stage").textContent=m[0];renderMeter();
 
  if(m[1]==="role"){
-   $("host").innerHTML=`<div class="signal"><div class="label">🚨 Incoming Source</div></div>${sourceCard(m[2])}<p class="question">${m[3]}</p>`;
-   $("host").appendChild(choices(m[4],()=>setU("role")))
+   $("host").innerHTML=`<div class="signal"><div class="label">🚨 Incoming Source</div></div>${sourceCard(m[2])}<p class="question">${m[3]}</p><p class="help"><strong>What to do:</strong> Choose the response that best fits the source's job. A correct choice unlocks the next mission.</p>`;
+   const wrap=choices(m[4],()=>setU("role"));$("host").appendChild(wrap);restoreChoiceSet(wrap,m[4])
  }
  if(m[1]==="decoder"){
    $("host").innerHTML=`<div class="decoder"><h3>🔓 ${m[2]}</h3><p>${m[3]}</p></div>`;fb("Hidden instruction decoded.","Academic shorthand makes more sense when you translate it into the reader's needs.")
  }
  if(m[1]==="bouncer"){
-   $("host").innerHTML=`<div class="bouncer"><h3>🚪 Source at the Door</h3>${sourceCard(m[2])}</div><p class="question">${m[3]}</p>`;
-   $("host").appendChild(choices(m[4],()=>{setU(i===14?"credibility":"role")}))
+   $("host").innerHTML=`<div class="bouncer"><h3>🚪 Source at the Door</h3>${sourceCard(m[2])}</div><p class="question">${m[3]}</p><p class="help"><strong>What to do:</strong> Choose the response that best evaluates this source for the job at hand. A correct choice unlocks the next mission.</p>`;
+   const wrap=choices(m[4],()=>{setU(i===16?"credibility":"role")});$("host").appendChild(wrap);restoreChoiceSet(wrap,m[4])
  }
  if(m[1]==="mix"){
-   $("host").innerHTML=`<div class="mixer"><div class="mix"><strong>QUOTE</strong>Exact wording matters</div><div class="mix"><strong>PARAPHRASE</strong>Specific idea matters</div><div class="mix"><strong>SUMMARY</strong>Big picture matters</div></div><div class="callout">${m[2]}</div><p class="question">${m[3]}</p>`;
-   $("host").appendChild(choices(m[4],()=>setU("choice")))
+   $("host").innerHTML=`<div class="mixer"><div class="mix"><strong>QUOTE</strong>Exact wording matters</div><div class="mix"><strong>PARAPHRASE</strong>Specific idea matters</div><div class="mix"><strong>SUMMARY</strong>Big picture matters</div></div><div class="callout">${m[2]}</div><p class="question">${m[3]}</p><p class="help"><strong>What to do:</strong> Choose the source move that best matches what the writer needs. A correct choice unlocks the next mission.</p>`;
+   const wrap=choices(m[4],()=>setU("choice"));$("host").appendChild(wrap);restoreChoiceSet(wrap,m[4])
  }
  if(m[1]==="thread"){
    $("host").innerHTML=`<div class="thread">
@@ -353,8 +363,8 @@ function render(){
    fb("Source-heavy does not automatically mean strong.","The writer's job is to select, connect, interpret, and respond—not merely report.")
  }
  if(m[1]==="choice"){
-   $("host").innerHTML=`<p class="question">${m[2]}</p>`;
-   $("host").appendChild(choices(m[3],()=>{if(i===8)setU("voice");if(i===11)setU("rescue");if(i===13)setU("choice");if(i===16)setU("synthesis")}))
+   $("host").innerHTML=`<p class="question">${m[2]}</p><p class="help"><strong>What to do:</strong> Choose the response that best completes this source-integration move. A correct choice unlocks the next mission.</p>`;
+   const wrap=choices(m[3],()=>{if(i===9)setU("voice");if(i===12)setU("rescue");if(i===14)setU("choice");if(i===18)setU("synthesis")});$("host").appendChild(wrap);restoreChoiceSet(wrap,m[3])
  }
  if(m[1]==="sandwich"){
    $("host").innerHTML=`<div class="secret"><h3>🥪 The Quotation Sandwich</h3>
@@ -403,8 +413,8 @@ function render(){
 
 $("next").onclick=()=>{if(i<moments.length-1){i++;render();$("stage").scrollIntoView({behavior:reduceMotion()?"auto":"smooth",block:"start"})}else finish()}
 function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());$("transferHeading").setAttribute("tabindex","-1");requestAnimationFrame(()=>{$("transferHeading").focus({preventScroll:true});$("transferHeading").scrollIntoView({behavior:reduceMotion()?"auto":"smooth",block:"start"})})}
-$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};render()}
-$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);localStorage.removeItem(transferKey);location.reload()}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;unlocked={role:false,choice:false,voice:false,rescue:false,credibility:false,synthesis:false};completed={};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){removeStored(key);removeStored(transferKey);location.reload()}}
 $("check").onclick=()=>{const opening=$("checkBox").classList.contains("hidden");$("checkBox").classList.toggle("hidden");$("check").setAttribute("aria-expanded",String(opening));$("check").textContent=opening?"🎛️ Close My Source Check":"🎛️ Open My Source Check"}
 $("copy").onclick=async()=>{
  const text=`SOURCE CHECK
@@ -419,9 +429,9 @@ Before I add this source:
  try{await navigator.clipboard.writeText(text);$("copy").textContent="✓ Source Check Copied"}catch(e){$("checkBox").classList.remove("hidden")}
 }
 const transferFields=["ownPoint","ownSource","ownRole","ownMove","ownReturn"];
-function saveTransfer(){const data={};transferFields.forEach(id=>data[id]=$(id).value);localStorage.setItem(transferKey,JSON.stringify(data))}
+function saveTransfer(){const data={};transferFields.forEach(id=>data[id]=$(id).value);setStored(transferKey,JSON.stringify(data))}
 transferFields.forEach(id=>$(id).addEventListener("input",saveTransfer));
-try{const savedTransfer=JSON.parse(localStorage.getItem(transferKey)||"null");if(savedTransfer)transferFields.forEach(id=>{if(savedTransfer[id])$(id).value=savedTransfer[id]})}catch(e){}
+try{const savedTransfer=JSON.parse(getStored(transferKey)||"null");if(savedTransfer)transferFields.forEach(id=>{if(savedTransfer[id])$(id).value=savedTransfer[id]})}catch(e){}
 $("buildMove").onclick=()=>{
  const point=$("ownPoint").value.trim(), source=$("ownSource").value.trim(), role=$("ownRole").value, move=$("ownMove").value, ret=$("ownReturn").value.trim();
  const missing=[];if(!point)missing.push("your point");if(!source)missing.push("the source material");if(!role)missing.push("the source's job");if(!move)missing.push("quote, paraphrase, or summarize");if(!ret)missing.push("what your voice will say after the source");
@@ -434,8 +444,8 @@ $("buildMove").onclick=()=>{
 };
 function escapeHTML(value){return value.replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]))}
 
-let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume Mission";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
+let s;try{s=JSON.parse(getStored(key)||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume Mission";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;completed=s.completed||{};$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
 </body>
