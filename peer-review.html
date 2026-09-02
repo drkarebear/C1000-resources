@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peer Review Lab: Be a Useful Reader</title>
 <meta name="description" content="An accessible first-gen-friendly peer review practice lab for ENGL C1000.">
+<link rel="icon" type="image/png" href="Favicon2.png">
 <style>
 :root{
  --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#64717e;--line:#d8e0e8;
@@ -85,7 +86,7 @@ button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight
  <div class="completion">
   <div class="complete">✓ Lab complete</div><h2>Peer Review Lab — Complete</h2>
   <div class="grid"><div>Respond as a reader</div><div>✓ Complete</div><div>Give specific positive feedback</div><div>✓ Complete</div><div>Describe confusion without taking over</div><div>✓ Complete</div><div>Decode common instructor language</div><div>✓ Complete</div><div>Prioritize useful feedback</div><div>✓ Complete</div></div>
-  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 Screenshot this completion card for Canvas.</div>
+  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
  </div>
  <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
 </section>
@@ -94,7 +95,7 @@ button{border:0;border-radius:12px;min-height:48px;padding:12px 17px;font-weight
 <script>
 (()=>{
 const $=id=>document.getElementById(id),key="peerReviewUsefulReaderV1";
-let i=0,skills={notice:false,specific:false,agency:false,questions:false,prioritize:false};
+let i=0,skills={notice:false,specific:false,agency:false,questions:false,prioritize:false},completed={};
 const passage=`<div class="passage"><p><strong>Student draft:</strong> Evening students can face barriers that daytime students do not always encounter. For example, some campus offices close before evening classes begin. A student who works during the day may therefore have fewer opportunities to ask questions in person. Colleges should think about these schedules when designing student services.</p></div>`;
 const moments=[
 ["1 · What Is Peer Review?","choice",passage,"What is the peer reviewer's main job?",[
@@ -178,19 +179,24 @@ const moments=[
 ["19 · Final Simulated Review","report"],
 ["20 · Reader, Not Editor","finish"]
 ];
-function save(done=false){localStorage.setItem(key,JSON.stringify({i,skills,done}))}
+function storageGet(){try{return localStorage.getItem(key)}catch(e){return null}}
+function storageSet(v){try{localStorage.setItem(key,v)}catch(e){}}
+function storageRemove(){try{localStorage.removeItem(key)}catch(e){}}
+function save(done=false){storageSet(JSON.stringify({i,skills,completed,done}))}
 function setSkill(k){if(k)skills[k]=true;toolkit()}
 function toolkit(){const a=[["notice","Notice reader experience"],["specific","Be specific"],["agency","Protect writer agency"],["questions","Ask useful questions"],["prioritize","Prioritize feedback"]];$("toolkit").innerHTML=a.map(([k,v])=>`<div class="reader-note ${skills[k]?"on":""}">${skills[k]?"✓":"○"} ${v}</div>`).join("")}
 function fb(t,x,good=true){$("feedback").className="feedback show"+(good?" good":"");$("ftitle").textContent=t;$("ftext").textContent=x;$("next").classList.remove("hidden")}
-function makeChoices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m])=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);fb("Useful reader move.",m)}else{b.disabled=true;fb("Try it from the reader's position.",m+" Try another response.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function makeChoices(arr,skill){const d=document.createElement("div");d.className="choices";arr.forEach(([l,g,m],idx)=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=l;b.onclick=()=>{if(g){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);completed[i]=idx;save();fb("Useful reader move.",m)}else{b.disabled=true;fb("Try it from the reader's position.",m+" Try another response.",false);$("next").classList.add("hidden")}};d.appendChild(b)});
+ if(completed[i]!==undefined){const idx=completed[i],b=d.children[idx];if(b){[...d.children].forEach(x=>x.disabled=true);b.classList.add("selected");setSkill(skill);fb("Already completed.",arr[idx][2])}}
+ return d}
 function render(){
  const m=moments[i];$("host").innerHTML="";$("feedback").className="feedback";$("next").classList.add("hidden");$("next").textContent="Next Reader Moment";
  $("ptext").textContent=`Reader moment ${i+1} of ${moments.length}`;$("pct").textContent=Math.round((i+1)/moments.length*100)+"%";$("bar").style.width=Math.round((i+1)/moments.length*100)+"%";$("stage").textContent=m[0];toolkit();
- if(m[1]==="choice"){$("host").innerHTML=(m[2]||"")+`<p class="question">${m[3]}</p>`;$("host").appendChild(makeChoices(m[4],m[5]))}
+ if(m[1]==="choice"){$("host").innerHTML=(m[2]||"")+`<p class="question">${m[3]}</p><div class="callout"><strong>What to do:</strong> Choose the response that gives the writer the most useful reader information. A correct choice unlocks the next reader moment.</div>`;$("host").appendChild(makeChoices(m[4],m[5]))}
  if(m[1]==="mind"){$("host").innerHTML=`<div class="mind"><div class="big">🔮 MIND READING...</div><p>Trying to determine exactly what the writer intended...</p><p><strong>🚫 MIND READING UNAVAILABLE</strong></p></div><div class="decoder"><strong>Try this instead:</strong> Tell the writer what you actually experienced. What did you understand? Where did you lose the thread? What interested you? What did you want to know?</div>`;setSkill("notice");fb("Good news: you don't need psychic powers.","Writer intention and reader experience are different. Peer review can report the second one.")}
  if(m[1]==="compare"){$("host").innerHTML=`<div class="compare"><div class="bad"><strong>Less useful</strong><p>“This paragraph is confusing.”</p></div><div class="better"><strong>More useful</strong><p>“I followed your point until the quotation. After it, I wasn't sure how the evidence connected to your paragraph's main idea.”</p></div></div>`;setSkill("specific");fb("Locate the reaction.","Specific reader information gives the writer something they can make a decision about.")}
  if(m[1]==="machine"){$("host").innerHTML=`<div class="machine"><h3>🤖 Compliment Upgrade Machine</h3><p><strong>INPUT:</strong> “Good job!”</p><p>⚙️ locating what worked... identifying reader effect...</p><p><strong>OUTPUT:</strong> “The example about missing the enrollment deadline made the problem concrete for me. That's where I understood why your argument matters.”</p></div>`;setSkill("specific");fb("Positive feedback is revision information too.","When writers know what worked, they know what they may want to preserve.")}
- if(m[1]==="awkward"){$("host").innerHTML=`<div class="awkward"><h3>😬 Peer Review Awkwardness Simulator</h3><p><strong>${m[2]}</strong></p></div><p class="question">${m[3]}</p>`;$("host").appendChild(makeChoices(m[4],"agency"))}
+ if(m[1]==="awkward"){$("host").innerHTML=`<div class="awkward"><h3>Peer Review Awkwardness Simulator</h3><p><strong>${m[2]}</strong></p></div><p class="question">${m[3]}</p><div class="callout"><strong>What to do:</strong> Choose the response that protects the writer's agency while still being useful. A correct choice unlocks the next reader moment.</div>`;$("host").appendChild(makeChoices(m[4],"agency"))}
  if(m[1]==="decoder"){$("host").innerHTML=`<div class="decoder"><h3>🔓 College Writing Decoder</h3><p><strong>${m[2]}</strong></p><p>${m[3]}</p></div>`;fb("Make the hidden request visible.","You can describe what a reader needs without pretending there is only one correct revision.")}
  if(m[1]==="report"){$("host").innerHTML=`${passage}<div class="report"><h3>👀 Reader Report</h3><div class="item"><strong>KEEP:</strong> The office-hours example made the scheduling barrier concrete for me.</div><div class="item"><strong>CONSIDER:</strong> I wanted a little more explanation of how significant this barrier might be.</div><div class="item"><strong>QUESTION:</strong> How might colleges support evening students when an office cannot stay open later?</div></div>`;Object.keys(skills).forEach(k=>skills[k]=true);toolkit();fb("That's a usable peer review.","It identifies a strength, reports an important reader need, and opens a revision possibility without taking control of the paper.")}
  if(m[1]==="finish"){$("host").innerHTML=`<div class="callout"><strong>You do not need to be the professor. You do not need to be a better writer. You do not need to know how to fix everything.</strong><br><br>Be an attentive reader. Tell the writer what happened while you were reading. Then let the writer decide what to do with that information.</div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
@@ -198,8 +204,8 @@ function render(){
 }
 $("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
 function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
-$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={notice:false,specific:false,agency:false,questions:false,prioritize:false};render()}
-$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={notice:false,specific:false,agency:false,questions:false,prioritize:false};completed={};render()}
+$("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){storageRemove();location.reload()}}
 $("copy").onclick=async()=>{const t=`PEER REVIEW STARTER
 
 KEEP: One thing that worked for me as a reader was ___ because ___.
@@ -209,8 +215,8 @@ CONSIDER: I followed your point until ___. Here I needed more ___.
 QUESTION: One question I had while reading was ___.
 
 Remember: I can describe my reader experience without deciding the writer's revision for them.`;try{await navigator.clipboard.writeText(t);$("copy").textContent="✓ Peer Review Starter Copied"}catch(e){alert(t)}}
-let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
+let s;try{s=JSON.parse(storageGet()||"null")}catch(e){}
+if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;completed=s.completed||{};$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
 </body>
