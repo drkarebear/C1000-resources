@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Develop, Don't Pad</title>
 <meta name="description" content="An accessible ENGL C1000 just-in-time writing lab that helps students diagnose what a reader needs when a professor says develop, expand, or go deeper.">
+<link rel="icon" type="image/png" href="Favicon2.png">
 <style>
 :root{
 --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
@@ -84,7 +85,8 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 
 <section id="finish" class="card hidden">
 <div class="good"><h2 id="finishhead" tabindex="-1">🧠 Development Detected</h2><p><s>How can I make this longer?</s><br><strong>What does my reader need next?</strong></p></div>
-<h2>📈 My Writing Needs More... What?</h2>
+<h2>📈 Optional: Try It on Your Own Draft</h2>
+<p>This transfer tool is optional. Your lab is already complete. Use it if you want help deciding what kind of development move your own paragraph may need.</p>
 <div class="tool">
 <label for="draft"><strong>Bring in one sentence or paragraph from your own draft.</strong></label>
 <textarea id="draft" placeholder="Paste it here. This stays in your browser."></textarea>
@@ -122,14 +124,17 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 ✓ Unpack compressed ideas<br>
 ✓ Recognize when a paragraph may already be developed enough</p>
 <p><strong>Completed:</strong> <span id="date"></span></p>
-<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+<div class="shot">📸 <strong>If your instructor asks for proof of completion,</strong> you can take a screenshot of this card.</div>
 </div>
 </section>
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
 
 <script>
-(()=>{const $=x=>document.getElementById(x),KEY="developDontPadV1",TRANSFER_KEY="developDontPadTransferV1";let i=0;
+(()=>{const $=x=>document.getElementById(x),KEY="developDontPadV1",TRANSFER_KEY="developDontPadTransferV1";let i=0,completed={};
+function safeGet(key){try{return localStorage.getItem(key)}catch(e){return null}}
+function safeSet(key,value){try{localStorage.setItem(key,value);return true}catch(e){return false}}
+function saveProgress(done=false){safeSet(KEY,JSON.stringify({i,done,completed}))}
 const M=[
 ["1 · What Does “Develop” Mean?","intro"],
 ["2 · Development Dashboard","dash"],
@@ -162,12 +167,12 @@ const M=[
 ];
 
 function fb(t,g=true){$("fb").textContent=t;$("fb").className="feedback show"+(g?" good":"");$("next").classList.remove("hidden")}
-function choices(opts,label){let d=document.createElement("div");d.className="choices";d.setAttribute("role","group");d.setAttribute("aria-label",label);opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");fb("📈 "+m)}else{b.disabled=true;fb(m+" Try a different move.",false);$("next").classList.add("hidden")}};d.appendChild(b)});return d}
+function choices(opts,label){let d=document.createElement("div");d.className="choices";d.setAttribute("role","group");d.setAttribute("aria-label",label);opts.forEach(([x,g,m])=>{let b=document.createElement("button");b.type="button";b.className="choice";b.textContent=x;b.onclick=()=>{if(g){[...d.children].forEach(q=>q.disabled=true);b.classList.add("ok");completed[i]=true;saveProgress();fb("📈 "+m)}else{b.disabled=true;fb(m+" Try a different move.",false);$("next").classList.add("hidden")}};d.appendChild(b)});if(completed[i]){[...d.children].forEach(q=>q.disabled=true);let correct=opts.findIndex(o=>o[1]);if(correct>=0)d.children[correct].classList.add("ok");fb("✓ You already completed this choice. Continue when you are ready.")}return d}
 function motionBehavior(){return window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}
 function focusCurrentMove(){const h=$("host").querySelector("h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({block:"start",behavior:motionBehavior()})}}
 function meters(vals){let labels=["Words","Evidence","Explanation","Specificity","Connection","Complexity"];return `<div class="meterbox">${labels.map((x,n)=>`<div class="meterrow"><strong>${x}</strong><div class="meter" role="img" aria-label="${x}: ${vals[n]} percent"><div class="fill" style="width:${vals[n]}%"></div></div></div>`).join("")}</div>`}
 function render(){let m=M[i];$("host").innerHTML="";$("fb").className="feedback";$("next").classList.add("hidden");$("next").textContent="Continue";$("stage").textContent=m[0];$("pt").textContent=`Development move ${i+1} of ${M.length}`;$("pc").textContent=Math.round((i+1)/M.length*100)+"%";$("bar").style.width=Math.round((i+1)/M.length*100)+"%";$("track").setAttribute("aria-valuenow",i+1);$("track").setAttribute("aria-valuetext",`${m[0]}, ${Math.round((i+1)/M.length*100)} percent complete`);
-if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p>`;$("host").appendChild(choices(m[4],m[3]))}
+if(m[1]==="choice"){$("host").innerHTML=m[2]+`<p><strong>${m[3]}</strong></p><p class="note"><strong>What to do:</strong> Choose the move that best gives this reader what they need. A correct choice will unlock Continue.</p>`;$("host").appendChild(choices(m[4],m[3]))}
 if(m[1]==="intro"){$("host").innerHTML=`<h2>🕵️ “Develop This.”</h2><div class="paragraph"><p>Evening students can have difficulty using campus services. Many services close before evening classes begin. This can make college more difficult.</p></div>${meters([30,15,15,15,10,0])}<div class="secret">🔓 The question is not automatically “How do I add sentences?” It is <strong>“What does my reader still need?”</strong></div>`;fb("First diagnose the missing work. Then choose a development move.")}
 if(m[1]==="dash"){$("host").innerHTML=`<h2>🎛️ Development Dashboard</h2><div class="dashboard"><div class="control"><strong>❓ WHY?</strong>Why is this true or important?</div><div class="control"><strong>⚙️ HOW?</strong>How does this happen?</div><div class="control"><strong>🔍 SHOW ME</strong>What would this look like?</div><div class="control"><strong>📚 SUPPORT IT</strong>What evidence would help?</div><div class="control"><strong>🔗 CONNECT IT</strong>How does this relate to the claim?</div><div class="control"><strong>🧩 COMPLICATE IT</strong>What condition, limit, consequence, or perspective matters?</div></div>`;fb("These are thinking moves, not a checklist every paragraph must complete.")}
 if(m[1]==="long"){$("host").innerHTML=`<h2>🎈 Make the Sentence Longer</h2><div class="machine"><div class="screen">Evening students attending institutions of higher education can potentially experience a variety of considerable difficulties relating to the accessibility and availability of various campus-based student support services...</div></div><div class="warn"><strong>🎈 WORDS +23</strong><br><strong>🧠 IDEA DEVELOPMENT +0</strong><br>The sentence got bigger. The idea didn't.</div>`;fb("Longer sentences can be useful, but length by itself is not development.")}
@@ -186,9 +191,9 @@ if(m[1]==="complicate"){$("host").innerHTML=`<h2>🧩 Complicate It</h2><div cla
 if(m[1]==="enough"){$("host").innerHTML=`<h2>✋ Enough Already</h2><div class="paragraph"><p>This paragraph makes a focused claim, provides appropriate evidence, explains what the evidence shows, gives needed context, connects to the thesis, and acknowledges an important limitation.</p></div><div class="call"><strong>Your paper is still half a page short. Add another example here?</strong></div><div class="good"><h3>✋ STEP AWAY FROM THE PARAGRAPH.</h3><p>Not necessarily. This idea may already be doing its job. Inspect another part of the draft for a genuine development need.</p></div>`;fb("Development has no automatic sentence quota.")}
 if(m[1]==="check"){$("host").innerHTML=`<h2>🧰 Build Your Development Check</h2><div class="toolbox"><p><strong>If the reader asks “How do you know?”</strong> → 📚 SUPPORT IT</p><p><strong>If the reader asks “Why/How?”</strong> → 🧠 EXPLAIN</p><p><strong>If the reader asks “What do you mean?”</strong> → 🔍 GET SPECIFIC</p><p><strong>If the reader asks “What does this have to do with your point?”</strong> → 🔗 CONNECT IT</p><p><strong>If the reader asks “Is it really that simple?”</strong> → 🧩 COMPLICATE IT</p><p><strong>If you're saying the same thing again</strong> → ❓ ASK A NEW QUESTION</p></div>`;fb("This is the tool you can reuse whenever “develop” feels vague.")}
 if(m[1]==="end"){$("host").innerHTML=`<h2>📈 What Are We Actually Measuring?</h2><div class="warn"><strong><s>WORD COUNT</s></strong></div><div class="good"><h2>🧠 READER UNDERSTANDING</h2><p><strong>Develop an idea until your reader has what they need to follow your reasoning. Then move on.</strong></p></div><div class="secret">🔓 When you do not know what to add, don't start by asking “How can I make this longer?” Ask <strong>“What would a curious reader need next?”</strong></div>`;$("next").textContent="Finish & Open Development Tool";$("next").classList.remove("hidden")}
-localStorage.setItem(KEY,JSON.stringify({i}))}
+saveProgress()}
 
-$("next").onclick=()=>{if(i<M.length-1){i++;render();focusCurrentMove()}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>{$("finishhead").focus({preventScroll:true});$("finish").scrollIntoView({block:"start",behavior:motionBehavior()})},50)}}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();focusCurrentMove()}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());saveProgress(true);setTimeout(()=>{$("finishhead").focus({preventScroll:true});$("finish").scrollIntoView({block:"start",behavior:motionBehavior()})},50)}}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render();focusCurrentMove()}
 
 const diagnoses={
@@ -203,7 +208,7 @@ unknown:["👀 USE THE CURIOUS READER","Read the paragraph and imagine a genuine
 done:["✋ IT MAY BE DONE","Do not add material only to make this paragraph longer. Inspect another part of the draft.","Ask: “Is there another claim, paragraph, relationship, or piece of evidence that genuinely needs more development?”","Name the next part of the draft you will inspect instead of padding this paragraph."]
 };
 $("diagnose").onclick=()=>{let r=diagnoses[$("problem").value];$("result").innerHTML=`<div class="good"><h3 tabindex="-1">${r[0]}</h3><p>${r[1]}</p><p><strong>Next question:</strong> ${r[2]}</p></div>`;$("applyPrompt").textContent=r[3];$("apply").classList.remove("hidden");const h=$("result").querySelector("h3");h.focus({preventScroll:true});h.scrollIntoView({block:"nearest",behavior:motionBehavior()});saveTransfer()};
-function saveTransfer(){localStorage.setItem(TRANSFER_KEY,JSON.stringify({draft:$("draft").value,problem:$("problem").value,move:$("draftmove").value}))}
+function saveTransfer(){safeSet(TRANSFER_KEY,JSON.stringify({draft:$("draft").value,problem:$("problem").value,move:$("draftmove").value}))}
 $("draft").addEventListener("input",saveTransfer);$("problem").addEventListener("change",saveTransfer);$("draftmove").addEventListener("input",saveTransfer);
 $("saveMove").onclick=()=>{saveTransfer();$("moveStatus").textContent=$("draftmove").value.trim()?"✓ Your development move is saved in this browser.":"Your note is empty right now. You can still come back and add a move."};
 
@@ -248,10 +253,10 @@ Length is something we can count.
 Development is something a reader can experience.`;
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText(check);$("copy").textContent="✓ Development Check Copied"}catch(e){alert(check)}}
 
-let t;try{t=JSON.parse(localStorage.getItem(TRANSFER_KEY)||"null")}catch(e){}
+let t;try{t=JSON.parse(safeGet(TRANSFER_KEY)||"null")}catch(e){}
 if(t){$("draft").value=t.draft||"";$("problem").value=t.problem||"claim";$("draftmove").value=t.move||""}
-let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
-if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Development Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("finishhead").focus(),50)}else{i=s.i||0;$("lab").classList.remove("hidden");render();focusCurrentMove()}}}
+let s;try{s=JSON.parse(safeGet(KEY)||"null")}catch(e){}
+if(s){completed=s.completed||{};$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Optional Development Tool":"Resume Lab";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("finishhead").focus(),50)}else{i=s.i||0;$("lab").classList.remove("hidden");render();focusCurrentMove()}}}
 })();
 </script>
 </body>
