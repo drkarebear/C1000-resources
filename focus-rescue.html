@@ -32,8 +32,23 @@ textarea{min-height:78px;resize:vertical}.controls{display:flex;justify-content:
 @media(max-width:480px){.toolbox,.desk{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
+
+<style id="c1000-global-nav-style">
+.c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
+.c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
+.c1000-global-nav .c1000-home{margin-right:auto;text-decoration:none;font-weight:850}
+.c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
+@media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
+</style>
 </head>
-<body><main>
+<body>
+<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
+  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
+  <a href="student.html">Student Labs</a>
+  <a href="faculty.html">Faculty</a>
+  <a href="toolkit.html">All Tools</a>
+</nav>
+<main>
 <section class="hero"><div class="kicker" style="color:#ddd9ff">Reading + Writing Focus Lab</div><h1>🧰 Focus Rescue</h1><p><strong>What to try when you're stuck.</strong></p><p>You have work to do. Your brain has other plans. Instead of calling yourself lazy or waiting to magically feel motivated, figure out what kind of stuck you're dealing with and test a strategy.</p><p class="mini">The goal isn't perfect productivity. It's finding the next useful move.</p></section>
 <section class="progressbox"><div class="proglabel"><span id="stepText">Rescue 1 of 10</span><span id="stepName">The stuck moment</span></div><div class="track"><div class="bar" id="bar"></div></div></section><div id="live" class="small" aria-live="polite"></div>
 
