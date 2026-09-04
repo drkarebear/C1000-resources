@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <title>Develop, Don't Pad</title>
 <meta content="An accessible ENGL C1000 just-in-time writing lab that helps students diagnose what a reader needs when a professor says develop, expand, or go deeper." name="description"/>
 <link href="Favicon2.png" rel="icon" type="image/png"/>
@@ -100,6 +101,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <h2>📈 Optional: Try It on Your Own Draft</h2>
 <p>This transfer tool is optional. Your lab is already complete. Use it if you want help deciding what kind of development move your own paragraph may need.</p>
 <div class="tool">
+<aside class="privacy-storage-note" aria-label="Browser storage privacy note"><strong>Privacy on this device:</strong> This lab saves your progress and some writing you type in your browser so you can return to it. Nothing is submitted to this website or sent to your professor. If you are using a shared computer, clear your saved writing when you finish. <a href="privacy.html">Read the privacy details</a>.</aside>
 <label for="draft"><strong>Bring in one sentence or paragraph from your own draft.</strong></label>
 <textarea id="draft" placeholder="Paste it here. This stays in your browser."></textarea>
 <label for="problem"><strong>What does this part of your draft seem to need most?</strong></label>
@@ -122,6 +124,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <div class="row"><button class="secondary" id="saveMove" type="button">Save My Development Move</button></div>
 <div aria-live="polite" id="moveStatus" role="status"></div>
 </div>
+<div class="privacy-clear-row"><button class="privacy-clear-button" id="clearSavedWriting" type="button">Clear My Saved Writing</button><span class="privacy-clear-status" id="clearSavedStatus" role="status" aria-live="polite"></span></div>
 </div>
 <div class="note"><h3>👀 The Curious Reader Test</h3><p>After an important sentence, imagine a curious reader asking:</p><div class="chips"><span class="badge">Why?</span><span class="badge">How?</span><span class="badge">Can you show me?</span><span class="badge">What does that show?</span><span class="badge">Why does it matter?</span><span class="badge">Is it always true?</span></div><p>You do not need to answer every question. Answer the ones your reader genuinely needs.</p></div>
 <div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Development Check</button></div>
@@ -229,6 +232,7 @@ $("diagnose").onclick=()=>{let r=diagnoses[$("problem").value];$("result").inner
 function saveTransfer(){safeSet(TRANSFER_KEY,JSON.stringify({draft:$("draft").value,problem:$("problem").value,move:$("draftmove").value}))}
 $("draft").addEventListener("input",saveTransfer);$("problem").addEventListener("change",saveTransfer);$("draftmove").addEventListener("input",saveTransfer);
 $("saveMove").onclick=()=>{saveTransfer();$("moveStatus").textContent=$("draftmove").value.trim()?"✓ Your development move is saved in this browser.":"Your note is empty right now. You can still come back and add a move."};
+$("clearSavedWriting").onclick=()=>{if(!confirm("Clear the draft and development writing saved by this tool from this browser?"))return;try{localStorage.removeItem(TRANSFER_KEY)}catch(e){}$("draft").value="";$("problem").value="claim";$("draftmove").value="";$("result").textContent="";$("apply").classList.add("hidden");$("moveStatus").textContent="";$("clearSavedStatus").textContent="Saved writing cleared from this browser.";$("clearSavedWriting").focus()};
 
 const check=`DEVELOP, DON'T PAD — DEVELOPMENT CHECK
 
@@ -277,5 +281,5 @@ let s;try{s=JSON.parse(safeGet(KEY)||"null")}catch(e){}
 if(s){completed=s.completed||{};$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Optional Development Tool":"Resume Lab";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("finishhead").focus(),50)}else{i=s.i||0;$("lab").classList.remove("hidden");render();focusCurrentMove()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

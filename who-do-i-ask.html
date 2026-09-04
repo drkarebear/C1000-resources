@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Who Do I Ask? The College Writing Help Desk</title>
 <meta content="An accessible first-gen friendly college writing help-routing lab for ENGL C1000." name="description"/>
@@ -226,5 +227,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Help Navigator":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

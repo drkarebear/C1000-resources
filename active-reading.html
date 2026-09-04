@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Active Reading Lab: Talk to the Text</title>
 <meta content="An accessible ENGL C1000 active reading practice lab." name="description"/>
@@ -106,6 +107,7 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
 <div class="callout"><strong>Think of active reading as a toolbox.</strong> Previewing, asking questions, making connections, annotating, rereading, summarizing, using audio or text-to-speech, and taking breaks are all tools. You do not have to use every tool every time.</div>
 <div aria-label="Activity details" class="meta"><span class="pill">20 interactions</span><span class="pill">About 12–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
 <p>You will practice on one short original article. Some activities have a best answer; others ask you to make your own reading visible. Your personal notes are saved only in this browser.</p>
+<aside class="privacy-storage-note" aria-label="Browser storage privacy note"><strong>Privacy on this device:</strong> This lab saves your progress and some writing you type in your browser so you can return to it. Nothing is submitted to this website or sent to your professor. If you are using a shared computer, clear your saved writing when you finish. <a href="privacy.html">Read the privacy details</a>.</aside>
 <div class="row"><button class="primary" id="start" type="button">Start the Lab</button><button class="secondary hidden" id="resume" type="button">Resume Where I Left Off</button></div>
 </section>
 <section aria-labelledby="qhead" class="card hidden" id="quiz">
@@ -262,5 +264,5 @@ $("restart").addEventListener("click",()=>{if(!confirm("Restart the Active Readi
 const s=state();if(s){resume.classList.remove("hidden");resume.textContent=s.completed?"View Completion Card":"Resume Where I Left Off"}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

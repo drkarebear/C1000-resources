@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Make Your Case</title>
 <meta content="An accessible ENGL C1000 argument lab for building, testing, qualifying, and supporting academic claims." name="description"/>
@@ -66,6 +67,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <div class="good"><h2>⚖️ Case Made</h2><p><strong>A strong academic claim is one you can support, explain, qualify, and examine.</strong></p></div>
 <h2>🧪 Stress-Test My Claim</h2>
 <div class="tool">
+<aside class="privacy-storage-note" aria-label="Browser storage privacy note"><strong>Privacy on this device:</strong> This lab saves your progress and some writing you type in your browser so you can return to it. Nothing is submitted to this website or sent to your professor. If you are using a shared computer, clear your saved writing when you finish. <a href="privacy.html">Read the privacy details</a>.</aside>
 <label for="ownClaim"><strong>Paste or write the claim you want to stress-test.</strong></label>
 <textarea id="ownClaim" placeholder="Write the working claim you are considering for your actual assignment."></textarea>
 <p class="small">A working claim is allowed to change. The point of this test is to find the next useful revision—not to prove that the sentence is perfect.</p>
@@ -87,6 +89,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <textarea id="revision" placeholder="My revised working claim / next move..."></textarea>
 <p class="small">Not scored. This is the handoff from the lab to your own draft.</p>
 </div>
+<div class="privacy-clear-row"><button class="privacy-clear-button" id="clearSavedWriting" type="button">Clear My Saved Writing</button><span class="privacy-clear-status" id="clearSavedStatus" role="status" aria-live="polite"></span></div>
 </div>
 <div class="note"><h3>🧰 Quick Claim Check</h3><p>What exactly am I claiming?<br/>For whom or under what conditions?<br/>Why might a reasonable reader care or question it?<br/>What evidence could support it?<br/>What would make it more accurate—not merely louder?<br/>What do I want my reader to understand after considering my reasons?</p></div>
 <div class="row"><button class="secondary" id="copy" type="button">📋 Copy Claim Stress Test</button></div>
@@ -153,6 +156,7 @@ function saveTransfer(){localStorage.setItem(TKEY,JSON.stringify({claim:$("ownCl
 $("diagnose").onclick=()=>{const claim=$("ownClaim").value.trim();if(!claim){$("ownClaim").setAttribute("aria-invalid","true");$("result").innerHTML='<div class="warn"><strong>Bring in a real claim first.</strong><p>Paste or write the working claim you want to test, then choose the issue you are noticing.</p></div>';$("ownClaim").focus();return}$("ownClaim").removeAttribute("aria-invalid");let r=R[$("problem").value];$("result").innerHTML=`<div class="good"><h3>${r[0]}</h3><p>${r[1]}</p><p><strong>Stress-test question:</strong> ${r[2]}</p></div>`;$("revisionWrap").classList.remove("hidden");saveTransfer();setTimeout(()=>$("revision").focus(),0)}
 $("ownClaim").addEventListener("input",saveTransfer);$("problem").addEventListener("change",saveTransfer);$("revision").addEventListener("input",saveTransfer);
 let transfer;try{transfer=JSON.parse(localStorage.getItem(TKEY)||"null")}catch(e){}if(transfer){$("ownClaim").value=transfer.claim||"";$("problem").value=transfer.problem||"broad";$("revision").value=transfer.revision||"";if(transfer.revision)$("revisionWrap").classList.remove("hidden")}
+$("clearSavedWriting").onclick=()=>{if(!confirm("Clear the claim and revision saved by this tool from this browser?"))return;localStorage.removeItem(TKEY);$("ownClaim").value="";$("problem").value="broad";$("revision").value="";$("revisionWrap").classList.add("hidden");$("result").textContent="";$("clearSavedStatus").textContent="Saved writing cleared from this browser.";$("clearSavedWriting").focus()};
 const check=`MAKE YOUR CASE — CLAIM STRESS TEST
 
 🎯 PRECISE?
@@ -190,5 +194,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Claim Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>{const h=$("finish").querySelector("h2");h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({behavior:motion(),block:"start"})},0)}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

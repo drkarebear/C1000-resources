@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Essay Triage</title>
 <meta content="An accessible college writing revision lab that helps students decide what to revise first." name="description"/>
@@ -258,5 +259,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume Triage";$("resume").onclick=()=>{i=s.i||0;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

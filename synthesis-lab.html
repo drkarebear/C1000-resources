@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Synthesis Lab: Get the Sources Talking</title>
 <meta content="An accessible ENGL C1000 synthesis lab that helps students organize multiple sources around their own ideas." name="description"/>
@@ -162,6 +163,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 “Source B complicates Source A by...”<br/>
 “Viewed together, these findings raise a question about...”</p></div>
 <div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Synthesis Check</button></div>
+<aside class="privacy-storage-note" aria-label="Browser storage privacy note"><strong>Privacy on this device:</strong> This lab saves your progress and some writing you type in your browser so you can return to it. Nothing is submitted to this website or sent to your professor. If you are using a shared computer, clear your saved writing when you finish. <a href="privacy.html">Read the privacy details</a>.</aside>
 <section aria-labelledby="transfer-title" class="transfer">
 <h2 id="transfer-title">🔗 Build One Synthesis Move From Your Own Sources</h2>
 <p>You do not need to draft a whole paragraph here. Bring in two sources from a project you are actually working on and make <strong>one relationship visible</strong>.</p>
@@ -174,6 +176,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <div class="row"><button class="primary" id="buildOwn" type="button">🧩 Check My Synthesis Move</button></div>
 <div aria-live="polite" class="transfer-result note hidden" id="ownResult" role="status" tabindex="-1"></div>
 <p><small>This practice is not scored. Your notes stay in this browser.</small></p>
+<div class="privacy-clear-row"><button class="privacy-clear-button" id="clearSavedWriting" type="button">Clear My Saved Writing</button><span class="privacy-clear-status" id="clearSavedStatus" role="status" aria-live="polite"></span></div>
 </section>
 <div class="completion" id="completion" tabindex="-1">
 <p class="done">✓ LAB COMPLETE</p>
@@ -377,6 +380,7 @@ const transferIds=["ownIdea","ownSourceA","ownSourceB","ownRelation","ownInsight
 function saveTransfer(){const data={};transferIds.forEach(id=>data[id]=$(id).value);localStorage.setItem(TKEY,JSON.stringify(data))}
 transferIds.forEach(id=>$(id).addEventListener(id==="ownRelation"?"change":"input",saveTransfer));
 try{const savedTransfer=JSON.parse(localStorage.getItem(TKEY)||"null");if(savedTransfer)transferIds.forEach(id=>{if(savedTransfer[id])$(id).value=savedTransfer[id]})}catch(e){}
+$("clearSavedWriting").addEventListener("click",()=>{if(!confirm("Clear the writing saved by this synthesis tool from this browser?"))return;localStorage.removeItem(TKEY);transferIds.forEach(id=>{$(id).value=id==="ownRelation"?"":""});$("ownResult").classList.add("hidden");$("ownResult").textContent="";$("clearSavedStatus").textContent="Saved writing cleared from this browser.";$("clearSavedWriting").focus()});
 $("buildOwn").onclick=()=>{
   saveTransfer();
   const missing=transferIds.filter(id=>!$(id).value.trim());
@@ -405,5 +409,5 @@ if(s){
 }
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

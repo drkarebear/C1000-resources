@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <title>Source Integration Lab: Join the Conversation</title>
 <meta content="An accessible interactive source integration lab for ENGL C1000." name="description"/>
 <link href="Favicon2.png" rel="icon" type="image/png"/>
@@ -116,6 +117,7 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 <p class="lead"><strong>You are the host. Sources are guests in your argument.</strong></p>
 <div class="callout">You decide who enters, why they are here, how much they say, and what your reader should understand after hearing them.</div>
 <div class="meta"><span class="pill">21 source missions</span><span class="pill">No timer</span><span class="pill">Quote · Paraphrase · Summarize</span><span class="pill">Your voice stays visible</span></div>
+<aside class="privacy-storage-note" aria-label="Browser storage privacy note"><strong>Privacy on this device:</strong> This lab saves your progress and some writing you type in your browser so you can return to it. Nothing is submitted to this website or sent to your professor. If you are using a shared computer, clear your saved writing when you finish. <a href="privacy.html">Read the privacy details</a>.</aside>
 <div class="row"><button class="primary" id="start" type="button">Enter the Source Control Room</button><button class="secondary hidden" id="resume" type="button">Resume Mission</button></div>
 </section>
 <section class="card hidden" id="lab">
@@ -456,5 +458,5 @@ let s;try{s=JSON.parse(getStored(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume Mission";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;completed=s.completed||{};$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

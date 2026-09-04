@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Writer's Block Buster</title>
 <meta content="An accessible, first-gen-friendly college writing lab for figuring out why you're stuck and choosing a useful next move." name="description"/>
@@ -287,5 +288,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;cracked=s.cracked||[];$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

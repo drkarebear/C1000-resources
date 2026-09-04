@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta name="referrer" content="no-referrer">
 <title>Thesis Lab: Find the Focus</title>
 <link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
@@ -47,6 +48,7 @@ textarea{width:100%;min-height:110px;border:2px solid #aebbc8;border-radius:10px
 <p>College writing often uses phrases like <em>too broad</em>, <em>arguable</em>, and <em>so what?</em> without fully explaining what they mean. This lab will decode some of that language along the way.</p>
 <p class="note"><strong>How it works:</strong> On choice screens, select the answer that best moves the writer's thinking forward. When you complete the required move, the <strong>Next Thesis Moment</strong> button will appear.</p>
 <div class="meta"><span class="pill">20 thesis moments</span><span class="pill">No timer</span><span class="pill">No one thesis formula</span></div>
+<aside class="privacy-storage-note" aria-label="Browser storage privacy note"><strong>Privacy on this device:</strong> This lab saves your progress and some writing you type in your browser so you can return to it. Nothing is submitted to this website or sent to your professor. If you are using a shared computer, clear your saved writing when you finish. <a href="privacy.html">Read the privacy details</a>.</aside>
 <div class="row"><button class="primary" id="start" type="button">Enter the Thesis Workshop</button><button class="secondary hidden" id="resume" type="button">Resume My Thesis</button></div>
 </section>
 <section class="card hidden" id="lab">
@@ -187,5 +189,5 @@ let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion Card":"Resume My Thesis";$("resume").onclick=()=>{i=s.i||0;history=s.history||history;notes=s.notes||{};completed=s.completed||{};$("intro").classList.add("hidden");if(s.done){$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date(s.date||Date.now()));requestAnimationFrame(()=>$("completeTitle").focus())}else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="privacy.html">Privacy</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>
