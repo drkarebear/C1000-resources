@@ -1,0 +1,21 @@
+C1000 OPTIONAL REFLECTION QA
+
+Implementation
+- Student-facing mini-labs targeted: 40
+- Student pages receiving Optional Reflection section: 40
+- Shared reflection page created: True
+- Activity-specific reflection prompts: 40
+- Missing reflection links: []
+- Instructor workflow note added: True
+- Student chooser note added: True
+
+Technical QA
+- Broken local links: []
+- H1 issues: []
+- Reflection dark mode: PASS
+- JavaScript syntax errors: []
+
+Privacy / workflow
+- Reflection page contains no response field: PASS
+- Reflection page states nothing is collected or submitted: PASS
+- Reflection explicitly optional unless assigned: PASS

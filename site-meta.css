@@ -9,3 +9,51 @@ button,select,input[type="text"],input[type="search"],textarea{min-height:24px}
 input[type="checkbox"]{min-width:24px;min-height:24px}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 @media (forced-colors: active){:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid CanvasText!important;box-shadow:none!important}}
+
+
+/* Optional reflection at the end of student mini-labs */
+.optional-reflection{
+  margin:28px 0 8px;
+  padding:20px;
+  border:1px solid rgba(80,80,80,.28);
+  border-left:5px solid #256c83;
+  border-radius:12px;
+  background:rgba(37,108,131,.07);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.55;
+}
+.optional-reflection .optional-reflection-kicker{
+  margin:0 0 4px;
+  font-size:.8rem;
+  font-weight:850;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.optional-reflection h2{
+  margin:.1rem 0 .4rem;
+  font-size:1.35rem;
+  line-height:1.2;
+}
+.optional-reflection p{margin:.35rem 0 .9rem}
+.optional-reflection a{
+  display:inline-flex;
+  min-height:48px;
+  align-items:center;
+  justify-content:center;
+  padding:.72rem 1rem;
+  border:2px solid currentColor;
+  border-radius:.65rem;
+  font-weight:800;
+  text-decoration:none;
+}
+.optional-reflection a:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:650px){
+  .optional-reflection a{width:100%}
+}
+@media(prefers-color-scheme:dark){
+  .optional-reflection{
+    background:rgba(117,190,213,.10);
+    border-color:#6f8792;
+    border-left-color:#8fd3e7;
+  }
+}
