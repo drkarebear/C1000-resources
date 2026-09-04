@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Who Do I Ask? The College Writing Help Desk</title>
-<meta name="description" content="An accessible first-gen friendly college writing help-routing lab for ENGL C1000.">
+<meta content="An accessible first-gen friendly college writing help-routing lab for ENGL C1000." name="description"/>
 <style>
 :root{--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
@@ -34,7 +35,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 @media(max-width:620px){body{font-size:17px}.people,.choices,.grid2,.myth{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.row{display:grid}.row button{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -42,43 +42,39 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-<section id="intro" class="card">
+<main class="shell" id="main">
+<section class="card" id="intro">
 <p class="eyebrow">College Writing · Unwritten Rules</p>
 <h1>🆘 Who Do I Ask?</h1>
 <h2>The College Writing Help Desk</h2>
 <p><strong>College gives you a lot of people who can help. It does not always explain who does what—or when you're “allowed” to ask.</strong></p>
 <div class="desk"><p class="incoming">🚨 HELP REQUEST INCOMING</p><p>“I know I need help with this paper. I just don't know who to ask.”</p></div>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> Knowing <em>where</em> to get help and <em>what to ask</em> is a college skill. You do not have to wait until you have a finished draft—or until things are going badly.</div>
-<div class="row"><button id="start" class="primary">🎧 Open the Help Desk</button><button id="resume" class="secondary hidden">Resume</button></div>
+<div class="row"><button class="primary" id="start">🎧 Open the Help Desk</button><button class="secondary hidden" id="resume">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div>
-<span id="stage" class="stage"></span>
-<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Continue</button></div></div>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
+<div class="layout"><div><div id="host"></div><div aria-live="polite" class="feedback" id="fb" role="status"></div><div class="row"><button class="primary hidden" id="next">Continue</button></div></div>
 <aside class="side"><h3>☎️ Help Desk Directory</h3>
-<p><strong>👩‍🏫 Professor</strong><br>Assignment expectations, course-specific questions, feedback, grades.</p>
-<p><strong>✍️ Tutor</strong><br>Ideas, drafts, organization, revision, reading as a reader.</p>
-<p><strong>📚 Librarian</strong><br>Search terms, databases, source types, research strategies.</p>
-<p><strong>👥 Classmate</strong><br>Reader reaction, brainstorming, shared course context.</p>
-<p><strong>💻 Tech Help</strong><br>Access, logins, platforms, technical problems.</p>
+<p><strong>👩‍🏫 Professor</strong><br/>Assignment expectations, course-specific questions, feedback, grades.</p>
+<p><strong>✍️ Tutor</strong><br/>Ideas, drafts, organization, revision, reading as a reader.</p>
+<p><strong>📚 Librarian</strong><br/>Search terms, databases, source types, research strategies.</p>
+<p><strong>👥 Classmate</strong><br/>Reader reaction, brainstorming, shared course context.</p>
+<p><strong>💻 Tech Help</strong><br/>Access, logins, platforms, technical problems.</p>
 <p><small>More than one route can be useful.</small></p>
 </aside></div>
 </section>
-
-<section id="finish" class="card hidden">
+<section class="card hidden" id="finish">
 <div class="good"><h2>🎉 Help Desk Navigator Unlocked</h2><p><strong>Asking for help is not one skill. Matching the problem to a useful person—and giving them enough information to help—is the skill.</strong></p></div>
-
 <h2>🆘 I Need Help. Where Do I Go?</h2>
 <div class="tool">
 <label for="problem">What's happening right now?</label>
@@ -93,22 +89,20 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <option value="behind">I'm behind</option>
 <option value="unknown">I don't even know what I need</option>
 </select>
-<div class="row"><button id="route" class="primary">☎️ Route My Question</button></div>
-<div id="result" class="result" aria-live="polite"></div>
+<div class="row"><button class="primary" id="route">☎️ Route My Question</button></div>
+<div aria-live="polite" class="result" id="result"></div>
 </div>
-
-<div class="note"><h3>🎯 A Better Help Request</h3><p><strong>What I'm working on:</strong> ______<br><strong>Where I am:</strong> ______<br><strong>What I'm unsure about:</strong> ______<br><strong>What I'd like help seeing/doing:</strong> ______</p></div>
-<div class="row"><button id="copy" class="secondary">📋 Copy My Help Request Builder</button></div>
-
+<div class="note"><h3>🎯 A Better Help Request</h3><p><strong>What I'm working on:</strong> ______<br/><strong>Where I am:</strong> ______<br/><strong>What I'm unsure about:</strong> ______<br/><strong>What I'd like help seeing/doing:</strong> ______</p></div>
+<div class="row"><button class="secondary" id="copy">📋 Copy My Help Request Builder</button></div>
 <div class="completion">
 <p class="done">✓ LAB COMPLETE</p>
 <h2>Who Do I Ask? The College Writing Help Desk — Complete</h2>
-<p>✓ Match writing problems with useful sources of help<br>
-✓ Recognize that several routes may be appropriate<br>
-✓ Use professors, tutors, librarians, classmates, and technical support strategically<br>
-✓ Ask for help before a draft is complete<br>
-✓ Turn a vague request into a more useful question<br>
-✓ Know that office hours can be used for confusion, ideas, drafts, and feedback<br>
+<p>✓ Match writing problems with useful sources of help<br/>
+✓ Recognize that several routes may be appropriate<br/>
+✓ Use professors, tutors, librarians, classmates, and technical support strategically<br/>
+✓ Ask for help before a draft is complete<br/>
+✓ Turn a vague request into a more useful question<br/>
+✓ Know that office hours can be used for confusion, ideas, drafts, and feedback<br/>
 ✓ Communicate when a writing or submission problem needs attention</p>
 <p><strong>Completed:</strong> <span id="date"></span></p>
 <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
@@ -185,7 +179,7 @@ if(m[1]==="process"){$("host").innerHTML=`<h2>🔄 Help Is Part of the Writing P
 if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>🎟️ Your Help Desk Pass</h2><p><strong>Problem → useful person → specific question → next move.</strong></p></div><div class="call">You do not need a perfect question.<br>You do not need a finished draft.<br>You do not need to know exactly what is wrong.<br><strong>You need enough information to open a useful conversation.</strong></div>`;$("next").textContent="Finish & Open Help Navigator";$("next").classList.remove("hidden")}
 localStorage.setItem(KEY,JSON.stringify({i}))}
 
-$("next").onclick=()=>{if(i<scenarios.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+$("next").onclick=()=>{if(i<scenarios.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")}),200)}}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
 
 const routes={
@@ -225,5 +219,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Help Navigator":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

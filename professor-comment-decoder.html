@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Professor Comment Decoder</title>
-<meta name="description" content="An accessible, first-gen-friendly college writing lab for turning instructor feedback into useful revision decisions.">
+<meta content="An accessible, first-gen-friendly college writing lab for turning instructor feedback into useful revision decisions." name="description"/>
 <style>
 :root{
  --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
@@ -44,7 +45,6 @@ h1,h2,h3{line-height:1.18;color:var(--dark)}h1{font-size:clamp(2.15rem,7vw,3.45r
 @media(max-width:600px){body{font-size:17px}.shell{width:min(calc(100% - 14px),var(--max));padding-top:9px}.card{padding:19px 15px}.twocol,.agency{grid-template-columns:1fr}.translator,.completegrid{grid-template-columns:1fr;gap:3px}.row{display:grid}.row button{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -52,84 +52,80 @@ h1,h2,h3{line-height:1.18;color:var(--dark)}h1{font-size:clamp(2.15rem,7vw,3.45r
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#main">Skip to activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
- <p class="eyebrow">ENGL C1000 · The unwritten rules</p>
- <h1>💬 Professor Comment Decoder</h1>
- <p class="lead"><strong>“Develop.” Cool. What do I actually do?</strong></p>
- <div class="callout">Instructor comments are often <strong>compressed messages</strong>: “unclear,” “develop,” “focus,” “awk.,” “so what?” A professor may know what those words mean in context. A student may reasonably see only a mystery.</div>
- <div class="secret">🔓 <strong>Unwritten Rule:</strong> Feedback usually needs interpretation before it needs obedience. Look at the comment <em>and</em> the writing around it to decide what your reader may need.</div>
- <div class="pills"><span class="pill">20 decoder missions</span><span class="pill">Translator 3000™</span><span class="pill">Same Comment, Different Problem</span><span class="pill">Find the Pattern</span><span class="pill">Ask the Professor</span></div>
- <div class="row"><button id="start" class="primary" type="button">⚙️ Start the Decoder</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · The unwritten rules</p>
+<h1>💬 Professor Comment Decoder</h1>
+<p class="lead"><strong>“Develop.” Cool. What do I actually do?</strong></p>
+<div class="callout">Instructor comments are often <strong>compressed messages</strong>: “unclear,” “develop,” “focus,” “awk.,” “so what?” A professor may know what those words mean in context. A student may reasonably see only a mystery.</div>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> Feedback usually needs interpretation before it needs obedience. Look at the comment <em>and</em> the writing around it to decide what your reader may need.</div>
+<div class="pills"><span class="pill">20 decoder missions</span><span class="pill">Translator 3000™</span><span class="pill">Same Comment, Different Problem</span><span class="pill">Find the Pattern</span><span class="pill">Ask the Professor</span></div>
+<div class="row"><button class="primary" id="start" type="button">⚙️ Start the Decoder</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
- <div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
- <span id="stage" class="stage"></span>
- <div class="layout">
-  <div>
-   <div id="host"></div>
-   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-   <div class="row"><button id="next" class="primary hidden" type="button">Next Comment</button></div>
-  </div>
-  <aside class="side">
-   <h3>🔦 Decoder Questions</h3>
-   <p><strong>1.</strong> Where did the reader comment?</p>
-   <p><strong>2.</strong> What happened for the reader there?</p>
-   <p><strong>3.</strong> Is this local or a pattern?</p>
-   <p><strong>4.</strong> What revision move might help?</p>
-   <p><strong>5.</strong> Do I need clarification?</p>
-  </aside>
- </div>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
+<div class="layout">
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Next Comment</button></div>
+</div>
+<aside class="side">
+<h2>🔦 Decoder Questions</h2>
+<p><strong>1.</strong> Where did the reader comment?</p>
+<p><strong>2.</strong> What happened for the reader there?</p>
+<p><strong>3.</strong> Is this local or a pattern?</p>
+<p><strong>4.</strong> What revision move might help?</p>
+<p><strong>5.</strong> Do I need clarification?</p>
+</aside>
+</div>
 </section>
-
-<section id="done" class="card hidden">
- <div class="decoded"><h2>⚙️ Decoder Online</h2><p><strong>A comment is information. Your job is to interpret it, look at the writing, notice patterns, and make a revision decision.</strong></p></div>
- <h2>💬 My Feedback Decoder</h2>
- <div class="toolkit">
-  <div class="tool"><strong>LOCATE</strong> — Where exactly did my reader have this response?</div>
-  <div class="tool"><strong>TRANSLATE</strong> — What might the comment mean in this context?</div>
-  <div class="tool"><strong>DIAGNOSE</strong> — Evidence? Analysis? Focus? Organization? Clarity? Convention?</div>
-  <div class="tool"><strong>LOOK FOR PATTERNS</strong> — Does this comment or problem repeat?</div>
-  <div class="tool"><strong>CHOOSE</strong> — What do I want to keep, adapt, add, move, cut, or clarify?</div>
-  <div class="tool"><strong>ASK</strong> — If I still can't tell what the feedback means, ask a specific question.</div>
- </div>
- <div class="machine" style="margin-top:20px">
-  <h2>🆘 Comment Decoder 3000™</h2>
-  <p>Choose a common comment to see possible meanings—not automatic instructions.</p>
-  <div class="chips" id="decoderButtons"></div>
-  <div id="decoderOutput" class="screen" aria-live="polite">Choose a comment above.</div>
- </div>
- <div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Feedback Decoder</button></div>
- <div id="completionCard" class="completion" style="margin-top:24px">
-  <div class="complete">✓ Lab complete</div>
-  <h2>Professor Comment Decoder — Complete</h2>
-  <div class="completegrid">
-   <span>Translate common instructor shorthand</span><strong>✓ Complete</strong>
-   <span>Use the surrounding writing to interpret feedback</span><strong>✓ Complete</strong>
-   <span>Recognize that the same comment can signal different needs</span><strong>✓ Complete</strong>
-   <span>Distinguish local comments from recurring patterns</span><strong>✓ Complete</strong>
-   <span>Respond to feedback without automatically erasing voice</span><strong>✓ Complete</strong>
-   <span>Ask a specific clarification question when needed</span><strong>✓ Complete</strong>
-  </div>
-  <p><strong>Completed:</strong> <span id="date"></span></p>
-  <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
- </div>
- <div class="row"><button id="restart" class="quiet" type="button">Decode Again</button></div>
+<section class="card hidden" id="done">
+<div class="decoded"><h2>⚙️ Decoder Online</h2><p><strong>A comment is information. Your job is to interpret it, look at the writing, notice patterns, and make a revision decision.</strong></p></div>
+<h2>💬 My Feedback Decoder</h2>
+<div class="toolkit">
+<div class="tool"><strong>LOCATE</strong> — Where exactly did my reader have this response?</div>
+<div class="tool"><strong>TRANSLATE</strong> — What might the comment mean in this context?</div>
+<div class="tool"><strong>DIAGNOSE</strong> — Evidence? Analysis? Focus? Organization? Clarity? Convention?</div>
+<div class="tool"><strong>LOOK FOR PATTERNS</strong> — Does this comment or problem repeat?</div>
+<div class="tool"><strong>CHOOSE</strong> — What do I want to keep, adapt, add, move, cut, or clarify?</div>
+<div class="tool"><strong>ASK</strong> — If I still can't tell what the feedback means, ask a specific question.</div>
+</div>
+<div class="machine" style="margin-top:20px">
+<h2>🆘 Comment Decoder 3000™</h2>
+<p>Choose a common comment to see possible meanings—not automatic instructions.</p>
+<div class="chips" id="decoderButtons"></div>
+<div aria-live="polite" class="screen" id="decoderOutput">Choose a comment above.</div>
+</div>
+<div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Feedback Decoder</button></div>
+<div class="completion" id="completionCard" style="margin-top:24px">
+<div class="complete">✓ Lab complete</div>
+<h2>Professor Comment Decoder — Complete</h2>
+<div class="completegrid">
+<span>Translate common instructor shorthand</span><strong>✓ Complete</strong>
+<span>Use the surrounding writing to interpret feedback</span><strong>✓ Complete</strong>
+<span>Recognize that the same comment can signal different needs</span><strong>✓ Complete</strong>
+<span>Distinguish local comments from recurring patterns</span><strong>✓ Complete</strong>
+<span>Respond to feedback without automatically erasing voice</span><strong>✓ Complete</strong>
+<span>Ask a specific clarification question when needed</span><strong>✓ Complete</strong>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+<div class="row"><button class="quiet" id="restart" type="button">Decode Again</button></div>
 </section>
 <footer>Progress stays in this browser. This lab does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id),KEY="professorCommentDecoderV1";let i=0;
@@ -209,8 +205,8 @@ if(m[1]==="boss"){$("host").innerHTML=`<div class="warning"><h2>👑 FINAL BOSS:
 if(m[1]==="finish"){$("host").innerHTML=`<div class="decoded"><h2>💬 Feedback Is Information</h2><p>You don't have to treat every comment as a mysterious command.</p><p><strong>Locate → Translate → Diagnose → Look for Patterns → Choose → Ask</strong></p></div><div class="secret">🔓 A useful question is not just <strong>“How do I fix this?”</strong> It is also <strong>“What happened for my reader here, and what revision would help this piece of writing do its job?”</strong></div>`;$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
 save()
 }
-$("next").onclick=()=>{if(i<M.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"),block:"center"}),250)}
 Object.entries(common).forEach(([k,v])=>{let b=document.createElement("button");b.type="button";b.className="secondary";b.textContent=k;b.onclick=()=>{$("decoderOutput").innerHTML=`<strong>${k}</strong><p>${v}</p>`};$("decoderButtons").appendChild(b)})
 const toolkit=`MY FEEDBACK DECODER
 
@@ -241,5 +237,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

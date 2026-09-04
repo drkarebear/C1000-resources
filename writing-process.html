@@ -1,12 +1,13 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Writing Process Lab: Behind the Draft</title>
-<meta name="description" content="A mobile-friendly interactive ENGL C1000 writing-process simulation that demystifies college writing.">
+<meta content="A mobile-friendly interactive ENGL C1000 writing-process simulation that demystifies college writing." name="description"/>
 <style>
 :root{
   --bg:#f5f7fa;
@@ -362,7 +363,6 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
   *,*::before,*::after{transition:none!important}
 }
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -370,104 +370,86 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<a href="#main" class="skip">Skip to activity</a>
-
-<main id="main" class="shell">
-<section id="intro" class="card" aria-labelledby="title">
-  <p class="eyebrow">ENGL C1000 · Make the invisible process visible</p>
-  <h1 id="title">Writing Process Lab: Behind the Draft</h1>
-  <p class="lead"><strong>See what writers actually do when writing gets messy.</strong></p>
-
-  <div class="callout">
-    <strong>Writing is not magic.</strong> Experienced writers do not always know exactly what they want to say before they begin. They use strategies, get stuck, ask questions, write incomplete drafts, change their minds, get feedback, revise, and try again.
+<a class="skip" href="#main">Skip to activity</a>
+<main class="shell" id="main">
+<section aria-labelledby="title" class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Make the invisible process visible</p>
+<h1 id="title">Writing Process Lab: Behind the Draft</h1>
+<p class="lead"><strong>See what writers actually do when writing gets messy.</strong></p>
+<div class="callout">
+<strong>Writing is not magic.</strong> Experienced writers do not always know exactly what they want to say before they begin. They use strategies, get stuck, ask questions, write incomplete drafts, change their minds, get feedback, revise, and try again.
   </div>
-
-  <p>College writing also comes with expectations that are not always explained. This lab makes some of those expectations visible and gives you practical strategies you can use when you are unsure what to do next.</p>
-
-  <div class="meta" aria-label="Activity details">
-    <span class="pill">21 writing moments</span>
-    <span class="pill">About 12–15 minutes</span>
-    <span class="pill">No timer</span>
-    <span class="pill">No single perfect process</span>
-  </div>
-
-  <div class="row">
-    <button id="start" class="primary" type="button">Enter the Writer's Desk</button>
-    <button id="resume" class="secondary hidden" type="button">Resume My Draft</button>
-  </div>
+<p>College writing also comes with expectations that are not always explained. This lab makes some of those expectations visible and gives you practical strategies you can use when you are unsure what to do next.</p>
+<div aria-label="Activity details" class="meta">
+<span class="pill">21 writing moments</span>
+<span class="pill">About 12–15 minutes</span>
+<span class="pill">No timer</span>
+<span class="pill">No single perfect process</span>
+</div>
+<div class="row">
+<button class="primary" id="start" type="button">Enter the Writer's Desk</button>
+<button class="secondary hidden" id="resume" type="button">Resume My Draft</button>
+</div>
 </section>
-
-<section id="lab" class="card hidden" aria-labelledby="labhead">
-  <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage"></span>
-  <h2 id="labhead">The Writer's Desk</h2>
-
-  <div class="workspace">
-    <div class="mainpane">
-      <div id="host"></div>
-      <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">
-        <strong id="ftitle"></strong>
-        <div id="ftext"></div>
-      </div>
-      <div class="row">
-        <button id="next" class="primary hidden" type="button">Next Writing Moment</button>
-      </div>
-    </div>
-
-    <aside class="sidebar" aria-label="Your writing process so far">
-      <h3>Your Draft So Far</h3>
-      <div id="draftbox" class="draftbox"></div>
-
-      <h3 style="margin-top:18px;">Your Writing Path</h3>
-      <div id="path" class="path" aria-live="polite"></div>
-
-      <h3 style="margin-top:18px;">Toolbox</h3>
-      <div id="toolcount" class="note">0 strategies unlocked</div>
-    </aside>
-  </div>
+<section aria-labelledby="labhead" class="card hidden" id="lab">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
+<div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
+<h2 id="labhead">The Writer's Desk</h2>
+<div class="workspace">
+<div class="mainpane">
+<div id="host"></div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="feedback" role="status">
+<strong id="ftitle"></strong>
+<div id="ftext"></div>
+</div>
+<div class="row">
+<button class="primary hidden" id="next" type="button">Next Writing Moment</button>
+</div>
+</div>
+<aside aria-label="Your writing process so far" class="sidebar">
+<h3>Your Draft So Far</h3>
+<div class="draftbox" id="draftbox"></div>
+<h3 style="margin-top:18px;">Your Writing Path</h3>
+<div aria-live="polite" class="path" id="path"></div>
+<h3 style="margin-top:18px;">Toolbox</h3>
+<div class="note" id="toolcount">0 strategies unlocked</div>
+</aside>
+</div>
 </section>
-
-<section id="done" class="card hidden" aria-labelledby="donehead">
-  <div class="completion">
-    <div class="complete">✓ Lab complete</div>
-    <h2 id="donehead">Writing Process Lab — Complete</h2>
-    <p>You practiced making decisions across a real writing process instead of memorizing a fixed list of steps.</p>
-
-    <div class="grid">
-      <div>Understanding the Assignment</div><div class="status">✓ Complete</div>
-      <div>Getting Started</div><div class="status">✓ Complete</div>
-      <div>Drafting &amp; Getting Unstuck</div><div class="status">✓ Complete</div>
-      <div>Revision &amp; Feedback</div><div class="status">✓ Complete</div>
-      <div>Editing &amp; Proofreading</div><div class="status">✓ Complete</div>
-      <div>Writer Agency</div><div class="status">✓ Complete</div>
-    </div>
-
-    <p><strong>Strategies unlocked:</strong> <span id="finaltools"></span><br>
-    <strong>Completed:</strong> <span id="date"></span></p>
-
-    <div class="shot">📸 Screenshot this completion card for Canvas.</div>
-  </div>
-
-  <div class="row hide-shot">
-    <button id="shot" class="primary" type="button">Prepare Screenshot View</button>
-    <button id="exit" class="secondary hidden" type="button">Exit Screenshot View</button>
-    <button id="restart" class="quiet" type="button">Practice Again</button>
-  </div>
+<section aria-labelledby="donehead" class="card hidden" id="done">
+<div class="completion">
+<div class="complete">✓ Lab complete</div>
+<h2 id="donehead">Writing Process Lab — Complete</h2>
+<p>You practiced making decisions across a real writing process instead of memorizing a fixed list of steps.</p>
+<div class="grid">
+<div>Understanding the Assignment</div><div class="status">✓ Complete</div>
+<div>Getting Started</div><div class="status">✓ Complete</div>
+<div>Drafting &amp; Getting Unstuck</div><div class="status">✓ Complete</div>
+<div>Revision &amp; Feedback</div><div class="status">✓ Complete</div>
+<div>Editing &amp; Proofreading</div><div class="status">✓ Complete</div>
+<div>Writer Agency</div><div class="status">✓ Complete</div>
+</div>
+<p><strong>Strategies unlocked:</strong> <span id="finaltools"></span><br/>
+<strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 Screenshot this completion card for Canvas.</div>
+</div>
+<div class="row hide-shot">
+<button class="primary" id="shot" type="button">Prepare Screenshot View</button>
+<button class="secondary hidden" id="exit" type="button">Exit Screenshot View</button>
+<button class="quiet" id="restart" type="button">Practice Again</button>
+</div>
 </section>
-
 <footer class="hide-shot">Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (function(){
 "use strict";
@@ -984,7 +966,7 @@ next.addEventListener("click",()=>{
     i++;
     next.textContent="Next Writing Moment";
     render();
-    window.scrollTo({top:lab.offsetTop-8,behavior:"smooth"});
+    window.scrollTo({top:lab.offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")});
   }else{
     finish();
   }
@@ -1028,7 +1010,7 @@ $("shot").addEventListener("click",()=>{
   document.body.classList.add("shotmode");
   $("shot").classList.add("hidden");
   $("exit").classList.remove("hidden");
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")});
 });
 $("exit").addEventListener("click",()=>{
   document.body.classList.remove("shotmode");
@@ -1046,7 +1028,7 @@ $("restart").addEventListener("click",()=>{
   intro.classList.remove("hidden");
   resume.classList.add("hidden");
   $("start").focus();
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")});
 });
 
 function escapeHtml(s){
@@ -1062,5 +1044,5 @@ if(saved){
 }
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

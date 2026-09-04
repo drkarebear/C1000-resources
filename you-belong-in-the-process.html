@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>You Belong in the Process</title>
 <style>
 :root{
@@ -72,7 +73,6 @@ textarea:focus,input:focus,select:focus{border-color:var(--accent);outline:3px s
 @media(max-width:480px){.people{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -80,202 +80,178 @@ textarea:focus,input:focus,select:focus{border-color:var(--accent);outline:3px s
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
+<main id="main">
 <section class="hero">
-  <div class="kicker" style="color:#ddd9ff">College Belonging Lab</div>
-  <h1>🌿 You Belong in the Process</h1>
-  <p><strong>Questions, feedback, revision, collaboration, and help-seeking are not signs that you are failing college. They are part of doing college.</strong></p>
-  <p class="mini">This activity is about what successful participation can actually look like when things get confusing, difficult, or unfinished.</p>
+<div class="kicker" style="color:#ddd9ff">College Belonging Lab</div>
+<h1>🌿 You Belong in the Process</h1>
+<p><strong>Questions, feedback, revision, collaboration, and help-seeking are not signs that you are failing college. They are part of doing college.</strong></p>
+<p class="mini">This activity is about what successful participation can actually look like when things get confusing, difficult, or unfinished.</p>
 </section>
-
-<section class="progressbox" aria-label="Activity progress">
-  <div class="proglabel"><span id="stepText">Part 1 of 8</span><span id="stepName">What belonging looks like</span></div>
-  <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+<section aria-label="Activity progress" class="progressbox">
+<div class="proglabel"><span id="stepText">Part 1 of 8</span><span id="stepName">What belonging looks like</span></div>
+<div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
 </section>
-<div id="live" class="small" aria-live="polite"></div>
-
+<div aria-live="polite" class="small" id="live"></div>
 <section class="screen active" data-step="0">
-  <div class="kicker">Part 1 · Start Here</div>
-  <h2>Belonging Does Not Mean Never Struggling</h2>
-  <div class="note"><strong>Try this idea on:</strong><br>Successful college students do not succeed because they never get confused, need feedback, ask questions, or revise. They succeed partly because they develop ways to respond when those things happen.</div>
-  <p class="q">Which statement is closest to what this lab is trying to teach?</p>
-  <div class="options" id="q0">
-    <button class="choice" data-ok="false">If I really belong in college, I should be able to figure most things out by myself.</button>
-    <button class="choice" data-ok="true">Needing clarification, feedback, revision, or support can be a normal part of learning.</button>
-    <button class="choice" data-ok="false">Confident students probably need less help than everyone else.</button>
-  </div>
-  <div id="fb0" class="feedback"></div>
-  <div class="controls"><button class="primary next" disabled>Enter the Classroom</button></div>
+<div class="kicker">Part 1 · Start Here</div>
+<h2>Belonging Does Not Mean Never Struggling</h2>
+<div class="note"><strong>Try this idea on:</strong><br/>Successful college students do not succeed because they never get confused, need feedback, ask questions, or revise. They succeed partly because they develop ways to respond when those things happen.</div>
+<p class="q">Which statement is closest to what this lab is trying to teach?</p>
+<div class="options" id="q0">
+<button class="choice" data-ok="false">If I really belong in college, I should be able to figure most things out by myself.</button>
+<button class="choice" data-ok="true">Needing clarification, feedback, revision, or support can be a normal part of learning.</button>
+<button class="choice" data-ok="false">Confident students probably need less help than everyone else.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb0" role="status"></div>
+<div class="controls"><button class="primary next" disabled="">Enter the Classroom</button></div>
 </section>
-
 <section class="screen" data-step="1">
-  <div class="kicker">Part 2 · Questions</div>
-  <h2>Everyone Else Seems to Get It</h2>
-  <div class="warning"><strong>Class ends.</strong> Your professor has explained the assignment. People start packing up. You still are not sure what the second part of the directions means.</div>
-  <p class="q">What is a useful college move?</p>
-  <div class="options" id="q1">
-    <button class="choice" data-ok="false">Stay quiet. If other people understood, I probably should have too.</button>
-    <button class="choice" data-ok="true">Ask for clarification about the part I do not understand.</button>
-    <button class="choice" data-ok="false">Submit something and hope I guessed correctly.</button>
-  </div>
-  <div id="fb1" class="feedback"></div>
-  <div class="callout"><strong>Useful college move: ASK.</strong><br>Silence does not tell you that everyone else understood. Other students may be unsure too. Questions are one way people learn expectations that are not always obvious.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Try Collaboration</button></div>
+<div class="kicker">Part 2 · Questions</div>
+<h2>Everyone Else Seems to Get It</h2>
+<div class="warning"><strong>Class ends.</strong> Your professor has explained the assignment. People start packing up. You still are not sure what the second part of the directions means.</div>
+<p class="q">What is a useful college move?</p>
+<div class="options" id="q1">
+<button class="choice" data-ok="false">Stay quiet. If other people understood, I probably should have too.</button>
+<button class="choice" data-ok="true">Ask for clarification about the part I do not understand.</button>
+<button class="choice" data-ok="false">Submit something and hope I guessed correctly.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb1" role="status"></div>
+<div class="callout"><strong>Useful college move: ASK.</strong><br/>Silence does not tell you that everyone else understood. Other students may be unsure too. Questions are one way people learn expectations that are not always obvious.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Try Collaboration</button></div>
 </section>
-
 <section class="screen" data-step="2">
-  <div class="kicker">Part 3 · Collaboration</div>
-  <h2>“I Should Be Able to Do This Myself”</h2>
-  <div class="warning">You have reread the same difficult page three times and still are not sure what the author is arguing.</div>
-  <p class="q">Which responses could be legitimate learning moves?</p>
-  <div class="options" id="collab">
-    <button class="choice" data-ok="true">👥 Compare notes with a classmate and talk through the passage.</button>
-    <button class="choice" data-ok="true">💬 Ask a tutor or professor about the part I do not understand.</button>
-    <button class="choice" data-ok="false">📋 Copy someone else's interpretation so I can move on.</button>
-    <button class="choice" data-ok="true">📝 Hear another person's interpretation, then decide what I think based on the text.</button>
-  </div>
-  <div id="fb2" class="feedback"></div>
-  <div class="note"><strong>Collaboration is not the same as giving away your thinking.</strong><br>Talking through ideas, asking questions, using tutoring, and comparing interpretations can support learning while you still do your own work.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Look at Feedback</button></div>
+<div class="kicker">Part 3 · Collaboration</div>
+<h2>“I Should Be Able to Do This Myself”</h2>
+<div class="warning">You have reread the same difficult page three times and still are not sure what the author is arguing.</div>
+<p class="q">Which responses could be legitimate learning moves?</p>
+<div class="options" id="collab">
+<button class="choice" data-ok="true">👥 Compare notes with a classmate and talk through the passage.</button>
+<button class="choice" data-ok="true">💬 Ask a tutor or professor about the part I do not understand.</button>
+<button class="choice" data-ok="false">📋 Copy someone else's interpretation so I can move on.</button>
+<button class="choice" data-ok="true">📝 Hear another person's interpretation, then decide what I think based on the text.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb2" role="status"></div>
+<div class="note"><strong>Collaboration is not the same as giving away your thinking.</strong><br/>Talking through ideas, asking questions, using tutoring, and comparing interpretations can support learning while you still do your own work.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Look at Feedback</button></div>
 </section>
-
 <section class="screen" data-step="3">
-  <div class="kicker">Part 4 · Feedback + Revision</div>
-  <h2>Your Draft Comes Back Covered in Comments</h2>
-  <div class="warning">Your professor returns your draft. There are comments in the margins, questions, and suggestions.</div>
-  <p class="q">Which mental model is more useful?</p>
-  <div class="options" id="q3">
-    <button class="choice" data-ok="false">Draft → Judgment → Proof of whether I can write</button>
-    <button class="choice" data-ok="true">Draft → Reader response → Revision → Stronger draft</button>
-  </div>
-  <div id="fb3" class="feedback"></div>
-  <div class="callout"><strong>Feedback is information, not a verdict.</strong><br>A draft needing revision does not mean the draft “failed.” Revision is part of writing.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>See the Invisible Classroom</button></div>
+<div class="kicker">Part 4 · Feedback + Revision</div>
+<h2>Your Draft Comes Back Covered in Comments</h2>
+<div class="warning">Your professor returns your draft. There are comments in the margins, questions, and suggestions.</div>
+<p class="q">Which mental model is more useful?</p>
+<div class="options" id="q3">
+<button class="choice" data-ok="false">Draft → Judgment → Proof of whether I can write</button>
+<button class="choice" data-ok="true">Draft → Reader response → Revision → Stronger draft</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb3" role="status"></div>
+<div class="callout"><strong>Feedback is information, not a verdict.</strong><br/>A draft needing revision does not mean the draft “failed.” Revision is part of writing.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">See the Invisible Classroom</button></div>
 </section>
-
 <section class="screen" data-step="4">
-  <div class="kicker">Part 5 · The Invisible Classroom</div>
-  <h2>Which of These Students Is Struggling?</h2>
-  <div class="people">
-    <div class="person">🙋<strong>Maya</strong><span>Asked two questions after class.</span></div>
-    <div class="person">✍️<strong>Devon</strong><span>Went to the Writing Center.</span></div>
-    <div class="person">👥<strong>Luis</strong><span>Compared notes with a classmate.</span></div>
-    <div class="person">💬<strong>Aisha</strong><span>Asked what a feedback comment meant.</span></div>
-    <div class="person">🔄<strong>Noah</strong><span>Rewrote one paragraph three times.</span></div>
-  </div>
-  <p class="q">What can we actually conclude?</p>
-  <div class="options" id="q4">
-    <button class="choice" data-ok="false">All five are clearly weaker students.</button>
-    <button class="choice" data-ok="true">They may be struggling, but they are also actively using learning strategies.</button>
-    <button class="choice" data-ok="false">Students who belong should not need most of these things.</button>
-  </div>
-  <div id="fb4" class="feedback"></div>
-  <div class="note"><strong>What looks like “struggle” can also be participation.</strong><br>Clarifying, revising, collaborating, and using support are things students do while learning.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Look Behind the Scene</button></div>
+<div class="kicker">Part 5 · The Invisible Classroom</div>
+<h2>Which of These Students Is Struggling?</h2>
+<div class="people">
+<div class="person">🙋<strong>Maya</strong><span>Asked two questions after class.</span></div>
+<div class="person">✍️<strong>Devon</strong><span>Went to the Writing Center.</span></div>
+<div class="person">👥<strong>Luis</strong><span>Compared notes with a classmate.</span></div>
+<div class="person">💬<strong>Aisha</strong><span>Asked what a feedback comment meant.</span></div>
+<div class="person">🔄<strong>Noah</strong><span>Rewrote one paragraph three times.</span></div>
+</div>
+<p class="q">What can we actually conclude?</p>
+<div class="options" id="q4">
+<button class="choice" data-ok="false">All five are clearly weaker students.</button>
+<button class="choice" data-ok="true">They may be struggling, but they are also actively using learning strategies.</button>
+<button class="choice" data-ok="false">Students who belong should not need most of these things.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb4" role="status"></div>
+<div class="note"><strong>What looks like “struggle” can also be participation.</strong><br/>Clarifying, revising, collaborating, and using support are things students do while learning.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Look Behind the Scene</button></div>
 </section>
-
 <section class="screen" data-step="5">
-  <div class="kicker">Part 6 · What You See / What You Don't</div>
-  <h2>You Usually See Other People's Finished Moments</h2>
-
-  <div class="reveal-card">
-    <strong>WHAT YOU SEE:</strong><br>A student gives a strong answer in class.
+<div class="kicker">Part 6 · What You See / What You Don't</div>
+<h2>You Usually See Other People's Finished Moments</h2>
+<div class="reveal-card">
+<strong>WHAT YOU SEE:</strong><br/>A student gives a strong answer in class.
     <button class="secondary reveal" type="button">Behind the Scene</button>
-    <div class="behind">They reread the article twice and asked a friend to talk through one section before class.</div>
-  </div>
-
-  <div class="reveal-card">
-    <strong>WHAT YOU SEE:</strong><br>A student earns a high grade on an essay.
+<div class="behind">They reread the article twice and asked a friend to talk through one section before class.</div>
+</div>
+<div class="reveal-card">
+<strong>WHAT YOU SEE:</strong><br/>A student earns a high grade on an essay.
     <button class="secondary reveal" type="button">Behind the Scene</button>
-    <div class="behind">They went to tutoring, rewrote the thesis, and asked the professor a question about the assignment.</div>
-  </div>
-
-  <div class="reveal-card">
-    <strong>WHAT YOU SEE:</strong><br>A student seems confident during group work.
+<div class="behind">They went to tutoring, rewrote the thesis, and asked the professor a question about the assignment.</div>
+</div>
+<div class="reveal-card">
+<strong>WHAT YOU SEE:</strong><br/>A student seems confident during group work.
     <button class="secondary reveal" type="button">Behind the Scene</button>
-    <div class="behind">They felt lost after the first assignment and spent time figuring out who they could ask for help.</div>
-  </div>
-
-  <div class="callout"><strong>You see other people's visible moments. You live through every messy part of your own process.</strong></div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" id="behindNext" disabled>Climb the Help-Seeking Ladder</button></div>
+<div class="behind">They felt lost after the first assignment and spent time figuring out who they could ask for help.</div>
+</div>
+<div class="callout"><strong>You see other people's visible moments. You live through every messy part of your own process.</strong></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="" id="behindNext">Climb the Help-Seeking Ladder</button></div>
 </section>
-
 <section class="screen" data-step="6">
-  <div class="kicker">Part 7 · Help-Seeking</div>
-  <h2>You Do Not Have to Begin With “I Don't Understand Anything”</h2>
-  <div class="ladder">
-    <div class="rung"><strong>1. Check the directions again.</strong></div>
-    <div class="rung"><strong>2. Identify the exact place you're unsure.</strong></div>
-    <div class="rung"><strong>3. Ask a classmate or use course support.</strong></div>
-    <div class="rung"><strong>4. Use tutoring / Writing Center / embedded support.</strong></div>
-    <div class="rung"><strong>5. Ask the professor a specific question.</strong></div>
-  </div>
-  <p class="q">Which question gives the professor the most useful information?</p>
-  <div class="options" id="q6">
-    <button class="choice" data-ok="false">“I don't get the assignment. What do I do?”</button>
-    <button class="choice" data-ok="true">“I understand that we are comparing the two readings, but I'm not sure whether to organize by author or by idea. Could you clarify what you recommend?”</button>
-    <button class="choice" data-ok="false">“Can you tell me what my thesis should be?”</button>
-  </div>
-  <div id="fb6" class="feedback"></div>
-  <div class="callout"><strong>Specific questions make help easier to give.</strong><br>Instead of asking someone to do the thinking for you, ask for information that helps you make the next decision.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Build My Support Map</button></div>
+<div class="kicker">Part 7 · Help-Seeking</div>
+<h2>You Do Not Have to Begin With “I Don't Understand Anything”</h2>
+<div class="ladder">
+<div class="rung"><strong>1. Check the directions again.</strong></div>
+<div class="rung"><strong>2. Identify the exact place you're unsure.</strong></div>
+<div class="rung"><strong>3. Ask a classmate or use course support.</strong></div>
+<div class="rung"><strong>4. Use tutoring / Writing Center / embedded support.</strong></div>
+<div class="rung"><strong>5. Ask the professor a specific question.</strong></div>
+</div>
+<p class="q">Which question gives the professor the most useful information?</p>
+<div class="options" id="q6">
+<button class="choice" data-ok="false">“I don't get the assignment. What do I do?”</button>
+<button class="choice" data-ok="true">“I understand that we are comparing the two readings, but I'm not sure whether to organize by author or by idea. Could you clarify what you recommend?”</button>
+<button class="choice" data-ok="false">“Can you tell me what my thesis should be?”</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb6" role="status"></div>
+<div class="callout"><strong>Specific questions make help easier to give.</strong><br/>Instead of asking someone to do the thinking for you, ask for information that helps you make the next decision.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Build My Support Map</button></div>
 </section>
-
 <section class="screen" data-step="7">
-  <div class="kicker">Part 8 · Your Support Map</div>
-  <h2>When I Get Stuck, What Can I Do Next?</h2>
-  <p>Fill in what seems realistic for you. You do not need one person who solves everything. Different problems may need different kinds of support.</p>
-
-  <label for="a1"><strong>If I don't understand the assignment, I can...</strong></label>
-  <input id="a1" type="text" placeholder="Example: reread directions, then ask a specific question">
-
-  <label for="a2" style="display:block;margin-top:14px"><strong>If I don't understand a reading, I can...</strong></label>
-  <input id="a2" type="text" placeholder="Example: compare notes with a classmate or ask a tutor">
-
-  <label for="a3" style="display:block;margin-top:14px"><strong>If I'm struggling with my draft, I can...</strong></label>
-  <input id="a3" type="text" placeholder="Example: get feedback on one part instead of hiding the draft">
-
-  <label for="a4" style="display:block;margin-top:14px"><strong>If feedback doesn't make sense, I can...</strong></label>
-  <input id="a4" type="text" placeholder="Example: identify the comment I don't understand and ask">
-
-  <label for="a5" style="display:block;margin-top:14px"><strong>If I'm falling behind, I can...</strong></label>
-  <input id="a5" type="text" placeholder="Example: contact the professor early and ask about my next best step">
-
-  <p class="q">Who might be part of your college team?</p>
-  <div class="support-grid" id="team">
-    <label class="support-card"><input type="checkbox" value="Professor"><strong>Professor</strong><span>Expectations, feedback, course questions</span></label>
-    <label class="support-card"><input type="checkbox" value="Classmates"><strong>Classmates</strong><span>Compare notes, talk through ideas</span></label>
-    <label class="support-card"><input type="checkbox" value="Tutor / Writing Center"><strong>Tutor / Writing Center</strong><span>Work through reading or writing problems</span></label>
-    <label class="support-card"><input type="checkbox" value="Counselor / Student Services"><strong>Counselor / Student Services</strong><span>College navigation or larger barriers</span></label>
-  </div>
-
-  <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeMap">Make My Support Map</button></div>
-
-  <div id="map" class="map hidden" aria-live="polite">
-    <h2 style="margin-top:0">🌿 My College Support Map</h2>
-    <div class="maprow"><strong>Assignment confusion:</strong><div id="m1"></div></div>
-    <div class="maprow"><strong>Reading confusion:</strong><div id="m2"></div></div>
-    <div class="maprow"><strong>Draft trouble:</strong><div id="m3"></div></div>
-    <div class="maprow"><strong>Feedback confusion:</strong><div id="m4"></div></div>
-    <div class="maprow"><strong>Falling behind:</strong><div id="m5"></div></div>
-    <div class="maprow"><strong>People/resources I can use:</strong><div id="mteam"></div></div>
-
-    <div class="note"><strong>Belonging does not mean never needing help.</strong><br>
-      Questions are normal. Feedback is normal. Revision is normal. Collaboration is normal. Getting stuck is normal.<br><br>
-      <strong>What matters is learning what you can do next.</strong>
-    </div>
-  </div>
+<div class="kicker">Part 8 · Your Support Map</div>
+<h2>When I Get Stuck, What Can I Do Next?</h2>
+<p>Fill in what seems realistic for you. You do not need one person who solves everything. Different problems may need different kinds of support.</p>
+<label for="a1"><strong>If I don't understand the assignment, I can...</strong></label>
+<input id="a1" placeholder="Example: reread directions, then ask a specific question" type="text"/>
+<label for="a2" style="display:block;margin-top:14px"><strong>If I don't understand a reading, I can...</strong></label>
+<input id="a2" placeholder="Example: compare notes with a classmate or ask a tutor" type="text"/>
+<label for="a3" style="display:block;margin-top:14px"><strong>If I'm struggling with my draft, I can...</strong></label>
+<input id="a3" placeholder="Example: get feedback on one part instead of hiding the draft" type="text"/>
+<label for="a4" style="display:block;margin-top:14px"><strong>If feedback doesn't make sense, I can...</strong></label>
+<input id="a4" placeholder="Example: identify the comment I don't understand and ask" type="text"/>
+<label for="a5" style="display:block;margin-top:14px"><strong>If I'm falling behind, I can...</strong></label>
+<input id="a5" placeholder="Example: contact the professor early and ask about my next best step" type="text"/>
+<p class="q">Who might be part of your college team?</p>
+<div class="support-grid" id="team">
+<label class="support-card"><input type="checkbox" value="Professor"/><strong>Professor</strong><span>Expectations, feedback, course questions</span></label>
+<label class="support-card"><input type="checkbox" value="Classmates"/><strong>Classmates</strong><span>Compare notes, talk through ideas</span></label>
+<label class="support-card"><input type="checkbox" value="Tutor / Writing Center"/><strong>Tutor / Writing Center</strong><span>Work through reading or writing problems</span></label>
+<label class="support-card"><input type="checkbox" value="Counselor / Student Services"/><strong>Counselor / Student Services</strong><span>College navigation or larger barriers</span></label>
+</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeMap">Make My Support Map</button></div>
+<div aria-live="polite" class="map hidden" id="map">
+<h2 style="margin-top:0">🌿 My College Support Map</h2>
+<div class="maprow"><strong>Assignment confusion:</strong><div id="m1"></div></div>
+<div class="maprow"><strong>Reading confusion:</strong><div id="m2"></div></div>
+<div class="maprow"><strong>Draft trouble:</strong><div id="m3"></div></div>
+<div class="maprow"><strong>Feedback confusion:</strong><div id="m4"></div></div>
+<div class="maprow"><strong>Falling behind:</strong><div id="m5"></div></div>
+<div class="maprow"><strong>People/resources I can use:</strong><div id="mteam"></div></div>
+<div class="note"><strong>Belonging does not mean never needing help.</strong><br/>
+      Questions are normal. Feedback is normal. Revision is normal. Collaboration is normal. Getting stuck is normal.<br/><br/>
+<strong>What matters is learning what you can do next.</strong>
+</div>
+</div>
 </section>
-
 </main>
 <script>
 (()=>{
@@ -294,7 +270,7 @@ textarea:focus,input:focus,select:focus{border-color:var(--accent);outline:3px s
     cur=n;
     screens[cur].classList.add('active');
     update();
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollTo({top:0,behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
   }
   document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
   document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
@@ -365,12 +341,12 @@ textarea:focus,input:focus,select:focus{border-color:var(--accent);outline:3px s
     const team=[...document.querySelectorAll('#team input:checked')].map(x=>x.value);
     document.getElementById('mteam').textContent=team.length?team.join(' · '):'I can identify a person or resource when I need one.';
     document.getElementById('map').classList.remove('hidden');
-    document.getElementById('map').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('map').scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});
     live.textContent='Your college support map is ready.';
   });
 
   update();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

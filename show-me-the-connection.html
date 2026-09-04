@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Show Me the Connection | ENGL C1000 Learning Lab</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
   --bg:#f6f8f8;--paper:#fff;--ink:#263943;--muted:#60727a;--line:#d7e0e3;
@@ -85,7 +86,6 @@ textarea{width:100%;min-height:94px;border:1px solid #aebdc2;border-radius:9px;p
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -93,171 +93,159 @@ textarea{width:100%;min-height:94px;border:1px solid #aebdc2;border-radius:9px;p
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-  <div class="top">
-    <div class="brand">ENGL C1000 Learning Lab</div>
-    <div class="progress-label" id="progressLabel">1 of 10</div>
-  </div>
-  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-
-  <section class="card active" data-step="0">
-    <p class="eyebrow">Writing Lab</p>
-    <h1>Show Me the Connection</h1>
-    <p>You made a claim. You included evidence. So why does your professor keep writing <strong>&ldquo;Explain this&rdquo;</strong> or <strong>&ldquo;How does this support your point?&rdquo;</strong>?</p>
-    <p>Because evidence does not usually explain itself. This lab will help you make the reasoning between your evidence and your point visible to your reader.</p>
-    <div class="note"><strong>Evidence is not the finish line.</strong><br>Your reader cannot see the connection that exists in your head unless you put that reasoning on the page.</div>
-    <div class="navrow"><button class="navbtn next" type="button" data-next>Start →</button></div>
-  </section>
-
-  <section class="card" data-step="1">
-    <p class="eyebrow">The move</p>
-    <h2>Claim → Evidence → Connection</h2>
-    <div class="move-grid">
-      <div class="move-card"><span class="move-label">Step 1</span><span class="move-title">CLAIM</span><p>What are you trying to show or argue?</p></div>
-      <div class="move-card"><span class="move-label">Step 2</span><span class="move-title">EVIDENCE</span><p>What example, quotation, fact, or detail supports that point?</p></div>
-      <div class="move-card"><span class="move-label">Step 3</span><span class="move-title">CONNECTION</span><p>How does that evidence support, prove, complicate, or clarify the claim?</p></div>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>See an example →</button></div>
-  </section>
-
-  <section class="card" data-step="2">
-    <p class="eyebrow">See the difference</p>
-    <h2>Evidence With and Without the Connection</h2>
-    <p>Imagine a student is writing about social media and attention.</p>
-    <div class="compare">
-      <div class="weak">
-        <h3>Without the Connection</h3>
-        <p><strong>Claim:</strong> Social media platforms can shape what users pay attention to.</p>
-        <p><strong>Evidence:</strong> A platform&rsquo;s algorithm may repeatedly place highly engaging posts at the top of a user&rsquo;s feed.</p>
-        <p>And then the paragraph moves on.</p>
-      </div>
-      <div class="strong">
-        <h3>With the Connection</h3>
-        <p><strong>Claim:</strong> Social media platforms can shape what users pay attention to.</p>
-        <p><strong>Evidence:</strong> A platform&rsquo;s algorithm may repeatedly place highly engaging posts at the top of a user&rsquo;s feed.</p>
-        <p><strong>Connection:</strong> Because users are more likely to encounter the content that the algorithm repeatedly prioritizes, the platform is not simply showing information neutrally; it is helping determine which topics receive the most attention.</p>
-      </div>
-    </div>
-    <div class="pass"><strong>The useful question:</strong><br><strong>How does this evidence help prove the point I just made?</strong></div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Practice 1 →</button></div>
-  </section>
-
-  <section class="card practice" data-step="3">
-    <p class="eyebrow">Connection 1</p>
-    <h2>Which Sentence Actually Explains the Evidence?</h2>
-    <div class="pass">
-      <p><strong>Claim:</strong> Lack of reliable transportation can make college attendance more difficult for students.</p>
-      <p><strong>Evidence:</strong> A student who depends on two buses may have a commute of more than an hour each way.</p>
-    </div>
-    <p class="question">Which sentence makes the strongest connection?</p>
-    <div class="choices">
-      <button class="choice" type="button" data-correct="false">Transportation is an important topic for college students.</button>
-      <button class="choice" type="button" data-correct="true">A long, unpredictable commute increases the chance that delays, missed connections, or work conflicts will interfere with a student&rsquo;s ability to arrive on time and attend consistently.</button>
-      <button class="choice" type="button" data-correct="false">Many people take buses every day.</button>
-      <button class="choice" type="button" data-correct="false">This evidence proves the claim because transportation matters.</button>
-    </div>
-    <div class="feedback" aria-live="polite"></div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Practice 2 →</button></div>
-  </section>
-
-  <section class="card practice" data-step="4">
-    <p class="eyebrow">Connection 2</p>
-    <h2>Go Beyond Repeating the Evidence</h2>
-    <div class="pass">
-      <p><strong>Claim:</strong> The character feels increasingly isolated from her family.</p>
-      <p><strong>Evidence:</strong> At dinner, she answers questions with one-word responses and leaves the table before anyone else finishes eating.</p>
-    </div>
-    <p class="question">Which explanation adds reasoning instead of simply restating the evidence?</p>
-    <div class="choices">
-      <button class="choice" type="button" data-correct="false">She gives one-word answers and leaves dinner early.</button>
-      <button class="choice" type="button" data-correct="true">Her brief responses and early departure show that she is withdrawing from opportunities to interact with her family, making her emotional distance visible through her behavior.</button>
-      <button class="choice" type="button" data-correct="false">The family is eating dinner together.</button>
-    </div>
-    <div class="feedback" aria-live="polite"></div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="5">
-    <p class="eyebrow">Connection 3</p>
-    <h2>What Kind of Connection Do You Need?</h2>
-    <p>Reasoning does more than say, &ldquo;This proves my claim.&rdquo; Different evidence may require different kinds of explanation.</p>
-    <div class="prompts">
-      <h3>Try one of these questions:</h3>
-      <ul>
-        <li><strong>How does this example show the pattern I am describing?</strong></li>
-        <li><strong>Why does this detail matter?</strong></li>
-        <li><strong>What should the reader notice about this evidence?</strong></li>
-        <li><strong>What does this evidence reveal that is not obvious at first?</strong></li>
-        <li><strong>How does this evidence support my claim?</strong></li>
-        <li><strong>Does this evidence complicate or qualify my point?</strong></li>
-        <li><strong>What conclusion can I reasonably draw from this evidence?</strong></li>
-      </ul>
-    </div>
-    <div class="pass"><strong>Watch out for the fake connection:</strong><br>&ldquo;This quote proves my point because it shows that my claim is true.&rdquo;<br><br>That sounds like explanation, but it does not actually tell the reader <strong>how</strong> the evidence supports the claim.</div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Use the Connection Test →</button></div>
-  </section>
-
-  <section class="card" data-step="6">
-    <p class="eyebrow">The Connection Test</p>
-    <h2>Check the Sentence After Your Evidence</h2>
-    <p>After using evidence, cover up your claim for a moment and look only at the evidence and the sentence after it.</p>
-    <div class="test-grid">
-      <div class="test-item"><strong>Did I interpret it?</strong>Did I explain what the reader should notice about the evidence?</div>
-      <div class="test-item"><strong>Did I connect it?</strong>Did I show how the evidence relates to the point I am making?</div>
-      <div class="test-item"><strong>Did I add thinking?</strong>Did I say something beyond simply repeating the quotation or example?</div>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Try it on my writing →</button></div>
-  </section>
-
-  <section class="card" data-step="7">
-    <p class="eyebrow">Your turn</p>
-    <h2>Find the Missing Connection</h2>
-    <p>Open a paragraph from something you are currently writing. Find one place where you use a quotation, fact, example, statistic, or other evidence.</p>
-    <label for="claim">What is the claim or point you are making?</label>
-    <textarea id="claim" placeholder="My point is..."></textarea>
-    <label for="evidence">What evidence are you using?</label>
-    <textarea id="evidence" placeholder="The evidence I use is..."></textarea>
-    <label for="connection">How does that evidence support, prove, clarify, or complicate your point?</label>
-    <textarea id="connection" placeholder="This evidence matters because..."></textarea>
-    <div class="note"><strong>Now revise the actual paragraph.</strong><br>Spend about 10–15 minutes revising that section so the connection is visible to your reader. You may need one sentence of explanation. You may need several. The goal is not to hit a formula; it is to give the reader the reasoning they need.</div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Check the connection →</button></div>
-  </section>
-
-  <section class="card" data-step="8">
-    <p class="eyebrow">Check out</p>
-    <h2>Which Description Best Matches the Paragraph Now?</h2>
-    <div class="status-grid" id="statusGrid">
-      <button class="status green" type="button" data-status="green"><strong>Green — The connection is visible.</strong>My reader can see how the evidence supports my point.</button>
-      <button class="status yellow" type="button" data-status="yellow"><strong>Yellow — I can see it, but explaining it is hard.</strong>I may need another sentence, example, or quick check from someone.</button>
-      <button class="status red" type="button" data-status="red"><strong>Red — I cannot connect this evidence to my claim.</strong>The evidence may not actually be the right evidence for this point.</button>
-    </div>
-    <div class="status-next" id="statusNext" aria-live="polite"></div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Build my connection card →</button></div>
-  </section>
-
-  <section class="card" data-step="9">
-    <p class="eyebrow">Your reasoning</p>
-    <h2>🔗 My Connection Card</h2>
-    <div class="summary-card" aria-live="polite">
-      <div class="summary-line"><span class="summary-label">My claim</span><span id="cardClaim"></span></div>
-      <div class="summary-line"><span class="summary-label">My evidence</span><span id="cardEvidence"></span></div>
-      <div class="summary-line"><span class="summary-label">The connection I need the reader to see</span><span id="cardConnection"></span></div>
-      <div class="summary-line"><span class="summary-label">My check</span><span id="cardStatus"></span></div>
-    </div>
-    <div class="writer-move"><strong>College Writer Move:</strong> Evidence does not replace your thinking. Your job as the writer is to help the reader understand <strong>what the evidence shows, why it matters, and how it connects to the larger point.</strong></div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn restart" type="button" id="restart">Start over</button></div>
-  </section>
+<main class="shell" id="main">
+<div class="top">
+<div class="brand">ENGL C1000 Learning Lab</div>
+<div class="progress-label" id="progressLabel">1 of 10</div>
+</div>
+<div aria-hidden="true" class="progress"><span id="progressBar"></span></div>
+<section class="card active" data-step="0">
+<p class="eyebrow">Writing Lab</p>
+<h1>Show Me the Connection</h1>
+<p>You made a claim. You included evidence. So why does your professor keep writing <strong>“Explain this”</strong> or <strong>“How does this support your point?”</strong>?</p>
+<p>Because evidence does not usually explain itself. This lab will help you make the reasoning between your evidence and your point visible to your reader.</p>
+<div class="note"><strong>Evidence is not the finish line.</strong><br/>Your reader cannot see the connection that exists in your head unless you put that reasoning on the page.</div>
+<div class="navrow"><button class="navbtn next" data-next="" type="button">Start →</button></div>
+</section>
+<section class="card" data-step="1">
+<p class="eyebrow">The move</p>
+<h2>Claim → Evidence → Connection</h2>
+<div class="move-grid">
+<div class="move-card"><span class="move-label">Step 1</span><span class="move-title">CLAIM</span><p>What are you trying to show or argue?</p></div>
+<div class="move-card"><span class="move-label">Step 2</span><span class="move-title">EVIDENCE</span><p>What example, quotation, fact, or detail supports that point?</p></div>
+<div class="move-card"><span class="move-label">Step 3</span><span class="move-title">CONNECTION</span><p>How does that evidence support, prove, complicate, or clarify the claim?</p></div>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">See an example →</button></div>
+</section>
+<section class="card" data-step="2">
+<p class="eyebrow">See the difference</p>
+<h2>Evidence With and Without the Connection</h2>
+<p>Imagine a student is writing about social media and attention.</p>
+<div class="compare">
+<div class="weak">
+<h3>Without the Connection</h3>
+<p><strong>Claim:</strong> Social media platforms can shape what users pay attention to.</p>
+<p><strong>Evidence:</strong> A platform’s algorithm may repeatedly place highly engaging posts at the top of a user’s feed.</p>
+<p>And then the paragraph moves on.</p>
+</div>
+<div class="strong">
+<h3>With the Connection</h3>
+<p><strong>Claim:</strong> Social media platforms can shape what users pay attention to.</p>
+<p><strong>Evidence:</strong> A platform’s algorithm may repeatedly place highly engaging posts at the top of a user’s feed.</p>
+<p><strong>Connection:</strong> Because users are more likely to encounter the content that the algorithm repeatedly prioritizes, the platform is not simply showing information neutrally; it is helping determine which topics receive the most attention.</p>
+</div>
+</div>
+<div class="pass"><strong>The useful question:</strong><br/><strong>How does this evidence help prove the point I just made?</strong></div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Practice 1 →</button></div>
+</section>
+<section class="card practice" data-step="3">
+<p class="eyebrow">Connection 1</p>
+<h2>Which Sentence Actually Explains the Evidence?</h2>
+<div class="pass">
+<p><strong>Claim:</strong> Lack of reliable transportation can make college attendance more difficult for students.</p>
+<p><strong>Evidence:</strong> A student who depends on two buses may have a commute of more than an hour each way.</p>
+</div>
+<p class="question">Which sentence makes the strongest connection?</p>
+<div class="choices">
+<button class="choice" data-correct="false" type="button">Transportation is an important topic for college students.</button>
+<button class="choice" data-correct="true" type="button">A long, unpredictable commute increases the chance that delays, missed connections, or work conflicts will interfere with a student’s ability to arrive on time and attend consistently.</button>
+<button class="choice" data-correct="false" type="button">Many people take buses every day.</button>
+<button class="choice" data-correct="false" type="button">This evidence proves the claim because transportation matters.</button>
+</div>
+<div aria-live="polite" class="feedback"></div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Practice 2 →</button></div>
+</section>
+<section class="card practice" data-step="4">
+<p class="eyebrow">Connection 2</p>
+<h2>Go Beyond Repeating the Evidence</h2>
+<div class="pass">
+<p><strong>Claim:</strong> The character feels increasingly isolated from her family.</p>
+<p><strong>Evidence:</strong> At dinner, she answers questions with one-word responses and leaves the table before anyone else finishes eating.</p>
+</div>
+<p class="question">Which explanation adds reasoning instead of simply restating the evidence?</p>
+<div class="choices">
+<button class="choice" data-correct="false" type="button">She gives one-word answers and leaves dinner early.</button>
+<button class="choice" data-correct="true" type="button">Her brief responses and early departure show that she is withdrawing from opportunities to interact with her family, making her emotional distance visible through her behavior.</button>
+<button class="choice" data-correct="false" type="button">The family is eating dinner together.</button>
+</div>
+<div aria-live="polite" class="feedback"></div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="5">
+<p class="eyebrow">Connection 3</p>
+<h2>What Kind of Connection Do You Need?</h2>
+<p>Reasoning does more than say, “This proves my claim.” Different evidence may require different kinds of explanation.</p>
+<div class="prompts">
+<h3>Try one of these questions:</h3>
+<ul>
+<li><strong>How does this example show the pattern I am describing?</strong></li>
+<li><strong>Why does this detail matter?</strong></li>
+<li><strong>What should the reader notice about this evidence?</strong></li>
+<li><strong>What does this evidence reveal that is not obvious at first?</strong></li>
+<li><strong>How does this evidence support my claim?</strong></li>
+<li><strong>Does this evidence complicate or qualify my point?</strong></li>
+<li><strong>What conclusion can I reasonably draw from this evidence?</strong></li>
+</ul>
+</div>
+<div class="pass"><strong>Watch out for the fake connection:</strong><br/>“This quote proves my point because it shows that my claim is true.”<br/><br/>That sounds like explanation, but it does not actually tell the reader <strong>how</strong> the evidence supports the claim.</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Use the Connection Test →</button></div>
+</section>
+<section class="card" data-step="6">
+<p class="eyebrow">The Connection Test</p>
+<h2>Check the Sentence After Your Evidence</h2>
+<p>After using evidence, cover up your claim for a moment and look only at the evidence and the sentence after it.</p>
+<div class="test-grid">
+<div class="test-item"><strong>Did I interpret it?</strong>Did I explain what the reader should notice about the evidence?</div>
+<div class="test-item"><strong>Did I connect it?</strong>Did I show how the evidence relates to the point I am making?</div>
+<div class="test-item"><strong>Did I add thinking?</strong>Did I say something beyond simply repeating the quotation or example?</div>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Try it on my writing →</button></div>
+</section>
+<section class="card" data-step="7">
+<p class="eyebrow">Your turn</p>
+<h2>Find the Missing Connection</h2>
+<p>Open a paragraph from something you are currently writing. Find one place where you use a quotation, fact, example, statistic, or other evidence.</p>
+<label for="claim">What is the claim or point you are making?</label>
+<textarea id="claim" placeholder="My point is..."></textarea>
+<label for="evidence">What evidence are you using?</label>
+<textarea id="evidence" placeholder="The evidence I use is..."></textarea>
+<label for="connection">How does that evidence support, prove, clarify, or complicate your point?</label>
+<textarea id="connection" placeholder="This evidence matters because..."></textarea>
+<div class="note"><strong>Now revise the actual paragraph.</strong><br/>Spend about 10–15 minutes revising that section so the connection is visible to your reader. You may need one sentence of explanation. You may need several. The goal is not to hit a formula; it is to give the reader the reasoning they need.</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Check the connection →</button></div>
+</section>
+<section class="card" data-step="8">
+<p class="eyebrow">Check out</p>
+<h2>Which Description Best Matches the Paragraph Now?</h2>
+<div class="status-grid" id="statusGrid">
+<button class="status green" data-status="green" type="button"><strong>Green — The connection is visible.</strong>My reader can see how the evidence supports my point.</button>
+<button class="status yellow" data-status="yellow" type="button"><strong>Yellow — I can see it, but explaining it is hard.</strong>I may need another sentence, example, or quick check from someone.</button>
+<button class="status red" data-status="red" type="button"><strong>Red — I cannot connect this evidence to my claim.</strong>The evidence may not actually be the right evidence for this point.</button>
+</div>
+<div aria-live="polite" class="status-next" id="statusNext"></div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Build my connection card →</button></div>
+</section>
+<section class="card" data-step="9">
+<p class="eyebrow">Your reasoning</p>
+<h2>🔗 My Connection Card</h2>
+<div aria-live="polite" class="summary-card">
+<div class="summary-line"><span class="summary-label">My claim</span><span id="cardClaim"></span></div>
+<div class="summary-line"><span class="summary-label">My evidence</span><span id="cardEvidence"></span></div>
+<div class="summary-line"><span class="summary-label">The connection I need the reader to see</span><span id="cardConnection"></span></div>
+<div class="summary-line"><span class="summary-label">My check</span><span id="cardStatus"></span></div>
+</div>
+<div class="writer-move"><strong>College Writer Move:</strong> Evidence does not replace your thinking. Your job as the writer is to help the reader understand <strong>what the evidence shows, why it matters, and how it connects to the larger point.</strong></div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn restart" id="restart" type="button">Start over</button></div>
+</section>
 </main>
-
 <script>
 const cards=[...document.querySelectorAll('.card')];
 const bar=document.getElementById('progressBar');
@@ -327,5 +315,5 @@ document.getElementById('restart').addEventListener('click',()=>{
 });
 render();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

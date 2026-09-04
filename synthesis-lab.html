@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Synthesis Lab: Get the Sources Talking</title>
-<meta name="description" content="An accessible ENGL C1000 synthesis lab that helps students organize multiple sources around their own ideas.">
+<meta content="An accessible ENGL C1000 synthesis lab that helps students organize multiple sources around their own ideas." name="description"/>
 <style>
 :root{
   --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#66727d;--line:#d7e0e8;
@@ -94,7 +95,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -102,55 +102,51 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#start">Skip to the synthesis activity</a>
-<main class="shell">
-<section id="intro" class="card">
+<main class="shell" id="main">
+<section class="card" id="intro">
 <p class="eyebrow">ENGL C1000 · Source Synthesis</p>
 <h1>🧩 Synthesis Lab: Get the Sources Talking</h1>
 <p class="lead"><strong>Three sources in one paragraph do not automatically equal synthesis.</strong></p>
 <div class="parade">
-  <div class="source"><strong>Smith says...</strong></div><span class="arrow">→</span>
-  <div class="source"><strong>Jones says...</strong></div><span class="arrow">→</span>
-  <div class="source"><strong>Garcia says...</strong></div>
+<div class="source"><strong>Smith says...</strong></div><span class="arrow">→</span>
+<div class="source"><strong>Jones says...</strong></div><span class="arrow">→</span>
+<div class="source"><strong>Garcia says...</strong></div>
 </div>
-<div class="warn"><strong>🚨 SOURCE PARADE DETECTED.</strong><br>The sources are standing next to each other. The writer has not yet shown us what relationship matters.</div>
+<div class="warn"><strong>🚨 SOURCE PARADE DETECTED.</strong><br/>The sources are standing next to each other. The writer has not yet shown us what relationship matters.</div>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> Synthesis means organizing sources around an idea, question, relationship, or claim that <em>you</em> control.</div>
-<div class="row"><button id="start" class="primary" type="button">🧠 Put the Writer Back in Charge</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+<div class="row"><button class="primary" id="start" type="button">🧠 Put the Writer Back in Charge</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
+<section class="card hidden" id="lab">
 <div class="progressline"><span id="pt"></span><span id="pc"></span></div>
-<div class="track" id="progress" role="progressbar" aria-label="Synthesis lab progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1" aria-valuetext="Synthesis move 1 of 20"><div id="bar" class="bar"></div></div>
-<span id="stage" class="stage"></span>
+<div aria-label="Synthesis lab progress" aria-valuemax="20" aria-valuemin="1" aria-valuenow="1" aria-valuetext="Synthesis move 1 of 20" class="track" id="progress" role="progressbar"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
 <div class="layout">
-  <div>
-    <div id="host"></div>
-    <div id="fb" class="feedback" role="status" aria-live="polite"></div>
-    <div class="row"><button id="next" class="primary hidden" type="button">Continue</button></div>
-  </div>
-  <aside class="side">
-    <h2>🧩 Synthesis Check</h2>
-    <p><strong>1.</strong> What idea is this paragraph developing?</p>
-    <p><strong>2.</strong> Which sources actually belong in this conversation?</p>
-    <p><strong>3.</strong> How do they relate?</p>
-    <p><strong>4.</strong> What do I notice because I put them together?</p>
-    <p><strong>5.</strong> Why does that matter to my claim?</p>
-  </aside>
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="fb" role="status"></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Continue</button></div>
+</div>
+<aside class="side">
+<h2>🧩 Synthesis Check</h2>
+<p><strong>1.</strong> What idea is this paragraph developing?</p>
+<p><strong>2.</strong> Which sources actually belong in this conversation?</p>
+<p><strong>3.</strong> How do they relate?</p>
+<p><strong>4.</strong> What do I notice because I put them together?</p>
+<p><strong>5.</strong> Why does that matter to my claim?</p>
+</aside>
 </div>
 </section>
-
-<section id="finish" class="card hidden">
+<section class="card hidden" id="finish">
 <div class="good"><h2 id="finishTitle" tabindex="-1">🧩 Conversation Built</h2><p><strong>Synthesis is not squeezing more sources into a paragraph. It is showing the reader what you notice when ideas are placed in conversation.</strong></p></div>
-
 <h2>🧩 I Have Multiple Sources. Now What?</h2>
 <div class="case">
 <p><strong>1. What idea is this paragraph trying to develop?</strong></p>
@@ -160,16 +156,13 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <p><strong>4. What do I notice because I put them together?</strong></p>
 <p><strong>5. Why does that relationship matter to my claim?</strong></p>
 </div>
-
 <div class="note"><h3>🧠 A synthesis sentence starter can help—but it is scaffolding, not a law.</h3>
-<p>“Taken together, these sources suggest...”<br>
-“While both sources identify..., they differ in...”<br>
-“Source B complicates Source A by...”<br>
+<p>“Taken together, these sources suggest...”<br/>
+“While both sources identify..., they differ in...”<br/>
+“Source B complicates Source A by...”<br/>
 “Viewed together, these findings raise a question about...”</p></div>
-
-<div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Synthesis Check</button></div>
-
-<section class="transfer" aria-labelledby="transfer-title">
+<div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Synthesis Check</button></div>
+<section aria-labelledby="transfer-title" class="transfer">
 <h2 id="transfer-title">🔗 Build One Synthesis Move From Your Own Sources</h2>
 <p>You do not need to draft a whole paragraph here. Bring in two sources from a project you are actually working on and make <strong>one relationship visible</strong>.</p>
 <div class="field"><label for="ownIdea">What idea, question, or claim are these sources helping you develop?</label><textarea id="ownIdea" placeholder="Example: Access depends on whether students can realistically use a service."></textarea></div>
@@ -178,21 +171,20 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <div class="field"><label for="ownRelation">What relationship seems most useful?</label><select id="ownRelation"><option value="">Choose one</option><option>Agree</option><option>Add or extend</option><option>Contrast</option><option>Complicate</option><option>Qualify</option><option>Give an example</option><option>Another relationship</option></select></div>
 <div class="field"><label for="ownInsight">What becomes visible when you put these sources together?</label><textarea id="ownInsight" placeholder="Try: Taken together... / While both..., they differ in... / Source B complicates Source A by..."></textarea></div>
 <div class="field"><label for="ownWhy">Why does that relationship matter to your idea or claim?</label><textarea id="ownWhy" placeholder="What should your reader understand because you made this connection?"></textarea></div>
-<div class="row"><button id="buildOwn" class="primary" type="button">🧩 Check My Synthesis Move</button></div>
-<div id="ownResult" class="transfer-result note hidden" role="status" aria-live="polite" tabindex="-1"></div>
+<div class="row"><button class="primary" id="buildOwn" type="button">🧩 Check My Synthesis Move</button></div>
+<div aria-live="polite" class="transfer-result note hidden" id="ownResult" role="status" tabindex="-1"></div>
 <p><small>This practice is not scored. Your notes stay in this browser.</small></p>
 </section>
-
-<div id="completion" class="completion" tabindex="-1">
+<div class="completion" id="completion" tabindex="-1">
 <p class="done">✓ LAB COMPLETE</p>
 <h2>Synthesis Lab: Get the Sources Talking — Complete</h2>
-<p>✓ Distinguish source-by-source summary from synthesis<br>
-✓ Identify relationships among sources<br>
-✓ Organize evidence around a writer-controlled idea<br>
-✓ Explain what becomes visible when sources are placed together<br>
-✓ Use agreement, contrast, complication, qualification, and examples purposefully<br>
-✓ Recognize when a source does not belong in a particular paragraph<br>
-✓ Use disagreement as material for analysis<br>
+<p>✓ Distinguish source-by-source summary from synthesis<br/>
+✓ Identify relationships among sources<br/>
+✓ Organize evidence around a writer-controlled idea<br/>
+✓ Explain what becomes visible when sources are placed together<br/>
+✓ Use agreement, contrast, complication, qualification, and examples purposefully<br/>
+✓ Recognize when a source does not belong in a particular paragraph<br/>
+✓ Use disagreement as material for analysis<br/>
 ✓ Connect synthesis back to the writer's claim</p>
 <p><strong>Completed:</strong> <span id="date"></span></p>
 <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
@@ -200,7 +192,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </section>
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
-
 <script>
 (()=>{const $=x=>document.getElementById(x),KEY="synthesisGetSourcesTalkingV1",TKEY="synthesisTransferV1";let i=0;
 const reduceMotion=()=>window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -407,5 +398,5 @@ if(s){
 }
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

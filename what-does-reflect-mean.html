@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>What Does “Reflect” Mean?</title>
-<meta name="description" content="An accessible ENGL C1000 reflection lab that helps students move beyond summary or confession toward meaningful reflective thinking.">
+<meta content="An accessible ENGL C1000 reflection lab that helps students move beyond summary or confession toward meaningful reflective thinking." name="description"/>
 <style>
 :root{
 --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
@@ -47,7 +48,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 @media(max-width:620px){body{font-size:17px}.choices,.grid2,.moves{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -55,46 +55,41 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-
-<section id="intro" class="card">
-<p class="eyebrow">ENGL C1000 · Reflection & Writing Process</p>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Reflection &amp; Writing Process</p>
 <h1>🪞 What Does “Reflect” Mean?</h1>
 <h2>It’s more than “I liked it” or “I learned a lot.”</h2>
-<div class="call"><strong>ASSIGNMENT SAYS:</strong> “Reflect on your writing process.”<br><br><strong>STUDENT:</strong> “Okay... so do I just say how I felt?”</div>
+<div class="call"><strong>ASSIGNMENT SAYS:</strong> “Reflect on your writing process.”<br/><br/><strong>STUDENT:</strong> “Okay... so do I just say how I felt?”</div>
 <p>Reflection is another college word that can sound obvious until you actually have to do it.</p>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> Reflection means looking back at an experience, choice, process, or piece of learning and figuring out what you understand now because you examined it.</div>
 <div class="good"><strong>Reflection is not proving that you learned. It is examining your learning closely enough to understand it.</strong></div>
-<div class="row"><button id="start" class="primary">🪞 Open the Reflection Lab</button><button id="resume" class="secondary hidden">Resume</button></div>
+<div class="row"><button class="primary" id="start">🪞 Open the Reflection Lab</button><button class="secondary hidden" id="resume">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div>
-<span id="stage" class="stage"></span>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
 <div class="layout">
-<div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Continue</button></div></div>
+<div><div id="host"></div><div aria-live="polite" class="feedback" id="fb" role="status"></div><div class="row"><button class="primary hidden" id="next">Continue</button></div></div>
 <aside class="side"><h3>🪞 Reflection Moves</h3>
-<p><strong>🔙 BEFORE</strong><br>What did I think, expect, or do at first?</p>
-<p><strong>👀 NOTICE</strong><br>What happened? What stood out?</p>
-<p><strong>🧠 INTERPRET</strong><br>What do I understand about it now?</p>
-<p><strong>🔄 CHANGE</strong><br>Did my thinking, strategy, or process shift?</p>
-<p><strong>➡️ TRANSFER</strong><br>What might I carry into another situation?</p>
+<p><strong>🔙 BEFORE</strong><br/>What did I think, expect, or do at first?</p>
+<p><strong>👀 NOTICE</strong><br/>What happened? What stood out?</p>
+<p><strong>🧠 INTERPRET</strong><br/>What do I understand about it now?</p>
+<p><strong>🔄 CHANGE</strong><br/>Did my thinking, strategy, or process shift?</p>
+<p><strong>➡️ TRANSFER</strong><br/>What might I carry into another situation?</p>
 <p><small>You do not need all five every time.</small></p>
 </aside></div>
 </section>
-
-<section id="finish" class="card hidden">
+<section class="card hidden" id="finish">
 <div class="good"><h2>🪞 Reflection Detected</h2><p><strong>Reflection is not a performance of learning. It is a way to notice what your experience now teaches you.</strong></p></div>
-
 <h2>🧭 Help Me Go Deeper</h2>
 <div class="tool">
 <label for="problem"><strong>What's happening in your reflection?</strong></label>
@@ -109,38 +104,33 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <option value="confession">It feels like I'm confessing what I did badly</option>
 <option value="good">I already have a specific insight</option>
 </select>
-<div class="row"><button id="diagnose" class="primary">🪞 Find My Next Reflection Move</button></div>
-<div id="result" class="result" aria-live="polite"></div>
+<div class="row"><button class="primary" id="diagnose">🪞 Find My Next Reflection Move</button></div>
+<div aria-live="polite" class="result" id="result"></div>
 </div>
-
 <div class="note"><h3>🧰 Quick Reflection Check</h3>
-<p>What did I expect or do at first?<br>
-What actually happened?<br>
-What do I understand now that I did not understand before?<br>
-What worked, failed, surprised, confused, or became clearer?<br>
-Why does that matter?<br>
+<p>What did I expect or do at first?<br/>
+What actually happened?<br/>
+What do I understand now that I did not understand before?<br/>
+What worked, failed, surprised, confused, or became clearer?<br/>
+Why does that matter?<br/>
 What might I do differently—or intentionally repeat—next time?</p></div>
-
-<div class="row"><button id="copy" class="secondary">📋 Copy Reflection Check</button></div>
-
+<div class="row"><button class="secondary" id="copy">📋 Copy Reflection Check</button></div>
 <div class="completion">
 <p class="done">✓ LAB COMPLETE</p>
 <h2>What Does “Reflect” Mean? — Complete</h2>
-<p>✓ Distinguish reflection from summary<br>
-✓ Move from feelings to interpretation<br>
-✓ Analyze both successful and unsuccessful choices<br>
-✓ Reflect without turning the assignment into a confession<br>
-✓ Identify changes in thinking, strategy, or understanding<br>
-✓ Recognize that reflection does not require changing your mind<br>
+<p>✓ Distinguish reflection from summary<br/>
+✓ Move from feelings to interpretation<br/>
+✓ Analyze both successful and unsuccessful choices<br/>
+✓ Reflect without turning the assignment into a confession<br/>
+✓ Identify changes in thinking, strategy, or understanding<br/>
+✓ Recognize that reflection does not require changing your mind<br/>
 ✓ Connect learning from one situation to a future one</p>
 <p><strong>Completed:</strong> <span id="date"></span></p>
 <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
 </div>
 </section>
-
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
-
 <script>
 (()=>{const $=x=>document.getElementById(x),KEY="whatDoesReflectMeanV1";let i=0;
 const M=[
@@ -202,7 +192,7 @@ if(m[1]==="builder"){$("host").innerHTML=`<h2>🧰 Build Your Reflection Check</
 if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>🪞 Look Back to Move Forward</h2><p><strong>Reflection is not proving that you learned.</strong></p><p>It is examining your learning closely enough to understand it.</p></div><div class="call">You do not need a dramatic transformation.<br>You do not need to confess.<br>You do not need to pretend everything went badly—or perfectly.<br><strong>You need something specific enough to examine.</strong></div>`;$("next").textContent="Finish & Open Reflection Tool";$("next").classList.remove("hidden")}
 localStorage.setItem(KEY,JSON.stringify({i}))}
 
-$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")}),200)}}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
 
 const R={
@@ -263,5 +253,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Reflection Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

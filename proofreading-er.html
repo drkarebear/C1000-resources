@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Proofreading ER</title>
-<meta name="description" content="An accessible ENGL C1000 proofreading activity focused on diagnosing sentence-level issues, prioritizing edits, and preserving writer meaning.">
+<meta content="An accessible ENGL C1000 proofreading activity focused on diagnosing sentence-level issues, prioritizing edits, and preserving writer meaning." name="description"/>
 <style>
 :root{
 --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
@@ -50,7 +51,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 @media(max-width:620px){body{font-size:17px}.choices,.grid2,.departments{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -58,54 +58,49 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-
-<section id="intro" class="card">
-<p class="eyebrow">ENGL C1000 · Editing & Proofreading</p>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Editing &amp; Proofreading</p>
 <h1>🩺 Proofreading ER</h1>
 <h2>Something looks off. Diagnose it before you fix it.</h2>
-<div class="call"><strong>PATIENT ARRIVING:</strong><br><br>“The article raises an important concern however the writer does not explain what should happen next.”</div>
+<div class="call"><strong>PATIENT ARRIVING:</strong><br/><br/>“The article raises an important concern however the writer does not explain what should happen next.”</div>
 <p>The temptation is to start throwing commas at the sentence.</p>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> Good proofreaders do not just hunt for “errors.” They identify what kind of problem they are looking at, decide whether it actually needs attention, and choose a revision that preserves the writer’s meaning.</div>
 <div class="good"><strong>Your job in this ER:</strong> Diagnose → Treat → Recheck.</div>
-<div class="row"><button id="start" class="primary">🚑 Admit the First Sentence</button><button id="resume" class="secondary hidden">Resume</button></div>
+<div class="row"><button class="primary" id="start">🚑 Admit the First Sentence</button><button class="secondary hidden" id="resume">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
+<section class="card hidden" id="lab">
 <div class="progressline"><span id="pt"></span><span id="pc"></span></div>
-<div class="track"><div id="bar" class="bar"></div></div>
-<span id="stage" class="stage"></span>
+<div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
 <div class="layout">
 <div>
 <div id="host"></div>
-<div id="fb" class="feedback" role="status" aria-live="polite"></div>
-<div class="row"><button id="next" class="primary hidden">Continue</button></div>
+<div aria-live="polite" class="feedback" id="fb" role="status"></div>
+<div class="row"><button class="primary hidden" id="next">Continue</button></div>
 </div>
 <aside class="side">
 <h3>🏥 ER Departments</h3>
-<p><strong>🧱 Boundaries</strong><br>Where does one complete thought end?</p>
-<p><strong>🔍 Clarity</strong><br>Can the reader tell what the sentence means?</p>
-<p><strong>⚙️ Consistency</strong><br>Do tense, agreement, and point of view stay steady?</p>
-<p><strong>🚦 Punctuation</strong><br>Do the marks help the reader follow the structure?</p>
-<p><strong>💬 Quotations</strong><br>Is borrowed language integrated clearly?</p>
-<p><strong>🔤 Words</strong><br>Spelling, usage, capitalization, confused words.</p>
-<p><strong>🧭 Connections</strong><br>Is the relationship between ideas clear?</p>
+<p><strong>🧱 Boundaries</strong><br/>Where does one complete thought end?</p>
+<p><strong>🔍 Clarity</strong><br/>Can the reader tell what the sentence means?</p>
+<p><strong>⚙️ Consistency</strong><br/>Do tense, agreement, and point of view stay steady?</p>
+<p><strong>🚦 Punctuation</strong><br/>Do the marks help the reader follow the structure?</p>
+<p><strong>💬 Quotations</strong><br/>Is borrowed language integrated clearly?</p>
+<p><strong>🔤 Words</strong><br/>Spelling, usage, capitalization, confused words.</p>
+<p><strong>🧭 Connections</strong><br/>Is the relationship between ideas clear?</p>
 </aside>
 </div>
 </section>
-
-<section id="finish" class="card hidden">
+<section class="card hidden" id="finish">
 <div class="good"><h2>🩺 Patient Stable</h2><p><strong>Good proofreading is not finding the most errors. It is noticing what your reader needs and making purposeful choices about what to change.</strong></p></div>
-
 <h2>🔎 Quick Proofreading Triage</h2>
 <div class="tool">
 <label for="problem"><strong>What are you noticing in your own sentence?</strong></label>
@@ -121,39 +116,34 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <option value="transition">The ideas do not seem to connect logically</option>
 <option value="fine">It may already be clear</option>
 </select>
-<div class="row"><button id="diagnose" class="primary">🩺 Diagnose It</button></div>
-<div id="result" class="result" aria-live="polite"></div>
+<div class="row"><button class="primary" id="diagnose">🩺 Diagnose It</button></div>
+<div aria-live="polite" class="result" id="result"></div>
 </div>
-
 <div class="note"><h3>🧰 60-Second Proofreading Check</h3>
-<p>1. Read the sentence for meaning first.<br>
-2. Is anything actually unclear?<br>
-3. What type of issue is it?<br>
-4. Is it a one-time issue or a pattern?<br>
-5. What is the smallest useful revision?<br>
+<p>1. Read the sentence for meaning first.<br/>
+2. Is anything actually unclear?<br/>
+3. What type of issue is it?<br/>
+4. Is it a one-time issue or a pattern?<br/>
+5. What is the smallest useful revision?<br/>
 6. Read the revised sentence again: did the meaning survive?</p></div>
-
-<div class="row"><button id="copy" class="secondary">📋 Copy Proofreading Check</button></div>
-
+<div class="row"><button class="secondary" id="copy">📋 Copy Proofreading Check</button></div>
 <div class="completion">
 <p class="done">✓ LAB COMPLETE</p>
 <h2>Proofreading ER — Complete</h2>
-<p>✓ Diagnose sentence-boundary problems<br>
-✓ Distinguish clarity issues from harmless differences<br>
-✓ Notice tense, agreement, and pronoun-reference patterns<br>
-✓ Use punctuation to clarify structure<br>
-✓ Proofread quotation integration<br>
-✓ Catch word-level problems and commonly confused forms<br>
-✓ Identify logical-connection problems<br>
+<p>✓ Diagnose sentence-boundary problems<br/>
+✓ Distinguish clarity issues from harmless differences<br/>
+✓ Notice tense, agreement, and pronoun-reference patterns<br/>
+✓ Use punctuation to clarify structure<br/>
+✓ Proofread quotation integration<br/>
+✓ Catch word-level problems and commonly confused forms<br/>
+✓ Identify logical-connection problems<br/>
 ✓ Prioritize edits that matter most to readers</p>
 <p><strong>Completed:</strong> <span id="date"></span></p>
 <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
 </div>
 </section>
-
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
-
 <script>
 (()=>{const $=x=>document.getElementById(x),KEY="proofreadingERV1";let i=0;
 const M=[
@@ -228,7 +218,7 @@ if(m[1]==="finalpatient"){$("host").innerHTML=`<h2>🚨 Final Patient: Messy Par
 if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>🏥 Discharge Instructions</h2><p><strong>Read for meaning first.</strong></p><p>Then diagnose the type of problem, choose the smallest useful revision, and read again.</p></div><div class="call">Good proofreading is not finding the most errors.<br><strong>It is noticing what your reader needs and making purposeful choices about what to change.</strong></div>`;$("next").textContent="Finish & Open Proofreading Tool";$("next").classList.remove("hidden")}
 localStorage.setItem(KEY,JSON.stringify({i}))}
 
-$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:"smooth"}),200)}}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("finish").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")}),200)}}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
 
 const R={
@@ -284,5 +274,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Proofreading Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

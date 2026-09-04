@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MLA 9 Review Lab</title>
-  <meta name="description" content="An accessible, mobile-friendly MLA 9 practice activity with immediate feedback and a screenshot-ready completion card.">
-  <link rel="icon" type="image/png" href="Favicon2.png">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>MLA 9 Review Lab</title>
+<meta content="An accessible, mobile-friendly MLA 9 practice activity with immediate feedback and a screenshot-ready completion card." name="description"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
+<style>
     :root{
       --bg:#f5f7fa;
       --surface:#ffffff;
@@ -402,7 +403,6 @@
       .card{box-shadow:none;border:0}
     }
   </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -410,98 +410,82 @@
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip-link" href="#main">Skip to activity</a>
-
-<main id="main" class="app-shell">
-  <section id="intro" class="card" aria-labelledby="intro-title">
-    <p class="eyebrow">Practice, not punishment</p>
-    <h1 id="intro-title">MLA 9 Review Lab</h1>
-    <p class="lead">MLA gets easier when you understand the patterns. Practice the citation and formatting choices you are most likely to use in college writing.</p>
-
-    <div class="meta" aria-label="Activity details">
-      <span class="pill">About 10–15 minutes</span>
-      <span class="pill">No timer</span>
-      <span class="pill">Retry as needed</span>
-      <span class="pill">No score penalty</span>
-    </div>
-
-    <p>You will get immediate feedback after each answer. Completion means you worked through every question—not that you got everything right on the first try.</p>
-
-    <div class="button-row">
-      <button id="startBtn" class="btn-primary" type="button">Start Full Review</button>
-      <button id="resumeBtn" class="btn-secondary hidden" type="button">Resume Where I Left Off</button>
-    </div>
-  </section>
-
-  <section id="quiz" class="card hidden" aria-labelledby="quiz-title">
-    <div class="progress-wrap" aria-label="Activity progress">
-      <div class="progress-text">
-        <span id="progressLabel">Question 1 of 20</span>
-        <span id="percentLabel">5%</span>
-      </div>
-      <div class="progress-track" aria-hidden="true">
-        <div id="progressBar" class="progress-bar"></div>
-      </div>
-    </div>
-
-    <span id="sectionLabel" class="section-label">Round 1 · Cite It or Not?</span>
-    <h2 id="quiz-title">Choose the best answer</h2>
-    <p class="helper"><strong>What to do:</strong> Select the answer that best follows MLA 9. If you miss one, use the feedback and try again. A correct answer unlocks the next question.</p>
-    <div id="questionHost"></div>
-
-    <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">
-      <div id="feedbackTitle" class="feedback-title"></div>
-      <div id="feedbackText"></div>
-    </div>
-
-    <div class="button-row">
-      <button id="retryBtn" class="btn-secondary hidden" type="button">Try Again</button>
-      <button id="nextBtn" class="btn-primary hidden" type="button">Next Question</button>
-    </div>
-  </section>
-
-  <section id="completion" class="card hidden" aria-labelledby="completion-title">
-    <div class="completion-card">
-      <div class="completion-mark">✓ Review complete</div>
-      <h2 id="completion-title">MLA 9 Review Lab — Complete</h2>
-      <p>You finished all 20 practice questions.</p>
-
-      <div class="completion-grid" aria-label="Completed review sections">
-        <div>Cite It or Not?</div><div class="status">✓ Complete</div>
-        <div>In-Text Citations</div><div class="status">✓ Complete</div>
-        <div>Titles &amp; Containers</div><div class="status">✓ Complete</div>
-        <div>Works Cited</div><div class="status">✓ Complete</div>
-        <div>MLA Paper Setup</div><div class="status">✓ Complete</div>
-        <div>AI Citation Detective</div><div class="status">✓ Complete</div>
-      </div>
-
-      <p><strong>Completed:</strong> <span id="completionDate"></span><br>
-      <strong>Practice completed:</strong> 20 of 20 questions</p>
-
-      <div class="screenshot-note">If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
-    </div>
-
-    <div class="button-row hide-in-screenshot">
-      <button id="screenshotBtn" class="btn-primary" type="button">Prepare Screenshot View</button>
-      <button id="exitScreenshotBtn" class="btn-secondary hidden" type="button">Exit Screenshot View</button>
-      <button id="restartBtn" class="btn-quiet" type="button">Practice Again</button>
-    </div>
-  </section>
-
-  <footer class="hide-in-screenshot">
+<main class="app-shell" id="main">
+<section aria-labelledby="intro-title" class="card" id="intro">
+<p class="eyebrow">Practice, not punishment</p>
+<h1 id="intro-title">MLA 9 Review Lab</h1>
+<p class="lead">MLA gets easier when you understand the patterns. Practice the citation and formatting choices you are most likely to use in college writing.</p>
+<div aria-label="Activity details" class="meta">
+<span class="pill">About 10–15 minutes</span>
+<span class="pill">No timer</span>
+<span class="pill">Retry as needed</span>
+<span class="pill">No score penalty</span>
+</div>
+<p>You will get immediate feedback after each answer. Completion means you worked through every question—not that you got everything right on the first try.</p>
+<div class="button-row">
+<button class="btn-primary" id="startBtn" type="button">Start Full Review</button>
+<button class="btn-secondary hidden" id="resumeBtn" type="button">Resume Where I Left Off</button>
+</div>
+</section>
+<section aria-labelledby="quiz-title" class="card hidden" id="quiz">
+<div aria-label="Activity progress" class="progress-wrap">
+<div class="progress-text">
+<span id="progressLabel">Question 1 of 20</span>
+<span id="percentLabel">5%</span>
+</div>
+<div aria-hidden="true" class="progress-track">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+</div>
+<span class="section-label" id="sectionLabel">Round 1 · Cite It or Not?</span>
+<h2 id="quiz-title">Choose the best answer</h2>
+<p class="helper"><strong>What to do:</strong> Select the answer that best follows MLA 9. If you miss one, use the feedback and try again. A correct answer unlocks the next question.</p>
+<div id="questionHost"></div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="feedback" role="status">
+<div class="feedback-title" id="feedbackTitle"></div>
+<div id="feedbackText"></div>
+</div>
+<div class="button-row">
+<button class="btn-secondary hidden" id="retryBtn" type="button">Try Again</button>
+<button class="btn-primary hidden" id="nextBtn" type="button">Next Question</button>
+</div>
+</section>
+<section aria-labelledby="completion-title" class="card hidden" id="completion">
+<div class="completion-card">
+<div class="completion-mark">✓ Review complete</div>
+<h2 id="completion-title">MLA 9 Review Lab — Complete</h2>
+<p>You finished all 20 practice questions.</p>
+<div aria-label="Completed review sections" class="completion-grid">
+<div>Cite It or Not?</div><div class="status">✓ Complete</div>
+<div>In-Text Citations</div><div class="status">✓ Complete</div>
+<div>Titles &amp; Containers</div><div class="status">✓ Complete</div>
+<div>Works Cited</div><div class="status">✓ Complete</div>
+<div>MLA Paper Setup</div><div class="status">✓ Complete</div>
+<div>AI Citation Detective</div><div class="status">✓ Complete</div>
+</div>
+<p><strong>Completed:</strong> <span id="completionDate"></span><br/>
+<strong>Practice completed:</strong> 20 of 20 questions</p>
+<div class="screenshot-note">If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
+</div>
+<div class="button-row hide-in-screenshot">
+<button class="btn-primary" id="screenshotBtn" type="button">Prepare Screenshot View</button>
+<button class="btn-secondary hidden" id="exitScreenshotBtn" type="button">Exit Screenshot View</button>
+<button class="btn-quiet" id="restartBtn" type="button">Practice Again</button>
+</div>
+</section>
+<footer class="hide-in-screenshot">
     This activity stores progress only in this browser. It does not ask for a name, email address, or login.
   </footer>
 </main>
-
 <script>
 (function(){
   "use strict";
@@ -878,7 +862,7 @@
       index += 1;
       answeredCorrectly = false;
       renderQuestion();
-      window.scrollTo({top:quiz.offsetTop - 8, behavior:"smooth"});
+      window.scrollTo({top:quiz.offsetTop - 8, behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")});
     }else{
       finishReview();
     }
@@ -924,7 +908,7 @@
     document.body.classList.add("screenshot-mode");
     screenshotBtn.classList.add("hidden");
     exitScreenshotBtn.classList.remove("hidden");
-    window.scrollTo({top:0, behavior:"smooth"});
+    window.scrollTo({top:0, behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")});
   });
 
   exitScreenshotBtn.addEventListener("click", ()=>{
@@ -944,7 +928,7 @@
     intro.classList.remove("hidden");
     resumeBtn.classList.add("hidden");
     startBtn.focus();
-    window.scrollTo({top:0, behavior:"smooth"});
+    window.scrollTo({top:0, behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")});
   });
 
   const saved = loadProgress();
@@ -958,5 +942,5 @@
   }
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

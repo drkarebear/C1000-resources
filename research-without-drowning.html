@@ -1,10 +1,11 @@
 
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Research Without Drowning</title>
 <style>
 :root{--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a}
@@ -26,7 +27,6 @@ h1,h2,h3{color:var(--dark);line-height:1.2}h1{font-size:clamp(2.15rem,7vw,3.5rem
 @media(max-width:780px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}@media(max-width:600px){body{font-size:17px}.jobs,.sources,.grid{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}.tabs{max-width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -34,44 +34,42 @@ h1,h2,h3{color:var(--dark);line-height:1.2}h1{font-size:clamp(2.15rem,7vw,3.5rem
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-<section id="intro" class="card">
+<main class="shell" id="main">
+<section class="card" id="intro">
 <p class="eye">ENGL C1000 · College Writer Toolkit</p><h1>🌊 Research Without Drowning</h1>
 <p><strong>You do not have to read the entire internet.</strong></p>
 <div class="browser"><div class="tabs"><span class="tab">Google</span><span class="tab">47-page PDF</span><span class="tab">Reddit</span><span class="tab">Journal?</span><span class="tab">YouTube</span><span class="tab">another PDF</span><span class="tab">😭</span></div><div class="screen"><h2>37 tabs open.</h2><p>Research question: ...wait. What was I researching?</p></div></div>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> Research is not “find sources, then write.” Writers search, skim, learn, change direction, keep some sources, release others, write, and search again when the draft reveals a gap.</div>
-<div class="row"><button id="start" class="primary">🛟 Rescue My Research</button><button id="resume" class="secondary hidden">Resume</button></div>
+<div class="row"><button class="primary" id="start">🛟 Rescue My Research</button><button class="secondary hidden" id="resume">Resume</button></div>
 </section>
-<section id="lab" class="card hidden"><div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div id="bar" class="bar"></div></div><span id="stage" class="stage"></span>
-<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden">Keep Swimming</button></div></div>
+<section class="card hidden" id="lab"><div class="progressline"><span id="pt"></span><span id="pc"></span></div><div class="track"><div class="bar" id="bar"></div></div><span class="stage" id="stage"></span>
+<div class="layout"><div><div id="host"></div><div aria-live="polite" class="feedback" id="fb" role="status"></div><div class="row"><button class="primary hidden" id="next">Keep Swimming</button></div></div>
 <aside class="side"><h3>🛟 Research Lifeguard</h3><p><strong>What am I trying to find out?</strong></p><p>What job does a source need to do?</p><p>Can I skim before committing?</p><p>Does this actually help my question?</p><p>Do I know enough to write something?</p></aside></div></section>
-
-<section id="finish" class="card hidden">
+<section class="card hidden" id="finish">
 <div class="good"><h2>🏄 You Are Steering the Research</h2><p><strong>The goal was never to find the whole internet. It was to make useful research decisions.</strong></p></div>
 <h2>🛟 Research Rescue</h2><div class="grid">
-<div class="step"><strong>🌊 Topic enormous?</strong><br>Turn the topic into something you are trying to find out.</div>
-<div class="step"><strong>🔎 Search terrible?</strong><br>Identify key concepts, populations, and useful synonyms. Revise the search.</div>
-<div class="step"><strong>📚 Too many sources?</strong><br>Give them jobs. Release duplicates and sources that do not serve the project.</div>
-<div class="step"><strong>😵 Source overwhelming?</strong><br>Skim its structure before deciding what you actually need to read closely.</div>
-<div class="step"><strong>🐇 Rabbit hole?</strong><br>Return to the research question: does this help answer it?</div>
-<div class="step"><strong>🧠 Sources disagree?</strong><br>Let evidence complicate or change the working claim.</div>
-<div class="step"><strong>📝 Can't stop researching?</strong><br>Write something. The draft can reveal what information is still missing.</div>
-<div class="step"><strong>🔗 Keeping a source?</strong><br>Record the source information now—and note why you saved it.</div>
+<div class="step"><strong>🌊 Topic enormous?</strong><br/>Turn the topic into something you are trying to find out.</div>
+<div class="step"><strong>🔎 Search terrible?</strong><br/>Identify key concepts, populations, and useful synonyms. Revise the search.</div>
+<div class="step"><strong>📚 Too many sources?</strong><br/>Give them jobs. Release duplicates and sources that do not serve the project.</div>
+<div class="step"><strong>😵 Source overwhelming?</strong><br/>Skim its structure before deciding what you actually need to read closely.</div>
+<div class="step"><strong>🐇 Rabbit hole?</strong><br/>Return to the research question: does this help answer it?</div>
+<div class="step"><strong>🧠 Sources disagree?</strong><br/>Let evidence complicate or change the working claim.</div>
+<div class="step"><strong>📝 Can't stop researching?</strong><br/>Write something. The draft can reveal what information is still missing.</div>
+<div class="step"><strong>🔗 Keeping a source?</strong><br/>Record the source information now—and note why you saved it.</div>
 </div>
-<div class="meter" style="margin-top:20px"><h2>🛟 Good Enough to Start Meter</h2><p>✓ I have a working question.<br>✓ I understand the issue better than when I started.<br>✓ I have useful sources doing different jobs.<br>✓ I recorded where my information came from.<br>✓ I have evidence relevant to my current thinking.</p><div class="meterline"><div class="meterfill"></div></div><div class="notreq">☐ <strong>I know everything there is to know.</strong><br>🚨 LAST BOX NOT REQUIRED.</div></div>
-<div class="lifeguard"><h2>🆘 Lifeguard Rescue Button</h2><div id="rescueOut" aria-live="polite">Press for a research rescue move.</div><button id="rescue" class="secondary" style="margin-top:10px">Rescue Me</button></div>
-<div class="row"><button id="copy" class="secondary">📋 Copy Research Rescue</button></div>
-<div id="completion" class="completion"><p class="done">✓ LAB COMPLETE</p><h2>Research Without Drowning — Complete</h2>
-<p>✓ Turn a broad topic into a research question<br>✓ Revise search terms strategically<br>✓ Skim before committing to a source<br>✓ Match sources to the jobs an argument needs<br>✓ Release credible but irrelevant sources<br>✓ Record citation information while researching<br>✓ Let research complicate a working claim<br>✓ Recognize when it is time to start writing</p>
+<div class="meter" style="margin-top:20px"><h2>🛟 Good Enough to Start Meter</h2><p>✓ I have a working question.<br/>✓ I understand the issue better than when I started.<br/>✓ I have useful sources doing different jobs.<br/>✓ I recorded where my information came from.<br/>✓ I have evidence relevant to my current thinking.</p><div class="meterline"><div class="meterfill"></div></div><div class="notreq">☐ <strong>I know everything there is to know.</strong><br/>🚨 LAST BOX NOT REQUIRED.</div></div>
+<div class="lifeguard"><h2>🆘 Lifeguard Rescue Button</h2><div aria-live="polite" id="rescueOut">Press for a research rescue move.</div><button class="secondary" id="rescue" style="margin-top:10px">Rescue Me</button></div>
+<div class="row"><button class="secondary" id="copy">📋 Copy Research Rescue</button></div>
+<div class="completion" id="completion"><p class="done">✓ LAB COMPLETE</p><h2>Research Without Drowning — Complete</h2>
+<p>✓ Turn a broad topic into a research question<br/>✓ Revise search terms strategically<br/>✓ Skim before committing to a source<br/>✓ Match sources to the jobs an argument needs<br/>✓ Release credible but irrelevant sources<br/>✓ Record citation information while researching<br/>✓ Let research complicate a working claim<br/>✓ Recognize when it is time to start writing</p>
 <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div></div>
 </section><footer>Progress stays in this browser. No name, email, login, or timer.</footer>
 </main>
@@ -119,7 +117,7 @@ if(m[1]==="ready"){$("host").innerHTML=`<h2>🛟 Good Enough to Start</h2><div c
 if(m[1]==="boss"){$("host").innerHTML=`<div class="warn"><h2>🌊 FINAL BOSS: THE INTERNET</h2><p>12 search results · 3 PDFs · YouTube · government report · Reddit thread · journal article · newspaper · organization report · Wikipedia · perfect-looking 2004 source · great data/wrong population</p></div><div class="good"><h3>Your controls:</h3><p><strong>SKIM · KEEP · MAYBE · RELEASE · CHANGE SEARCH · FOLLOW A CITATION · WRITE NOW</strong></p></div><div class="secret">There is no secret set of five universally “correct” sources. You are making evidence decisions for a particular question and argument.</div>`;feedback("🏄 You are steering the research.")}
 if(m[1]==="end"){$("host").innerHTML=`<div class="good"><h2>🏄 Research Is Steering</h2><p>Question → Search → Skim → Keep/Release → Learn → Write → Notice a gap → Search again.</p></div><div class="secret">🔓 Research can be recursive. Writing is allowed to begin before searching is “finished.”</div>`;$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
 localStorage.setItem(KEY,JSON.stringify({i}))}
-$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:"smooth"})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("completion").scrollIntoView({behavior:"smooth"}),200)}}
+$("next").onclick=()=>{if(i<M.length-1){i++;render();scrollTo({top:$("lab").offsetTop,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else{$("lab").classList.add("hidden");$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());localStorage.setItem(KEY,JSON.stringify({done:true}));setTimeout(()=>$("completion").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")}),200)}}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;render()}
 const rescues=["🌊 Turn the giant topic into something you are trying to find out.","🔎 Pull 2–3 key concepts from your question. Try synonyms or a more specific population.","👀 Stop reading line 1. Check the title, abstract/description, headings, conclusion, and search within first.","📚 Give each saved source a job. Release sources that duplicate a job without adding much.","🐇 Return to your research question. If this tab doesn't help answer it, close it.","🧠 If strong evidence complicates your thesis, let the working claim change.","📝 Write one paragraph with what you know. The draft will show you what research is actually missing.","🔗 Save source information and a note about why you kept the evidence—now, not later."];
 let r=0;$("rescue").onclick=()=>{$("rescueOut").textContent=rescues[r++%rescues.length]}
@@ -137,4 +135,4 @@ $("copy").onclick=async()=>{try{await navigator.clipboard.writeText(card);$("cop
 let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body></html>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body></html>

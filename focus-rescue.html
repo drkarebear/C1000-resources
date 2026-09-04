@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Focus Rescue: What to Try When You're Stuck</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{--bg:#f4f2ed;--ink:#24313b;--muted:#66727b;--card:#fff;--line:#d8d2c9;--accent:#5e52b2;--soft:#efecff;--green:#2e7865;--green2:#eaf6f1;--gold:#946d16;--gold2:#fff7dc;--rose:#9d5263;--rose2:#fff0f4;--shadow:0 10px 28px rgba(36,49,59,.08)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58}
@@ -32,7 +33,6 @@ textarea{min-height:78px;resize:vertical}.controls{display:flex;justify-content:
 @media(max-width:480px){.toolbox,.desk{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -40,58 +40,48 @@ textarea{min-height:78px;resize:vertical}.controls{display:flex;justify-content:
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-<main>
+<main id="main">
 <section class="hero"><div class="kicker" style="color:#ddd9ff">Reading + Writing Focus Lab</div><h1>🧰 Focus Rescue</h1><p><strong>What to try when you're stuck.</strong></p><p>You have work to do. Your brain has other plans. Instead of calling yourself lazy or waiting to magically feel motivated, figure out what kind of stuck you're dealing with and test a strategy.</p><p class="mini">The goal isn't perfect productivity. It's finding the next useful move.</p></section>
-<section class="progressbox"><div class="proglabel"><span id="stepText">Rescue 1 of 10</span><span id="stepName">The stuck moment</span></div><div class="track"><div class="bar" id="bar"></div></div></section><div id="live" class="small" aria-live="polite"></div>
-
+<section class="progressbox"><div class="proglabel"><span id="stepText">Rescue 1 of 10</span><span id="stepName">The stuck moment</span></div><div class="track"><div class="bar" id="bar"></div></div></section><div aria-live="polite" class="small" id="live"></div>
 <section class="screen active" data-step="0"><div class="kicker">Rescue 1 · Recognition</div><h2>I've Been “About to Start” for 27 Minutes</h2>
-<div class="desk"><div>📄<br>Essay.docx</div><div>📚<br>Reading.pdf</div><div>📱<br>Phone</div><div>📧<br>Email</div><div>🌐<br>14 tabs</div></div>
+<div class="desk"><div>📄<br/>Essay.docx</div><div>📚<br/>Reading.pdf</div><div>📱<br/>Phone</div><div>📧<br/>Email</div><div>🌐<br/>14 tabs</div></div>
 <div class="timeline"><p><strong>11:07</strong> — Study time begins.</p><p><strong>11:12</strong> — Check Canvas.</p><p><strong>11:19</strong> — Open reading.</p><p><strong>11:21</strong> — Check one message.</p><p><strong>11:28</strong> — Search for something unrelated.</p><p><strong>11:34</strong> — Reopen assignment.</p></div>
 <div class="warning"><strong>27 minutes have passed.</strong> The assignment is still waiting.</div>
-<p class="q">What's the most useful response?</p><div class="options" id="q0"><button class="choice" data-ok="false">I need to be more disciplined.</button><button class="choice" data-ok="true">Figure out what is making it hard to start, then choose a strategy that fits.</button><button class="choice" data-ok="false">Wait until I feel motivated.</button></div><div id="fb0" class="feedback"></div><div class="controls"><button class="primary next" disabled>What's My Kind of Stuck?</button></div></section>
-
+<p class="q">What's the most useful response?</p><div class="options" id="q0"><button class="choice" data-ok="false">I need to be more disciplined.</button><button class="choice" data-ok="true">Figure out what is making it hard to start, then choose a strategy that fits.</button><button class="choice" data-ok="false">Wait until I feel motivated.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fb0" role="status"></div><div class="controls"><button class="primary next" disabled="">What's My Kind of Stuck?</button></div></section>
 <section class="screen" data-step="1"><div class="kicker">Rescue 2 · Diagnose the Stuck</div><h2>“Procrastinating” Can Mean Different Things</h2><p class="q">Which one sounds most like what happens to you sometimes?</p>
 <div class="grid single" data-key="stuck"><button class="choice">🚪 I know what to do, but I can't start.</button><button class="choice">🌪️ The task feels huge.</button><button class="choice">❓ I don't know where to start.</button><button class="choice">🐿️ I start, but keep getting distracted.</button><button class="choice">🪫 I start, but lose focus quickly.</button><button class="choice">😰 I'm worried I'll do it badly.</button><button class="choice">🙄 I really don't want to do it.</button><button class="choice">⏰ I don't have much time, so starting feels pointless.</button></div>
-<div class="callout"><strong>Different kinds of stuck need different tools.</strong> You don't need every strategy. You need something reasonable to try for the problem you're having now.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Open the Toolbox</button></div></section>
-
-<section class="screen" data-step="2"><div class="kicker">Rescue 3 · Tiny Start</div><h2>Make the Starting Line Smaller</h2><div class="monster">WRITE ESSAY</div><p>Your brain may be reacting to the entire project at once. You don't need to shrink the goal. Shrink the <strong>first move</strong>.</p><p class="q">Which is the smallest useful start?</p><div class="options" id="q2"><button class="choice" data-ok="false">Write the introduction.</button><button class="choice" data-ok="false">Work for an hour.</button><button class="choice" data-ok="true">Open the draft and reread the last paragraph I wrote.</button><button class="choice" data-ok="false">Finish two pages.</button></div><div id="fb2" class="feedback"></div><div class="callout"><strong>Tool unlocked: 🚪 Tiny Start</strong><br>Make starting so small that you don't need to feel ready for the entire assignment.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Try Timer Lab</button></div></section>
-
+<div class="callout"><strong>Different kinds of stuck need different tools.</strong> You don't need every strategy. You need something reasonable to try for the problem you're having now.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Open the Toolbox</button></div></section>
+<section class="screen" data-step="2"><div class="kicker">Rescue 3 · Tiny Start</div><h2>Make the Starting Line Smaller</h2><div class="monster">WRITE ESSAY</div><p>Your brain may be reacting to the entire project at once. You don't need to shrink the goal. Shrink the <strong>first move</strong>.</p><p class="q">Which is the smallest useful start?</p><div class="options" id="q2"><button class="choice" data-ok="false">Write the introduction.</button><button class="choice" data-ok="false">Work for an hour.</button><button class="choice" data-ok="true">Open the draft and reread the last paragraph I wrote.</button><button class="choice" data-ok="false">Finish two pages.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fb2" role="status"></div><div class="callout"><strong>Tool unlocked: 🚪 Tiny Start</strong><br/>Make starting so small that you don't need to feel ready for the entire assignment.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Try Timer Lab</button></div></section>
 <section class="screen" data-step="3"><div class="kicker">Rescue 4 · Timer Lab</div><h2>🍅 Pomodoro Is One Tool — Not a Magic Number</h2><p>A classic Pomodoro uses about 25 minutes of work followed by a short break. But the useful idea is broader: <strong>give the work a boundary.</strong></p><p class="q">Choose a work period you'd actually be willing to start.</p>
 <div class="grid single" data-key="timer"><button class="choice">⏱️ 10 minutes</button><button class="choice">⏱️ 15 minutes</button><button class="choice">🍅 25 minutes</button><button class="choice">⏱️ 40 minutes</button><button class="choice">🧭 Until a natural stopping point</button><button class="choice">🤷 I need to experiment</button></div>
-<div class="note"><strong>25 isn't magic.</strong> A timer can reduce the feeling that you're committing to an endless task. Test a period that helps you begin without pushing past useful focus.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Handle Distractions</button></div></section>
-
-<section class="screen" data-step="4"><div class="kicker">Rescue 5 · Thought Parking Lot</div><h2>Your Brain Remembers Something Important</h2><div class="case">You're reading. Suddenly: <strong>“I need to email my professor.”</strong><br>Then: <strong>“Did I check my work schedule?”</strong><br>Then: <strong>“I should look up summer classes.”</strong></div><p class="q">What could keep those thoughts from taking over the study session?</p>
-<div class="options" id="q4"><button class="choice" data-ok="false">Handle every thought immediately.</button><button class="choice" data-ok="false">Try hard not to think about any of them.</button><button class="choice" data-ok="true">Put them somewhere I can return to later, then go back to the task.</button></div><div id="fb4" class="feedback"></div>
-<div id="parkingDemo" class="parking hidden"><strong>🅿️ Thought Parking Lot</strong><label for="parkInput" class="small" style="display:block;margin-top:8px">Something popped into your head?</label><div style="display:flex;gap:8px;margin-top:5px"><input id="parkInput" type="text" placeholder="Example: email professor"><button class="secondary" id="parkBtn" type="button">Park It</button></div><div id="parkList"></div></div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Change the Environment</button></div></section>
-
-<section class="screen" data-step="5"><div class="kicker">Rescue 6 · Add Friction</div><h2>Don't Make Willpower Do Every Job</h2><div class="case">📱 Phone beside laptop &nbsp; 🔔 Notifications on &nbsp; 🌐 Social tab open &nbsp; 📄 Assignment buried somewhere in Canvas</div><p class="q">Choose one small environmental change you could test.</p>
+<div class="note"><strong>25 isn't magic.</strong> A timer can reduce the feeling that you're committing to an endless task. Test a period that helps you begin without pushing past useful focus.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Handle Distractions</button></div></section>
+<section class="screen" data-step="4"><div class="kicker">Rescue 5 · Thought Parking Lot</div><h2>Your Brain Remembers Something Important</h2><div class="case">You're reading. Suddenly: <strong>“I need to email my professor.”</strong><br/>Then: <strong>“Did I check my work schedule?”</strong><br/>Then: <strong>“I should look up summer classes.”</strong></div><p class="q">What could keep those thoughts from taking over the study session?</p>
+<div class="options" id="q4"><button class="choice" data-ok="false">Handle every thought immediately.</button><button class="choice" data-ok="false">Try hard not to think about any of them.</button><button class="choice" data-ok="true">Put them somewhere I can return to later, then go back to the task.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fb4" role="status"></div>
+<div class="parking hidden" id="parkingDemo"><strong>🅿️ Thought Parking Lot</strong><label class="small" for="parkInput" style="display:block;margin-top:8px">Something popped into your head?</label><div style="display:flex;gap:8px;margin-top:5px"><input id="parkInput" placeholder="Example: email professor" type="text"/><button class="secondary" id="parkBtn" type="button">Park It</button></div><div id="parkList"></div></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Change the Environment</button></div></section>
+<section class="screen" data-step="5"><div class="kicker">Rescue 6 · Add Friction</div><h2>Don't Make Willpower Do Every Job</h2><div class="case">📱 Phone beside laptop   🔔 Notifications on   🌐 Social tab open   📄 Assignment buried somewhere in Canvas</div><p class="q">Choose one small environmental change you could test.</p>
 <div class="grid single" data-key="friction"><button class="choice">🎒 Put my phone in my bag</button><button class="choice">🔕 Turn on Do Not Disturb</button><button class="choice">↔️ Move my phone farther away</button><button class="choice">✖️ Close distracting tabs</button><button class="choice">📄 Open the assignment before I begin</button><button class="choice">✓ My environment isn't the main problem</button></div>
-<div class="callout"><strong>Your brain didn't suddenly become more disciplined.</strong> You just made distraction slightly less convenient or work slightly easier to enter.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Break Down the Monster</button></div></section>
-
-<section class="screen" data-step="6"><div class="kicker">Rescue 7 · Define Done</div><h2>Sometimes the Task Has No Visible Entrance</h2><div class="monster">DO THE READING</div><p class="q">Which version gives you a clearer finish line?</p><div class="options" id="q6"><button class="choice" data-ok="false">Work on the reading.</button><button class="choice" data-ok="true">Read pages 42–49 and mark three places that could help answer Question 2.</button><button class="choice" data-ok="false">Study until I understand everything.</button></div><div id="fb6" class="feedback"></div>
-<div class="note"><strong>Tool unlocked: 🎯 Define Done</strong><br>“Work on essay” and “do reading” are hard to enter. A visible task has an action and a stopping point.</div>
-<div class="case"><strong>Writing version:</strong><br>❌ Work on essay<br>✓ Draft paragraph 2, even if it's rough.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Escape the Perfectionism Trap</button></div></section>
-
-<section class="screen" data-step="7"><div class="kicker">Rescue 8 · Draft First</div><h2>The First Sentence Has Been Rewritten Seven Times</h2><div class="case">You keep polishing sentence one. Sentence two does not exist.</div><p class="q">What might help?</p><div class="options" id="q7"><button class="choice" data-ok="false">Keep improving the first sentence until it sounds academic enough.</button><button class="choice" data-ok="true">Give myself permission to write a rough version and keep moving.</button><button class="choice" data-ok="false">Stop until I know exactly how the paragraph should sound.</button></div><div id="fb7" class="feedback"></div><div class="callout"><strong>Drafting and polishing are different jobs.</strong> You can't revise a paragraph that doesn't exist yet.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Take the Focus Cases</button></div></section>
-
+<div class="callout"><strong>Your brain didn't suddenly become more disciplined.</strong> You just made distraction slightly less convenient or work slightly easier to enter.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Break Down the Monster</button></div></section>
+<section class="screen" data-step="6"><div class="kicker">Rescue 7 · Define Done</div><h2>Sometimes the Task Has No Visible Entrance</h2><div class="monster">DO THE READING</div><p class="q">Which version gives you a clearer finish line?</p><div class="options" id="q6"><button class="choice" data-ok="false">Work on the reading.</button><button class="choice" data-ok="true">Read pages 42–49 and mark three places that could help answer Question 2.</button><button class="choice" data-ok="false">Study until I understand everything.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fb6" role="status"></div>
+<div class="note"><strong>Tool unlocked: 🎯 Define Done</strong><br/>“Work on essay” and “do reading” are hard to enter. A visible task has an action and a stopping point.</div>
+<div class="case"><strong>Writing version:</strong><br/>❌ Work on essay<br/>✓ Draft paragraph 2, even if it's rough.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Escape the Perfectionism Trap</button></div></section>
+<section class="screen" data-step="7"><div class="kicker">Rescue 8 · Draft First</div><h2>The First Sentence Has Been Rewritten Seven Times</h2><div class="case">You keep polishing sentence one. Sentence two does not exist.</div><p class="q">What might help?</p><div class="options" id="q7"><button class="choice" data-ok="false">Keep improving the first sentence until it sounds academic enough.</button><button class="choice" data-ok="true">Give myself permission to write a rough version and keep moving.</button><button class="choice" data-ok="false">Stop until I know exactly how the paragraph should sound.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fb7" role="status"></div><div class="callout"><strong>Drafting and polishing are different jobs.</strong> You can't revise a paragraph that doesn't exist yet.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Take the Focus Cases</button></div></section>
 <section class="screen" data-step="8"><div class="kicker">Rescue 9 · Focus Cases</div><h2>Pick a Reasonable Tool</h2><div class="toolbox"><div class="tool">🚪<b>Tiny Start</b></div><div class="tool">⏱️<b>Timer Sprint</b></div><div class="tool">🎯<b>Define Done</b></div><div class="tool">🅿️<b>Parking Lot</b></div><div class="tool">👥<b>Work Beside Someone</b></div><div class="tool">📵<b>Add Friction</b></div><div class="tool">🧱<b>Break It Down</b></div><div class="tool">🤝<b>10-Minute Deal</b></div></div>
-<div class="case"><strong>CASE: Maria</strong><br>Maria has 35 minutes before work. She thinks there's no point starting her essay because she can't finish it.</div><p class="q">Which could be a useful move?</p><div class="options" id="case1"><button class="choice" data-ok="true">🎯 Define today's “done” as drafting one paragraph.</button><button class="choice" data-ok="true">⏱️ Use one short focused work period.</button><button class="choice" data-ok="false">Wait for a day when she has enough time to finish the whole essay.</button></div><div id="fbc1" class="feedback"></div>
-<div class="case"><strong>CASE: Jordan</strong><br>Jordan knows exactly what to write but has spent 35 minutes avoiding opening the document.</div><p class="q">Which could help?</p><div class="options" id="case2"><button class="choice" data-ok="true">🚪 Make the first job simply opening the document.</button><button class="choice" data-ok="true">🤝 Make a 10-minute deal: start for ten minutes, then reassess.</button><button class="choice" data-ok="false">Make a more detailed semester schedule before starting.</button></div><div id="fbc2" class="feedback"></div>
-<div class="callout"><strong>There isn't always one secret correct technique.</strong> Pick a strategy that matches the problem, try it, and see what happens.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Rescue My Actual Work</button></div></section>
-
+<div class="case"><strong>CASE: Maria</strong><br/>Maria has 35 minutes before work. She thinks there's no point starting her essay because she can't finish it.</div><p class="q">Which could be a useful move?</p><div class="options" id="case1"><button class="choice" data-ok="true">🎯 Define today's “done” as drafting one paragraph.</button><button class="choice" data-ok="true">⏱️ Use one short focused work period.</button><button class="choice" data-ok="false">Wait for a day when she has enough time to finish the whole essay.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fbc1" role="status"></div>
+<div class="case"><strong>CASE: Jordan</strong><br/>Jordan knows exactly what to write but has spent 35 minutes avoiding opening the document.</div><p class="q">Which could help?</p><div class="options" id="case2"><button class="choice" data-ok="true">🚪 Make the first job simply opening the document.</button><button class="choice" data-ok="true">🤝 Make a 10-minute deal: start for ten minutes, then reassess.</button><button class="choice" data-ok="false">Make a more detailed semester schedule before starting.</button></div><div aria-atomic="true" aria-live="polite" class="feedback" id="fbc2" role="status"></div>
+<div class="callout"><strong>There isn't always one secret correct technique.</strong> Pick a strategy that matches the problem, try it, and see what happens.</div><div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Rescue My Actual Work</button></div></section>
 <section class="screen" data-step="9"><div class="kicker">Rescue 10 · Name the Problem</div><h2>Rescue Your Actual Work</h2>
 <label for="task"><strong>What are you supposed to be working on?</strong></label>
-<input id="task" type="text" placeholder="Example: Read Chapter 4 or draft Essay 2">
-<p class="q">What's getting in the way right now?</p>
+<input id="task" placeholder="Example: Read Chapter 4 or draft Essay 2" type="text"/>
+<label class="q" for="problem">What's getting in the way right now?</label>
 <select id="problem">
 <option value="">Choose one</option>
 <option>🚪 I can't start</option>
@@ -103,18 +93,16 @@ textarea{min-height:78px;resize:vertical}.controls{display:flex;justify-content:
 <option>🙄 I really don't want to do it</option>
 <option>⏰ I only have a little time</option>
 </select>
-<div class="callout"><strong>You are not diagnosing your personality.</strong><br>You are identifying the barrier that matters for this work session so you can choose a tool that fits.</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" id="problemNext" disabled>Make the Starting Line Smaller</button></div>
+<div class="callout"><strong>You are not diagnosing your personality.</strong><br/>You are identifying the barrier that matters for this work session so you can choose a tool that fits.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="" id="problemNext">Make the Starting Line Smaller</button></div>
 </section>
-
 <section class="screen" data-step="10"><div class="kicker">Rescue 11 · Tiny Start</div><h2>What Is the First Move?</h2>
 <p>Your first move should be specific enough that you can do it without solving the whole assignment first.</p>
-<div class="case"><strong>Too big:</strong> “Work on my essay.”<br><strong>Usable:</strong> “Open the draft and reread the last paragraph.”</div>
+<div class="case"><strong>Too big:</strong> “Work on my essay.”<br/><strong>Usable:</strong> “Open the draft and reread the last paragraph.”</div>
 <label for="first"><strong>Make your first step ridiculously specific and small.</strong></label>
-<input id="first" type="text" placeholder="Example: Open the article and read the first two pages">
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" id="firstNext" disabled>Choose a Work Deal</button></div>
+<input id="first" placeholder="Example: Open the article and read the first two pages" type="text"/>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="" id="firstNext">Choose a Work Deal</button></div>
 </section>
-
 <section class="screen" data-step="11"><div class="kicker">Rescue 12 · Make a Deal</div><h2>Give the Work a Boundary</h2>
 <p>You are not promising to finish the assignment. Choose a work period you are actually willing to begin.</p>
 <p class="q">Choose a short work deal.</p>
@@ -125,9 +113,8 @@ textarea{min-height:78px;resize:vertical}.controls{display:flex;justify-content:
 <button class="choice">40 minutes</button>
 </div>
 <div class="note"><strong>This is an experiment.</strong> The best interval is the one that helps you enter the work and gives you useful information about what happens next.</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" id="timerNext" disabled>Choose One Support</button></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="" id="timerNext">Choose One Support</button></div>
 </section>
-
 <section class="screen" data-step="12"><div class="kicker">Rescue 13 · Build the Plan</div><h2>Choose One Support to Test</h2>
 <p>You already have a task, a barrier, a first move, and a work boundary. Add <strong>one</strong> support rather than trying every productivity trick at once.</p>
 <div class="grid single" data-key="support">
@@ -138,34 +125,31 @@ textarea{min-height:78px;resize:vertical}.controls{display:flex;justify-content:
 <button class="choice">✍️ Give myself permission to make it rough</button>
 <button class="choice">🎯 Define exactly what “done for now” means</button>
 </div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary" id="build" disabled>Build My Rescue Plan</button></div>
-
-<div id="plan" class="plan hidden" aria-live="polite">
+<div class="controls"><button class="secondary back">Back</button><button class="primary" disabled="" id="build">Build My Rescue Plan</button></div>
+<div aria-live="polite" class="plan hidden" id="plan">
 <h2 style="margin-top:0">🛟 My Focus Rescue Plan</h2>
 <div class="planrow"><strong>I'm working on:</strong><div id="pTask"></div></div>
 <div class="planrow"><strong>What's happening:</strong><div id="pProblem"></div></div>
 <div class="planrow"><strong>My first tiny move:</strong><div id="pFirst"></div></div>
 <div class="planrow"><strong>My work deal:</strong><div id="pTimer"></div></div>
 <div class="planrow"><strong>Support I'll test:</strong><div id="pSupport"></div></div>
-<div class="callout"><strong>You have a strategy. Don't keep planning how you're going to work.</strong><br>Do the first tiny step.</div>
+<div class="callout"><strong>You have a strategy. Don't keep planning how you're going to work.</strong><br/>Do the first tiny step.</div>
 <button class="primary" id="startTimer" type="button">▶ Start My Focus Sprint</button>
 </div>
-
-<div id="timerBox" class="timerbox hidden">
+<div class="timerbox hidden" id="timerBox">
 <div class="small" style="color:#dfe2f0">FOCUS SPRINT</div>
 <div class="timer" id="timerDisplay">10:00</div>
 <div class="timerTask" id="timerTask"></div>
 <div class="timerButtons">
 <button id="pause">Pause</button><button id="reset">Reset</button><button id="parkOpen">🅿️ Park a Thought</button>
 </div>
-<div id="timerParking" class="parking hidden" style="color:var(--ink);text-align:left">
+<div class="parking hidden" id="timerParking" style="color:var(--ink);text-align:left">
 <label for="timerPark">Save it for later, then return to your task.</label>
-<div style="display:flex;gap:8px;margin-top:6px"><input id="timerPark" type="text"><button id="timerParkBtn" class="secondary">Park It</button></div>
+<div style="display:flex;gap:8px;margin-top:6px"><input id="timerPark" type="text"/><button class="secondary" id="timerParkBtn">Park It</button></div>
 <div id="timerParkList"></div>
 </div>
 </div>
-
-<div id="reflection" class="plan hidden">
+<div class="plan hidden" id="reflection">
 <h2 style="margin-top:0">⏰ Check the Experiment</h2>
 <p>What happened?</p>
 <div class="options" id="reflect">
@@ -294,4 +278,4 @@ document.querySelectorAll('#reflect .choice').forEach(b=>b.onclick=()=>{
 });
 update();
 })();
-</script></body></html>
+</script><div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body></html>

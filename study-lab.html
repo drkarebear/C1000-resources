@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Study Lab: Figure Out How You Get Work Done</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
  --bg:#f5f3ee;--ink:#24313b;--muted:#66737c;--card:#fff;--line:#d9d3ca;
@@ -52,7 +53,6 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
 @media(max-width:480px){.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -60,200 +60,185 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
+<main id="main">
 <section class="hero">
- <div class="kicker" style="color:#ddd9ff">College Learning Lab</div>
- <h1>🧪 Study Lab</h1>
- <p><strong>Figure out how you get work done.</strong></p>
- <p>You don't need the “perfect” study routine. You need to notice what helps you focus, match your work to the conditions you actually have, and test what works.</p>
- <p class="mini">This activity does not assign you a learning style. You're running a small experiment on yourself.</p>
+<div class="kicker" style="color:#ddd9ff">College Learning Lab</div>
+<h1>🧪 Study Lab</h1>
+<p><strong>Figure out how you get work done.</strong></p>
+<p>You don't need the “perfect” study routine. You need to notice what helps you focus, match your work to the conditions you actually have, and test what works.</p>
+<p class="mini">This activity does not assign you a learning style. You're running a small experiment on yourself.</p>
 </section>
-
-<section class="progressbox" aria-label="Activity progress">
- <div class="proglabel"><span id="stepText">Experiment 1 of 8</span><span id="stepName">Start with a hypothesis</span></div>
- <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+<section aria-label="Activity progress" class="progressbox">
+<div class="proglabel"><span id="stepText">Experiment 1 of 8</span><span id="stepName">Start with a hypothesis</span></div>
+<div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
 </section>
-<div id="live" class="small" aria-live="polite"></div>
-
+<div aria-live="polite" class="small" id="live"></div>
 <section class="screen active" data-step="0">
- <div class="kicker">Experiment 1 · Start Here</div>
- <h2>There Is No Perfect Place to Study</h2>
- <div class="note"><strong>The question isn't:</strong> “What's the best way to study?”<br><strong>The better question:</strong> “What helps my brain do <em>this kind of work</em>?”</div>
- <p>Some people need silence. Some like background noise. Some focus around other people. Some need to be alone. And the conditions that work for difficult reading may not be the conditions that work for proofreading or checking Canvas.</p>
- <p class="q">Which idea will guide this lab?</p>
- <div class="options" id="startQuiz">
-  <button class="choice" data-ok="false" aria-pressed="false">Successful college students all need basically the same study routine.</button>
-  <button class="choice" data-ok="true" aria-pressed="false">I can notice patterns, test conditions, and adjust based on the kind of work I'm doing.</button>
-  <button class="choice" data-ok="false" aria-pressed="false">If I cannot create ideal study conditions, I probably cannot do useful work.</button>
- </div>
- <div id="fb0" class="feedback"></div>
- <div class="controls"><button class="primary next" disabled>Test My Time</button></div>
+<div class="kicker">Experiment 1 · Start Here</div>
+<h2>There Is No Perfect Place to Study</h2>
+<div class="note"><strong>The question isn't:</strong> “What's the best way to study?”<br/><strong>The better question:</strong> “What helps my brain do <em>this kind of work</em>?”</div>
+<p>Some people need silence. Some like background noise. Some focus around other people. Some need to be alone. And the conditions that work for difficult reading may not be the conditions that work for proofreading or checking Canvas.</p>
+<p class="q">Which idea will guide this lab?</p>
+<div class="options" id="startQuiz">
+<button aria-pressed="false" class="choice" data-ok="false">Successful college students all need basically the same study routine.</button>
+<button aria-pressed="false" class="choice" data-ok="true">I can notice patterns, test conditions, and adjust based on the kind of work I'm doing.</button>
+<button aria-pressed="false" class="choice" data-ok="false">If I cannot create ideal study conditions, I probably cannot do useful work.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb0" role="status"></div>
+<div class="controls"><button class="primary next" disabled="">Test My Time</button></div>
 </section>
-
 <section class="screen" data-step="1">
- <div class="kicker">Experiment 2 · Time</div>
- <h2>When Does Your Brain Have More to Give?</h2>
- <div class="scenario"><strong>Scenario:</strong> It's 9:00 p.m. You've been awake since early morning. You finally have 45 minutes available. You planned to tackle the hardest reading of the week.</div>
- <p class="q">What's the strongest first question?</p>
- <div class="options" id="timeQuiz">
-  <button class="choice" data-ok="false" aria-pressed="false">“Do I technically have 45 minutes?”</button>
-  <button class="choice" data-ok="true" aria-pressed="false">“Can I actually concentrate on difficult reading right now?”</button>
-  <button class="choice" data-ok="false" aria-pressed="false">“Should everyone avoid studying at night?”</button>
- </div>
- <div id="fb1" class="feedback"></div>
- <div class="callout"><strong>Available time ≠ useful focus time.</strong> A time slot can still be useful even if it isn't the right time for your hardest task.</div>
- <p class="q">When does difficult thinking seem most promising for you?</p>
- <div class="grid singlePick" data-key="time">
-  <button class="choice" aria-pressed="false">🌅 Early morning</button><button class="choice" aria-pressed="false">☀️ Late morning</button>
-  <button class="choice" aria-pressed="false">🌤️ Afternoon</button><button class="choice" aria-pressed="false">🌆 Evening</button>
-  <button class="choice" aria-pressed="false">🌙 Late night</button><button class="choice" aria-pressed="false">🤷 I don't know yet — I can test it</button>
- </div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Test My Place</button></div>
+<div class="kicker">Experiment 2 · Time</div>
+<h2>When Does Your Brain Have More to Give?</h2>
+<div class="scenario"><strong>Scenario:</strong> It's 9:00 p.m. You've been awake since early morning. You finally have 45 minutes available. You planned to tackle the hardest reading of the week.</div>
+<p class="q">What's the strongest first question?</p>
+<div class="options" id="timeQuiz">
+<button aria-pressed="false" class="choice" data-ok="false">“Do I technically have 45 minutes?”</button>
+<button aria-pressed="false" class="choice" data-ok="true">“Can I actually concentrate on difficult reading right now?”</button>
+<button aria-pressed="false" class="choice" data-ok="false">“Should everyone avoid studying at night?”</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb1" role="status"></div>
+<div class="callout"><strong>Available time ≠ useful focus time.</strong> A time slot can still be useful even if it isn't the right time for your hardest task.</div>
+<p class="q">When does difficult thinking seem most promising for you?</p>
+<div class="grid singlePick" data-key="time">
+<button aria-pressed="false" class="choice">🌅 Early morning</button><button aria-pressed="false" class="choice">☀️ Late morning</button>
+<button aria-pressed="false" class="choice">🌤️ Afternoon</button><button aria-pressed="false" class="choice">🌆 Evening</button>
+<button aria-pressed="false" class="choice">🌙 Late night</button><button aria-pressed="false" class="choice">🤷 I don't know yet — I can test it</button>
+</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Test My Place</button></div>
 </section>
-
 <section class="screen" data-step="2">
- <div class="kicker">Experiment 3 · Place</div>
- <h2>Where Do You Actually Finish Things?</h2>
- <p>Your favorite place to sit is not always your best place for every kind of work.</p>
- <p class="q">Where have you actually gotten focused work done — or where would you like to test it?</p>
- <div class="grid singlePick" data-key="place">
-  <button class="choice" aria-pressed="false">📚 Library</button><button class="choice" aria-pressed="false">🏫 Campus study area</button>
-  <button class="choice" aria-pressed="false">🍽️ Table or desk at home</button><button class="choice" aria-pressed="false">🛋️ Couch</button>
-  <button class="choice" aria-pressed="false">🛏️ Bedroom</button><button class="choice" aria-pressed="false">☕ Coffee shop</button>
-  <button class="choice" aria-pressed="false">🌳 Outside</button><button class="choice" aria-pressed="false">🚌 Bus/train or while commuting</button>
-  <button class="choice" aria-pressed="false">💼 Work break</button><button class="choice" aria-pressed="false">🤷 I need to experiment</button>
- </div>
- <div class="note"><strong>Useful question:</strong> Don't only ask “Where do I usually start?” Ask “Where do I actually finish things?”</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Test Sound + People</button></div>
+<div class="kicker">Experiment 3 · Place</div>
+<h2>Where Do You Actually Finish Things?</h2>
+<p>Your favorite place to sit is not always your best place for every kind of work.</p>
+<p class="q">Where have you actually gotten focused work done — or where would you like to test it?</p>
+<div class="grid singlePick" data-key="place">
+<button aria-pressed="false" class="choice">📚 Library</button><button aria-pressed="false" class="choice">🏫 Campus study area</button>
+<button aria-pressed="false" class="choice">🍽️ Table or desk at home</button><button aria-pressed="false" class="choice">🛋️ Couch</button>
+<button aria-pressed="false" class="choice">🛏️ Bedroom</button><button aria-pressed="false" class="choice">☕ Coffee shop</button>
+<button aria-pressed="false" class="choice">🌳 Outside</button><button aria-pressed="false" class="choice">🚌 Bus/train or while commuting</button>
+<button aria-pressed="false" class="choice">💼 Work break</button><button aria-pressed="false" class="choice">🤷 I need to experiment</button>
+</div>
+<div class="note"><strong>Useful question:</strong> Don't only ask “Where do I usually start?” Ask “Where do I actually finish things?”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Test Sound + People</button></div>
 </section>
-
 <section class="screen" data-step="3">
- <div class="kicker">Experiment 4 · Sound + People</div>
- <h2>Quiet, Noise, or Someone Nearby?</h2>
- <p class="q">For difficult reading or writing, what seems most promising?</p>
- <div class="grid singlePick" data-key="sound">
-  <button class="choice" aria-pressed="false">🔇 Silence</button><button class="choice" aria-pressed="false">🎧 Noise-reducing headphones</button>
-  <button class="choice" aria-pressed="false">🎵 Music without lyrics</button><button class="choice" aria-pressed="false">🎶 Music with lyrics</button>
-  <button class="choice" aria-pressed="false">🌧️ Ambient sound</button><button class="choice" aria-pressed="false">☕ Background chatter</button>
-  <button class="choice" aria-pressed="false">🤷 I need to test different sound levels</button>
- </div>
- <p class="q">What about other people?</p>
- <div class="grid singlePick" data-key="people">
-  <button class="choice" aria-pressed="false">🙋 I focus better by myself</button>
-  <button class="choice" aria-pressed="false">👥 I may focus better when other people are working nearby</button>
-  <button class="choice" aria-pressed="false">📱 A virtual study buddy might help</button>
-  <button class="choice" aria-pressed="false">🏫 Going somewhere where people are studying helps me start</button>
-  <button class="choice" aria-pressed="false">🤷 I've never paid attention — I'll test it</button>
- </div>
- <div class="callout"><strong>Study buddy doesn't have to mean tutor.</strong> Sometimes another person quietly doing their own work makes it easier to start and stay with yours. You can test that without deciding it has to work for you.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Check the Basics</button></div>
+<div class="kicker">Experiment 4 · Sound + People</div>
+<h2>Quiet, Noise, or Someone Nearby?</h2>
+<p class="q">For difficult reading or writing, what seems most promising?</p>
+<div class="grid singlePick" data-key="sound">
+<button aria-pressed="false" class="choice">🔇 Silence</button><button aria-pressed="false" class="choice">🎧 Noise-reducing headphones</button>
+<button aria-pressed="false" class="choice">🎵 Music without lyrics</button><button aria-pressed="false" class="choice">🎶 Music with lyrics</button>
+<button aria-pressed="false" class="choice">🌧️ Ambient sound</button><button aria-pressed="false" class="choice">☕ Background chatter</button>
+<button aria-pressed="false" class="choice">🤷 I need to test different sound levels</button>
+</div>
+<p class="q">What about other people?</p>
+<div class="grid singlePick" data-key="people">
+<button aria-pressed="false" class="choice">🙋 I focus better by myself</button>
+<button aria-pressed="false" class="choice">👥 I may focus better when other people are working nearby</button>
+<button aria-pressed="false" class="choice">📱 A virtual study buddy might help</button>
+<button aria-pressed="false" class="choice">🏫 Going somewhere where people are studying helps me start</button>
+<button aria-pressed="false" class="choice">🤷 I've never paid attention — I'll test it</button>
+</div>
+<div class="callout"><strong>Study buddy doesn't have to mean tutor.</strong> Sometimes another person quietly doing their own work makes it easier to start and stay with yours. You can test that without deciding it has to work for you.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Check the Basics</button></div>
 </section>
-
 <section class="screen" data-step="4">
- <div class="kicker">Experiment 5 · Your Body Is in the Room Too</div>
- <h2>Before You Blame Your Focus, Check the Basics</h2>
- <p>You don't need to optimize yourself like a machine. But physical discomfort can use attention too.</p>
- <p class="q">Before a study session, what might be worth checking? Select any that are useful to you.</p>
- <div class="checks" id="bodyChecks">
-  <label class="check"><input type="checkbox" value="🥤 Get water"><span>🥤 Am I thirsty?</span></label>
-  <label class="check"><input type="checkbox" value="🍎 Eat if I need to"><span>🍎 Am I hungry or do I need to eat?</span></label>
-  <label class="check"><input type="checkbox" value="🚶 Move for a few minutes"><span>🚶 Would a little movement help?</span></label>
-  <label class="check"><input type="checkbox" value="😴 Notice my energy level"><span>😴 Am I too exhausted for the hardest task?</span></label>
-  <label class="check"><input type="checkbox" value="🚻 Take care of physical needs"><span>🚻 Do I need a bathroom break?</span></label>
-  <label class="check"><input type="checkbox" value="🪑 Get physically comfortable"><span>🪑 Am I physically comfortable enough to work?</span></label>
-  <label class="check"><input type="checkbox" value="👀 Take a screen break if needed"><span>👀 Have I been staring at a screen too long?</span></label>
-  <label class="check"><input type="checkbox" value="🔌 Get materials ready"><span>🔌 Do I have the charger, reading, notes, or materials I need?</span></label>
- </div>
- <div class="small" style="margin-top:10px">Food, caffeine, sleep, medication, and health needs vary from person to person. This activity is about noticing your own practical needs, not following a universal rule.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next">Run the Phone Test</button></div>
+<div class="kicker">Experiment 5 · Your Body Is in the Room Too</div>
+<h2>Before You Blame Your Focus, Check the Basics</h2>
+<p>You don't need to optimize yourself like a machine. But physical discomfort can use attention too.</p>
+<p class="q">Before a study session, what might be worth checking? Select any that are useful to you.</p>
+<div class="checks" id="bodyChecks">
+<label class="check"><input type="checkbox" value="🥤 Get water"/><span>🥤 Am I thirsty?</span></label>
+<label class="check"><input type="checkbox" value="🍎 Eat if I need to"/><span>🍎 Am I hungry or do I need to eat?</span></label>
+<label class="check"><input type="checkbox" value="🚶 Move for a few minutes"/><span>🚶 Would a little movement help?</span></label>
+<label class="check"><input type="checkbox" value="😴 Notice my energy level"/><span>😴 Am I too exhausted for the hardest task?</span></label>
+<label class="check"><input type="checkbox" value="🚻 Take care of physical needs"/><span>🚻 Do I need a bathroom break?</span></label>
+<label class="check"><input type="checkbox" value="🪑 Get physically comfortable"/><span>🪑 Am I physically comfortable enough to work?</span></label>
+<label class="check"><input type="checkbox" value="👀 Take a screen break if needed"/><span>👀 Have I been staring at a screen too long?</span></label>
+<label class="check"><input type="checkbox" value="🔌 Get materials ready"/><span>🔌 Do I have the charger, reading, notes, or materials I need?</span></label>
+</div>
+<div class="small" style="margin-top:10px">Food, caffeine, sleep, medication, and health needs vary from person to person. This activity is about noticing your own practical needs, not following a universal rule.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next">Run the Phone Test</button></div>
 </section>
-
 <section class="screen" data-step="5">
- <div class="kicker">Experiment 6 · Distraction</div>
- <h2>The Two-Minute Phone Check</h2>
- <div class="scenario">You pick up your phone to check one notification during a study session.</div>
- <p class="q">Be extremely honest: what tends to happen next?</p>
- <div class="grid singlePick" data-key="phonePattern">
-  <button class="choice" aria-pressed="false">⚡ I usually come right back</button><button class="choice" aria-pressed="false">⏳ A few minutes disappear</button>
-  <button class="choice" aria-pressed="false">🕰️ It can become 15–30 minutes</button><button class="choice" aria-pressed="false">😅 Sometimes I forget what I was doing</button>
-  <button class="choice" aria-pressed="false">🤷 My phone isn't usually my main distraction</button>
- </div>
- <div class="callout"><strong>No judgment — just data.</strong> If a two-minute check reliably becomes twenty minutes, that's useful information.</div>
- <p class="q">Choose one phone setup you could test.</p>
- <div class="grid singlePick" data-key="phonePlan">
-  <button class="choice" aria-pressed="false">🔕 Do Not Disturb</button><button class="choice" aria-pressed="false">🎒 Phone in my bag</button>
-  <button class="choice" aria-pressed="false">↔️ Phone farther away</button><button class="choice" aria-pressed="false">⏱️ Check after a work interval</button>
-  <button class="choice" aria-pressed="false">📱 Face down / notifications hidden</button><button class="choice" aria-pressed="false">✓ I don't need a phone change right now</button>
- </div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Match Task to Conditions</button></div>
+<div class="kicker">Experiment 6 · Distraction</div>
+<h2>The Two-Minute Phone Check</h2>
+<div class="scenario">You pick up your phone to check one notification during a study session.</div>
+<p class="q">Be extremely honest: what tends to happen next?</p>
+<div class="grid singlePick" data-key="phonePattern">
+<button aria-pressed="false" class="choice">⚡ I usually come right back</button><button aria-pressed="false" class="choice">⏳ A few minutes disappear</button>
+<button aria-pressed="false" class="choice">🕰️ It can become 15–30 minutes</button><button aria-pressed="false" class="choice">😅 Sometimes I forget what I was doing</button>
+<button aria-pressed="false" class="choice">🤷 My phone isn't usually my main distraction</button>
+</div>
+<div class="callout"><strong>No judgment — just data.</strong> If a two-minute check reliably becomes twenty minutes, that's useful information.</div>
+<p class="q">Choose one phone setup you could test.</p>
+<div class="grid singlePick" data-key="phonePlan">
+<button aria-pressed="false" class="choice">🔕 Do Not Disturb</button><button aria-pressed="false" class="choice">🎒 Phone in my bag</button>
+<button aria-pressed="false" class="choice">↔️ Phone farther away</button><button aria-pressed="false" class="choice">⏱️ Check after a work interval</button>
+<button aria-pressed="false" class="choice">📱 Face down / notifications hidden</button><button aria-pressed="false" class="choice">✓ I don't need a phone change right now</button>
+</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Match Task to Conditions</button></div>
 </section>
-
 <section class="screen" data-step="6">
- <div class="kicker">Experiment 7 · Task Matching</div>
- <h2>Not Every Task Needs the Same Amount of Focus</h2>
- <div class="taskgrid">
-  <div class="taskcol"><strong>🔴 Higher Focus</strong>Dense reading<br>Figuring out an argument<br>Drafting a difficult paragraph</div>
-  <div class="taskcol"><strong>🟡 Medium Focus</strong>Reviewing notes<br>Finding sources<br>Revising an existing section</div>
-  <div class="taskcol"><strong>🟢 Lower Focus</strong>Checking due dates<br>Downloading readings<br>Formatting<br>Organizing files</div>
- </div>
- <div class="scenario"><strong>You have 25 minutes on the bus.</strong> It's noisy and you know dense reading is difficult for you there. What is the strongest move?</div>
- <div class="options" id="matchQuiz">
-  <button class="choice" data-ok="false" aria-pressed="false">Force myself through the hardest reading. Any study time should go to the hardest task.</button>
-  <button class="choice" data-ok="true" aria-pressed="false">Use the time for a task that fits the conditions, then save the dense reading for a better focus window.</button>
-  <button class="choice" data-ok="false" aria-pressed="false">Do nothing. If conditions aren't ideal, studying isn't worthwhile.</button>
- </div>
- <div id="fb6" class="feedback"></div>
- <div class="callout"><strong>Don't waste usable time. Match the task to the conditions.</strong> A less-than-ideal study window can still be useful.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Build My Experiment</button></div>
+<div class="kicker">Experiment 7 · Task Matching</div>
+<h2>Not Every Task Needs the Same Amount of Focus</h2>
+<div class="taskgrid">
+<div class="taskcol"><strong>🔴 Higher Focus</strong>Dense reading<br/>Figuring out an argument<br/>Drafting a difficult paragraph</div>
+<div class="taskcol"><strong>🟡 Medium Focus</strong>Reviewing notes<br/>Finding sources<br/>Revising an existing section</div>
+<div class="taskcol"><strong>🟢 Lower Focus</strong>Checking due dates<br/>Downloading readings<br/>Formatting<br/>Organizing files</div>
+</div>
+<div class="scenario"><strong>You have 25 minutes on the bus.</strong> It's noisy and you know dense reading is difficult for you there. What is the strongest move?</div>
+<div class="options" id="matchQuiz">
+<button aria-pressed="false" class="choice" data-ok="false">Force myself through the hardest reading. Any study time should go to the hardest task.</button>
+<button aria-pressed="false" class="choice" data-ok="true">Use the time for a task that fits the conditions, then save the dense reading for a better focus window.</button>
+<button aria-pressed="false" class="choice" data-ok="false">Do nothing. If conditions aren't ideal, studying isn't worthwhile.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb6" role="status"></div>
+<div class="callout"><strong>Don't waste usable time. Match the task to the conditions.</strong> A less-than-ideal study window can still be useful.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Build My Experiment</button></div>
 </section>
-
 <section class="screen" data-step="7">
- <div class="kicker">Experiment 8 · Choose a Work Boundary</div>
- <h2>How Long Will You Test the Conditions?</h2>
- <p>You have already noticed patterns about time, place, sound, people, physical needs, distractions, and task difficulty. Now choose a <strong>work boundary to test</strong>.</p>
- <p class="q">Which interval feels realistic enough to try?</p>
- <div class="grid singlePick" data-key="interval">
-  <button class="choice" aria-pressed="false">⏱️ 15 minutes</button>
-  <button class="choice" aria-pressed="false">⏱️ 25 minutes</button>
-  <button class="choice" aria-pressed="false">⏱️ 40 minutes</button>
-  <button class="choice" aria-pressed="false">⏱️ 50 minutes</button>
-  <button class="choice" aria-pressed="false">🧭 I'll stop at a natural break</button>
-  <button class="choice" aria-pressed="false">🤷 I want to compare two intervals</button>
- </div>
- <div class="note"><strong>The goal is not to discover your perfect number.</strong><br>Pick something you can test, then notice whether it helps you start, stay with the task, understand more, or finish more.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" id="makeRecipe" disabled>Build My Study Experiment</button></div>
+<div class="kicker">Experiment 8 · Choose a Work Boundary</div>
+<h2>How Long Will You Test the Conditions?</h2>
+<p>You have already noticed patterns about time, place, sound, people, physical needs, distractions, and task difficulty. Now choose a <strong>work boundary to test</strong>.</p>
+<p class="q">Which interval feels realistic enough to try?</p>
+<div class="grid singlePick" data-key="interval">
+<button aria-pressed="false" class="choice">⏱️ 15 minutes</button>
+<button aria-pressed="false" class="choice">⏱️ 25 minutes</button>
+<button aria-pressed="false" class="choice">⏱️ 40 minutes</button>
+<button aria-pressed="false" class="choice">⏱️ 50 minutes</button>
+<button aria-pressed="false" class="choice">🧭 I'll stop at a natural break</button>
+<button aria-pressed="false" class="choice">🤷 I want to compare two intervals</button>
+</div>
+<div class="note"><strong>The goal is not to discover your perfect number.</strong><br/>Pick something you can test, then notice whether it helps you start, stay with the task, understand more, or finish more.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="" id="makeRecipe">Build My Study Experiment</button></div>
 </section>
-
 <section class="screen" data-step="8">
- <div class="kicker">Experiment 9 · Your Plan</div>
- <h2>🧪 My Study Experiment</h2>
- <p>This is a <strong>hypothesis</strong> based on what you noticed—not a permanent rule about how you learn.</p>
-
- <div class="recipe" id="recipe" aria-live="polite">
-  <div class="recipe-row"><strong>Hard thinking seems most promising:</strong><div id="rTime"></div></div>
-  <div class="recipe-row"><strong>Place I want to use or test:</strong><div id="rPlace"></div></div>
-  <div class="recipe-row"><strong>Sound:</strong><div id="rSound"></div></div>
-  <div class="recipe-row"><strong>People:</strong><div id="rPeople"></div></div>
-  <div class="recipe-row"><strong>Before I start, I may:</strong><div id="rBody"></div></div>
-  <div class="recipe-row"><strong>Phone experiment:</strong><div id="rPhone"></div></div>
-  <div class="recipe-row"><strong>Work interval:</strong><div id="rInterval"></div></div>
-  <div class="recipe-row"><strong>When conditions aren't great:</strong><div>I'll choose a task that fits the conditions instead of assuming the whole study session is ruined.</div></div>
- </div>
-
- <div class="note"><strong>Run the experiment two or three times.</strong><br>Did you actually start more easily, stay with the work longer, understand more, or finish more? <strong>Keep what helps. Change what doesn't.</strong></div>
-
- <div class="callout"><strong>One useful question after each attempt:</strong><br>“What should I keep, change, or test next time?”</div>
-
- <div class="controls"><button class="secondary back">Back</button><button class="primary" id="restartExperiment">Start Over</button></div>
+<div class="kicker">Experiment 9 · Your Plan</div>
+<h2>🧪 My Study Experiment</h2>
+<p>This is a <strong>hypothesis</strong> based on what you noticed—not a permanent rule about how you learn.</p>
+<div aria-live="polite" class="recipe" id="recipe">
+<div class="recipe-row"><strong>Hard thinking seems most promising:</strong><div id="rTime"></div></div>
+<div class="recipe-row"><strong>Place I want to use or test:</strong><div id="rPlace"></div></div>
+<div class="recipe-row"><strong>Sound:</strong><div id="rSound"></div></div>
+<div class="recipe-row"><strong>People:</strong><div id="rPeople"></div></div>
+<div class="recipe-row"><strong>Before I start, I may:</strong><div id="rBody"></div></div>
+<div class="recipe-row"><strong>Phone experiment:</strong><div id="rPhone"></div></div>
+<div class="recipe-row"><strong>Work interval:</strong><div id="rInterval"></div></div>
+<div class="recipe-row"><strong>When conditions aren't great:</strong><div>I'll choose a task that fits the conditions instead of assuming the whole study session is ruined.</div></div>
+</div>
+<div class="note"><strong>Run the experiment two or three times.</strong><br/>Did you actually start more easily, stay with the work longer, understand more, or finish more? <strong>Keep what helps. Change what doesn't.</strong></div>
+<div class="callout"><strong>One useful question after each attempt:</strong><br/>“What should I keep, change, or test next time?”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary" id="restartExperiment">Start Over</button></div>
 </section>
 </main>
 <script>
@@ -325,5 +310,5 @@ button.primary,button.secondary{border:0;border-radius:12px;padding:12px 18px;mi
  update();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

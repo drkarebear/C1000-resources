@@ -1,12 +1,13 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Active Reading Lab: Talk to the Text</title>
-<meta name="description" content="An accessible ENGL C1000 active reading practice lab.">
+<meta content="An accessible ENGL C1000 active reading practice lab." name="description"/>
 <style>
 :root{
   --bg:#f5f7fa;--surface:#ffffff;--ink:#243447;--muted:#5b6674;--line:#d7dee8;
@@ -81,7 +82,6 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -89,38 +89,35 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<a href="#main" class="skip">Skip to the active reading activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card" aria-labelledby="title">
+<a class="skip" href="#main">Skip to the active reading activity</a>
+<main class="shell" id="main">
+<section aria-labelledby="title" class="card" id="intro">
 <p class="eyebrow">ENGL C1000 · Reading with purpose and confidence</p>
 <h1 id="title">Active Reading Lab: Talk to the Text</h1>
 <p class="lead">Active reading is not about reading faster or understanding everything the first time. It is about noticing what your brain is doing while you read—and using strategies that help you understand.</p>
 <div class="callout"><strong>Think of active reading as a toolbox.</strong> Previewing, asking questions, making connections, annotating, rereading, summarizing, using audio or text-to-speech, and taking breaks are all tools. You do not have to use every tool every time.</div>
-<div class="meta" aria-label="Activity details"><span class="pill">20 interactions</span><span class="pill">About 12–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
+<div aria-label="Activity details" class="meta"><span class="pill">20 interactions</span><span class="pill">About 12–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
 <p>You will practice on one short original article. Some activities have a best answer; others ask you to make your own reading visible. Your personal notes are saved only in this browser.</p>
-<div class="row"><button id="start" class="primary" type="button">Start the Lab</button><button id="resume" class="secondary hidden" type="button">Resume Where I Left Off</button></div>
+<div class="row"><button class="primary" id="start" type="button">Start the Lab</button><button class="secondary hidden" id="resume" type="button">Resume Where I Left Off</button></div>
 </section>
-
-<section id="quiz" class="card hidden" aria-labelledby="qhead">
+<section aria-labelledby="qhead" class="card hidden" id="quiz">
 <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-<div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
-<span id="round" class="round"></span>
+<div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
+<span class="round" id="round"></span>
 <h2 id="qhead">Active Reading Practice</h2>
 <div id="host"></div>
-<div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"><strong id="ftitle"></strong><div id="ftext"></div></div>
-<div class="row"><button id="retry" class="secondary hidden" type="button">Try Again</button><button id="next" class="primary hidden" type="button">Next</button></div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="secondary hidden" id="retry" type="button">Try Again</button><button class="primary hidden" id="next" type="button">Next</button></div>
 </section>
-
-<section id="done" class="card hidden" aria-labelledby="donehead">
+<section aria-labelledby="donehead" class="card hidden" id="done">
 <div class="completion">
 <div class="complete">✓ Lab complete</div>
 <h2 id="donehead" tabindex="-1">Active Reading Lab — Complete</h2>
@@ -133,14 +130,13 @@ body.shotmode .card{box-shadow:none;border:0;margin:0;padding:0}
 <div>Main Ideas &amp; Evidence</div><div class="status">✓ Complete</div>
 <div>Summarizing &amp; Reflection</div><div class="status">✓ Complete</div>
 </div>
-<p><strong>Completed:</strong> <span id="date"></span><br><strong>Practice completed:</strong> 20 of 20 interactions</p>
+<p><strong>Completed:</strong> <span id="date"></span><br/><strong>Practice completed:</strong> 20 of 20 interactions</p>
 <div class="shot">📸 Screenshot this completion card for Canvas.</div>
 </div>
-<div class="row hide-shot"><button id="shot" class="primary" type="button">Prepare Screenshot View</button><button id="exit" class="secondary hidden" type="button">Exit Screenshot View</button><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<div class="row hide-shot"><button class="primary" id="shot" type="button">Prepare Screenshot View</button><button class="secondary hidden" id="exit" type="button">Exit Screenshot View</button><button class="quiet" id="restart" type="button">Practice Again</button></div>
 </section>
 <footer class="hide-shot">Progress and optional notes stay in this browser. This activity does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (function(){
 "use strict";
@@ -259,5 +255,5 @@ $("restart").addEventListener("click",()=>{if(!confirm("Restart the Active Readi
 const s=state();if(s){resume.classList.remove("hidden");resume.textContent=s.completed?"View Completion Card":"Resume Where I Left Off"}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

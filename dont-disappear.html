@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Don't Disappear | ENGL C1000 Learning Lab</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
   --bg:#f7f8f8;--paper:#fff;--ink:#263943;--muted:#62747c;--line:#d7e0e3;
@@ -76,7 +77,6 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid #aebdc2;border
   *{transition:none!important}
 }
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -84,158 +84,147 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid #aebdc2;border
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-  <div class="top">
-    <div class="brand">ENGL C1000 Learning Lab</div>
-    <div class="progress-label" id="progressLabel">1 of 9</div>
-  </div>
-  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-
-  <section class="card active" data-step="0">
-    <p class="eyebrow">5–10 minute re-entry tool</p>
-    <h1>Don&rsquo;t Disappear</h1>
-    <p>Maybe you missed a deadline. Maybe you stopped checking Canvas. Maybe you got confused, fell behind, or felt embarrassed about coming back.</p>
-    <p>You do not have to solve the whole semester right now. First, find out <strong>what is actually true</strong> and make one useful move back into the course.</p>
-    <div class="callout"><strong>Falling behind and deciding what to do next are two different things.</strong><br>Avoiding the course cannot tell you what your options are. Checking can.</div>
-    <div class="navrow"><button class="navbtn next" type="button" data-next>Start →</button></div>
-  </section>
-
-  <section class="card" data-step="1">
-    <p class="eyebrow">Step 1</p>
-    <h2>What Is Your Brain Telling You?</h2>
-    <p>Choose the thought that sounds closest to what is making it hard to come back.</p>
-    <div class="choice-grid" id="thoughtChoices">
-      <button type="button" class="choice">I&rsquo;m too far behind.</button>
-      <button type="button" class="choice">I already ruined my grade.</button>
-      <button type="button" class="choice">My professor is probably annoyed with me.</button>
-      <button type="button" class="choice">It&rsquo;s embarrassing to come back now.</button>
-      <button type="button" class="choice">There&rsquo;s no point if I can&rsquo;t catch up on everything.</button>
-      <button type="button" class="choice">I don&rsquo;t even know where to start.</button>
-    </div>
-    <p class="micro">Pick the closest one. You do not have to prove it is true.</p>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="2">
-    <p class="eyebrow">Step 2</p>
-    <h2>Separate the Facts From the Story</h2>
-    <p>Your brain may be filling in missing information with conclusions. Try separating what happened from what you think it means.</p>
-    <div class="example-grid">
-      <div class="fact"><strong>FACT</strong>I missed two assignments.</div>
-      <div class="story"><strong>STORY</strong>There is no point coming back now.</div>
-    </div>
-    <label for="fact">What do you actually know happened?</label>
-    <textarea id="fact" placeholder="Example: I missed last week's discussion and have not started the current reading."></textarea>
-    <label for="story">What are you telling yourself that this means?</label>
-    <textarea id="story" placeholder="Example: I'm too far behind to recover."></textarea>
-    <div class="unknown"><strong>Unknown is not the same as bad news.</strong><br>Questions about late work, grades, or what your professor recommends are still questions—not answers.</div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="3">
-    <p class="eyebrow">Step 3</p>
-    <h2>Orient First. Catch Up Second.</h2>
-    <p>Do not review the entire semester right now. Spend about <strong>three minutes</strong> checking only what you need to re-enter.</p>
-    <div class="scan">
-      <strong>Open Canvas and check four things:</strong>
-      <ol>
-        <li>What is happening <strong>right now</strong> in the course?</li>
-        <li>What is the <strong>next upcoming deadline</strong>?</li>
-        <li>Is there an announcement, grade comment, or message I need to see?</li>
-        <li>Is there one missed item I need to ask about?</li>
-      </ol>
-    </div>
-    <p class="micro">You do not have to solve anything yet. Just find your current location.</p>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>I checked. Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="4">
-    <p class="eyebrow">Step 4</p>
-    <h2>Sort What You Found</h2>
-    <p>Everything does not need the same kind of attention.</p>
-    <div class="three-way">
-      <div class="bucket"><strong>DO NOW</strong>Current work that is still open and actionable.</div>
-      <div class="bucket"><strong>ASK ABOUT</strong>Missing work, unclear policies, or something you cannot figure out alone.</div>
-      <div class="bucket"><strong>LET GO FOR NOW</strong>Something you cannot change today or do not need to solve before re-entering.</div>
-    </div>
-    <label for="doNow">What can you do now?</label>
-    <textarea id="doNow" placeholder="Example: Start this week's reading and complete the current discussion."></textarea>
-    <label for="askAbout">What do you need to ask about?</label>
-    <textarea id="askAbout" placeholder="Example: I need to ask whether I should still submit the missed draft."></textarea>
-    <label for="letGo">What are you not going to solve right now?</label>
-    <textarea id="letGo" placeholder="Example: I am not going to work backward through every missed task before starting the current module."></textarea>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="5">
-    <p class="eyebrow">Step 5</p>
-    <h2>Re-Enter Before You Catch Up</h2>
-    <div class="unknown"><strong>&ldquo;I cannot participate again until I finish everything I missed.&rdquo;</strong></div>
-    <p>That can feel logical, but re-entering the course and catching up are not always the same task.</p>
-    <p>Sometimes the strongest move is to start participating in what is happening <strong>now</strong> while separately figuring out what can still be recovered from the past.</p>
-    <div class="callout"><strong>Re-entry is a different goal from being fully caught up.</strong> You are trying to reconnect with the course first.</div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="6">
-    <p class="eyebrow">Step 6</p>
-    <h2>Ask One Clear Question</h2>
-    <p>If you need information from your professor, you do not need to write a long apology. Give enough context, show what you have already checked, and ask one specific question.</p>
-    <div class="message-box">
-      <strong>A useful structure:</strong>
-      <p><strong>Context → What I&rsquo;ve already checked or done → One clear question</strong></p>
-      <div class="message-example">
-        Hi Professor,<br><br>
-        I&rsquo;m working on getting re-engaged with the course. I see that I missed the draft due Friday, and I&rsquo;ve checked Canvas and started this week&rsquo;s work. Could you let me know whether I should still submit the missed draft or focus on the next assignment?<br><br>
+<main class="shell" id="main">
+<div class="top">
+<div class="brand">ENGL C1000 Learning Lab</div>
+<div class="progress-label" id="progressLabel">1 of 9</div>
+</div>
+<div aria-hidden="true" class="progress"><span id="progressBar"></span></div>
+<section class="card active" data-step="0">
+<p class="eyebrow">5–10 minute re-entry tool</p>
+<h1>Don’t Disappear</h1>
+<p>Maybe you missed a deadline. Maybe you stopped checking Canvas. Maybe you got confused, fell behind, or felt embarrassed about coming back.</p>
+<p>You do not have to solve the whole semester right now. First, find out <strong>what is actually true</strong> and make one useful move back into the course.</p>
+<div class="callout"><strong>Falling behind and deciding what to do next are two different things.</strong><br/>Avoiding the course cannot tell you what your options are. Checking can.</div>
+<div class="navrow"><button class="navbtn next" data-next="" type="button">Start →</button></div>
+</section>
+<section class="card" data-step="1">
+<p class="eyebrow">Step 1</p>
+<h2>What Is Your Brain Telling You?</h2>
+<p>Choose the thought that sounds closest to what is making it hard to come back.</p>
+<div class="choice-grid" id="thoughtChoices">
+<button class="choice" type="button">I’m too far behind.</button>
+<button class="choice" type="button">I already ruined my grade.</button>
+<button class="choice" type="button">My professor is probably annoyed with me.</button>
+<button class="choice" type="button">It’s embarrassing to come back now.</button>
+<button class="choice" type="button">There’s no point if I can’t catch up on everything.</button>
+<button class="choice" type="button">I don’t even know where to start.</button>
+</div>
+<p class="micro">Pick the closest one. You do not have to prove it is true.</p>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="2">
+<p class="eyebrow">Step 2</p>
+<h2>Separate the Facts From the Story</h2>
+<p>Your brain may be filling in missing information with conclusions. Try separating what happened from what you think it means.</p>
+<div class="example-grid">
+<div class="fact"><strong>FACT</strong>I missed two assignments.</div>
+<div class="story"><strong>STORY</strong>There is no point coming back now.</div>
+</div>
+<label for="fact">What do you actually know happened?</label>
+<textarea id="fact" placeholder="Example: I missed last week's discussion and have not started the current reading."></textarea>
+<label for="story">What are you telling yourself that this means?</label>
+<textarea id="story" placeholder="Example: I'm too far behind to recover."></textarea>
+<div class="unknown"><strong>Unknown is not the same as bad news.</strong><br/>Questions about late work, grades, or what your professor recommends are still questions—not answers.</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="3">
+<p class="eyebrow">Step 3</p>
+<h2>Orient First. Catch Up Second.</h2>
+<p>Do not review the entire semester right now. Spend about <strong>three minutes</strong> checking only what you need to re-enter.</p>
+<div class="scan">
+<strong>Open Canvas and check four things:</strong>
+<ol>
+<li>What is happening <strong>right now</strong> in the course?</li>
+<li>What is the <strong>next upcoming deadline</strong>?</li>
+<li>Is there an announcement, grade comment, or message I need to see?</li>
+<li>Is there one missed item I need to ask about?</li>
+</ol>
+</div>
+<p class="micro">You do not have to solve anything yet. Just find your current location.</p>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">I checked. Continue →</button></div>
+</section>
+<section class="card" data-step="4">
+<p class="eyebrow">Step 4</p>
+<h2>Sort What You Found</h2>
+<p>Everything does not need the same kind of attention.</p>
+<div class="three-way">
+<div class="bucket"><strong>DO NOW</strong>Current work that is still open and actionable.</div>
+<div class="bucket"><strong>ASK ABOUT</strong>Missing work, unclear policies, or something you cannot figure out alone.</div>
+<div class="bucket"><strong>LET GO FOR NOW</strong>Something you cannot change today or do not need to solve before re-entering.</div>
+</div>
+<label for="doNow">What can you do now?</label>
+<textarea id="doNow" placeholder="Example: Start this week's reading and complete the current discussion."></textarea>
+<label for="askAbout">What do you need to ask about?</label>
+<textarea id="askAbout" placeholder="Example: I need to ask whether I should still submit the missed draft."></textarea>
+<label for="letGo">What are you not going to solve right now?</label>
+<textarea id="letGo" placeholder="Example: I am not going to work backward through every missed task before starting the current module."></textarea>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="5">
+<p class="eyebrow">Step 5</p>
+<h2>Re-Enter Before You Catch Up</h2>
+<div class="unknown"><strong>“I cannot participate again until I finish everything I missed.”</strong></div>
+<p>That can feel logical, but re-entering the course and catching up are not always the same task.</p>
+<p>Sometimes the strongest move is to start participating in what is happening <strong>now</strong> while separately figuring out what can still be recovered from the past.</p>
+<div class="callout"><strong>Re-entry is a different goal from being fully caught up.</strong> You are trying to reconnect with the course first.</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="6">
+<p class="eyebrow">Step 6</p>
+<h2>Ask One Clear Question</h2>
+<p>If you need information from your professor, you do not need to write a long apology. Give enough context, show what you have already checked, and ask one specific question.</p>
+<div class="message-box">
+<strong>A useful structure:</strong>
+<p><strong>Context → What I’ve already checked or done → One clear question</strong></p>
+<div class="message-example">
+        Hi Professor,<br/><br/>
+        I’m working on getting re-engaged with the course. I see that I missed the draft due Friday, and I’ve checked Canvas and started this week’s work. Could you let me know whether I should still submit the missed draft or focus on the next assignment?<br/><br/>
         Thank you.
       </div>
-    </div>
-    <label for="question">What is the one question you need answered?</label>
-    <textarea id="question" placeholder="Example: Should I still submit the missed draft, or should I focus on the current essay?"></textarea>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="7">
-    <p class="eyebrow">Step 7</p>
-    <h2>Choose Your Re-Entry Move</h2>
-    <p>Pick one action that can move you from <strong>&ldquo;avoiding the course&rdquo;</strong> to <strong>&ldquo;participating again.&rdquo;</strong></p>
-    <div class="move-grid" id="moveChoices">
-      <button type="button" class="move">Open the current module.</button>
-      <button type="button" class="move">Read the current assignment directions.</button>
-      <button type="button" class="move">Work on the current task for 15 minutes.</button>
-      <button type="button" class="move">Send my professor one clear question.</button>
-      <button type="button" class="move">Read the feedback I have been avoiding.</button>
-      <button type="button" class="move">Figure out which support person I need to contact.</button>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Build my card →</button></div>
-  </section>
-
-  <section class="card" data-step="8">
-    <p class="eyebrow">Your plan</p>
-    <h2>My Re-Entry Card</h2>
-    <p>You do not need a perfect recovery plan. You need a next move that is real enough to do.</p>
-    <div class="reentry-card" aria-live="polite">
-      <div class="card-line"><span class="card-label">What my brain was saying</span><span id="cardThought"></span></div>
-      <div class="card-line"><span class="card-label">What actually happened</span><span id="cardFact"></span></div>
-      <div class="card-line"><span class="card-label">What I can do now</span><span id="cardDoNow"></span></div>
-      <div class="card-line"><span class="card-label">What I need to ask</span><span id="cardQuestion"></span></div>
-      <div class="card-line"><span class="card-label">What I am not solving today</span><span id="cardLetGo"></span></div>
-      <div class="card-line"><span class="card-label">My next move</span><span id="cardMove"></span></div>
-    </div>
-    <div class="ending"><strong>You&rsquo;re back.</strong><p>Not caught up. Not finished. <strong>Back.</strong></p><p>Now do the next move on your card.</p></div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn restart" type="button" id="restart">Start over</button></div>
-  </section>
+</div>
+<label for="question">What is the one question you need answered?</label>
+<textarea id="question" placeholder="Example: Should I still submit the missed draft, or should I focus on the current essay?"></textarea>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="7">
+<p class="eyebrow">Step 7</p>
+<h2>Choose Your Re-Entry Move</h2>
+<p>Pick one action that can move you from <strong>“avoiding the course”</strong> to <strong>“participating again.”</strong></p>
+<div class="move-grid" id="moveChoices">
+<button class="move" type="button">Open the current module.</button>
+<button class="move" type="button">Read the current assignment directions.</button>
+<button class="move" type="button">Work on the current task for 15 minutes.</button>
+<button class="move" type="button">Send my professor one clear question.</button>
+<button class="move" type="button">Read the feedback I have been avoiding.</button>
+<button class="move" type="button">Figure out which support person I need to contact.</button>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Build my card →</button></div>
+</section>
+<section class="card" data-step="8">
+<p class="eyebrow">Your plan</p>
+<h2>My Re-Entry Card</h2>
+<p>You do not need a perfect recovery plan. You need a next move that is real enough to do.</p>
+<div aria-live="polite" class="reentry-card">
+<div class="card-line"><span class="card-label">What my brain was saying</span><span id="cardThought"></span></div>
+<div class="card-line"><span class="card-label">What actually happened</span><span id="cardFact"></span></div>
+<div class="card-line"><span class="card-label">What I can do now</span><span id="cardDoNow"></span></div>
+<div class="card-line"><span class="card-label">What I need to ask</span><span id="cardQuestion"></span></div>
+<div class="card-line"><span class="card-label">What I am not solving today</span><span id="cardLetGo"></span></div>
+<div class="card-line"><span class="card-label">My next move</span><span id="cardMove"></span></div>
+</div>
+<div class="ending"><strong>You’re back.</strong><p>Not caught up. Not finished. <strong>Back.</strong></p><p>Now do the next move on your card.</p></div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn restart" id="restart" type="button">Start over</button></div>
+</section>
 </main>
-
 <script>
 const cards=[...document.querySelectorAll('.card')];
 const progressBar=document.getElementById('progressBar');
@@ -287,5 +276,5 @@ document.getElementById('restart').addEventListener('click',()=>{
 });
 render();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

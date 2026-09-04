@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>From the Student's Side | Faculty Learning Lab</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{--ink:#202333;--muted:#626579;--paper:#f7f3ed;--card:#fff;--line:#ddd7cf;--purple:#6656b8;--soft:#eeeafd;--navy:#222742;--gold:#f3c969;--green:#e8f3eb}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
@@ -22,7 +23,6 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 @media(max-width:620px){.raccoon{grid-template-columns:72px 1fr}.screen{padding:20px}.controls button{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -30,34 +30,31 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-<main>
+<main id="main">
 <section class="hero">
 <div class="eyebrow">Faculty Learning Lab · ENGL C1000</div>
 <h1>👀 From the Student's Side</h1>
 <p>You know your course because you built it. Students encounter it from the other direction. In this lab, you'll look at familiar teaching choices, make a judgment from the instructor side, and then turn the camera around.</p>
 <p class="tiny" style="color:#e6e3f1">No score. No “gotcha.” About 7 minutes.</p>
 </section>
-
-<section class="progress" aria-label="Activity progress"><div class="progrow"><span id="stepText">View 1 of 8</span><span id="stepName">Turn the camera around</span></div><div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div></section>
-<div id="live" class="tiny" aria-live="polite"></div>
-
+<section aria-label="Activity progress" class="progress"><div class="progrow"><span id="stepText">View 1 of 8</span><span id="stepName">Turn the camera around</span></div><div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div></section>
+<div aria-live="polite" class="tiny" id="live"></div>
 <section class="screen active">
 <div class="kicker">Start here</div><h2>Same Course. Different View.</h2>
 <p>Most teaching choices make sense from the instructor side. That's not the question we're testing.</p>
 <div class="callout"><strong>The question:</strong> What does this choice require a student to notice, know, infer, navigate, or decide?</div>
-<div class="raccoon"><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“You know the course because you built the course.”</p></div></div>
+<div class="raccoon"><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“You know the course because you built the course.”</p></div></div>
 <p>For each scene, choose the response closest to your first reaction. Then reveal the student side. Sometimes the original teaching choice will work just fine.</p>
 <div class="controls"><button class="primary next">Turn the Camera Around</button></div>
 </section>
-
 <section class="screen scenario" data-title="Independence">
 <div class="kicker">Scene 1 · Independence</div><h2>“Students Can Ask If They're Confused.”</h2>
 <div class="scene"><strong class="label">Instructor side</strong><p>Your assignment sheet includes the prompt, requirements, and due date. You don't want to over-explain. College students need opportunities to become independent, and you tell them to ask questions if anything is unclear.</p></div>
@@ -68,11 +65,10 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 <button class="choice">I'd explain every step students should take from beginning to end.</button>
 </div>
 <div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I read the directions twice. I think I understand them. I don't know that I'm misunderstanding the word <em>analyze</em>, so I don't have a question to ask.”</p></div></div>
-<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“You can't ask about the thing you don't know you don't know.”</p></div></div>
-<div class="callout" hidden><strong>Possible move:</strong> Independence can include a checkpoint: a sample response, a “before you begin” question, a short task-decoding activity, or an invitation to paraphrase the assignment. The student still does the thinking.</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+<div class="raccoon" hidden=""><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“You can't ask about the thing you don't know you don't know.”</p></div></div>
+<div class="callout" hidden=""><strong>Possible move:</strong> Independence can include a checkpoint: a sample response, a “before you begin” question, a short task-decoding activity, or an invitation to paraphrase the assignment. The student still does the thinking.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Next View</button></div>
 </section>
-
 <section class="screen scenario" data-title="Feedback">
 <div class="kicker">Scene 2 · Feedback</div><h2>“I Gave Them Detailed Feedback.”</h2>
 <div class="scene"><strong class="label">Instructor side</strong><p>You spend substantial time responding to a draft. You mark unclear sentences, MLA problems, weak transitions, missing analysis, paragraph structure, grammar patterns, source integration, and places where the thesis needs work.</p></div>
@@ -83,11 +79,10 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 <button class="choice">I'd avoid written feedback and just give the grade.</button>
 </div>
 <div class="flip"><div class="student"><strong class="label">Student side</strong><p>“There are comments everywhere. I fixed the commas because I knew how. I wasn't sure which of the other 41 things mattered most.”</p></div></div>
-<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Forty-one priorities is a fascinating number of priorities.”</p></div></div>
-<div class="callout" hidden><strong>Possible move:</strong> Signal the one to three changes with the greatest payoff. Detailed feedback isn't inherently bad; the student needs help seeing a path through it.</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+<div class="raccoon" hidden=""><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“Forty-one priorities is a fascinating number of priorities.”</p></div></div>
+<div class="callout" hidden=""><strong>Possible move:</strong> Signal the one to three changes with the greatest payoff. Detailed feedback isn't inherently bad; the student needs help seeing a path through it.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Next View</button></div>
 </section>
-
 <section class="screen scenario" data-title="Canvas">
 <div class="kicker">Scene 3 · Course Navigation</div><h2>“It's All in Canvas.”</h2>
 <div class="scene"><strong class="label">Instructor side</strong><p>The assignment instructions are on the assignment page. The rubric is attached there. The model is in Files. You announced a deadline adjustment last week. Feedback appears in Grades. Everything students need is available.</p></div>
@@ -98,11 +93,10 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 <button class="choice">Whether students completed the Canvas orientation.</button>
 </div>
 <div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I found the assignment. I didn't know there was a model in Files. I saw the announcement about the new deadline, but now I can't remember where it was. I think my professor left comments, but I'm not sure where to open them.”</p></div></div>
-<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Available and findable are cousins. Not twins.”</p></div></div>
-<div class="callout" hidden><strong>Possible move:</strong> Give each major task a clear home base that points outward to the rubric, model, feedback location, and current deadline.</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+<div class="raccoon" hidden=""><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“Available and findable are cousins. Not twins.”</p></div></div>
+<div class="callout" hidden=""><strong>Possible move:</strong> Give each major task a clear home base that points outward to the rubric, model, feedback location, and current deadline.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Next View</button></div>
 </section>
-
 <section class="screen scenario" data-title="Modeling">
 <div class="kicker">Scene 4 · Modeling</div><h2>“Am I Doing Too Much for Them?”</h2>
 <div class="scene good"><strong class="label">Instructor side</strong><p>Before students analyze their own passage, you project a different paragraph. You underline a detail, think aloud about two possible interpretations, reject the weaker one, and explain why the stronger interpretation better fits the text.</p></div>
@@ -113,11 +107,10 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 <button class="choice">It only helps if students copy the same interpretation structure exactly.</button>
 </div>
 <div class="flip"><div class="student"><strong class="label">Student side</strong><p>“Oh. Analysis isn't just finding a quote and explaining what happened. I saw how she moved from the detail to an interpretation—and that she considered an idea that didn't work.”</p></div></div>
-<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Support happened. Thinking is still required. Everybody survives.”</p></div></div>
-<div class="callout" hidden><strong>What worked:</strong> The instructor exposed the process without completing the students' task. Not every student-side flip reveals a problem.</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+<div class="raccoon" hidden=""><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“Support happened. Thinking is still required. Everybody survives.”</p></div></div>
+<div class="callout" hidden=""><strong>What worked:</strong> The instructor exposed the process without completing the students' task. Not every student-side flip reveals a problem.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Next View</button></div>
 </section>
-
 <section class="screen scenario" data-title="Standards">
 <div class="kicker">Scene 5 · Standards</div><h2>“The Rubric Is Accurate.”</h2>
 <div class="scene"><strong class="label">Instructor side</strong><p>A student's paper earns a low score in analysis. Your rubric accurately identifies the problem, and your end comment says: “Needs more analysis of evidence.”</p></div>
@@ -128,11 +121,10 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 <button class="choice">A higher score so the student doesn't become discouraged.</button>
 </div>
 <div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I understand that my analysis is weak. I still don't know what I was supposed to write after the quote.”</p></div></div>
-<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“A diagnosis can be completely accurate and still not be directions.”</p></div></div>
-<div class="callout" hidden><strong>Possible move:</strong> Keep the standard. Add a next-step cue: “After this quotation, tell me what specific words/details you want the reader to notice and how they support your claim.”</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Next View</button></div>
+<div class="raccoon" hidden=""><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“A diagnosis can be completely accurate and still not be directions.”</p></div></div>
+<div class="callout" hidden=""><strong>Possible move:</strong> Keep the standard. Add a next-step cue: “After this quotation, tell me what specific words/details you want the reader to notice and how they support your claim.”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Next View</button></div>
 </section>
-
 <section class="screen scenario" data-title="Availability">
 <div class="kicker">Scene 6 · Help-Seeking</div><h2>“I Told Them I'm Available.”</h2>
 <div class="scene"><strong class="label">Instructor side</strong><p>Your syllabus lists office hours, and you regularly tell the class: “Come see me if you need help. That's what office hours are for.”</p></div>
@@ -143,22 +135,21 @@ main{max-width:920px;margin:auto;padding:24px 18px 60px}.hero,.screen,.progress{
 <button class="choice">Whether office hours are mandatory.</button>
 </div>
 <div class="flip"><div class="student"><strong class="label">Student side</strong><p>“I know she has office hours. I don't know if my problem is important enough. Also, I don't really know what to ask. I mostly just know I'm lost.”</p></div></div>
-<div class="raccoon" hidden><img src="raccoon.png" alt=""><div><strong>🦝 Raccoon Check</strong><p>“Availability and approachability aren't quite the same thing.”</p></div></div>
-<div class="callout" hidden><strong>Possible move:</strong> Normalize specific reasons to come: “You can bring a paragraph, a confusing comment, the assignment directions, or just the sentence ‘I don't know where I'm stuck.’”</div>
-<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Finish the Lab</button></div>
+<div class="raccoon" hidden=""><img alt="" src="raccoon.png"/><div><strong>🦝 Raccoon Check</strong><p>“Availability and approachability aren't quite the same thing.”</p></div></div>
+<div class="callout" hidden=""><strong>Possible move:</strong> Normalize specific reasons to come: “You can bring a paragraph, a confusing comment, the assignment directions, or just the sentence ‘I don't know where I'm stuck.’”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Finish the Lab</button></div>
 </section>
-
 <section class="screen">
 <div class="kicker">Try this tomorrow</div><h2>Same Classroom. Different View.</h2>
 <p>Most teaching choices make sense from the instructor side. The useful question is what those choices require students to <strong>notice, know, infer, navigate, or decide</strong> from their side.</p>
 <div class="summary">
-<div><strong>🚧 Directions</strong><br>Can students recognize what they don't yet understand?</div>
-<div><strong>💬 Feedback</strong><br>Can students tell what matters most and what to do next?</div>
-<div><strong>🧭 Navigation</strong><br>Is important information merely available—or findable from where students begin?</div>
-<div><strong>🧠 Modeling</strong><br>Can we expose expert thinking while leaving the intellectual work to students?</div>
-<div><strong>🚪 Help</strong><br>Does “I'm available” also tell students how to enter?</div>
+<div><strong>🚧 Directions</strong><br/>Can students recognize what they don't yet understand?</div>
+<div><strong>💬 Feedback</strong><br/>Can students tell what matters most and what to do next?</div>
+<div><strong>🧭 Navigation</strong><br/>Is important information merely available—or findable from where students begin?</div>
+<div><strong>🧠 Modeling</strong><br/>Can we expose expert thinking while leaving the intellectual work to students?</div>
+<div><strong>🚪 Help</strong><br/>Does “I'm available” also tell students how to enter?</div>
 </div>
-<div class="raccoon"><img src="raccoon.png" alt=""><div><strong>🦝 One last rummage</strong><p>“What does this look like if I don't already know what I know?”</p></div></div>
+<div class="raccoon"><img alt="" src="raccoon.png"/><div><strong>🦝 One last rummage</strong><p>“What does this look like if I don't already know what I know?”</p></div></div>
 <div class="callout"><strong>Try This Tomorrow:</strong> Pick one routine part of your course—an announcement, assignment, feedback comment, Canvas module, late-work policy, or invitation to office hours. Look at it from the starting point of a student encountering it for the first time.</div>
 <div class="scene"><strong class="label">For a faculty conversation</strong><p><strong>Which part of your course probably looks most different from the student side than it does from yours?</strong></p></div>
 <div class="controls"><button class="secondary back">Back</button><button class="primary" id="restart">Start Over</button></div>
@@ -188,4 +179,4 @@ document.getElementById('restart').onclick=()=>{
 update();
 })();
 </script>
-</body></html>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body></html>

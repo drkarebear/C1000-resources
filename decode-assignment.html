@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Decode the Assignment Lab</title>
-<meta name="description" content="An accessible first-gen-friendly ENGL C1000 lab for decoding college writing assignments.">
+<meta content="An accessible first-gen-friendly ENGL C1000 lab for decoding college writing assignments." name="description"/>
 <style>
 :root{
  --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#64717d;--line:#d7e0e8;
@@ -41,7 +42,6 @@ textarea{width:100%;min-height:110px;border:2px solid #aebbc7;border-radius:12px
 @media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.brief-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -49,71 +49,66 @@ textarea{width:100%;min-height:110px;border:2px solid #aebbc7;border-radius:12px
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#main">Skip to activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
- <p class="eyebrow">ENGL C1000 · The unwritten rules</p>
- <h1>🔓 Decode the Assignment</h1>
- <p class="lead"><strong>Figure out what your professor is actually asking you to do.</strong></p>
- <div class="callout">College assignments can pack the task, evidence, audience, format, grading expectations, and unfamiliar academic language into one page. Experienced students learn to take that page apart. <strong>You can learn that strategy too.</strong></div>
- <div class="meta"><span class="pill">20 decoder missions</span><span class="pill">Verb Decoder</span><span class="pill">Rubric Time Machine</span><span class="pill">No timer</span></div>
- <div class="row"><button id="start" class="primary" type="button">Open the Assignment File</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · The unwritten rules</p>
+<h1>🔓 Decode the Assignment</h1>
+<p class="lead"><strong>Figure out what your professor is actually asking you to do.</strong></p>
+<div class="callout">College assignments can pack the task, evidence, audience, format, grading expectations, and unfamiliar academic language into one page. Experienced students learn to take that page apart. <strong>You can learn that strategy too.</strong></div>
+<div class="meta"><span class="pill">20 decoder missions</span><span class="pill">Verb Decoder</span><span class="pill">Rubric Time Machine</span><span class="pill">No timer</span></div>
+<div class="row"><button class="primary" id="start" type="button">Open the Assignment File</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
- <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
- <span id="stage" class="stage"></span><h2>Assignment Decoder</h2>
- <div class="workspace">
-  <div>
-   <div id="host"></div>
-   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-   <div class="row"><button id="next" class="primary hidden" type="button">Next Decoder Mission</button></div>
-  </div>
-  <aside class="side"><h3>Decoder Toolkit</h3><div id="tools"></div></aside>
- </div>
+<section class="card hidden" id="lab">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span><h2>Assignment Decoder</h2>
+<div class="workspace">
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Next Decoder Mission</button></div>
+</div>
+<aside class="side"><h3>Decoder Toolkit</h3><div id="tools"></div></aside>
+</div>
 </section>
-
-<section id="done" class="card hidden">
- <div class="unlock">
-  <div class="lock">🔓 ASSIGNMENT UNLOCKED</div>
-  <h2>You learned how to take an assignment apart.</h2>
-  <p>You do not have to understand an entire assignment all at once. Find the job, the evidence, the reader, the deliverable, the constraints, and anything you still need to ask about.</p>
- </div>
- <div class="decoder">
-  <h2>📄 Decode My Real Assignment</h2>
-  <p>Open your actual Canvas assignment and answer these six questions:</p>
-  <p><strong>1.</strong> What am I making?<br><strong>2.</strong> What am I being asked to <em>do</em> with the topic?<br><strong>3.</strong> What evidence or materials must I use?<br><strong>4.</strong> Who am I writing for?<br><strong>5.</strong> What constraints must I follow?<br><strong>6.</strong> What am I still unsure about?</p>
- </div>
- <div class="row"><button id="copy" class="primary" type="button">📋 Copy My Assignment Decoder</button></div>
-
- <div class="completion" id="completionCard">
-  <div class="complete">✓ Lab complete</div>
-  <h2>Decode the Assignment Lab — Complete</h2>
-  <div class="grid">
-   <div>Identify the assignment's main job</div><div>✓ Complete</div>
-   <div>Decode common academic verbs</div><div>✓ Complete</div>
-   <div>Separate thinking requirements from surface requirements</div><div>✓ Complete</div>
-   <div>Use a rubric before drafting</div><div>✓ Complete</div>
-   <div>Turn instructions into a workable plan</div><div>✓ Complete</div>
-   <div>Build a specific clarification question</div><div>✓ Complete</div>
-  </div>
-  <p><strong>Completed:</strong> <span id="date"></span></p>
-  <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
- </div>
- <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<section class="card hidden" id="done">
+<div class="unlock">
+<div class="lock">🔓 ASSIGNMENT UNLOCKED</div>
+<h2>You learned how to take an assignment apart.</h2>
+<p>You do not have to understand an entire assignment all at once. Find the job, the evidence, the reader, the deliverable, the constraints, and anything you still need to ask about.</p>
+</div>
+<div class="decoder">
+<h2>📄 Decode My Real Assignment</h2>
+<p>Open your actual Canvas assignment and answer these six questions:</p>
+<p><strong>1.</strong> What am I making?<br/><strong>2.</strong> What am I being asked to <em>do</em> with the topic?<br/><strong>3.</strong> What evidence or materials must I use?<br/><strong>4.</strong> Who am I writing for?<br/><strong>5.</strong> What constraints must I follow?<br/><strong>6.</strong> What am I still unsure about?</p>
+</div>
+<div class="row"><button class="primary" id="copy" type="button">📋 Copy My Assignment Decoder</button></div>
+<div class="completion" id="completionCard">
+<div class="complete">✓ Lab complete</div>
+<h2>Decode the Assignment Lab — Complete</h2>
+<div class="grid">
+<div>Identify the assignment's main job</div><div>✓ Complete</div>
+<div>Decode common academic verbs</div><div>✓ Complete</div>
+<div>Separate thinking requirements from surface requirements</div><div>✓ Complete</div>
+<div>Use a rubric before drafting</div><div>✓ Complete</div>
+<div>Turn instructions into a workable plan</div><div>✓ Complete</div>
+<div>Build a specific clarification question</div><div>✓ Complete</div>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+<div class="row"><button class="quiet" id="restart" type="button">Practice Again</button></div>
 </section>
 <footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id),key="decodeAssignmentV1";
@@ -204,8 +199,8 @@ function render(){
  if(m[1]==="finish"){$("host").innerHTML=`<div class="unlock"><h3>🔓 YOUR DECODER</h3><p><strong>You didn't suddenly become better at following directions. You learned how college assignments are built.</strong></p><p>The next time an assignment looks overwhelming, decode one layer at a time.</p></div>`;$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
  save()
 }
-$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"),block:"center"}),250)}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={job:false,verb:false,evidence:false,audience:false,constraints:false,rubric:false,ask:false};render()}
 $("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){localStorage.removeItem(key);location.reload()}}
 const decoder=`DECODE MY ASSIGNMENT
@@ -223,5 +218,5 @@ let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Editing Lab: What Needs Attention?</title>
-<meta name="description" content="An accessible, first-gen-friendly editing and mechanics lab for ENGL C1000.">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta content="An accessible, first-gen-friendly editing and mechanics lab for ENGL C1000." name="description"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
  --bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#63707c;--line:#d7e0e8;
@@ -45,7 +46,6 @@ h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);mar
 @media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.goggles{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -53,61 +53,57 @@ h1,h2,h3{line-height:1.2;color:var(--dark)}h1{font-size:clamp(2rem,6vw,3rem);mar
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#main">Skip to activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
- <p class="eyebrow">ENGL C1000 · Editing without the grammar panic</p>
- <h1>Editing Lab: What Needs Attention?</h1>
- <p class="lead"><strong>Something looks different. Does it actually need fixing?</strong></p>
- <div class="callout">Good editors do more than hunt for mistakes. They figure out what may make writing easier for a reader to follow—and they know when to leave something alone.</div>
- <div class="meta"><span class="pill">20 editing cases</span><span class="pill">Professor Comment Translator</span><span class="pill">No timer</span><span class="pill">Difference ≠ error</span></div>
- <div class="row"><button id="start" class="primary" type="button">Open the Case Files</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Editing without the grammar panic</p>
+<h1>Editing Lab: What Needs Attention?</h1>
+<p class="lead"><strong>Something looks different. Does it actually need fixing?</strong></p>
+<div class="callout">Good editors do more than hunt for mistakes. They figure out what may make writing easier for a reader to follow—and they know when to leave something alone.</div>
+<div class="meta"><span class="pill">20 editing cases</span><span class="pill">Professor Comment Translator</span><span class="pill">No timer</span><span class="pill">Difference ≠ error</span></div>
+<div class="row"><button class="primary" id="start" type="button">Open the Case Files</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
- <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
- <span id="stage" class="stage"></span><h2>Editing Investigation Desk</h2>
- <div class="workspace">
-  <div>
-   <div id="host"></div>
-   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-   <div class="row"><button id="next" class="primary hidden" type="button">Next Case</button></div>
-  </div>
-  <aside class="side"><h3>Editor Toolkit</h3><div id="tools"></div></aside>
- </div>
+<section class="card hidden" id="lab">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span><h2>Editing Investigation Desk</h2>
+<div class="workspace">
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Next Case</button></div>
+</div>
+<aside class="side"><h3>Editor Toolkit</h3><div id="tools"></div></aside>
+</div>
 </section>
-
-<section id="done" class="card hidden">
- <div class="license"><div>🔎</div><div class="big">EDITOR LICENSE</div><p>You can investigate writing without assuming every difference is a defect.</p></div>
- <div class="prescription">
-  <h2>🧰 Your 5-Minute Editing Routine</h2>
-  <p><strong>1. Meaning:</strong> Can I tell what I mean?<br>
-  <strong>2. Sentence boundaries:</strong> Where does each complete thought begin and end?<br>
-  <strong>3. One known pattern:</strong> What issue do I know I should check for?<br>
-  <strong>4. Read aloud:</strong> Hear what your eyes may skip.<br>
-  <strong>5. Formatting:</strong> Check the assignment's final conventions.</p>
- </div>
- <div class="row"><button id="random" class="primary" type="button">🎲 Give Me an Editing Lens</button><button id="speak" class="secondary" type="button">🔊 Read the Routine Aloud</button><button id="copy" class="secondary" type="button">📋 Copy My Editing Routine</button></div>
- <div id="randomBox" class="decoder hidden" role="status" aria-live="polite"></div>
- <div class="completion">
-  <div class="complete">✓ Lab complete</div><h2>Editing Lab — Complete</h2>
-  <div class="grid"><div>Check meaning before correcting</div><div>✓ Complete</div><div>Identify sentence-boundary patterns</div><div>✓ Complete</div><div>Decode common professor comments</div><div>✓ Complete</div><div>Separate revision from editing</div><div>✓ Complete</div><div>Know when not to edit</div><div>✓ Complete</div></div>
-  <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
- </div>
- <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<section class="card hidden" id="done">
+<div class="license"><div>🔎</div><div class="big">EDITOR LICENSE</div><p>You can investigate writing without assuming every difference is a defect.</p></div>
+<div class="prescription">
+<h2>🧰 Your 5-Minute Editing Routine</h2>
+<p><strong>1. Meaning:</strong> Can I tell what I mean?<br/>
+<strong>2. Sentence boundaries:</strong> Where does each complete thought begin and end?<br/>
+<strong>3. One known pattern:</strong> What issue do I know I should check for?<br/>
+<strong>4. Read aloud:</strong> Hear what your eyes may skip.<br/>
+<strong>5. Formatting:</strong> Check the assignment's final conventions.</p>
+</div>
+<div class="row"><button class="primary" id="random" type="button">🎲 Give Me an Editing Lens</button><button class="secondary" id="speak" type="button">🔊 Read the Routine Aloud</button><button class="secondary" id="copy" type="button">📋 Copy My Editing Routine</button></div>
+<div aria-live="polite" class="decoder hidden" id="randomBox" role="status"></div>
+<div class="completion">
+<div class="complete">✓ Lab complete</div><h2>Editing Lab — Complete</h2>
+<div class="grid"><div>Check meaning before correcting</div><div>✓ Complete</div><div>Identify sentence-boundary patterns</div><div>✓ Complete</div><div>Decode common professor comments</div><div>✓ Complete</div><div>Separate revision from editing</div><div>✓ Complete</div><div>Know when not to edit</div><div>✓ Complete</div></div>
+<p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
+</div>
+<div class="row"><button class="quiet" id="restart" type="button">Practice Again</button></div>
 </section>
 <footer>Progress stays in this browser. Read-aloud is optional and depends on browser support. This activity does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id),key="editingNeedsAttentionV1";
@@ -191,7 +187,7 @@ function render(){
  if(m[1]==="finish"){$("host").innerHTML=`<div class="prescription"><h3>CASE CLOSED</h3><p><strong>Revision changes what the writing is doing.</strong></p><p><strong>Editing helps the writing communicate that work clearly.</strong></p><p>And sometimes the best editing decision is: <strong>leave it alone.</strong></p></div>`;$("next").textContent="Finish Lab";$("next").classList.remove("hidden")}
  save()
 }
-$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else finish()}
 function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date())}
 $("start").onclick=()=>{$("intro").classList.add("hidden");$("lab").classList.remove("hidden");i=0;skills={meaning:false,boundaries:false,conventions:false,voice:false,patterns:false,process:false};completed={};render()}
 $("restart").onclick=()=>{if(confirm("Restart the lab and clear progress saved in this browser?")){try{localStorage.removeItem(key)}catch(e){}location.reload()}}
@@ -212,5 +208,5 @@ let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;skills=s.skills||skills;completed=s.completed||{};$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

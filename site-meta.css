@@ -1,0 +1,11 @@
+/* Shared accessibility and site-information styles */
+.skip-site-link{position:absolute;left:-9999px;top:10px;z-index:9999;padding:10px 14px;background:#fff;color:#17202a;border:2px solid #17202a;border-radius:6px;font-weight:700;text-decoration:none}
+.skip-site-link:focus{left:10px}
+.site-meta-bar{margin-top:28px;padding:18px 20px;border-top:1px solid rgba(80,80,80,.25);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.94rem;line-height:1.5;text-align:center}
+.site-meta-bar nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.site-meta-bar a{text-decoration:underline;text-underline-offset:3px}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #fff!important;outline-offset:2px;box-shadow:0 0 0 5px #1b5f93!important}
+button,select,input[type="text"],input[type="search"],textarea{min-height:24px}
+input[type="checkbox"]{min-width:24px;min-height:24px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media (forced-colors: active){:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid CanvasText!important;box-shadow:none!important}}

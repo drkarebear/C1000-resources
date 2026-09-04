@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Submit the Imperfect Thing</title>
 <style>
 :root{
@@ -46,7 +47,6 @@ textarea{min-height:88px;resize:vertical}textarea:focus,select:focus,input:focus
 @media(max-width:760px){.grid,.scorecard{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -54,191 +54,173 @@ textarea{min-height:88px;resize:vertical}textarea:focus,select:focus,input:focus
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
+<main id="main">
 <section class="hero">
- <div class="kicker" style="color:#ddd9ff">Perfectionism + Submission Lab</div>
- <h1>📤 Submit the Imperfect Thing</h1>
- <p><strong>Sometimes the choice is not “perfect paper” versus “bad paper.” It is “submit the best version I have” versus “keep polishing until I miss the chance to submit.”</strong></p>
- <p class="mini">This lab helps you tell the difference between a draft that needs one useful fix and a draft that is already good enough to turn in.</p>
+<div class="kicker" style="color:#ddd9ff">Perfectionism + Submission Lab</div>
+<h1>📤 Submit the Imperfect Thing</h1>
+<p><strong>Sometimes the choice is not “perfect paper” versus “bad paper.” It is “submit the best version I have” versus “keep polishing until I miss the chance to submit.”</strong></p>
+<p class="mini">This lab helps you tell the difference between a draft that needs one useful fix and a draft that is already good enough to turn in.</p>
 </section>
-
-<section class="progressbox" aria-label="Activity progress">
- <div class="proglabel"><span id="stepText">Part 1 of 8</span><span id="stepName">Catch the perfectionism thought</span></div>
- <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+<section aria-label="Activity progress" class="progressbox">
+<div class="proglabel"><span id="stepText">Part 1 of 8</span><span id="stepName">Catch the perfectionism thought</span></div>
+<div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
 </section>
-<div id="live" class="small" aria-live="polite"></div>
-
+<div aria-live="polite" class="small" id="live"></div>
 <section class="screen active" data-step="0">
- <div class="kicker">Part 1 · Catch It</div>
- <h2>“It’s Not Good Enough Yet”</h2>
- <div class="scene">
+<div class="kicker">Part 1 · Catch It</div>
+<h2>“It’s Not Good Enough Yet”</h2>
+<div class="scene">
   Your essay is due in 18 minutes. It has a clear thesis, body paragraphs, evidence, and a conclusion that feels rushed.
   <div class="thought"><strong>Your brain:</strong> “If I submit this and it isn’t polished, everyone will see I’m a bad writer.”</div>
- </div>
- <p class="q">Which response checks the thought without pretending the paper is perfect?</p>
- <div class="options" id="q0">
-  <button class="choice" data-ok="false">This paper is definitely amazing.</button>
-  <button class="choice" data-ok="true">The paper may have weaknesses, but submitting an assessable draft gives me a chance to earn credit and get feedback.</button>
-  <button class="choice" data-ok="false">If it has flaws, I should probably wait.</button>
- </div>
- <div id="fb0" class="feedback"></div>
- <div class="note"><strong>CBT move:</strong> replace all-or-nothing thinking with a more accurate question: <strong>“Is this complete enough to be assessed?”</strong></div>
- <div class="controls"><button class="primary next" disabled>Check What Matters Most</button></div>
+</div>
+<p class="q">Which response checks the thought without pretending the paper is perfect?</p>
+<div class="options" id="q0">
+<button class="choice" data-ok="false">This paper is definitely amazing.</button>
+<button class="choice" data-ok="true">The paper may have weaknesses, but submitting an assessable draft gives me a chance to earn credit and get feedback.</button>
+<button class="choice" data-ok="false">If it has flaws, I should probably wait.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb0" role="status"></div>
+<div class="note"><strong>CBT move:</strong> replace all-or-nothing thinking with a more accurate question: <strong>“Is this complete enough to be assessed?”</strong></div>
+<div class="controls"><button class="primary next" disabled="">Check What Matters Most</button></div>
 </section>
-
 <section class="screen" data-step="1">
- <div class="kicker">Part 2 · Assess It</div>
- <h2>Imperfect Is Not the Same as Unsubmit-able</h2>
- <div class="scorecard">
-  <div class="score"><strong>✅ Core task</strong>Answers the prompt</div>
-  <div class="score"><strong>✅ Main structure</strong>Has thesis + developed body</div>
-  <div class="score"><strong>⚠️ Polish</strong>Conclusion is rushed; a few sentences are awkward</div>
- </div>
- <p class="q">What is the best classification?</p>
- <div class="options" id="q1">
-  <button class="choice" data-ok="true">Imperfect but assessable.</button>
-  <button class="choice" data-ok="false">Not ready because every part is not polished.</button>
-  <button class="choice" data-ok="false">A failure because the conclusion is weak.</button>
- </div>
- <div id="fb1" class="feedback"></div>
- <div class="callout"><strong>Ask in this order:</strong><br>1. Did I answer the task?<br>2. Is the main work there?<br>3. Is there one quick fix that changes meaning or clarity?<br>4. If not, submit.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Choose the Last Fix</button></div>
+<div class="kicker">Part 2 · Assess It</div>
+<h2>Imperfect Is Not the Same as Unsubmit-able</h2>
+<div class="scorecard">
+<div class="score"><strong>✅ Core task</strong>Answers the prompt</div>
+<div class="score"><strong>✅ Main structure</strong>Has thesis + developed body</div>
+<div class="score"><strong>⚠️ Polish</strong>Conclusion is rushed; a few sentences are awkward</div>
+</div>
+<p class="q">What is the best classification?</p>
+<div class="options" id="q1">
+<button class="choice" data-ok="true">Imperfect but assessable.</button>
+<button class="choice" data-ok="false">Not ready because every part is not polished.</button>
+<button class="choice" data-ok="false">A failure because the conclusion is weak.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb1" role="status"></div>
+<div class="callout"><strong>Ask in this order:</strong><br/>1. Did I answer the task?<br/>2. Is the main work there?<br/>3. Is there one quick fix that changes meaning or clarity?<br/>4. If not, submit.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Choose the Last Fix</button></div>
 </section>
-
 <section class="screen" data-step="2">
- <div class="kicker">Part 3 · Last Useful Fix</div>
- <h2>Not Every Improvement Is Equally Important</h2>
- <div class="scene">You have 10 minutes left.</div>
- <p class="q">Which change is worth doing first?</p>
- <div class="options" id="q2">
-  <button class="choice" data-ok="false">Spend 8 minutes finding a more impressive title.</button>
-  <button class="choice" data-ok="true">Fix a sentence in paragraph 3 that currently says the opposite of what you mean.</button>
-  <button class="choice" data-ok="false">Replace three ordinary words with more sophisticated vocabulary.</button>
- </div>
- <div id="fb2" class="feedback"></div>
- <div class="note"><strong>Adult-learning move:</strong> prioritize the change with the biggest effect on meaning, task completion, or readability—not the change that makes the paper feel more “finished.”</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Spot the Perfectionism Trap</button></div>
+<div class="kicker">Part 3 · Last Useful Fix</div>
+<h2>Not Every Improvement Is Equally Important</h2>
+<div class="scene">You have 10 minutes left.</div>
+<p class="q">Which change is worth doing first?</p>
+<div class="options" id="q2">
+<button class="choice" data-ok="false">Spend 8 minutes finding a more impressive title.</button>
+<button class="choice" data-ok="true">Fix a sentence in paragraph 3 that currently says the opposite of what you mean.</button>
+<button class="choice" data-ok="false">Replace three ordinary words with more sophisticated vocabulary.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb2" role="status"></div>
+<div class="note"><strong>Adult-learning move:</strong> prioritize the change with the biggest effect on meaning, task completion, or readability—not the change that makes the paper feel more “finished.”</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Spot the Perfectionism Trap</button></div>
 </section>
-
 <section class="screen" data-step="3">
- <div class="kicker">Part 4 · Trap</div>
- <h2>Polishing Can Become Avoidance</h2>
- <div class="scene">
+<div class="kicker">Part 4 · Trap</div>
+<h2>Polishing Can Become Avoidance</h2>
+<div class="scene">
   You have rewritten the first sentence of your introduction six times. The current sentence is clear and accurate.
  </div>
- <p class="q">What is the most useful next move?</p>
- <div class="options" id="q3">
-  <button class="choice" data-ok="false">Keep rewriting until the sentence feels impressive.</button>
-  <button class="choice" data-ok="true">Leave it. Use the remaining time to check whether the paper actually answers the prompt.</button>
-  <button class="choice" data-ok="false">Delete the introduction and start over.</button>
- </div>
- <div id="fb3" class="feedback"></div>
- <div class="warning"><strong>Perfectionism can disguise itself as productivity.</strong> You are technically “working” while avoiding the more important decision: <em>Is this ready enough to submit?</em></div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Take the Deadline Challenge</button></div>
+<p class="q">What is the most useful next move?</p>
+<div class="options" id="q3">
+<button class="choice" data-ok="false">Keep rewriting until the sentence feels impressive.</button>
+<button class="choice" data-ok="true">Leave it. Use the remaining time to check whether the paper actually answers the prompt.</button>
+<button class="choice" data-ok="false">Delete the introduction and start over.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb3" role="status"></div>
+<div class="warning"><strong>Perfectionism can disguise itself as productivity.</strong> You are technically “working” while avoiding the more important decision: <em>Is this ready enough to submit?</em></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Take the Deadline Challenge</button></div>
 </section>
-
 <section class="screen" data-step="4">
- <div class="kicker">Part 5 · Deadline Challenge</div>
- <h2>What Would You Do With the Last 12 Minutes?</h2>
- <div class="scene">
-  <strong>Your draft:</strong><br>
-  • Answers the prompt<br>
-  • Has a thesis<br>
-  • Uses two required sources<br>
-  • One body paragraph is shorter than you wanted<br>
-  • Two MLA citations need a quick check<br>
+<div class="kicker">Part 5 · Deadline Challenge</div>
+<h2>What Would You Do With the Last 12 Minutes?</h2>
+<div class="scene">
+<strong>Your draft:</strong><br/>
+  • Answers the prompt<br/>
+  • Has a thesis<br/>
+  • Uses two required sources<br/>
+  • One body paragraph is shorter than you wanted<br/>
+  • Two MLA citations need a quick check<br/>
   • The conclusion exists but is basic
  </div>
- <p class="q">Pick the strongest plan.</p>
- <div class="options" id="q4">
-  <button class="choice" data-ok="false">Rewrite the short body paragraph from scratch and hope I finish.</button>
-  <button class="choice" data-ok="true">Check the two citations, skim for a major missing piece, and submit with time to spare.</button>
-  <button class="choice" data-ok="false">Keep revising until the system closes because submitting something imperfect feels wrong.</button>
- </div>
- <div id="fb4" class="feedback"></div>
- <div class="callout"><strong>Submission strategy:</strong> protect the work you already did. A minor weakness does not need to become a missed submission.</div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Compare the Outcomes</button></div>
+<p class="q">Pick the strongest plan.</p>
+<div class="options" id="q4">
+<button class="choice" data-ok="false">Rewrite the short body paragraph from scratch and hope I finish.</button>
+<button class="choice" data-ok="true">Check the two citations, skim for a major missing piece, and submit with time to spare.</button>
+<button class="choice" data-ok="false">Keep revising until the system closes because submitting something imperfect feels wrong.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb4" role="status"></div>
+<div class="callout"><strong>Submission strategy:</strong> protect the work you already did. A minor weakness does not need to become a missed submission.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Compare the Outcomes</button></div>
 </section>
-
 <section class="screen" data-step="5">
- <div class="kicker">Part 6 · Outcome Check</div>
- <h2>Which Risk Is Bigger?</h2>
- <div class="compare grid">
-  <div class="scene"><strong>Option A</strong><br>Submit a complete but imperfect essay.<br><br>Possible outcome: partial or strong credit + feedback.</div>
-  <div class="scene"><strong>Option B</strong><br>Keep polishing, miss the deadline, submit nothing.<br><br>Possible outcome: zero, late penalty, or no feedback.</div>
- </div>
- <p class="q">What is the more accurate question?</p>
- <div class="options" id="q5">
-  <button class="choice" data-ok="true">Which choice protects more of the work I have already done?</button>
-  <button class="choice" data-ok="false">Which choice proves I care the most?</button>
-  <button class="choice" data-ok="false">Which choice guarantees a perfect grade?</button>
- </div>
- <div id="fb5" class="feedback"></div>
- <div class="note"><strong>CBT move:</strong> shift from “What if they judge this?” to <strong>“What action best serves my actual goal right now?”</strong></div>
- <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Practice With My Assignment</button></div>
+<div class="kicker">Part 6 · Outcome Check</div>
+<h2>Which Risk Is Bigger?</h2>
+<div class="compare grid">
+<div class="scene"><strong>Option A</strong><br/>Submit a complete but imperfect essay.<br/><br/>Possible outcome: partial or strong credit + feedback.</div>
+<div class="scene"><strong>Option B</strong><br/>Keep polishing, miss the deadline, submit nothing.<br/><br/>Possible outcome: zero, late penalty, or no feedback.</div>
+</div>
+<p class="q">What is the more accurate question?</p>
+<div class="options" id="q5">
+<button class="choice" data-ok="true">Which choice protects more of the work I have already done?</button>
+<button class="choice" data-ok="false">Which choice proves I care the most?</button>
+<button class="choice" data-ok="false">Which choice guarantees a perfect grade?</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb5" role="status"></div>
+<div class="note"><strong>CBT move:</strong> shift from “What if they judge this?” to <strong>“What action best serves my actual goal right now?”</strong></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Practice With My Assignment</button></div>
 </section>
-
 <section class="screen" data-step="6">
- <div class="kicker">Part 7 · Your Turn</div>
- <h2>Run a Submission Check</h2>
- <label for="assignment"><strong>What are you deciding whether to submit?</strong></label>
- <input id="assignment" type="text" placeholder="Example: Essay 2">
-
- <label for="status" style="display:block;margin-top:14px"><strong>Which description fits best?</strong></label>
- <select id="status">
-  <option value="">Choose one</option>
-  <option>It answers the prompt, but some parts are rough.</option>
-  <option>Most of the work is there, but one required part is missing.</option>
-  <option>I keep polishing even though the main work is complete.</option>
-  <option>I am worried about being judged if it is not strong.</option>
-  <option>I am not sure whether it is complete enough to assess.</option>
- </select>
-
- <label for="mustfix" style="display:block;margin-top:14px"><strong>What is the ONE thing that truly needs attention before submitting?</strong></label>
- <textarea id="mustfix" placeholder="Example: Fix the missing in-text citation in paragraph 4."></textarea>
-
- <label for="leave" style="display:block;margin-top:14px"><strong>What are you willing to leave imperfect for now?</strong></label>
- <textarea id="leave" placeholder="Example: The conclusion could be more elegant, but it does the job."></textarea>
-
- <div class="warning"><strong>Important:</strong> If a required part is genuinely missing, this lab is not telling you to ignore it. The skill is distinguishing <em>required work</em> from <em>endless polishing</em>.</div>
-
- <div class="controls"><button class="secondary back">Back</button><button class="primary" id="toLast" disabled>Make My Submission Plan</button></div>
+<div class="kicker">Part 7 · Your Turn</div>
+<h2>Run a Submission Check</h2>
+<label for="assignment"><strong>What are you deciding whether to submit?</strong></label>
+<input id="assignment" placeholder="Example: Essay 2" type="text"/>
+<label for="status" style="display:block;margin-top:14px"><strong>Which description fits best?</strong></label>
+<select id="status">
+<option value="">Choose one</option>
+<option>It answers the prompt, but some parts are rough.</option>
+<option>Most of the work is there, but one required part is missing.</option>
+<option>I keep polishing even though the main work is complete.</option>
+<option>I am worried about being judged if it is not strong.</option>
+<option>I am not sure whether it is complete enough to assess.</option>
+</select>
+<label for="mustfix" style="display:block;margin-top:14px"><strong>What is the ONE thing that truly needs attention before submitting?</strong></label>
+<textarea id="mustfix" placeholder="Example: Fix the missing in-text citation in paragraph 4."></textarea>
+<label for="leave" style="display:block;margin-top:14px"><strong>What are you willing to leave imperfect for now?</strong></label>
+<textarea id="leave" placeholder="Example: The conclusion could be more elegant, but it does the job."></textarea>
+<div class="warning"><strong>Important:</strong> If a required part is genuinely missing, this lab is not telling you to ignore it. The skill is distinguishing <em>required work</em> from <em>endless polishing</em>.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary" disabled="" id="toLast">Make My Submission Plan</button></div>
 </section>
-
 <section class="screen" data-step="7">
- <div class="kicker">Part 8 · Submit</div>
- <h2>Protect the Work You Did</h2>
- <p>Choose the thought you want to use at submission time.</p>
- <div class="options" id="reminders">
-  <button class="choice">📤 “Complete enough to assess is enough to submit.”</button>
-  <button class="choice">🧭 “I can fix the highest-impact issue and stop.”</button>
-  <button class="choice">🌱 “A submitted draft can teach me something. An invisible draft cannot.”</button>
-  <button class="choice">🔄 “This assignment is one version of my work, not a final verdict on my ability.”</button>
- </div>
-
- <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeCard" disabled>Make My Submit Card</button></div>
-
- <div id="card" class="card hidden" aria-live="polite">
-  <h2 style="margin-top:0">📤 My Submit-the-Imperfect-Thing Plan</h2>
-  <div class="row"><strong>Assignment:</strong><div id="cAssignment"></div></div>
-  <div class="row"><strong>What is true right now:</strong><div id="cStatus"></div></div>
-  <div class="row"><strong>One must-fix item:</strong><div id="cFix"></div></div>
-  <div class="row"><strong>What I can leave imperfect:</strong><div id="cLeave"></div></div>
-  <div class="row"><strong>My submission reminder:</strong><div id="cReminder"></div></div>
-  <div class="note"><strong>Final check:</strong><br>Does it answer the task? Is the required work there? Is there a major error that changes meaning? If the answer is yes / yes / no, <strong>submit the thing.</strong></div>
- </div>
+<div class="kicker">Part 8 · Submit</div>
+<h2>Protect the Work You Did</h2>
+<p>Choose the thought you want to use at submission time.</p>
+<div class="options" id="reminders">
+<button class="choice">📤 “Complete enough to assess is enough to submit.”</button>
+<button class="choice">🧭 “I can fix the highest-impact issue and stop.”</button>
+<button class="choice">🌱 “A submitted draft can teach me something. An invisible draft cannot.”</button>
+<button class="choice">🔄 “This assignment is one version of my work, not a final verdict on my ability.”</button>
+</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary" disabled="" id="makeCard">Make My Submit Card</button></div>
+<div aria-live="polite" class="card hidden" id="card">
+<h2 style="margin-top:0">📤 My Submit-the-Imperfect-Thing Plan</h2>
+<div class="row"><strong>Assignment:</strong><div id="cAssignment"></div></div>
+<div class="row"><strong>What is true right now:</strong><div id="cStatus"></div></div>
+<div class="row"><strong>One must-fix item:</strong><div id="cFix"></div></div>
+<div class="row"><strong>What I can leave imperfect:</strong><div id="cLeave"></div></div>
+<div class="row"><strong>My submission reminder:</strong><div id="cReminder"></div></div>
+<div class="note"><strong>Final check:</strong><br/>Does it answer the task? Is the required work there? Is there a major error that changes meaning? If the answer is yes / yes / no, <strong>submit the thing.</strong></div>
+</div>
 </section>
 </main>
-
 <script>
 (()=>{
  const screens=[...document.querySelectorAll('.screen')];
@@ -253,7 +235,7 @@ textarea{min-height:88px;resize:vertical}textarea:focus,select:focus,input:focus
  }
  function show(n){
   screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0,behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
  }
  document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
  document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
@@ -298,11 +280,11 @@ textarea{min-height:88px;resize:vertical}textarea:focus,select:focus,input:focus
   document.getElementById('cLeave').textContent=leave.value.trim();
   document.getElementById('cReminder').textContent=reminder;
   document.getElementById('card').classList.remove('hidden');
-  document.getElementById('card').scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('card').scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});
   live.textContent='Your submission plan is ready.';
  });
  update();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

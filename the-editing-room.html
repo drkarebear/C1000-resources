@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>The Editing Room: Turn Feedback Into a Better Draft</title>
 <style>
 :root{
@@ -74,7 +75,6 @@ select{width:100%;padding:11px;border:2px solid var(--line);border-radius:10px;b
 @media(max-width:480px){.legend,.category-row{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -82,159 +82,147 @@ select{width:100%;padding:11px;border:2px solid var(--line);border-radius:10px;b
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
-<section class="hero" aria-labelledby="title">
-  <div class="kicker" style="color:#ddd8ff">C1000 / C1000E Revision Lab</div>
-  <h1 id="title">🎬 The Editing Room</h1>
-  <p><strong>Turn Feedback Into a Better Draft.</strong> Reading comments is only the beginning. Your job is to figure out what the reader noticed, what kind of work your draft needs, and what to change first.</p>
-  <p class="mini">You are still the writer. Feedback gives you information. You make the editorial decisions.</p>
+<main id="main">
+<section aria-labelledby="title" class="hero">
+<div class="kicker" style="color:#ddd8ff">C1000 / C1000E Revision Lab</div>
+<h1 id="title">🎬 The Editing Room</h1>
+<p><strong>Turn Feedback Into a Better Draft.</strong> Reading comments is only the beginning. Your job is to figure out what the reader noticed, what kind of work your draft needs, and what to change first.</p>
+<p class="mini">You are still the writer. Feedback gives you information. You make the editorial decisions.</p>
 </section>
-
-<section class="progress-wrap" aria-label="Activity progress">
-  <div class="progress-label"><span id="progressText">Scene 1 of 6</span><span id="progressLabel">Translate the comment</span></div>
-  <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+<section aria-label="Activity progress" class="progress-wrap">
+<div class="progress-label"><span id="progressText">Scene 1 of 6</span><span id="progressLabel">Translate the comment</span></div>
+<div aria-hidden="true" class="progress"><div id="progressBar"></div></div>
 </section>
-<div id="live" class="small" aria-live="polite"></div>
-
+<div aria-live="polite" class="small" id="live"></div>
 <section class="screen active" data-step="0">
-  <div class="kicker">Scene 1 · Translate the Comment</div>
-  <h2>What Is the Reader Actually Asking For?</h2>
-  <p>Feedback often arrives in professor-language or peer-review-language. Before revising, turn the comment into a job you understand.</p>
-  <div class="comment"><div class="who">💬 INSTRUCTOR COMMENT</div><blockquote>“Can you develop this idea further?”</blockquote></div>
-  <p class="question">What revision job does this point toward?</p>
-  <div class="options" id="translate1">
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Make the sentence longer.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Add a quotation.</button>
-    <button class="option" type="button" data-correct="true" aria-pressed="false">Explain the idea or reasoning more fully.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Fix the grammar.</button>
-  </div>
-  <div id="fb-t1" class="feedback"></div>
-
-  <div class="comment"><div class="who">💬 READER COMMENT</div><blockquote>“I'm not seeing how this evidence supports your claim.”</blockquote></div>
-  <p class="question">Translate that into a revision task.</p>
-  <div class="options" id="translate2">
-    <button class="option" type="button" data-correct="true" aria-pressed="false">Explain the connection between my evidence and my point.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Find a longer quotation.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Delete the paragraph.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Change the font or formatting.</button>
-  </div>
-  <div id="fb-t2" class="feedback"></div>
-  <div class="callout"><strong>Editing-room move:</strong> Turn “What does this comment mean?” into “What do I need to do?”</div>
-  <div class="controls"><button class="primary next" type="button" disabled>Open the Feedback Inbox</button></div>
+<div class="kicker">Scene 1 · Translate the Comment</div>
+<h2>What Is the Reader Actually Asking For?</h2>
+<p>Feedback often arrives in professor-language or peer-review-language. Before revising, turn the comment into a job you understand.</p>
+<div class="comment"><div class="who">💬 INSTRUCTOR COMMENT</div><blockquote>“Can you develop this idea further?”</blockquote></div>
+<p class="question">What revision job does this point toward?</p>
+<div class="options" id="translate1">
+<button aria-pressed="false" class="option" data-correct="false" type="button">Make the sentence longer.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Add a quotation.</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">Explain the idea or reasoning more fully.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Fix the grammar.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-t1" role="status"></div>
+<div class="comment"><div class="who">💬 READER COMMENT</div><blockquote>“I'm not seeing how this evidence supports your claim.”</blockquote></div>
+<p class="question">Translate that into a revision task.</p>
+<div class="options" id="translate2">
+<button aria-pressed="false" class="option" data-correct="true" type="button">Explain the connection between my evidence and my point.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Find a longer quotation.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Delete the paragraph.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Change the font or formatting.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-t2" role="status"></div>
+<div class="callout"><strong>Editing-room move:</strong> Turn “What does this comment mean?” into “What do I need to do?”</div>
+<div class="controls"><button class="primary next" disabled="" type="button">Open the Feedback Inbox</button></div>
 </section>
-
 <section class="screen" data-step="1">
-  <div class="kicker">Scene 2 · Feedback Inbox</div>
-  <h2>What Kind of Work Does This Need?</h2>
-  <p>Don't just count comments. Sort them by the kind of revision they point toward.</p>
-  <div class="legend">
-    <div><strong>🧭 RETHINK</strong>Argument or central idea</div>
-    <div><strong>✂️ MOVE / CUT</strong>Organization or relevance</div>
-    <div><strong>➕ BUILD</strong>Needs more support</div>
-    <div><strong>🔗 CONNECT</strong>Relationship isn't clear</div>
-    <div><strong>✨ POLISH</strong>Sentence, citation, format</div>
-  </div>
-  <div class="inbox" id="inbox">
-    <div class="inbox-item" data-answer="rethink"><div class="status">1 NEW COMMENT</div><strong>“Your thesis says social media is harmful, but the essay seems to argue that its effects depend on how people use it.”</strong><div class="category-row"></div></div>
-    <div class="inbox-item" data-answer="build"><div class="status">1 NEW COMMENT</div><strong>“Can you give an example here?”</strong><div class="category-row"></div></div>
-    <div class="inbox-item" data-answer="connect"><div class="status">1 NEW COMMENT</div><strong>“How does this quotation support the point you're making in this paragraph?”</strong><div class="category-row"></div></div>
-    <div class="inbox-item" data-answer="move"><div class="status">1 NEW COMMENT</div><strong>“This paragraph is interesting, but I'm not sure how it fits here.”</strong><div class="category-row"></div></div>
-    <div class="inbox-item" data-answer="polish"><div class="status">1 NEW COMMENT</div><strong>“Check the MLA citation format here.”</strong><div class="category-row"></div></div>
-  </div>
-  <div id="fb-inbox" class="feedback"></div>
-  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Enter the Cutting Room</button></div>
+<div class="kicker">Scene 2 · Feedback Inbox</div>
+<h2>What Kind of Work Does This Need?</h2>
+<p>Don't just count comments. Sort them by the kind of revision they point toward.</p>
+<div class="legend">
+<div><strong>🧭 RETHINK</strong>Argument or central idea</div>
+<div><strong>✂️ MOVE / CUT</strong>Organization or relevance</div>
+<div><strong>➕ BUILD</strong>Needs more support</div>
+<div><strong>🔗 CONNECT</strong>Relationship isn't clear</div>
+<div><strong>✨ POLISH</strong>Sentence, citation, format</div>
+</div>
+<div class="inbox" id="inbox">
+<div class="inbox-item" data-answer="rethink"><div class="status">1 NEW COMMENT</div><strong>“Your thesis says social media is harmful, but the essay seems to argue that its effects depend on how people use it.”</strong><div class="category-row"></div></div>
+<div class="inbox-item" data-answer="build"><div class="status">1 NEW COMMENT</div><strong>“Can you give an example here?”</strong><div class="category-row"></div></div>
+<div class="inbox-item" data-answer="connect"><div class="status">1 NEW COMMENT</div><strong>“How does this quotation support the point you're making in this paragraph?”</strong><div class="category-row"></div></div>
+<div class="inbox-item" data-answer="move"><div class="status">1 NEW COMMENT</div><strong>“This paragraph is interesting, but I'm not sure how it fits here.”</strong><div class="category-row"></div></div>
+<div class="inbox-item" data-answer="polish"><div class="status">1 NEW COMMENT</div><strong>“Check the MLA citation format here.”</strong><div class="category-row"></div></div>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-inbox" role="status"></div>
+<div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" disabled="" type="button">Enter the Cutting Room</button></div>
 </section>
-
 <section class="screen" data-step="2">
-  <div class="kicker">Scene 3 · Don't Polish a Scene You Might Cut</div>
-  <h2>You Have 30 Minutes. What Comes First?</h2>
-  <div class="warning"><strong>Your draft has seven comments:</strong> the thesis doesn't match the essay; one paragraph doesn't support the argument; one quotation needs explanation; the conclusion needs development; one comma splice; one MLA error; one typo.</div>
-  <p class="question">Where should you begin?</p>
-  <div class="options" id="priority">
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Fix the typo, comma, and MLA error first because they are quick.</button>
-    <button class="option" type="button" data-correct="true" aria-pressed="false">Start with the thesis and major argument problems, then work toward smaller changes.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Start at the first comment and work straight down the document.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Fix whichever comments are easiest so I can complete the most.</button>
-  </div>
-  <div id="fb-priority" class="feedback"></div>
-  <div class="callout"><strong>Revision isn't about completing the most comments.</strong> It's about making the changes that improve the draft most.</div>
-  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Watch the Domino Effect</button></div>
+<div class="kicker">Scene 3 · Don't Polish a Scene You Might Cut</div>
+<h2>You Have 30 Minutes. What Comes First?</h2>
+<div class="warning"><strong>Your draft has seven comments:</strong> the thesis doesn't match the essay; one paragraph doesn't support the argument; one quotation needs explanation; the conclusion needs development; one comma splice; one MLA error; one typo.</div>
+<p class="question">Where should you begin?</p>
+<div class="options" id="priority">
+<button aria-pressed="false" class="option" data-correct="false" type="button">Fix the typo, comma, and MLA error first because they are quick.</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">Start with the thesis and major argument problems, then work toward smaller changes.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Start at the first comment and work straight down the document.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Fix whichever comments are easiest so I can complete the most.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-priority" role="status"></div>
+<div class="callout"><strong>Revision isn't about completing the most comments.</strong> It's about making the changes that improve the draft most.</div>
+<div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" disabled="" type="button">Watch the Domino Effect</button></div>
 </section>
-
 <section class="screen" data-step="3">
-  <div class="kicker">Scene 4 · The Domino Effect</div>
-  <h2>One Big Edit Can Change the Whole Draft</h2>
-  <div class="comment"><div class="who">💬 INSTRUCTOR COMMENT</div><blockquote>“Your thesis says social media is harmful, but most of your essay argues that its effects depend on how people use it.”</blockquote></div>
-  <p class="question">What should you examine first?</p>
-  <div class="options" id="dominoChoice">
-    <button class="option" type="button" data-correct="true" aria-pressed="false">The thesis</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">The Works Cited page</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">The commas in paragraph 2</button>
-  </div>
-  <div id="fb-domino" class="feedback"></div>
-  <div id="dominoPath" class="domino hidden" aria-label="Revision domino effect">
-    <span>🎯 Revise thesis</span><span class="arrow">→</span><span>✓ Paragraph 1 still works</span><span class="arrow">→</span><span>🔧 Paragraph 2 needs a new topic sentence</span><span class="arrow">→</span><span>✓ Paragraph 3 fits better</span><span class="arrow">→</span><span>🔧 Update conclusion</span>
-  </div>
-  <div class="callout"><strong>Big edits create ripples.</strong> That is why writers usually make higher-level decisions before polishing sentences.</div>
-  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Handle Tricky Feedback</button></div>
+<div class="kicker">Scene 4 · The Domino Effect</div>
+<h2>One Big Edit Can Change the Whole Draft</h2>
+<div class="comment"><div class="who">💬 INSTRUCTOR COMMENT</div><blockquote>“Your thesis says social media is harmful, but most of your essay argues that its effects depend on how people use it.”</blockquote></div>
+<p class="question">What should you examine first?</p>
+<div class="options" id="dominoChoice">
+<button aria-pressed="false" class="option" data-correct="true" type="button">The thesis</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">The Works Cited page</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">The commas in paragraph 2</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-domino" role="status"></div>
+<div aria-label="Revision domino effect" class="domino hidden" id="dominoPath">
+<span>🎯 Revise thesis</span><span class="arrow">→</span><span>✓ Paragraph 1 still works</span><span class="arrow">→</span><span>🔧 Paragraph 2 needs a new topic sentence</span><span class="arrow">→</span><span>✓ Paragraph 3 fits better</span><span class="arrow">→</span><span>🔧 Update conclusion</span>
+</div>
+<div class="callout"><strong>Big edits create ripples.</strong> That is why writers usually make higher-level decisions before polishing sentences.</div>
+<div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" disabled="" type="button">Handle Tricky Feedback</button></div>
 </section>
-
 <section class="screen" data-step="4">
-  <div class="kicker">Scene 5 · You're Still the Editor</div>
-  <h2>Feedback Is Information, Not an Order</h2>
-  <div class="comment"><div class="who">💬 PEER REVIEW COMMENT</div><blockquote>“You should delete this whole paragraph.”</blockquote></div>
-  <p class="question">What is the strongest response?</p>
-  <div class="options" id="agency">
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Delete it immediately. The reviewer said it doesn't work.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Ignore it. It's my paper.</button>
-    <button class="option" type="button" data-correct="true" aria-pressed="false">Figure out what made the reader think the paragraph wasn't helping, then decide whether to cut, move, or revise it.</button>
-  </div>
-  <div id="fb-agency" class="feedback"></div>
-
-  <div class="comment"><div class="who">💬 TWO REVIEWERS</div><blockquote>Reviewer A: “I want more background here.”<br>Reviewer B: “The introduction feels too long.”</blockquote></div>
-  <p class="question">Those comments conflict. Now what?</p>
-  <div class="options" id="conflict">
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Choose the reviewer I agree with.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Count votes and follow whichever opinion appears most often.</button>
-    <button class="option" type="button" data-correct="true" aria-pressed="false">Look for the problem underneath both comments: maybe the introduction needs the right background more efficiently.</button>
-    <button class="option" type="button" data-correct="false" aria-pressed="false">Ignore both because they cancel each other out.</button>
-  </div>
-  <div id="fb-conflict" class="feedback"></div>
-  <div class="callout"><strong>Don't just count votes.</strong> Ask what reader experience might be underneath the comments.</div>
-  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" type="button" disabled>Build My Editing Plan</button></div>
+<div class="kicker">Scene 5 · You're Still the Editor</div>
+<h2>Feedback Is Information, Not an Order</h2>
+<div class="comment"><div class="who">💬 PEER REVIEW COMMENT</div><blockquote>“You should delete this whole paragraph.”</blockquote></div>
+<p class="question">What is the strongest response?</p>
+<div class="options" id="agency">
+<button aria-pressed="false" class="option" data-correct="false" type="button">Delete it immediately. The reviewer said it doesn't work.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Ignore it. It's my paper.</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">Figure out what made the reader think the paragraph wasn't helping, then decide whether to cut, move, or revise it.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-agency" role="status"></div>
+<div class="comment"><div class="who">💬 TWO REVIEWERS</div><blockquote>Reviewer A: “I want more background here.”<br/>Reviewer B: “The introduction feels too long.”</blockquote></div>
+<p class="question">Those comments conflict. Now what?</p>
+<div class="options" id="conflict">
+<button aria-pressed="false" class="option" data-correct="false" type="button">Choose the reviewer I agree with.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Count votes and follow whichever opinion appears most often.</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">Look for the problem underneath both comments: maybe the introduction needs the right background more efficiently.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Ignore both because they cancel each other out.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-conflict" role="status"></div>
+<div class="callout"><strong>Don't just count votes.</strong> Ask what reader experience might be underneath the comments.</div>
+<div class="controls"><button class="secondary back" type="button">Back</button><button class="primary next" disabled="" type="button">Build My Editing Plan</button></div>
 </section>
-
 <section class="screen" data-step="5">
-  <div class="kicker">Final Scene · Your Draft</div>
-  <h2>Turn Your Feedback Into an Editing Plan</h2>
-  <p>Paste up to five comments from your own draft. You don't need to enter all your feedback—start with the comments that seem most important or confusing.</p>
-  <div id="planInputs"></div>
-  <div class="controls"><button class="secondary back" type="button">Back</button><button class="primary" id="makePlan" type="button">Build My Editing Plan</button></div>
-
-  <div id="finalPlan" class="final-plan hidden" aria-live="polite">
-    <h2 style="margin-top:0">🎬 My Editing Plan</h2>
-    <p>Work from bigger decisions toward smaller ones. You can change this order if your draft needs something different—you're the editor.</p>
-    <div id="planOutput"></div>
-    <div class="callout"><strong>Don't polish a scene you might cut.</strong><p style="margin-bottom:0">You don't have to “fix the whole paper.” Make the next useful change, then look again.</p></div>
-  </div>
+<div class="kicker">Final Scene · Your Draft</div>
+<h2>Turn Your Feedback Into an Editing Plan</h2>
+<p>Paste up to five comments from your own draft. You don't need to enter all your feedback—start with the comments that seem most important or confusing.</p>
+<div id="planInputs"></div>
+<div class="controls"><button class="secondary back" type="button">Back</button><button class="primary" id="makePlan" type="button">Build My Editing Plan</button></div>
+<div aria-live="polite" class="final-plan hidden" id="finalPlan">
+<h2 style="margin-top:0">🎬 My Editing Plan</h2>
+<p>Work from bigger decisions toward smaller ones. You can change this order if your draft needs something different—you're the editor.</p>
+<div id="planOutput"></div>
+<div class="callout"><strong>Don't polish a scene you might cut.</strong><p style="margin-bottom:0">You don't have to “fix the whole paper.” Make the next useful change, then look again.</p></div>
+</div>
 </section>
 </main>
-
 <script>
 (function(){
 const screens=[...document.querySelectorAll('.screen')], labels=['Translate the comment','Feedback inbox','Choose what comes first','The domino effect','Writer agency','Build your editing plan'];
 const live=document.getElementById('live'),bar=document.getElementById('progressBar'),pt=document.getElementById('progressText'),pl=document.getElementById('progressLabel');let current=0;
 function progress(){bar.style.width=((current+1)/screens.length*100)+'%';pt.textContent=`Scene ${current+1} of ${screens.length}`;pl.textContent=labels[current]}
-function show(n){screens[current].classList.remove('active');current=n;screens[current].classList.add('active');progress();window.scrollTo({top:0,behavior:'smooth'})}
+function show(n){screens[current].classList.remove('active');current=n;screens[current].classList.add('active');progress();window.scrollTo({top:0,behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')})}
 function nextOn(i,on){const b=screens[i].querySelector('.next');if(b)b.disabled=!on}
 function quiz(id,fbid,callback){
  const box=document.getElementById(id),fb=document.getElementById(fbid);
@@ -291,10 +279,10 @@ document.getElementById('makePlan').addEventListener('click',()=>{
   grouped[type].forEach(e=>{const p=document.createElement('p');const strong=document.createElement('strong');strong.textContent='Revision task: ';p.appendChild(strong);p.appendChild(document.createTextNode(e.task));const small=document.createElement('div');small.className='small';small.textContent='Feedback: “'+e.c+'”';sec.appendChild(p);sec.appendChild(small)});
   out.appendChild(sec)
  });
- document.getElementById('finalPlan').classList.remove('hidden');document.getElementById('finalPlan').scrollIntoView({behavior:'smooth',block:'start'});live.textContent='Your editing plan is ready.'
+ document.getElementById('finalPlan').classList.remove('hidden');document.getElementById('finalPlan').scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});live.textContent='Your editing plan is ready.'
 });
 progress();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

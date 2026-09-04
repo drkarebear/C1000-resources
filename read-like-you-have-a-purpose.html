@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Read Like You Have a Purpose</title>
 <style>
 :root{
@@ -287,7 +288,6 @@ textarea:focus{
   *{scroll-behavior:auto!important;transition:none!important}
 }
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -295,232 +295,198 @@ textarea:focus{
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
-  <section class="hero" aria-labelledby="title">
-    <div class="kicker" style="color:#ded9ff">C1000 / C1000E Reading Lab</div>
-    <h1 id="title">🎯 Read Like You Have a Purpose</h1>
-    <p>You do not annotate a reading. You annotate <strong>for something</strong>.</p>
-    <p class="mini">The goal: stop highlighting everything and start marking what actually helps.</p>
-  </section>
-
-  <section class="progress-wrap" aria-label="Activity progress">
-    <div class="progress-label">
-      <span id="progressText">Step 1 of 6</span>
-      <span id="progressLabel">The highlight trap</span>
+<main id="main">
+<section aria-labelledby="title" class="hero">
+<div class="kicker" style="color:#ded9ff">C1000 / C1000E Reading Lab</div>
+<h1 id="title">🎯 Read Like You Have a Purpose</h1>
+<p>You do not annotate a reading. You annotate <strong>for something</strong>.</p>
+<p class="mini">The goal: stop highlighting everything and start marking what actually helps.</p>
+</section>
+<section aria-label="Activity progress" class="progress-wrap">
+<div class="progress-label">
+<span id="progressText">Step 1 of 6</span>
+<span id="progressLabel">The highlight trap</span>
+</div>
+<div aria-hidden="true" class="progress"><div id="progressBar"></div></div>
+</section>
+<div aria-live="polite" class="small" id="live"></div>
+<section class="screen active" data-step="0">
+<div class="kicker">Step 1 · The Highlight Trap</div>
+<h2>When Everything Looks Important</h2>
+<div class="warning">
+<strong>Classic problem:</strong> You start highlighting. Important. Important. Definitely important. Three pages later, almost everything is yellow.
     </div>
-    <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
-  </section>
-
-  <div id="live" class="small" aria-live="polite"></div>
-
-  <section class="screen active" data-step="0">
-    <div class="kicker">Step 1 · The Highlight Trap</div>
-    <h2>When Everything Looks Important</h2>
-    <div class="warning">
-      <strong>Classic problem:</strong> You start highlighting. Important. Important. Definitely important. Three pages later, almost everything is yellow.
+<p>The issue is not that you are bad at annotation. The issue is that you started without a mission.</p>
+<p class="question">What should you look at first when you know a reading will be used for an assignment?</p>
+<div class="options" id="firstLook">
+<button aria-pressed="false" class="option" data-correct="false" type="button">The first page of the article</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">The assignment or question you will eventually answer</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Your highlighter</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-firstLook" role="status"></div>
+<div class="callout">
+<strong>Reading rule:</strong> Knowing what you will eventually have to do changes what you notice while you read.
     </div>
-    <p>The issue is not that you are bad at annotation. The issue is that you started without a mission.</p>
-
-    <p class="question">What should you look at first when you know a reading will be used for an assignment?</p>
-    <div class="options" id="firstLook">
-      <button class="option" type="button" data-correct="false" aria-pressed="false">The first page of the article</button>
-      <button class="option" type="button" data-correct="true" aria-pressed="false">The assignment or question you will eventually answer</button>
-      <button class="option" type="button" data-correct="false" aria-pressed="false">Your highlighter</button>
-    </div>
-    <div id="fb-firstLook" class="feedback"></div>
-
-    <div class="callout">
-      <strong>Reading rule:</strong> Knowing what you will eventually have to do changes what you notice while you read.
-    </div>
-
-    <div class="controls">
-      <button class="primary next" type="button" disabled>Start Mission 1</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="1">
-    <div class="kicker">Step 2 · Mission 1</div>
-    <h2>Find the Author's Position</h2>
-
-    <div class="mission">
-      <strong>🎯 Your mission:</strong> Tomorrow you need to explain what the author believes about phones in college classrooms.
+<div class="controls">
+<button class="primary next" disabled="" type="button">Start Mission 1</button>
+</div>
+</section>
+<section class="screen" data-step="1">
+<div class="kicker">Step 2 · Mission 1</div>
+<h2>Find the Author's Position</h2>
+<div class="mission">
+<strong>🎯 Your mission:</strong> Tomorrow you need to explain what the author believes about phones in college classrooms.
       <div class="budget" style="margin-top:10px">Annotation budget: <span class="token">1</span><span class="token">2</span><span class="token">3</span> three highlights only.</div>
-    </div>
-
-    <div class="passage" id="passage1">
-      <button type="button" class="sentence selectable" data-good="true">1. Many instructors worry that phones divide students' attention during class.</button>
-      <button type="button" class="sentence selectable" data-good="false">2. Smartphones have become a normal part of daily life for most college students.</button>
-      <button type="button" class="sentence selectable" data-good="true">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
-      <button type="button" class="sentence selectable" data-good="true">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
-      <button type="button" class="sentence selectable" data-good="false">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
-      <button type="button" class="sentence selectable" data-good="false">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
-    </div>
-    <div id="budgetMessage" class="small"></div>
-    <div id="fb-mission1" class="feedback"></div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>See What Changed</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="2">
-    <div class="kicker">Step 3 · Same Reading, New Mission</div>
-    <h2>Find Evidence You Could Actually Use</h2>
-
-    <div class="mission">
-      <strong>🎯 Essay question:</strong> Should colleges limit phone use in classrooms?
+</div>
+<div class="passage" id="passage1">
+<button class="sentence selectable" data-good="true" type="button">1. Many instructors worry that phones divide students' attention during class.</button>
+<button class="sentence selectable" data-good="false" type="button">2. Smartphones have become a normal part of daily life for most college students.</button>
+<button class="sentence selectable" data-good="true" type="button">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
+<button class="sentence selectable" data-good="true" type="button">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
+<button class="sentence selectable" data-good="false" type="button">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
+<button class="sentence selectable" data-good="false" type="button">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+</div>
+<div class="small" id="budgetMessage"></div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-mission1" role="status"></div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">See What Changed</button>
+</div>
+</section>
+<section class="screen" data-step="2">
+<div class="kicker">Step 3 · Same Reading, New Mission</div>
+<h2>Find Evidence You Could Actually Use</h2>
+<div class="mission">
+<strong>🎯 Essay question:</strong> Should colleges limit phone use in classrooms?
       <p style="margin-bottom:0">This time, choose <strong>two details</strong> that could actually help you write about that question.</p>
+</div>
+<div class="passage" id="passage2">
+<button class="sentence selectable" data-good="true" type="button">1. Many instructors worry that phones divide students' attention during class.</button>
+<button class="sentence selectable" data-good="false" type="button">2. Smartphones have become a normal part of daily life for most college students.</button>
+<button class="sentence selectable" data-good="false" type="button">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
+<button class="sentence selectable" data-good="true" type="button">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
+<button class="sentence selectable" data-good="false" type="button">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
+<button class="sentence selectable" data-good="false" type="button">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-mission2" role="status"></div>
+<div class="callout">
+<strong>Key idea:</strong> Something can be important to the reading without being useful for your particular writing task.
     </div>
-
-    <div class="passage" id="passage2">
-      <button type="button" class="sentence selectable" data-good="true">1. Many instructors worry that phones divide students' attention during class.</button>
-      <button type="button" class="sentence selectable" data-good="false">2. Smartphones have become a normal part of daily life for most college students.</button>
-      <button type="button" class="sentence selectable" data-good="false">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
-      <button type="button" class="sentence selectable" data-good="true">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
-      <button type="button" class="sentence selectable" data-good="false">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
-      <button type="button" class="sentence selectable" data-good="false">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Try Mission 3</button>
+</div>
+</section>
+<section class="screen" data-step="3">
+<div class="kicker">Step 4 · Mission 3</div>
+<h2>Find Something Worth Questioning</h2>
+<div class="mission">
+<strong>🎯 Your mission:</strong> Find a place where you could question, complicate, or push against the author.
     </div>
-    <div id="fb-mission2" class="feedback"></div>
-
-    <div class="callout">
-      <strong>Key idea:</strong> Something can be important to the reading without being useful for your particular writing task.
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Try Mission 3</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="3">
-    <div class="kicker">Step 4 · Mission 3</div>
-    <h2>Find Something Worth Questioning</h2>
-
-    <div class="mission">
-      <strong>🎯 Your mission:</strong> Find a place where you could question, complicate, or push against the author.
-    </div>
-
-    <div class="passage" id="passage3">
-      <button type="button" class="sentence selectable" data-good="false">1. Many instructors worry that phones divide students' attention during class.</button>
-      <button type="button" class="sentence selectable" data-good="false">2. Smartphones have become a normal part of daily life for most college students.</button>
-      <button type="button" class="sentence selectable" data-good="false">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
-      <button type="button" class="sentence selectable" data-good="false">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
-      <button type="button" class="sentence selectable" data-good="true">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
-      <button type="button" class="sentence selectable" data-good="true">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
-    </div>
-    <div id="fb-mission3" class="feedback"></div>
-
-    <div class="compare">
-      <div class="compare-card">
-        <strong>Understand the argument</strong>
+<div class="passage" id="passage3">
+<button class="sentence selectable" data-good="false" type="button">1. Many instructors worry that phones divide students' attention during class.</button>
+<button class="sentence selectable" data-good="false" type="button">2. Smartphones have become a normal part of daily life for most college students.</button>
+<button class="sentence selectable" data-good="false" type="button">3. Rather than banning phones completely, colleges should teach students when and how to use them responsibly in academic settings.</button>
+<button class="sentence selectable" data-good="false" type="button">4. A limited-phone policy can reduce distraction while still allowing students to use devices for course-related work.</button>
+<button class="sentence selectable" data-good="true" type="button">5. Some students also use phones to check transportation, work schedules, or family messages.</button>
+<button class="sentence selectable" data-good="true" type="button">6. The debate is unlikely to disappear as technology becomes more integrated into education.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-mission3" role="status"></div>
+<div class="compare">
+<div class="compare-card">
+<strong>Understand the argument</strong>
         Claim + reason + qualification
       </div>
-      <div class="compare-card">
-        <strong>Find usable evidence</strong>
+<div class="compare-card">
+<strong>Find usable evidence</strong>
         Details that help answer your essay question
       </div>
-      <div class="compare-card">
-        <strong>Find something to question</strong>
+<div class="compare-card">
+<strong>Find something to question</strong>
         Assumptions, complications, missing perspectives, tensions
       </div>
+</div>
+<div class="callout">
+<strong>Same reading. Different maps.</strong> There is no single correct way to annotate a text. What you mark depends on what you plan to do with it.
     </div>
-
-    <div class="callout">
-      <strong>Same reading. Different maps.</strong> There is no single correct way to annotate a text. What you mark depends on what you plan to do with it.
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Clean Up the Crime Scene</button>
+</div>
+</section>
+<section class="screen" data-step="4">
+<div class="kicker">Step 5 · Highlight Crime Scene</div>
+<h2>Save the Annotation</h2>
+<p>Someone highlighted almost everything. Your job: keep only the parts that help with the mission.</p>
+<div class="mission">
+<strong>🎯 Mission:</strong> Tomorrow you must explain the author's main argument. Keep only <strong>three highlights</strong>.
     </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Clean Up the Crime Scene</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="4">
-    <div class="kicker">Step 5 · Highlight Crime Scene</div>
-    <h2>Save the Annotation</h2>
-    <p>Someone highlighted almost everything. Your job: keep only the parts that help with the mission.</p>
-
-    <div class="mission">
-      <strong>🎯 Mission:</strong> Tomorrow you must explain the author's main argument. Keep only <strong>three highlights</strong>.
-    </div>
-
-    <div class="passage" id="crimeScene">
-      <button type="button" class="sentence selectable selected" data-good="true">1. Colleges should not ban phones completely.</button>
-      <button type="button" class="sentence selectable selected" data-good="false">2. Phones are common on nearly every campus.</button>
-      <button type="button" class="sentence selectable selected" data-good="true">3. The stronger approach is to teach students how to manage attention and use devices intentionally.</button>
-      <button type="button" class="sentence selectable selected" data-good="false">4. Some classrooms have charging stations near the walls.</button>
-      <button type="button" class="sentence selectable selected" data-good="true">5. Limited-use policies can reduce distraction without removing useful academic tools.</button>
-      <button type="button" class="sentence selectable selected" data-good="false">6. Faculty members have different opinions about technology.</button>
-    </div>
-    <div id="fb-crime" class="feedback"></div>
-
-    <p class="question">Which margin note will Future You understand?</p>
-    <div class="options" id="futureNote">
-      <button class="option" type="button" data-correct="false" aria-pressed="false">IMPORTANT!!!</button>
-      <button class="option" type="button" data-correct="false" aria-pressed="false">Phones</button>
-      <button class="option" type="button" data-correct="true" aria-pressed="false">Main claim: teach responsible use instead of banning phones</button>
-      <button class="option" type="button" data-correct="false" aria-pressed="false">⭐⭐⭐</button>
-    </div>
-    <div id="fb-futureNote" class="feedback"></div>
-
-    <div class="code-grid">
-      <div class="code-card"><strong>🎯 TARGET</strong>Directly helps with my assignment.</div>
-      <div class="code-card"><strong>💡 IDEA</strong>Important to the author's argument.</div>
-      <div class="code-card"><strong>❓ QUESTION</strong>I do not understand this, or I want to challenge it.</div>
-      <div class="code-card"><strong>🔗 CONNECTION</strong>Connects to another idea, source, experience, or part of my essay.</div>
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Build My Reading Mission</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="5">
-    <div class="kicker">Step 6 · Your Reading Mission</div>
-    <h2>Decide What You Are Hunting For</h2>
-
-    <label for="assignment"><strong>What is your next writing task or reading question?</strong></label>
-    <textarea id="assignment" placeholder="Paste or type the question, assignment, or purpose here."></textarea>
-
-    <p class="question">What will you need from the reading? Choose up to three.</p>
-    <div class="checklist" id="needList">
-      <label class="check-item"><input type="checkbox" value="Understand the author's main argument"><span>Understand the author's main argument</span></label>
-      <label class="check-item"><input type="checkbox" value="Find evidence"><span>Find evidence</span></label>
-      <label class="check-item"><input type="checkbox" value="Find examples"><span>Find examples</span></label>
-      <label class="check-item"><input type="checkbox" value="Find something to analyze"><span>Find something to analyze</span></label>
-      <label class="check-item"><input type="checkbox" value="Compare this author with another author"><span>Compare this author with another author</span></label>
-      <label class="check-item"><input type="checkbox" value="Identify assumptions"><span>Identify assumptions</span></label>
-      <label class="check-item"><input type="checkbox" value="Find a counterargument"><span>Find a counterargument</span></label>
-      <label class="check-item"><input type="checkbox" value="Understand an unfamiliar concept"><span>Understand an unfamiliar concept</span></label>
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary" type="button" id="makeMission" disabled>Make My Mission</button>
-    </div>
-
-    <div id="missionCard" class="mission-card hidden" aria-live="polite">
-      <h2 style="margin-top:0">🎯 My Reading Mission</h2>
-      <p><strong>My task:</strong> <span id="outTask"></span></p>
-      <p><strong>While I read, I am hunting for:</strong></p>
-      <ul id="outNeeds"></ul>
-      <p><strong>Annotation budget:</strong> Start small. Mark only what helps with the mission.</p>
-      <p><strong>My rule:</strong> If I cannot explain why I am marking it, I probably do not need to mark it yet.</p>
-    </div>
-  </section>
+<div class="passage" id="crimeScene">
+<button class="sentence selectable selected" data-good="true" type="button">1. Colleges should not ban phones completely.</button>
+<button class="sentence selectable selected" data-good="false" type="button">2. Phones are common on nearly every campus.</button>
+<button class="sentence selectable selected" data-good="true" type="button">3. The stronger approach is to teach students how to manage attention and use devices intentionally.</button>
+<button class="sentence selectable selected" data-good="false" type="button">4. Some classrooms have charging stations near the walls.</button>
+<button class="sentence selectable selected" data-good="true" type="button">5. Limited-use policies can reduce distraction without removing useful academic tools.</button>
+<button class="sentence selectable selected" data-good="false" type="button">6. Faculty members have different opinions about technology.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-crime" role="status"></div>
+<p class="question">Which margin note will Future You understand?</p>
+<div class="options" id="futureNote">
+<button aria-pressed="false" class="option" data-correct="false" type="button">IMPORTANT!!!</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Phones</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">Main claim: teach responsible use instead of banning phones</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">⭐⭐⭐</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-futureNote" role="status"></div>
+<div class="code-grid">
+<div class="code-card"><strong>🎯 TARGET</strong>Directly helps with my assignment.</div>
+<div class="code-card"><strong>💡 IDEA</strong>Important to the author's argument.</div>
+<div class="code-card"><strong>❓ QUESTION</strong>I do not understand this, or I want to challenge it.</div>
+<div class="code-card"><strong>🔗 CONNECTION</strong>Connects to another idea, source, experience, or part of my essay.</div>
+</div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Build My Reading Mission</button>
+</div>
+</section>
+<section class="screen" data-step="5">
+<div class="kicker">Step 6 · Your Reading Mission</div>
+<h2>Decide What You Are Hunting For</h2>
+<label for="assignment"><strong>What is your next writing task or reading question?</strong></label>
+<textarea id="assignment" placeholder="Paste or type the question, assignment, or purpose here."></textarea>
+<p class="question">What will you need from the reading? Choose up to three.</p>
+<div class="checklist" id="needList">
+<label class="check-item"><input type="checkbox" value="Understand the author's main argument"/><span>Understand the author's main argument</span></label>
+<label class="check-item"><input type="checkbox" value="Find evidence"/><span>Find evidence</span></label>
+<label class="check-item"><input type="checkbox" value="Find examples"/><span>Find examples</span></label>
+<label class="check-item"><input type="checkbox" value="Find something to analyze"/><span>Find something to analyze</span></label>
+<label class="check-item"><input type="checkbox" value="Compare this author with another author"/><span>Compare this author with another author</span></label>
+<label class="check-item"><input type="checkbox" value="Identify assumptions"/><span>Identify assumptions</span></label>
+<label class="check-item"><input type="checkbox" value="Find a counterargument"/><span>Find a counterargument</span></label>
+<label class="check-item"><input type="checkbox" value="Understand an unfamiliar concept"/><span>Understand an unfamiliar concept</span></label>
+</div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary" disabled="" id="makeMission" type="button">Make My Mission</button>
+</div>
+<div aria-live="polite" class="mission-card hidden" id="missionCard">
+<h2 style="margin-top:0">🎯 My Reading Mission</h2>
+<p><strong>My task:</strong> <span id="outTask"></span></p>
+<p><strong>While I read, I am hunting for:</strong></p>
+<ul id="outNeeds"></ul>
+<p><strong>Annotation budget:</strong> Start small. Mark only what helps with the mission.</p>
+<p><strong>My rule:</strong> If I cannot explain why I am marking it, I probably do not need to mark it yet.</p>
+</div>
+</section>
 </main>
-
 <script>
 (function(){
   const screens=[...document.querySelectorAll('.screen')];
@@ -541,7 +507,7 @@ textarea:focus{
     current=n;
     screens[current].classList.add('active');
     updateProgress();
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollTo({top:0,behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
   }
   function enableNext(index,on){
     const btn=screens[index].querySelector('.next');
@@ -697,12 +663,12 @@ textarea:focus{
       ul.appendChild(li);
     });
     document.getElementById('missionCard').classList.remove('hidden');
-    document.getElementById('missionCard').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('missionCard').scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});
     live.textContent='Your reading mission is ready.';
   });
 
   updateProgress();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

@@ -1,12 +1,13 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Rhetorical Choices Lab</title>
-<meta name="description" content="An accessible, mobile-friendly ENGL C1000 activity about rhetorical situation, voice, and linguistic flexibility.">
+<meta content="An accessible, mobile-friendly ENGL C1000 activity about rhetorical situation, voice, and linguistic flexibility." name="description"/>
 <style>
 :root{
   --bg:#f5f7fa;--surface:#fff;--ink:#1f2937;--muted:#596574;--line:#d6dee8;
@@ -69,7 +70,6 @@ body.shotmode .completion{min-height:90vh;display:flex;flex-direction:column;jus
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 @media print{.hide-shot{display:none!important}body{background:#fff}.shell{width:100%;padding:0}.card{box-shadow:none;border:0}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -77,37 +77,34 @@ body.shotmode .completion{min-height:90vh;display:flex;flex-direction:column;jus
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#main">Skip to activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card" aria-labelledby="title">
+<main class="shell" id="main">
+<section aria-labelledby="title" class="card" id="intro">
 <p class="eyebrow">ENGL C1000 · Writing choices in context</p>
 <h1 id="title">Rhetorical Choices Lab</h1>
 <p class="lead"><strong>What works here—and why?</strong> In this activity, you’ll explore how writers make choices based on audience, purpose, genre, context, and voice.</p>
 <div class="callout"><strong>One idea to carry with you:</strong> There is not one “right” way to sound. Academic writing is not a new identity you have to put on. It is another set of strategies you can add to your rhetorical toolbox.</div>
-<div class="meta" aria-label="Activity details"><span class="pill">20 questions</span><span class="pill">About 10–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
+<div aria-label="Activity details" class="meta"><span class="pill">20 questions</span><span class="pill">About 10–15 minutes</span><span class="pill">No timer</span><span class="pill">Retry as needed</span></div>
 <p>You’ll sometimes choose the option that fits a particular situation best. That does <strong>not</strong> mean the other voices are bad or wrong. The question is what each choice helps a writer do.</p>
-<div class="row"><button id="start" class="primary" type="button">Start the Lab</button><button id="resume" class="secondary hidden" type="button">Resume Where I Left Off</button></div>
+<div class="row"><button class="primary" id="start" type="button">Start the Lab</button><button class="secondary hidden" id="resume" type="button">Resume Where I Left Off</button></div>
 </section>
-
-<section id="quiz" class="card hidden" aria-labelledby="quizhead">
-<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div class="track" aria-hidden="true"><div id="bar" class="bar"></div></div>
-<span id="round" class="round"></span>
+<section aria-labelledby="quizhead" class="card hidden" id="quiz">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
+<span class="round" id="round"></span>
 <h2 id="quizhead">What works here—and why?</h2>
 <div id="host"></div>
-<div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"><div id="ftitle" class="feedback-title"></div><div id="ftext"></div></div>
-<div class="row"><button id="retry" class="secondary hidden" type="button">Try Again</button><button id="next" class="primary hidden" type="button">Next Question</button></div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="feedback" role="status"><div class="feedback-title" id="ftitle"></div><div id="ftext"></div></div>
+<div class="row"><button class="secondary hidden" id="retry" type="button">Try Again</button><button class="primary hidden" id="next" type="button">Next Question</button></div>
 </section>
-
-<section id="done" class="card hidden" aria-labelledby="donehead">
+<section aria-labelledby="donehead" class="card hidden" id="done">
 <div class="completion">
 <div class="complete-mark">✓ Lab complete</div>
 <h2 id="donehead">Rhetorical Choices Lab — Complete</h2>
@@ -119,14 +116,13 @@ body.shotmode .completion{min-height:90vh;display:flex;flex-direction:column;jus
 <div>Academic Conventions</div><div class="status">✓ Complete</div>
 <div>Feedback &amp; Writer Agency</div><div class="status">✓ Complete</div>
 </div>
-<p><strong>Completed:</strong> <span id="date"></span><br><strong>Practice completed:</strong> 20 of 20 questions</p>
+<p><strong>Completed:</strong> <span id="date"></span><br/><strong>Practice completed:</strong> 20 of 20 questions</p>
 <div class="shot">📸 Screenshot this completion card for Canvas.</div>
 </div>
-<div class="row hide-shot"><button id="shot" class="primary" type="button">Prepare Screenshot View</button><button id="exit" class="secondary hidden" type="button">Exit Screenshot View</button><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<div class="row hide-shot"><button class="primary" id="shot" type="button">Prepare Screenshot View</button><button class="secondary hidden" id="exit" type="button">Exit Screenshot View</button><button class="quiet" id="restart" type="button">Practice Again</button></div>
 </section>
 <footer class="hide-shot">Progress is stored only in this browser. This activity does not ask for your name, email address, or login.</footer>
 </main>
-
 <script>
 (function(){
 "use strict";
@@ -175,13 +171,13 @@ function check(n,b){
  else{bs.forEach(z=>z.disabled=true);feedback.className="feedback show";ftitle.textContent="Look at the situation again";ftext.textContent=x.no;retry.classList.remove("hidden");retry.focus()}
 }
 retry.addEventListener("click",()=>{const bs=[...host.querySelectorAll(".answer")];bs.forEach(z=>z.disabled=false);feedback.className="feedback";retry.classList.add("hidden");if(bs[0])bs[0].focus()});
-next.addEventListener("click",()=>{if(i<qs.length-1){i++;render();window.scrollTo({top:quiz.offsetTop-8,behavior:"smooth"})}else finish()});
+next.addEventListener("click",()=>{if(i<qs.length-1){i++;render();window.scrollTo({top:quiz.offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else finish()});
 function finish(){save(true);quiz.classList.add("hidden");done.classList.remove("hidden");const d=new Date();$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(d);done.scrollIntoView({block:"start"})}
 $("start").addEventListener("click",()=>{i=0;showQuiz()});
 resume.addEventListener("click",()=>{const s=load();i=s&&Number.isInteger(s.i)?Math.min(s.i,qs.length-1):0;showQuiz()});
-$("shot").addEventListener("click",()=>{document.body.classList.add("shotmode");$("shot").classList.add("hidden");$("exit").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})});
+$("shot").addEventListener("click",()=>{document.body.classList.add("shotmode");$("shot").classList.add("hidden");$("exit").classList.remove("hidden");window.scrollTo({top:0,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})});
 $("exit").addEventListener("click",()=>{document.body.classList.remove("shotmode");$("exit").classList.add("hidden");$("shot").classList.remove("hidden");done.scrollIntoView({block:"start"})});
-$("restart").addEventListener("click",()=>{if(!confirm("Restart the Rhetorical Choices Lab from the beginning?"))return;localStorage.removeItem(key);i=0;document.body.classList.remove("shotmode");done.classList.add("hidden");intro.classList.remove("hidden");resume.classList.add("hidden");$("start").focus();window.scrollTo({top:0,behavior:"smooth"})});
+$("restart").addEventListener("click",()=>{if(!confirm("Restart the Rhetorical Choices Lab from the beginning?"))return;localStorage.removeItem(key);i=0;document.body.classList.remove("shotmode");done.classList.add("hidden");intro.classList.remove("hidden");resume.classList.add("hidden");$("start").focus();window.scrollTo({top:0,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})});
 const saved=load();
 if(saved){
  if(saved.completed){resume.textContent="View Completion Card";resume.classList.remove("hidden");resume.addEventListener("click",function view(){intro.classList.add("hidden");quiz.classList.add("hidden");done.classList.remove("hidden");const d=saved.date?new Date(saved.date):new Date();$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(d)},{once:true})}
@@ -189,5 +185,5 @@ if(saved){
 }
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

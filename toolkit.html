@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
-<meta name="description" content="Browse the full ENGL C1000 Learning Lab collection by skill and purpose.">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
+<meta content="Browse the full ENGL C1000 Learning Lab collection by skill and purpose." name="description"/>
 <title>All Tools | ENGL C1000 Learning Lab</title>
 <style>
 :root{
@@ -72,180 +73,164 @@ footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);f
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 <header>
-  <div class="wrap topbar">
-    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">✦</span><span>ENGL C1000 Learning Lab</span></a>
-    <nav aria-label="Main navigation">
-      <a href="student.html">Students</a>
-      <a href="faculty.html">Faculty</a>
-      <a href="toolkit.html" aria-current="page">All tools</a>
-    </nav>
-  </div>
+<div class="wrap topbar">
+<a class="brand" href="index.html"><span aria-hidden="true" class="mark">✦</span><span>ENGL C1000 Learning Lab</span></a>
+<nav aria-label="Main navigation">
+<a href="student.html">Students</a>
+<a href="faculty.html">Faculty</a>
+<a aria-current="page" href="toolkit.html">All tools</a>
+</nav>
+</div>
 </header>
-
 <main id="main">
 <section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Browse the collection</span>
-    <h1>Find the tool that fits the moment.</h1>
-    <p class="lede">Browse the full collection by skill and purpose, or search for the problem, process, or kind of support you have in mind.</p>
-  </div>
+<div class="wrap">
+<span class="eyebrow">Browse the collection</span>
+<h1>Find the tool that fits the moment.</h1>
+<p class="lede">Browse the full collection by skill and purpose, or search for the problem, process, or kind of support you have in mind.</p>
+</div>
 </section>
-
 <section class="controls">
-  <div class="wrap">
-    <div class="control-card">
-      <div class="search-row">
-        <label class="search-wrap">
-          <span aria-hidden="true">⌕</span>
-          <span class="skip">Search the toolkit</span>
-          <input id="search" type="search" placeholder="Search: thesis, reading, feedback, focus, MLA…" autocomplete="off">
-        </label>
-        <button class="clear" type="button" id="clear">Clear</button>
-      </div>
-      <p class="filter-label">Filter by purpose</p>
-      <div class="filters" role="group" aria-label="Filter tools by purpose">
-        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" type="button" data-filter="reading" aria-pressed="false">Reading</button>
-        <button class="filter" type="button" data-filter="analysis" aria-pressed="false">Analysis + argument</button>
-        <button class="filter" type="button" data-filter="research" aria-pressed="false">Research</button>
-        <button class="filter" type="button" data-filter="drafting" aria-pressed="false">Drafting</button>
-        <button class="filter" type="button" data-filter="revision" aria-pressed="false">Revision + editing</button>
-        <button class="filter" type="button" data-filter="learning" aria-pressed="false">Learning strategies</button>
-        <button class="filter" type="button" data-filter="belonging" aria-pressed="false">Belonging + emotional blocks</button>
-        <button class="filter" type="button" data-filter="help" aria-pressed="false">Help-seeking + persistence</button>
-      </div>
-      <p class="result-note" id="result-note" aria-live="polite"></p>
-    </div>
-  </div>
+<div class="wrap">
+<div class="control-card">
+<div class="search-row">
+<label class="search-wrap">
+<span aria-hidden="true">⌕</span>
+<span class="skip">Search the toolkit</span>
+<input autocomplete="off" id="search" placeholder="Search: thesis, reading, feedback, focus, MLA…" type="search"/>
+</label>
+<button class="clear" id="clear" type="button">Clear</button>
+</div>
+<p class="filter-label">Filter by purpose</p>
+<div aria-label="Filter tools by purpose" class="filters" role="group">
+<button aria-pressed="true" class="filter" data-filter="all" type="button">All</button>
+<button aria-pressed="false" class="filter" data-filter="reading" type="button">Reading</button>
+<button aria-pressed="false" class="filter" data-filter="analysis" type="button">Analysis + argument</button>
+<button aria-pressed="false" class="filter" data-filter="research" type="button">Research</button>
+<button aria-pressed="false" class="filter" data-filter="drafting" type="button">Drafting</button>
+<button aria-pressed="false" class="filter" data-filter="revision" type="button">Revision + editing</button>
+<button aria-pressed="false" class="filter" data-filter="learning" type="button">Learning strategies</button>
+<button aria-pressed="false" class="filter" data-filter="belonging" type="button">Belonging + emotional blocks</button>
+<button aria-pressed="false" class="filter" data-filter="help" type="button">Help-seeking + persistence</button>
+</div>
+<p aria-live="polite" class="result-note" id="result-note"></p>
+</div>
+</div>
 </section>
-
 <section class="catalog">
 <div class="wrap">
-
 <div class="category" data-category="reading">
-  <div class="category-head"><div><h2>Reading & Comprehension</h2><p>Tools for making sense of difficult texts, reading strategically, and decoding what an assignment asks students to do.</p></div><span class="count">6 tools</span></div>
-  <div class="cards">
-    <a class="card" href="wait-what-did-i-just-read.html" data-tags="reading comprehension dense text paraphrase reread"><h3>Wait, What Did I Just Read?</h3><p>Repair comprehension when a sentence or paragraph stops making sense.</p><div class="meta"><span class="tag">Reading</span></div></a>
-    <a class="card" href="read-like-you-have-a-purpose.html" data-tags="reading annotation purpose strategic reading"><h3>Read Like You Have a Purpose</h3><p>Read and annotate for a specific job instead of marking everything.</p><div class="meta"><span class="tag">Reading</span></div></a>
-    <a class="card" href="active-reading.html" data-tags="reading active reading annotation engagement"><h3>Active Reading</h3><p>Practice interacting with a text so meaning is easier to track and remember.</p><div class="meta"><span class="tag">Reading</span></div></a>
-    <a class="card" href="decode-assignment.html" data-tags="reading assignment prompt directions task requirements"><h3>Decode the Assignment</h3><p>Separate the task, requirements, choices, and evidence of success in a prompt.</p><div class="meta"><span class="tag">Reading</span></div></a>
-    <a class="card" href="what-does-analyze-mean.html" data-tags="reading analyze academic language task verb analysis"><h3>What Does “Analyze” Mean?</h3><p>Turn a common academic verb into concrete thinking and writing moves.</p><div class="meta"><span class="tag">Reading</span><span class="tag">Analysis</span></div></a>
-    <a class="card" href="what-does-reflect-mean.html" data-tags="reading reflect academic language task verb reflection"><h3>What Does “Reflect” Mean?</h3><p>Distinguish reflection from summary and translate the task into usable moves.</p><div class="meta"><span class="tag">Reading</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Reading &amp; Comprehension</h2><p>Tools for making sense of difficult texts, reading strategically, and decoding what an assignment asks students to do.</p></div><span class="count">6 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="reading comprehension dense text paraphrase reread" href="wait-what-did-i-just-read.html"><h3>Wait, What Did I Just Read?</h3><p>Repair comprehension when a sentence or paragraph stops making sense.</p><div class="meta"><span class="tag">Reading</span></div></a>
+<a class="card" data-tags="reading annotation purpose strategic reading" href="read-like-you-have-a-purpose.html"><h3>Read Like You Have a Purpose</h3><p>Read and annotate for a specific job instead of marking everything.</p><div class="meta"><span class="tag">Reading</span></div></a>
+<a class="card" data-tags="reading active reading annotation engagement" href="active-reading.html"><h3>Active Reading</h3><p>Practice interacting with a text so meaning is easier to track and remember.</p><div class="meta"><span class="tag">Reading</span></div></a>
+<a class="card" data-tags="reading assignment prompt directions task requirements" href="decode-assignment.html"><h3>Decode the Assignment</h3><p>Separate the task, requirements, choices, and evidence of success in a prompt.</p><div class="meta"><span class="tag">Reading</span></div></a>
+<a class="card" data-tags="reading analyze academic language task verb analysis" href="what-does-analyze-mean.html"><h3>What Does “Analyze” Mean?</h3><p>Turn a common academic verb into concrete thinking and writing moves.</p><div class="meta"><span class="tag">Reading</span><span class="tag">Analysis</span></div></a>
+<a class="card" data-tags="reading reflect academic language task verb reflection" href="what-does-reflect-mean.html"><h3>What Does “Reflect” Mean?</h3><p>Distinguish reflection from summary and translate the task into usable moves.</p><div class="meta"><span class="tag">Reading</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="analysis">
-  <div class="category-head"><div><h2>Analysis, Argument & Development</h2><p>Tools for turning observations into interpretations, claims, reasoning, and developed paragraphs.</p></div><span class="count">8 tools</span></div>
-  <div class="cards">
-    <a class="card" href="analysis-detective.html" data-tags="analysis interpretation summary pattern significance"><h3>The Analysis Detective</h3><p>Move from clue → pattern → interpretation → significance.</p><div class="meta"><span class="tag">Analysis</span></div></a>
-    <a class="card" href="make-your-case.html" data-tags="analysis argument claim position evidence"><h3>Make Your Case</h3><p>Turn an idea into an arguable, supportable claim.</p><div class="meta"><span class="tag">Argument</span></div></a>
-    <a class="card" href="thesis.html" data-tags="analysis argument thesis claim focus"><h3>Build a Working Thesis</h3><p>Make a thesis more focused, arguable, and useful for the draft.</p><div class="meta"><span class="tag">Argument</span></div></a>
-    <a class="card" href="show-me-the-connection.html" data-tags="analysis reasoning warrant evidence claim connection"><h3>Show Me the Connection</h3><p>Practice claim → evidence → reasoning so the reader does not have to infer the connection.</p><div class="meta"><span class="tag">Analysis</span></div></a>
-    <a class="card" href="body-paragraphs.html" data-tags="analysis development paragraph body paragraphs reasoning evidence explanation specificity"><h3>Develop, Don’t Pad</h3><p>Strengthen a paragraph through explanation, specificity, evidence, and reasoning instead of extra words.</p><div class="meta"><span class="tag">Development</span></div></a>
-    <a class="card" href="rhetorical-choices.html" data-tags="analysis rhetoric rhetorical choices audience purpose effect"><h3>Rhetorical Choices</h3><p>Explain how a writer’s choices shape meaning, purpose, or reader response.</p><div class="meta"><span class="tag">Analysis</span></div></a>
-    <a class="card" href="crack-the-academic-code.html" data-tags="analysis academic language vocabulary task words analyze evaluate synthesize interpret"><h3>Crack the Academic Code</h3><p>Translate academic task words into the kind of thinking and writing they require.</p><div class="meta"><span class="tag">Analysis</span></div></a>
-    <a class="card" href="stop-performing-academic.html" data-tags="analysis style clarity academic voice vocabulary diction"><h3>Stop Performing “Academic”</h3><p>Replace inflated wording with clear, precise college-level language.</p><div class="meta"><span class="tag">Clarity</span><span class="tag emotional">Emotional block</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Analysis, Argument &amp; Development</h2><p>Tools for turning observations into interpretations, claims, reasoning, and developed paragraphs.</p></div><span class="count">8 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="analysis interpretation summary pattern significance" href="analysis-detective.html"><h3>The Analysis Detective</h3><p>Move from clue → pattern → interpretation → significance.</p><div class="meta"><span class="tag">Analysis</span></div></a>
+<a class="card" data-tags="analysis argument claim position evidence" href="make-your-case.html"><h3>Make Your Case</h3><p>Turn an idea into an arguable, supportable claim.</p><div class="meta"><span class="tag">Argument</span></div></a>
+<a class="card" data-tags="analysis argument thesis claim focus" href="thesis.html"><h3>Build a Working Thesis</h3><p>Make a thesis more focused, arguable, and useful for the draft.</p><div class="meta"><span class="tag">Argument</span></div></a>
+<a class="card" data-tags="analysis reasoning warrant evidence claim connection" href="show-me-the-connection.html"><h3>Show Me the Connection</h3><p>Practice claim → evidence → reasoning so the reader does not have to infer the connection.</p><div class="meta"><span class="tag">Analysis</span></div></a>
+<a class="card" data-tags="analysis development paragraph body paragraphs reasoning evidence explanation specificity" href="body-paragraphs.html"><h3>Develop, Don’t Pad</h3><p>Strengthen a paragraph through explanation, specificity, evidence, and reasoning instead of extra words.</p><div class="meta"><span class="tag">Development</span></div></a>
+<a class="card" data-tags="analysis rhetoric rhetorical choices audience purpose effect" href="rhetorical-choices.html"><h3>Rhetorical Choices</h3><p>Explain how a writer’s choices shape meaning, purpose, or reader response.</p><div class="meta"><span class="tag">Analysis</span></div></a>
+<a class="card" data-tags="analysis academic language vocabulary task words analyze evaluate synthesize interpret" href="crack-the-academic-code.html"><h3>Crack the Academic Code</h3><p>Translate academic task words into the kind of thinking and writing they require.</p><div class="meta"><span class="tag">Analysis</span></div></a>
+<a class="card" data-tags="analysis style clarity academic voice vocabulary diction" href="stop-performing-academic.html"><h3>Stop Performing “Academic”</h3><p>Replace inflated wording with clear, precise college-level language.</p><div class="meta"><span class="tag">Clarity</span><span class="tag emotional">Emotional block</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="research">
-  <div class="category-head"><div><h2>Research & Sources</h2><p>Tools for managing research, integrating evidence, synthesizing sources, and reviewing MLA choices.</p></div><span class="count">4 tools</span></div>
-  <div class="cards">
-    <a class="card" href="research-without-drowning.html" data-tags="research sources search organize overwhelm"><h3>Research Without Drowning</h3><p>Turn an overwhelming pile of tabs and sources into a manageable next step.</p><div class="meta"><span class="tag research">Research</span></div></a>
-    <a class="card" href="source-integration.html" data-tags="research sources quotes paraphrase integration evidence"><h3>Source Integration</h3><p>Set up, use, and explain quotations and paraphrases without dropping them into the paragraph.</p><div class="meta"><span class="tag research">Research</span></div></a>
-    <a class="card" href="synthesis-lab.html" data-tags="research synthesis sources compare conversation"><h3>Synthesis Lab</h3><p>Put multiple sources into conversation around an idea instead of discussing them one at a time.</p><div class="meta"><span class="tag research">Research</span></div></a>
-    <a class="card" href="mla-review.html" data-tags="research mla citation works cited formatting review"><h3>MLA Review</h3><p>Review common MLA choices before submitting research-based writing.</p><div class="meta"><span class="tag research">Research</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Research &amp; Sources</h2><p>Tools for managing research, integrating evidence, synthesizing sources, and reviewing MLA choices.</p></div><span class="count">4 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="research sources search organize overwhelm" href="research-without-drowning.html"><h3>Research Without Drowning</h3><p>Turn an overwhelming pile of tabs and sources into a manageable next step.</p><div class="meta"><span class="tag research">Research</span></div></a>
+<a class="card" data-tags="research sources quotes paraphrase integration evidence" href="source-integration.html"><h3>Source Integration</h3><p>Set up, use, and explain quotations and paraphrases without dropping them into the paragraph.</p><div class="meta"><span class="tag research">Research</span></div></a>
+<a class="card" data-tags="research synthesis sources compare conversation" href="synthesis-lab.html"><h3>Synthesis Lab</h3><p>Put multiple sources into conversation around an idea instead of discussing them one at a time.</p><div class="meta"><span class="tag research">Research</span></div></a>
+<a class="card" data-tags="research mla citation works cited formatting review" href="mla-review.html"><h3>MLA Review</h3><p>Review common MLA choices before submitting research-based writing.</p><div class="meta"><span class="tag research">Research</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="drafting">
-  <div class="category-head"><div><h2>Drafting & Getting Started</h2><p>Tools for beginning, generating movement, and treating writing as a process rather than a one-shot performance.</p></div><span class="count">5 tools</span></div>
-  <div class="cards">
-    <a class="card" href="good-enough-to-draft.html" data-tags="drafting perfectionism start first draft writing"><h3>Good Enough to Draft</h3><p>Separate discovery from polishing so the first draft can actually begin.</p><div class="meta"><span class="tag">Drafting</span><span class="tag emotional">Emotional block</span></div></a>
-    <a class="card" href="writers-block-buster.html" data-tags="drafting writer block start generate ideas"><h3>Writer’s Block Buster</h3><p>Use a concrete move to get words and ideas moving when the page feels stuck.</p><div class="meta"><span class="tag">Drafting</span></div></a>
-    <a class="card" href="writing-process.html" data-tags="drafting process prewriting drafting revision editing"><h3>The Writing Process</h3><p>See writing as a set of different jobs rather than one giant task.</p><div class="meta"><span class="tag">Drafting</span></div></a>
-    <a class="card" href="focus-rescue.html" data-tags="drafting focus attention start stuck task initiation"><h3>Focus Rescue</h3><p>Match the kind of stuck to a small focus strategy you can test.</p><div class="meta"><span class="tag">Drafting</span><span class="tag">Learning strategy</span></div></a>
-    <a class="card" href="reset-before-you-start.html" data-tags="drafting anxiety stress reset focus start"><h3>Reset Before You Start</h3><p>Use a brief reset before returning attention to reading or writing.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Drafting &amp; Getting Started</h2><p>Tools for beginning, generating movement, and treating writing as a process rather than a one-shot performance.</p></div><span class="count">5 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="drafting perfectionism start first draft writing" href="good-enough-to-draft.html"><h3>Good Enough to Draft</h3><p>Separate discovery from polishing so the first draft can actually begin.</p><div class="meta"><span class="tag">Drafting</span><span class="tag emotional">Emotional block</span></div></a>
+<a class="card" data-tags="drafting writer block start generate ideas" href="writers-block-buster.html"><h3>Writer’s Block Buster</h3><p>Use a concrete move to get words and ideas moving when the page feels stuck.</p><div class="meta"><span class="tag">Drafting</span></div></a>
+<a class="card" data-tags="drafting process prewriting drafting revision editing" href="writing-process.html"><h3>The Writing Process</h3><p>See writing as a set of different jobs rather than one giant task.</p><div class="meta"><span class="tag">Drafting</span></div></a>
+<a class="card" data-tags="drafting focus attention start stuck task initiation" href="focus-rescue.html"><h3>Focus Rescue</h3><p>Match the kind of stuck to a small focus strategy you can test.</p><div class="meta"><span class="tag">Drafting</span><span class="tag">Learning strategy</span></div></a>
+<a class="card" data-tags="drafting anxiety stress reset focus start" href="reset-before-you-start.html"><h3>Reset Before You Start</h3><p>Use a brief reset before returning attention to reading or writing.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="revision">
-  <div class="category-head"><div><h2>Revision, Editing & Mechanics</h2><p>Tools for interpreting feedback, reorganizing drafts, proofreading strategically, and improving sentence-level correctness.</p></div><span class="count">8 tools</span></div>
-  <div class="cards">
-    <a class="card" href="the-editing-room.html" data-tags="revision feedback prioritize comments edit revise"><h3>The Editing Room</h3><p>Sort feedback by the kind of revision it calls for and decide what comes first.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
-    <a class="card" href="professor-comment-decoder.html" data-tags="revision feedback professor comments unclear develop analyze"><h3>Professor Comment Decoder</h3><p>Translate common instructor comments into possible revision actions.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
-    <a class="card" href="reverse-outline.html" data-tags="revision organization reverse outline paragraphs structure"><h3>Reverse Outline</h3><p>Map what each paragraph is actually doing after a draft exists.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
-    <a class="card" href="peer-review.html" data-tags="revision peer review feedback collaboration"><h3>Peer Review</h3><p>Use peer feedback as a revision tool rather than a proofreading exchange.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
-    <a class="card" href="proofreading-er.html" data-tags="revision proofreading grammar editing sentence errors"><h3>Proofreading ER</h3><p>Find and prioritize high-impact sentence-level problems after larger revisions are settled.</p><div class="meta"><span class="tag revision">Editing</span></div></a>
-    <a class="card" href="mechanics.html" data-tags="revision grammar mechanics punctuation spelling sentence"><h3>Mechanics</h3><p>Practice common grammar, punctuation, spelling, and sentence-level issues.</p><div class="meta"><span class="tag revision">Editing</span></div></a>
-    <a class="card" href="essay-triage.html" data-tags="revision deadline prioritize essay triage last minute"><h3>Essay Triage</h3><p>Decide what to fix first when there is not enough time to revise everything.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
-    <a class="card" href="submit-the-imperfect-thing.html" data-tags="revision submit perfectionism deadline final draft"><h3>Submit the Imperfect Thing</h3><p>Decide whether work is complete enough to be assessed and choose the last useful fix.</p><div class="meta"><span class="tag revision">Revision</span><span class="tag emotional">Emotional block</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Revision, Editing &amp; Mechanics</h2><p>Tools for interpreting feedback, reorganizing drafts, proofreading strategically, and improving sentence-level correctness.</p></div><span class="count">8 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="revision feedback prioritize comments edit revise" href="the-editing-room.html"><h3>The Editing Room</h3><p>Sort feedback by the kind of revision it calls for and decide what comes first.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
+<a class="card" data-tags="revision feedback professor comments unclear develop analyze" href="professor-comment-decoder.html"><h3>Professor Comment Decoder</h3><p>Translate common instructor comments into possible revision actions.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
+<a class="card" data-tags="revision organization reverse outline paragraphs structure" href="reverse-outline.html"><h3>Reverse Outline</h3><p>Map what each paragraph is actually doing after a draft exists.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
+<a class="card" data-tags="revision peer review feedback collaboration" href="peer-review.html"><h3>Peer Review</h3><p>Use peer feedback as a revision tool rather than a proofreading exchange.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
+<a class="card" data-tags="revision proofreading grammar editing sentence errors" href="proofreading-er.html"><h3>Proofreading ER</h3><p>Find and prioritize high-impact sentence-level problems after larger revisions are settled.</p><div class="meta"><span class="tag revision">Editing</span></div></a>
+<a class="card" data-tags="revision grammar mechanics punctuation spelling sentence" href="mechanics.html"><h3>Mechanics</h3><p>Practice common grammar, punctuation, spelling, and sentence-level issues.</p><div class="meta"><span class="tag revision">Editing</span></div></a>
+<a class="card" data-tags="revision deadline prioritize essay triage last minute" href="essay-triage.html"><h3>Essay Triage</h3><p>Decide what to fix first when there is not enough time to revise everything.</p><div class="meta"><span class="tag revision">Revision</span></div></a>
+<a class="card" data-tags="revision submit perfectionism deadline final draft" href="submit-the-imperfect-thing.html"><h3>Submit the Imperfect Thing</h3><p>Decide whether work is complete enough to be assessed and choose the last useful fix.</p><div class="meta"><span class="tag revision">Revision</span><span class="tag emotional">Emotional block</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="learning">
-  <div class="category-head"><div><h2>Focus & Learning Strategies</h2><p>Tools for metacognition, task initiation, attention, and finding study conditions that fit the work at hand.</p></div><span class="count">4 tools</span></div>
-  <div class="cards">
-    <a class="card" href="study-lab.html" data-tags="learning study metacognition focus environment attention"><h3>Study Lab</h3><p>Notice, predict, test, and adjust study conditions instead of searching for one perfect method.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
-    <a class="card" href="focus-rescue.html" data-tags="learning focus attention task initiation stuck"><h3>Focus Rescue</h3><p>Identify the kind of stuck and test a strategy that matches it.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
-    <a class="card" href="reset-before-you-start.html" data-tags="learning reset anxiety stress attention nervous system"><h3>Reset Before You Start</h3><p>Reduce the immediate attention cost of stress before beginning academic work.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
-    <a class="card" href="good-enough-to-draft.html" data-tags="learning perfectionism start draft task initiation"><h3>Good Enough to Draft</h3><p>Lower the starting friction created by trying to perfect work too early.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Focus &amp; Learning Strategies</h2><p>Tools for metacognition, task initiation, attention, and finding study conditions that fit the work at hand.</p></div><span class="count">4 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="learning study metacognition focus environment attention" href="study-lab.html"><h3>Study Lab</h3><p>Notice, predict, test, and adjust study conditions instead of searching for one perfect method.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
+<a class="card" data-tags="learning focus attention task initiation stuck" href="focus-rescue.html"><h3>Focus Rescue</h3><p>Identify the kind of stuck and test a strategy that matches it.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
+<a class="card" data-tags="learning reset anxiety stress attention nervous system" href="reset-before-you-start.html"><h3>Reset Before You Start</h3><p>Reduce the immediate attention cost of stress before beginning academic work.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
+<a class="card" data-tags="learning perfectionism start draft task initiation" href="good-enough-to-draft.html"><h3>Good Enough to Draft</h3><p>Lower the starting friction created by trying to perfect work too early.</p><div class="meta"><span class="tag">Learning strategy</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="belonging">
-  <div class="category-head"><div><h2>Belonging & Emotional Blocks</h2><p>Tools for moments when fear, comparison, perfectionism, or a setback changes how students interpret the academic task—or themselves.</p></div><span class="count">6 tools</span></div>
-  <div class="cards">
-    <a class="card" href="still-a-writer.html" data-tags="belonging confidence writer identity grade feedback struggle"><h3>Still a Writer</h3><p>Separate a difficult writing event from a global judgment about writing ability.</p><div class="meta"><span class="tag emotional">Belonging</span></div></a>
-    <a class="card" href="you-belong-in-the-process.html" data-tags="belonging help revision questions process college"><h3>You Belong in the Process</h3><p>Make questions, feedback, revision, collaboration, and help-seeking visible as normal college participation.</p><div class="meta"><span class="tag emotional">Belonging</span></div></a>
-    <a class="card" href="youre-seeing-their-highlight-reel.html" data-tags="belonging comparison peers confidence social comparison"><h3>You’re Seeing Their Highlight Reel</h3><p>Separate what is visible about other students from the conclusions drawn about one’s own ability.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
-    <a class="card" href="what-if-i-ask-a-dumb-question.html" data-tags="belonging question fear help shame confidence"><h3>What If I Ask a Dumb Question?</h3><p>Turn fear about asking for clarification into a specific, useful question.</p><div class="meta"><span class="tag emotional">Emotional block</span><span class="tag help">Help-seeking</span></div></a>
-    <a class="card" href="stop-performing-academic.html" data-tags="belonging academic voice clarity vocabulary confidence"><h3>Stop Performing “Academic”</h3><p>Use clear, precise language without treating complexity of wording as proof of intelligence.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
-    <a class="card" href="one-grade-isnt-the-story.html" data-tags="belonging grade setback confidence persistence"><h3>One Grade Isn’t the Story</h3><p>Interpret one score as information rather than a complete forecast of ability or course outcome.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Belonging &amp; Emotional Blocks</h2><p>Tools for moments when fear, comparison, perfectionism, or a setback changes how students interpret the academic task—or themselves.</p></div><span class="count">6 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="belonging confidence writer identity grade feedback struggle" href="still-a-writer.html"><h3>Still a Writer</h3><p>Separate a difficult writing event from a global judgment about writing ability.</p><div class="meta"><span class="tag emotional">Belonging</span></div></a>
+<a class="card" data-tags="belonging help revision questions process college" href="you-belong-in-the-process.html"><h3>You Belong in the Process</h3><p>Make questions, feedback, revision, collaboration, and help-seeking visible as normal college participation.</p><div class="meta"><span class="tag emotional">Belonging</span></div></a>
+<a class="card" data-tags="belonging comparison peers confidence social comparison" href="youre-seeing-their-highlight-reel.html"><h3>You’re Seeing Their Highlight Reel</h3><p>Separate what is visible about other students from the conclusions drawn about one’s own ability.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
+<a class="card" data-tags="belonging question fear help shame confidence" href="what-if-i-ask-a-dumb-question.html"><h3>What If I Ask a Dumb Question?</h3><p>Turn fear about asking for clarification into a specific, useful question.</p><div class="meta"><span class="tag emotional">Emotional block</span><span class="tag help">Help-seeking</span></div></a>
+<a class="card" data-tags="belonging academic voice clarity vocabulary confidence" href="stop-performing-academic.html"><h3>Stop Performing “Academic”</h3><p>Use clear, precise language without treating complexity of wording as proof of intelligence.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
+<a class="card" data-tags="belonging grade setback confidence persistence" href="one-grade-isnt-the-story.html"><h3>One Grade Isn’t the Story</h3><p>Interpret one score as information rather than a complete forecast of ability or course outcome.</p><div class="meta"><span class="tag emotional">Emotional block</span></div></a>
 </div>
-
+</div>
 <div class="category" data-category="help">
-  <div class="category-head"><div><h2>Help-Seeking & Persistence</h2><p>Tools for reconnecting, asking for support, returning after missed work, and identifying what is still possible.</p></div><span class="count">6 tools</span></div>
-  <div class="cards">
-    <a class="card" href="who-do-i-ask.html" data-tags="help support professor tutor counselor librarian campus resource"><h3>Who Do I Ask?</h3><p>Choose the person or resource that fits the kind of problem a student is facing.</p><div class="meta"><span class="tag help">Help-seeking</span></div></a>
-    <a class="card" href="what-if-i-ask-a-dumb-question.html" data-tags="help question professor tutor office hours fear"><h3>What If I Ask a Dumb Question?</h3><p>Practice asking for clarification without handing over ownership of the thinking.</p><div class="meta"><span class="tag help">Help-seeking</span></div></a>
-    <a class="card" href="dont-disappear.html" data-tags="help persistence missed work absent return reconnect"><h3>Don’t Disappear</h3><p>Find one concrete way to reconnect after missed work, avoidance, or embarrassment.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
-    <a class="card" href="whats-still-possible.html" data-tags="help persistence missed assignments setback recover"><h3>What’s Still Possible?</h3><p>Identify the work and choices that can still affect the outcome after a setback.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
-    <a class="card" href="one-grade-isnt-the-story.html" data-tags="help persistence grade setback recover confidence"><h3>One Grade Isn’t the Story</h3><p>Keep a single grade from becoming a reason to disengage from the course.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
-    <a class="card" href="submit-the-imperfect-thing.html" data-tags="help persistence submit deadline perfectionism missing assignment"><h3>Submit the Imperfect Thing</h3><p>Keep perfectionism from turning assessable work into a missing assignment.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
-  </div>
+<div class="category-head"><div><h2>Help-Seeking &amp; Persistence</h2><p>Tools for reconnecting, asking for support, returning after missed work, and identifying what is still possible.</p></div><span class="count">6 tools</span></div>
+<div class="cards">
+<a class="card" data-tags="help support professor tutor counselor librarian campus resource" href="who-do-i-ask.html"><h3>Who Do I Ask?</h3><p>Choose the person or resource that fits the kind of problem a student is facing.</p><div class="meta"><span class="tag help">Help-seeking</span></div></a>
+<a class="card" data-tags="help question professor tutor office hours fear" href="what-if-i-ask-a-dumb-question.html"><h3>What If I Ask a Dumb Question?</h3><p>Practice asking for clarification without handing over ownership of the thinking.</p><div class="meta"><span class="tag help">Help-seeking</span></div></a>
+<a class="card" data-tags="help persistence missed work absent return reconnect" href="dont-disappear.html"><h3>Don’t Disappear</h3><p>Find one concrete way to reconnect after missed work, avoidance, or embarrassment.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
+<a class="card" data-tags="help persistence missed assignments setback recover" href="whats-still-possible.html"><h3>What’s Still Possible?</h3><p>Identify the work and choices that can still affect the outcome after a setback.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
+<a class="card" data-tags="help persistence grade setback recover confidence" href="one-grade-isnt-the-story.html"><h3>One Grade Isn’t the Story</h3><p>Keep a single grade from becoming a reason to disengage from the course.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
+<a class="card" data-tags="help persistence submit deadline perfectionism missing assignment" href="submit-the-imperfect-thing.html"><h3>Submit the Imperfect Thing</h3><p>Keep perfectionism from turning assessable work into a missing assignment.</p><div class="meta"><span class="tag help">Persistence</span></div></a>
 </div>
-
+</div>
 <div class="empty" id="empty">
-  <strong>No tools matched that search.</strong>
+<strong>No tools matched that search.</strong>
   Try a broader word such as “reading,” “feedback,” “research,” “focus,” or “help.”
 </div>
-
 </div>
 </section>
-
 <section class="audience">
-  <div class="wrap">
-    <div class="audience-card">
-      <a class="audience-link" href="student.html"><strong>Not sure which tool you need?</strong><span>Use the student page to start from the problem you are experiencing right now.</span></a>
-      <a class="audience-link" href="faculty.html"><strong>Choosing a tool for students?</strong><span>Use the faculty page to browse by instructional purpose and see when each mini-lab may be useful.</span></a>
-    </div>
-  </div>
+<div class="wrap">
+<div class="audience-card">
+<a class="audience-link" href="student.html"><strong>Not sure which tool you need?</strong><span>Use the student page to start from the problem you are experiencing right now.</span></a>
+<a class="audience-link" href="faculty.html"><strong>Choosing a tool for students?</strong><span>Use the faculty page to browse by instructional purpose and see when each mini-lab may be useful.</span></a>
+</div>
+</div>
 </section>
 </main>
-
 <footer>
-  <div class="wrap foot">
-    <div class="credit"><strong>ENGL C1000 Learning Lab</strong><br>This collection was created by Karen Crozer to support ENGL C1000 learning in California Community Colleges (CCCs).</div>
-    <nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="student.html">Students</a><a href="faculty.html">Faculty</a></nav>
-  </div>
+<div class="wrap foot">
+<div class="credit"><strong>ENGL C1000 Learning Lab</strong><br/>This collection was created by Karen Crozer to support ENGL C1000 learning in California Community Colleges (CCCs).</div>
+<nav aria-label="Footer navigation"><a href="index.html">Home</a><a href="student.html">Students</a><a href="faculty.html">Faculty</a></nav>
+</div>
 </footer>
-
 <script>
 const search = document.getElementById('search');
 const clearBtn = document.getElementById('clear');
@@ -298,5 +283,5 @@ clearBtn.addEventListener('click', () => {
 
 applyFilters();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

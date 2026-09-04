@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Still a Writer</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
   --bg:#f6f3ee;
@@ -305,7 +306,6 @@ textarea:focus{
   *{scroll-behavior:auto!important;transition:none!important}
 }
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -313,269 +313,234 @@ textarea:focus{
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
-  <section class="hero" aria-labelledby="title">
-    <div class="kicker" style="color:#ded9ff">C1000 / C1000E Writing Lab</div>
-    <h1 id="title">🌱 Still a Writer</h1>
-    <p>Writing can get personal. This activity helps you separate a rough writing moment from a story about who you are.</p>
-    <p class="mini">No points. No perfect answers. Just a reset you can actually use.</p>
-  </section>
-
-  <section class="progress-wrap" aria-label="Activity progress">
-    <div class="progress-label">
-      <span id="progressText">Step 1 of 5</span>
-      <span id="progressLabel">Meet the writers</span>
+<main id="main">
+<section aria-labelledby="title" class="hero">
+<div class="kicker" style="color:#ded9ff">C1000 / C1000E Writing Lab</div>
+<h1 id="title">🌱 Still a Writer</h1>
+<p>Writing can get personal. This activity helps you separate a rough writing moment from a story about who you are.</p>
+<p class="mini">No points. No perfect answers. Just a reset you can actually use.</p>
+</section>
+<section aria-label="Activity progress" class="progress-wrap">
+<div class="progress-label">
+<span id="progressText">Step 1 of 5</span>
+<span id="progressLabel">Meet the writers</span>
+</div>
+<div aria-hidden="true" class="progress"><div id="progressBar"></div></div>
+</section>
+<div aria-live="polite" class="small" id="live"></div>
+<section class="screen active" data-step="0">
+<div class="kicker">Step 1 · Meet the Writers</div>
+<h2>Someone Here Might Feel Familiar</h2>
+<p>Choose one student whose situation feels interesting or recognizable. You are not choosing who is “most struggling.” You are choosing a story to explore.</p>
+<div class="story-grid">
+<button aria-pressed="false" class="story-card" data-evidence="I'm still learning how college reading and writing work." data-name="Marisol" data-thought="Maybe everyone else is just smarter than me." type="button">
+<div class="emoji">🌻</div>
+<h3>Marisol</h3>
+<p>First semester of college. Everyone in discussion seems to understand the readings faster.</p>
+<div class="quote">“Maybe everyone else is just smarter than me.”</div>
+</button>
+<button aria-pressed="false" class="story-card" data-evidence="I missed some work, but one missed deadline does not decide the semester." data-name="Andre" data-thought="I'm already behind. Why even turn it in?" type="button">
+<div class="emoji">🚌</div>
+<h3>Andre</h3>
+<p>Works evenings. Transportation problems made him miss a reading and a draft.</p>
+<div class="quote">“I'm already behind. Why even turn it in?”</div>
+</button>
+<button aria-pressed="false" class="story-card" data-evidence="I have ideas. I'm still learning how to shape them into academic writing." data-name="Linh" data-thought="Everyone else's writing sounds smarter." type="button">
+<div class="emoji">🌙</div>
+<h3>Linh</h3>
+<p>Has strong ideas in discussion but freezes when trying to make them sound “academic.”</p>
+<div class="quote">“Everyone else's writing sounds smarter.”</div>
+</button>
+<button aria-pressed="false" class="story-card" data-evidence="College students write in all kinds of real-life conditions. The work still counts." data-name="Mateo" data-thought="Real college students probably don't write essays like this." type="button">
+<div class="emoji">👨‍👧</div>
+<h3>Mateo</h3>
+<p>Works and helps with family responsibilities. He writes in small pockets of time.</p>
+<div class="quote">“Real college students probably don't write essays like this.”</div>
+</button>
+<button aria-pressed="false" class="story-card" data-evidence="I received a lot of feedback. Feedback tells me what to work on next." data-name="Jay" data-thought="My paper has so many comments. Apparently I can't write." type="button">
+<div class="emoji">📝</div>
+<h3>Jay</h3>
+<p>Gets back a draft covered in comments and assumes the comments are a verdict.</p>
+<div class="quote">“Apparently I can't write.”</div>
+</button>
+<button aria-pressed="false" class="story-card" data-evidence="I'm stuck in revision and perfectionism. Difficulty is part of writing, not proof that I don't belong." data-name="Nia" data-thought="If I were a good writer, this wouldn't be so hard." type="button">
+<div class="emoji">🔄</div>
+<h3>Nia</h3>
+<p>Has started the same paragraph six times because she wants the first draft to be good.</p>
+<div class="quote">“If I were a good writer, this wouldn't be so hard.”</div>
+</button>
+</div>
+<div class="controls">
+<button class="primary next" disabled="" type="button">Explore This Story</button>
+</div>
+</section>
+<section class="screen" data-step="1">
+<div class="kicker">Step 2 · Change the Story</div>
+<h2 id="storyName">What Would You Tell a Classmate?</h2>
+<div class="callout">
+<strong id="storyThought"></strong>
+</div>
+<p class="question">If this student were sitting next to you, which response would actually help?</p>
+<div class="options" id="responseOptions">
+<button aria-pressed="false" class="option" data-correct="false" type="button">Don't worry. Everything will work out.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">You just need to manage your time better.</button>
+<button aria-pressed="false" class="option" data-correct="true" type="button">What happened is real, but it does not decide what happens next. Pick the smallest next move you can make.</button>
+<button aria-pressed="false" class="option" data-correct="false" type="button">Try harder so you do not fall behind again.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="responseFeedback" role="status"></div>
+<div class="story-evidence">
+<div class="panel story">
+<strong>❌ Story</strong>
+<span id="storyPanel"></span>
+</div>
+<div class="panel evidence">
+<strong>🔎 Evidence</strong>
+<span id="evidencePanel"></span>
+</div>
+</div>
+<div class="callout">
+<strong>Recovery thought:</strong> It does not pretend everything is fine. It separates <em>what happened</em> from <em>what happens next</em>.
     </div>
-    <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
-  </section>
-
-  <div id="live" class="small" aria-live="polite"></div>
-
-  <section class="screen active" data-step="0">
-    <div class="kicker">Step 1 · Meet the Writers</div>
-    <h2>Someone Here Might Feel Familiar</h2>
-    <p>Choose one student whose situation feels interesting or recognizable. You are not choosing who is “most struggling.” You are choosing a story to explore.</p>
-
-    <div class="story-grid">
-      <button type="button" class="story-card" data-name="Marisol" data-thought="Maybe everyone else is just smarter than me." data-evidence="I'm still learning how college reading and writing work." aria-pressed="false">
-        <div class="emoji">🌻</div>
-        <h3>Marisol</h3>
-        <p>First semester of college. Everyone in discussion seems to understand the readings faster.</p>
-        <div class="quote">“Maybe everyone else is just smarter than me.”</div>
-      </button>
-
-      <button type="button" class="story-card" data-name="Andre" data-thought="I'm already behind. Why even turn it in?" data-evidence="I missed some work, but one missed deadline does not decide the semester." aria-pressed="false">
-        <div class="emoji">🚌</div>
-        <h3>Andre</h3>
-        <p>Works evenings. Transportation problems made him miss a reading and a draft.</p>
-        <div class="quote">“I'm already behind. Why even turn it in?”</div>
-      </button>
-
-      <button type="button" class="story-card" data-name="Linh" data-thought="Everyone else's writing sounds smarter." data-evidence="I have ideas. I'm still learning how to shape them into academic writing." aria-pressed="false">
-        <div class="emoji">🌙</div>
-        <h3>Linh</h3>
-        <p>Has strong ideas in discussion but freezes when trying to make them sound “academic.”</p>
-        <div class="quote">“Everyone else's writing sounds smarter.”</div>
-      </button>
-
-      <button type="button" class="story-card" data-name="Mateo" data-thought="Real college students probably don't write essays like this." data-evidence="College students write in all kinds of real-life conditions. The work still counts." aria-pressed="false">
-        <div class="emoji">👨‍👧</div>
-        <h3>Mateo</h3>
-        <p>Works and helps with family responsibilities. He writes in small pockets of time.</p>
-        <div class="quote">“Real college students probably don't write essays like this.”</div>
-      </button>
-
-      <button type="button" class="story-card" data-name="Jay" data-thought="My paper has so many comments. Apparently I can't write." data-evidence="I received a lot of feedback. Feedback tells me what to work on next." aria-pressed="false">
-        <div class="emoji">📝</div>
-        <h3>Jay</h3>
-        <p>Gets back a draft covered in comments and assumes the comments are a verdict.</p>
-        <div class="quote">“Apparently I can't write.”</div>
-      </button>
-
-      <button type="button" class="story-card" data-name="Nia" data-thought="If I were a good writer, this wouldn't be so hard." data-evidence="I'm stuck in revision and perfectionism. Difficulty is part of writing, not proof that I don't belong." aria-pressed="false">
-        <div class="emoji">🔄</div>
-        <h3>Nia</h3>
-        <p>Has started the same paragraph six times because she wants the first draft to be good.</p>
-        <div class="quote">“If I were a good writer, this wouldn't be so hard.”</div>
-      </button>
-    </div>
-
-    <div class="controls">
-      <button class="primary next" type="button" disabled>Explore This Story</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="1">
-    <div class="kicker">Step 2 · Change the Story</div>
-    <h2 id="storyName">What Would You Tell a Classmate?</h2>
-    <div class="callout">
-      <strong id="storyThought"></strong>
-    </div>
-
-    <p class="question">If this student were sitting next to you, which response would actually help?</p>
-    <div class="options" id="responseOptions">
-      <button class="option" type="button" data-correct="false" aria-pressed="false">Don't worry. Everything will work out.</button>
-      <button class="option" type="button" data-correct="false" aria-pressed="false">You just need to manage your time better.</button>
-      <button class="option" type="button" data-correct="true" aria-pressed="false">What happened is real, but it does not decide what happens next. Pick the smallest next move you can make.</button>
-      <button class="option" type="button" data-correct="false" aria-pressed="false">Try harder so you do not fall behind again.</button>
-    </div>
-    <div id="responseFeedback" class="feedback"></div>
-
-    <div class="story-evidence">
-      <div class="panel story">
-        <strong>❌ Story</strong>
-        <span id="storyPanel"></span>
-      </div>
-      <div class="panel evidence">
-        <strong>🔎 Evidence</strong>
-        <span id="evidencePanel"></span>
-      </div>
-    </div>
-
-    <div class="callout">
-      <strong>Recovery thought:</strong> It does not pretend everything is fine. It separates <em>what happened</em> from <em>what happens next</em>.
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Try This With Me</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="2">
-    <div class="kicker">Step 3 · Your Turn</div>
-    <h2>Which Thought Has Shown Up for You?</h2>
-    <p>Select any that feel familiar. This is not a quiz, and nothing here is a diagnosis.</p>
-
-    <div class="checklist" id="thoughtList">
-      <label class="check-item"><input type="checkbox" value="I don't know what I'm doing."><span>I don't know what I'm doing.</span></label>
-      <label class="check-item"><input type="checkbox" value="Everyone else is better at this."><span>Everyone else is better at this.</span></label>
-      <label class="check-item"><input type="checkbox" value="I'm too far behind."><span>I'm too far behind.</span></label>
-      <label class="check-item"><input type="checkbox" value="I should be better at writing by now."><span>I should be better at writing by now.</span></label>
-      <label class="check-item"><input type="checkbox" value="I don't sound academic enough."><span>I don't sound “academic” enough.</span></label>
-      <label class="check-item"><input type="checkbox" value="Feedback means I did badly."><span>Feedback means I did badly.</span></label>
-      <label class="check-item"><input type="checkbox" value="I don't have enough time."><span>I don't have enough time.</span></label>
-      <label class="check-item"><input type="checkbox" value="I don't belong here."><span>I don't belong here.</span></label>
-      <label class="check-item"><input type="checkbox" value="I don't know how to start."><span>I don't know how to start.</span></label>
-    </div>
-
-    <div style="margin-top:16px">
-      <label for="otherThought"><strong>Something else?</strong></label>
-      <textarea id="otherThought" placeholder="Optional"></textarea>
-    </div>
-
-    <p class="question">What actually happened underneath that story?</p>
-    <div class="options" id="evidenceChoices">
-      <button class="option" type="button" aria-pressed="false">I got a grade I did not want.</button>
-      <button class="option" type="button" aria-pressed="false">I received a lot of feedback.</button>
-      <button class="option" type="button" aria-pressed="false">I'm struggling with this assignment.</button>
-      <button class="option" type="button" aria-pressed="false">I do not understand something yet.</button>
-      <button class="option" type="button" aria-pressed="false">Writing is taking me a long time.</button>
-      <button class="option" type="button" aria-pressed="false">I made sentence-level errors.</button>
-      <button class="option" type="button" aria-pressed="false">I have not written this kind of assignment before.</button>
-      <button class="option" type="button" aria-pressed="false">Something outside class is making school harder right now.</button>
-    </div>
-
-    <div class="story-evidence">
-      <div class="panel story">
-        <strong>❌ Big conclusion</strong>
-        <span id="myStory">Choose a thought above.</span>
-      </div>
-      <div class="panel evidence">
-        <strong>🔎 What actually happened</strong>
-        <span id="myEvidence">Choose the closest evidence.</span>
-      </div>
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Build My Writer Reminder</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="3">
-    <div class="kicker">Step 4 · Build a Writer Reminder</div>
-    <h2>Choose Something True Enough to Believe</h2>
-    <p>A useful writer reminder does not have to sound inspirational. It just has to be credible enough to help you move.</p>
-
-    <div class="reminder-grid" id="reminders">
-      <button class="reminder" type="button" aria-pressed="false">I don't need the whole essay yet. I need the next sentence.</button>
-      <button class="reminder" type="button" aria-pressed="false">A rough draft is allowed to be rough. That's why it has a name.</button>
-      <button class="reminder" type="button" aria-pressed="false">Feedback gives me somewhere to go next. It isn't a verdict on me.</button>
-      <button class="reminder" type="button" aria-pressed="false">I can't see how long someone else's writing took.</button>
-      <button class="reminder" type="button" aria-pressed="false">I don't have to already be good at something I'm here to learn.</button>
-      <button class="reminder" type="button" aria-pressed="false">My ideas matter before they sound polished. I can work on the language after I know what I want to say.</button>
-      <button class="reminder" type="button" aria-pressed="false">Behind is a location, not an identity. I can choose my next move from here.</button>
-      <button class="reminder" type="button" aria-pressed="false">Difficulty is part of writing. It is not proof that I do not belong here.</button>
-    </div>
-
-    <div class="callout">
-      <strong>Pick the one you can actually believe today.</strong>
-      <p style="margin-bottom:0">You do not need the most positive sentence. You need a sentence that interrupts the big conclusion without pretending the writing moment is easy.</p>
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Choose My Next Move</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="4">
-    <div class="kicker">Step 5 · Choose a Next Move</div>
-    <h2>What Would Help Most Right Now?</h2>
-    <p>Your reminder changes the story. Your next move changes what happens next.</p>
-
-    <div class="next-moves" id="moves">
-      <button class="move" type="button" aria-pressed="false">👩‍🏫 Ask my professor one clear question.</button>
-      <button class="move" type="button" aria-pressed="false">🧑‍🤝‍🧑 Ask someone to look at one part of my writing.</button>
-      <button class="move" type="button" aria-pressed="false">📚 Get help understanding the assignment.</button>
-      <button class="move" type="button" aria-pressed="false">⏱️ Work for 15 minutes and then reassess.</button>
-      <button class="move" type="button" aria-pressed="false">🧠 Stop for tonight and come back with a clearer head.</button>
-      <button class="move" type="button" aria-pressed="false">✍️ Write badly for 10 minutes just to get words on the page.</button>
-      <button class="move" type="button" aria-pressed="false">🏫 Reach out for support with something outside class that is making school harder.</button>
-      <button class="move" type="button" aria-pressed="false">🔎 Decide exactly what part of the assignment is confusing me.</button>
-    </div>
-
-    <div class="callout">
-      <strong>You only need one next move.</strong>
-      <p style="margin-bottom:0">Choose the action that would make the situation a little more workable—not the action that proves you can handle everything alone.</p>
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Make My Writer Card</button>
-    </div>
-  </section>
-
-  <section class="screen" data-step="5">
-    <div class="kicker">Step 6 · Your Reset</div>
-    <h2>Still a Writer</h2>
-    <p>Your card does not promise that writing will be easy. It reminds you what you can do when writing gets hard.</p>
-
-    <div class="writer-card">
-      <div class="big">🌱 My Writer Reset Card</div>
-      <div class="card-line">
-        <strong>When my brain says:</strong>
-        <p id="cardStory"></p>
-      </div>
-      <div class="card-line">
-        <strong>What actually happened:</strong>
-        <p id="cardEvidence"></p>
-      </div>
-      <div class="card-line">
-        <strong>I'm going to remember:</strong>
-        <p id="cardReminder"></p>
-      </div>
-      <div class="card-line">
-        <strong>My next move:</strong>
-        <p id="cardMove"></p>
-      </div>
-      <div class="card-line">
-        <strong>One more thing:</strong>
-        <p>Asking for help is part of doing college. It is not evidence that you cannot do college.</p>
-      </div>
-    </div>
-
-    <div class="callout">
-      <strong>You're still a writer when writing is going badly.</strong>
-      <p style="margin-bottom:0">College writers get confused. They get feedback. They miss things. They revise. They ask questions. They start again. The goal is not to never struggle. The goal is to know what you can do when struggle shows up.</p>
-    </div>
-
-    <div class="controls">
-      <button class="secondary" type="button" id="restart">Start Over</button>
-    </div>
-  </section>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Try This With Me</button>
+</div>
+</section>
+<section class="screen" data-step="2">
+<div class="kicker">Step 3 · Your Turn</div>
+<h2>Which Thought Has Shown Up for You?</h2>
+<p>Select any that feel familiar. This is not a quiz, and nothing here is a diagnosis.</p>
+<div class="checklist" id="thoughtList">
+<label class="check-item"><input type="checkbox" value="I don't know what I'm doing."/><span>I don't know what I'm doing.</span></label>
+<label class="check-item"><input type="checkbox" value="Everyone else is better at this."/><span>Everyone else is better at this.</span></label>
+<label class="check-item"><input type="checkbox" value="I'm too far behind."/><span>I'm too far behind.</span></label>
+<label class="check-item"><input type="checkbox" value="I should be better at writing by now."/><span>I should be better at writing by now.</span></label>
+<label class="check-item"><input type="checkbox" value="I don't sound academic enough."/><span>I don't sound “academic” enough.</span></label>
+<label class="check-item"><input type="checkbox" value="Feedback means I did badly."/><span>Feedback means I did badly.</span></label>
+<label class="check-item"><input type="checkbox" value="I don't have enough time."/><span>I don't have enough time.</span></label>
+<label class="check-item"><input type="checkbox" value="I don't belong here."/><span>I don't belong here.</span></label>
+<label class="check-item"><input type="checkbox" value="I don't know how to start."/><span>I don't know how to start.</span></label>
+</div>
+<div style="margin-top:16px">
+<label for="otherThought"><strong>Something else?</strong></label>
+<textarea id="otherThought" placeholder="Optional"></textarea>
+</div>
+<p class="question">What actually happened underneath that story?</p>
+<div class="options" id="evidenceChoices">
+<button aria-pressed="false" class="option" type="button">I got a grade I did not want.</button>
+<button aria-pressed="false" class="option" type="button">I received a lot of feedback.</button>
+<button aria-pressed="false" class="option" type="button">I'm struggling with this assignment.</button>
+<button aria-pressed="false" class="option" type="button">I do not understand something yet.</button>
+<button aria-pressed="false" class="option" type="button">Writing is taking me a long time.</button>
+<button aria-pressed="false" class="option" type="button">I made sentence-level errors.</button>
+<button aria-pressed="false" class="option" type="button">I have not written this kind of assignment before.</button>
+<button aria-pressed="false" class="option" type="button">Something outside class is making school harder right now.</button>
+</div>
+<div class="story-evidence">
+<div class="panel story">
+<strong>❌ Big conclusion</strong>
+<span id="myStory">Choose a thought above.</span>
+</div>
+<div class="panel evidence">
+<strong>🔎 What actually happened</strong>
+<span id="myEvidence">Choose the closest evidence.</span>
+</div>
+</div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Build My Writer Reminder</button>
+</div>
+</section>
+<section class="screen" data-step="3">
+<div class="kicker">Step 4 · Build a Writer Reminder</div>
+<h2>Choose Something True Enough to Believe</h2>
+<p>A useful writer reminder does not have to sound inspirational. It just has to be credible enough to help you move.</p>
+<div class="reminder-grid" id="reminders">
+<button aria-pressed="false" class="reminder" type="button">I don't need the whole essay yet. I need the next sentence.</button>
+<button aria-pressed="false" class="reminder" type="button">A rough draft is allowed to be rough. That's why it has a name.</button>
+<button aria-pressed="false" class="reminder" type="button">Feedback gives me somewhere to go next. It isn't a verdict on me.</button>
+<button aria-pressed="false" class="reminder" type="button">I can't see how long someone else's writing took.</button>
+<button aria-pressed="false" class="reminder" type="button">I don't have to already be good at something I'm here to learn.</button>
+<button aria-pressed="false" class="reminder" type="button">My ideas matter before they sound polished. I can work on the language after I know what I want to say.</button>
+<button aria-pressed="false" class="reminder" type="button">Behind is a location, not an identity. I can choose my next move from here.</button>
+<button aria-pressed="false" class="reminder" type="button">Difficulty is part of writing. It is not proof that I do not belong here.</button>
+</div>
+<div class="callout">
+<strong>Pick the one you can actually believe today.</strong>
+<p style="margin-bottom:0">You do not need the most positive sentence. You need a sentence that interrupts the big conclusion without pretending the writing moment is easy.</p>
+</div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Choose My Next Move</button>
+</div>
+</section>
+<section class="screen" data-step="4">
+<div class="kicker">Step 5 · Choose a Next Move</div>
+<h2>What Would Help Most Right Now?</h2>
+<p>Your reminder changes the story. Your next move changes what happens next.</p>
+<div class="next-moves" id="moves">
+<button aria-pressed="false" class="move" type="button">👩‍🏫 Ask my professor one clear question.</button>
+<button aria-pressed="false" class="move" type="button">🧑‍🤝‍🧑 Ask someone to look at one part of my writing.</button>
+<button aria-pressed="false" class="move" type="button">📚 Get help understanding the assignment.</button>
+<button aria-pressed="false" class="move" type="button">⏱️ Work for 15 minutes and then reassess.</button>
+<button aria-pressed="false" class="move" type="button">🧠 Stop for tonight and come back with a clearer head.</button>
+<button aria-pressed="false" class="move" type="button">✍️ Write badly for 10 minutes just to get words on the page.</button>
+<button aria-pressed="false" class="move" type="button">🏫 Reach out for support with something outside class that is making school harder.</button>
+<button aria-pressed="false" class="move" type="button">🔎 Decide exactly what part of the assignment is confusing me.</button>
+</div>
+<div class="callout">
+<strong>You only need one next move.</strong>
+<p style="margin-bottom:0">Choose the action that would make the situation a little more workable—not the action that proves you can handle everything alone.</p>
+</div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Make My Writer Card</button>
+</div>
+</section>
+<section class="screen" data-step="5">
+<div class="kicker">Step 6 · Your Reset</div>
+<h2>Still a Writer</h2>
+<p>Your card does not promise that writing will be easy. It reminds you what you can do when writing gets hard.</p>
+<div class="writer-card">
+<div class="big">🌱 My Writer Reset Card</div>
+<div class="card-line">
+<strong>When my brain says:</strong>
+<p id="cardStory"></p>
+</div>
+<div class="card-line">
+<strong>What actually happened:</strong>
+<p id="cardEvidence"></p>
+</div>
+<div class="card-line">
+<strong>I'm going to remember:</strong>
+<p id="cardReminder"></p>
+</div>
+<div class="card-line">
+<strong>My next move:</strong>
+<p id="cardMove"></p>
+</div>
+<div class="card-line">
+<strong>One more thing:</strong>
+<p>Asking for help is part of doing college. It is not evidence that you cannot do college.</p>
+</div>
+</div>
+<div class="callout">
+<strong>You're still a writer when writing is going badly.</strong>
+<p style="margin-bottom:0">College writers get confused. They get feedback. They miss things. They revise. They ask questions. They start again. The goal is not to never struggle. The goal is to know what you can do when struggle shows up.</p>
+</div>
+<div class="controls">
+<button class="secondary" id="restart" type="button">Start Over</button>
+</div>
+</section>
 </main>
-
 <script>
 (function(){
   const screens=[...document.querySelectorAll('.screen')];
@@ -607,7 +572,7 @@ textarea:focus{
     current=n;
     screens[current].classList.add('active');
     updateProgress();
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollTo({top:0,behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
   }
 
   function enableNext(screenIndex,enabled){
@@ -735,5 +700,5 @@ textarea:focus{
   updateProgress();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

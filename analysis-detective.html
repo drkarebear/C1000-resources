@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>The Analysis Detective: Crack the Case</title>
 <style>
 :root{
@@ -218,7 +219,6 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
   *{scroll-behavior:auto!important;transition:none!important}
 }
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -226,218 +226,189 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip-link" href="#casework">Skip to the analysis activity</a>
 <main id="casework">
-  <section class="hero" aria-labelledby="title">
-    <div class="kicker" style="color:#d8d2ff">C1000 / C1000E Writing Lab Game</div>
-    <h1 id="title">🔎 The Analysis Detective</h1>
-    <p><strong>Crack the Case:</strong> You already read the text. Now your job is to figure out what the details might reveal.</p>
-    <div class="badge-row" aria-label="Skills practiced">
-      <span class="badge">Find a clue</span>
-      <span class="badge">Spot a pattern</span>
-      <span class="badge">Make an inference</span>
-      <span class="badge">Answer “So what?”</span>
-    </div>
-  </section>
-
-  <section class="progress-wrap" aria-label="Game progress">
-    <div class="progress-label">
-      <span id="progressText">Case 1 of 4</span>
-      <span id="scoreText">Case files solved: 0</span>
-    </div>
-    <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
-  </section>
-
-  <div id="live" class="small" aria-live="polite"></div>
-
-  <section class="case active" data-step="0">
-    <div class="kicker">Case 1 · Something Doesn't Match</div>
-    <h2 tabindex="-1">Find the Clue</h2>
-    <p>Your job is not to summarize the whole passage. Find one detail that gives you something to investigate.</p>
-
-    <div class="passage">
+<section aria-labelledby="title" class="hero">
+<div class="kicker" style="color:#d8d2ff">C1000 / C1000E Writing Lab Game</div>
+<h1 id="title">🔎 The Analysis Detective</h1>
+<p><strong>Crack the Case:</strong> You already read the text. Now your job is to figure out what the details might reveal.</p>
+<div aria-label="Skills practiced" class="badge-row">
+<span class="badge">Find a clue</span>
+<span class="badge">Spot a pattern</span>
+<span class="badge">Make an inference</span>
+<span class="badge">Answer “So what?”</span>
+</div>
+</section>
+<section aria-label="Game progress" class="progress-wrap">
+<div class="progress-label">
+<span id="progressText">Case 1 of 4</span>
+<span id="scoreText">Case files solved: 0</span>
+</div>
+<div aria-hidden="true" class="progress"><div id="progressBar"></div></div>
+</section>
+<div aria-live="polite" class="small" id="live"></div>
+<section class="case active" data-step="0">
+<div class="kicker">Case 1 · Something Doesn't Match</div>
+<h2 tabindex="-1">Find the Clue</h2>
+<p>Your job is not to summarize the whole passage. Find one detail that gives you something to investigate.</p>
+<div class="passage">
       Maya checked her phone again. No messages. She placed it facedown on the table, picked it up thirty seconds later, and refreshed the screen. Across the restaurant, her friends were laughing. Maya smiled at something someone said, although she had not heard it.
     </div>
-
-    <p class="question">Which detail is most useful to investigate? Choose one strong clue.</p>
-    <div class="options" data-question="q1">
-      <button class="option" type="button" data-correct="false">The scene takes place in a restaurant.</button>
-      <button class="option" type="button" data-correct="true">Maya repeatedly checks a phone that has no new messages.</button>
-      <button class="option" type="button" data-correct="false">Maya's friends are laughing.</button>
-      <button class="option" type="button" data-correct="true">Maya smiles even though she did not hear what her friend said.</button>
-    </div>
-    <div class="feedback" id="fb-q1"></div>
-
-    <p class="question">Now look at the clues together. What pattern do they create?</p>
-    <div class="options" data-question="q2">
-      <button class="option" type="button" data-correct="false">Maya is eating dinner.</button>
-      <button class="option" type="button" data-correct="false">Phones appear several times.</button>
-      <button class="option" type="button" data-correct="true">Maya is physically with other people but seems mentally somewhere else.</button>
-      <button class="option" type="button" data-correct="false">Maya should stop using her phone.</button>
-    </div>
-    <div class="feedback" id="fb-q2"></div>
-
-    <div class="impostor">
-      <strong>🚨 Summary Impostor Alert</strong>
-      <p>“Maya is at dinner with her friends and keeps checking her phone.”</p>
-      <p class="question">Is this analysis?</p>
-      <div class="options" data-question="q3">
-        <button class="option" type="button" data-correct="false">Yes — it tells us what the passage is about.</button>
-        <button class="option" type="button" data-correct="true">No — it reports what happened but does not explain what the details might mean.</button>
-      </div>
-      <div class="feedback" id="fb-q3"></div>
-    </div>
-
-    <div class="controls">
-      <button class="primary next" type="button" disabled>Close Case 1</button>
-    </div>
-  </section>
-
-  <section class="case" data-step="1">
-    <div class="kicker">Case 2 · Why That Word?</div>
-    <h2 tabindex="-1">Investigate the Language</h2>
-    <p>This time, the clue is not an event. It is a word choice.</p>
-
-    <div class="passage">
+<p class="question">Which detail is most useful to investigate? Choose one strong clue.</p>
+<div class="options" data-question="q1">
+<button class="option" data-correct="false" type="button">The scene takes place in a restaurant.</button>
+<button class="option" data-correct="true" type="button">Maya repeatedly checks a phone that has no new messages.</button>
+<button class="option" data-correct="false" type="button">Maya's friends are laughing.</button>
+<button class="option" data-correct="true" type="button">Maya smiles even though she did not hear what her friend said.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q1" role="status"></div>
+<p class="question">Now look at the clues together. What pattern do they create?</p>
+<div class="options" data-question="q2">
+<button class="option" data-correct="false" type="button">Maya is eating dinner.</button>
+<button class="option" data-correct="false" type="button">Phones appear several times.</button>
+<button class="option" data-correct="true" type="button">Maya is physically with other people but seems mentally somewhere else.</button>
+<button class="option" data-correct="false" type="button">Maya should stop using her phone.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q2" role="status"></div>
+<div class="impostor">
+<strong>🚨 Summary Impostor Alert</strong>
+<p>“Maya is at dinner with her friends and keeps checking her phone.”</p>
+<p class="question">Is this analysis?</p>
+<div class="options" data-question="q3">
+<button class="option" data-correct="false" type="button">Yes — it tells us what the passage is about.</button>
+<button class="option" data-correct="true" type="button">No — it reports what happened but does not explain what the details might mean.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q3" role="status"></div>
+</div>
+<div class="controls">
+<button class="primary next" disabled="" type="button">Close Case 1</button>
+</div>
+</section>
+<section class="case" data-step="1">
+<div class="kicker">Case 2 · Why That Word?</div>
+<h2 tabindex="-1">Investigate the Language</h2>
+<p>This time, the clue is not an event. It is a word choice.</p>
+<div class="passage">
       A delivery company describes its drivers as “independent partners” who have the freedom to choose when they work. Drivers use their own cars, pay for their own gas, and receive no guaranteed number of hours each week.
     </div>
-
-    <p class="question">Which phrase deserves investigation?</p>
-    <div class="options" data-question="q4">
-      <button class="option" type="button" data-correct="true">“independent partners”</button>
-      <button class="option" type="button" data-correct="false">“their own cars”</button>
-      <button class="option" type="button" data-correct="false">“each week”</button>
+<p class="question">Which phrase deserves investigation?</p>
+<div class="options" data-question="q4">
+<button class="option" data-correct="true" type="button">“independent partners”</button>
+<button class="option" data-correct="false" type="button">“their own cars”</button>
+<button class="option" data-correct="false" type="button">“each week”</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q4" role="status"></div>
+<p class="question">What could that phrase be doing? Choose one defensible interpretation.</p>
+<div class="options" data-question="q5">
+<button class="option" data-correct="false" type="button">It proves the company is treating workers fairly.</button>
+<button class="option" data-correct="true" type="button">It emphasizes freedom and independence, which may make the work arrangement sound more appealing.</button>
+<button class="option" data-correct="true" type="button">It may shift attention away from the costs and risks the drivers carry themselves.</button>
+<button class="option" data-correct="false" type="button">It means the drivers legally own part of the company.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q5" role="status"></div>
+<div class="callout">
+<strong>Detective Rule:</strong> More than one interpretation can be defensible. What matters is whether you can connect it back to evidence.
     </div>
-    <div class="feedback" id="fb-q4"></div>
-
-    <p class="question">What could that phrase be doing? Choose one defensible interpretation.</p>
-    <div class="options" data-question="q5">
-      <button class="option" type="button" data-correct="false">It proves the company is treating workers fairly.</button>
-      <button class="option" type="button" data-correct="true">It emphasizes freedom and independence, which may make the work arrangement sound more appealing.</button>
-      <button class="option" type="button" data-correct="true">It may shift attention away from the costs and risks the drivers carry themselves.</button>
-      <button class="option" type="button" data-correct="false">It means the drivers legally own part of the company.</button>
-    </div>
-    <div class="feedback" id="fb-q5"></div>
-
-    <div class="callout">
-      <strong>Detective Rule:</strong> More than one interpretation can be defensible. What matters is whether you can connect it back to evidence.
-    </div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Close Case 2</button>
-    </div>
-  </section>
-
-  <section class="case" data-step="2">
-    <div class="kicker">Case 3 · What's Missing?</div>
-    <h2 tabindex="-1">Investigate the Gap</h2>
-    <p>Sometimes the most revealing clue is an assumption the writer never says out loud.</p>
-
-    <div class="passage">
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Close Case 2</button>
+</div>
+</section>
+<section class="case" data-step="2">
+<div class="kicker">Case 3 · What's Missing?</div>
+<h2 tabindex="-1">Investigate the Gap</h2>
+<p>Sometimes the most revealing clue is an assumption the writer never says out loud.</p>
+<div class="passage">
       College students should work no more than fifteen hours per week. Students who work less have more time to study, attend office hours, and participate in campus life. Colleges should encourage all students to reduce their work schedules during the semester.
     </div>
-
-    <p class="question">What important complication is missing from the argument?</p>
-    <div class="options" data-question="q6">
-      <button class="option" type="button" data-correct="false">Some students do not like office hours.</button>
-      <button class="option" type="button" data-correct="true">Some students work because they need income for rent, food, transportation, or family responsibilities.</button>
-      <button class="option" type="button" data-correct="false">Some college campuses have clubs.</button>
-      <button class="option" type="button" data-correct="false">Some students study in the morning.</button>
-    </div>
-    <div class="feedback" id="fb-q6"></div>
-
-    <p class="question">Why does that missing perspective matter? Choose one strong explanation.</p>
-    <div class="options" data-question="q7">
-      <button class="option" type="button" data-correct="true">The recommendation assumes students can simply choose to work less, which may not be realistic for everyone.</button>
-      <button class="option" type="button" data-correct="false">It proves the writer knows nothing about college students.</button>
-      <button class="option" type="button" data-correct="true">The argument may sound reasonable while overlooking the financial realities that shape some students' choices.</button>
-      <button class="option" type="button" data-correct="false">It means students should always work more hours.</button>
-    </div>
-    <div class="feedback" id="fb-q7"></div>
-
-    <div class="controls">
-      <button class="secondary back" type="button">Back</button>
-      <button class="primary next" type="button" disabled>Open Final Case</button>
-    </div>
-  </section>
-
-  <section class="case" data-step="3">
-    <div class="kicker">Final Case · Crack It Yourself</div>
-    <h2 tabindex="-1">Build the Evidence Board</h2>
-    <p>No multiple choice this time. Use the same detective moves on a new passage.</p>
-
-    <div class="passage">
+<p class="question">What important complication is missing from the argument?</p>
+<div class="options" data-question="q6">
+<button class="option" data-correct="false" type="button">Some students do not like office hours.</button>
+<button class="option" data-correct="true" type="button">Some students work because they need income for rent, food, transportation, or family responsibilities.</button>
+<button class="option" data-correct="false" type="button">Some college campuses have clubs.</button>
+<button class="option" data-correct="false" type="button">Some students study in the morning.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q6" role="status"></div>
+<p class="question">Why does that missing perspective matter? Choose one strong explanation.</p>
+<div class="options" data-question="q7">
+<button class="option" data-correct="true" type="button">The recommendation assumes students can simply choose to work less, which may not be realistic for everyone.</button>
+<button class="option" data-correct="false" type="button">It proves the writer knows nothing about college students.</button>
+<button class="option" data-correct="true" type="button">The argument may sound reasonable while overlooking the financial realities that shape some students' choices.</button>
+<button class="option" data-correct="false" type="button">It means students should always work more hours.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb-q7" role="status"></div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary next" disabled="" type="button">Open Final Case</button>
+</div>
+</section>
+<section class="case" data-step="3">
+<div class="kicker">Final Case · Crack It Yourself</div>
+<h2 tabindex="-1">Build the Evidence Board</h2>
+<p>No multiple choice this time. Use the same detective moves on a new passage.</p>
+<div class="passage">
       The college library recently extended its evening hours, describing the change as an effort to make campus resources more accessible. The announcement celebrates the extra study time but does not mention transportation. The final bus serving the campus leaves shortly after 8:00 p.m., while the library now remains open until 10:00 p.m.
     </div>
-
-    <div class="detective-board" aria-label="Analysis process">
-      <div class="board-step"><strong>🔎 Clue</strong><span>What catches your attention?</span></div>
-      <div class="board-step"><strong>🧩 Pattern</strong><span>What do the details reveal together?</span></div>
-      <div class="board-step"><strong>💭 Inference</strong><span>What might that suggest?</span></div>
-      <div class="board-step"><strong>💥 So What?</strong><span>Why might it matter?</span></div>
-    </div>
-
-    <form id="finalForm" class="final-grid">
-      <div>
-        <label for="clue">🔎 Clue: What detail caught your attention?</label>
-        <textarea id="clue" required placeholder="Example: I noticed that..."></textarea>
-      </div>
-      <div>
-        <label for="pattern">🧩 Pattern: What do you notice when you put the details together?</label>
-        <textarea id="pattern" required placeholder="The details seem to show..."></textarea>
-      </div>
-      <div>
-        <label for="inference">💭 Inference: What might that suggest?</label>
-        <textarea id="inference" required placeholder="This might suggest..."></textarea>
-      </div>
-      <div>
-        <label for="sowhat">💥 So What? Why could this matter?</label>
-        <textarea id="sowhat" required placeholder="This matters because..."></textarea>
-      </div>
-
-      <div class="controls">
-        <button class="secondary back" type="button">Back</button>
-        <button class="primary" type="submit">Crack the Case</button>
-      </div>
-    </form>
-
-    <div id="finalResult" class="summary-box hidden" aria-live="polite" tabindex="-1">
-      <h3 style="margin-top:0">🎉 Case Closed</h3>
-      <p>You just performed textual analysis.</p>
-      <p><strong>You noticed:</strong> <span id="outClue"></span></p>
-      <p><strong>You connected the details:</strong> <span id="outPattern"></span></p>
-      <p><strong>You inferred:</strong> <span id="outInference"></span></p>
-      <p><strong>You explained why it matters:</strong> <span id="outSoWhat"></span></p>
-      <div class="callout">
-        <strong>That is what “go deeper” looks like.</strong>
-        <p style="margin-bottom:0">You did not find a hidden answer in the passage. You built an interpretation from evidence.</p>
-      </div>
-
-      <div class="callout">
-        <h3 style="margin-top:0">Take the Detective Move to Your Own Reading</h3>
-        <p>Choose one detail from a text you are actually reading for class. You do not need to analyze the whole text. Follow one clue far enough to make a claim about it.</p>
-        <label for="transfer">What did you notice, what might it suggest, and why might it matter?</label>
-        <textarea id="transfer" placeholder="I noticed… This might suggest… This matters because…"></textarea>
-        <p class="small" style="margin-bottom:0">This is not scored. The goal is to carry the method out of the practice passage and into your own reading.</p>
-      </div>
-
-      <div class="controls">
-        <button class="secondary" type="button" id="restart">Play Again</button>
-      </div>
-    </div>
-  </section>
+<div aria-label="Analysis process" class="detective-board">
+<div class="board-step"><strong>🔎 Clue</strong><span>What catches your attention?</span></div>
+<div class="board-step"><strong>🧩 Pattern</strong><span>What do the details reveal together?</span></div>
+<div class="board-step"><strong>💭 Inference</strong><span>What might that suggest?</span></div>
+<div class="board-step"><strong>💥 So What?</strong><span>Why might it matter?</span></div>
+</div>
+<form class="final-grid" id="finalForm">
+<div>
+<label for="clue">🔎 Clue: What detail caught your attention?</label>
+<textarea id="clue" placeholder="Example: I noticed that..." required=""></textarea>
+</div>
+<div>
+<label for="pattern">🧩 Pattern: What do you notice when you put the details together?</label>
+<textarea id="pattern" placeholder="The details seem to show..." required=""></textarea>
+</div>
+<div>
+<label for="inference">💭 Inference: What might that suggest?</label>
+<textarea id="inference" placeholder="This might suggest..." required=""></textarea>
+</div>
+<div>
+<label for="sowhat">💥 So What? Why could this matter?</label>
+<textarea id="sowhat" placeholder="This matters because..." required=""></textarea>
+</div>
+<div class="controls">
+<button class="secondary back" type="button">Back</button>
+<button class="primary" type="submit">Crack the Case</button>
+</div>
+</form>
+<div aria-live="polite" class="summary-box hidden" id="finalResult" tabindex="-1">
+<h3 style="margin-top:0">🎉 Case Closed</h3>
+<p>You just performed textual analysis.</p>
+<p><strong>You noticed:</strong> <span id="outClue"></span></p>
+<p><strong>You connected the details:</strong> <span id="outPattern"></span></p>
+<p><strong>You inferred:</strong> <span id="outInference"></span></p>
+<p><strong>You explained why it matters:</strong> <span id="outSoWhat"></span></p>
+<div class="callout">
+<strong>That is what “go deeper” looks like.</strong>
+<p style="margin-bottom:0">You did not find a hidden answer in the passage. You built an interpretation from evidence.</p>
+</div>
+<div class="callout">
+<h3 style="margin-top:0">Take the Detective Move to Your Own Reading</h3>
+<p>Choose one detail from a text you are actually reading for class. You do not need to analyze the whole text. Follow one clue far enough to make a claim about it.</p>
+<label for="transfer">What did you notice, what might it suggest, and why might it matter?</label>
+<textarea id="transfer" placeholder="I noticed… This might suggest… This matters because…"></textarea>
+<p class="small" style="margin-bottom:0">This is not scored. The goal is to carry the method out of the practice passage and into your own reading.</p>
+</div>
+<div class="controls">
+<button class="secondary" id="restart" type="button">Play Again</button>
+</div>
+</div>
+</section>
 </main>
-
 <script>
 (function(){
   const cases=[...document.querySelectorAll('.case')];
@@ -587,5 +558,5 @@ textarea:focus{border-color:var(--accent);outline:3px solid rgba(108,92,231,.15)
   updateProgress();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

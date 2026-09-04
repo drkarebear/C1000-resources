@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Make Your Case</title>
-<meta name="description" content="An accessible ENGL C1000 argument lab for building, testing, qualifying, and supporting academic claims.">
+<meta content="An accessible ENGL C1000 argument lab for building, testing, qualifying, and supporting academic claims." name="description"/>
 <style>
 :root{--bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;--blue:#315f78;--dark:#203f52;--soft:#edf5f8;--green:#2f7749;--greenbg:#eef8f1;--gold:#946807;--goldbg:#fff6dc;--rose:#8b4f66;--rosebg:#fbf0f4;--purple:#72559a;--lav:#f7f3fb}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 Arial,Helvetica,sans-serif}
@@ -31,7 +32,6 @@ h1,h2,h3{color:var(--dark);line-height:1.18}h1{font-size:clamp(2.1rem,7vw,3.6rem
 footer{text-align:center;color:var(--muted);font-size:.9rem}
 @media(max-width:800px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}}@media(max-width:620px){body{font-size:17px}.choices,.grid2,.controls{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -39,33 +39,30 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip-link" href="#intro">Skip to the Make Your Case lab</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
-<p class="eyebrow">ENGL C1000 · Argument & Rhetorical Choices</p>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Argument &amp; Rhetorical Choices</p>
 <h1>⚖️ Make Your Case</h1>
 <h2>Build a claim you can actually support.</h2>
-<div class="call"><strong>ARGUMENT ≠ FIGHT</strong><br>Academic argument isn't about being the loudest person in the room. It's about making a claim readers can examine and giving them reasons to consider it.</div>
+<div class="call"><strong>ARGUMENT ≠ FIGHT</strong><br/>Academic argument isn't about being the loudest person in the room. It's about making a claim readers can examine and giving them reasons to consider it.</div>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> A stronger argument does not always sound more certain. Sometimes a claim becomes stronger when you make it more precise, acknowledge limits, or account for complexity.</div>
-<div class="row"><button id="start" type="button" class="primary">🧪 Start the Claim Stress Test</button><button id="resume" type="button" class="secondary hidden">Resume</button></div>
+<div class="row"><button class="primary" id="start" type="button">🧪 Start the Claim Stress Test</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div id="progress" class="track" role="progressbar" aria-label="Claim stress test progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"><div id="bar" class="bar"></div></div><span id="stage" class="stage" aria-live="polite"></span>
-<div class="layout"><div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" type="button" class="primary hidden">Continue</button></div></div>
-<aside class="side"><h3>🧪 Claim Stress Test</h3><p><strong>🎯 Precise?</strong><br>Can the reader tell exactly what you're claiming?</p><p><strong>👥 For whom?</strong><br>Does the claim overgeneralize?</p><p><strong>🗓️ Under what conditions?</strong><br>What limits matter?</p><p><strong>📚 Supportable?</strong><br>What evidence could reasonably support it?</p><p><strong>⚖️ Arguable?</strong><br>Could a reasonable reader question or complicate it?</p><p><strong>🧩 Nuanced?</strong><br>Is reality more complicated than the first version suggests?</p></aside></div>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div aria-label="Claim stress test progress" aria-valuemax="20" aria-valuemin="1" aria-valuenow="1" class="track" id="progress" role="progressbar"><div class="bar" id="bar"></div></div><span aria-live="polite" class="stage" id="stage"></span>
+<div class="layout"><div><div id="host"></div><div aria-live="polite" class="feedback" id="fb" role="status"></div><div class="row"><button class="primary hidden" id="next" type="button">Continue</button></div></div>
+<aside class="side"><h3>🧪 Claim Stress Test</h3><p><strong>🎯 Precise?</strong><br/>Can the reader tell exactly what you're claiming?</p><p><strong>👥 For whom?</strong><br/>Does the claim overgeneralize?</p><p><strong>🗓️ Under what conditions?</strong><br/>What limits matter?</p><p><strong>📚 Supportable?</strong><br/>What evidence could reasonably support it?</p><p><strong>⚖️ Arguable?</strong><br/>Could a reasonable reader question or complicate it?</p><p><strong>🧩 Nuanced?</strong><br/>Is reality more complicated than the first version suggests?</p></aside></div>
 </section>
-
-<section id="finish" class="card hidden">
+<section class="card hidden" id="finish">
 <div class="good"><h2>⚖️ Case Made</h2><p><strong>A strong academic claim is one you can support, explain, qualify, and examine.</strong></p></div>
 <h2>🧪 Stress-Test My Claim</h2>
 <div class="tool">
@@ -84,16 +81,16 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <option value="evidence">I have evidence but don't know what I'm arguing</option>
 <option value="good">It already seems precise and supportable</option>
 </select>
-<div class="row"><button id="diagnose" type="button" class="primary">⚖️ Stress-Test It</button></div><div id="result" class="result" role="status" aria-live="polite"></div>
-<div id="revisionWrap" class="hidden">
+<div class="row"><button class="primary" id="diagnose" type="button">⚖️ Stress-Test It</button></div><div aria-live="polite" class="result" id="result" role="status"></div>
+<div class="hidden" id="revisionWrap">
 <label for="revision"><strong>Now revise the claim—or name the next move you need to make.</strong></label>
 <textarea id="revision" placeholder="My revised working claim / next move..."></textarea>
 <p class="small">Not scored. This is the handoff from the lab to your own draft.</p>
 </div>
 </div>
-<div class="note"><h3>🧰 Quick Claim Check</h3><p>What exactly am I claiming?<br>For whom or under what conditions?<br>Why might a reasonable reader care or question it?<br>What evidence could support it?<br>What would make it more accurate—not merely louder?<br>What do I want my reader to understand after considering my reasons?</p></div>
-<div class="row"><button id="copy" type="button" class="secondary">📋 Copy Claim Stress Test</button></div>
-<div class="completion"><p class="done">✓ LAB COMPLETE</p><h2>Make Your Case — Complete</h2><p>✓ Distinguish academic argument from conflict<br>✓ Turn broad reactions into supportable claims<br>✓ Identify facts, preferences, and arguable claims<br>✓ Make claims more precise without making them artificially extreme<br>✓ Use qualification and complication strategically<br>✓ Represent other perspectives reasonably<br>✓ Recognize false binaries<br>✓ Connect evidence to a writer-controlled claim</p><p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div></div>
+<div class="note"><h3>🧰 Quick Claim Check</h3><p>What exactly am I claiming?<br/>For whom or under what conditions?<br/>Why might a reasonable reader care or question it?<br/>What evidence could support it?<br/>What would make it more accurate—not merely louder?<br/>What do I want my reader to understand after considering my reasons?</p></div>
+<div class="row"><button class="secondary" id="copy" type="button">📋 Copy Claim Stress Test</button></div>
+<div class="completion"><p class="done">✓ LAB COMPLETE</p><h2>Make Your Case — Complete</h2><p>✓ Distinguish academic argument from conflict<br/>✓ Turn broad reactions into supportable claims<br/>✓ Identify facts, preferences, and arguable claims<br/>✓ Make claims more precise without making them artificially extreme<br/>✓ Use qualification and complication strategically<br/>✓ Represent other perspectives reasonably<br/>✓ Recognize false binaries<br/>✓ Connect evidence to a writer-controlled claim</p><p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div></div>
 </section>
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
@@ -186,5 +183,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Claim Tool":"Resume";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>{const h=$("finish").querySelector("h2");h.tabIndex=-1;h.focus({preventScroll:true});h.scrollIntoView({behavior:motion(),block:"start"})},0)}else{i=s.i||0;$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

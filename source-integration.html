@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Source Integration Lab: Join the Conversation</title>
-<meta name="description" content="An accessible interactive source integration lab for ENGL C1000.">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta content="An accessible interactive source integration lab for ENGL C1000." name="description"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
   --bg:#f4f7f9;--surface:#ffffff;--ink:#243447;--muted:#64707d;--line:#d8e0e7;
@@ -92,7 +93,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 @media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}.bubble{max-width:96%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -100,140 +100,126 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding-top:5px}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<a href="#main" class="skip">Skip to the source integration activity</a>
-<main id="main" class="shell">
-
-<section id="intro" class="card">
-  <p class="eyebrow">ENGL C1000 · Sources as conversation</p>
-  <h1>Source Integration Lab: Join the Conversation</h1>
-  <p class="lead"><strong>You are the host. Sources are guests in your argument.</strong></p>
-  <div class="callout">You decide who enters, why they are here, how much they say, and what your reader should understand after hearing them.</div>
-  <div class="meta"><span class="pill">21 source missions</span><span class="pill">No timer</span><span class="pill">Quote · Paraphrase · Summarize</span><span class="pill">Your voice stays visible</span></div>
-  <div class="row"><button id="start" class="primary" type="button">Enter the Source Control Room</button><button id="resume" class="secondary hidden" type="button">Resume Mission</button></div>
+<a class="skip" href="#main">Skip to the source integration activity</a>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Sources as conversation</p>
+<h1>Source Integration Lab: Join the Conversation</h1>
+<p class="lead"><strong>You are the host. Sources are guests in your argument.</strong></p>
+<div class="callout">You decide who enters, why they are here, how much they say, and what your reader should understand after hearing them.</div>
+<div class="meta"><span class="pill">21 source missions</span><span class="pill">No timer</span><span class="pill">Quote · Paraphrase · Summarize</span><span class="pill">Your voice stays visible</span></div>
+<div class="row"><button class="primary" id="start" type="button">Enter the Source Control Room</button><button class="secondary hidden" id="resume" type="button">Resume Mission</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-  <div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
-  <div id="progress" class="track" role="progressbar" aria-label="Source mission progress" aria-valuemin="1" aria-valuemax="21" aria-valuenow="1"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage" role="heading" aria-level="3" tabindex="-1"></span>
-  <h2>Source Control Room</h2>
-
-  <div class="controlroom">
-    <div>
-      <div id="host"></div>
-      <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-      <div class="row"><button id="next" class="primary hidden" type="button">Next Source Mission</button></div>
-    </div>
-
-    <aside class="side">
-      <div class="argue"><small>Your argument</small>Colleges should improve how they communicate essential student-services information because information students cannot easily find or understand may function as if it were unavailable.</div>
-      <h3>Conversation Meter</h3>
-      <div id="meter" class="voice-meter"></div>
-    </aside>
-  </div>
+<section class="card hidden" id="lab">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div>
+<div aria-label="Source mission progress" aria-valuemax="21" aria-valuemin="1" aria-valuenow="1" class="track" id="progress" role="progressbar"><div class="bar" id="bar"></div></div>
+<span aria-level="3" class="stage" id="stage" role="heading" tabindex="-1"></span>
+<h2>Source Control Room</h2>
+<div class="controlroom">
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Next Source Mission</button></div>
+</div>
+<aside class="side">
+<div class="argue"><small>Your argument</small>Colleges should improve how they communicate essential student-services information because information students cannot easily find or understand may function as if it were unavailable.</div>
+<h3>Conversation Meter</h3>
+<div class="voice-meter" id="meter"></div>
+</aside>
+</div>
 </section>
-
-<section id="done" class="card hidden">
-  <div class="map">
-    <div class="center">🎙️ YOU<br>THE WRITER</div>
-    <div class="nodes">
-      <div class="node"><strong>Source A</strong>Provides context</div>
-      <div class="node"><strong>Source B</strong>Supports</div>
-      <div class="node"><strong>Source C</strong>Complicates</div>
-      <div class="node"><strong>Source D</strong>Offers an example</div>
-    </div>
-  </div>
-
-  <div class="secret">
-    <h2>You're Still Running the Conversation</h2>
-    <p>You chose which sources entered. You decided what jobs they performed. You chose when to quote, paraphrase, or summarize. You explained what the evidence meant. You put sources into conversation with one another.</p>
-    <p><strong>And your voice never disappeared.</strong></p>
-  </div>
-
-  <div class="row">
-    <button id="check" class="primary" type="button" aria-expanded="false" aria-controls="checkBox">🎛️ Open My Source Check</button>
-    <button id="copy" class="secondary" type="button">📋 Copy Source Check</button>
-  </div>
-
-  <div id="checkBox" class="decoder hidden" role="status" aria-live="polite">
-    <h3>Before I add this source...</h3>
-    <p>Why is it here?<br>What does my reader need from it?<br>Quote, paraphrase, or summarize?<br>How will I identify and credit it?<br>What will I say after it?<br>How does it help my argument?</p>
-  </div>
-
-  <div class="transfer" aria-labelledby="transferHeading">
-    <h2 id="transferHeading">Optional: Take One Source Into Your Own Draft</h2>
-    <p><strong>This transfer tool is optional. Your lab is already complete.</strong> Use it if you want to practice the same moves with one source you are considering for a paper. This is a planning tool, not a graded quiz.</p>
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="ownPoint">1. What point are <em>you</em> trying to make?</label>
-        <textarea id="ownPoint" placeholder="Write the claim or idea this source needs to help you develop."></textarea>
-      </div>
-      <div class="form-group">
-        <label for="ownSource">2. What source material are you considering?</label>
-        <textarea id="ownSource" placeholder="Paste a short passage, paraphrase the source idea, or describe the evidence you may use."></textarea>
-        <p class="help">You do not need to paste an entire article. Bring in only the source material you are deciding how to use.</p>
-      </div>
-      <div class="form-group">
-        <label for="ownRole">3. What job should this source perform?</label>
-        <select id="ownRole">
-          <option value="">Choose the closest role</option>
-          <option value="context">Provide context or background</option>
-          <option value="support">Support or extend my point</option>
-          <option value="example">Offer a concrete example</option>
-          <option value="complicate">Complicate or qualify my point</option>
-          <option value="counter">Represent another position</option>
-          <option value="define">Define or clarify an idea</option>
-          <option value="other">Do another useful job</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="ownMove">4. How will you bring the source in?</label>
-        <select id="ownMove">
-          <option value="">Choose a source move</option>
-          <option value="quote">Quote — the exact wording matters</option>
-          <option value="paraphrase">Paraphrase — the specific idea matters</option>
-          <option value="summary">Summarize — the larger point matters</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="ownReturn">5. After the source speaks, what will <em>you</em> say?</label>
-        <textarea id="ownReturn" placeholder="Explain what the evidence shows, why it matters, or how it connects to your point."></textarea>
-      </div>
-    </div>
-    <div class="row"><button id="buildMove" class="primary" type="button">Check My Source Move</button></div>
-    <div id="transferResult" class="transfer-result" role="status" aria-live="polite"></div>
-  </div>
-
-  <div class="completion">
-    <div class="complete">✓ Lab complete</div>
-    <h2>Source Integration Lab — Complete</h2>
-    <div class="grid">
-      <div>Choose useful source roles</div><div>✓ Complete</div>
-      <div>Reject sources that do not help</div><div>✓ Complete</div>
-      <div>Choose quote, paraphrase, or summary</div><div>✓ Complete</div>
-      <div>Bring your voice back after evidence</div><div>✓ Complete</div>
-      <div>Repair dropped quotations</div><div>✓ Complete</div>
-      <div>Synthesize sources</div><div>✓ Complete</div>
-    </div>
-    <p><strong>Completed:</strong> <span id="date"></span></p>
-    <div class="shot">📸 If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
-  </div>
-
-  <div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<section class="card hidden" id="done">
+<div class="map">
+<div class="center">🎙️ YOU<br/>THE WRITER</div>
+<div class="nodes">
+<div class="node"><strong>Source A</strong>Provides context</div>
+<div class="node"><strong>Source B</strong>Supports</div>
+<div class="node"><strong>Source C</strong>Complicates</div>
+<div class="node"><strong>Source D</strong>Offers an example</div>
+</div>
+</div>
+<div class="secret">
+<h2>You're Still Running the Conversation</h2>
+<p>You chose which sources entered. You decided what jobs they performed. You chose when to quote, paraphrase, or summarize. You explained what the evidence meant. You put sources into conversation with one another.</p>
+<p><strong>And your voice never disappeared.</strong></p>
+</div>
+<div class="row">
+<button aria-controls="checkBox" aria-expanded="false" class="primary" id="check" type="button">🎛️ Open My Source Check</button>
+<button class="secondary" id="copy" type="button">📋 Copy Source Check</button>
+</div>
+<div aria-live="polite" class="decoder hidden" id="checkBox" role="status">
+<h3>Before I add this source...</h3>
+<p>Why is it here?<br/>What does my reader need from it?<br/>Quote, paraphrase, or summarize?<br/>How will I identify and credit it?<br/>What will I say after it?<br/>How does it help my argument?</p>
+</div>
+<div aria-labelledby="transferHeading" class="transfer">
+<h2 id="transferHeading">Optional: Take One Source Into Your Own Draft</h2>
+<p><strong>This transfer tool is optional. Your lab is already complete.</strong> Use it if you want to practice the same moves with one source you are considering for a paper. This is a planning tool, not a graded quiz.</p>
+<div class="form-grid">
+<div class="form-group">
+<label for="ownPoint">1. What point are <em>you</em> trying to make?</label>
+<textarea id="ownPoint" placeholder="Write the claim or idea this source needs to help you develop."></textarea>
+</div>
+<div class="form-group">
+<label for="ownSource">2. What source material are you considering?</label>
+<textarea id="ownSource" placeholder="Paste a short passage, paraphrase the source idea, or describe the evidence you may use."></textarea>
+<p class="help">You do not need to paste an entire article. Bring in only the source material you are deciding how to use.</p>
+</div>
+<div class="form-group">
+<label for="ownRole">3. What job should this source perform?</label>
+<select id="ownRole">
+<option value="">Choose the closest role</option>
+<option value="context">Provide context or background</option>
+<option value="support">Support or extend my point</option>
+<option value="example">Offer a concrete example</option>
+<option value="complicate">Complicate or qualify my point</option>
+<option value="counter">Represent another position</option>
+<option value="define">Define or clarify an idea</option>
+<option value="other">Do another useful job</option>
+</select>
+</div>
+<div class="form-group">
+<label for="ownMove">4. How will you bring the source in?</label>
+<select id="ownMove">
+<option value="">Choose a source move</option>
+<option value="quote">Quote — the exact wording matters</option>
+<option value="paraphrase">Paraphrase — the specific idea matters</option>
+<option value="summary">Summarize — the larger point matters</option>
+</select>
+</div>
+<div class="form-group">
+<label for="ownReturn">5. After the source speaks, what will <em>you</em> say?</label>
+<textarea id="ownReturn" placeholder="Explain what the evidence shows, why it matters, or how it connects to your point."></textarea>
+</div>
+</div>
+<div class="row"><button class="primary" id="buildMove" type="button">Check My Source Move</button></div>
+<div aria-live="polite" class="transfer-result" id="transferResult" role="status"></div>
+</div>
+<div class="completion">
+<div class="complete">✓ Lab complete</div>
+<h2>Source Integration Lab — Complete</h2>
+<div class="grid">
+<div>Choose useful source roles</div><div>✓ Complete</div>
+<div>Reject sources that do not help</div><div>✓ Complete</div>
+<div>Choose quote, paraphrase, or summary</div><div>✓ Complete</div>
+<div>Bring your voice back after evidence</div><div>✓ Complete</div>
+<div>Repair dropped quotations</div><div>✓ Complete</div>
+<div>Synthesize sources</div><div>✓ Complete</div>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 If your instructor asks for proof of completion, you can take a screenshot of this card.</div>
+</div>
+<div class="row"><button class="quiet" id="restart" type="button">Practice Again</button></div>
 </section>
-
 <footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id), key="sourceJoinConversationV1", transferKey="sourceJoinConversationTransferV1";
@@ -463,5 +449,5 @@ let s;try{s=JSON.parse(getStored(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion":"Resume Mission";$("resume").onclick=()=>{i=s.i||0;unlocked=s.unlocked||unlocked;completed=s.completed||{};$("intro").classList.add("hidden");if(s.done){finish()}else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

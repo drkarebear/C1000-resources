@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Stop Performing “Academic”</title>
 <style>
 :root{
@@ -48,7 +49,6 @@ textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus
 @media(max-width:760px){.grid,.beforeafter,.wordbank{grid-template-columns:1fr}.controls button{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -56,197 +56,179 @@ textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main>
+<main id="main">
 <section class="hero">
-  <div class="kicker" style="color:#ddd9ff">Academic Voice Lab</div>
-  <h1>🎭 Stop Performing “Academic”</h1>
-  <p><strong>College writing does not require you to dress every sentence in a tiny suit and hand it a thesaurus.</strong></p>
-  <p class="mini">The goal is not to sound casual. The goal is to sound clear, precise, thoughtful, and appropriate for the situation.</p>
+<div class="kicker" style="color:#ddd9ff">Academic Voice Lab</div>
+<h1>🎭 Stop Performing “Academic”</h1>
+<p><strong>College writing does not require you to dress every sentence in a tiny suit and hand it a thesaurus.</strong></p>
+<p class="mini">The goal is not to sound casual. The goal is to sound clear, precise, thoughtful, and appropriate for the situation.</p>
 </section>
-
-<section class="progressbox" aria-label="Activity progress">
-  <div class="proglabel"><span id="stepText">Scene 1 of 8</span><span id="stepName">Catch the performance</span></div>
-  <div class="track" aria-hidden="true"><div class="bar" id="bar"></div></div>
+<section aria-label="Activity progress" class="progressbox">
+<div class="proglabel"><span id="stepText">Scene 1 of 8</span><span id="stepName">Catch the performance</span></div>
+<div aria-hidden="true" class="track"><div class="bar" id="bar"></div></div>
 </section>
-<div id="live" class="small" aria-live="polite"></div>
-
+<div aria-live="polite" class="small" id="live"></div>
 <section class="screen active" data-step="0">
-  <div class="kicker">Scene 1 · The Costume Goes On</div>
-  <h2>“I Need to Sound Smarter”</h2>
-  <div class="scene">
+<div class="kicker">Scene 1 · The Costume Goes On</div>
+<h2>“I Need to Sound Smarter”</h2>
+<div class="scene">
     You know what you want to say:
     <div class="thought"><strong>Real thought:</strong> “The policy sounds fair, but it affects working students differently.”</div>
     Then you start typing:
     <div class="warning"><strong>School voice:</strong> “The multifaceted ramifications of the aforementioned institutional policy illuminate a plethora of inequitable experiential outcomes for employed collegiate individuals.”</div>
-  </div>
-  <p class="q">What probably happened?</p>
-  <div class="options" id="q0">
-    <button class="choice" data-ok="false">The second sentence is automatically more academic because it uses longer words.</button>
-    <button class="choice" data-ok="true">The writer may be trying to sound academic instead of concentrating on making the idea precise and clear.</button>
-    <button class="choice" data-ok="false">College writing should always sound like normal conversation.</button>
-  </div>
-  <div id="fb0" class="feedback"></div>
-  <div class="note"><strong>CBT move:</strong> catch the rule hiding underneath the sentence: <em>“If I use ordinary language, people will think I’m not smart.”</em> That is a belief to test—not a writing requirement.</div>
-  <div class="controls"><button class="primary next" disabled>Enter the Costume Department</button></div>
+</div>
+<p class="q">What probably happened?</p>
+<div class="options" id="q0">
+<button class="choice" data-ok="false">The second sentence is automatically more academic because it uses longer words.</button>
+<button class="choice" data-ok="true">The writer may be trying to sound academic instead of concentrating on making the idea precise and clear.</button>
+<button class="choice" data-ok="false">College writing should always sound like normal conversation.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb0" role="status"></div>
+<div class="note"><strong>CBT move:</strong> catch the rule hiding underneath the sentence: <em>“If I use ordinary language, people will think I’m not smart.”</em> That is a belief to test—not a writing requirement.</div>
+<div class="controls"><button class="primary next" disabled="">Enter the Costume Department</button></div>
 </section>
-
 <section class="screen" data-step="1">
-  <div class="kicker">Scene 2 · Costume Department</div>
-  <h2>Which Pieces Are Helping?</h2>
-  <div class="scene">
+<div class="kicker">Scene 2 · Costume Department</div>
+<h2>Which Pieces Are Helping?</h2>
+<div class="scene">
     “The <strong>utilization</strong> of social media by contemporary adolescents can <strong>facilitate</strong> meaningful connection, although <strong>algorithmic recommendation systems</strong> may also intensify exposure to harmful content.”
   </div>
-  <div class="costume" aria-label="Words under review">
-    <span class="tag">utilization</span><span class="tag">facilitate</span><span class="tag">algorithmic recommendation systems</span>
-  </div>
-  <p class="q">Which phrase is most worth keeping because it names something specific?</p>
-  <div class="options" id="q1">
-    <button class="choice" data-ok="false">utilization</button>
-    <button class="choice" data-ok="false">facilitate</button>
-    <button class="choice" data-ok="true">algorithmic recommendation systems</button>
-  </div>
-  <div id="fb1" class="feedback"></div>
-  <div class="callout"><strong>Not all “academic-sounding” language is bad.</strong><br>Keep a specialized term when it gives you precision. Question a fancy substitute when a simpler word says the same thing just as accurately.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Play Clear or Costume?</button></div>
+<div aria-label="Words under review" class="costume">
+<span class="tag">utilization</span><span class="tag">facilitate</span><span class="tag">algorithmic recommendation systems</span>
+</div>
+<p class="q">Which phrase is most worth keeping because it names something specific?</p>
+<div class="options" id="q1">
+<button class="choice" data-ok="false">utilization</button>
+<button class="choice" data-ok="false">facilitate</button>
+<button class="choice" data-ok="true">algorithmic recommendation systems</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb1" role="status"></div>
+<div class="callout"><strong>Not all “academic-sounding” language is bad.</strong><br/>Keep a specialized term when it gives you precision. Question a fancy substitute when a simpler word says the same thing just as accurately.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Play Clear or Costume?</button></div>
 </section>
-
 <section class="screen" data-step="2">
-  <div class="kicker">Scene 3 · Clear or Costume?</div>
-  <h2>Choose the Sentence That Does More Thinking</h2>
-  <p class="q">Which sentence is stronger?</p>
-  <div class="options" id="q2">
-    <button class="choice" data-ok="false">The author utilizes a plethora of rhetorical strategies in order to effectively elucidate her multifaceted perspective.</button>
-    <button class="choice" data-ok="true">The author repeats the phrase “we waited” to slow the passage and emphasize the family’s lack of control.</button>
-  </div>
-  <div id="fb2" class="feedback"></div>
-  <div class="beforeafter">
-    <div class="panel"><h3>Sounds “academic”</h3><p>rhetorical strategies<br>effectively elucidate<br>multifaceted perspective</p><p><strong>But:</strong> What strategies? What effect? What perspective?</p></div>
-    <div class="panel"><h3>Does academic work</h3><p>names the technique<br>points to evidence<br>explains the effect</p><p><strong>Clear can still be sophisticated.</strong></p></div>
-  </div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Strip the Costume</button></div>
+<div class="kicker">Scene 3 · Clear or Costume?</div>
+<h2>Choose the Sentence That Does More Thinking</h2>
+<p class="q">Which sentence is stronger?</p>
+<div class="options" id="q2">
+<button class="choice" data-ok="false">The author utilizes a plethora of rhetorical strategies in order to effectively elucidate her multifaceted perspective.</button>
+<button class="choice" data-ok="true">The author repeats the phrase “we waited” to slow the passage and emphasize the family’s lack of control.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb2" role="status"></div>
+<div class="beforeafter">
+<div class="panel"><h3>Sounds “academic”</h3><p>rhetorical strategies<br/>effectively elucidate<br/>multifaceted perspective</p><p><strong>But:</strong> What strategies? What effect? What perspective?</p></div>
+<div class="panel"><h3>Does academic work</h3><p>names the technique<br/>points to evidence<br/>explains the effect</p><p><strong>Clear can still be sophisticated.</strong></p></div>
+</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Strip the Costume</button></div>
 </section>
-
 <section class="screen" data-step="3">
-  <div class="kicker">Scene 4 · Translation Booth</div>
-  <h2>Make It Clear Without Making It Shallow</h2>
-  <div class="scene"><strong>Original:</strong><br>“The implementation of the aforementioned policy engenders deleterious consequences for individuals possessing limited economic resources.”</div>
-  <p class="q">Which revision keeps the idea but removes unnecessary performance?</p>
-  <div class="options" id="q3">
-    <button class="choice" data-ok="true">The policy can harm people with limited financial resources.</button>
-    <button class="choice" data-ok="false">The policy is bad.</button>
-    <button class="choice" data-ok="false">The aforementioned implementation deleteriously impacts economically constrained persons.</button>
-  </div>
-  <div id="fb3" class="feedback"></div>
-  <div class="note"><strong>Clear ≠ simplistic.</strong> The strongest revision preserves the claim’s meaning and level of precision while removing words that mainly signal status.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Protect the Useful Words</button></div>
+<div class="kicker">Scene 4 · Translation Booth</div>
+<h2>Make It Clear Without Making It Shallow</h2>
+<div class="scene"><strong>Original:</strong><br/>“The implementation of the aforementioned policy engenders deleterious consequences for individuals possessing limited economic resources.”</div>
+<p class="q">Which revision keeps the idea but removes unnecessary performance?</p>
+<div class="options" id="q3">
+<button class="choice" data-ok="true">The policy can harm people with limited financial resources.</button>
+<button class="choice" data-ok="false">The policy is bad.</button>
+<button class="choice" data-ok="false">The aforementioned implementation deleteriously impacts economically constrained persons.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb3" role="status"></div>
+<div class="note"><strong>Clear ≠ simplistic.</strong> The strongest revision preserves the claim’s meaning and level of precision while removing words that mainly signal status.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Protect the Useful Words</button></div>
 </section>
-
 <section class="screen" data-step="4">
-  <div class="kicker">Scene 5 · Don’t Overcorrect</div>
-  <h2>Some Academic Words Earn Their Keep</h2>
-  <div class="wordbank">
-    <div class="wordcard"><strong>correlation</strong>A specific relationship between variables; useful when that is what you mean.</div>
-    <div class="wordcard"><strong>assumption</strong>Names an idea being taken for granted.</div>
-    <div class="wordcard"><strong>synthesize</strong>Names a particular academic move with multiple sources.</div>
-    <div class="wordcard"><strong>utilize</strong>Often just means <em>use</em>.</div>
-    <div class="wordcard"><strong>aforementioned</strong>Often just means <em>this</em>, <em>that</em>, or the actual noun.</div>
-    <div class="wordcard"><strong>plethora</strong>Often just means <em>many</em>—and sometimes adds nothing.</div>
-  </div>
-  <p class="q">What is the better rule?</p>
-  <div class="options" id="q4">
-    <button class="choice" data-ok="false">Never use long or specialized words.</button>
-    <button class="choice" data-ok="true">Use the word that expresses the idea most accurately for the reader and task.</button>
-    <button class="choice" data-ok="false">Use as much discipline-specific language as possible.</button>
-  </div>
-  <div id="fb4" class="feedback"></div>
-  <div class="callout"><strong>Precision test:</strong> If I replace this word with a simpler one, do I lose an important distinction? If yes, keep it. If no, the simpler word may be stronger.</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Catch the “Sound Smart” Thought</button></div>
+<div class="kicker">Scene 5 · Don’t Overcorrect</div>
+<h2>Some Academic Words Earn Their Keep</h2>
+<div class="wordbank">
+<div class="wordcard"><strong>correlation</strong>A specific relationship between variables; useful when that is what you mean.</div>
+<div class="wordcard"><strong>assumption</strong>Names an idea being taken for granted.</div>
+<div class="wordcard"><strong>synthesize</strong>Names a particular academic move with multiple sources.</div>
+<div class="wordcard"><strong>utilize</strong>Often just means <em>use</em>.</div>
+<div class="wordcard"><strong>aforementioned</strong>Often just means <em>this</em>, <em>that</em>, or the actual noun.</div>
+<div class="wordcard"><strong>plethora</strong>Often just means <em>many</em>—and sometimes adds nothing.</div>
+</div>
+<p class="q">What is the better rule?</p>
+<div class="options" id="q4">
+<button class="choice" data-ok="false">Never use long or specialized words.</button>
+<button class="choice" data-ok="true">Use the word that expresses the idea most accurately for the reader and task.</button>
+<button class="choice" data-ok="false">Use as much discipline-specific language as possible.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb4" role="status"></div>
+<div class="callout"><strong>Precision test:</strong> If I replace this word with a simpler one, do I lose an important distinction? If yes, keep it. If no, the simpler word may be stronger.</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Catch the “Sound Smart” Thought</button></div>
 </section>
-
 <section class="screen" data-step="5">
-  <div class="kicker">Scene 6 · Thought Check</div>
-  <h2>What Are You Afraid the Reader Will Think?</h2>
-  <div class="scene">
+<div class="kicker">Scene 6 · Thought Check</div>
+<h2>What Are You Afraid the Reader Will Think?</h2>
+<div class="scene">
     You write: <strong>“The article shows that work schedules can affect how much time students have for school.”</strong>
-    <div class="thought"><strong>Your brain:</strong> “That sounds too simple. My professor is going to think I’m not college-level.”</div>
-  </div>
-  <p class="q">Which response is most evidence-based?</p>
-  <div class="options" id="q5">
-    <button class="choice" data-ok="false">My professor will definitely love this sentence.</button>
-    <button class="choice" data-ok="true">The sentence makes a clear claim. I can make it more sophisticated by developing the reasoning or adding precision—not by automatically replacing ordinary words.</button>
-    <button class="choice" data-ok="false">I should make every word sound more advanced.</button>
-  </div>
-  <div id="fb5" class="feedback"></div>
-  <div class="note"><strong>CBT move:</strong> change the target from <em>“sound smart”</em> to something you can actually evaluate: <strong>Is my idea clear? specific? supportable? developed?</strong></div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Upgrade the Thinking</button></div>
+<div class="thought"><strong>Your brain:</strong> “That sounds too simple. My professor is going to think I’m not college-level.”</div>
+</div>
+<p class="q">Which response is most evidence-based?</p>
+<div class="options" id="q5">
+<button class="choice" data-ok="false">My professor will definitely love this sentence.</button>
+<button class="choice" data-ok="true">The sentence makes a clear claim. I can make it more sophisticated by developing the reasoning or adding precision—not by automatically replacing ordinary words.</button>
+<button class="choice" data-ok="false">I should make every word sound more advanced.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb5" role="status"></div>
+<div class="note"><strong>CBT move:</strong> change the target from <em>“sound smart”</em> to something you can actually evaluate: <strong>Is my idea clear? specific? supportable? developed?</strong></div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Upgrade the Thinking</button></div>
 </section>
-
 <section class="screen" data-step="6">
-  <div class="kicker">Scene 7 · Upgrade the Thinking, Not the Costume</div>
-  <h2>Make the Idea Smarter</h2>
-  <div class="scene"><strong>Starting sentence:</strong><br>“Social media affects students.”</div>
-  <p class="q">Which revision becomes more academic because the <em>thinking</em> gets more precise?</p>
-  <div class="options" id="q6">
-    <button class="choice" data-ok="false">Social media has multitudinous ramifications upon contemporary collegiate individuals.</button>
-    <button class="choice" data-ok="true">Social media can support student connection, but constant notifications may also fragment attention during reading and writing.</button>
-    <button class="choice" data-ok="false">Social media is very significant in society.</button>
-  </div>
-  <div id="fb6" class="feedback"></div>
-  <div class="callout"><strong>Academic sophistication often comes from:</strong><br>specificity · relationships · evidence · qualification · reasoning · acknowledging complexity</div>
-  <div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled>Work on My Own Sentence</button></div>
+<div class="kicker">Scene 7 · Upgrade the Thinking, Not the Costume</div>
+<h2>Make the Idea Smarter</h2>
+<div class="scene"><strong>Starting sentence:</strong><br/>“Social media affects students.”</div>
+<p class="q">Which revision becomes more academic because the <em>thinking</em> gets more precise?</p>
+<div class="options" id="q6">
+<button class="choice" data-ok="false">Social media has multitudinous ramifications upon contemporary collegiate individuals.</button>
+<button class="choice" data-ok="true">Social media can support student connection, but constant notifications may also fragment attention during reading and writing.</button>
+<button class="choice" data-ok="false">Social media is very significant in society.</button>
+</div>
+<div aria-atomic="true" aria-live="polite" class="feedback" id="fb6" role="status"></div>
+<div class="callout"><strong>Academic sophistication often comes from:</strong><br/>specificity · relationships · evidence · qualification · reasoning · acknowledging complexity</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary next" disabled="">Work on My Own Sentence</button></div>
 </section>
-
 <section class="screen" data-step="7">
-  <div class="kicker">Scene 8 · Your Turn</div>
-  <h2>Take Off the Costume. Keep the Thinking.</h2>
-  <p>Use a sentence from your own writing, or invent one that sounds like something you might write when you are trying very hard to sound “academic.”</p>
-
-  <label for="original"><strong>My “performing academic” sentence:</strong></label>
-  <textarea id="original" placeholder="Example: The utilization of technological devices by contemporary students engenders numerous detrimental ramifications..."></textarea>
-
-  <label for="meaning" style="display:block;margin-top:14px"><strong>What am I actually trying to say?</strong></label>
-  <textarea id="meaning" placeholder="Say it as plainly as you need to. Example: Phones can make it harder for students to concentrate."></textarea>
-
-  <label for="keep" style="display:block;margin-top:14px"><strong>Is there a precise term worth keeping?</strong></label>
-  <input id="keep" type="text" placeholder="Example: attention fragmentation — or write “none”">
-
-  <label for="revision" style="display:block;margin-top:14px"><strong>Now write the clear, precise version:</strong></label>
-  <textarea id="revision" placeholder="Example: Frequent phone notifications can fragment students’ attention during difficult reading."></textarea>
-
-  <p class="q">What did you improve?</p>
-  <div class="grid" id="improve">
-    <button class="choice">🎯 Made the claim more specific</button>
-    <button class="choice">✂️ Removed words that were not doing work</button>
-    <button class="choice">🔬 Kept a useful technical term</button>
-    <button class="choice">🔗 Made the relationship between ideas clearer</button>
-    <button class="choice">🎚️ Added limits or qualification</button>
-    <button class="choice">💬 Made the sentence sound more like something I understand</button>
-  </div>
-
-  <div class="controls"><button class="secondary back">Back</button><button class="primary" id="makeCard" disabled>Make My Clear-Writing Card</button></div>
-
-  <div id="card" class="card hidden" aria-live="polite">
-    <h2 style="margin-top:0">🎭➡️💡 My Clear-Writing Reset</h2>
-    <div class="row"><strong>Before:</strong><div id="cOriginal"></div></div>
-    <div class="row"><strong>What I meant:</strong><div id="cMeaning"></div></div>
-    <div class="row"><strong>Precise term worth keeping:</strong><div id="cKeep"></div></div>
-    <div class="row"><strong>After:</strong><div id="cRevision"></div></div>
-    <div class="row"><strong>What improved:</strong><div id="cImprove"></div></div>
-    <div class="note"><strong>Reader test:</strong><br>Could a thoughtful reader tell what I mean, what I am claiming, and why the sentence matters? If yes, it can be academic without wearing a costume.</div>
-    <div class="callout"><strong>Clear is not the opposite of intelligent.</strong><br>Clarity lets the reader see the intelligence of the idea.</div>
-  </div>
+<div class="kicker">Scene 8 · Your Turn</div>
+<h2>Take Off the Costume. Keep the Thinking.</h2>
+<p>Use a sentence from your own writing, or invent one that sounds like something you might write when you are trying very hard to sound “academic.”</p>
+<label for="original"><strong>My “performing academic” sentence:</strong></label>
+<textarea id="original" placeholder="Example: The utilization of technological devices by contemporary students engenders numerous detrimental ramifications..."></textarea>
+<label for="meaning" style="display:block;margin-top:14px"><strong>What am I actually trying to say?</strong></label>
+<textarea id="meaning" placeholder="Say it as plainly as you need to. Example: Phones can make it harder for students to concentrate."></textarea>
+<label for="keep" style="display:block;margin-top:14px"><strong>Is there a precise term worth keeping?</strong></label>
+<input id="keep" placeholder="Example: attention fragmentation — or write “none”" type="text"/>
+<label for="revision" style="display:block;margin-top:14px"><strong>Now write the clear, precise version:</strong></label>
+<textarea id="revision" placeholder="Example: Frequent phone notifications can fragment students’ attention during difficult reading."></textarea>
+<p class="q">What did you improve?</p>
+<div class="grid" id="improve">
+<button class="choice">🎯 Made the claim more specific</button>
+<button class="choice">✂️ Removed words that were not doing work</button>
+<button class="choice">🔬 Kept a useful technical term</button>
+<button class="choice">🔗 Made the relationship between ideas clearer</button>
+<button class="choice">🎚️ Added limits or qualification</button>
+<button class="choice">💬 Made the sentence sound more like something I understand</button>
+</div>
+<div class="controls"><button class="secondary back">Back</button><button class="primary" disabled="" id="makeCard">Make My Clear-Writing Card</button></div>
+<div aria-live="polite" class="card hidden" id="card">
+<h2 style="margin-top:0">🎭➡️💡 My Clear-Writing Reset</h2>
+<div class="row"><strong>Before:</strong><div id="cOriginal"></div></div>
+<div class="row"><strong>What I meant:</strong><div id="cMeaning"></div></div>
+<div class="row"><strong>Precise term worth keeping:</strong><div id="cKeep"></div></div>
+<div class="row"><strong>After:</strong><div id="cRevision"></div></div>
+<div class="row"><strong>What improved:</strong><div id="cImprove"></div></div>
+<div class="note"><strong>Reader test:</strong><br/>Could a thoughtful reader tell what I mean, what I am claiming, and why the sentence matters? If yes, it can be academic without wearing a costume.</div>
+<div class="callout"><strong>Clear is not the opposite of intelligent.</strong><br/>Clarity lets the reader see the intelligence of the idea.</div>
+</div>
 </section>
 </main>
-
 <script>
 (()=>{
  const screens=[...document.querySelectorAll('.screen')];
@@ -261,7 +243,7 @@ textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus
  }
  function show(n){
   screens[cur].classList.remove('active');cur=n;screens[cur].classList.add('active');update();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0,behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth')});
  }
  document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(cur+1)));
  document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
@@ -306,11 +288,11 @@ textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus
   document.getElementById('cRevision').textContent=revision.value.trim();
   document.getElementById('cImprove').textContent=improvement;
   document.getElementById('card').classList.remove('hidden');
-  document.getElementById('card').scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('card').scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});
   live.textContent='Your clear-writing reset card is ready.';
  });
  update();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

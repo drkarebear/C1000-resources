@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A short guided drafting reset that helps students create rough material before judging or editing it.">
-  <title>Good Enough to Draft | ENGL C1000 Learning Lab</title>
-  <link rel="icon" type="image/png" href="Favicon2.png">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A short guided drafting reset that helps students create rough material before judging or editing it." name="description"/>
+<title>Good Enough to Draft | ENGL C1000 Learning Lab</title>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
+<style>
     *{box-sizing:border-box}
     :root{
       --bg:#f7f8f7;--paper:#fff;--ink:#263943;--muted:#63747b;--navy:#173e4b;
@@ -75,7 +76,6 @@
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress-bar{transition:none}}
   </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -83,141 +83,129 @@
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#lab">Skip to activity</a>
-<main class="shell">
-  <div class="brand"><a href="student.html">← ENGL C1000 Learning Lab</a><span>Student mini-lab · about 8–10 minutes</span></div>
-  <header class="hero">
-    <p class="eyebrow">Drafting reset</p>
-    <h1>Good Enough to Draft</h1>
-    <p>You do not need to make the whole paper good right now. You need enough material to discover what you want to say.</p>
-  </header>
-
-  <section class="lab" id="lab" aria-labelledby="screenHeading">
-    <div class="progress-wrap">
-      <div class="progress-top"><span id="progressText">Start</span><span id="progressCount">1 of 8</span></div>
-      <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
-    </div>
-
-    <div class="screen active" data-screen="0">
-      <span class="step-label">Before you start</span>
-      <h2 id="screenHeading">Drafting and judging are different jobs.</h2>
-      <p class="lead">If you try to generate an idea, organize it, word it perfectly, check grammar, sound academic, and decide whether it is good enough all at once, writing gets much harder.</p>
-      <div class="key-box"><strong>For the next few minutes, your job is only to make material.</strong><p>You can judge, reorganize, polish, and proofread later—when there is actually something on the page to work with.</p></div>
-      <p>This lab will walk you through one small decision at a time. Nothing you type is submitted anywhere.</p>
-    </div>
-
-    <div class="screen" data-screen="1">
-      <span class="step-label">Step 1</span>
-      <h2>What are you requiring from yourself?</h2>
-      <p class="lead">Choose any rules your brain seems to be giving you <em>before</em> you are allowed to write.</p>
-      <div class="choice-grid" id="ruleChoices">
-        <button type="button" class="choice">I need a strong opening sentence.</button><button type="button" class="choice">I need to know my thesis first.</button>
-        <button type="button" class="choice">It needs to sound academic.</button><button type="button" class="choice">I need the right words.</button>
-        <button type="button" class="choice">I need to know exactly where the paper is going.</button><button type="button" class="choice">My sentences should sound good immediately.</button>
-        <button type="button" class="choice">I should not write something unless I know it is correct.</button><button type="button" class="choice">If this sounds bad, it means I am bad at writing.</button>
-      </div>
-      <div class="key-box"><strong>Those may be reasonable goals for a finished paper.</strong><p>They are expensive requirements for a first draft.</p></div>
-    </div>
-
-    <div class="screen" data-screen="2">
-      <span class="step-label">Step 2</span>
-      <h2>Give yourself temporary permission.</h2>
-      <p class="lead">Choose a few things you are allowed to do while you are drafting.</p>
-      <div class="choice-grid" id="permissionChoices">
-        <button type="button" class="choice">Write an awkward sentence.</button><button type="button" class="choice">Change my mind.</button>
-        <button type="button" class="choice">Start in the middle.</button><button type="button" class="choice">Leave the introduction for later.</button>
-        <button type="button" class="choice">Use a word that is not quite right yet.</button><button type="button" class="choice">Repeat myself while I figure out the idea.</button>
-        <button type="button" class="choice">Leave a placeholder and keep moving.</button><button type="button" class="choice">Write something I may eventually delete.</button>
-      </div>
-      <div class="permission-box"><strong>This is not permission to submit weak work.</strong><p>It is permission to create material that revision can work with.</p></div>
-    </div>
-
-    <div class="screen" data-screen="3">
-      <span class="step-label">Step 3</span>
-      <h2>The bad first sentence challenge.</h2>
-      <div class="challenge-box"><strong>Your sentence is not allowed to be impressive.</strong><p>For one minute, explain what you think you may want to say. Do not stop to fix the wording.</p></div>
-      <p><strong>Need a starter?</strong> Pick one and it will appear in the box.</p>
-      <div class="choice-grid" id="starterChoices">
-        <button type="button" class="choice">Basically, I think...</button><button type="button" class="choice">What I’m trying to say is...</button>
-        <button type="button" class="choice">I don’t know exactly how to explain this yet, but...</button><button type="button" class="choice">The thing I keep noticing is...</button>
-        <button type="button" class="choice">Maybe my point is...</button><button type="button" class="choice">One thing that seems important is...</button>
-      </div>
-      <div class="timer-box"><div class="timer" id="timer">1:00</div><button type="button" class="timer-button" id="timerButton">Start 1-minute draft</button></div>
-      <label for="messyDraft">Write the not-impressive version:</label>
-      <textarea id="messyDraft" class="big" placeholder="Basically, I think..."></textarea>
-      <p class="small-help">You can continue even if you did not use the full minute.</p>
-    </div>
-
-    <div class="screen" data-screen="4">
-      <span class="step-label">Step 4</span>
-      <h2>Don’t ask, “Is this good?”</h2>
-      <p class="lead">That question is too early. Your rough writing only needs to give you something to work with.</p>
-      <div class="key-box"><strong>Ask this instead:</strong><p>Is there anything here I can use?</p></div>
-      <label for="usableIdea">What idea in your messy writing seems worth keeping?</label>
-      <textarea id="usableIdea" placeholder="Example: The algorithm does more than show people content they already like—it may shape what they keep paying attention to."></textarea>
-      <label for="whatYouMean">What are you actually trying to say about that idea?</label>
-      <textarea id="whatYouMean" placeholder="Explain it in ordinary language. You can make it sound polished later."></textarea>
-    </div>
-
-    <div class="screen" data-screen="5">
-      <span class="step-label">Step 5</span>
-      <h2>Use placeholders instead of stop signs.</h2>
-      <p class="lead">You will sometimes reach something you cannot solve while drafting. That does not mean the whole draft needs to stop.</p>
-      <div class="placeholder-grid"><div class="placeholder">[SOURCE HERE]</div><div class="placeholder">[BETTER WORD]</div><div class="placeholder">[CHECK MLA]</div><div class="placeholder">[EXPLAIN WHY]</div><div class="placeholder">[CONNECT TO THESIS]</div><div class="placeholder">[COME BACK]</div></div>
-      <div class="example"><div class="stop"><strong>Stopping</strong><p>I cannot remember the exact quote, so I stop drafting and start searching.</p></div><div class="keep"><strong>Keeping going</strong><p>Carr argues that [ADD QUOTE HERE], which shows...</p></div></div>
-      <label for="placeholder">What can you give yourself permission to leave for later?</label>
-      <textarea id="placeholder" placeholder="Example: [Find source about algorithmic recommendation here]"></textarea>
-    </div>
-
-    <div class="screen" data-screen="6">
-      <span class="step-label">Step 6</span>
-      <h2>What does your reader need next?</h2>
-      <p class="lead">You have an idea now. Instead of evaluating the whole paper, make one forward-moving decision.</p>
-      <div class="choice-grid" id="needChoices">
-        <button type="button" class="choice">An example</button><button type="button" class="choice">Evidence</button>
-        <button type="button" class="choice">More explanation</button><button type="button" class="choice">Background or context</button>
-        <button type="button" class="choice">A connection to my main point</button><button type="button" class="choice">Another idea</button>
-        <button type="button" class="choice">I’m not sure yet</button>
-      </div>
-      <label for="nextSentence">What could you write next?</label>
-      <textarea id="nextSentence" placeholder="It can still be rough. Just keep the thinking moving."></textarea>
-    </div>
-
-    <div class="screen" data-screen="7">
-      <span class="step-label">Your next move</span>
-      <h2>Keep drafting before you start editing.</h2>
-      <p class="lead">You now have material. The temptation may be to go back to the first sentence and polish it. Resist that for a little longer.</p>
-      <div class="challenge-box"><strong>Your next job:</strong><p>Keep writing for 10 minutes without editing your opening sentence.</p></div>
-      <label for="nextMove">What will you work on during those 10 minutes?</label>
-      <textarea id="nextMove" placeholder="Example: Add the example and explain how it connects to my point."></textarea>
-      <div class="final-card" id="draftCard">
-        <h3>My Drafting Permission Card</h3>
-        <div class="card-line"><span class="card-label">My brain wanted</span><span id="cardRule">A finished-paper decision before I was allowed to draft.</span></div>
-        <div class="card-line"><span class="card-label">For this draft, I can</span><span id="cardPermission">Write something imperfect so I have something to revise.</span></div>
-        <div class="card-line"><span class="card-label">The idea I found</span><span id="cardIdea">There is something in my rough writing worth developing.</span></div>
-        <div class="card-line"><span class="card-label">What I am trying to say</span><span id="cardMeaning">I can keep discovering what I mean while I draft.</span></div>
-        <div class="card-line"><span class="card-label">What I do not need to solve yet</span><span id="cardPlaceholder">Every gap in the draft.</span></div>
-        <div class="card-line"><span class="card-label">My next move</span><span id="cardMove">Keep drafting for 10 minutes.</span></div>
-      </div>
-      <div class="finish"><strong>You have something revision can work with now.</strong><p>Do not go back and fix the first sentence yet. Keep writing.</p><button type="button" class="restart" id="restart">Start over</button></div>
-    </div>
-
-    <div class="nav-row">
-      <button type="button" class="nav-btn back" id="backButton" hidden>← Back</button>
-      <button type="button" class="nav-btn next" id="nextButton">Start →</button>
-    </div>
-  </section>
+<main class="shell" id="main">
+<div class="brand"><a href="student.html">← ENGL C1000 Learning Lab</a><span>Student mini-lab · about 8–10 minutes</span></div>
+<header class="hero">
+<p class="eyebrow">Drafting reset</p>
+<h1>Good Enough to Draft</h1>
+<p>You do not need to make the whole paper good right now. You need enough material to discover what you want to say.</p>
+</header>
+<section aria-labelledby="screenHeading" class="lab" id="lab">
+<div class="progress-wrap">
+<div class="progress-top"><span id="progressText">Start</span><span id="progressCount">1 of 8</span></div>
+<div aria-hidden="true" class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+<div class="screen active" data-screen="0">
+<span class="step-label">Before you start</span>
+<h2 id="screenHeading">Drafting and judging are different jobs.</h2>
+<p class="lead">If you try to generate an idea, organize it, word it perfectly, check grammar, sound academic, and decide whether it is good enough all at once, writing gets much harder.</p>
+<div class="key-box"><strong>For the next few minutes, your job is only to make material.</strong><p>You can judge, reorganize, polish, and proofread later—when there is actually something on the page to work with.</p></div>
+<p>This lab will walk you through one small decision at a time. Nothing you type is submitted anywhere.</p>
+</div>
+<div class="screen" data-screen="1">
+<span class="step-label">Step 1</span>
+<h2>What are you requiring from yourself?</h2>
+<p class="lead">Choose any rules your brain seems to be giving you <em>before</em> you are allowed to write.</p>
+<div class="choice-grid" id="ruleChoices">
+<button class="choice" type="button">I need a strong opening sentence.</button><button class="choice" type="button">I need to know my thesis first.</button>
+<button class="choice" type="button">It needs to sound academic.</button><button class="choice" type="button">I need the right words.</button>
+<button class="choice" type="button">I need to know exactly where the paper is going.</button><button class="choice" type="button">My sentences should sound good immediately.</button>
+<button class="choice" type="button">I should not write something unless I know it is correct.</button><button class="choice" type="button">If this sounds bad, it means I am bad at writing.</button>
+</div>
+<div class="key-box"><strong>Those may be reasonable goals for a finished paper.</strong><p>They are expensive requirements for a first draft.</p></div>
+</div>
+<div class="screen" data-screen="2">
+<span class="step-label">Step 2</span>
+<h2>Give yourself temporary permission.</h2>
+<p class="lead">Choose a few things you are allowed to do while you are drafting.</p>
+<div class="choice-grid" id="permissionChoices">
+<button class="choice" type="button">Write an awkward sentence.</button><button class="choice" type="button">Change my mind.</button>
+<button class="choice" type="button">Start in the middle.</button><button class="choice" type="button">Leave the introduction for later.</button>
+<button class="choice" type="button">Use a word that is not quite right yet.</button><button class="choice" type="button">Repeat myself while I figure out the idea.</button>
+<button class="choice" type="button">Leave a placeholder and keep moving.</button><button class="choice" type="button">Write something I may eventually delete.</button>
+</div>
+<div class="permission-box"><strong>This is not permission to submit weak work.</strong><p>It is permission to create material that revision can work with.</p></div>
+</div>
+<div class="screen" data-screen="3">
+<span class="step-label">Step 3</span>
+<h2>The bad first sentence challenge.</h2>
+<div class="challenge-box"><strong>Your sentence is not allowed to be impressive.</strong><p>For one minute, explain what you think you may want to say. Do not stop to fix the wording.</p></div>
+<p><strong>Need a starter?</strong> Pick one and it will appear in the box.</p>
+<div class="choice-grid" id="starterChoices">
+<button class="choice" type="button">Basically, I think...</button><button class="choice" type="button">What I’m trying to say is...</button>
+<button class="choice" type="button">I don’t know exactly how to explain this yet, but...</button><button class="choice" type="button">The thing I keep noticing is...</button>
+<button class="choice" type="button">Maybe my point is...</button><button class="choice" type="button">One thing that seems important is...</button>
+</div>
+<div class="timer-box"><div class="timer" id="timer">1:00</div><button class="timer-button" id="timerButton" type="button">Start 1-minute draft</button></div>
+<label for="messyDraft">Write the not-impressive version:</label>
+<textarea class="big" id="messyDraft" placeholder="Basically, I think..."></textarea>
+<p class="small-help">You can continue even if you did not use the full minute.</p>
+</div>
+<div class="screen" data-screen="4">
+<span class="step-label">Step 4</span>
+<h2>Don’t ask, “Is this good?”</h2>
+<p class="lead">That question is too early. Your rough writing only needs to give you something to work with.</p>
+<div class="key-box"><strong>Ask this instead:</strong><p>Is there anything here I can use?</p></div>
+<label for="usableIdea">What idea in your messy writing seems worth keeping?</label>
+<textarea id="usableIdea" placeholder="Example: The algorithm does more than show people content they already like—it may shape what they keep paying attention to."></textarea>
+<label for="whatYouMean">What are you actually trying to say about that idea?</label>
+<textarea id="whatYouMean" placeholder="Explain it in ordinary language. You can make it sound polished later."></textarea>
+</div>
+<div class="screen" data-screen="5">
+<span class="step-label">Step 5</span>
+<h2>Use placeholders instead of stop signs.</h2>
+<p class="lead">You will sometimes reach something you cannot solve while drafting. That does not mean the whole draft needs to stop.</p>
+<div class="placeholder-grid"><div class="placeholder">[SOURCE HERE]</div><div class="placeholder">[BETTER WORD]</div><div class="placeholder">[CHECK MLA]</div><div class="placeholder">[EXPLAIN WHY]</div><div class="placeholder">[CONNECT TO THESIS]</div><div class="placeholder">[COME BACK]</div></div>
+<div class="example"><div class="stop"><strong>Stopping</strong><p>I cannot remember the exact quote, so I stop drafting and start searching.</p></div><div class="keep"><strong>Keeping going</strong><p>Carr argues that [ADD QUOTE HERE], which shows...</p></div></div>
+<label for="placeholder">What can you give yourself permission to leave for later?</label>
+<textarea id="placeholder" placeholder="Example: [Find source about algorithmic recommendation here]"></textarea>
+</div>
+<div class="screen" data-screen="6">
+<span class="step-label">Step 6</span>
+<h2>What does your reader need next?</h2>
+<p class="lead">You have an idea now. Instead of evaluating the whole paper, make one forward-moving decision.</p>
+<div class="choice-grid" id="needChoices">
+<button class="choice" type="button">An example</button><button class="choice" type="button">Evidence</button>
+<button class="choice" type="button">More explanation</button><button class="choice" type="button">Background or context</button>
+<button class="choice" type="button">A connection to my main point</button><button class="choice" type="button">Another idea</button>
+<button class="choice" type="button">I’m not sure yet</button>
+</div>
+<label for="nextSentence">What could you write next?</label>
+<textarea id="nextSentence" placeholder="It can still be rough. Just keep the thinking moving."></textarea>
+</div>
+<div class="screen" data-screen="7">
+<span class="step-label">Your next move</span>
+<h2>Keep drafting before you start editing.</h2>
+<p class="lead">You now have material. The temptation may be to go back to the first sentence and polish it. Resist that for a little longer.</p>
+<div class="challenge-box"><strong>Your next job:</strong><p>Keep writing for 10 minutes without editing your opening sentence.</p></div>
+<label for="nextMove">What will you work on during those 10 minutes?</label>
+<textarea id="nextMove" placeholder="Example: Add the example and explain how it connects to my point."></textarea>
+<div class="final-card" id="draftCard">
+<h3>My Drafting Permission Card</h3>
+<div class="card-line"><span class="card-label">My brain wanted</span><span id="cardRule">A finished-paper decision before I was allowed to draft.</span></div>
+<div class="card-line"><span class="card-label">For this draft, I can</span><span id="cardPermission">Write something imperfect so I have something to revise.</span></div>
+<div class="card-line"><span class="card-label">The idea I found</span><span id="cardIdea">There is something in my rough writing worth developing.</span></div>
+<div class="card-line"><span class="card-label">What I am trying to say</span><span id="cardMeaning">I can keep discovering what I mean while I draft.</span></div>
+<div class="card-line"><span class="card-label">What I do not need to solve yet</span><span id="cardPlaceholder">Every gap in the draft.</span></div>
+<div class="card-line"><span class="card-label">My next move</span><span id="cardMove">Keep drafting for 10 minutes.</span></div>
+</div>
+<div class="finish"><strong>You have something revision can work with now.</strong><p>Do not go back and fix the first sentence yet. Keep writing.</p><button class="restart" id="restart" type="button">Start over</button></div>
+</div>
+<div class="nav-row">
+<button class="nav-btn back" hidden="" id="backButton" type="button">← Back</button>
+<button class="nav-btn next" id="nextButton" type="button">Start →</button>
+</div>
+</section>
 </main>
-
 <script>
 (() => {
   const screens=[...document.querySelectorAll('.screen')];
@@ -293,5 +281,5 @@
   render();
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

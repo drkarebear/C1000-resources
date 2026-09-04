@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Wait, What Did I Just Read? | ENGL C1000 Learning Lab</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
   --bg:#f5f7f7;--paper:#fff;--ink:#263943;--muted:#60727a;--line:#d6dfe2;
@@ -84,7 +85,6 @@ textarea{width:100%;min-height:94px;resize:vertical;border:1px solid #aebdc2;bor
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -92,175 +92,163 @@ textarea{width:100%;min-height:94px;resize:vertical;border:1px solid #aebdc2;bor
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
-<body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<link href="site-meta.css" rel="stylesheet"/></head>
+<body><a class="skip-site-link" href="#main">Skip to main content</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<main class="shell">
-  <div class="top">
-    <div class="brand">ENGL C1000 Learning Lab</div>
-    <div class="progress-label" id="progressLabel">1 of 10</div>
-  </div>
-  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-
-  <section class="card active" data-step="0">
-    <p class="eyebrow">Reading Repair Lab</p>
-    <h1>Wait, What Did I Just Read?</h1>
-    <p>You read the sentence. Maybe you even read it twice. And somehow you still have no idea what it just said.</p>
-    <p>Instead of starting over from the top, this lab helps you figure out <strong>where meaning broke down and what to do about it.</strong></p>
-    <div class="note"><strong>Difficult reading is supposed to slow readers down sometimes.</strong><br>Strong readers do not understand every sentence instantly. They notice when meaning breaks down and use strategies to repair it.</div>
-    <div class="navrow"><button class="navbtn next" type="button" data-next>Start →</button></div>
-  </section>
-
-  <section class="card" data-step="1">
-    <p class="eyebrow">The strategy</p>
-    <h2>The Reading Repair Move</h2>
-    <p>When something stops making sense, try this instead of automatically rereading the whole page.</p>
-    <div class="move-strip">
-      <div class="move-card"><span>Step 1</span><strong>STOP</strong>Notice the exact place where you lost the meaning.</div>
-      <div class="move-card"><span>Step 2</span><strong>FIND THE SNAG</strong>Sentence structure, idea, word, or missing connection?</div>
-      <div class="move-card"><span>Step 3</span><strong>REPAIR</strong>Chunk it, find actor + action, use context, or look up what blocks you.</div>
-      <div class="move-card"><span>Step 4</span><strong>SAY IT BACK</strong>Put the idea into your own words.</div>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Try Repair 1 →</button></div>
-  </section>
-
-  <section class="card practice" data-step="2" data-repair="1">
-    <p class="eyebrow">Repair 1</p>
-    <h2>This Sentence Is Doing Too Much</h2>
-    <p>Read this sentence once.</p>
-    <div class="passage">Although social media platforms are often described as neutral technologies that simply allow users to communicate, the algorithms that determine which posts users encounter can shape public attention by making some voices, topics, and forms of information considerably more visible than others.</div>
-    <p class="question">If this sentence feels difficult, what would be the most useful first move?</p>
-    <div class="choices">
-      <button type="button" class="choice" data-correct="false">Look up every word that seems academic.</button>
-      <button type="button" class="choice" data-correct="true">Break the sentence into smaller idea chunks.</button>
-      <button type="button" class="choice" data-correct="false">Start the entire paragraph over and read it faster.</button>
-      <button type="button" class="choice" data-correct="false">Skip the sentence because it probably is not important.</button>
-    </div>
-    <div class="feedback" aria-live="polite"></div>
-    <div class="repair-box">
-      <h3>Repair It: Chunk the Sentence</h3>
-      <p><span class="chunk">Although social media platforms are often described as neutral technologies</span> / <span class="chunk">the algorithms determine which posts users encounter</span> / <span class="chunk">those choices can shape public attention</span> / <span class="chunk">because some voices and information become more visible than others.</span></p>
-      <p><strong>Basic idea:</strong> Social media may look neutral, but algorithms influence what people see and therefore what gets attention.</p>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Next repair →</button></div>
-  </section>
-
-  <section class="card practice" data-step="3" data-repair="2">
-    <p class="eyebrow">Repair 2</p>
-    <h2>Who Is Doing What?</h2>
-    <p>Sometimes a sentence becomes clearer once you find its main <strong>actor</strong> and <strong>action</strong>.</p>
-    <div class="passage">The increasing reliance on automated decision-making systems by institutions responsible for employment, lending, and education has raised concerns about the reproduction of existing social inequalities.</div>
-    <p class="question">What is the main thing this sentence says is happening?</p>
-    <div class="choices">
-      <button type="button" class="choice" data-correct="false">Social inequalities are responsible for employment and education.</button>
-      <button type="button" class="choice" data-correct="true">Institutions are increasingly using automated systems, and that use is creating concerns.</button>
-      <button type="button" class="choice" data-correct="false">Automated systems have eliminated social inequality.</button>
-      <button type="button" class="choice" data-correct="false">Lending institutions are becoming educational institutions.</button>
-    </div>
-    <div class="feedback" aria-live="polite"></div>
-    <div class="repair-box">
-      <h3>Repair It: Find Actor + Action</h3>
-      <p><strong>Actor:</strong> institutions</p>
-      <p><strong>Action:</strong> are increasingly relying on automated decision-making</p>
-      <p><strong>Why the author mentions it:</strong> people are concerned this could reproduce existing inequalities.</p>
-      <p>Once you understand the backbone, you can add the details back in.</p>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Next repair →</button></div>
-  </section>
-
-  <section class="card practice" data-step="4" data-repair="3">
-    <p class="eyebrow">Repair 3</p>
-    <h2>Do I Actually Need to Look Up That Word?</h2>
-    <div class="passage">The policy produced an <strong>uneven</strong> response across the region. Some communities adopted the recommendations immediately, while others rejected them entirely.</div>
-    <p class="question">Imagine you are unsure what <em>uneven</em> means here. What should you try first?</p>
-    <div class="choices">
-      <button type="button" class="choice" data-correct="true">Use the next sentence to see whether the context helps explain it.</button>
-      <button type="button" class="choice" data-correct="false">Immediately stop reading and search for every definition of “uneven.”</button>
-      <button type="button" class="choice" data-correct="false">Ignore the entire paragraph.</button>
-    </div>
-    <div class="feedback" aria-live="polite"></div>
-    <div class="repair-box">
-      <h3>Repair It: Use Context</h3>
-      <p>The next sentence shows two very different reactions: some communities accepted the recommendations and others rejected them.</p>
-      <p>So <strong>uneven</strong> probably means <strong>not consistent or not the same everywhere</strong>.</p>
-      <p>The surrounding text gave you enough information; a dictionary was not necessary this time.</p>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Continue →</button></div>
-  </section>
-
-  <section class="card" data-step="5">
-    <p class="eyebrow">Diagnose first</p>
-    <h2>“I Don’t Understand” Can Mean Different Things</h2>
-    <p>The repair depends on the problem.</p>
-    <div class="diagnosis-grid">
-      <div class="diagnosis-item"><strong>The sentence is too packed.</strong>Break it into smaller chunks.</div>
-      <div class="diagnosis-item"><strong>I can’t tell who is doing what.</strong>Find the main actor and action.</div>
-      <div class="diagnosis-item"><strong>One word is blocking me.</strong>Try context first. Look it up if you still need it.</div>
-      <div class="diagnosis-item"><strong>I understand the words but not the point.</strong>Ask: “Why is the author telling me this?”</div>
-      <div class="diagnosis-item"><strong>I lost the connection.</strong>Reread the sentence immediately before this one.</div>
-      <div class="diagnosis-item"><strong>My brain just checked out.</strong>Pause, reset, and reread only the small section where meaning disappeared.</div>
-    </div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Try it on a real reading →</button></div>
-  </section>
-
-  <section class="card" data-step="6">
-    <p class="eyebrow">Your turn</p>
-    <h2>Repair a Real Reading</h2>
-    <p>Open something you actually need to read for one of your classes. Find <strong>one sentence or short paragraph that genuinely does not make sense to you yet.</strong></p>
-    <div class="checklist"><strong>Run the Reading Repair:</strong><ol><li>Stop at the exact place where meaning breaks down.</li><li>Identify the snag.</li><li>Choose one repair strategy.</li><li>Try the repair.</li><li>Say the idea back in your own words.</li></ol></div>
-    <label for="snag">What was making the passage difficult?</label>
-    <textarea id="snag" placeholder="For example: The sentence was long and I couldn't tell what the main point was."></textarea>
-    <label for="repair">What repair did you try?</label>
-    <textarea id="repair" placeholder="For example: I broke the sentence into three smaller chunks and found the main actor and action."></textarea>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Say it back →</button></div>
-  </section>
-
-  <section class="card" data-step="7">
-    <p class="eyebrow">Check the repair</p>
-    <h2>Say the Idea Back</h2>
-    <p>This is the part that tells you whether the repair actually worked.</p>
-    <label for="paraphrase">In your own words, what is the passage basically saying?</label>
-    <textarea id="paraphrase" placeholder="In my own words, the passage is basically saying..."></textarea>
-    <p class="note"><strong>You are not trying to make it elegant.</strong><br>You are checking whether you can now explain the idea without simply repeating the original sentence.</p>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next>Check where I am →</button></div>
-  </section>
-
-  <section class="card" data-step="8">
-    <p class="eyebrow">Self-check</p>
-    <h2>Did the Repair Work?</h2>
-    <p>Choose the description that best matches where you are now.</p>
-    <div class="status-grid" id="statusGrid">
-      <button type="button" class="status green" data-status="green"><strong>Green — I got it.</strong>The passage makes enough sense for me to keep reading.</button>
-      <button type="button" class="status yellow" data-status="yellow"><strong>Yellow — Better, but fuzzy.</strong>I understand more, but I may need another strategy or a quick check.</button>
-      <button type="button" class="status red" data-status="red"><strong>Red — Still stuck.</strong>I tried to repair the meaning and still cannot make sense of the passage. It is time to ask someone.</button>
-    </div>
-    <div class="status-next" id="statusNext" aria-live="polite"></div>
-    <label for="nextRepair">Next time meaning breaks down, what will you try first?</label>
-    <textarea id="nextRepair" placeholder="For example: I will stop at the exact sentence, find the actor and action, and say the idea back in my own words."></textarea>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn next" type="button" data-next disabled>Finish →</button></div>
-  </section>
-
-  <section class="card" data-step="9">
-    <p class="eyebrow">Your reading repair</p>
-    <h2>📖 My Repair Card</h2>
-    <div class="summary-card" aria-live="polite">
-      <div class="summary-line"><span class="summary-label">What snagged me</span><span id="cardSnag"></span></div>
-      <div class="summary-line"><span class="summary-label">What I tried</span><span id="cardRepair"></span></div>
-      <div class="summary-line"><span class="summary-label">What the passage means in my own words</span><span id="cardParaphrase"></span></div>
-      <div class="summary-line"><span class="summary-label">Where I am now</span><span id="cardStatus"></span></div>
-      <div class="summary-line"><span class="summary-label">What I’ll try first next time</span><span id="cardNext"></span></div>
-    </div>
-    <div class="writer-move"><strong>College Reader Move:</strong> Strong readers are not people who understand everything immediately. They notice when comprehension breaks down, figure out what is causing the problem, and choose a strategy instead of repeatedly rereading without a plan.</div>
-    <div class="navrow"><button class="navbtn back" type="button" data-back>← Back</button><button class="navbtn restart" type="button" id="restart">Start over</button></div>
-  </section>
+<main class="shell" id="main">
+<div class="top">
+<div class="brand">ENGL C1000 Learning Lab</div>
+<div class="progress-label" id="progressLabel">1 of 10</div>
+</div>
+<div aria-hidden="true" class="progress"><span id="progressBar"></span></div>
+<section class="card active" data-step="0">
+<p class="eyebrow">Reading Repair Lab</p>
+<h1>Wait, What Did I Just Read?</h1>
+<p>You read the sentence. Maybe you even read it twice. And somehow you still have no idea what it just said.</p>
+<p>Instead of starting over from the top, this lab helps you figure out <strong>where meaning broke down and what to do about it.</strong></p>
+<div class="note"><strong>Difficult reading is supposed to slow readers down sometimes.</strong><br/>Strong readers do not understand every sentence instantly. They notice when meaning breaks down and use strategies to repair it.</div>
+<div class="navrow"><button class="navbtn next" data-next="" type="button">Start →</button></div>
+</section>
+<section class="card" data-step="1">
+<p class="eyebrow">The strategy</p>
+<h2>The Reading Repair Move</h2>
+<p>When something stops making sense, try this instead of automatically rereading the whole page.</p>
+<div class="move-strip">
+<div class="move-card"><span>Step 1</span><strong>STOP</strong>Notice the exact place where you lost the meaning.</div>
+<div class="move-card"><span>Step 2</span><strong>FIND THE SNAG</strong>Sentence structure, idea, word, or missing connection?</div>
+<div class="move-card"><span>Step 3</span><strong>REPAIR</strong>Chunk it, find actor + action, use context, or look up what blocks you.</div>
+<div class="move-card"><span>Step 4</span><strong>SAY IT BACK</strong>Put the idea into your own words.</div>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Try Repair 1 →</button></div>
+</section>
+<section class="card practice" data-repair="1" data-step="2">
+<p class="eyebrow">Repair 1</p>
+<h2>This Sentence Is Doing Too Much</h2>
+<p>Read this sentence once.</p>
+<div class="passage">Although social media platforms are often described as neutral technologies that simply allow users to communicate, the algorithms that determine which posts users encounter can shape public attention by making some voices, topics, and forms of information considerably more visible than others.</div>
+<p class="question">If this sentence feels difficult, what would be the most useful first move?</p>
+<div class="choices">
+<button class="choice" data-correct="false" type="button">Look up every word that seems academic.</button>
+<button class="choice" data-correct="true" type="button">Break the sentence into smaller idea chunks.</button>
+<button class="choice" data-correct="false" type="button">Start the entire paragraph over and read it faster.</button>
+<button class="choice" data-correct="false" type="button">Skip the sentence because it probably is not important.</button>
+</div>
+<div aria-live="polite" class="feedback"></div>
+<div class="repair-box">
+<h3>Repair It: Chunk the Sentence</h3>
+<p><span class="chunk">Although social media platforms are often described as neutral technologies</span> / <span class="chunk">the algorithms determine which posts users encounter</span> / <span class="chunk">those choices can shape public attention</span> / <span class="chunk">because some voices and information become more visible than others.</span></p>
+<p><strong>Basic idea:</strong> Social media may look neutral, but algorithms influence what people see and therefore what gets attention.</p>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Next repair →</button></div>
+</section>
+<section class="card practice" data-repair="2" data-step="3">
+<p class="eyebrow">Repair 2</p>
+<h2>Who Is Doing What?</h2>
+<p>Sometimes a sentence becomes clearer once you find its main <strong>actor</strong> and <strong>action</strong>.</p>
+<div class="passage">The increasing reliance on automated decision-making systems by institutions responsible for employment, lending, and education has raised concerns about the reproduction of existing social inequalities.</div>
+<p class="question">What is the main thing this sentence says is happening?</p>
+<div class="choices">
+<button class="choice" data-correct="false" type="button">Social inequalities are responsible for employment and education.</button>
+<button class="choice" data-correct="true" type="button">Institutions are increasingly using automated systems, and that use is creating concerns.</button>
+<button class="choice" data-correct="false" type="button">Automated systems have eliminated social inequality.</button>
+<button class="choice" data-correct="false" type="button">Lending institutions are becoming educational institutions.</button>
+</div>
+<div aria-live="polite" class="feedback"></div>
+<div class="repair-box">
+<h3>Repair It: Find Actor + Action</h3>
+<p><strong>Actor:</strong> institutions</p>
+<p><strong>Action:</strong> are increasingly relying on automated decision-making</p>
+<p><strong>Why the author mentions it:</strong> people are concerned this could reproduce existing inequalities.</p>
+<p>Once you understand the backbone, you can add the details back in.</p>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Next repair →</button></div>
+</section>
+<section class="card practice" data-repair="3" data-step="4">
+<p class="eyebrow">Repair 3</p>
+<h2>Do I Actually Need to Look Up That Word?</h2>
+<div class="passage">The policy produced an <strong>uneven</strong> response across the region. Some communities adopted the recommendations immediately, while others rejected them entirely.</div>
+<p class="question">Imagine you are unsure what <em>uneven</em> means here. What should you try first?</p>
+<div class="choices">
+<button class="choice" data-correct="true" type="button">Use the next sentence to see whether the context helps explain it.</button>
+<button class="choice" data-correct="false" type="button">Immediately stop reading and search for every definition of “uneven.”</button>
+<button class="choice" data-correct="false" type="button">Ignore the entire paragraph.</button>
+</div>
+<div aria-live="polite" class="feedback"></div>
+<div class="repair-box">
+<h3>Repair It: Use Context</h3>
+<p>The next sentence shows two very different reactions: some communities accepted the recommendations and others rejected them.</p>
+<p>So <strong>uneven</strong> probably means <strong>not consistent or not the same everywhere</strong>.</p>
+<p>The surrounding text gave you enough information; a dictionary was not necessary this time.</p>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Continue →</button></div>
+</section>
+<section class="card" data-step="5">
+<p class="eyebrow">Diagnose first</p>
+<h2>“I Don’t Understand” Can Mean Different Things</h2>
+<p>The repair depends on the problem.</p>
+<div class="diagnosis-grid">
+<div class="diagnosis-item"><strong>The sentence is too packed.</strong>Break it into smaller chunks.</div>
+<div class="diagnosis-item"><strong>I can’t tell who is doing what.</strong>Find the main actor and action.</div>
+<div class="diagnosis-item"><strong>One word is blocking me.</strong>Try context first. Look it up if you still need it.</div>
+<div class="diagnosis-item"><strong>I understand the words but not the point.</strong>Ask: “Why is the author telling me this?”</div>
+<div class="diagnosis-item"><strong>I lost the connection.</strong>Reread the sentence immediately before this one.</div>
+<div class="diagnosis-item"><strong>My brain just checked out.</strong>Pause, reset, and reread only the small section where meaning disappeared.</div>
+</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Try it on a real reading →</button></div>
+</section>
+<section class="card" data-step="6">
+<p class="eyebrow">Your turn</p>
+<h2>Repair a Real Reading</h2>
+<p>Open something you actually need to read for one of your classes. Find <strong>one sentence or short paragraph that genuinely does not make sense to you yet.</strong></p>
+<div class="checklist"><strong>Run the Reading Repair:</strong><ol><li>Stop at the exact place where meaning breaks down.</li><li>Identify the snag.</li><li>Choose one repair strategy.</li><li>Try the repair.</li><li>Say the idea back in your own words.</li></ol></div>
+<label for="snag">What was making the passage difficult?</label>
+<textarea id="snag" placeholder="For example: The sentence was long and I couldn't tell what the main point was."></textarea>
+<label for="repair">What repair did you try?</label>
+<textarea id="repair" placeholder="For example: I broke the sentence into three smaller chunks and found the main actor and action."></textarea>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Say it back →</button></div>
+</section>
+<section class="card" data-step="7">
+<p class="eyebrow">Check the repair</p>
+<h2>Say the Idea Back</h2>
+<p>This is the part that tells you whether the repair actually worked.</p>
+<label for="paraphrase">In your own words, what is the passage basically saying?</label>
+<textarea id="paraphrase" placeholder="In my own words, the passage is basically saying..."></textarea>
+<p class="note"><strong>You are not trying to make it elegant.</strong><br/>You are checking whether you can now explain the idea without simply repeating the original sentence.</p>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" type="button">Check where I am →</button></div>
+</section>
+<section class="card" data-step="8">
+<p class="eyebrow">Self-check</p>
+<h2>Did the Repair Work?</h2>
+<p>Choose the description that best matches where you are now.</p>
+<div class="status-grid" id="statusGrid">
+<button class="status green" data-status="green" type="button"><strong>Green — I got it.</strong>The passage makes enough sense for me to keep reading.</button>
+<button class="status yellow" data-status="yellow" type="button"><strong>Yellow — Better, but fuzzy.</strong>I understand more, but I may need another strategy or a quick check.</button>
+<button class="status red" data-status="red" type="button"><strong>Red — Still stuck.</strong>I tried to repair the meaning and still cannot make sense of the passage. It is time to ask someone.</button>
+</div>
+<div aria-live="polite" class="status-next" id="statusNext"></div>
+<label for="nextRepair">Next time meaning breaks down, what will you try first?</label>
+<textarea id="nextRepair" placeholder="For example: I will stop at the exact sentence, find the actor and action, and say the idea back in my own words."></textarea>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn next" data-next="" disabled="" type="button">Finish →</button></div>
+</section>
+<section class="card" data-step="9">
+<p class="eyebrow">Your reading repair</p>
+<h2>📖 My Repair Card</h2>
+<div aria-live="polite" class="summary-card">
+<div class="summary-line"><span class="summary-label">What snagged me</span><span id="cardSnag"></span></div>
+<div class="summary-line"><span class="summary-label">What I tried</span><span id="cardRepair"></span></div>
+<div class="summary-line"><span class="summary-label">What the passage means in my own words</span><span id="cardParaphrase"></span></div>
+<div class="summary-line"><span class="summary-label">Where I am now</span><span id="cardStatus"></span></div>
+<div class="summary-line"><span class="summary-label">What I’ll try first next time</span><span id="cardNext"></span></div>
+</div>
+<div class="writer-move"><strong>College Reader Move:</strong> Strong readers are not people who understand everything immediately. They notice when comprehension breaks down, figure out what is causing the problem, and choose a strategy instead of repeatedly rereading without a plan.</div>
+<div class="navrow"><button class="navbtn back" data-back="" type="button">← Back</button><button class="navbtn restart" id="restart" type="button">Start over</button></div>
+</section>
 </main>
-
 <script>
 const cards=[...document.querySelectorAll('.card')];
 const bar=document.getElementById('progressBar');
@@ -330,5 +318,5 @@ document.getElementById('restart').addEventListener('click',()=>{
 });
 render();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Thesis Lab: Find the Focus</title>
-<link rel="icon" type="image/png" href="Favicon2.png">
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{--bg:#f5f7fa;--surface:#fff;--ink:#243447;--muted:#5f6b78;--line:#d8e0e8;--brand:#315a7d;--brand-dark:#203e59;--soft:#eef4f8;--warm:#fff6dc;--warm-line:#d6a52b;--good:#2f7a4b;--good-bg:#eef8f1;--rose:#f8eef2;--rose-line:#a85d79;--focus:#111827;--max:920px;--radius:16px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.6}
@@ -21,7 +22,6 @@ textarea{width:100%;min-height:110px;border:2px solid #aebbc8;border-radius:10px
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar{transition:none}}
 @media(max-width:760px){.workspace{grid-template-columns:1fr}.sidebar{position:static;order:-1}.reader-grid{grid-template-columns:1fr}}@media(max-width:560px){body{font-size:17px}.shell{width:min(100% - 14px,var(--max));padding-top:10px}.card{padding:19px 15px}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.grid{grid-template-columns:1fr;gap:4px}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -29,18 +29,17 @@ textarea{width:100%;min-height:110px;border:2px solid #aebbc8;border-radius:10px
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<a href="#main" class="skip">Skip to main content</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
+<a class="skip" href="#main">Skip to main content</a>
+<main class="shell" id="main">
+<section class="card" id="intro">
 <p class="eyebrow">ENGL C1000 · Make the hidden thinking visible</p>
 <h1>Thesis Lab: Find the Focus</h1>
 <p class="lead"><strong>You do not have to magically “find” a perfect thesis. You can develop one.</strong></p>
@@ -48,25 +47,22 @@ textarea{width:100%;min-height:110px;border:2px solid #aebbc8;border-radius:10px
 <p>College writing often uses phrases like <em>too broad</em>, <em>arguable</em>, and <em>so what?</em> without fully explaining what they mean. This lab will decode some of that language along the way.</p>
 <p class="note"><strong>How it works:</strong> On choice screens, select the answer that best moves the writer's thinking forward. When you complete the required move, the <strong>Next Thesis Moment</strong> button will appear.</p>
 <div class="meta"><span class="pill">20 thesis moments</span><span class="pill">No timer</span><span class="pill">No one thesis formula</span></div>
-<div class="row"><button id="start" class="primary" type="button">Enter the Thesis Workshop</button><button id="resume" class="secondary hidden" type="button">Resume My Thesis</button></div>
+<div class="row"><button class="primary" id="start" type="button">Enter the Thesis Workshop</button><button class="secondary hidden" id="resume" type="button">Resume My Thesis</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div id="progress" class="track" role="progressbar" aria-label="Thesis workshop progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1" aria-valuetext="Thesis moment 1 of 20"><div id="bar" class="bar"></div></div>
-<span id="stage" class="stage"></span><h2>The Thesis Workshop</h2>
-<div class="workspace"><div class="mainpane"><div id="host"></div><div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div><div class="row"><button id="next" class="primary hidden" type="button">Next Thesis Moment</button></div></div>
-<aside class="sidebar"><h3>Your Thesis History</h3><div id="history" class="history"></div></aside></div>
+<section class="card hidden" id="lab">
+<div class="progress-text"><span id="ptext"></span><span id="pct"></span></div><div aria-label="Thesis workshop progress" aria-valuemax="20" aria-valuemin="1" aria-valuenow="1" aria-valuetext="Thesis moment 1 of 20" class="track" id="progress" role="progressbar"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span><h2>The Thesis Workshop</h2>
+<div class="workspace"><div class="mainpane"><div id="host"></div><div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div><div class="row"><button class="primary hidden" id="next" type="button">Next Thesis Moment</button></div></div>
+<aside class="sidebar"><h3>Your Thesis History</h3><div class="history" id="history"></div></aside></div>
 </section>
-
-<section id="done" class="card hidden">
+<section class="card hidden" id="done">
 <div class="completion"><div class="complete">✓ Lab complete</div><h2 id="completeTitle" tabindex="-1">Thesis Lab — Complete</h2><p>You practiced developing a thesis through questions, focus, reader needs, evidence, and revision.</p>
 <div class="grid"><div>Topic vs. Thesis</div><div>✓ Complete</div><div>Narrowing &amp; Focus</div><div>✓ Complete</div><div>Arguable Claims</div><div>✓ Complete</div><div>Reader Direction</div><div>✓ Complete</div><div>Revision &amp; Qualification</div><div>✓ Complete</div><div>College Writing Decoder</div><div>✓ Complete</div></div>
 <p><strong>Completed:</strong> <span id="date"></span></p><div class="shot">If your instructor asks for proof of completion, you can take a screenshot of this card.</div></div>
-<div class="row"><button id="restart" class="quiet" type="button">Practice Again</button></div>
+<div class="row"><button class="quiet" id="restart" type="button">Practice Again</button></div>
 </section>
 <footer>Progress stays in this browser. This activity does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id), key="thesisFindFocusDraftV1";
@@ -184,5 +180,5 @@ let s;try{s=JSON.parse(localStorage.getItem(key)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Completion Card":"Resume My Thesis";$("resume").onclick=()=>{i=s.i||0;history=s.history||history;notes=s.notes||{};completed=s.completed||{};$("intro").classList.add("hidden");if(s.done){$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date(s.date||Date.now()));requestAnimationFrame(()=>$("completeTitle").focus())}else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

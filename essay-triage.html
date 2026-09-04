@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Essay Triage</title>
-<meta name="description" content="An accessible college writing revision lab that helps students decide what to revise first.">
+<meta content="An accessible college writing revision lab that helps students decide what to revise first." name="description"/>
 <style>
 :root{
  --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#66737e;--line:#d6e0e7;
@@ -45,7 +46,6 @@ h1,h2,h3{line-height:1.18;color:var(--dark)}h1{font-size:clamp(2.2rem,7vw,3.5rem
 @media(max-width:580px){body{font-size:17px}.shell{width:min(calc(100% - 14px),var(--max));padding-top:9px}.card{padding:19px 15px}.patterns{grid-template-columns:1fr}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.completegrid,.planstep{grid-template-columns:1fr;gap:3px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -53,85 +53,81 @@ h1,h2,h3{line-height:1.18;color:var(--dark)}h1{font-size:clamp(2.2rem,7vw,3.5rem
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#main">Skip to activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
- <p class="eyebrow">ENGL C1000 · College Writer Toolkit</p>
- <h1>🩺 Essay Triage</h1>
- <p class="lead"><strong>Your draft has arrived. What needs attention first?</strong></p>
- <div class="callout"><strong>You probably can't fix everything at once.</strong> Revision gets easier when you stop treating every comment, typo, paragraph, and citation as equally urgent.</div>
- <div class="secret">🔓 <strong>Unwritten Rule:</strong> Experienced writers prioritize. They diagnose what would help this particular draft most <em>before</em> polishing everything they see.</div>
- <div class="pills"><span class="pill">20 triage cases</span><span class="pill">Essay X-Ray</span><span class="pill">Zombie Paragraph</span><span class="pill">Wrong Treatment Game</span><span class="pill">Revision Rescue Tool</span></div>
- <div class="row"><button id="start" class="primary" type="button">🚑 Admit the Draft</button><button id="resume" class="secondary hidden" type="button">Resume Triage</button></div>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · College Writer Toolkit</p>
+<h1>🩺 Essay Triage</h1>
+<p class="lead"><strong>Your draft has arrived. What needs attention first?</strong></p>
+<div class="callout"><strong>You probably can't fix everything at once.</strong> Revision gets easier when you stop treating every comment, typo, paragraph, and citation as equally urgent.</div>
+<div class="secret">🔓 <strong>Unwritten Rule:</strong> Experienced writers prioritize. They diagnose what would help this particular draft most <em>before</em> polishing everything they see.</div>
+<div class="pills"><span class="pill">20 triage cases</span><span class="pill">Essay X-Ray</span><span class="pill">Zombie Paragraph</span><span class="pill">Wrong Treatment Game</span><span class="pill">Revision Rescue Tool</span></div>
+<div class="row"><button class="primary" id="start" type="button">🚑 Admit the Draft</button><button class="secondary hidden" id="resume" type="button">Resume Triage</button></div>
 </section>
-
-<section id="lab" class="card hidden">
- <div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
- <span id="stage" class="tag"></span>
- <div class="layout">
-  <div>
-   <div id="host"></div>
-   <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-   <div class="row"><button id="next" class="primary hidden" type="button">Next Case</button></div>
-  </div>
-  <aside class="side" aria-label="Essay triage board">
-   <h3>🏥 Triage Board</h3>
-   <div class="triage">
-    <div class="lane red"><strong>🔴 BIG MOVES</strong><br><small>Purpose · thesis · ideas · organization · development</small></div>
-    <div class="lane yellow"><strong>🟡 READER CARE</strong><br><small>Evidence · analysis · connections · context</small></div>
-    <div class="lane green"><strong>🟢 POLISH</strong><br><small>Sentences · proofreading · citations · formatting</small></div>
-   </div>
-   <p style="font-size:.9rem"><strong>Recurring question:</strong><br>What change would help this draft most right now?</p>
-  </aside>
- </div>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="tag" id="stage"></span>
+<div class="layout">
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Next Case</button></div>
+</div>
+<aside aria-label="Essay triage board" class="side">
+<h2>🏥 Triage Board</h2>
+<div class="triage">
+<div class="lane red"><strong>🔴 BIG MOVES</strong><br/><small>Purpose · thesis · ideas · organization · development</small></div>
+<div class="lane yellow"><strong>🟡 READER CARE</strong><br/><small>Evidence · analysis · connections · context</small></div>
+<div class="lane green"><strong>🟢 POLISH</strong><br/><small>Sentences · proofreading · citations · formatting</small></div>
+</div>
+<p style="font-size:.9rem"><strong>Recurring question:</strong><br/>What change would help this draft most right now?</p>
+</aside>
+</div>
 </section>
-
-<section id="done" class="card hidden">
- <div class="stable"><h2>💚 Draft Stabilized</h2><p><strong>You didn't fix everything. You learned how to decide what deserves your attention first.</strong></p></div>
- <h2>🩺 My Essay Triage Card</h2>
- <div class="plan">
-  <div class="planstep"><strong>1 · JOB</strong><span>Does my paper still answer the assignment?</span></div>
-  <div class="planstep"><strong>2 · CLAIM</strong><span>Can I find the paper's main point?</span></div>
-  <div class="planstep"><strong>3 · X-RAY</strong><span>What job does each paragraph actually do?</span></div>
-  <div class="planstep"><strong>4 · THINK</strong><span>Where does my reader need more evidence, analysis, context, or connection?</span></div>
-  <div class="planstep"><strong>5 · PATTERNS</strong><span>What one or two issues repeat?</span></div>
-  <div class="planstep"><strong>6 · POLISH</strong><span>Edit, proofread, cite, and format the version I'm actually submitting.</span></div>
- </div>
- <div class="decision" style="margin-top:20px">
-  <h2>🆘 I Don't Know What to Fix First</h2>
-  <div id="rescueOutput" aria-live="polite">Press the button for one triage question.</div>
-  <button id="rescueBtn" class="secondary" type="button" style="margin-top:12px">Start Revision Rescue</button>
- </div>
- <div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Triage Card</button></div>
- <div id="completionCard" class="completion" style="margin-top:24px">
-  <div class="complete">✓ Lab complete</div>
-  <h2>Essay Triage — Complete</h2>
-  <div class="completegrid">
-   <span>Prioritize revision before polishing</span><strong>✓ Complete</strong>
-   <span>Distinguish revision from editing</span><strong>✓ Complete</strong>
-   <span>Use an essay X-ray / reverse outline</span><strong>✓ Complete</strong>
-   <span>Identify paragraph and feedback patterns</span><strong>✓ Complete</strong>
-   <span>Choose a useful response to common draft problems</span><strong>✓ Complete</strong>
-   <span>Recognize when the normal priority order needs an exception</span><strong>✓ Complete</strong>
-   <span>Create a realistic revision treatment plan</span><strong>✓ Complete</strong>
-  </div>
-  <p><strong>Completed:</strong> <span id="date"></span></p>
-  <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
- </div>
- <div class="row"><button id="restart" class="quiet" type="button">Triage Another Draft</button></div>
+<section class="card hidden" id="done">
+<div class="stable"><h2>💚 Draft Stabilized</h2><p><strong>You didn't fix everything. You learned how to decide what deserves your attention first.</strong></p></div>
+<h2>🩺 My Essay Triage Card</h2>
+<div class="plan">
+<div class="planstep"><strong>1 · JOB</strong><span>Does my paper still answer the assignment?</span></div>
+<div class="planstep"><strong>2 · CLAIM</strong><span>Can I find the paper's main point?</span></div>
+<div class="planstep"><strong>3 · X-RAY</strong><span>What job does each paragraph actually do?</span></div>
+<div class="planstep"><strong>4 · THINK</strong><span>Where does my reader need more evidence, analysis, context, or connection?</span></div>
+<div class="planstep"><strong>5 · PATTERNS</strong><span>What one or two issues repeat?</span></div>
+<div class="planstep"><strong>6 · POLISH</strong><span>Edit, proofread, cite, and format the version I'm actually submitting.</span></div>
+</div>
+<div class="decision" style="margin-top:20px">
+<h2>🆘 I Don't Know What to Fix First</h2>
+<div aria-live="polite" id="rescueOutput">Press the button for one triage question.</div>
+<button class="secondary" id="rescueBtn" style="margin-top:12px" type="button">Start Revision Rescue</button>
+</div>
+<div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Triage Card</button></div>
+<div class="completion" id="completionCard" style="margin-top:24px">
+<div class="complete">✓ Lab complete</div>
+<h2>Essay Triage — Complete</h2>
+<div class="completegrid">
+<span>Prioritize revision before polishing</span><strong>✓ Complete</strong>
+<span>Distinguish revision from editing</span><strong>✓ Complete</strong>
+<span>Use an essay X-ray / reverse outline</span><strong>✓ Complete</strong>
+<span>Identify paragraph and feedback patterns</span><strong>✓ Complete</strong>
+<span>Choose a useful response to common draft problems</span><strong>✓ Complete</strong>
+<span>Recognize when the normal priority order needs an exception</span><strong>✓ Complete</strong>
+<span>Create a realistic revision treatment plan</span><strong>✓ Complete</strong>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+<div class="row"><button class="quiet" id="restart" type="button">Triage Another Draft</button></div>
 </section>
 <footer>Progress stays in this browser. This lab does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id),KEY="essayTriageV1"; let i=0;
@@ -215,8 +211,8 @@ function render(){
  if(c[1]==="finish"){$("host").innerHTML=`<div class="stable"><h2>💚 PATIENT STABILIZED</h2><p>You diagnosed before treating. You looked for patterns. You separated major revision from polishing. You also recognized when an exception could change the order.</p></div><div class="callout"><h3>🩺 The question to keep:</h3><p style="font-size:1.3rem"><strong>What change would help this draft most right now?</strong></p></div>`;$("next").textContent="Discharge Draft & Get Canvas Completion";$("next").classList.remove("hidden")}
  save()
 }
-$("next").onclick=()=>{if(i<cases.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+$("next").onclick=()=>{if(i<cases.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"),block:"center"}),250)}
 const rescue=[
 "<div class='q'>1. Does your draft answer the assignment?</div><div class='ans'>If you're not sure, reread the prompt and compare it with your thesis. Start there.</div>",
 "<div class='q'>2. Can you state the paper's main claim?</div><div class='ans'>If not, investigate the thesis or focus before polishing individual sentences.</div>",
@@ -255,5 +251,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume Triage";$("resume").onclick=()=>{i=s.i||0;$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

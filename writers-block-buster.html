@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <title>Writer's Block Buster</title>
-<meta name="description" content="An accessible, first-gen-friendly college writing lab for figuring out why you're stuck and choosing a useful next move.">
+<meta content="An accessible, first-gen-friendly college writing lab for figuring out why you're stuck and choosing a useful next move." name="description"/>
 <style>
 :root{
   --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#64717d;--line:#d7e0e8;
@@ -60,7 +61,6 @@ textarea{width:100%;min-height:105px;border:2px solid #aebbc7;border-radius:12px
 @media(max-width:580px){body{font-size:17px}.shell{width:min(calc(100% - 14px),var(--max));padding-top:9px}.card{padding:19px 15px}.stuckgrid,.parking{grid-template-columns:1fr}.row{display:grid;grid-template-columns:1fr}.row button{width:100%}.toolrow,.completegrid{grid-template-columns:1fr;gap:3px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -68,89 +68,84 @@ textarea{width:100%;min-height:105px;border:2px solid #aebbc7;border-radius:12px
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
 <a class="skip" href="#main">Skip to activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
-  <p class="eyebrow">ENGL C1000 · College Writer Toolkit</p>
-  <h1>💥 Writer's Block Buster</h1>
-  <p class="lead"><strong>Stuck? Find your next move.</strong></p>
-  <div class="callout"><strong>“Writer's block” isn't always one problem.</strong> You might be confused, overloaded with ideas, missing information, trying to make the first sentence perfect, or simply unsure what writers do next. Different blocks need different tools.</div>
-  <div class="secret">🔓 <strong>College Writing Secret:</strong> Experienced writers still get stuck. What changes is that they collect strategies for getting moving again.</div>
-  <div class="pills"><span class="pill">20 block-busting missions</span><span class="pill">Stuck Simulator</span><span class="pill">Next-Move Machine</span><span class="pill">No timer</span><span class="pill">Canvas completion card</span></div>
-  <div class="row"><button id="start" class="primary" type="button">Bust the First Block</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · College Writer Toolkit</p>
+<h1>💥 Writer's Block Buster</h1>
+<p class="lead"><strong>Stuck? Find your next move.</strong></p>
+<div class="callout"><strong>“Writer's block” isn't always one problem.</strong> You might be confused, overloaded with ideas, missing information, trying to make the first sentence perfect, or simply unsure what writers do next. Different blocks need different tools.</div>
+<div class="secret">🔓 <strong>College Writing Secret:</strong> Experienced writers still get stuck. What changes is that they collect strategies for getting moving again.</div>
+<div class="pills"><span class="pill">20 block-busting missions</span><span class="pill">Stuck Simulator</span><span class="pill">Next-Move Machine</span><span class="pill">No timer</span><span class="pill">Canvas completion card</span></div>
+<div class="row"><button class="primary" id="start" type="button">Bust the First Block</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-  <div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div id="bar" class="bar"></div></div>
-  <span id="stage" class="stage"></span>
-  <div class="layout">
-    <div>
-      <div id="host"></div>
-      <div id="feedback" class="feedback" role="status" aria-live="polite"><strong id="ftitle"></strong><div id="ftext"></div></div>
-      <div class="row"><button id="next" class="primary hidden" type="button">Next Block</button></div>
-    </div>
-    <aside class="side" aria-label="Block wall">
-      <h3>🧱 Block Wall</h3>
-      <p style="font-size:.9rem">Each strategy gives you another way through.</p>
-      <div id="wall" class="blockwall"></div>
-    </aside>
-  </div>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="ptext"></span><span id="pct"></span></div><div class="track"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
+<div class="layout">
+<div>
+<div id="host"></div>
+<div aria-live="polite" class="feedback" id="feedback" role="status"><strong id="ftitle"></strong><div id="ftext"></div></div>
+<div class="row"><button class="primary hidden" id="next" type="button">Next Block</button></div>
+</div>
+<aside aria-label="Block wall" class="side">
+<h2>🧱 Block Wall</h2>
+<p style="font-size:.9rem">Each strategy gives you another way through.</p>
+<div class="blockwall" id="wall"></div>
+</aside>
+</div>
 </section>
-
-<section id="done" class="card hidden">
-  <div class="buster">
-    <h2>💥 Writers Get Stuck.</h2>
-    <p><strong>The skill is learning how to respond when it happens.</strong></p>
-  </div>
-  <h2>🧰 My “I'm Stuck” Toolkit</h2>
-  <div class="toolkit">
-    <div class="toolrow"><strong>Confused →</strong><span>Decode the assignment or ask a specific question.</span></div>
-    <div class="toolrow"><strong>Blank →</strong><span>Generate questions before trying to generate answers.</span></div>
-    <div class="toolrow"><strong>Too many ideas →</strong><span>Choose what belongs now and park the rest for later.</span></div>
-    <div class="toolrow"><strong>Can't find the words →</strong><span>Say what you mean normally first; shape it for the reader later.</span></div>
-    <div class="toolrow"><strong>Trying for perfect →</strong><span>Write something temporary that gives you material to revise.</span></div>
-    <div class="toolrow"><strong>Stuck at the beginning →</strong><span>Start somewhere else. Essays do not have to be written in order.</span></div>
-    <div class="toolrow"><strong>Need information →</strong><span>Stop drafting and read, search, observe, or ask.</span></div>
-    <div class="toolrow"><strong>Overwhelmed →</strong><span>Shrink the job until the next action is visible.</span></div>
-    <div class="toolrow"><strong>Behind →</strong><span>Re-enter with one useful action; communication may be part of the process.</span></div>
-  </div>
-  <div class="machine" style="margin-top:20px">
-    <h2>🆘 Next-Move Machine</h2>
-    <p>Come back anytime you're stuck. Get one small thing you can do next.</p>
-    <div id="machineOutput" class="machine-output" aria-live="polite">Press the button for a next move.</div>
-    <button id="machineBtn" class="secondary" type="button">💥 Give Me a Next Move</button>
-  </div>
-  <div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Stuck Toolkit</button></div>
-
-  <div id="completionCard" class="completion" style="margin-top:24px">
-    <div class="complete">✓ Lab complete</div>
-    <h2>Writer's Block Buster — Complete</h2>
-    <div class="completegrid">
-      <span>Diagnose different kinds of “stuck”</span><strong>✓ Complete</strong>
-      <span>Generate ideas with questions</span><strong>✓ Complete</strong>
-      <span>Use temporary writing instead of waiting for perfect wording</span><strong>✓ Complete</strong>
-      <span>Start a draft somewhere other than the introduction</span><strong>✓ Complete</strong>
-      <span>Recognize when research—not drafting—is the next move</span><strong>✓ Complete</strong>
-      <span>Shrink a large assignment into a useful next action</span><strong>✓ Complete</strong>
-      <span>Choose a re-entry strategy when behind</span><strong>✓ Complete</strong>
-    </div>
-    <p><strong>Completed:</strong> <span id="date"></span></p>
-    <div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
-  </div>
-  <div class="row"><button id="restart" class="quiet" type="button">Bust the Blocks Again</button></div>
+<section class="card hidden" id="done">
+<div class="buster">
+<h2>💥 Writers Get Stuck.</h2>
+<p><strong>The skill is learning how to respond when it happens.</strong></p>
+</div>
+<h2>🧰 My “I'm Stuck” Toolkit</h2>
+<div class="toolkit">
+<div class="toolrow"><strong>Confused →</strong><span>Decode the assignment or ask a specific question.</span></div>
+<div class="toolrow"><strong>Blank →</strong><span>Generate questions before trying to generate answers.</span></div>
+<div class="toolrow"><strong>Too many ideas →</strong><span>Choose what belongs now and park the rest for later.</span></div>
+<div class="toolrow"><strong>Can't find the words →</strong><span>Say what you mean normally first; shape it for the reader later.</span></div>
+<div class="toolrow"><strong>Trying for perfect →</strong><span>Write something temporary that gives you material to revise.</span></div>
+<div class="toolrow"><strong>Stuck at the beginning →</strong><span>Start somewhere else. Essays do not have to be written in order.</span></div>
+<div class="toolrow"><strong>Need information →</strong><span>Stop drafting and read, search, observe, or ask.</span></div>
+<div class="toolrow"><strong>Overwhelmed →</strong><span>Shrink the job until the next action is visible.</span></div>
+<div class="toolrow"><strong>Behind →</strong><span>Re-enter with one useful action; communication may be part of the process.</span></div>
+</div>
+<div class="machine" style="margin-top:20px">
+<h2>🆘 Next-Move Machine</h2>
+<p>Come back anytime you're stuck. Get one small thing you can do next.</p>
+<div aria-live="polite" class="machine-output" id="machineOutput">Press the button for a next move.</div>
+<button class="secondary" id="machineBtn" type="button">💥 Give Me a Next Move</button>
+</div>
+<div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Stuck Toolkit</button></div>
+<div class="completion" id="completionCard" style="margin-top:24px">
+<div class="complete">✓ Lab complete</div>
+<h2>Writer's Block Buster — Complete</h2>
+<div class="completegrid">
+<span>Diagnose different kinds of “stuck”</span><strong>✓ Complete</strong>
+<span>Generate ideas with questions</span><strong>✓ Complete</strong>
+<span>Use temporary writing instead of waiting for perfect wording</span><strong>✓ Complete</strong>
+<span>Start a draft somewhere other than the introduction</span><strong>✓ Complete</strong>
+<span>Recognize when research—not drafting—is the next move</span><strong>✓ Complete</strong>
+<span>Shrink a large assignment into a useful next action</span><strong>✓ Complete</strong>
+<span>Choose a re-entry strategy when behind</span><strong>✓ Complete</strong>
+</div>
+<p><strong>Completed:</strong> <span id="date"></span></p>
+<div class="shot">📸 <strong>Canvas completion:</strong> Take a screenshot of this card and submit it to the Canvas assignment.</div>
+</div>
+<div class="row"><button class="quiet" id="restart" type="button">Bust the Blocks Again</button></div>
 </section>
 <footer>Progress stays in this browser. This lab does not ask for your name, email, or login.</footer>
 </main>
-
 <script>
 (()=>{
 const $=id=>document.getElementById(id), KEY="writersBlockBusterV1";
@@ -264,8 +259,8 @@ function render(){
  if(m[1]==="finish"){$("host").innerHTML=`<div class="buster"><h2>🧰 Build Your Block Buster Toolkit</h2><p><strong>You don't need one magic strategy.</strong> You need enough different strategies that when one kind of stuck appears, you have another move to try.</p></div><div class="secret">🔓 There isn't a secret group of college students who never get stuck. <strong>Writers learn more ways to respond when they do.</strong></div>`;blocks.forEach(crack);$("next").textContent="Finish & Get Canvas Completion";$("next").classList.remove("hidden")}
  save()
 }
-$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:"smooth"})}else finish()}
-function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:"smooth",block:"center"}),250)}
+$("next").onclick=()=>{if(i<moments.length-1){i++;render();window.scrollTo({top:$("lab").offsetTop-8,behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth")})}else finish()}
+function finish(){save(true);$("lab").classList.add("hidden");$("done").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("completionCard").scrollIntoView({behavior:(window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"),block:"center"}),250)}
 $("machineBtn").onclick=()=>{$("machineOutput").textContent=nextMoves[Math.floor(Math.random()*nextMoves.length)]}
 const toolkit=`MY "I'M STUCK" TOOLKIT
 
@@ -285,5 +280,5 @@ let s;try{s=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
 if(s){$("resume").classList.remove("hidden");$("resume").textContent=s.done?"View Canvas Completion":"Resume";$("resume").onclick=()=>{i=s.i||0;cracked=s.cracked||[];$("intro").classList.add("hidden");if(s.done)finish();else{$("lab").classList.remove("hidden");render()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>

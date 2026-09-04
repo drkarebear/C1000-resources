@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Develop, Don't Pad</title>
-<meta name="description" content="An accessible ENGL C1000 just-in-time writing lab that helps students diagnose what a reader needs when a professor says develop, expand, or go deeper.">
-<link rel="icon" type="image/png" href="Favicon2.png">
+<meta content="An accessible ENGL C1000 just-in-time writing lab that helps students diagnose what a reader needs when a professor says develop, expand, or go deeper." name="description"/>
+<link href="Favicon2.png" rel="icon" type="image/png"/>
 <style>
 :root{
 --bg:#f5f7fa;--paper:#fff;--ink:#243447;--muted:#65727d;--line:#d7e0e8;
@@ -52,7 +53,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 @media(max-width:620px){body{font-size:17px}.dashboard,.choices,.grid2{grid-template-columns:1fr}.row{display:grid}.row button{width:100%}.meterrow{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
-
 <style id="c1000-global-nav-style">
 .c1000-global-nav{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:.92rem;line-height:1.4}
 .c1000-global-nav a{color:#29354a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
@@ -60,46 +60,43 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 .c1000-global-nav a:focus-visible{outline:3px solid #2d65a0;outline-offset:3px;border-radius:3px}
 @media(max-width:560px){.c1000-global-nav{gap:8px 13px}.c1000-global-nav .c1000-home{width:100%;margin-right:0}}
 </style>
-</head>
+<link href="site-meta.css" rel="stylesheet"/></head>
 <body>
-<nav class="c1000-global-nav" aria-label="ENGL C1000 Learning Lab navigation">
-  <a class="c1000-home" href="index.html">← Learning Lab Home</a>
-  <a href="student.html">Student Labs</a>
-  <a href="faculty.html">Faculty</a>
-  <a href="toolkit.html">All Tools</a>
+<nav aria-label="ENGL C1000 Learning Lab navigation" class="c1000-global-nav">
+<a class="c1000-home" href="index.html">← Learning Lab Home</a>
+<a href="student.html">Student Labs</a>
+<a href="faculty.html">Faculty</a>
+<a href="toolkit.html">All Tools</a>
 </nav>
-
-<a href="#main" class="skip">Skip to the development activity</a>
-<main id="main" class="shell">
-<section id="intro" class="card">
-<p class="eyebrow">ENGL C1000 · Development & Revision</p>
+<a class="skip" href="#main">Skip to the development activity</a>
+<main class="shell" id="main">
+<section class="card" id="intro">
+<p class="eyebrow">ENGL C1000 · Development &amp; Revision</p>
 <h1>📈 Develop, Don't Pad</h1>
 <h2>Make the idea bigger—not just the paper longer.</h2>
-<div class="call"><strong>PROFESSOR COMMENT:</strong> “Develop this idea.”<br><br><strong>STUDENT:</strong> “Okay... but HOW?”</div>
+<div class="call"><strong>PROFESSOR COMMENT:</strong> “Develop this idea.”<br/><br/><strong>STUDENT:</strong> “Okay... but HOW?”</div>
 <p>Words like <strong>develop, expand, go deeper, explain, be specific,</strong> and <strong>so what?</strong> can sound like instructions even when they don't tell you what move to make.</p>
 <div class="secret">🔓 <strong>Unwritten Rule:</strong> “Develop” is not one specific revision move. Usually, it means your reader needs something more before they can fully understand, believe, or appreciate the point.</div>
 <div class="good"><strong>Length is something we can count. Development is something a reader can experience.</strong></div>
-<div class="row"><button id="start" class="primary" type="button">🧪 Enter the Development Lab</button><button id="resume" class="secondary hidden" type="button">Resume</button></div>
+<div class="row"><button class="primary" id="start" type="button">🧪 Enter the Development Lab</button><button class="secondary hidden" id="resume" type="button">Resume</button></div>
 </section>
-
-<section id="lab" class="card hidden">
-<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div id="track" class="track" role="progressbar" aria-label="Development lab progress" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"><div id="bar" class="bar"></div></div>
-<span id="stage" class="stage"></span>
+<section class="card hidden" id="lab">
+<div class="progressline"><span id="pt"></span><span id="pc"></span></div><div aria-label="Development lab progress" aria-valuemax="20" aria-valuemin="1" aria-valuenow="1" class="track" id="track" role="progressbar"><div class="bar" id="bar"></div></div>
+<span class="stage" id="stage"></span>
 <div class="layout">
-<div><div id="host"></div><div id="fb" class="feedback" role="status" aria-live="polite"></div><div class="row"><button id="next" class="primary hidden" type="button">Continue</button></div></div>
+<div><div id="host"></div><div aria-live="polite" class="feedback" id="fb" role="status"></div><div class="row"><button class="primary hidden" id="next" type="button">Continue</button></div></div>
 <aside class="side">
 <h3>📈 Development Controls</h3>
-<p><strong>❓ WHY?</strong><br>Why is it true/important?</p>
-<p><strong>⚙️ HOW?</strong><br>How does it happen/work?</p>
-<p><strong>🔍 SHOW ME</strong><br>Give a specific example.</p>
-<p><strong>📚 SUPPORT IT</strong><br>Add evidence when needed.</p>
-<p><strong>🔗 CONNECT IT</strong><br>Link it to the larger claim.</p>
-<p><strong>🧩 COMPLICATE IT</strong><br>Add conditions, limits, consequences, or another perspective.</p>
+<p><strong>❓ WHY?</strong><br/>Why is it true/important?</p>
+<p><strong>⚙️ HOW?</strong><br/>How does it happen/work?</p>
+<p><strong>🔍 SHOW ME</strong><br/>Give a specific example.</p>
+<p><strong>📚 SUPPORT IT</strong><br/>Add evidence when needed.</p>
+<p><strong>🔗 CONNECT IT</strong><br/>Link it to the larger claim.</p>
+<p><strong>🧩 COMPLICATE IT</strong><br/>Add conditions, limits, consequences, or another perspective.</p>
 </aside></div>
 </section>
-
-<section id="finish" class="card hidden">
-<div class="good"><h2 id="finishhead" tabindex="-1">🧠 Development Detected</h2><p><s>How can I make this longer?</s><br><strong>What does my reader need next?</strong></p></div>
+<section class="card hidden" id="finish">
+<div class="good"><h2 id="finishhead" tabindex="-1">🧠 Development Detected</h2><p><s>How can I make this longer?</s><br/><strong>What does my reader need next?</strong></p></div>
 <h2>📈 Optional: Try It on Your Own Draft</h2>
 <p>This transfer tool is optional. Your lab is already complete. Use it if you want help deciding what kind of development move your own paragraph may need.</p>
 <div class="tool">
@@ -117,26 +114,26 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 <option value="unknown">I don't know what's missing</option>
 <option value="done">It already seems focused, supported, and explained</option>
 </select>
-<div class="row"><button id="diagnose" class="primary" type="button">🧪 Diagnose My Next Move</button></div>
-<div id="result" class="result" aria-live="polite"></div>
-<div id="apply" class="applybox hidden">
+<div class="row"><button class="primary" id="diagnose" type="button">🧪 Diagnose My Next Move</button></div>
+<div aria-live="polite" class="result" id="result"></div>
+<div class="applybox hidden" id="apply">
 <label for="draftmove"><strong id="applyPrompt">Try the move now.</strong></label>
 <textarea id="draftmove" placeholder="Write one sentence, revision, example, connection, question, or note you could use in your draft."></textarea>
-<div class="row"><button id="saveMove" class="secondary" type="button">Save My Development Move</button></div>
-<div id="moveStatus" role="status" aria-live="polite"></div>
+<div class="row"><button class="secondary" id="saveMove" type="button">Save My Development Move</button></div>
+<div aria-live="polite" id="moveStatus" role="status"></div>
 </div>
 </div>
 <div class="note"><h3>👀 The Curious Reader Test</h3><p>After an important sentence, imagine a curious reader asking:</p><div class="chips"><span class="badge">Why?</span><span class="badge">How?</span><span class="badge">Can you show me?</span><span class="badge">What does that show?</span><span class="badge">Why does it matter?</span><span class="badge">Is it always true?</span></div><p>You do not need to answer every question. Answer the ones your reader genuinely needs.</p></div>
-<div class="row"><button id="copy" class="secondary" type="button">📋 Copy My Development Check</button></div>
+<div class="row"><button class="secondary" id="copy" type="button">📋 Copy My Development Check</button></div>
 <div class="completion">
 <p class="done">✓ LAB COMPLETE</p>
 <h2>Develop, Don't Pad — Complete</h2>
-<p>✓ Translate “develop” into possible revision moves<br>
-✓ Distinguish more words from more reader understanding<br>
-✓ Decide when a paragraph needs evidence, analysis, specificity, connection, or complication<br>
-✓ Use reader questions to uncover development opportunities<br>
-✓ Recognize repetition and inflated language as different from development<br>
-✓ Unpack compressed ideas<br>
+<p>✓ Translate “develop” into possible revision moves<br/>
+✓ Distinguish more words from more reader understanding<br/>
+✓ Decide when a paragraph needs evidence, analysis, specificity, connection, or complication<br/>
+✓ Use reader questions to uncover development opportunities<br/>
+✓ Recognize repetition and inflated language as different from development<br/>
+✓ Unpack compressed ideas<br/>
 ✓ Recognize when a paragraph may already be developed enough</p>
 <p><strong>Completed:</strong> <span id="date"></span></p>
 <div class="shot">📸 <strong>If your instructor asks for proof of completion,</strong> you can take a screenshot of this card.</div>
@@ -144,7 +141,6 @@ footer{text-align:center;color:var(--muted);font-size:.9rem}
 </section>
 <footer>Progress stays in this browser. No name, email, login, timer, or required drag-and-drop.</footer>
 </main>
-
 <script>
 (()=>{const $=x=>document.getElementById(x),KEY="developDontPadV1",TRANSFER_KEY="developDontPadTransferV1";let i=0,completed={};
 function safeGet(key){try{return localStorage.getItem(key)}catch(e){return null}}
@@ -274,5 +270,5 @@ let s;try{s=JSON.parse(safeGet(KEY)||"null")}catch(e){}
 if(s){completed=s.completed||{};$("resume").classList.remove("hidden");$("resume").textContent=s.done?"Open Optional Development Tool":"Resume Lab";$("resume").onclick=()=>{$("intro").classList.add("hidden");if(s.done){$("finish").classList.remove("hidden");$("date").textContent=new Intl.DateTimeFormat(undefined,{year:"numeric",month:"long",day:"numeric"}).format(new Date());setTimeout(()=>$("finishhead").focus(),50)}else{i=s.i||0;$("lab").classList.remove("hidden");render();focusCurrentMove()}}}
 })();
 </script>
-</body>
+<div class="site-meta-bar"><nav aria-label="Site information"><a href="accessibility.html">Accessibility</a><a href="license.html">License &amp; Reuse</a></nav></div></body>
 </html>
